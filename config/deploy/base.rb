@@ -16,7 +16,7 @@ set :web_port,    8500
 
 # ===== Source Access =====
 
-set :repo_url,         'ssh://git@github.com/andyl/mvscim.git'
+set :repo_url,         'ssh://git@github.com/mvscorg/mvscim.git'
 
 # ===== Tasks =====
 
