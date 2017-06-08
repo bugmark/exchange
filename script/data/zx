@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+
+require_relative './reload_db'
+
+pmsg 'loading rails'
+require __dir__ + '/../config/environment'
+
+devlog "RAILS_ENV = #{Rails.env}"
+
+def dsload(klas, file)
+  klas.new(file).import
+end
+
+# devlog 'BAMRU'
+# dsload CfgTeamRankImporter  , "data/import/orgs/SMSO/teams/bamru/bootstrap/cfg_team_ranks.csv"
+# dsload CfgTeamRoleImporter  , "data/import/orgs/SMSO/teams/bamru/bootstrap/cfg_team_roles.csv"
+# dsload MembershipImporter   , "data/import/orgs/SMSO/teams/bamru/members/memberships.csv"
+# dsload MembershipImporter   , 'data/import/orgs/SMSO/teams/bamru/members/mem_roles.csv'
+
+devlog "SMCSAR"
+dsload CfgTeamRankImporter  , "data/import/orgs/SMSO/teams/smcsar/bootstrap/cfg_team_ranks.csv"
+dsload CfgTeamRoleImporter  , "data/import/orgs/SMSO/teams/smcsar/bootstrap/cfg_team_roles.csv"
+dsload MembershipImporter   , "data/import/orgs/SMSO/teams/smcsar/members/memberships.csv"
+
+# devlog "SVIP"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/svip/members/memberships.csv"
+
+# devlog "AIRSQUAD"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/airsquad/members/memberships1.csv"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/airsquad/members/memberships2.csv"
+
+# devlog "RESERVES"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/reserves/members/memberships.csv"
+
+# devlog "SCU"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/scu/members/memberships.csv"
+
+# devlog "SMESB"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/smesb/members/memberships.csv"
+
+# devlog "TEST1"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/test1/members/memberships.csv"
+
+# devlog "DEVTEST"
+# dsload MembershipImporter           , "data/import/orgs/SMSO/teams/devtest/members/memberships.csv"
+
+pmsg 'done'

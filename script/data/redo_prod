@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+cap production app:disable
+
+ssh deploy@Mvscim 'sudo stop MvscIM'
+
+ssh deploy@Mvscim 'killall -9 ruby'
+
+ssh deploy@Mvscim 'cd a/Mvscim/current ; script/recsv build'
+
+ssh deploy@Mvscim 'sudo start MvscIM'
+
+sleep 2
+
+cap production app:enable
+
+echo '----- system is enabled'
+
+alert ding
+
+sleep 5
+
+ssh deploy@Mvscim 'cd a/Mvscim/current ; script/reavatar'
+
+echo '---done'
+
+alert ring

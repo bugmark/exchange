@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# DEVELOPMENT CONSOLE
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+# call using devcon_msg "message text" $@
+devcon_msg() 
+{
+  msg=$1
+  if [ $# -gt 2 ] ; then
+    echo "Usage: `basename $0` [<host>]\n  $msg\n  default host is <localhost>."
+    exit
+  fi 
+}
+
+# call using devcon_run 'script' $@
+devcon_run() 
+{
+  server=$1
+  cmd="script/tmux/console_base script/tmux/dev_layout"
+  if [ ! -z $server ] ; then
+    cmd="ssh -t $server '$cmd'"
+  fi
+  echo "$cmd"
+  eval "$cmd"
+}
+
+devcon_msg "runs the MvscIM development environment" $@
+
+devcon_run $@

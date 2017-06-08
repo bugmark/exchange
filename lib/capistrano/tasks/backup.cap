@@ -1,0 +1,60 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+namespace :backup do
+  namespace :generate do
+    desc "Backup all Targets"
+    task :all do
+      on roles(:all) do |host|
+        execute "cd #{current_path} && bundle exec rake data:backup:all"
+      end
+    end
+
+    desc "Backup System Directory"
+    task :sysdir do
+      on roles(:all) do |host|
+        execute "cd #{current_path} && bundle exec rake data:backup:sysdir"
+      end
+    end
+
+    desc "Backup Database"
+    task :db do
+      on roles(:all) do |host|
+        execute "cd #{current_path} && bundle exec rake data:backup:db"
+      end
+    end
+  end
+
+  namespace :download do
+      desc "Download all backups"
+      task :all do
+        invoke 'backup:download:db'
+        invoke 'backup:download:sysdir'
+        puts "All backups downloaded."
+      end
+
+      desc "Download system backups"
+      task :sysdir do
+        puts "Download system directory backups - this might take awhile. (#{Time.now.strftime('%H:%M:%S')})"
+        on roles(:all) do |server|
+          base_dir = "e/lica/#{server.hostname}/sysdir"
+          locl_dir = base_dir.split('/')[0..-2].join('/')
+          system "mkdir -p ~/#{base_dir}"
+          run_locally { execute "rsync -rv --delete #{fetch(:user)}@#{server.hostname}:#{base_dir} ~/#{locl_dir}" }
+        end
+        puts "Downloading finished. (#{Time.now.strftime('%H:%M:%S')})"
+      end
+
+      desc "Download db backups"
+      task :db do
+        puts "Download database backups. (#{Time.now.strftime('%H:%M:%S')})"
+        on roles(:all) do |server|
+          base_dir = "e/lica/#{server.hostname}/db"
+          locl_dir = base_dir.split('/')[0..-2].join('/')
+          system "mkdir -p ~/#{base_dir}"
+          run_locally { execute "rsync -rv --delete #{fetch(:user)}@#{server.hostname}:#{base_dir} ~/#{locl_dir}" }
+        end
+        puts "Downloading finished. (#{Time.now.strftime('%H:%M:%S')})"
+      end
+  end
+end

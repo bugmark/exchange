@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+#
+# to preview cronfile  : `whenever -f CronJobs`
+# to generate cronfile : `whenever -f CronJobs --update-crontab`
+# to clear cronfile    : `whenever -f CronJobs --clear-crontab`
+# for help on whenever : `whenever -h`
+# to see cron settings : `crontab -l`
+#
+# Learn more:
+# - http://github.com/javan/whenever  | cron processor
+# - http://en.wikipedia.org/wiki/Cron | cron instructions
+
+# TODO: ADD LOGROTATE
+
+load File.expand_path("~/g/pdev_util/bin/SysRole")
+
+# whenever_config
+
+# every 1.minute do
+#   run_scripts 'util/heartbeat', app: "MvscIM"
+# end
+
+# if dev_host?
+#   every 1.hour do
+#     run_scripts 'util/download_backup', app: "MvscIM"
+#   end
+#
+#   every 7.days do
+#     run_scripts 'util/backup_keys', app: "MvscIM"
+#   end
+# end
+
+# if rails_production? 
+#   every 1.day, at: "00:30 am" do
+#     run_scripts 'util/backup_db', app: "MvscIM", rails_env: "production"
+#   end
+#
+#   every 4.days, at: "01:30 am"do
+#     run_scripts 'util/backup_sysdir', app: "MvscIM", rails_env: "production"
+#   end
+# end
+

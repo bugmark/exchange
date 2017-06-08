@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require_relative './reload_db'
+
+reload_db 'reseed'
+
+pmsg 'load seed data'
+system 'bundle exec rake db:seed'
+
+pmsg 'loading BAMRU extended data'
+system %[bundle exec rails runner 'require "import/bamru" ; Import::Bamru.all']
+
+pmsg 'loading SMESB extended data'
+system %[bundle exec rails runner 'require "import/smesb" ; Import::Smesb.all']
+
+pmsg 'loading default avatars'
+system %[bundle exec rails runner 'User.sans_avatar.to_a.each {|usr| usr.add_default_avatar; print "."; $stdout.flush}']
+
+pmsg 'loading BAMRU events'
+EventImporter.new(           'data/import/orgs/SMSO/teams/bamru/events/events.csv').import
+EventPeriodImporter.new(     'data/import/orgs/SMSO/teams/bamru/events/periods.csv').import
+EventParticipantImporter.new('data/import/orgs/SMSO/teams/bamru/events/participants.csv').import
+
+pmsg 'done'

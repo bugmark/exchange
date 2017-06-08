@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# use capistrano to generate a backup on the remote machine
+# downloads the backup to the local machine
+# stages the backup file for loading into the system
+
+echo ----- generate backup on production machine
+cap backup:generate:all
+
+echo ----- download backup from produciton machine
+cap backup:download:all
+
+echo ----- restore backup to development system
+bundle exec rake ops:restore:all
+
+

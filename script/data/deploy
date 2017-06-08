@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+puts 'loading rails...'
+require __dir__ + '/../config/environment'
+
+devlog "RAILS_ENV = #{Rails.env}"
+
+def dsload(klas, file)
+  klas.new(file).import
+end
+
+devlog 'PCERT Memberships'
+dsload MembershipImporter           , 'data/import/orgs/SMSO/teams/pcert/memberships.csv'
+devlog 'PCERT Emails'
+dsload UserEmailImporter            , 'data/import/orgs/SMSO/teams/pcert/emails.csv'
+devlog 'PCERT Phones'
+dsload UserPhoneImporter            , 'data/import/orgs/SMSO/teams/pcert/phones.csv'
+devlog 'PCERT Addresses'
+dsload UserAddressImporter          , 'data/import/orgs/SMSO/teams/pcert/addresses.csv'
+
+devlog 'done'

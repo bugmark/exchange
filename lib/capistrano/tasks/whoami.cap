@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+desc "Display current user"
+task :whoami do |task|
+  on roles(:all) do |host| 
+    info "HOST #{host} - CURRENT USER: #{capture(:whoami)}"
+  end
+end
+
+desc "Display current uptime"
+task :uptime do |task|
+  on roles(:all) do |host|
+    info "HOST #{host} - UPTIME #{capture(:uptime)}"
+  end
+end

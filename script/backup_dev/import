@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+drop() {
+echo ----- drop the old database on the local machine
+rails db:create
+rails db:environment:set RAILS_ENV=development
+rails db:drop 
+}
+
+create() {
+echo ----- create a new database on the local machine
+rails db:create
+}
+
+import() {
+echo ----- import the backup on the local machine
+rails data:db:import 
+}
+
+migrate() {
+echo ----- migrate the test database
+rails db:migrate RAILS_ENV=test
+}
+
+drop && create && import && migrate

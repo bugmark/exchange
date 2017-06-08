@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# remote port forwarding
+# to use this, you'll need a userid on the PROXY_SERVER
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+source script/pair/proxy_ip
+
+DEFAULT_PROXY="$PROXY_IP"
+
+exe=`basename $0`
+rem_port=$1
+lcl_port=$2
+rem_host=${3:-"vagrant@$DEFAULT_PROXY"}   # use 3rd arg, or DEFAULT_PROXY
+lcl_host=$SYSNAME
+pidfile=/tmp/$exe$rem_port.pid
+
+# check number of arguments
+if [ "$#" -ne 2 ] && [ "$#" -ne 3 ]; then
+  echo "Usage: $exe <remote_port> <local_port> [<remote_host> (default $rem_host)]"
+  exit 1
+fi
+
+# kill existing process, then rewrite pidfile
+[ -f $pidfile ] && sudo kill `cat $pidfile` > /dev/null 2>&1 
+echo $$ > $pidfile                          
+
+# define ssh_command 
+ssh_command="ssh -NR $rem_port:localhost:$lcl_port $rem_host"
+
+# console output
+echo $ssh_command
+echo Started `date`
+echo Tunneling $rem_host:$rem_port to $lcl_host:$lcl_port
+echo Press Ctrl-C to exit...
+
+$ssh_command
+
+echo Finished `date`

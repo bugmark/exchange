@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# https://exceptiontrap.com/blog/6-tail-your-remote-logs-with-capistrano
+
+# This will show and tail the production.log
+# $ cap logs:tail
+
+# This will show and tail the cron.log
+# $ cap logs:tail -s file=cron
+
+# Nov 5 2014 / this doesn't work
+
+# namespace :logs do
+#   desc "tail log files"
+#   task :tail do
+#     on roles(:app) do |host|
+#       file = fetch(:file, 'production') # uses 'production' as default
+#       trap("INT") { puts 'Interupted'; exit 0; }
+#       run "tail -f #{shared_path}/log/#{file}.log" do |channel, stream, data|
+#         puts  # for an extra line break before the host name
+#         puts "#{channel[:host]}: #{data}"
+#         break if stream == :err
+#       end
+#     end
+#   end
+# end

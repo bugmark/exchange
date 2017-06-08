@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# should be called from tmux_console
+
+export APP="xmdev"
+
+create_new_session()
+{
+
+  cd /home/aleak/lr/MvscIM
+
+  # ----- DEV Window: Server, Sidekiq -----
+  
+  tmux new-session -s $APP -n "DEV" -d
+
+  tmux split-window -v -p 70 -t $APP:1.1    # vertical split 
+  
+  tmux send-keys -t $APP:1.1 'cls ; cd /home/aleak/lr/MvscIM ; bundle exec sidekiq' C-m         # background job processor
+  tmux send-keys -t $APP:1.2 'cls ; cd /home/aleak/lr/MvscIM ; spring rails server Puma' C-m    # app server
+
+  # ----- RPF Window -----
+
+  tmux new-window -n "RPF"
+  tmux split-window -v -p 70 -t $APP:2   # vertical split   - RPF on top, shell on bottom
+  
+  tmux send-keys -t $APP:2.1 'cls ; cd /home/aleak/lr/MvscIM ; rpf Mvscimhost:3000 3000' C-m                   # for inbound email testing
+
+  tmux select-window -t $APP:1
+
+}
+

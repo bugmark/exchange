@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# import seed data
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+echo ------- start import -------
+date
+echo -----------------------------
+killall ruby > /dev/null 2&>1
+echo "Import development database"
+bundle exec rake db:drop data:db:import db:migrate > /dev/null 2>&1
+echo "Import test database (runs slow...)"
+RAILS_ENV=test bundle exec rake db:drop data:db:import db:migrate > /dev/null 2>&1
+mv public/system public/system.bak
+RAILS_ENV=test bundle exec rails runner "TestClean.all"
+mv public/system.bak public/system
+echo ------- finish restore ------
+date
+echo -----------------------------

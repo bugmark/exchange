@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# see
+# http://wendbaar.nl/blog/2010/04/automagically-tagging-releases-in-github/
+# http://stackoverflow.com/questions/5735656/tagging-release-before-deploying-with-capistrano
+
+namespace :git do
+
+  task :tag do
+    stage = fetch(:stage)
+    if %i(ln6 production).include?(stage)
+      user  = `git config --get user.name`.chomp
+      email = `git config --get user.email`.chomp
+      date  = Time.now.strftime("%Y.%m.%d-%H.%M.%S")
+      tag   = "#{fetch(:stage)}-#{date}"
+      puts "<<< git deploy tag: #{tag} >>>"
+      puts `git tag #{tag} -m "Deployed by #{user} <#{email}>"`
+      puts `git push --tags origin`
+    end
+  end
+
+  task :diff do
+    last_deploy_tag = `git tag -l #{fetch(:stage)}_* | tail -1`
+    system("git diff #{last_deploy_tag}", out: $stdout, err: :out)
+  end
+
+end
+
+after "deploy:restart", "git:tag"

@@ -1,0 +1,3 @@
+# Moved common setup commands to 'deploy/base.rb'...
+
+require __dir__ + '/deploy/base'

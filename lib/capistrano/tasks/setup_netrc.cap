@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+namespace :setup do
+
+  # Configure https access to send username/password when pulling from private repo on github.
+  # More on '.netrc':
+  # http://publib.boulder.ibm.com/infocenter/aix/v6r1/index.jsp?topic=%2Fcom.ibm.aix.files%2Fdoc%2Faixfiles%2Fnetrc.htm
+  # Github read-only access for private repos:
+  # https://help.github.com/articles/how-do-i-add-a-collaborator
+  # to test that the .netrc configuration works:
+  # - log onto machine
+  # - run 'cat .netrc'
+  # - run 'git clone https://github.com/andyl/lica'
+  #
+  desc "Setup .netrc"
+  task :netrc do |task|
+    on roles(:all) do |host|
+      capture "echo 'machine github.com login deploy password #{ENV['DEPLOY_PWD']}' > ~/.netrc"
+      execute "echo '.netrc has been updated...'"
+    end
+  end
+
+end

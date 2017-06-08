@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+after 'deploy:restart', 'whenever:update'
+
+namespace :whenever do
+  desc "Update Crontab with Whenever"
+  task :update do
+    on roles(:all) do
+      within current_path do
+        execute :bundle, :exec, "whenever -f ~/a/mvscim/current/CronJobs --update-crontab"
+      end
+    end
+  end
+end

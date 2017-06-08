@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Copy ssh key to proxy machine
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+source script/pair/proxy_ip
+
+echo "=== copy ssh key to $PROXY_IP ====================="
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub vagrant@$PROXY_IP
+
+echo "Done."

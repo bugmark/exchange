@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'json'
+require 'net/http'
+require File.expand_path(File.dirname(__FILE__)) + '/../lib/env_settings'
+LOG_FILE = File.dirname(__FILE__) + '/../tmp/perf.log'
+
+puts "Performance Demon - Starting #{Time.now} - Ctrl-C to exit..."
+
+def get_perf_numbers
+  string = `dstat --nocolor -mc 1 1`.split("\n").last.gsub(/[M|]/,'')
+  arr = string.split(' ').map {|x| x.to_i}
+  mem_sum = arr[0] + arr[1] + arr[2] + arr[3]
+  mem_consumed = (arr[0] * 100) / mem_sum
+  cpu_consumed = 100 - arr[6]
+  {:mem => mem_consumed, :cpu => cpu_consumed}
+end
+
+def update_log_file(data)
+  max_log_file_lines = 24
+  file_lines = File.exist?(LOG_FILE) ? File.readlines(LOG_FILE) : []
+  file_lines << data.to_json + "\n"
+  if file_lines.length > max_log_file_lines
+    file_lines = file_lines[-max_log_file_lines..-1]
+  end
+  File.open(LOG_FILE, 'w') {|f| f.puts file_lines.join}
+end
+
+def send_faye(data)
+  message = {:channel => '/monitor/snapshots', :data => data.to_json}
+  uri = URI.parse(FAYE_SERVER)
+  Net::HTTP.post_form(uri, :message => message.to_json)
+end
+
+count = 0
+
+sleep 30
+puts 'perfd is starting...'
+
+while (loop_forever = true)
+  data = get_perf_numbers
+  data[:id] = count += 1
+  while (Time.now.to_i % 5) != 0
+    sleep 0.5
+  end
+  data[:time] = Time.now.strftime('%b-%d %H:%M:%S').downcase
+  update_log_file(data)
+  send_faye(data)
+  sleep 3
+end

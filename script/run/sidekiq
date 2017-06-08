@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# sidekiq
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+clear
+echo "script/run/sidekiq"
+reset
+bundle exec sidekiq -C config/sidekiq.yml
+reset
+

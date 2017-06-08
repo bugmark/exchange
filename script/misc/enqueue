@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# Adds an item to the queue_classic job queue.
+
+require 'rubygems'
+require 'queue_classic'
+
+msg = 'enqueue <command> [<arg> | <args>...]'
+
+abort msg unless ARGV.length > 0
+
+cmd = ARGV.shift
+
+if ARGV.empty? 
+  QC.enqueue(cmd)
+else
+  QC.enqueue(cmd, *ARGV)
+end

@@ -1,0 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Rake::Task["deploy:migrating"].clear_actions
+Rake::Task["deploy:migrating"].clear_comments
+namespace :deploy do
+  task :migrating do
+    on roles(:all) do |host|
+      execute "cd #{release_path} && RAILS_ENV=production bundle exec rake db:migrate"
+    end
+  end
+end

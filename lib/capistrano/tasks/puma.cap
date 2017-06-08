@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require __dir__ + '/../cap_helpers'
+
+before "deploy:symlink:release", "puma:nginx_conf"
+
+namespace :puma do
+  desc "Upload Certs to Deploy Targets"
+  task :certs do
+    on roles(:all) do |server|
+      cmd = "rsync -a .certs #{ fetch(:user) }@#{server.hostname}:#{release_path}"
+      puts cmd
+      run_locally { execute cmd }
+      execute "cd #{release_path}/.certs/staging ; ./generate"
+    end
+  end
+  desc "Export an puma config file for nginx."
+  task :nginx_conf => :certs do
+    on roles(:web) do |server|
+      set :is_prod_host, (server.hostname == "lch1")
+      template "nginx_puma.erb", "/etc/nginx/conf.d/mvscim.conf"
+      execute  "sudo /etc/init.d/nginx reload"
+    end
+  end
+end

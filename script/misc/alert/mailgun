@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'mailgun'
+
+msg = "Usage: script/misc/alert/mailgun 'body'"
+abort msg unless ARGV.length == 1
+
+puts "Load ENV..."
+require 'dotenv'
+Dotenv.load
+require File.expand_path('../../../lib/env_settings', __dir__)
+
+@msg_txt = ARGV[0]
+@api_key = MAILGUN_API_KEY
+@domain  = "bamru.listcall.com"
+
+def send_simple_message
+  url = "https://api:#{@api_key}@api.mailgun.net/v3/#{@domain}/messages"
+  RestClient.post url,
+    :from    => "Test User <mailgun@#{@domain}>",
+    :to      => "andy@r210.com",
+    :subject => "Hello",
+    :text    => "Testing some Mailgun awesomness!"
+end
+
+puts "Sending Message..."
+@response = send_simple_message
+
+puts @response
+
+puts 'Done.'

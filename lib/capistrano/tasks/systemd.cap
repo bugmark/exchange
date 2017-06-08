@@ -1,0 +1,71 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# before 'deploy:restart', 'systemd:export'
+# after 'deploy:update', 'systemd:restart'
+# after 'deploy:rollback:revision', 'systemd:export_rollback'
+
+before 'deploy:check', 'systemd:test'
+#after  'systemd:test', 'systemd:exit'
+
+namespace :systemd do
+  desc "Do a test"
+  task :test do
+    on roles(:all) do
+      execute "sudo whoami"
+      puts capture "sudo whoami"
+    end
+  end
+
+  task :env_chruby do
+    on roles(:app) do
+      debug " ENV_CHRUBY ".center(80,'-')
+      execute "cd #{current_path}; script/deploy/gen_env_chruby #{fetch(:user)} >> .env"
+    end
+  end
+
+  desc "Export systemd service files"
+  task :export do
+    invoke("systemd:env_chruby")
+    on roles(:all) do
+      template "systemd_mvscim_service.erb"  , "/tmp/mvscim.service"
+      # template "systemd_sidekiq_service.erb", "/tmp/sidekiq.service"
+      execute "sudo mv /tmp/mvscim.service   /etc/systemd/system"
+      # execute "sudo mv /tmp/sidekiq.service /etc/systemd/system"
+      execute "sudo systemctl daemon-reload"
+      execute "sudo systemctl enable mvscim"
+      # execute "sudo systemctl enable sidekiq"
+    end
+  end
+
+  desc "Create Logfile Symlinks"
+  task :symlink_logs do
+    on roles(:all) do
+      execute "cd #{current_path}; script/deploy/symlink_logs #{fetch(:application)} 4"
+    end
+  end
+
+  desc "Start the application services"
+  task :start do
+    on roles(:all) do
+      execute "sudo systemctl start mvscim"
+      # execute "sudo systemctl start sidekiq"
+    end
+  end
+
+  desc "Stop the application services"
+  task :stop do
+    on roles(:all) do
+      execute "sudo systemctl stop mvscim"
+      # execute "sudo systemctl stop sidekiq"
+    end
+  end
+
+  desc "Restart the application services"
+  task :restart do
+    on roles(:all) do
+      puts "RESTARTING"
+      execute "sudo systemctl restart mvscim"
+    end
+  end
+end

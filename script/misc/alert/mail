@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+# sends an alert mail to ENV['ALERT_ADDRESSES']
+
+require 'rubygems'
+require 'mail'
+require File.expand_path('../lib/env_settings', File.dirname(__FILE__))
+
+msg = "Usage: script/alert/mail 'subject' 'body'"
+
+abort msg unless ARGV.length == 2
+
+subject = ARGV[0]
+body    = ARGV[1]
+
+mail = Mail.new do
+  from     "MvscIM <#{GMAIL_USER}@gmail.com>"
+  reply_to "#{GMAIL_USER}@gmail.com"
+  to       'andy@r210.com'
+  subject  "[MvscIMNET] #{subject}"
+  body     body
+end
+
+mail.delivery_method(:smtp, SMTP_SETTINGS)
+mail.deliver
+
+puts 'OK'

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# backup_db
+
+abort() {
+  echo "ERROR: ONLY RUNS ON PRODUCTION!"
+  exit 1
+}
+
+echo "||||||||||||||||||||||||||||"
+echo ------- start db backup -------
+date
+echo PWD is `pwd`
+echo USER is `whoami`
+echo ----------------------------
+
+. ./.env 2> /dev/null
+
+[[ "$RAILS_ENV" == "production" ]] || abort
+
+bundle exec rake data:backup:db
+
+echo ------- finish backup ------
+date
+echo ----------------------------
+

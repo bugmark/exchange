@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+# sends an alert sms to ENV['ALERT_ADDRESSES']
+
+require 'rubygems'
+require 'ruby-debug'
+require 'nexmo'
+
+require File.expand_path('../lib/env_settings', File.dirname(__FILE__))
+
+msg = "Usage: script/alert/nexmo 'body'"
+
+abort msg unless ARGV.length == 1
+
+text = ARGV[0]
+
+@account_key     = NEXMO_SMS_KEY
+@account_secret  = NEXMO_SMS_SECRET
+
+# set up a client to talk to the Nexmo REST API
+@client = Nexmo::Client.new(@account_key, @account_secret)
+
+params = {
+  to: '16508230836',
+  from: NEXMO_SMS_NUMBERS.split(' ').first,
+  text: text
+}
+
+@response = @client.send_message(params)
+
+puts @response.object
+
+puts 'OK'

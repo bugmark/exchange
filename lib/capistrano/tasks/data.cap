@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+namespace :data do
+  desc "Rsync shared data to deploy targets"
+  task :rsync do
+    on roles(:all) do |server|
+      execute "mkdir -p #{shared_path}/data"
+      run_locally { execute "rsync -qr data #{ fetch(:user) }@#{server.hostname}:#{shared_path} ; echo done" }
+      execute "chown -R #{ fetch(:user) } #{shared_path}/data"
+      execute "chgrp -R #{ fetch(:user) } #{shared_path}/data"
+    end
+  end
+  desc "Upload Varfile to deploy targets"
+  task :varfile do
+    varpath = "#{release_path}/.env"
+    on roles(:all) do |server|
+      cmd = "rsync -vL .env #{ fetch(:user) }@#{server.hostname}:#{release_path}"
+      puts cmd
+      run_locally { execute cmd }
+      execute "cat #{varpath} | sed s/=development/=production/ > /tmp/vars"  # change environment to production
+      execute "mv /tmp/vars #{varpath}"                                       # change environment to production
+    end
+  end
+ end
+

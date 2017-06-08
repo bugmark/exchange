@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# this is to execute commands on a production system
+# can be executed by root - relies on chruby switcher
+
+if (( $# == 0 )); then
+  echo "usage: chrun COMMAND [ARGS]"
+  exit 1
+fi
+
+source .env-chruby
+
+export PATH=$CHRUBY_PATH:$PATH
+export GEM_PATH
+export GEM_HOME
+export GEM_ROOT
+export RUBY_ROOT
+
+exec $*
+

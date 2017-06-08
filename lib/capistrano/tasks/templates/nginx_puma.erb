@@ -1,0 +1,60 @@
+# nginx_puma
+# this file created by Capistrano
+# generated <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
+
+server {
+  listen  80;
+  server_name ~^.*$;
+  return  301 https://$host$request_uri;
+}
+
+server {
+  listen 443 ssl;
+  ssl on;
+  ssl_certificate     <%= fetch(:release_path) %>/.certs/<%= fetch(:rails_env) %>.pem;
+  ssl_certificate_key <%= fetch(:release_path) %>/.certs/<%= fetch(:rails_env) %>.key;
+  ssl_session_timeout 5m;
+  ssl_protocols       SSLv2 SSLv3 TLSv1;
+  ssl_ciphers         HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers  on;
+
+  server_name ~^.*$;
+  client_max_body_size 20M;
+  root <%= fetch(:deploy_to) %>/current/public;
+  if (-f $document_root/util/maintenance.html) {
+    return 503;
+  }
+  error_page 404 /404.html;
+  error_page 422 /422.html;
+  error_page 500 502 504 /500.html;
+  error_page 503 @503;
+  location @503 {
+    rewrite ^(.*)$ /util/maintenance.html break;
+  }
+  location ~ ^/(all_packs|img|fonts|assets|system|icons|avatar|metrics)/ {
+    expires max;
+    gzip_static on;
+    add_header ETag "";
+    add_header Last-Modified "";
+    add_header Cache-Control public;
+    break;
+  }
+  location = /robots.txt { }
+  location = /500.html   { }
+  location = /422.html   { }
+  location /cable {
+    proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+  location / {
+    proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
+    proxy_set_header Host $host;
+    proxy_intercept_errors on;
+    # ----- ssl support -----
+    proxy_set_header X-Forwarded-Proto https;
+    # -----
+  }
+}
+
