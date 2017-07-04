@@ -21,7 +21,7 @@ echo ----------------------------
 
 # bundle exec rake data:backup:db
 # bundle exec cap lch1 data:download:all
-rsync -av deploy@lch1:e/lica/lch1 ~/e/lica --delete
+rsync -av deploy@lch1:var/backup/lica/lch1 ~/var/backup/lica --delete
 
 echo ------- finish download ------
 date
