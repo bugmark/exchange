@@ -46,7 +46,7 @@ On the new VM:
 
 6. Start a new shell: `bash` (required to load your new user configuration)
 
-## Appmvscimtion Bootstrap
+## Application Bootstrap
 
 Follow these steps to bootstrap the app in your development environment.
 
@@ -61,7 +61,6 @@ Follow these steps to bootstrap the app in your development environment.
 |----------------------------|--------------------------|
 | `script/seed/share_env`    | `script/seed/get_env`    |
 | `script/seed/share_db`     | `script/seed/get_db`     |
-| `script/seed/share_sysdir` | `script/seed/get_sysdir` |
 |----------------------------|--------------------------|
 
 4. Import the seed db `script/seed/import_db`
