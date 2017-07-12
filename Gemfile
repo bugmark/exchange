@@ -20,6 +20,7 @@ gem 'devise'
 gem 'colored'
 gem 'whenever'
 gem 'github_api'
+gem 'nokogiri'
 
 gem 'slim-rails'                 # slim templates
 
