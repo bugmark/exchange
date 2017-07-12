@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# call from tmux_dashboard
+# call from tmux_console
 
-export APP="LICA-DEV"
+export APP="MVSCIM-DEV"
 
 sendkeys() {
   tmux send-keys -t $APP:$1 "$2" C-m
@@ -35,21 +35,23 @@ create_new_session()
 
   tmux new-window -n "WEBPACK"
 
+  # sendkeys 4.1 'clear ; webpack-dev-server --host 0.0.0.0 --public soak:8080'
+  # sendkeys 4.1 'clear ; webpack-dev-server --public'
   sendkeys 4.1 'script/dev/webpack'
 
   # ----- -----
 
-  tmux new-window -n "SIDEKIQ"
-
-  sendkeys 5.1 'script/dev/sidekiq'
+  # tmux new-window -n "SIDEKIQ"
+  #
+  # sendkeys 5.1 'script/run/sidekiq'
 
   # ----- -----
 
-  tmux new-window -n "TUNNEL"
-
-  splitwin 70 4
-
-  sendkeys 6.1 'clear ; rpf deploy@x440h64:3000 3000'
+  # tmux new-window -n "TUNNEL"
+  #
+  # splitwin 70 4
+  #
+  # sendkeys 6.1 'clear ; rpf deploy@x440h64:3000 3000'
 
   # ----- -----
 
