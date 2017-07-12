@@ -18,6 +18,9 @@
 /doc/
 /data/
 /wiki/
+/script/dev/vm/.vagrant/
+/script/dev/vm/.vagrant/*
+/script/dev/vm/.vagrant/machine/
 /db/test*
 /db/backups*
 /db/backups/*
