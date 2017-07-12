@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# get the database file (db/backups/data.psql)
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+function save_file() {
+  timestamp=$(date +%y%m%d_%H%M%S)
+  altfile=$1.$timestamp.save
+  [ -f "$1" ] && echo "Saving $1 to $altfile" && mv $1 $altfile
+}
+
+echo "=== get .db ========================================"
+mkdir -p db/backups
+cd db/backups
+save_file data.psql
+wormhole receive
+echo "Done."

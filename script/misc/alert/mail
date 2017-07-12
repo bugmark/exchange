@@ -14,10 +14,10 @@ subject = ARGV[0]
 body    = ARGV[1]
 
 mail = Mail.new do
-  from     "MvscIM <#{GMAIL_USER}@gmail.com>"
+  from     "ListCall <#{GMAIL_USER}@gmail.com>"
   reply_to "#{GMAIL_USER}@gmail.com"
   to       'andy@r210.com'
-  subject  "[MvscIMNET] #{subject}"
+  subject  "[ListCallNET] #{subject}"
   body     body
 end
 

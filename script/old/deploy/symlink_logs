@@ -2,7 +2,7 @@
 
 # creates symlinks to upstart logs
 
-app_name   = ARGV[0] || 'ListCall'
+app_name   = ARGV[0] || 'MvscIM'
 delay_time = ARGV[1] || 0
 
 abort 'Need App Name!' if app_name.empty?
@@ -14,7 +14,7 @@ system "rm -f #{local_log_dir}/#{app_name}*.log"
 system "sleep #{delay_time}"
 
 Dir.glob("#{umain_log_dir}/#{app_name}*.log").each do |logfile|
-  file_name = logfile.split('/').last.gsub('ListCall-','')
+  file_name = logfile.split('/').last.gsub('MvscIM-','')
   system "ln -s #{logfile} #{local_log_dir}/#{file_name}"
   system "sudo chmod a+rw #{logfile}"
 end

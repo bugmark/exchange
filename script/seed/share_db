@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# share the database (db/backups/data.psql)
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+function export() {
+  echo "Exporting Database"
+  bundle exec rails data:db:export
+}
+
+echo "=== share db ========================================"
+mkdir -p db/backups
+[ -f db/backups/data.psql ] || export
+cd db/backups
+wormhole send data.psql
+echo "Done."

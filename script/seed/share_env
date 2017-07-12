@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# share the environment file (.env)
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+echo "=== share .env ========================================"
+wormhole send .env
+echo "Done."

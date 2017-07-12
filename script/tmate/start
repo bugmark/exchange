@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# tmate/start
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+script/tmate/_run
+

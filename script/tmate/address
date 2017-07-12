@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# tmate/start
+
+# tmate/start
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+result=`script/tmate/_run address`
+
+echo -e "$result\r" | ssh listcall.net -p 2022 2>&1 > /dev/null
+
+echo $result
+

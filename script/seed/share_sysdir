@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# share the system directory (public/system)
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+echo "=== share sysdir ========================================"
+cd public
+wormhole send system
+echo "Done."

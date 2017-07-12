@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# LOGVIEW CONSOLE
+# DEVELOPMENT DASHBOARD
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
 
-# call using devcon_msg "message text" $@
-devcon_msg() 
+# call using devdash_msg "message text" $@
+devdash_msg() 
 {
   msg=$1
   if [ $# -gt 2 ] ; then
@@ -15,11 +15,11 @@ devcon_msg()
   fi 
 }
 
-# call using devcon_run 'script' $@
-devcon_run() 
+# call using devdash_run 'script' $@
+devdash_run() 
 {
   server=$1
-  cmd="script/tmux/dashboard_base script/tmux/log_layout"
+  cmd="script/tmux/dashboard_base script/tmux/dev_layout"
   if [ ! -z $server ] ; then
     cmd="ssh -t $server '$cmd'"
   fi
@@ -27,5 +27,6 @@ devcon_run()
   eval "$cmd"
 }
 
-devcon_msg "shows ListCall production logs" $@
-devcon_run $@
+devdash_msg "runs the ListCall development environment" $@
+
+devdash_run $@

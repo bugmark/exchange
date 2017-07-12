@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# get the sysdir (public/system)
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+function save_dir() {
+  timestamp=$(date +%y%m%d_%H%M%S)
+  altdir=$1.$timestamp.save
+  [ -d "$1" ] && echo "Saving $1 to $altdir" && mv $1 $altdir
+}
+
+echo "=== get sysdir ========================================"
+cd public
+save_dir system
+wormhole receive
+echo "Done."

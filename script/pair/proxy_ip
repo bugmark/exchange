@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# IP address of the Pair Programming Proxy Server.
-
-export PROXY_IP="45.79.82.37"

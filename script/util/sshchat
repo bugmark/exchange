@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# sshchat
+
+ssh listcall.net -p 2022
+
