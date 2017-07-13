@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+
+# xml = File.read('allitems-cvrf-year-2017.xml')
+xml = File.read('allitems_short.xml')
+
+doc = Nokogiri::XML(xml) do |config|
+  config.huge
+end
+
+# puts doc.root.children
+
+# obj = doc.xpath('//DocumentNotes')
+# obj = doc.xpath('.//DocumentNotes')
+# obj = doc.search("//Note")
+# obj = doc.xpath('//DocumentNotes')
+# obj = doc.css('DocumentNotes')
+obj = doc.css('item')
+
+puts obj.class
+puts obj.length
+# obj.each {|ele| puts ele}

@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+# load test json data
+
+require 'json'
+
+json = File.read('github_xdmarket.json')
+
+repo_obj = Repo.find_by_name("")
+
+hash = JSON.parse(json)
+
+puts hash.class
+puts hash.length

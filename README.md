@@ -65,9 +65,9 @@ Follow these steps to bootstrap the app in your development environment.
 
 4. Import the seed db `script/seed/import_db`
 
-5. Start the development dashboard `script/dev/dashboard`
+5. Start the tmux development session `script/dev/session`
 
-   A cheat-sheet for dashboard navigation is in `~/.tmux.conf`.
+   A cheat-sheet for tmux navigation is in `~/.tmux.conf`.
 
 ## Host Web Access
 

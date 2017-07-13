@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# DEVELOPMENT DASHBOARD
+# START A MULTI-PROCESS DEVELOPMENT SESSION
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
