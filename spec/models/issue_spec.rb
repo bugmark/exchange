@@ -10,9 +10,11 @@ end
 #
 #  id         :integer          not null, primary key
 #  repo_id    :integer
-#  foreign_id :string
+#  api_url    :string
+#  http_url   :string
 #  title      :string
 #  status     :string
+#  labels     :text             default([]), is an Array
 #  synced_at  :datetime
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

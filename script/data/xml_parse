@@ -1,13 +1,16 @@
 #!/usr/bin/env ruby
 
 require 'nokogiri'
+require 'pry'
 
-# xml = File.read('allitems-cvrf-year-2017.xml')
-xml = File.read('allitems_short.xml')
+xml = File.read('cve_2008.xml')
 
-doc = Nokogiri::XML(xml) do |config|
-  config.huge
-end
+# doc = Nokogiri::Slop(xml)
+doc = Nokogiri::XML(xml)
+binding.pry
+doc.remove_namespaces!
+binding.pry
+x = 1
 
 # puts doc.root.children
 
@@ -15,8 +18,10 @@ end
 # obj = doc.xpath('.//DocumentNotes')
 # obj = doc.search("//Note")
 # obj = doc.xpath('//DocumentNotes')
-# obj = doc.css('DocumentNotes')
-obj = doc.css('item')
+# obj = doc.xpath('//Vulnerability', 'Vulnerability' => "http://www.icasi.org/CVRF/schema/vuln/1.1")
+# obj = doc.xpath('//xmlns:Vulnerability')
+obj = doc.css('//Notes')
+# obj = doc.css('item')
 
 puts obj.class
 puts obj.length

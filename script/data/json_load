@@ -1,14 +1,24 @@
 #!/usr/bin/env ruby
 
-# load test json data
+require './config/environment'
 
-require 'json'
+json = File.read('script/data/github_xdmarket.json')
 
-json = File.read('github_xdmarket.json')
+repo_name = "mvscorg/xdmarket"
 
-repo_obj = Repo.find_by_name("")
+Repo.find_by_name(repo_name).try(:destroy)
 
-hash = JSON.parse(json)
+repo = Repo.create(name: repo_name, format: "GitHub")
 
-puts hash.class
-puts hash.length
+JSON.parse(json).each do |el|
+  attrs = {
+    api_url:   el["url"]       ,
+    http_url:  el["http_url"]  ,
+    repo_id:   repo.id         ,
+    title:     el["title"]     ,
+    labels:    el["labels"]    ,
+    status:    el["state"]     ,
+    synced_at: Time.now
+  }
+  Issue.create attrs
+end

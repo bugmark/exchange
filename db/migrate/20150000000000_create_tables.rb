@@ -1,18 +1,20 @@
 class CreateTables < ActiveRecord::Migration[5.1]
   def change
     create_table :repos do |t|
-      t.string   :type
+      t.string   :format          # GitHub, CVRF
+      t.string   :name            # mvscorg/xdmarket
       t.string   :url
-      t.string   :name
       t.datetime :synced_at
       t.timestamps
     end
 
     create_table :issues do |t|
       t.integer  :repo_id
-      t.string   :foreign_id
+      t.string   :api_url
+      t.string   :http_url
       t.string   :title
       t.string   :status
+      t.text     :labels, array: true, default: []
       t.datetime :synced_at
       t.timestamps
     end

@@ -1,0 +1,11 @@
+h2 Repos
+table.table
+  tr
+    th Format
+    th Name
+    th Num Issues
+  - @repos.each do |repo|
+    tr
+      td = repo.format
+      td = repo.name
+      td = repo.issues.count
