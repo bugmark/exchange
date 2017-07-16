@@ -19,7 +19,7 @@ devcon_msg()
 devcon_run() 
 {
   server=$1
-  cmd="script/tmux/console_base script/tmux/log_layout"
+  cmd="script/tmux/dashboard_base script/tmux/log_layout"
   if [ ! -z $server ] ; then
     cmd="ssh -t $server '$cmd'"
   fi
@@ -27,5 +27,5 @@ devcon_run()
   eval "$cmd"
 }
 
-devcon_msg "shows bugmark production logs" $@
+devcon_msg "shows ListCall production logs" $@
 devcon_run $@

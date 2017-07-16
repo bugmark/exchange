@@ -1,0 +1,44 @@
+---
+# sets up a development environment on the target host
+#
+- vars:
+    - rem_host:     all           
+    - rem_user:     "{{lookup('env', 'USER') }}"
+    # - rem_host:     lch1
+    # - rem_user:     deploy
+    - lcl_user:     "{{ lookup('env', 'USER') }}"
+    - lcl_root:     "/home/{{lcl_user}}/src/bugmark"
+    - dotenv:       "{{lcl_root}}/.env"
+    - pg_user:      "{{APP_NAME}}"
+    - pg_pass:      "{{POSTGRES_PASS}}"
+    - pg_dbs:
+        - "{{pg_user}}_production"
+        - "{{pg_user}}_test"
+        - "{{pg_user}}_development"
+  remote_user: "{{rem_user}}"
+  hosts:       "{{rem_host}}"
+  become: true
+  roles:
+    - Vars/predicates
+    - Vars/lclhost
+    - CLI/user
+    - CLI/base
+    - CLI/tzone
+    - Ruby/sysruby
+    - Ruby/chruby
+    - Ruby/install
+    - Ruby/gems
+    - CLI/util
+    - pip
+    - tmux
+    - nodejs
+    - yarn 
+    - postgres
+    - postgres_user
+    - postgres_db 
+    - redis
+    - memcached
+    # - influxdb
+    # - telegraf
+    # - grafana
+

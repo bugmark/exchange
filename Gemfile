@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'dotenv'
-gem 'rails', '~> 5.1.1'
+gem 'rails', '~> 5.1.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
@@ -20,6 +20,7 @@ gem 'devise'
 gem 'colored'
 gem 'whenever'
 gem 'github_api'
+gem 'nokogiri'
 
 gem 'slim-rails'                 # slim templates
 
@@ -55,6 +56,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'       # 'spring rspec' command
+  gem 'annotate', require: false   #'be annotate -d; be annotate -p after'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

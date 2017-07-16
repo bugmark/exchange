@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# START A MULTI-PROCESS DEVELOPMENT SESSION
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+# call using devdash_msg "message text" $@
+devdash_msg() 
+{
+  msg=$1
+  if [ $# -gt 2 ] ; then
+    echo "Usage: `basename $0` [<host>]\n  $msg\n  default host is <localhost>."
+    exit
+  fi 
+}
+
+# call using devdash_run 'script' $@
+devdash_run() 
+{
+  server=$1
+  cmd="script/tmux/dashboard_base script/tmux/dev_layout"
+  if [ ! -z $server ] ; then
+    cmd="ssh -t $server '$cmd'"
+  fi
+  echo "$cmd"
+  eval "$cmd"
+}
+
+devdash_msg "runs the ListCall development environment" $@
+
+devdash_run $@

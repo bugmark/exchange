@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+require 'pry'
+
+xml = File.read('cve_2008.xml')
+
+# doc = Nokogiri::Slop(xml)
+doc = Nokogiri::XML(xml)
+doc.remove_namespaces!
+
+list = doc.search("//Vulnerability")
+
+list.each do |el|
+  title = el.css('Title').first&.text
+  note  = el.css('Note[Type="Description"]')
+  description = note.first&.text&.gsub("\n"," ") || "NA"
+
+  puts "#{title.ljust(15)} #{description[0,60]}"
+end
+

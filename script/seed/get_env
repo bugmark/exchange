@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# get the environment file (.env)
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+function save_file() {
+  timestamp=$(date +%y%m%d_%H%M%S)
+  altfile=$1.$timestamp.save
+  [ -f "$1" ] && echo "Saving $1 to $altfile" && mv $1 $altfile
+}
+
+echo "=== get .env ========================================"
+save_file .env
+wormhole receive
+echo "Done."

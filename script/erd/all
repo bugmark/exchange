@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+puts "Loading Rails..."
+
+require './config/environment'
+Rails.application.eager_load!
+
+ARGS = [/.*/]
+
+def klasses
+  kn1 = ActiveRecord::Base.descendants.map {|x| x.name}.uniq
+  kn2 = kn1.select {|x| ARGS.any?{|y| y.match(x)}}
+  kn3 = kn2.select {|x| ! /::As[A-Z]/.match(x)}
+  kn3.join(',')
+end
+
+def cfg_file(klasnames)
+"
+attributes:
+  - inheritance
+disconnected: true
+filename: erd
+filetype: pdf
+indirect: false
+inheritance: true
+markup: true
+notation: simple
+orientation: vertical
+polymorphism: true
+sort: true
+warn: false
+title: ListCall All
+exclude: null
+only: #{klasnames}
+"
+end
+
+puts klasses
+
+File.open("./.erdconfig", "w") { |f| f.puts cfg_file(klasses) }
+
+cmd = "bundle exec erd --filename=ERD_ALL"
+
+puts cmd
+system cmd
+

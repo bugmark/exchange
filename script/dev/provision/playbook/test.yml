@@ -1,0 +1,44 @@
+---
+- hosts: all
+  sudo:  true
+  vars:
+    - roles_dir:    ~/.ansible_playbooks/roles
+    - dev_user:     aleak
+    - src_root:     /home/{{dev_user}}/src/lica
+    - dotfile:      ${src_root}/.env
+    - user:         vagrant
+  tasks:
+    # - local_action: shell echo `whoami`
+    #   sudo: false
+    # - local_action: shell echo `pwd`
+    #   sudo: false
+    # - local_action: shell echo `hostname`
+    #   sudo: false
+    # - local_action: shell echo `ruby -v`
+    #   sudo: false
+    - debug: msg={{dotfile}}
+    - local_action: dotenv file={{dotfile}}
+      sudo: false
+    - name: try again
+      set_fact: x=1, y=2
+    - debug: msg={{x}}
+    - debug: msg={{testE}}
+    - debug: msg={{roles_dir}}
+    - name: doing {{ansible_facts["x"]}} and ${user} and ${test1} and done
+      local_action: command echo "done"
+
+# - hosts: all
+#   user:  vagrant
+#   vars:
+#     - roles_dir:  ~/.ansible_playbooks/roles
+#     - user: vagrant
+#     - pg_user: lica
+#     - pg_pass: simple
+#   roles:
+#     - ${roles_dir}/cli_util
+#     - ${roles_dir}/postgres
+#     - ${roles_dir}/postgres_user 
+#     - ${roles_dir}/nginx
+#     - ${roles_dir}/redis
+#     - ${roles_dir}/memcached
+#     - ${roles_dir}/rbgems

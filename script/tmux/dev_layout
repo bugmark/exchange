@@ -2,7 +2,7 @@
 
 # call from tmux_console
 
-export APP="bugmark-DEV"
+export APP="BUGMARK-DEV"
 
 sendkeys() {
   tmux send-keys -t $APP:$1 "$2" C-m
@@ -17,7 +17,7 @@ create_new_session()
 
   tmux new-session -s $APP -n "RSPEC" -d
 
-  sendkeys 1.1 'script/run/specs'
+  sendkeys 1.1 'script/dev/specs'
 
   # ----- -----
 
@@ -29,14 +29,15 @@ create_new_session()
 
   tmux new-window -n "PUMA"
 
-  sendkeys 3.1 'script/run/server'
+  sendkeys 3.1 'script/dev/puma'
 
   # ----- -----
 
   tmux new-window -n "WEBPACK"
 
   # sendkeys 4.1 'clear ; webpack-dev-server --host 0.0.0.0 --public soak:8080'
-  sendkeys 4.1 'clear ; webpack-dev-server --public'
+  # sendkeys 4.1 'clear ; webpack-dev-server --public'
+  sendkeys 4.1 'script/dev/webpack'
 
   # ----- -----
 
