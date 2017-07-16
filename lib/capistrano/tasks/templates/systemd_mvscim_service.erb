@@ -22,8 +22,8 @@ User=deploy
 Group=deploy
 Type=simple
 
-WorkingDirectory=/home/deploy/a/mvscim/current
-EnvironmentFile=/home/deploy/a/mvscim/current/.env
+WorkingDirectory=/home/deploy/src/mvscim/current
+EnvironmentFile=/home/deploy/src/mvscim/current/.env
 ExecStart=/bin/bash -lc 'bin/puma -p <%= fetch(:web_port) %> -C config/puma.rb -e production -S $USR_HOME/.mvscim_Puma_State'
 
 Restart=always

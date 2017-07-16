@@ -25,8 +25,8 @@ User=deploy
 Group=deploy
 Type=simple
 
-WorkingDirectory=/home/aleak/a/lica/current
-EnvironmentFile=/home/deploy/a/lica/current/.env
+WorkingDirectory=/home/deploy/src/lica/current
+EnvironmentFile=/home/deploy/src/lica/current/.env
 ExecStart=/bin/bash -lc 'bin/sidekiq -e production'
 
 RestartSec=1
