@@ -8,7 +8,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    create_table :issues do |t|
+    create_table :bugs do |t|
       t.integer  :repo_id
       t.string   :api_url
       t.string   :http_url

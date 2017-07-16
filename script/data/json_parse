@@ -2,7 +2,7 @@
 
 require 'json'
 
-json = File.read('github_xdmarket.json')
+json = File.read('gh_xdm.json')
 
 hash = JSON.parse(json)
 

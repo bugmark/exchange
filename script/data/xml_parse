@@ -7,22 +7,15 @@ xml = File.read('cve_2008.xml')
 
 # doc = Nokogiri::Slop(xml)
 doc = Nokogiri::XML(xml)
-binding.pry
 doc.remove_namespaces!
-binding.pry
-x = 1
 
-# puts doc.root.children
+list = doc.search("//Vulnerability")
 
-# obj = doc.xpath('//DocumentNotes')
-# obj = doc.xpath('.//DocumentNotes')
-# obj = doc.search("//Note")
-# obj = doc.xpath('//DocumentNotes')
-# obj = doc.xpath('//Vulnerability', 'Vulnerability' => "http://www.icasi.org/CVRF/schema/vuln/1.1")
-# obj = doc.xpath('//xmlns:Vulnerability')
-obj = doc.css('//Notes')
-# obj = doc.css('item')
+list.each do |el|
+  title = el.css('Title').first&.text
+  note  = el.css('Note[Type="Description"]')
+  description = note.first&.text&.gsub("\n"," ") || "NA"
 
-puts obj.class
-puts obj.length
-# obj.each {|ele| puts ele}
+  puts "#{title.ljust(15)} #{description[0,60]}"
+end
+
