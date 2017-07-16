@@ -27,5 +27,5 @@ devcon_run()
   eval "$cmd"
 }
 
-devcon_msg "shows MvscIM production logs" $@
+devcon_msg "shows bugmark production logs" $@
 devcon_run $@

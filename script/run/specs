@@ -5,7 +5,7 @@
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
 
-export APP="MvscIM"
+export APP="bugmark"
 export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 
 clear

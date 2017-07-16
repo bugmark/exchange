@@ -5,5 +5,5 @@
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
 
-ansible-playbook -i "localhost," -c local config/provision/Mvscim_development.yml
+ansible-playbook -i "localhost," -c local config/provision/bugmark_development.yml
 

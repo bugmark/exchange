@@ -1,5 +1,5 @@
 {
-  "name": "mvscim",
+  "name": "bugmark",
   "private": true,
   "dependencies": {
     "autoprefixer": "^7.1.1",

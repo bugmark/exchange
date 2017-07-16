@@ -27,6 +27,6 @@ devcon_run()
   eval "$cmd"
 }
 
-devcon_msg "runs the MvscIM development environment" $@
+devcon_msg "runs the bugmark development environment" $@
 
 devcon_run $@

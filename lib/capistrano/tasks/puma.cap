@@ -19,7 +19,7 @@ namespace :puma do
   task :nginx_conf => :certs do
     on roles(:web) do |server|
       set :is_prod_host, (server.hostname == "lch1")
-      template "nginx_puma.erb", "/etc/nginx/conf.d/mvscim.conf"
+      template "nginx_puma.erb", "/etc/nginx/conf.d/bugmark.conf"
       execute  "sudo /etc/init.d/nginx reload"
     end
   end

@@ -2,13 +2,13 @@
 
 cap production app:disable
 
-ssh deploy@Mvscim 'sudo stop MvscIM'
+ssh deploy@bugmark 'sudo stop bugmark'
 
-ssh deploy@Mvscim 'killall -9 ruby'
+ssh deploy@bugmark 'killall -9 ruby'
 
-ssh deploy@Mvscim 'cd a/Mvscim/current ; script/recsv build'
+ssh deploy@bugmark 'cd a/bugmark/current ; script/recsv build'
 
-ssh deploy@Mvscim 'sudo start MvscIM'
+ssh deploy@bugmark 'sudo start bugmark'
 
 sleep 2
 
@@ -20,7 +20,7 @@ alert ding
 
 sleep 5
 
-ssh deploy@Mvscim 'cd a/Mvscim/current ; script/reavatar'
+ssh deploy@bugmark 'cd a/bugmark/current ; script/reavatar'
 
 echo '---done'
 
