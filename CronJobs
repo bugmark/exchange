@@ -17,26 +17,26 @@ load File.expand_path("~/g/pdev_util/bin/SysRole")
 # whenever_config
 
 # every 1.minute do
-#   run_scripts 'util/heartbeat', app: "MvscIM"
+#   run_scripts 'util/heartbeat', app: "BUGMARK"
 # end
 
 # if dev_host?
 #   every 1.hour do
-#     run_scripts 'util/download_backup', app: "MvscIM"
+#     run_scripts 'util/download_backup', app: "BUGMARK"
 #   end
 #
 #   every 7.days do
-#     run_scripts 'util/backup_keys', app: "MvscIM"
+#     run_scripts 'util/backup_keys', app: "BUGMARK"
 #   end
 # end
 
 # if rails_production? 
 #   every 1.day, at: "00:30 am" do
-#     run_scripts 'util/backup_db', app: "MvscIM", rails_env: "production"
+#     run_scripts 'util/backup_db', app: "BUGMARK", rails_env: "production"
 #   end
 #
 #   every 4.days, at: "01:30 am"do
-#     run_scripts 'util/backup_sysdir', app: "MvscIM", rails_env: "production"
+#     run_scripts 'util/backup_sysdir', app: "BUGMARK", rails_env: "production"
 #   end
 # end
 

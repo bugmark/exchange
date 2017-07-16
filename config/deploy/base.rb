@@ -2,7 +2,7 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 
 # ===== App Config =====
 
-set :application,    'mvscim'
+set :application,    'bugmark'
 
 set :log_level,      :error                 # use :error, :warn, :info, or :debug
 set :format_options, command_output: false  # :stdout, :stderr, true, false
@@ -11,13 +11,13 @@ set :deploy_to,   -> { "/home/#{fetch(:user)}/src/#{fetch(:application).downcase
 
 # ===== Nginx Config =====
 
-set :vhost_names, %w(mvscim.net *.mvscim.net *.mozdm.net mozdm.net)
+set :vhost_names, %w(bugmark.net *.bugmark.net *.mozdm.net mozdm.net)
 set :web_port,    8500
 
 # ===== Source Access =====
 
-# set :repo_url,         'ssh://git@github.com/mvscorg/mvscim.git'
-set :repo_url,         'https://github.com/mvscorg/mvscim.git'
+# set :repo_url,         'ssh://git@github.com/mvscorg/bugmark.git'
+set :repo_url,         'https://github.com/mvscorg/bugmark.git'
 
 # ===== Tasks =====
 
@@ -54,7 +54,7 @@ namespace :deploy do
       debug ' RESTART '.center(80,'-')
       debug ' TODO: FIX THE BROKEN KILL SIGNALS '.center(80,'-')
       # restart PUMA
-      execute "sudo systemctl restart mvscim"
+      execute "sudo systemctl restart bugmark"
       # execute "sudo systemctl restart sidekiq"
     end
   end

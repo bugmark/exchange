@@ -28,12 +28,12 @@ namespace :systemd do
   task :export do
     invoke("systemd:env_chruby")
     on roles(:all) do
-      template "systemd_mvscim_service.erb"  , "/tmp/mvscim.service"
+      template "systemd_bugmark_service.erb"  , "/tmp/bugmark.service"
       # template "systemd_sidekiq_service.erb", "/tmp/sidekiq.service"
-      execute "sudo mv /tmp/mvscim.service   /etc/systemd/system"
+      execute "sudo mv /tmp/bugmark.service   /etc/systemd/system"
       # execute "sudo mv /tmp/sidekiq.service /etc/systemd/system"
       execute "sudo systemctl daemon-reload"
-      execute "sudo systemctl enable mvscim"
+      execute "sudo systemctl enable bugmark"
       # execute "sudo systemctl enable sidekiq"
     end
   end
@@ -48,7 +48,7 @@ namespace :systemd do
   desc "Start the application services"
   task :start do
     on roles(:all) do
-      execute "sudo systemctl start mvscim"
+      execute "sudo systemctl start bugmark"
       # execute "sudo systemctl start sidekiq"
     end
   end
@@ -56,7 +56,7 @@ namespace :systemd do
   desc "Stop the application services"
   task :stop do
     on roles(:all) do
-      execute "sudo systemctl stop mvscim"
+      execute "sudo systemctl stop bugmark"
       # execute "sudo systemctl stop sidekiq"
     end
   end
@@ -65,7 +65,7 @@ namespace :systemd do
   task :restart do
     on roles(:all) do
       puts "RESTARTING"
-      execute "sudo systemctl restart mvscim"
+      execute "sudo systemctl restart bugmark"
     end
   end
 end

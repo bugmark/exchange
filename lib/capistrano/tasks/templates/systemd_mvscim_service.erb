@@ -1,10 +1,10 @@
-# Systemd unit file for MVSCIM on Ubuntu
+# Systemd unit file for bugmark on Ubuntu
 # This file created by Capistrano <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
 # This file installed in /lib/systemd/system. Run:
-#   - systemctl enable mvscim
-#   - systemctl {status,start,stop,restart} mvscim
-#   - journalctl -u mvscim
-#   - journalctl -u mvscim -f
+#   - systemctl enable bugmark
+#   - systemctl {status,start,stop,restart} bugmark
+#   - journalctl -u bugmark
+#   - journalctl -u bugmark -f
 #
 # See Inspeqtor's Systemd wiki page for more detail about Systemd:
 # https://github.com/mperham/inspeqtor/wiki/Systemd
@@ -14,7 +14,7 @@
 # http://0pointer.de/public/systemd-man/systemd.exec.html
 
 [Unit]
-Description=mvscim: a Rails web application
+Description=bugmark: a Rails web application
 After=syslog.target network.target
 
 [Service]
@@ -22,9 +22,9 @@ User=deploy
 Group=deploy
 Type=simple
 
-WorkingDirectory=/home/deploy/src/mvscim/current
-EnvironmentFile=/home/deploy/src/mvscim/current/.env
-ExecStart=/bin/bash -lc 'bin/puma -p <%= fetch(:web_port) %> -C config/puma.rb -e production -S $USR_HOME/.mvscim_Puma_State'
+WorkingDirectory=/home/deploy/src/bugmark/current
+EnvironmentFile=/home/deploy/src/bugmark/current/.env
+ExecStart=/bin/bash -lc 'bin/puma -p <%= fetch(:web_port) %> -C config/puma.rb -e production -S $USR_HOME/.bugmark_Puma_State'
 
 Restart=always
 KillMode=mixed
@@ -33,7 +33,7 @@ TimeoutStopSec=5
 StandardInput=null
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=mvscim
+SyslogIdentifier=bugmark
 
 [Install]
 WantedBy=multi-user.target

@@ -19,16 +19,16 @@ Let's get started:
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
-   `wget raw.githubusercontent.com/mvscorg/mvscim/script/dev/vm/Vagrantfile`
+   `wget raw.githubusercontent.com/mvscorg/bugmark/script/dev/vm/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
 
 4. Login to your virtual machine using `vagrant ssh`
 
 5. Clone the repo 
-   `mkdir src; cd src; git clone https://github.com/mvscorg/mvscim.git`
+   `mkdir src; cd src; git clone https://github.com/mvscorg/bugmark.git`
 
-6. CD to the repo directory `cd ~/src/mvscim`
+6. CD to the repo directory `cd ~/src/bugmark`
 
 ## Development Environment Provisioning
 
@@ -117,11 +117,11 @@ https://www.webrtc-experiment.com/desktop-sharing
 
 Pro Tips:
 
-- Configure the desktop-sharing plugin with a fixed room name (like "mvscim").
+- Configure the desktop-sharing plugin with a fixed room name (like "bugmark").
   This will make it possible for team members to bookmark the room, and will
   enable remote sessions to auto-reconnect if a stream is interrupted.
 
-- Share the entire desktop, not an appmvscimtion window.  The reason is that the
+- Share the entire desktop, not an appbugmarktion window.  The reason is that the
   app-window sharing seems to resize/crop incorrectly.
 
 - The session participant should experiment with full-screen (F11) or normal

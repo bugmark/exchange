@@ -8,12 +8,12 @@ default: &default
 
 development:
   <<: *default
-  database: mvscim_development
+  database: bugmark_development
 
 test:
   <<: *default
-  database: mvscim_test
+  database: bugmark_test
 
 production:
   <<: *default
-  database: mvscim_production
+  database: bugmark_production

@@ -7,7 +7,7 @@
     # - rem_host:     lch1
     # - rem_user:     deploy
     - lcl_user:     "{{ lookup('env', 'USER') }}"
-    - lcl_root:     "/home/{{lcl_user}}/src/mvscim"
+    - lcl_root:     "/home/{{lcl_user}}/src/bugmark"
     - dotenv:       "{{lcl_root}}/.env"
     - pg_user:      "{{APP_NAME}}"
     - pg_pass:      "{{POSTGRES_PASS}}"
