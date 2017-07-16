@@ -2,7 +2,7 @@
 
 # call from tmux_console
 
-export APP="bugmark-DEV"
+export APP="BUGMARK-DEV"
 
 sendkeys() {
   tmux send-keys -t $APP:$1 "$2" C-m
