@@ -15,7 +15,7 @@ namespace :puma do
       execute "cd #{release_path}/.certs/staging ; ./generate"
     end
   end
-  desc "Export an puma config file for nginx."
+  desc "Export a puma config file for nginx."
   task :nginx_conf => :certs do
     on roles(:web) do |server|
       set :is_prod_host, (server.hostname == "lch1")
