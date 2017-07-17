@@ -17,7 +17,7 @@
 # http://0pointer.de/public/systemd-man/systemd.exec.html
 
 [Unit]
-Description=Sidekiq: Rails background job processing for Lica
+Description=Sidekiq: Rails background job processing for BugMark
 After=syslog.target network.target redis-server.service bugmark.service
 
 [Service]
@@ -25,8 +25,8 @@ User=deploy
 Group=deploy
 Type=simple
 
-WorkingDirectory=/home/deploy/run/lica/current
-EnvironmentFile=/home/deploy/run/lica/current/.env
+WorkingDirectory=/home/deploy/run/bugmark/current
+EnvironmentFile=/home/deploy/run/bugmark/current/.env
 ExecStart=/bin/bash -lc 'bin/sidekiq -e production'
 
 RestartSec=1

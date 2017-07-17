@@ -37,7 +37,7 @@ namespace :backup do
       task :sysdir do
         puts "Download system directory backups - this might take awhile. (#{Time.now.strftime('%H:%M:%S')})"
         on roles(:all) do |server|
-          base_dir = "e/lica/#{server.hostname}/sysdir"
+          base_dir = "var/backup/bugmark/#{server.hostname}/sysdir"
           locl_dir = base_dir.split('/')[0..-2].join('/')
           system "mkdir -p ~/#{base_dir}"
           run_locally { execute "rsync -rv --delete #{fetch(:user)}@#{server.hostname}:#{base_dir} ~/#{locl_dir}" }
@@ -49,7 +49,7 @@ namespace :backup do
       task :db do
         puts "Download database backups. (#{Time.now.strftime('%H:%M:%S')})"
         on roles(:all) do |server|
-          base_dir = "e/lica/#{server.hostname}/db"
+          base_dir = "var/backup/bugmark/#{server.hostname}/db"
           locl_dir = base_dir.split('/')[0..-2].join('/')
           system "mkdir -p ~/#{base_dir}"
           run_locally { execute "rsync -rv --delete #{fetch(:user)}@#{server.hostname}:#{base_dir} ~/#{locl_dir}" }
