@@ -3,7 +3,7 @@
 require 'nokogiri'
 require 'pry'
 
-xml = File.read('cve_2008.xml')
+xml = File.read('CVE.xml')
 
 # doc = Nokogiri::Slop(xml)
 doc = Nokogiri::XML(xml)

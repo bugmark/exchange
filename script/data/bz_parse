@@ -2,9 +2,9 @@
 
 require 'json'
 
-json = File.read('GHxdm.json')
+json = File.read('BZsm.json')
 
 hash = JSON.parse(json)
 
 puts hash.class
-puts hash.length
+puts hash["bugs"].length
