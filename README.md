@@ -1,4 +1,6 @@
-# BugMark
+# BugMark README
+
+BugMark - A Blockchain Market for Software Vulnerabilities and Issues
 
 ## Development VM Configuration
 
@@ -7,12 +9,10 @@ Ubuntu Virtual machine.
 
 NOTE: this configuration process will install many packages and will make
 changes to your user configuration, including:
-- rename `.bashrc` to `.bashrc.old` and drop in a new `.bashrc`
+- adding items to your `.bashrc`, modifying your path
 - adding your UserID to `sudoers`
-- etc.
 
-If you want to preserve your user settings, perform this VM configuration under
-a separate userid.
+To preserve your settings, perform this configuration under a separate userid.
 
 Let's get started:
 
@@ -75,7 +75,7 @@ Follow these steps to bootstrap the app in your development environment.
 
 2. On your host machine, add the VM IP Address to `/etc/hosts`
 
-3. On your host machine, browse to `http://bamru.smso.dev:3000`
+3. On your host machine, browse to `http://<hostname>:3000`
 
 ## Online Collaboration
 

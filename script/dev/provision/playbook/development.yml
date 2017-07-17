@@ -21,14 +21,14 @@
   roles:
     - Vars/predicates
     - Vars/lclhost
+    - CLI/pkg
     - CLI/user
-    - CLI/base
     - CLI/tzone
     - Ruby/sysruby
     - Ruby/chruby
     - Ruby/install
     - Ruby/gems
-    - CLI/util
+    - CLI/util_base
     - pip
     - tmux
     - nodejs
