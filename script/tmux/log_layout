@@ -17,7 +17,7 @@ create_new_session() {
 
   splitwin 50 1
 
-  sendkeys 1.1 'sudo journalctl -u lica -f'      # system log
+  sendkeys 1.1 'sudo journalctl -u bugmark -f'      # system log
   sendkeys 1.2 'cd log; tail -f production.log'  # app log
 
   # ----- -----

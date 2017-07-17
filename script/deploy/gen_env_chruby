@@ -7,7 +7,7 @@ env = ARGV[1] || 'dev'
 vsn = File.read('.ruby-version').strip
 usrpr = "/home/#{usr}/.rubies"
 usrpg = "/home/#{usr}/.gem"
-based = "/home/#{usr}/run/lica"                # for production
+based = "/home/#{usr}/run/bugmark"             # for production
 share = "#{based}/shared/bundle/ruby/#{vsn}"   # for production
 cpath = "#{usrpg}/ruby/#{vsn}/bin:#{usrpr}/ruby-#{vsn}/lib/ruby/gems/2.1.0/bin:#{usrpr}/ruby-#{vsn}/bin:./bin"
 
