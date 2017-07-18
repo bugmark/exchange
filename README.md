@@ -125,6 +125,10 @@ Pro Tips:
 - The session participant should experiment with full-screen (F11) or normal
   browser sizing to get the best image.
 
+## Google Hangouts
+
+We use Google Hangouts for our weekly standups.
+
 ## TBD
 
 - Fix the wget URL for the Vagrantfile (dev branch)
