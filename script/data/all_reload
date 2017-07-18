@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+script/data/all_clear
+
+script/data/bz_load
+script/data/gh_load
+script/data/cve_load
