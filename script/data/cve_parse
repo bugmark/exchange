@@ -1,11 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'nokogiri'
-require 'pry'
 
 xml = File.read('CVE.xml')
 
-# doc = Nokogiri::Slop(xml)
 doc = Nokogiri::XML(xml)
 doc.remove_namespaces!
 

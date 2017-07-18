@@ -1,0 +1,9 @@
+h2 Bugs
+table.table
+  tr
+    th Bug Type
+    th Bug Title
+  - @bugs.each do |bug|
+    tr
+      td = bug.type
+      td = bug.title

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :contracts
   resources :wallets
   resources :users
-  resources :issues
+  resources :bugs
   resources :repos
 
   root "static#home"

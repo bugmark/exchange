@@ -6,6 +6,6 @@ table.table
     th Num Issues
   - @repos.each do |repo|
     tr
-      td = repo.format
+      td = repo.type
       td = repo.name
-      td = repo.issues.count
+      td = repo.bugs.count
