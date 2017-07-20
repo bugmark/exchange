@@ -14,4 +14,6 @@ echo Load GH data
 script/data/gh_load
 echo Load CVE data
 script/data/cve_load
+echo Load Contracts
+script/data/contract_load
 echo Done.

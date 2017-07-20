@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+require "./config/environment"
+
+opts = [
+  {
+    type:   "Contract::Reward"    ,
+    bug_id: Bug.first.id          ,
+    currency_type:   "ether"      ,
+    currency_amount: 50           ,
+    terms:           "Net30"      ,
+    expire_at:       Time.now + 5.days
+  },
+  {
+    type:   "Contract::Forecast"  ,
+    bug_id: Bug.first.id          ,
+    currency_type:   "bugcoin"    ,
+    currency_amount: 3            ,
+    terms:           "Net30"      ,
+    expire_at:       Time.now +  1.week
+  }
+]
+
+Contract.create opts

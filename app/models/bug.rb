@@ -1,7 +1,7 @@
 class Bug < ApplicationRecord
 
   belongs_to :repo
-  has_many   :contracts
+  has_many   :contracts, :dependent => :destroy
 
 end
 

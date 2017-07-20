@@ -3,7 +3,9 @@ table.table
   tr
     th Bug Type
     th Bug Title
+    th # Contracts
   - @bugs.each do |bug|
     tr
       td = bug.type
       td = bug.title
+      td = bug.contracts.count
