@@ -1,6 +1,7 @@
 class Bug < ApplicationRecord
 
   belongs_to :repo
+  has_many   :contracts
 
 end
 
@@ -17,7 +18,7 @@ end
 #  description :string
 #  status      :string
 #  labels      :text             default([]), is an Array
-#  xfields     :jsonb            not null
+#  jfields     :jsonb            not null
 #  synced_at   :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
