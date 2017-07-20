@@ -22,6 +22,8 @@ gem 'whenever'
 gem 'github_api'
 gem 'nokogiri'
 
+gem 'mini_portile2'
+
 gem 'slim-rails'                 # slim templates
 
 # Use Capistrano for deployment
