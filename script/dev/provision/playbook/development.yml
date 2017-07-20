@@ -38,6 +38,7 @@
     - postgres_db 
     - redis
     - memcached
+    - ethereum
     # - influxdb
     # - telegraf
     # - grafana

@@ -1,0 +1,26 @@
+{
+  "name": "xdmarket-js",
+  "version": "0.0.1",
+  "description": "js support for xdmarket solidity for tests and dapps",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mvscorg/xdmarket.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mvscorg/xdmarket/issues"
+  },
+  "homepage": "https://github.com/mvscorg/xdmarket#readme",
+  "dependencies": {
+    "moment": "^2.18.1",
+    "zeppelin-solidity": "^1.1.0"
+  }
+}

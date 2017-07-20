@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# start the dtest server
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+clear
+echo "script/dev/dtest"
+cd dapp
+echo "TEST SERVER FOR DAPP UNDER CONSTRUCTION..."
