@@ -60,12 +60,11 @@ Follow these steps to bootstrap the app in your development environment.
 |-------------------------|-----------------------|
 | `script/seed/share_env` | `script/seed/get_env` |
 
-4. Run migrations and load seed data
+4. Run migrations `bundle exec rails db:migrate`
 
-    `bundle exec rails db:migrate`
-    `script/data/all_reload`
+5. Load seed data `script/data/all_reload`
 
-5. Start the tmux development session `script/dev/session`
+6. Start the tmux development session `script/dev/session`
 
    A cheat-sheet for tmux navigation is in `~/.tmux.conf`.
 
