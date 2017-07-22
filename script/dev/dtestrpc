@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# start the testrpc server
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+clear
+echo "script/dev/testrpc"
+cd dapp
+testrpc

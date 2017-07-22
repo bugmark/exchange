@@ -1,0 +1,13 @@
+h2 Bugs
+table.table
+  tr
+    th Bug Type
+    th Bug Title
+    th Contracts
+    th Create
+  - @bugs.each do |bug|
+    tr
+      td = bug.type
+      td = bug.title
+      td = bug.contracts.count
+      td Reward | Forecast

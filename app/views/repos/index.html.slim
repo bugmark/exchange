@@ -4,8 +4,10 @@ table.table
     th Format
     th Name
     th Num Issues
+    th Create
   - @repos.each do |repo|
     tr
-      td = repo.format
+      td = repo.type
       td = repo.name
-      td = repo.issues.count
+      td = repo.bugs.count
+      td Forecast

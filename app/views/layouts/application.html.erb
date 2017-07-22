@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <title>BugMark</title>
     <%= csrf_meta_tags %>
+
+    <link href="/img/bugfav.ico" rel="icon" type="image/x-icon" />
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,13 +25,10 @@
         <ul class="navbar-nav mr-auto">
           <%= nav_link("Home"      , "/")          %>
           <%= nav_link("Repos"     , "/repos")     %>
-          <%= nav_link("Issues"    , "/issues")    %>
+          <%= nav_link("Bugs"      , "/bugs")      %>
           <%= nav_link("Contracts" , "/contracts") %>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <%= render "layouts/devise" %>
       </div>
     </nav>
 

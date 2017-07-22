@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require './config/environment'
+
+json = File.read('script/data/BZsm.json')
+
+repo_name = "Mozilla/SeaMonkey"
+
+Repo.find_by_name(repo_name).try(:destroy)
+
+repo = Repo.create(name: repo_name, type: "Repo::BugZilla")
+
+JSON.parse(json)["bugs"].each do |el|
+  attrs = {
+    type:      "Bug::BugZilla"           ,
+    repo_id:   repo.id                   ,
+    title:     el["summary"]             ,
+    status:    el["status"]              ,
+    synced_at: Time.now
+  }
+  Bug.create attrs
+end

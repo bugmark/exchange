@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require './config/environment'
+
+Repo.destroy_all
+

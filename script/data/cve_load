@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'nokogiri'
+require './config/environment'
+
+xml = File.read('script/data/CVE.xml')
+
+doc = Nokogiri::XML(xml) 
+doc.remove_namespaces!
+
+repo_name = "Mitre/CVE"
+
+Repo.find_by_name(repo_name).try(:destroy)
+
+repo = Repo.create(name: repo_name, type: "Repo::Cvrf")
+
+list = doc.search("//Vulnerability")
+
+list.each do |el|
+  note        = el.css('Note[Type="Description"]')
+  description = note.first&.text&.gsub("\n"," ") || "NA"
+  attrs = {
+    type:    "Bug::Cvrf",
+    repo_id: repo.id,
+    title:   el.css('Title').first&.text,
+    status:  "NA",
+    synced_at: Time.now
+  }
+  Bug.create attrs
+end
+

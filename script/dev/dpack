@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# start the dpack server
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+clear
+echo "script/dev/dpack"
+cd dapp
+webpack --watch

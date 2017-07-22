@@ -1,0 +1,17 @@
+h2 Contracts
+table.table
+  tr
+    th Contract Type
+    th Contract Amount
+    th Contract Expiration
+    th Bug ID
+    th Status
+    th Action
+  - @contracts.each do |contract|
+    tr
+      td = contract.type
+      td = "#{contract.currency_amount} #{contract.currency_type}"
+      td = contract.expire_at
+      td = contract.bug_id
+      td = contract.status
+      td take

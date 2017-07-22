@@ -8,7 +8,7 @@ namespace :whenever do
   task :update do
     on roles(:all) do
       within current_path do
-        execute :bundle, :exec, "whenever -f ~/src/bugmark/current/CronJobs --update-crontab"
+        execute :bundle, :exec, "whenever -f ~/run/bugmark/current/CronJobs --update-crontab"
       end
     end
   end

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+echo RAILS ENV $RAILS_ENV
+
+echo Clear Old Data
+script/data/all_clear
+
+echo Load BZ data
+script/data/bz_load
+echo Load GH data
+script/data/gh_load
+echo Load CVE data
+bundle exec script/data/cve_load
+echo Load Contracts
+bundle exec script/data/contract_load
+echo Done.

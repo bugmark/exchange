@@ -6,7 +6,10 @@ Rake::Task["deploy:migrating"].clear_comments
 namespace :deploy do
   task :migrating do
     on roles(:all) do |host|
-      execute "cd #{release_path} && RAILS_ENV=production bundle exec rake db:migrate"
+      # while the system is under development, recreate
+      # the database and reload all data
+      execute "cd #{release_path} && script/data/all_production"
+      # execute "cd #{release_path} && RAILS_ENV=production bundle exec rake db:migrate"
     end
   end
 end

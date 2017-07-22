@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+json = File.read('GHxdm.json')
+
+hash = JSON.parse(json)
+
+puts hash.class
+puts hash.length

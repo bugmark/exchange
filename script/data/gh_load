@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require './config/environment'
+
+json = File.read('script/data/GHxdm.json')
+
+repo_name = "mvscorg/xdmarket"
+
+Repo.find_by_name(repo_name).try(:destroy)
+
+repo = Repo.create(name: repo_name, type: "Repo::GitHub")
+
+JSON.parse(json).each do |el|
+  attrs = {
+    type:      "Bug::GitHub"   ,
+    api_url:   el["url"]       ,
+    http_url:  el["http_url"]  ,
+    repo_id:   repo.id         ,
+    title:     el["title"]     ,
+    labels:    el["labels"]    ,
+    status:    el["state"]     ,
+    synced_at: Time.now
+  }
+  Bug.create attrs
+end

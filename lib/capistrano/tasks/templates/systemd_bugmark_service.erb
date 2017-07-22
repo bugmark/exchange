@@ -1,0 +1,39 @@
+# Systemd unit file for Bugmark on Ubuntu
+# This file created by Capistrano <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
+# This file installed in /lib/systemd/system. Run:
+#   - systemctl enable bugmark
+#   - systemctl {status,start,stop,restart} bugmark
+#   - journalctl -u bugmark
+#   - journalctl -u bugmark -f
+#
+# See Inspeqtor's Systemd wiki page for more detail about Systemd:
+# https://github.com/mperham/inspeqtor/wiki/Systemd
+#
+# See these pages for lots of options:
+# http://0pointer.de/public/systemd-man/systemd.service.html
+# http://0pointer.de/public/systemd-man/systemd.exec.html
+
+[Unit]
+Description=Bugmark: a Rails web application
+After=syslog.target network.target
+
+[Service]
+User=deploy
+Group=deploy
+Type=simple
+
+WorkingDirectory=/home/deploy/run/bugmark/current
+EnvironmentFile=/home/deploy/run/bugmark/current/.env
+ExecStart=/bin/bash -lc 'bin/puma -p <%= fetch(:web_port) %> -C config/puma.rb -e production -S $USR_HOME/.bugmark_Puma_State'
+
+Restart=always
+KillMode=mixed
+TimeoutStopSec=5
+
+StandardInput=null
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=bugmark
+
+[Install]
+WantedBy=multi-user.target

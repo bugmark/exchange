@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+export RAILS_ENV=production
+export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+
+echo Reset Production Database
+bundle exec rails db:drop db:create db:migrate
+
+echo Reload Production Data
+script/data/all_reload
+
