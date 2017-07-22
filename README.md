@@ -19,7 +19,7 @@ Let's get started:
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
-   `wget raw.githubusercontent.com/mvscorg/bugmark/script/dev/vm/Vagrantfile`
+   `wget raw.githubusercontent.com/mvscorg/bugmark/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
 

@@ -1,5 +1,11 @@
 class Contract < ApplicationRecord
   belongs_to :bug
+
+  before_save :default_values
+
+  def default_values
+    self.status ||= 'open'
+  end
 end
 
 # == Schema Information
