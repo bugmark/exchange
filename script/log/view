@@ -27,5 +27,5 @@ devcon_run()
   eval "$cmd"
 }
 
-devcon_msg "shows ListCall production logs" $@
+devcon_msg "shows BUGMARK production logs" $@
 devcon_run $@

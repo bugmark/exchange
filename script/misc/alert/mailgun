@@ -13,7 +13,7 @@ require File.expand_path('../../../lib/env_settings', __dir__)
 
 @msg_txt = ARGV[0]
 @api_key = MAILGUN_API_KEY
-@domain  = "bamru.listcall.com"
+@domain  = "bamru.BUGMARK.com"
 
 def send_simple_message
   url = "https://api:#{@api_key}@api.mailgun.net/v3/#{@domain}/messages"
