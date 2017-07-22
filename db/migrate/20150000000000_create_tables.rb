@@ -30,6 +30,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :jfields, using: :gin
 
     create_table :contracts do |t|
+      # t.integer  :repo_id
       t.integer  :bug_id
       t.string   :type                # forecast, reward
       t.integer  :publisher_id
