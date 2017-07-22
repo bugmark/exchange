@@ -59,9 +59,11 @@ Follow these steps to bootstrap the app in your development environment.
 | PARTNER COMMAND         | YOUR COMMAND          |
 |-------------------------|-----------------------|
 | `script/seed/share_env` | `script/seed/get_env` |
-| `script/seed/share_db`  | `script/seed/get_db`  |
 
-4. Import the seed db `script/seed/import_db`
+4. Run migrations and load seed data
+
+    `bundle exec rails db:migrate`
+    `script/data/all_reload`
 
 5. Start the tmux development session `script/dev/session`
 
@@ -129,9 +131,3 @@ Pro Tips:
 
 We use Google Hangouts for our weekly standups.
 
-## TBD
-
-- Fix the wget URL for the Vagrantfile (dev branch)
-- Install Firefox on VirtualBox
-- Email testing
-- Port configuration in Vagrant file
