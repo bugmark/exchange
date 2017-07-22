@@ -29,7 +29,7 @@ orientation: vertical
 polymorphism: true
 sort: true
 warn: false
-title: ListCall Certs V2
+title: BUGMARK Certs V2
 exclude: null
 only: #{klasnames}
 "

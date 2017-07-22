@@ -8,6 +8,10 @@ table.table
   - @bugs.each do |bug|
     tr
       td = bug.type
-      td = bug.title
-      td = bug.contracts.count
-      td Reward | Forecast
+      td = truncate(bug.title)
+      td = bug_contract_link(bug)
+      td
+        nobr
+          = bug_forecast_link(bug)
+          | |
+          a href='contracts/new?type=reward?bug_id=#{bug.id}' Reward

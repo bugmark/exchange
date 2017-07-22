@@ -29,7 +29,7 @@ orientation: vertical
 polymorphism: true
 sort: true
 warn: false
-title: ListCall All
+title: BUGMARK All
 exclude: null
 only: #{klasnames}
 "

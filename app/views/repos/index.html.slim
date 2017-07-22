@@ -3,11 +3,11 @@ table.table
   tr
     th Format
     th Name
-    th Num Issues
+    th Bugs
     th Create
   - @repos.each do |repo|
     tr
       td = repo.type
       td = repo.name
-      td = repo.bugs.count
-      td Forecast
+      td = repo_bug_link(repo)
+      td = repo_forecast_link(repo)

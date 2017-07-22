@@ -27,6 +27,6 @@ devdash_run()
   eval "$cmd"
 }
 
-devdash_msg "runs the ListCall development environment" $@
+devdash_msg "runs the BUGMARK development environment" $@
 
 devdash_run $@
