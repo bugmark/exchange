@@ -1,4 +1,12 @@
-h2 Contracts
+table width='100%'
+  tr
+    td
+      h2 Contracts
+    td align='right'
+      - if @bug
+        | Contracts for Bug ##{@bug.id}
+      - else
+        | All Contracts
 table.table
   tr
     th Contract Type
