@@ -7,9 +7,12 @@ class ContractsController < ApplicationController
   end
 
   def new
+    binding.pry
     @contract = Contract.new
   end
 
   def edit
+    binding.pry
+    x = 1
   end
 end
