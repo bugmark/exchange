@@ -1,4 +1,9 @@
 module BugsHelper
+  def bug_title_link(bug)
+    title = truncate(bug.title)
+    raw "<a href='/bugs/#{bug.id}'>#{title}</a>"
+  end
+
   def bug_contract_link(bug)
     count = bug.contracts.count
     if count > 0

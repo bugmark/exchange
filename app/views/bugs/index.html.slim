@@ -16,7 +16,7 @@ table.table
   - @bugs.each do |bug|
     tr
       td = bug.type
-      td = truncate(bug.title)
+      td = bug_title_link(bug)
       td = bug_contract_link(bug)
       td
         nobr

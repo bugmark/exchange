@@ -8,6 +8,6 @@ table.table
   - @repos.each do |repo|
     tr
       td = repo.type
-      td = repo.name
+      td = repo_name_link(repo)
       td = repo_bug_link(repo)
       td = repo_forecast_link(repo)

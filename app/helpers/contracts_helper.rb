@@ -1,4 +1,9 @@
 module ContractsHelper
+  def contract_type_link(contract)
+    type = contract.type
+    raw "<a href='/contracts/#{contract.id}'>#{type}</a>"
+  end
+
   def contract_take_link(contract)
     status = contract.status
     if status == "open"

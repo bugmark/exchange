@@ -29,7 +29,7 @@ class ContractsController < ApplicationController
   end
 
   def show
-
+    @contract = Contract.find(params["id"])
   end
 
   private
