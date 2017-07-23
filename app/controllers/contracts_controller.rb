@@ -1,6 +1,6 @@
 class ContractsController < ApplicationController
 
-  before_action :authenticate_user!, :except => [:index]
+  before_action :authenticate_user!, :except => [:index, :show]
 
   # bug_id (optional)
   def index
