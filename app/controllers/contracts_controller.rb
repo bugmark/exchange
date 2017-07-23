@@ -7,6 +7,7 @@ class ContractsController < ApplicationController
   end
 
   def new
+    @contract = Contract.new
   end
 
   def edit

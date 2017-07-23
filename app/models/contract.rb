@@ -1,5 +1,6 @@
 class Contract < ApplicationRecord
   belongs_to :bug
+  belongs_to :repo
 
   before_save :default_values
 
@@ -13,6 +14,7 @@ end
 # Table name: contracts
 #
 #  id              :integer          not null, primary key
+#  repo_id         :integer
 #  bug_id          :integer
 #  type            :string
 #  publisher_id    :integer
@@ -20,6 +22,7 @@ end
 #  currency_amount :float
 #  currency_type   :string
 #  terms           :string
+#  status          :string
 #  jfields         :jsonb            not null
 #  expire_at       :datetime
 #  created_at      :datetime         not null

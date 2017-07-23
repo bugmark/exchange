@@ -22,6 +22,8 @@ gem 'whenever'
 gem 'github_api'
 gem 'nokogiri'
 
+gem 'bootstrap_form'
+
 gem 'mini_portile2'
 
 gem 'slim-rails'                 # slim templates

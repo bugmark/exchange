@@ -1,3 +1,9 @@
 h2 Contracts New
 hr
-| UNDER CONSTRUCTION
+= bootstrap_form_for(@contract) do |f|
+  = f.text_field   :type
+  = f.number_field :currency_amount
+  = f.text_field   :currency_type
+  = f.text_field   :terms
+  = f.date_field   :expire_at
+  = f.submit
