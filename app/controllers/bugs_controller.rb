@@ -9,4 +9,8 @@ class BugsController < ApplicationController
       @bugs = Bug.all
     end
   end
+
+  def show
+
+  end
 end

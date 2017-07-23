@@ -13,13 +13,32 @@ class ContractsController < ApplicationController
     end
   end
 
-  # bug_id or repo_id
+  # bug_id or repo_id, type(forecast | reward)
   def new
-    @contract = Contract.new(type: 'Contract::Reward')
+    @contract = Contract.new(new_opts(params))
   end
 
   # id (contract ID)
   def edit
     @contract = Contract.find(params[:id])
+  end
+
+  def create
+    binding.pry
+    xx = 1
+  end
+
+  def show
+
+  end
+
+  private
+
+  def new_opts(params)
+    opts = {type: "Contract::#{params["type"]&.capitalize}"}
+    key  = "bug_id"  if params["bug_id"]
+    key  = "repo_id" if params["repo_id"]
+    id   = params["bug_id"] || params["repo_id"]
+    opts.merge({key => id, 'publisher_id' => current_user.id})
   end
 end

@@ -4,4 +4,8 @@ class ReposController < ApplicationController
     @repos = Repo.all
   end
 
+  def show
+
+  end
+
 end
