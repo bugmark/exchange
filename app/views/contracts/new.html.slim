@@ -2,8 +2,11 @@ h2 Contracts New
 hr
 = bootstrap_form_for(@contract) do |f|
   = f.text_field   :type
-  = f.number_field :currency_amount
+  = f.number_field :bug_id
+  = f.number_field :repo_id
+  = f.number_field :publisher_id
   = f.text_field   :currency_type
+  = f.number_field :currency_amount
   = f.text_field   :terms
   = f.date_field   :expire_at
   = f.submit

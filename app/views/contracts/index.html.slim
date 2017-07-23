@@ -12,7 +12,7 @@ table.table
     th Contract Type
     th Contract Amount
     th Contract Expiration
-    th Bug ID
+    th Attached To
     th Status
     th Action
   - @contracts.each do |contract|
@@ -20,6 +20,6 @@ table.table
       td = contract_type_link(contract)
       td = "#{contract.currency_amount} #{contract.currency_type}"
       td = contract.expire_at
-      td = contract.bug_id
+      td = contract_attach_link(contract)
       td = contract.status
       td = contract_take_link(contract)
