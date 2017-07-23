@@ -17,7 +17,7 @@ create_new_session()
 
   tmux new-session -s $APP -n "RSPEC" -d
 
-  sendkeys 1.1 'script/dev/specs'
+  sendkeys 1.1 'script/dev/rspec'
 
   # ----- -----
 
@@ -35,8 +35,6 @@ create_new_session()
 
   tmux new-window -n "WEBPACK"
 
-  # sendkeys 4.1 'clear ; webpack-dev-server --host 0.0.0.0 --public soak:8080'
-  # sendkeys 4.1 'clear ; webpack-dev-server --public'
   sendkeys 4.1 'script/dev/webpack'
 
   # ----- -----
