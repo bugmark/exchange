@@ -1,6 +1,6 @@
 class Contract < ApplicationRecord
-  belongs_to :bug
-  belongs_to :repo
+  belongs_to :bug   , optional: true
+  belongs_to :repo  , optional: true
 
   before_save :default_values
 

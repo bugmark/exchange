@@ -1,6 +1,11 @@
 module ReposHelper
+  def repo_name_link(repo)
+    name = truncate(repo.name)
+    raw "<a href='/repos/#{repo.id}'>#{name}</a>"
+  end
+
   def repo_forecast_link(repo)
-    path = "contracts/new?type=forecast?repo_id=#{repo.id}"
+    path = "contracts/new?type=forecast&repo_id=#{repo.id}"
     raw "<a href='#{path}'>Forecast</a>"
   end
 

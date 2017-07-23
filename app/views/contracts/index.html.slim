@@ -1,17 +1,25 @@
-h2 Contracts
+table width='100%'
+  tr
+    td
+      h2 Contracts
+    td align='right'
+      - if @bug
+        | Contracts for Bug ##{@bug.id}
+      - else
+        | All Contracts
 table.table
   tr
     th Contract Type
     th Contract Amount
     th Contract Expiration
-    th Bug ID
+    th Attached To
     th Status
     th Action
   - @contracts.each do |contract|
     tr
-      td = contract.type
+      td = contract_type_link(contract)
       td = "#{contract.currency_amount} #{contract.currency_type}"
       td = contract.expire_at
-      td = contract.bug_id
+      td = contract_attach_link(contract)
       td = contract.status
       td = contract_take_link(contract)

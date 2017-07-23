@@ -6,15 +6,15 @@ opts = [
   {
     type:   "Contract::Reward"    ,
     bug_id: Bug.first.id          ,
-    currency_type:   "ether"      ,
+    currency_type:   "Ether"      ,
     currency_amount: 50           ,
-    terms:           "Net30"      ,
+    terms:           "Net10"      ,
     expire_at:       Time.now + 5.days
   },
   {
     type:   "Contract::Forecast"  ,
     bug_id: Bug.first.id          ,
-    currency_type:   "bugcoin"    ,
+    currency_type:   "PokerBux"   ,
     currency_amount: 3            ,
     terms:           "Net30"      ,
     expire_at:       Time.now +  1.week
