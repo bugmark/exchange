@@ -4,10 +4,12 @@ table.table
     th Format
     th Name
     th Bugs
+    th Contracts
     th Create
   - @repos.each do |repo|
     tr
-      td = repo.type
+      td = repo.type.gsub("Repo::", "")
       td = repo_name_link(repo)
       td = repo_bug_link(repo)
+      td = repo_contract_link(repo)
       td = repo_forecast_link(repo)

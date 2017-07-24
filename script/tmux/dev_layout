@@ -23,7 +23,7 @@ create_new_session()
 
   tmux new-window -n "JEST"
 
-  sendkeys 2.1 'jest --watch'
+  sendkeys 2.1 'script/dev/jest'
 
   # ----- -----
 

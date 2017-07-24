@@ -4,12 +4,16 @@ class ContractsController < ApplicationController
 
   # bug_id (optional)
   def index
-    if bug_id = params["bug_id"]&.to_i
-      @bug       = Bug.find(bug_id)
-      @contracts = Contract.where(bug_id: bug_id)
-    else
-      @bug       = nil
-      @contracts = Contract.all
+    @bug = @repo = nil
+    case
+      when bug_id = params["bug_id"]&.to_i
+        @bug       = Bug.find(bug_id)
+        @contracts = Contract.where(bug_id: bug_id)
+      when repo_id = params["repo_id"]&.to_i
+        @repo      = Repo.find(repo_id)
+        @contracts = Contract.where(repo_id: repo_id)
+      else
+        @contracts = Contract.all
     end
   end
 

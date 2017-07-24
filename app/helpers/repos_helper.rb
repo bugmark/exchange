@@ -9,6 +9,15 @@ module ReposHelper
     raw "<a href='#{path}'>Forecast</a>"
   end
 
+  def repo_contract_link(repo)
+    count = repo.contracts.count
+    if count > 0
+      raw "<a href='/contracts?repo_id=#{repo.id}'>#{count}</a>"
+    else
+      count
+    end
+  end
+
   def repo_bug_link(repo)
     count = repo.bugs.count
     if count > 0

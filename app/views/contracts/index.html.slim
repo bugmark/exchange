@@ -3,10 +3,13 @@ table width='100%'
     td
       h2 Contracts
     td align='right'
-      - if @bug
-        | Contracts for Bug ##{@bug.id}
-      - else
-        | All Contracts
+      - case
+        - when @bug
+          | Contracts for Bug ##{@bug.id}
+        - when @repo
+          | Contracts for Repo ##{@repo.id}
+        - else
+          | All Contracts
 table.table
   tr
     th Type
