@@ -4,7 +4,7 @@ require "./config/environment"
 
 opts = [
   {
-    type:   "Contract::Reward"     ,
+    type:   "Contract::Forecast"   ,
     bug_id: Bug.first.id           ,
     currency_type:   "Ether"       ,
     currency_amount: 50            ,

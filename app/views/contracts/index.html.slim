@@ -12,7 +12,6 @@ table width='100%'
           | All Contracts
 table.table
   tr
-    th Type
     th Amount
     th Expires
     th Attached To
@@ -20,7 +19,6 @@ table.table
     th Action
   - @contracts.each do |contract|
     tr
-      td = contract_type_link(contract)
       td = "#{contract.currency_amount} #{contract.currency_type}"
       td = contract.expire_at
       td = contract_attach_link(contract)

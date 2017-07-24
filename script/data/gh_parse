@@ -2,7 +2,7 @@
 
 require 'json'
 
-json = File.read('GHxdm.json')
+json = File.read('GH.json')
 
 hash = JSON.parse(json)
 

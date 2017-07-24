@@ -2,7 +2,7 @@
 
 require './config/environment'
 
-json = File.read('script/data/GHxdm.json')
+json = File.read('script/data/GH.json')
 
 repo_name = "mvscorg/xdmarket"
 

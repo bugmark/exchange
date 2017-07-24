@@ -3,6 +3,7 @@
 GitHub Issues:
 
 https://api.github.com/repos/<usernam>/<repo>/issues
+curl https://api.github.com/repos/mvscorg/bugmark/issues > GH.json
 
 Bugzilla Issues:
 
