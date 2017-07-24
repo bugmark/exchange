@@ -6,8 +6,14 @@ class User < ApplicationRecord
 
   before_save :default_values
 
+  def ether_balance
+    0
+  end
+
+  private
+
   def default_values
-    self.status ||= 'open'
+    self.pokerbux_balance ||= 100
   end
 end
 

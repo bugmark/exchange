@@ -1,12 +1,18 @@
 h2 Contracts New
 hr
 = bootstrap_form_for(@contract) do |f|
-  = f.text_field   :type
-  = f.number_field :bug_id
-  = f.number_field :repo_id
-  = f.number_field :publisher_id
-  = f.text_field   :currency_type
-  = f.number_field :currency_amount
-  = f.text_field   :terms
+  = f.hidden_field :type
+  = f.hidden_field :publisher_id
+  = f.hidden_field :terms
+  = f.hidden_field :currency_type
+  = f.number_field :currency_amount, label: "Pokerbux Amount"
   = f.date_field   :expire_at
+  div style='background: lightgrey; padding: 4px; margin-bottom: 4px;'
+    | Match Criteria (blank for "don't care")
+  = f.number_field  :bug_id  , label: "Bug ID"
+  = f.number_field  :repo_id , label: "Repo ID"
+  = f.text_field    :title   , label: "Title (substring match)"
+  = f.text_field    :labels  , label: "Label (comma separated, substring match)"
+  = f.text_field    :status  , label: "Status (open | closed)"
+  = f.boolean_field :assert_present
   = f.submit
