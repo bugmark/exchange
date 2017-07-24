@@ -1,0 +1,100 @@
+[
+  {
+    "id": 652432916,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/0%20next%20action",
+    "name": "0 next action",
+    "color": "0e8a16",
+    "default": false
+  },
+  {
+    "id": 652431758,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/1%20bug",
+    "name": "1 bug",
+    "color": "f00000",
+    "default": false
+  },
+  {
+    "id": 652431843,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/1%20security",
+    "name": "1 security",
+    "color": "b60205",
+    "default": false
+  },
+  {
+    "id": 652432177,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/2%20usability%20issue",
+    "name": "2 usability issue",
+    "color": "1d76db",
+    "default": false
+  },
+  {
+    "id": 652432221,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/3%20enhancement",
+    "name": "3 enhancement",
+    "color": "c5def5",
+    "default": false
+  },
+  {
+    "id": 651666386,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/9%20discuss",
+    "name": "9 discuss",
+    "color": "5319e7",
+    "default": false
+  },
+  {
+    "id": 652431491,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/9%20question",
+    "name": "9 question",
+    "color": "5319e7",
+    "default": false
+  },
+  {
+    "id": 652432306,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/9%20wontfix",
+    "name": "9 wontfix",
+    "color": "5319e7",
+    "default": false
+  },
+  {
+    "id": 652433323,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/ADMIN",
+    "name": "ADMIN",
+    "color": "fbca04",
+    "default": false
+  },
+  {
+    "id": 652448548,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/DEV%20PROCESS",
+    "name": "DEV PROCESS",
+    "color": "fbca04",
+    "default": false
+  },
+  {
+    "id": 652433601,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/METRICS",
+    "name": "METRICS",
+    "color": "fbca04",
+    "default": false
+  },
+  {
+    "id": 652433551,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/REPO%20SYNC",
+    "name": "REPO SYNC",
+    "color": "fbca04",
+    "default": false
+  },
+  {
+    "id": 652433388,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/SOLIDITY",
+    "name": "SOLIDITY",
+    "color": "fbca04",
+    "default": false
+  },
+  {
+    "id": 652433417,
+    "url": "https://api.github.com/repos/mvscorg/bugmark/labels/WEB3",
+    "name": "WEB3",
+    "color": "fbca04",
+    "default": false
+  }
+]

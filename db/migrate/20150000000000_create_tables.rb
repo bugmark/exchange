@@ -39,6 +39,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :currency_type
       t.string   :terms
       t.string   :status
+      t.text     :labels, array: true, default: []
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :expire_at
       t.timestamps
@@ -47,21 +48,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :contracts, :bug_id
     add_index :contracts, :publisher_id
     add_index :contracts, :counterparty_id
+    add_index :contracts, :labels , using: :gin
     add_index :contracts, :jfields, using: :gin
 
     create_table :users do |t|
       t.boolean  :admin
-      t.timestamps
-    end
-
-    create_table :wallets do |t|
-      t.string   :user_id
-      t.string   :pub_key
-      t.timestamps
-    end
-
-    create_table :events do |t|
-      t.string :name
+      t.integer  :pokerbux_balance
       t.timestamps
     end
   end
