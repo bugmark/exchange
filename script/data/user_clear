@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "./config/environment"
+
+User.destroy_all

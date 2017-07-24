@@ -8,8 +8,10 @@ echo RAILS ENV $RAILS_ENV
 echo Clear Old Data
 script/data/all_clear
 
-echo Load BZ data
-script/data/bz_load
+#echo Load BZ data
+#script/data/bz_load
+echo Load User Data
+script/data/user_load
 echo Load GH data
 script/data/gh_load
 echo Load CVE data

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require "./config/environment"
+
+opts = [
+  {
+    email:                 "test1@bugmark.net"    ,
+    password:              "bugmark"              ,
+    password_confirmation: "bugmark"
+  },
+  {
+    email:                 "test2@bugmark.net"    ,
+    password:              "bugmark"              ,
+    password_confirmation: "bugmark"
+  },
+  {
+    email:                 "test3@bugmark.net"    ,
+    password:              "bugmark"              ,
+    password_confirmation: "bugmark"
+  }
+]
+
+User.create opts

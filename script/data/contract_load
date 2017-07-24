@@ -4,19 +4,21 @@ require "./config/environment"
 
 opts = [
   {
-    type:   "Contract::Reward"    ,
-    bug_id: Bug.first.id          ,
-    currency_type:   "Ether"      ,
-    currency_amount: 50           ,
-    terms:           "Net10"      ,
+    type:   "Contract::Reward"     ,
+    bug_id: Bug.first.id           ,
+    currency_type:   "Ether"       ,
+    currency_amount: 50            ,
+    terms:           "Net10"       ,
+    publisher_id:    User.first.id ,
     expire_at:       Time.now + 5.days
   },
   {
-    type:   "Contract::Forecast"  ,
-    bug_id: Bug.first.id          ,
-    currency_type:   "PokerBux"   ,
-    currency_amount: 3            ,
-    terms:           "Net30"      ,
+    type:   "Contract::Forecast"   ,
+    bug_id: Bug.first.id           ,
+    currency_type:   "PokerBux"    ,
+    currency_amount: 3             ,
+    terms:           "Net30"       ,
+    publisher_id:    User.first.id ,
     expire_at:       Time.now +  1.week
   }
 ]
