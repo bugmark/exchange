@@ -18,6 +18,7 @@ end
 #  currency_type   :string
 #  terms           :string
 #  status          :string
+#  labels          :text             default([]), is an Array
 #  jfields         :jsonb            not null
 #  expire_at       :datetime
 #  created_at      :datetime         not null

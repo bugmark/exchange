@@ -10,6 +10,7 @@ end
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
+#  pokerbux_balance       :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null

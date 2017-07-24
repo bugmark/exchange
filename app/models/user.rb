@@ -3,6 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  before_save :default_values
+
+  def default_values
+    self.status ||= 'open'
+  end
 end
 
 # == Schema Information
@@ -11,6 +17,7 @@ end
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
+#  pokerbux_balance       :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null
