@@ -1,3 +1,15 @@
 h2 EDIT (CONTRACT ID #{@contract.id})
-hr
-| UNDER CONSTRUCTION
+.row
+  .col-md-6
+    table.table
+      tr
+        td Contract ID
+        td = @contract.id
+      tr
+        td Contact Type
+        td = @contract.type
+  .col-md-6
+    = bootstrap_form_for(@contract, :action => :update) do |f|
+      = f.number_field :id
+      = f.number_field :counterparty_id
+      = f.submit

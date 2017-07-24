@@ -17,6 +17,10 @@ class ContractsController < ApplicationController
     end
   end
 
+  def show
+    @contract = Contract.find(params["id"])
+  end
+
   # bug_id or repo_id, type(forecast | reward)
   def new
     @contract = Contract.new(new_opts(params))
@@ -25,6 +29,7 @@ class ContractsController < ApplicationController
   # id (contract ID)
   def edit
     @contract = Contract.find(params[:id])
+    @contract.counterparty_id = current_user.id
   end
 
   def create
@@ -33,8 +38,13 @@ class ContractsController < ApplicationController
     redirect_to("/contracts/#{contract.id}")
   end
 
-  def show
-    @contract = Contract.find(params["id"])
+  def update
+    opts = params["contract_forecast"] || params["contract_reward"]
+    contract = Contract.find(opts["id"])
+    contract.status = "taken"
+    contract.counterparty_id = opts["counterparty_id"]
+    contract.save
+    redirect_to "/contracts"
   end
 
   private

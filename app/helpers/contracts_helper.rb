@@ -16,7 +16,7 @@ module ContractsHelper
       path = "/contracts/#{contract.id}/edit"
       raw "<a href='#{path}'>take</a>"
     else
-      status
+      "NA"
     end
   end
 end
