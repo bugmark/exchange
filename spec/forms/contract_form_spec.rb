@@ -25,6 +25,15 @@ RSpec.describe ContractForm, type: :model do
     it { should be_valid    }
   end
 
+  describe "Subobjects" do
+    it { should respond_to :subobject_symbols }
+    it { should respond_to :subobjects        }
+    it { should respond_to :subs              }
+    it 'returns an array' do
+      expect(subject.subobjects).to be_an(Array)
+    end
+  end
+
   describe "Delegated Object" do
     it 'has a present Contract' do
       expect(subject.contract).to be_present
