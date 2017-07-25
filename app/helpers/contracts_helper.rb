@@ -1,4 +1,8 @@
 module ContractsHelper
+  def contract_id_link(contract)
+    raw "<a href='/contracts/#{contract.id}'>#{contract.id}</a>"
+  end
+
   def contract_type_link(contract)
     type = contract.type.gsub("Contract::", "")
     raw "<a href='/contracts/#{contract.id}'>#{type}</a>"

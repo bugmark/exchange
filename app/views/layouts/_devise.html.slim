@@ -1,5 +1,6 @@
 ul class="nav navbar-nav navbar-right"
   - if current_user
+    = nav_link "Trading" , user_path(current_user)
     = nav_link "Settings", edit_user_registration_path
     = nav_link "Log Out" , destroy_user_session_path
   - else

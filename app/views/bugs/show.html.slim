@@ -1,3 +1,21 @@
-h2 SHOW (BUG ID #{@bug.id})
-hr
-| UNDER CONSTRUCTION
+h2 BUG ##{@bug.id}
+.row
+  .col-md-6
+    table.table
+      tr
+        td Type
+        td = @bug.type
+      tr
+        td Title
+        td = @bug.title
+      tr
+        td URL
+        td @bug.url
+  .col-md-6
+    table.table
+      tr
+        td Contracts
+        td = bug_contract_link(@bug)
+      tr
+        td Create
+        td = bug_forecast_link(@bug)

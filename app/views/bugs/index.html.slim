@@ -9,12 +9,14 @@ table width='100%'
         | All Bugs
 table.table
   tr
-    th Bug Type
-    th Bug Title
+    th ID
+    th Type
+    th Title
     th Contracts
     th Create
   - @bugs.each do |bug|
     tr
+      td = bug_id_link(bug)
       td = bug.type
       td = bug_title_link(bug)
       td = bug_contract_link(bug)

@@ -1,3 +1,21 @@
-h2 SHOW (CONTRACT ID #{@contract.id})
-hr
-| UNDER CONSTRUCTION
+h2 CONTRACT ##{@contract.id}
+.row
+  .col-md-6
+    table.table
+      tr
+        td Type
+        td = @contract.type
+      tr
+        td Publisher ID
+        td = @contract.publisher_id
+      tr
+        td Counterparty ID
+        td = @contract.counterparty_id
+  .col-md-6
+    table.table
+      tr
+        td Attached To
+        td = contract_attach_link(@contract)
+      tr
+        td Action
+        td = contract_take_link(@contract)

@@ -1,6 +1,7 @@
 h2 Repos
 table.table
   tr
+    th ID
     th Format
     th Name
     th Bugs
@@ -8,6 +9,7 @@ table.table
     th Create
   - @repos.each do |repo|
     tr
+      th = repo_id_link(repo)
       td = repo.type.gsub("Repo::", "")
       td = repo_name_link(repo)
       td = repo_bug_link(repo)
