@@ -16,6 +16,10 @@ RSpec.describe ContractForm, type: :model do
     it { should respond_to :currency_amount        }
   end
 
+  describe "Methods" do
+    it { should respond_to :save                 }
+  end
+
   describe "Object Existence" do
     it { should be_a klas   }
     it { should be_valid    }
@@ -36,10 +40,16 @@ RSpec.describe ContractForm, type: :model do
   end
 
   describe "Object Saving" do
-    # it 'saves the object to the database' do
-    #   subject.save
-    #   expect(subject).to be_valid
-    # end
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+
+    it 'gets the right object count' do
+      expect(Contract.count).to eq(0)
+      subject.save
+      expect(Contract.count).to eq(1)
+    end
   end
 end
 

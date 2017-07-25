@@ -23,8 +23,8 @@ class ContractsController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
-    @contract = Contract.new(new_opts(params))
-    # @contract_form = ContractForm.new(@contract.attributes)
+    # @contract = Contract.new(new_opts(params))
+    @contract = ContractForm.new(new_opts(params))
   end
 
   # id (contract ID)
@@ -35,10 +35,9 @@ class ContractsController < ApplicationController
 
   def create
     opts = params["contract_forecast"] || params["contract_reward"] || params["contract_form"]
-    @contract = Contract.new(valid_params(opts))
-    # @form = ContractForm.new(valid_params(opts))
-    if @contract.valid?
-      @contract.save
+    # @contract = Contract.new(valid_params(opts))
+    @contract = ContractForm.new(valid_params(opts))
+    if @contract.save
       redirect_to("/contracts/#{@contract.id}")
     else
       # binding.pry
