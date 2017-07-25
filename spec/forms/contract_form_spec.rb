@@ -11,40 +11,35 @@ RSpec.describe ContractForm, type: :model do
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
-  describe "Associations" do
-    # it { should respond_to(:bug) }
+  describe "Attributes" do
+    it { should respond_to :contract               }
+    it { should respond_to :currency_amount        }
   end
 
-  describe "Object Creation" do
-    it { should be_valid }
+  describe "Object Existence" do
+    it { should be_a klas   }
+    it { should be_valid    }
+  end
 
-    it 'saves the object to the database' do
-      subject.save
-      expect(subject).to be_valid
+  describe "Delegated Object" do
+    it 'has a present Contract' do
+      expect(subject.contract).to be_present
+    end
+
+    it 'has a Contract with the right class' do
+      expect(subject.contract).to be_a(Contract)
+    end
+
+    it 'should have a valid Contract' do
+      expect(subject.contract).to be_valid
     end
   end
 
+  describe "Object Saving" do
+    # it 'saves the object to the database' do
+    #   subject.save
+    #   expect(subject).to be_valid
+    # end
+  end
 end
 
-# == Schema Information
-#
-# Table name: contracts
-#
-#  id              :integer          not null, primary key
-#  type            :string
-#  publisher_id    :integer
-#  counterparty_id :integer
-#  currency_type   :string
-#  currency_amount :float
-#  terms           :string
-#  expire_at       :datetime
-#  bug_id          :integer
-#  repo_id         :integer
-#  title           :string
-#  status          :string
-#  labels          :string
-#  assert_match    :boolean
-#  jfields         :jsonb            not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#

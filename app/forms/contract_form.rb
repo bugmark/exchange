@@ -6,7 +6,7 @@ class ContractForm < ApplicationForm
   attr_accessor *CONTRACT_FIELDS
   attr_accessor :contract
 
-  def initalize(args = {})
+  def initialize(args = {})
     super(args)
     @contract = Contract.new(args)
   end
