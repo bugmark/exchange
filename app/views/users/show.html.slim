@@ -1,3 +1,18 @@
-| User ID #{@user.id} / #{@user.email}
-hr
-| Account Balance: #{@user.pokerbux_balance} PokerBux
+table.table
+  tr
+    td
+      h3 Trading Activity
+    td User ID #{@user.id} / #{@user.email}
+    td Account Balance: #{@user.pokerbux_balance} PokerBux
+div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
+  b Published Contracts:
+  table.table-sm
+    - @user.published_contracts.each do |contract|
+      tr
+        td = contract.id
+div style='background: lightgrey;'
+  b Taken Contracts:
+  table.table-sm
+    - @user.taken_contracts.each do |contract|
+      tr
+        td = contract.id

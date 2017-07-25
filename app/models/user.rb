@@ -6,6 +6,14 @@ class User < ApplicationRecord
 
   before_save :default_values
 
+  def published_contracts
+    Contract.where(publisher_id: self.id)
+  end
+
+  def taken_contracts
+    Contract.where(counterparty_id: self.id)
+  end
+
   def ether_balance
     0
   end
