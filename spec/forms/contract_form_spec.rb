@@ -1,17 +1,29 @@
-class Contract < ApplicationRecord
-  belongs_to :bug   , optional: true
-  belongs_to :repo  , optional: true
+require 'rails_helper'
 
-  validates :currency_amount, numericality: {less_than: 15}
+RSpec.describe ContractForm, type: :model do
 
-  before_save :default_values
-
-  private
-
-  def default_values
-    self.status       ||= 'open'
-    self.assert_match ||= true
+  def valid_params
+    {
+      currency_amount: 10
+    }
   end
+
+  let(:klas)   { described_class         }
+  subject      { klas.new(valid_params)  }
+
+  describe "Associations" do
+    # it { should respond_to(:bug) }
+  end
+
+  describe "Object Creation" do
+    it { should be_valid }
+
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
+
 end
 
 # == Schema Information

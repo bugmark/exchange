@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   before_save :default_values
 
+  # ----- ASSOCIATIONS -----
+
   def published_contracts
     Contract.where(publisher_id: self.id)
   end
@@ -13,6 +15,8 @@ class User < ApplicationRecord
   def taken_contracts
     Contract.where(counterparty_id: self.id)
   end
+
+  # ----- ACCOUNT -----
 
   def ether_balance
     0

@@ -1,5 +1,7 @@
 h2 Contracts New
 hr
+- if @contract.invalid?
+  .alert.alert-danger Please fix the errors below.
 = bootstrap_form_for(@contract) do |f|
   = f.hidden_field :type
   = f.hidden_field :publisher_id
