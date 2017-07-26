@@ -23,7 +23,7 @@ module ApplicationHelper
     balance = user.pokerbux_balance
     pubs    = user.published_contracts.count
     takes   = user.taken_contracts.count
-    "TRADING #{balance}-#{pubs}-#{takes}"
+    "Trading #{balance}-#{pubs}-#{takes}"
   end
 
 end
