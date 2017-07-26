@@ -28,7 +28,8 @@ class Bug < ApplicationRecord
     end
 
     def by_labels(labels)
-      where(labels: labels)
+      # where(labels: labels)
+      where(false)
     end
 
     # -----

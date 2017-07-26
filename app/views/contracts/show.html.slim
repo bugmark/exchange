@@ -25,8 +25,21 @@ h2 CONTRACT ##{@contract.id}
         td Action
         td = contract_take_link(@contract)
 hr
-b Matching Bugs (#{@contract.matching_bugs.length})
+b Matching Bugs (#{@contract.matching_bugs.count})
 table.table
+  - if @contract.matching_bugs.count > 0
+    tr
+      th ID
+      th Type
+      th Title
+      th Contracts
+      th Create
   - @contract.matching_bugs.each do |bug|
     tr
-      td = bug.id
+      td = bug_id_link(bug)
+      td = bug.type
+      td = bug_title_link(bug)
+      td = bug_contract_link(bug)
+      td
+        nobr
+          = bug_forecast_link(bug)
