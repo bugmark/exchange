@@ -1,12 +1,32 @@
+# inspired by
+# http://blog.sundaycoding.com/blog/2016/01/08/contextual-validations-with-form-objects
+
 class ApplicationForm
   include ActiveModel::Model
 
-  def self.attr_subobjects(*list)
-    attr_accessor(*list)
+  # define an attr_accessor for each subobject
+  # define a method `subobject_symbols` that returns the list of subobjects
+  def self.attr_subobjects(*klas_list)
+    attr_accessor(*klas_list)
     define_method 'subobject_symbols' do
-      list
+      klas_list
     end
   end
+
+  # delegate all fields of a subobject to the subobject
+  def self.attr_delegate_fields(*klas_list)
+    klas_list.each do |sym|
+      klas = sym.to_s.camelize.constantize
+      fields = klas.attribute_names.map(&:to_sym)
+      delegate *fields, to: sym
+    end
+  end
+
+  # return the list of subobjects
+  def subobjects
+    subobject_symbols.map {|el| self.send(el)}
+  end
+  alias_method :subs, :subobjects
 
   # def initialize(args={})
   #   args.each do |k,v|
@@ -16,7 +36,12 @@ class ApplicationForm
   # end
 
   def save
-    valid? ? subs.each(&:save) : false
+    if valid?
+      form_transaction      # perform a transaction, if any
+      subs.each(&:save)     # save all subobjects
+    else
+      false
+    end
   end
 
   def valid?
@@ -24,8 +49,8 @@ class ApplicationForm
       true
     else
       subs.each do |object|
-        object.valid?
-        object.errors.each do |field, error|
+        object.valid?                         # populate the subobject errors
+        object.errors.each do |field, error|  # transfer the error messages
           errors.add(field, error)
         end
       end
@@ -33,12 +58,11 @@ class ApplicationForm
     end
   end
 
-  def subobjects
-    subobject_symbols.map {|el| self.send(el)}
-  end
-  alias_method :subs, :subobjects
-
   def invalid?
     ! valid?
+  end
+
+  def form_transaction
+    # override in subclass
   end
 end

@@ -1,17 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe ContractForm, type: :model do
+RSpec.describe ContractCreateForm, type: :model do
 
   def valid_params
     {
-      currency_amount: 10
+      currency_amount: 10            ,
+      publisher_id:    user.id
     }
   end
 
-  let(:klas)   { described_class         }
-  subject      { klas.new(valid_params)  }
+  let(:user)   { User.create(email: 'xx@yy.com', password: 'yyyyyy')    }
+  let(:klas)   { described_class                                        }
+  subject      { klas.new(valid_params)                                 }
 
   describe "Attributes" do
+    it { should respond_to :user                   }
     it { should respond_to :contract               }
     it { should respond_to :currency_amount        }
   end
