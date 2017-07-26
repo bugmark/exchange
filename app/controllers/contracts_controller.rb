@@ -23,18 +23,18 @@ class ContractsController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
-    @contract = ContractCreateForm.new(new_opts(params))
+    @contract = ContractPub.new(new_opts(params))
   end
 
   # id (contract ID)
   def edit
-    @contract = Contract.find(params[:id])
-    @contract.counterparty_id = current_user.id
+    @contract = ContractTake.find(params[:id], with_counterparty: current_user)
   end
 
   def create
-    opts = params["contract_create_form"]
-    @contract = ContractCreateForm.new(valid_params(opts))
+    binding.pry
+    opts = params["contract_pub"]
+    @contract = ContractPub.new(valid_params(opts))
     if @contract.save
       redirect_to("/contracts/#{@contract.id}")
     else
@@ -43,12 +43,14 @@ class ContractsController < ApplicationController
   end
 
   def update
-    opts = params["contract_forecast"] || params["contract_reward"]
-    contract = Contract.find(opts["id"])
-    contract.status = "taken"
-    contract.counterparty_id = opts["counterparty_id"]
-    contract.save
-    redirect_to "/contracts"
+    binding.pry
+    opts = params["contract_take"]
+    @contract = ContractTake.find(opts["id"], with_counterparty: current_user)
+    if @contract.save
+      redirect_to("/contracts/#{@contract.id}")
+    else
+      render 'contracts/new'
+    end
   end
 
   private

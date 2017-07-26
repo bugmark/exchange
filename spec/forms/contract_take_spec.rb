@@ -1,17 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe ContractCreateForm, type: :model do
+RSpec.describe ContractTake, type: :model do
 
   def valid_params
     {
       currency_amount: 10            ,
-      publisher_id:    user.id
+      counterparty_id: user.id
     }
   end
 
-  let(:user)   { User.create(email: 'xx@yy.com', password: 'yyyyyy')    }
-  let(:klas)   { described_class                                        }
-  subject      { klas.new(valid_params)                                 }
+  let(:kontrakt) { Contract.create(valid_params)                          }
+  let(:user)     { User.create(email: 'xx@yy.com', password: 'yyyyyy')    }
+  let(:klas)     { described_class                                        }
+  subject        { klas.find(kontrakt.id, with_counterparty: user)        }
 
   describe "Attributes" do
     it { should respond_to :user                   }
@@ -19,7 +20,13 @@ RSpec.describe ContractCreateForm, type: :model do
     it { should respond_to :currency_amount        }
   end
 
-  describe "Methods" do
+  describe "Class Methods" do
+    it 'has a find method' do
+      expect(klas).to respond_to(:find)
+    end
+  end
+
+  describe "Object Methods" do
     it { should respond_to :save                 }
   end
 
@@ -58,9 +65,19 @@ RSpec.describe ContractCreateForm, type: :model do
     end
 
     it 'gets the right object count' do
-      expect(Contract.count).to eq(0)
+      expect(kontrakt).to be_present
+      expect(Contract.count).to eq(1)
       subject.save
       expect(Contract.count).to eq(1)
+    end
+  end
+
+  describe "Object Transaction" do
+    it 'adjusts the user balance' do
+      expect(user.pokerbux_balance).to eq(100)
+      subject.save
+      user.reload
+      expect(user.pokerbux_balance).to eq(90)
     end
   end
 end

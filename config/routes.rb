@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get 'static/help'
 
   resources :contracts
-  resources :contract_create_forms, path: "/contracts"
+  resource  :contract_forecasts , path: "/contracts"
+  resources :contract_pubs      , path: "/contracts"
+  resources :contract_takes     , path: "/contracts"
   resources :wallets
   resources :users
   resources :bugs

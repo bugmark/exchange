@@ -2,7 +2,7 @@ class Contract < ApplicationRecord
   belongs_to :bug   , optional: true
   belongs_to :repo  , optional: true
 
-  validates :currency_amount, numericality: {less_than: 15}
+  # validates :currency_amount, numericality: {less_than: 15}
 
   before_save :default_values
 

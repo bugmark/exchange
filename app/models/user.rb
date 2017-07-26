@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   before_save :default_values
 
+  def to_i
+    self.id
+  end
+
   # ----- ASSOCIATIONS -----
 
   def published_contracts

@@ -7,7 +7,7 @@ opts = [
     type:   "Contract::Forecast"   ,
     bug_id: Bug.first.id           ,
     currency_type:   "Ether"       ,
-    currency_amount: 50            ,
+    currency_amount: 15            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
     expire_at:       Time.now + 5.days
@@ -16,11 +16,13 @@ opts = [
     type:   "Contract::Forecast"   ,
     bug_id: Bug.first.id           ,
     currency_type:   "PokerBux"    ,
-    currency_amount: 3             ,
+    currency_amount: 5             ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
     expire_at:       Time.now +  1.week
   }
 ]
 
-Contract.create opts
+opts.each do |opt|
+  ContractPub.new(opt).save
+end

@@ -8,8 +8,14 @@ h2 EDIT (CONTRACT ID #{@contract.id})
       tr
         td Contact Type
         td = @contract.type
+      tr
+        td Contract Publisher ID
+        td = @contract.publisher_id
+      tr
+        td Contract Price
+        td = @contract.currency_amount
   .col-md-6
-    = bootstrap_form_for(@contract, :action => :update) do |f|
+    = bootstrap_form_for(@contract, :url => {:action => :update}, :method => :put) do |f|
       = f.number_field :id
       = f.number_field :counterparty_id
       = f.submit

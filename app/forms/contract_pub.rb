@@ -1,9 +1,9 @@
-class ContractCreateForm < ApplicationForm
+class ContractPub < ApplicationForm
 
   attr_subobjects      :contract, :user
   attr_delegate_fields :contract
 
-  validate :user_funds
+  validate :publisher_funds
 
   def initialize(args = {})
     @contract = Contract.new(args)
@@ -11,12 +11,13 @@ class ContractCreateForm < ApplicationForm
   end
 
   def form_transaction
+    contract.status        = "open"
     user.pokerbux_balance -= contract.currency_amount
   end
 
   private
 
-  def user_funds
+  def publisher_funds
     if user.pokerbux_balance < contract.currency_amount
       errors.add(:currency_amount, "not enough funds in user account")
     end

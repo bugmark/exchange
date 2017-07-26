@@ -10,7 +10,10 @@ h2 CONTRACT ##{@contract.id}
         td = @contract.publisher_id
       tr
         td Counterparty ID
-        td = @contract.counterparty_id
+        td = @contract.counterparty_id || "NA"
+      tr
+        td Contract Price
+        td = @contract.currency_amount
   .col-md-6
     table.table
       tr
