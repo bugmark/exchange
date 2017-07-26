@@ -6,11 +6,25 @@ class Contract < ApplicationRecord
 
   before_save :default_values
 
+  def matching_bugs
+    @bugmatch ||= Bug.match(match_attrs)
+  end
+
   private
 
   def default_values
     self.status       ||= 'open'
     self.assert_match ||= true
+  end
+
+  def match_attrs
+    {
+      id:      self.bug_id       ,
+      repo_id: self.repo_id      ,
+      title:   self.title        ,
+      status:  self.status       ,
+      labels:  self.labels
+    }
   end
 end
 

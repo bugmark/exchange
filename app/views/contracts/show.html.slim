@@ -1,6 +1,7 @@
 h2 CONTRACT ##{@contract.id}
 .row
   .col-md-6
+    b Details
     table.table
       tr
         td Type
@@ -15,6 +16,7 @@ h2 CONTRACT ##{@contract.id}
         td Contract Price
         td = @contract.currency_amount
   .col-md-6
+    b Actions
     table.table
       tr
         td Attached To
@@ -22,3 +24,9 @@ h2 CONTRACT ##{@contract.id}
       tr
         td Action
         td = contract_take_link(@contract)
+hr
+b Matching Bugs (#{@contract.matching_bugs.length})
+table.table
+  - @contract.matching_bugs.each do |bug|
+    tr
+      td = bug.id

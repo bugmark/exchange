@@ -25,6 +25,35 @@ RSpec.describe Bug, type: :model do
     end
   end
 
+  describe "Scopes" do
+    it 'has scope methods' do
+      expect(klas).to respond_to :base_scope
+      expect(klas).to respond_to :by_id
+      expect(klas).to respond_to :by_repoid
+      expect(klas).to respond_to :by_title
+      expect(klas).to respond_to :by_status
+      expect(klas).to respond_to :by_labels
+    end
+  end
+
+  describe ".by_id" do
+    before(:each) { subject.save}
+
+    it 'returns a matching record' do
+      expect(klas.by_id(subject.id).count).to eq(1)
+    end
+  end
+
+  describe ".match" do
+    before(:each) { subject.save}
+
+    it 'matches id' do
+      expect(subject).to_not be_nil
+      expect(klas.count).to eq(1)
+      expect(klas.match({id: subject.id}).length).to eq(1)
+    end
+  end
+
 end
 
 # == Schema Information
