@@ -32,7 +32,6 @@ class ContractsController < ApplicationController
   end
 
   def create
-    binding.pry
     opts = params["contract_pub"]
     @contract = ContractPub.new(valid_params(opts))
     if @contract.save

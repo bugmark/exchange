@@ -5,13 +5,13 @@ table.table
     td User ID #{@user.id} / #{@user.email}
     td Account Balance: #{@user.pokerbux_balance} PokerBux
 div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
-  b Published Contracts:
+  b Published Contracts (#{@user.published_contracts.count}):
   table.table-sm
     - @user.published_contracts.each do |contract|
       tr
         td = contract.id
 div style='background: lightgrey;'
-  b Taken Contracts:
+  b Taken Contracts (#{@user.taken_contracts.count}):
   table.table-sm
     - @user.taken_contracts.each do |contract|
       tr

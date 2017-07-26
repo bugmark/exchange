@@ -4,8 +4,7 @@ module ReposHelper
   end
 
   def repo_name_link(repo)
-    name = truncate(repo.name)
-    # raw "<a href='/repos/#{repo.id}'>#{name}</a>"
+    truncate(repo.name)
   end
 
   def repo_forecast_link(repo)
