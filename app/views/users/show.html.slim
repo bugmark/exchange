@@ -6,13 +6,43 @@ table.table
     td Account Balance: #{@user.pokerbux_balance} PokerBux
 div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
   b Published Contracts (#{@user.published_contracts.count}):
-  table.table-sm
+  table.table
+    - if @user.published_contracts.count > 0
+      tr
+        th ID
+        th Price
+        th Expires
+        th Attached To
+        th Status
+        th Publisher
+        th Counterparty
     - @user.published_contracts.each do |contract|
       tr
-        td = contract.id
+        td = contract_id_link(contract)
+        td = "#{contract.currency_amount} #{contract.currency_type}"
+        td = contract.expire_at
+        td = contract_attach_link(contract)
+        td = contract.status
+        td = contract_publisher_link(contract)
+        td = contract_counterparty_link(contract)
 div style='background: lightgrey;'
   b Taken Contracts (#{@user.taken_contracts.count}):
-  table.table-sm
+  table.table
+    - if @user.taken_contracts.count > 0
+      tr
+        th ID
+        th Price
+        th Expires
+        th Attached To
+        th Status
+        th Publisher
+        th Counterparty
     - @user.taken_contracts.each do |contract|
       tr
-        td = contract.id
+        td = contract_id_link(contract)
+        td = "#{contract.currency_amount} #{contract.currency_type}"
+        td = contract.expire_at
+        td = contract_attach_link(contract)
+        td = contract.status
+        td = contract_publisher_link(contract)
+        td = contract_counterparty_link(contract)

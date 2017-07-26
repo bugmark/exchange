@@ -23,4 +23,17 @@ module ContractsHelper
       "NA"
     end
   end
+
+  def contract_publisher_link(contract)
+    pid  = contract.publisher_id
+    path = "/users/#{pid}"
+    raw "<a href='#{path}'>#{pid}</a>"
+  end
+
+  def contract_counterparty_link(contract)
+    return "NA" unless contract.counterparty_id
+    pid  = contract.counterparty_id
+    path = "/users/#{pid}"
+    raw "<a href='#{path}'>#{pid}</a>"
+  end
 end
