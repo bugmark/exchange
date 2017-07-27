@@ -10,43 +10,40 @@ class Contract < ApplicationRecord
     @bugmatch ||= Bug.match(match_attrs)
   end
 
+  # ----- SCOPES -----
+
+  class << self
+    def pending_resolution
+      expired.unresolved
+    end
+
+    def expired
+      where("expires_at < ?", Time.now)
+    end
+
+    def unresolved
+      where("status != ?", "resolved")
+    end
+  end
+
+  def awaredee
+    self.awarded_to || "TBD"   # add some logic here to calculate awardee
+  end
+
   private
 
   def default_values
     self.status       ||= 'open'
-    self.assert_match ||= true
+    self.bug_exists   ||= true
   end
 
   def match_attrs
     {
-      id:      self.bug_id       ,
-      repo_id: self.repo_id      ,
-      title:   self.title        ,
-      status:  self.status       ,
-      labels:  self.labels
+      id:       self.bug_id       ,
+      repo_id:  self.repo_id      ,
+      title:    self.bug_title    ,
+      status:   self.bug_status   ,
+      labels:   self.bug_labels
     }
   end
 end
-
-# == Schema Information
-#
-# Table name: contracts
-#
-#  id              :integer          not null, primary key
-#  type            :string
-#  publisher_id    :integer
-#  counterparty_id :integer
-#  currency_type   :string
-#  currency_amount :float
-#  terms           :string
-#  expire_at       :datetime
-#  bug_id          :integer
-#  repo_id         :integer
-#  title           :string
-#  status          :string
-#  labels          :string
-#  assert_match    :boolean
-#  jfields         :jsonb            not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#

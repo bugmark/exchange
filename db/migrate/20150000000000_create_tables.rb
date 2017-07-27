@@ -36,14 +36,16 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :currency_type
       t.float    :currency_amount
       t.string   :terms               # eg Net0, Net30
-      t.datetime :expire_at
+      t.string   :status              # open, taken, resolved
+      t.string   :awarded_to          # publisher, counterparty
+      t.datetime :expires_at
       # ----- match fields
-      t.integer  :bug_id
       t.integer  :repo_id
-      t.string   :title
-      t.string   :status
-      t.string   :labels
-      t.boolean  :assert_match
+      t.integer  :bug_id
+      t.string   :bug_title
+      t.string   :bug_status
+      t.string   :bug_labels
+      t.boolean  :bug_exists
       # -----
       t.jsonb    :jfields,  null: false, default: '{}'
       t.timestamps

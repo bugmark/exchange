@@ -37,7 +37,7 @@ class ApplicationForm
 
   def save
     if valid?
-      form_transaction      # perform a transaction, if any
+      transact_before_save      # perform a transaction, if any
       subs.each(&:save)     # save all subobjects
     else
       false
@@ -62,7 +62,7 @@ class ApplicationForm
     ! valid?
   end
 
-  def form_transaction
+  def transact_before_save
     # override in subclass
   end
 end

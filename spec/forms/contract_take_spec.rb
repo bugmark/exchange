@@ -15,7 +15,7 @@ RSpec.describe ContractTake, type: :model do
   subject        { klas.find(kontrakt.id, with_counterparty: user)        }
 
   describe "Attributes" do
-    it { should respond_to :user                   }
+    it { should respond_to :counterparty           }
     it { should respond_to :contract               }
     it { should respond_to :currency_amount        }
   end

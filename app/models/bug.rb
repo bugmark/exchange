@@ -35,7 +35,7 @@ class Bug < ApplicationRecord
     # -----
 
     def match(attrs)
-      attrs.without_nils.reduce(base_scope) do |acc, (key, val)|
+      attrs.without_blanks.reduce(base_scope) do |acc, (key, val)|
         scope_for(acc, key, val)
       end
     end
@@ -60,22 +60,3 @@ class Bug < ApplicationRecord
 
   end
 end
-
-# == Schema Information
-#
-# Table name: bugs
-#
-#  id          :integer          not null, primary key
-#  repo_id     :integer
-#  type        :string
-#  api_url     :string
-#  http_url    :string
-#  title       :string
-#  description :string
-#  status      :string
-#  labels      :text             default([]), is an Array
-#  jfields     :jsonb            not null
-#  synced_at   :datetime
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#

@@ -8,14 +8,14 @@ hr
   = f.hidden_field :terms
   = f.hidden_field :currency_type
   = f.number_field :currency_amount, label: "Pokerbux Amount"
-  = f.date_field   :expire_at
+  = f.date_field   :expires_at
   div style='background: lightgrey; padding: 4px;'
     | Match Criteria (blank for "don't care")
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
-    = f.number_field  :bug_id  , label: "Bug ID"
-    = f.number_field  :repo_id , label: "Repo ID"
-    = f.text_field    :title   , label: "Bug Title (substring match)"
-    = f.text_field    :labels  , label: "Bug Labels (comma separated, substring match)"
-    = f.text_field    :status  , label: "Bug Status (open | closed)"
-    = f.check_box     :assert_match, label: "Bug Exists?"
+    = f.number_field  :repo_id     , label: "Repo ID"
+    = f.number_field  :bug_id      , label: "Bug ID"
+    = f.text_field    :bug_title   , label: "Bug Title (substring match)"
+    = f.text_field    :bug_labels  , label: "Bug Labels (comma separated, substring match)"
+    = f.text_field    :bug_status  , label: "Bug Status (open | closed)"
+    = f.check_box     :bug_exists  , label: "Bug Exists?"
   = f.submit

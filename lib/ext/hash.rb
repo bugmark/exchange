@@ -8,7 +8,7 @@ class Hash
     self
   end
 
-  def without_nils
-    self.select {|_key, val| !val.nil?}
+  def without_blanks
+    self.select {|_key, val| !(val.nil? || val == "")}
   end
 end

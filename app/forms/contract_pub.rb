@@ -10,7 +10,7 @@ class ContractPub < ApplicationForm
     @user     = User.find(contract.publisher_id)
   end
 
-  def form_transaction
+  def transact_before_save
     contract.status        = "open"
     user.pokerbux_balance -= contract.currency_amount
   end

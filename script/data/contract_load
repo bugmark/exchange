@@ -10,7 +10,7 @@ opts = [
     currency_amount: 15            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
-    expire_at:       Time.now + 5.days
+    expires_at:       Time.now + 5.days
   },
   {
     type:   "Contract::Forecast"   ,
@@ -19,7 +19,7 @@ opts = [
     currency_amount: 5             ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
-    expire_at:       Time.now +  1.week
+    expires_at:       Time.now +  1.week
   }
 ]
 

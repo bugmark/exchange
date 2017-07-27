@@ -17,7 +17,7 @@ module BugsHelper
   end
 
   def bug_forecast_link(bug)
-    path = "contracts/new?type=forecast&bug_id=#{bug.id}"
+    path = "/contracts/new?type=forecast&bug_id=#{bug.id}"
     raw "<a href='#{path}'>Forecast</a>"
   end
 

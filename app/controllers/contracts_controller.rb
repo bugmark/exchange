@@ -42,7 +42,6 @@ class ContractsController < ApplicationController
   end
 
   def update
-    binding.pry
     opts = params["contract_take"]
     @contract = ContractTake.find(opts["id"], with_counterparty: current_user)
     if @contract.save
@@ -65,7 +64,7 @@ class ContractsController < ApplicationController
       terms:           "Net0"                                       ,
       currency_type:   "PokerBux"                                   ,
       currency_amount: 10                                           ,
-      expire_at:       Time.now + 14.days                           ,
+      expires_at:       Time.now + 14.days                           ,
       publisher_id:    current_user.id
     }
     key  = "bug_id"  if params["bug_id"]

@@ -22,7 +22,7 @@ table.table
     tr
       td = contract_id_link(contract)
       td = "#{contract.currency_amount} #{contract.currency_type}"
-      td = contract.expire_at
+      td = contract.expires_at
       td = contract_attach_link(contract)
       td = contract.status
       td = contract_take_link(contract)
