@@ -2,6 +2,10 @@
 
 BugMark - A Blockchain Market for Software Vulnerabilities and Issues
 
+This readme covers the config and install of the bugmark software components.
+
+For everything else relating to bugmark, including design, please use the [wiki](https://github.com/mvscorg/bugmark/wiki)
+
 ## Development VM Configuration
 
 Follow these steps to set up a working development environment running on an
