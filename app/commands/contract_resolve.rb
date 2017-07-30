@@ -20,13 +20,19 @@ class ContractResolve < ApplicationCommand
   end
 
   def transact_before_save
-    contract.status               = "resolved"
+    contract.status               = get_status
     contract.awarded_to           = contract.awardee
     # FIXME
     # contract.send(contract.awardee.to_sym).currency_amount += contract.currency_amount * 2
   end
 
   private
+
+  def get_status
+    status = "lapsed"
+    status = "resolved" if contract.counterparty.present?
+    status
+  end
 
   def resolvable_contract
     if Time.now > contract.expires_at

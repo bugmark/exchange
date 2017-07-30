@@ -53,7 +53,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :bug_title
       t.string   :bug_status
       t.string   :bug_labels
-      t.boolean  :bug_exists
+      t.boolean  :bug_presence
       # -----
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref

@@ -4,7 +4,16 @@ class Contract < ApplicationRecord
 
   # validates :currency_amount, numericality: {less_than: 15}
 
-  before_save :default_values
+  before_validation :default_values
+
+  # VALID STATUSES
+  # > open      - can be taken
+  # > withdrawn - withdrawn by publisher (before taken)
+  # > taken     - taken by a counterparty
+  # > lapsed    - expired before being taken
+  # > resolved  - in favor of publisher or counterparty
+
+  validates :status, inclusion: { in: %w(open withdrawn taken lapsed resolved)}
 
   def matching_bugs
     @bugmatch ||= Bug.match(match_attrs)
@@ -34,7 +43,7 @@ class Contract < ApplicationRecord
 
   def default_values
     self.status       ||= 'open'
-    self.bug_exists   ||= true
+    self.bug_presence ||= true
   end
 
   def match_attrs
@@ -47,30 +56,3 @@ class Contract < ApplicationRecord
     }
   end
 end
-
-# == Schema Information
-#
-# Table name: contracts
-#
-#  id              :integer          not null, primary key
-#  type            :string
-#  publisher_id    :integer
-#  counterparty_id :integer
-#  currency_type   :string
-#  currency_amount :float
-#  terms           :string
-#  status          :string
-#  awarded_to      :string
-#  expires_at      :datetime
-#  repo_id         :integer
-#  bug_id          :integer
-#  bug_title       :string
-#  bug_status      :string
-#  bug_labels      :string
-#  bug_exists      :boolean
-#  jfields         :jsonb            not null
-#  exref           :string
-#  uuref           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#
