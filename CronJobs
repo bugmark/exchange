@@ -12,31 +12,37 @@
 
 # TODO: ADD LOGROTATE
 
-# load File.expand_path("~/g/pdev_util/bin/SysRole")
+CRON_UTIL = File.expand_path("~/util/pdev_util/bin/SysRole")
 
-# whenever_config
+if File.exist?(CRON_UTIL)
+  load CRON_UTIL
+else
+  abort "NO CRON_UTIL AT '#{CRON_UTIL}'"
+end
 
-# every 1.minute do
-#   run_scripts 'util/heartbeat', app: "BUGMARK"
-# end
+whenever_config
 
-# if dev_host?
-#   every 1.hour do
-#     run_scripts 'util/download_backup', app: "BUGMARK"
-#   end
-#
-#   every 7.days do
-#     run_scripts 'util/backup_keys', app: "BUGMARK"
-#   end
-# end
+every 1.minute do
+  run_scripts 'cron/heartbeat', app: "BUGMARK"
+end
 
-# if rails_production? 
-#   every 1.day, at: "00:30 am" do
-#     run_scripts 'util/backup_db', app: "BUGMARK", rails_env: "production"
-#   end
-#
-#   every 4.days, at: "01:30 am"do
-#     run_scripts 'util/backup_sysdir', app: "BUGMARK", rails_env: "production"
-#   end
-# end
+if dev_host?
+  # every 1.hour do
+  #   run_scripts 'cron/download_backup', app: "BUGMARK"
+  # end
+  #
+  # every 7.days do
+  #   run_scripts 'cron/backup_keys', app: "BUGMARK"
+  # end
+end
+
+if rails_production?
+  # every 1.day, at: "00:30 am" do
+  #   run_scripts 'cron/backup_db', app: "BUGMARK", rails_env: "production"
+  # end
+  #
+  # every 4.days, at: "01:30 am"do
+  #   run_scripts 'cron/backup_sysdir', app: "BUGMARK", rails_env: "production"
+  # end
+end
 
