@@ -6,8 +6,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :url
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
+      t.string   :exref
+      t.string   :uuref
       t.timestamps
     end
+    add_index :repos, :exref
+    add_index :repos, :uuref
     add_index :repos, :type
     add_index :repos, :jfields, using: :gin
 
@@ -22,8 +26,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.text     :labels, array: true, default: []
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
+      t.string   :exref
+      t.string   :uuref
       t.timestamps
     end
+    add_index :bugs, :exref
+    add_index :bugs, :uuref
     add_index :bugs, :repo_id
     add_index :bugs, :type
     add_index :bugs, :labels , using: :gin
@@ -48,8 +56,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.boolean  :bug_exists
       # -----
       t.jsonb    :jfields,  null: false, default: '{}'
+      t.string   :exref
+      t.string   :uuref
       t.timestamps
     end
+    add_index :contracts, :exref
+    add_index :contracts, :uuref
     add_index :contracts, :repo_id
     add_index :contracts, :bug_id
     add_index :contracts, :publisher_id
@@ -59,7 +71,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :users do |t|
       t.boolean  :admin
       t.integer  :pokerbux_balance
+      t.string   :exref
+      t.string   :uuref
       t.timestamps
     end
+    add_index :users, :exref
+    add_index :users, :uuref
   end
 end

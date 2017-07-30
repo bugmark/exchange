@@ -11,6 +11,23 @@ RSpec.describe Contract, type: :model do
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
+  describe "Attributes" do
+    it { should respond_to :exref                  }
+    it { should respond_to :uuref                  }
+  end
+
+  describe "#uuref" do
+    it 'generates a string' do
+      subject.save
+      expect(subject.uuref).to be_a(String)
+    end
+
+    it 'generates a 36-character string' do
+      subject.save
+      expect(subject.uuref.length).to eq(36)
+    end
+  end
+
   describe "Associations" do
     it { should respond_to(:bug) }
   end
