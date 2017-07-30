@@ -1,4 +1,4 @@
-class ContractPub < ApplicationForm
+class ContractPub < ApplicationCommand
 
   attr_subobjects      :contract, :user
   attr_delegate_fields :contract

@@ -1,4 +1,4 @@
-class ContractTake < ApplicationForm
+class ContractTake < ApplicationCommand
 
   attr_subobjects      :contract, :counterparty
   attr_delegate_fields :contract

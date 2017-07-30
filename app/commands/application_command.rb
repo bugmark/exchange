@@ -1,7 +1,7 @@
 # inspired by
 # http://blog.sundaycoding.com/blog/2016/01/08/contextual-validations-with-form-objects
 
-class ApplicationForm
+class ApplicationCommand
   include ActiveModel::Model
 
   # define an attr_accessor for each subobject

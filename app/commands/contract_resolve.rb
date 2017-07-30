@@ -1,4 +1,4 @@
-class ContractResolve < ApplicationForm
+class ContractResolve < ApplicationCommand
 
   attr_subobjects      :contract, :publisher, :counterparty
   attr_delegate_fields :contract

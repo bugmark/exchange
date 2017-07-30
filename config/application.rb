@@ -15,7 +15,7 @@ module Bugmark
     config.load_defaults 5.1
 
     base = "#{config.root}/app"
-    config.autoload_paths += %W(#{base}/forms)
+    config.autoload_paths += %W(#{base}/commands)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
