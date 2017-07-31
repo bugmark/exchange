@@ -25,12 +25,11 @@ Next Actions:
 - [DONE] add a resolve command and contract support methods
 - [DONE] add a resolve script
 - [DONE] launch resolve script from production cron
+- [DONE] add a weekly account top-up script
+- [DONE] launch top-up script from production cron
 
-- [TODO] add a weekly account top-up script
-- [TODO] launch top-up script from production cron
-
-- [TODO] add repo sync
 - [TODO] add repo add/remove
+- [TODO] add repo sync
 
 - [TODO] generate an event stream for all commands
 - [TODO] add the event stream to the UI (account history, etc.)

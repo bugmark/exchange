@@ -7,4 +7,12 @@ class ReposController < ApplicationController
   def show
     @repo = Repo.find(params["id"])
   end
+
+  def new
+    @repo = Repo.new
+  end
+
+  def create
+
+  end
 end

@@ -6,20 +6,21 @@ json = File.read('script/data/GH.json')
 
 repo_name = "mvscorg/xdmarket"
 
-Repo.find_by_name(repo_name).try(:destroy)
+# Repo.find_by_name(repo_name).try(:destroy)
 
-repo = Repo.create(name: repo_name, type: "Repo::GitHub")
+repo = Repo.find_or_create_by(name: repo_name, type: "Repo::GitHub")
 
 JSON.parse(json).each do |el|
   attrs = {
+    repo_id:   repo.id         ,
     type:      "Bug::GitHub"   ,
     api_url:   el["url"]       ,
     http_url:  el["http_url"]  ,
-    repo_id:   repo.id         ,
     title:     el["title"]     ,
     labels:    el["labels"]    ,
     status:    el["state"]     ,
     synced_at: Time.now
   }
-  Bug.create attrs
+  bug = Bug.find_or_create_by(exref: el["id"])
+  bug.update_attributes(attrs)
 end

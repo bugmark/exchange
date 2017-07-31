@@ -1,0 +1,21 @@
+h2 Contracts New
+hr
+- if @repo.invalid?
+  .alert.alert-danger Please fix the errors below.
+= bootstrap_form_for(@repo) do |f|
+  = f.hidden_field :type
+  = f.hidden_field :publisher_id
+  = f.hidden_field :terms
+  = f.hidden_field :currency_type
+  = f.number_field :currency_amount, label: "Pokerbux Amount"
+  = f.date_field :matures_at
+  div style='background: lightgrey; padding: 4px;'
+    | Match Criteria (blank for "don't care")
+  div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
+    = f.number_field :repo_id, label: "Repo ID"
+    = f.number_field :bug_id, label: "Bug ID"
+    = f.text_field :bug_title, label: "Bug Title (substring match)"
+    = f.text_field :bug_labels, label: "Bug Labels (comma separated, substring match)"
+    = f.text_field :bug_status, label: "Bug Status (open | closed)"
+    = f.check_box :bug_presence, label: "Bug Presence?"
+  = f.submit

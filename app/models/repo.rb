@@ -1,7 +1,21 @@
 class Repo < ApplicationRecord
 
-  has_many :bugs     , :dependent => :destroy
-  has_many :contracts, :dependent => :destroy
+  has_many :bugs         , :dependent => :destroy
+  has_many :contracts    , :dependent => :destroy
+  has_many :bug_contracts, :through   => :bugs    , :source => :contracts
+
+  def sync
+
+  end
+
+
+  # ----- SCOPES -----
+
+  class << self
+    def github
+      where(type: "Repo::Github")
+    end
+  end
 
 end
 

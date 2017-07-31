@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# github_sync
+
+require "./config/environment"
+
+Repo.github.each do |repo|
+  puts "RESET USER BALANCE #{repo.id}"
+  repo.update_attribute(:pokerbux_balance, 100)
+end
