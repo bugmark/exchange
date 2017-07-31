@@ -23,10 +23,10 @@ Next Actions:
 
 Next Actions:
 - [DONE] add a resolve command and contract support methods
+- [DONE] add a resolve script
+- [DONE] launch resolve script from production cron
 
-- [TODO] add a resolve script
 - [TODO] add a weekly account top-up script
-- [TODO] launch resolve script from production cron
 - [TODO] launch top-up script from production cron
 
 - [TODO] add repo sync

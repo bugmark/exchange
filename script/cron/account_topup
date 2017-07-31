@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# account_topup
+
+require "./config/environment"
+
+User.low_balance.each do |user|
+  puts "RESET USER BALANCE #{user.id}"
+  user.update_attribute(:pokerbux_balance, 100)
+end

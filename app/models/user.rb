@@ -26,6 +26,14 @@ class User < ApplicationRecord
     0
   end
 
+  # ----- SCOPES -----
+
+  class << self
+    def low_balance
+      where('pokerbux_balance < 100')
+    end
+  end
+
   private
 
   def default_values

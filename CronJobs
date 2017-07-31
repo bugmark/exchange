@@ -41,6 +41,10 @@ if rails_production?
     run_scripts 'cron/contract_resolve', app: 'BUGMARK', rails_env: "production"
   end
 
+  every 1.week do
+    run_scripts 'cron/account_topup', app: 'BUGMARK', rails_env: "production"
+  end
+
   # every 1.day, at: "00:30 am" do
   #   run_scripts 'cron/backup_db', app: "BUGMARK", rails_env: "production"
   # end
