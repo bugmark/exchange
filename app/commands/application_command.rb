@@ -28,13 +28,6 @@ class ApplicationCommand
   end
   alias_method :subs, :subobjects
 
-  # def initialize(args={})
-  #   args.each do |k,v|
-  #     key = "@#{k}"
-  #     instance_variable_set(key.to_sym, v) unless v.nil?
-  #   end
-  # end
-
   def save
     if valid?
       transact_before_save      # perform a transaction, if any

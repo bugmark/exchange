@@ -1,21 +1,22 @@
 class ContractResolve < ApplicationCommand
 
-  attr_subobjects      :contract, :publisher, :counterparty
+  attr_subobjects      :contract, :publisher
+  attr_accessor        :counterparty
   attr_delegate_fields :contract
 
   validates :counterparty_id,     presence: true
   validate  :resolvable_contract
 
-  def self.find(contract_id)
+  def self.find(contract)
     instance              = allocate
-    instance.contract     = Contract.find(contract_id.to_i)
+    instance.contract     = Contract.find(contract.to_i)
     instance.publisher    = instance.contract.publisher
     instance.counterparty = instance.contract.counterparty
     instance
   end
 
-  def initialize(contract_id)
-    @contract     = Contract.find(contract_id.to_i)
+  def initialize(contract)
+    @contract     = Contract.find(contract.to_i)
     @publisher    = contract.publisher
     @counterparty = contract.counterparty
   end

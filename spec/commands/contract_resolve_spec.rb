@@ -63,7 +63,7 @@ RSpec.describe ContractResolve, type: :model do
       expect(user.pokerbux_balance).to eq(100)
       subject.save
       user.reload
-      expect(user.pokerbux_balance).to eq(120)
+      expect(user.pokerbux_balance).to eq(100)
     end
   end
 end

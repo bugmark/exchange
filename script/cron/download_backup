@@ -19,7 +19,7 @@ echo ----------------------------
 
 [[ "$RAILS_ENV" == "development" ]] || abort
 
-rsync -av deploy@lch1:var/backup/lica/lch1 ~/var/backup/lica --delete
+rsync -av deploy@lch1:var/backup/bugmark/lch1 ~/var/backup/bugmark --delete
 
 echo ------- finish download ------
 date

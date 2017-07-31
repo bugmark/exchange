@@ -18,10 +18,19 @@ CQRS TODO:
 Next Actions:
 - [DONE] add CronJobs scripts
 - [DONE] update CronJobs on production deploy
-- [TODO] add a resolve command and contract support methods
-- [TODO] add a resolve script and launch from production cron
+
+# Jul 31
+
+Next Actions:
+- [DONE] add a resolve command and contract support methods
+
+- [TODO] add a resolve script
 - [TODO] add a weekly account top-up script
+- [TODO] launch resolve script from production cron
+- [TODO] launch top-up script from production cron
+
 - [TODO] add repo sync
 - [TODO] add repo add/remove
+
 - [TODO] generate an event stream for all commands
 - [TODO] add the event stream to the UI (account history, etc.)
