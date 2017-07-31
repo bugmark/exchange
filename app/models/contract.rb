@@ -15,8 +15,19 @@ class Contract < ApplicationRecord
 
   validates :status, inclusion: { in: %w(open withdrawn taken lapsed resolved)}
 
-  def matching_bugs
+  # returns list of matching bugs
+  def match_list
     @bugmatch ||= Bug.match(match_attrs)
+  end
+
+  # returns boolean result of the match assertion
+  def match_assertion
+    match_length = match_list.count
+    if self.bug_presence
+      match_length > 0
+    else
+      match_length == 0
+    end
   end
 
   # ----- SCOPES -----
@@ -37,6 +48,7 @@ class Contract < ApplicationRecord
 
   def awaredee
     self.awarded_to || "TBD"   # add some logic here to calculate awardee
+
   end
 
   private
