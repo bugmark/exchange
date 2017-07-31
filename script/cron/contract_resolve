@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# contract_resolve
+
+require "./config/environment"
+
+Contract.pending_resolution.each do |contract|
+  puts "RESOLVING CONTRACT #{contract.id}"
+  ContractResolve.new(contract).save
+end
