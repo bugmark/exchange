@@ -21,7 +21,7 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
       tr
         td = contract_id_link(contract)
         td = "#{contract.currency_amount} #{contract.currency_type}"
-        td = contract.expires_at
+        td = contract.matures_at
         td = contract_attach_link(contract)
         td = contract.status
         td = contract_publisher_link(contract)
@@ -42,7 +42,7 @@ div style='background: lightgrey;'
       tr
         td = contract_id_link(contract)
         td = "#{contract.currency_amount} #{contract.currency_type}"
-        td = contract.expires_at
+        td = contract.matures_at
         td = contract_attach_link(contract)
         td = contract.status
         td = contract_publisher_link(contract)

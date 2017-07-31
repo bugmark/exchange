@@ -10,7 +10,7 @@ opts = [
     currency_amount: 20            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
-    expires_at:      Time.now + 1.week
+    matures_at:      Time.now + 1.week
   },
   {
     type:   "Contract::Forecast"   ,
@@ -19,7 +19,7 @@ opts = [
     currency_amount: 15            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
-    expires_at:      Time.now + 1.hour
+    matures_at:      Time.now + 1.hour
   },
   {
     type:   "Contract::Forecast"   ,
@@ -28,7 +28,7 @@ opts = [
     currency_amount: 5             ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
-    expires_at:      Time.now + 1.day
+    matures_at:      Time.now + 1.day
   },
   {
     type:   "Contract::Forecast"   ,
@@ -37,7 +37,7 @@ opts = [
     currency_amount: 10            ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
-    expires_at:      Time.now - 1.hour
+    matures_at:      Time.now - 1.hour
   }
 ]
 

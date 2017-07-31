@@ -64,7 +64,7 @@ class ContractsController < ApplicationController
       terms:           "Net0"                                       ,
       currency_type:   "PokerBux"                                   ,
       currency_amount: 10                                           ,
-      expires_at:       Time.now + 14.days                           ,
+      matures_at:       Time.now + 14.days                           ,
       publisher_id:    current_user.id
     }
     key  = "bug_id"  if params["bug_id"]

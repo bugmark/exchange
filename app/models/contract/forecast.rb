@@ -17,7 +17,7 @@ end
 #  terms           :string
 #  status          :string
 #  awarded_to      :string
-#  expires_at      :datetime
+#  matures_at      :datetime
 #  repo_id         :integer
 #  bug_id          :integer
 #  bug_title       :string

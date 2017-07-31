@@ -42,7 +42,7 @@ module Kernel
     meth = ref.match(/\`(.+)\'/)[1]
     pref = "#{(' ' + file).rjust(20, char)}:#{line.ljust(2)} #{(meth + ' ').ljust(30,'-')}"
     msgs.each do |msg|
-      string = "#{char}#{pref}> #{msg.inspect}"
+      string = "#{char}#{pref}> #{msg}"
       puts string.send(color)
       $stdout.flush
     end

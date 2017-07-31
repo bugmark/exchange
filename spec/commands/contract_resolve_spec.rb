@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ContractTake, type: :model do
+RSpec.describe ContractResolve, type: :model do
 
   def contract_params
     {
@@ -13,27 +13,12 @@ RSpec.describe ContractTake, type: :model do
   let(:kontrakt) { Contract.create(contract_params)                       }
   let(:user)     { User.create(email: 'xx@yy.com', password: 'yyyyyy')    }
   let(:klas)     { described_class                                        }
-  subject        { klas.find(kontrakt.id, with_counterparty: user)        }
+  subject        { klas.find(kontrakt.id)                                 }
 
   describe "Attributes" do
     it { should respond_to :counterparty           }
     it { should respond_to :contract               }
     it { should respond_to :currency_amount        }
-  end
-
-  describe "Class Methods" do
-    it 'has a find method' do
-      expect(klas).to respond_to(:find)
-    end
-  end
-
-  describe "Object Methods" do
-    it { should respond_to :save                 }
-  end
-
-  describe "Object Existence" do
-    it { should be_a klas   }
-    it { should be_valid    }
   end
 
   describe "Subobjects" do
@@ -59,27 +44,27 @@ RSpec.describe ContractTake, type: :model do
     end
   end
 
-  describe "Object Saving" do
-    it 'saves the object to the database' do
-      subject.save
-      expect(subject).to be_valid
-    end
+  # describe "Object Saving" do
+  #   it 'saves the object to the database' do
+  #     subject.save
+  #     expect(subject).to be_valid
+  #   end
+  #
+  #   it 'gets the right object count' do
+  #     expect(kontrakt).to be_present
+  #     expect(Contract.count).to eq(1)
+  #     subject.save
+  #     expect(Contract.count).to eq(1)
+  #   end
+  # end
 
-    it 'gets the right object count' do
-      expect(kontrakt).to be_present
-      expect(Contract.count).to eq(1)
-      subject.save
-      expect(Contract.count).to eq(1)
-    end
-  end
-
-  describe "Object Transaction" do
-    it 'adjusts the user balance' do
-      expect(user.pokerbux_balance).to eq(100)
-      subject.save
-      user.reload
-      expect(user.pokerbux_balance).to eq(90)
-    end
-  end
+  # describe "Object Transaction" do
+  #   it 'adjusts the user balance' do
+  #     expect(user.pokerbux_balance).to eq(100)
+  #     subject.save
+  #     user.reload
+  #     expect(user.pokerbux_balance).to eq(90)
+  #   end
+  # end
 end
 

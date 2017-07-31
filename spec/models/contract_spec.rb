@@ -4,16 +4,25 @@ RSpec.describe Contract, type: :model do
 
   def valid_params
     {
-      currency_amount: 10
+      currency_amount: 10                  ,
+      publisher_id:    user.id
     }
   end
 
-  let(:klas)   { described_class         }
-  subject      { klas.new(valid_params)  }
+  let(:user) { User.create email: "asdf@qwer.net", password: "gggggg" }
+  let(:klas) { described_class                                        }
+  subject    { klas.new(valid_params)                                 }
+
+  describe "Associations" do
+    it { should respond_to(:repo)              }
+    it { should respond_to(:bug)               }
+    it { should respond_to(:publisher)         }
+    it { should respond_to(:counterparty)      }
+  end
 
   describe "Attributes" do
-    it { should respond_to :exref                  }
-    it { should respond_to :uuref                  }
+    it { should respond_to :exref              }
+    it { should respond_to :uuref              }
   end
 
   describe "Object Creation" do
@@ -31,19 +40,46 @@ RSpec.describe Contract, type: :model do
   end
 
   describe "#uuref" do
-    it 'generates a string' do #
+    it 'holds a string' do
       subject.save
       expect(subject.uuref).to be_a(String)
     end
 
-    it 'generates a 36-character string' do
+    it 'holds a 36-character string' do
       subject.save
       expect(subject.uuref.length).to eq(36)
     end
   end
 
-  describe "Associations" do
-    it { should respond_to(:bug) }
+  describe "#match_list" do
+    it 'returns an empty list' do
+      expect(subject.match_list).to be_empty
+    end
+  end
+
+  describe "#match_assertion" do
+    it 'return true by default' do
+      subject.save
+      expect(subject.match_assertion).to be_falsey
+    end
+
+    it 'return false if bug_presence is true' do
+      subject.bug_presence = false
+      expect(subject.match_assertion).to be_truthy
+    end
+  end
+
+  describe "#awardee" do
+    it "returns publisher" do
+      subject.save
+      expect(subject.awardee).to eq("counterparty")
+    end
+
+    it "returns counterparty" do
+      subject.save
+      subject.bug_presence = false
+      expect(subject.awardee).to eq("publisher")
+    end
   end
 
 end
@@ -61,7 +97,7 @@ end
 #  terms           :string
 #  status          :string
 #  awarded_to      :string
-#  expires_at      :datetime
+#  matures_at      :datetime
 #  repo_id         :integer
 #  bug_id          :integer
 #  bug_title       :string

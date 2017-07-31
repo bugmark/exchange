@@ -44,9 +44,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :currency_type
       t.float    :currency_amount
       t.string   :terms               # eg Net0, Net30
-      t.string   :status              # open, taken, resolved
+      t.string   :status              # open, taken, resolved, ...
       t.string   :awarded_to          # publisher, counterparty
-      t.datetime :expires_at
+      t.datetime :matures_at
       # ----- match fields
       t.integer  :repo_id
       t.integer  :bug_id

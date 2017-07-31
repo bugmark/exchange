@@ -1,10 +1,12 @@
 class Contract < ApplicationRecord
-  belongs_to :bug   , optional: true
-  belongs_to :repo  , optional: true
+  belongs_to :bug, optional: true
+  belongs_to :repo, optional: true
 
-  # validates :currency_amount, numericality: {less_than: 15}
+  belongs_to :publisher, class_name: "User", foreign_key: 'publisher_id'
+  belongs_to :counterparty, class_name: "User", foreign_key: 'counterparty_id', optional: true
 
   before_validation :default_values
+  validates :status, inclusion: {in: %w(open withdrawn taken lapsed resolved)}
 
   # VALID STATUSES
   # > open      - can be taken
@@ -12,8 +14,6 @@ class Contract < ApplicationRecord
   # > taken     - taken by a counterparty
   # > lapsed    - expired before being taken
   # > resolved  - in favor of publisher or counterparty
-
-  validates :status, inclusion: { in: %w(open withdrawn taken lapsed resolved)}
 
   # returns list of matching bugs
   def match_list
@@ -30,6 +30,16 @@ class Contract < ApplicationRecord
     end
   end
 
+  def awardee
+    self.awarded_to || begin
+      match_assertion ? "publisher" : "counterparty"
+    end
+  end
+
+  def to_i
+    self.id
+  end
+
   # ----- SCOPES -----
 
   class << self
@@ -38,7 +48,7 @@ class Contract < ApplicationRecord
     end
 
     def expired
-      where("expires_at < ?", Time.now)
+      where("matures_at < ?", Time.now)
     end
 
     def unresolved
@@ -46,25 +56,20 @@ class Contract < ApplicationRecord
     end
   end
 
-  def awaredee
-    self.awarded_to || "TBD"   # add some logic here to calculate awardee
-
-  end
-
   private
 
   def default_values
-    self.status       ||= 'open'
+    self.status ||= 'open'
     self.bug_presence ||= true
   end
 
   def match_attrs
     {
-      id:       self.bug_id       ,
-      repo_id:  self.repo_id      ,
-      title:    self.bug_title    ,
-      status:   self.bug_status   ,
-      labels:   self.bug_labels
+      id: self.bug_id,
+      repo_id: self.repo_id,
+      title: self.bug_title,
+      status: self.bug_status,
+      labels: self.bug_labels
     }
   end
 end
@@ -82,7 +87,7 @@ end
 #  terms           :string
 #  status          :string
 #  awarded_to      :string
-#  expires_at      :datetime
+#  matures_at      :datetime
 #  repo_id         :integer
 #  bug_id          :integer
 #  bug_title       :string

@@ -3,18 +3,19 @@ class ContractResolve < ApplicationCommand
   attr_subobjects      :contract, :publisher, :counterparty
   attr_delegate_fields :contract
 
-  validate :resolvable_contract
+  validates :counterparty_id,     presence: true
+  validate  :resolvable_contract
 
   def self.find(contract_id)
     instance              = allocate
-    instance.contract     = Contract.find(contract_id)
+    instance.contract     = Contract.find(contract_id.to_i)
     instance.publisher    = instance.contract.publisher
     instance.counterparty = instance.contract.counterparty
     instance
   end
 
   def initialize(contract_id)
-    @contract     = Contract.find(contract_id)
+    @contract     = Contract.find(contract_id.to_i)
     @publisher    = contract.publisher
     @counterparty = contract.counterparty
   end
@@ -35,8 +36,8 @@ class ContractResolve < ApplicationCommand
   end
 
   def resolvable_contract
-    if Time.now > contract.expires_at
-      errors.add(:expires_at, "contract has not expired")
+    if Time.now > contract.matures_at
+      errors.add(:matures_at, "contract has not matured")
     end
   end
 end
