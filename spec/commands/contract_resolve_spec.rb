@@ -44,27 +44,27 @@ RSpec.describe ContractResolve, type: :model do
     end
   end
 
-  # describe "Object Saving" do
-  #   it 'saves the object to the database' do
-  #     subject.save
-  #     expect(subject).to be_valid
-  #   end
-  #
-  #   it 'gets the right object count' do
-  #     expect(kontrakt).to be_present
-  #     expect(Contract.count).to eq(1)
-  #     subject.save
-  #     expect(Contract.count).to eq(1)
-  #   end
-  # end
+  describe "Object Saving" do
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
 
-  # describe "Object Transaction" do
-  #   it 'adjusts the user balance' do
-  #     expect(user.pokerbux_balance).to eq(100)
-  #     subject.save
-  #     user.reload
-  #     expect(user.pokerbux_balance).to eq(90)
-  #   end
-  # end
+    it 'gets the right object count' do
+      expect(kontrakt).to be_present
+      expect(Contract.count).to eq(1)
+      subject.save
+      expect(Contract.count).to eq(1)
+    end
+  end
+
+  describe "Object Transaction" do
+    it 'adjusts the user balance' do
+      expect(user.pokerbux_balance).to eq(100)
+      subject.save
+      user.reload
+      expect(user.pokerbux_balance).to eq(120)
+    end
+  end
 end
 

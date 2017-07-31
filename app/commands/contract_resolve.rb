@@ -23,8 +23,8 @@ class ContractResolve < ApplicationCommand
   def transact_before_save
     contract.status               = get_status
     contract.awarded_to           = contract.awardee
-    # FIXME
-    # contract.send(contract.awardee.to_sym).currency_amount += contract.currency_amount * 2
+    awardee = contract.send(contract.awardee.to_sym)
+    awardee.pokerbux_balance += contract.currency_amount * 2
   end
 
   private

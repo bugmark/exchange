@@ -7,6 +7,7 @@ class Contract < ApplicationRecord
 
   before_validation :default_values
   validates :status, inclusion: {in: %w(open withdrawn taken lapsed resolved)}
+  validates :matures_at, presence: true
 
   # VALID STATUSES
   # > open      - can be taken
@@ -59,17 +60,18 @@ class Contract < ApplicationRecord
   private
 
   def default_values
-    self.status ||= 'open'
+    self.status       ||= 'open'
     self.bug_presence ||= true
+    self.matures_at   ||= Time.now + 1.week
   end
 
   def match_attrs
     {
-      id: self.bug_id,
+      id:      self.bug_id,
       repo_id: self.repo_id,
-      title: self.bug_title,
-      status: self.bug_status,
-      labels: self.bug_labels
+      title:   self.bug_title,
+      status:  self.bug_status,
+      labels:  self.bug_labels
     }
   end
 end
