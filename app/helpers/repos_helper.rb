@@ -7,9 +7,9 @@ module ReposHelper
     truncate(repo.name)
   end
 
-  def repo_forecast_link(repo)
+  def repo_contract_new_link(repo)
     path = "contracts/new?type=forecast&repo_id=#{repo.id}"
-    raw "<a href='#{path}'>Create Contract</a>"
+    raw "<a href='#{path}'>New Contract</a>"
   end
 
   def repo_contract_link(repo)

@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   resources :wallets
   resources :users
   resources :bugs
-  resources :repos
-  resources :bings
-  resources :bongs
+  resources :repos do
+    get 'sync', :on => :member
+  end
 
   root "static#home"
 

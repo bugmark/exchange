@@ -21,6 +21,8 @@ table.table
       td = repo_bug_link(repo)
       td = repo_contract_link(repo)
       td
-        = repo_forecast_link(repo)
-        |
-        | Delete Repo
+        = repo_contract_new_link(repo)
+        '  |
+        = link_to "Sync", {:action => :sync, :id => repo.id}
+        '  |
+        = link_to 'Destroy',  { action: :destroy, id: repo.id }, method: :delete, data: { confirm: 'Are you sure?' }

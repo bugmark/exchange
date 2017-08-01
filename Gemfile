@@ -21,6 +21,7 @@ gem 'colored'
 gem 'whenever'
 gem 'github_api'
 gem 'nokogiri'
+gem 'rails-ujs'
 
 gem 'bootstrap_form'
 

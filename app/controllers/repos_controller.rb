@@ -23,6 +23,19 @@ class ReposController < ApplicationController
     end
   end
 
+  def destroy
+    id = params["id"]
+    @repo = Repo.find(id)
+    @repo.destroy
+    redirect_to "/repos"
+  end
+
+  def sync
+    id = params["id"]
+    @repo = Repo.find(id)
+    redirect_to "/repos"
+  end
+
   private
 
   def valid_params(params)

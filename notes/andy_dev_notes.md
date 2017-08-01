@@ -28,8 +28,16 @@ Next Actions:
 - [DONE] add a weekly account top-up script
 - [DONE] launch top-up script from production cron
 
+# Aug 01
+
+Next Actions:
+
 - [TODO] add repo add/remove
 - [TODO] add repo sync
 
+- [TODO] work on usability and documentation
+- [TODO] compile user stories
+
 - [TODO] generate an event stream for all commands
 - [TODO] add the event stream to the UI (account history, etc.)
+
