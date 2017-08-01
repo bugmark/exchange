@@ -27,6 +27,8 @@ gem 'bootstrap_form'
 
 gem 'mini_portile2'
 
+gem 'font-awesome-sass'
+
 gem 'slim-rails'                 # slim templates
 
 # Use Capistrano for deployment

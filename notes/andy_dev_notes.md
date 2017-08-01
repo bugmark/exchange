@@ -32,11 +32,15 @@ Next Actions:
 
 Next Actions:
 
-- [TODO] add repo add/remove
-- [TODO] add repo sync
+- [DONE] add repo add/remove
+- [DONE] add repo sync
+- [DONE] add repo sync to cron
 
-- [TODO] work on usability and documentation
-- [TODO] compile user stories
+- [TODO] UI: add font awesome
+- [TODO] UI: change 'forecast' to 'contract'
+- [TODO] UI: add documentation
+
+- [TODO] add callout to blockchain
 
 - [TODO] generate an event stream for all commands
 - [TODO] add the event stream to the UI (account history, etc.)
