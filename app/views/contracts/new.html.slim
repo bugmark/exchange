@@ -1,6 +1,6 @@
 h2 Contracts New
 hr
-- if @contract.invalid?
+- if @contract.errors.any?
   .alert.alert-danger Please fix the errors below.
 = bootstrap_form_for(@contract) do |f|
   = f.hidden_field :type
