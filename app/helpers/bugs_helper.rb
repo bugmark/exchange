@@ -4,14 +4,18 @@ module BugsHelper
   end
 
   def bug_title_link(bug)
-    truncate(bug.title)
+    title = truncate(bug.title)
+    raw "<a href='/bugs/#{bug.id}'>#{title}</a>"
   end
 
-  def bug_repo_link(bug)
+  def bug_repo_link(bug, filter)
     repo = bug.repo
     id   = repo.id
     name = repo.name
-    raw "<a href='/bugs?repo_id=#{id}'>#{name}</a>"
+    l1   = "<a href='/bugs?repo_id=#{id}'><i class='fa fa-filter'></i></a> | "
+    l2   = "<a href='/repos/#{id}'>#{name}</a>"
+    dev_log filter
+    raw (filter.nil? ? l1 + l2 : l2)
   end
 
   def bug_contract_link(bug)

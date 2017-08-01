@@ -10,15 +10,13 @@ table width='100%'
         | All Bugs
 table.table
   tr
-    th ID
     th Repo
     th Title
     th Contracts
     th Create
   - @bugs.each do |bug|
     tr
-      td = bug_id_link(bug)
-      td = bug_repo_link(bug)
+      td = bug_repo_link(bug, @repo)
       td = bug_title_link(bug)
       td = bug_contract_link(bug)
       td
