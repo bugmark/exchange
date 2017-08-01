@@ -12,12 +12,15 @@ table.table
     th Name
     th Bugs
     th Contracts
-    th Create
+    th Action
   - @repos.each do |repo|
     tr
       th = repo_id_link(repo)
-      td = repo.type.gsub("Repo::", "")
+      td = repo&.type&.gsub("Repo::", "")
       td = repo_name_link(repo)
       td = repo_bug_link(repo)
       td = repo_contract_link(repo)
-      td = repo_forecast_link(repo)
+      td
+        = repo_forecast_link(repo)
+        |
+        | Delete Repo

@@ -9,7 +9,7 @@ module ReposHelper
 
   def repo_forecast_link(repo)
     path = "contracts/new?type=forecast&repo_id=#{repo.id}"
-    raw "<a href='#{path}'>Forecast</a>"
+    raw "<a href='#{path}'>Create Contract</a>"
   end
 
   def repo_contract_link(repo)
