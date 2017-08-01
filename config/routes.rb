@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :repos do
     get 'sync', :on => :member
   end
+  resources :repo_git_hubs      , path: "/repos"
 
   root "static#home"
 

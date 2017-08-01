@@ -35,8 +35,9 @@ Next Actions:
 - [DONE] add repo add/remove
 - [DONE] add repo sync
 - [DONE] add repo sync to cron
+- [DONE] UI: add font awesome
 
-- [TODO] UI: add font awesome
+- [DONE] UI: add table sorting
 - [TODO] UI: change 'forecast' to 'contract'
 - [TODO] UI: add documentation
 

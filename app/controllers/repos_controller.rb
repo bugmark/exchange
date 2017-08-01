@@ -13,10 +13,10 @@ class ReposController < ApplicationController
   end
 
   def create
-    opts = params["repo"]
-    @repo = Repo.find_or_create_by(url: opts["url"])
+    opts = params["repo"] || params["repo_git_hub"]
+    @repo = Repo::GitHub.new(valid_params(opts))
     if @repo.save
-      @repo.update_attributes(valid_params(opts))
+      @repo.sync
       redirect_to("/repos/#{@repo.id}")
     else
       render 'repos/new'

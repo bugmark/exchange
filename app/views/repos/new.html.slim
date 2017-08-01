@@ -1,9 +1,9 @@
 h2 Contracts New
 hr
+Use this form to add a new GitHub repo to the system.
+hr
 - if @repo.invalid?
   .alert.alert-danger Please fix the errors below.
 = bootstrap_form_for(@repo) do |f|
-  = f.text_field   :type            , value: "Repo::GitHub"
-  = f.text_field   :name
-  = f.text_field   :url             , value: "https://api.github.com/repos/mvscorg/bugmark/issues"
+  = f.text_field   :name, prompt: "<GitHub Account Name>/<GitHub Repo Name>"
   = f.submit
