@@ -84,8 +84,7 @@ end
 #  type            :string
 #  publisher_id    :integer
 #  counterparty_id :integer
-#  currency_type   :string
-#  token_value :float
+#  token_value     :float
 #  terms           :string
 #  status          :string
 #  awarded_to      :string
