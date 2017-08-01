@@ -13,7 +13,7 @@ end
 #  publisher_id    :integer
 #  counterparty_id :integer
 #  currency_type   :string
-#  currency_amount :float
+#  token_value :float
 #  terms           :string
 #  status          :string
 #  awarded_to      :string

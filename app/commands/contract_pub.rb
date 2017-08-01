@@ -11,15 +11,15 @@ class ContractPub < ApplicationCommand
   end
 
   def transact_before_save
-    contract.status        = "open"
-    user.pokerbux_balance -= contract.currency_amount
+    contract.status     = "open"
+    user.token_balance -= contract.token_value
   end
 
   private
 
   def publisher_funds
-    if user.pokerbux_balance < contract.currency_amount
-      errors.add(:currency_amount, "not enough funds in user account")
+    if user.token_balance < contract.token_value
+      errors.add(:token_value, "not enough funds in user account")
     end
   end
 end

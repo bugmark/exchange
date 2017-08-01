@@ -43,8 +43,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                # forecast, reward
       t.integer  :publisher_id
       t.integer  :counterparty_id
-      t.string   :currency_type
-      t.float    :currency_amount
+      t.float    :token_value
       t.string   :terms               # eg Net0, Net30
       t.string   :status              # open, taken, resolved, ...
       t.string   :awarded_to          # publisher, counterparty
@@ -72,7 +71,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :users do |t|
       t.boolean  :admin
-      t.integer  :pokerbux_balance
+      t.integer  :token_balance
       t.string   :exref
       t.string   :uuref
       t.timestamps

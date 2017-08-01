@@ -6,8 +6,7 @@ opts = [
   {
     type:   "Contract::Forecast"   ,
     bug_id: Bug.first.id           ,
-    currency_type:   "Ether"       ,
-    currency_amount: 20            ,
+    token_value:     20            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
     matures_at:      Time.now + 1.week
@@ -15,8 +14,7 @@ opts = [
   {
     type:   "Contract::Forecast"   ,
     bug_id: Bug.first.id           ,
-    currency_type:   "Ether"       ,
-    currency_amount: 15            ,
+    token_value:     15            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
     matures_at:      Time.now + 1.hour
@@ -24,8 +22,7 @@ opts = [
   {
     type:   "Contract::Forecast"   ,
     bug_id: Bug.first.id           ,
-    currency_type:   "PokerBux"    ,
-    currency_amount: 5             ,
+    token_value:     5             ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
     matures_at:      Time.now + 1.day
@@ -33,8 +30,7 @@ opts = [
   {
     type:   "Contract::Forecast"   ,
     bug_id: Bug.first.id           ,
-    currency_type:   "PokerBux"    ,
-    currency_amount: 10            ,
+    token_value:     10            ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
     matures_at:      Time.now - 1.hour

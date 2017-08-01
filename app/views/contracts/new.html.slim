@@ -6,8 +6,7 @@ hr
   = f.hidden_field :type
   = f.hidden_field :publisher_id
   = f.hidden_field :terms
-  = f.hidden_field :currency_type
-  = f.number_field :currency_amount, label: "Pokerbux Amount"
+  = f.number_field :token_value, label: "Tokens"
   = f.date_field   :matures_at
   div style='background: lightgrey; padding: 4px;'
     | Match Criteria (blank for "don't care")

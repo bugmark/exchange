@@ -4,7 +4,7 @@ RSpec.describe ContractTake, type: :model do
 
   def contract_params
     {
-      currency_amount: 10            ,
+      token_value: 10            ,
       publisher_id:    user.id       ,
       counterparty_id: user.id
     }
@@ -18,7 +18,7 @@ RSpec.describe ContractTake, type: :model do
   describe "Attributes" do
     it { should respond_to :counterparty           }
     it { should respond_to :contract               }
-    it { should respond_to :currency_amount        }
+    it { should respond_to :token_value        }
   end
 
   describe "Class Methods" do
@@ -75,10 +75,10 @@ RSpec.describe ContractTake, type: :model do
 
   describe "Object Transaction" do
     it 'adjusts the user balance' do
-      expect(user.pokerbux_balance).to eq(100)
+      expect(user.token_balance).to eq(100)
       subject.save
       user.reload
-      expect(user.pokerbux_balance).to eq(90)
+      expect(user.token_balance).to eq(90)
     end
   end
 end

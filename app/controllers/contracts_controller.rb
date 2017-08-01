@@ -62,9 +62,8 @@ class ContractsController < ApplicationController
     opts = {
       type:            "Contract::#{params["type"]&.capitalize}"    ,
       terms:           "Net0"                                       ,
-      currency_type:   "PokerBux"                                   ,
-      currency_amount: 10                                           ,
-      matures_at:       Time.now + 14.days                           ,
+      token_value:     10                                           ,
+      matures_at:      Time.now + 14.days                           ,
       publisher_id:    current_user.id
     }
     key  = "bug_id"  if params["bug_id"]

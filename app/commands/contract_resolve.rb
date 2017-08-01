@@ -25,7 +25,7 @@ class ContractResolve < ApplicationCommand
     contract.status               = get_status
     contract.awarded_to           = contract.awardee
     awardee = contract.send(contract.awardee.to_sym)
-    awardee.pokerbux_balance += contract.currency_amount * 2
+    awardee.token_balance += contract.token_value * 2
   end
 
   private

@@ -30,14 +30,14 @@ class User < ApplicationRecord
 
   class << self
     def low_balance
-      where('pokerbux_balance < 100')
+      where('token_balance < 100')
     end
   end
 
   private
 
   def default_values
-    self.pokerbux_balance ||= 100
+    self.token_balance ||= 100
   end
 end
 
@@ -47,7 +47,7 @@ end
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
-#  pokerbux_balance       :integer
+#  token_balance       :integer
 #  exref                  :string
 #  uuref                  :string
 #  created_at             :datetime         not null

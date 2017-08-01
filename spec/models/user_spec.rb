@@ -32,7 +32,7 @@ end
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
-#  pokerbux_balance       :integer
+#  token_balance       :integer
 #  exref                  :string
 #  uuref                  :string
 #  created_at             :datetime         not null

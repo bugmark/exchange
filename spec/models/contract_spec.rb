@@ -4,7 +4,7 @@ RSpec.describe Contract, type: :model do
 
   def valid_params
     {
-      currency_amount: 10                  ,
+      token_value: 10                  ,
       publisher_id:    user.id
     }
   end
@@ -93,7 +93,7 @@ end
 #  publisher_id    :integer
 #  counterparty_id :integer
 #  currency_type   :string
-#  currency_amount :float
+#  token_value :float
 #  terms           :string
 #  status          :string
 #  awarded_to      :string

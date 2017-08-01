@@ -37,7 +37,7 @@ Next Actions:
 - [DONE] add repo sync to cron
 - [DONE] UI: add font awesome
 
-- [DONE] UI: add table sorting
+- [TODO] UI: add table sorting
 - [TODO] UI: change 'forecast' to 'contract'
 - [TODO] UI: add documentation
 

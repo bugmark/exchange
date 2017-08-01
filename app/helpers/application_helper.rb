@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def trading_summary(user)
-    balance = user.pokerbux_balance
+    balance = user.token_balance
     pubs    = user.published_contracts.count
     takes   = user.taken_contracts.count
     "Trading #{balance}-#{pubs}-#{takes}"

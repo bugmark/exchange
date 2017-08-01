@@ -14,7 +14,7 @@ h2 CONTRACT ##{@contract.id}
         td = @contract.counterparty_id || "NA"
       tr
         td Contract Price
-        td = @contract.currency_amount
+        td = @contract.token_value
   .col-md-6
     b Actions
     table.table

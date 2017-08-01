@@ -21,14 +21,14 @@ class ContractTake < ApplicationCommand
 
   def transact_before_save
     contract.status                = "taken"
-    counterparty.pokerbux_balance -= contract.currency_amount
+    counterparty.token_balance -= contract.token_value
   end
 
   private
 
   def counterparty_funds
-    if counterparty.pokerbux_balance < contract.currency_amount
-      errors.add(:currency_amount, "not enough funds in user account")
+    if counterparty.token_balance < contract.token_value
+      errors.add(:token_value, "not enough funds in user account")
     end
   end
 end

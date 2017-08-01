@@ -21,7 +21,7 @@ table.table
   - @contracts.each do |contract|
     tr
       td = contract_id_link(contract)
-      td = "#{contract.currency_amount} #{contract.currency_type}"
+      td = "#{contract.token_value} tokens"
       td = contract.matures_at
       td = contract_attach_link(contract)
       td = contract.status

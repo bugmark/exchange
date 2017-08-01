@@ -4,7 +4,7 @@ RSpec.describe ContractPub, type: :model do
 
   def valid_params
     {
-      currency_amount: 10            ,
+      token_value: 10            ,
       publisher_id:    user.id
     }
   end
@@ -16,7 +16,7 @@ RSpec.describe ContractPub, type: :model do
   describe "Attributes" do
     it { should respond_to :user                   }
     it { should respond_to :contract               }
-    it { should respond_to :currency_amount        }
+    it { should respond_to :token_value        }
   end
 
   describe "Methods" do
@@ -71,10 +71,10 @@ RSpec.describe ContractPub, type: :model do
 
   describe "Object Transaction" do
     it 'adjusts the user balance' do
-      expect(user.pokerbux_balance).to eq(100)
+      expect(user.token_balance).to eq(100)
       subject.save
       user.reload
-      expect(user.pokerbux_balance).to eq(90)
+      expect(user.token_balance).to eq(90)
     end
   end
 end
