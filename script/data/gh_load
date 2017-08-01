@@ -2,25 +2,18 @@
 
 require './config/environment'
 
-json = File.read('script/data/GH.json')
-
-repo_name = "mvscorg/xdmarket"
-
-# Repo.find_by_name(repo_name).try(:destroy)
-
-repo = Repo.find_or_create_by(name: repo_name, type: "Repo::GitHub")
-
-JSON.parse(json).each do |el|
-  attrs = {
-    repo_id:   repo.id         ,
-    type:      "Bug::GitHub"   ,
-    api_url:   el["url"]       ,
-    http_url:  el["http_url"]  ,
-    title:     el["title"]     ,
-    labels:    el["labels"]    ,
-    status:    el["state"]     ,
-    synced_at: Time.now
+def sync(name)
+  opts = {
+    name: name               ,
+    type: "Repo::GitHub"         
   }
-  bug = Bug.find_or_create_by(exref: el["id"])
-  bug.update_attributes(attrs)
+
+  repo = Repo.find_or_create_by(opts)
+  repo.sync
 end
+
+%w(mvscorg/bugmark elixir-lang/gen_stage elixir-lang/flow elixir-lang/gettext rust-lang/regex).each do |name|
+  puts "Loading #{name}"
+  sync(name)
+end
+

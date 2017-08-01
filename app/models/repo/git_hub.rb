@@ -1,7 +1,32 @@
+require 'net/http'
+
 class Repo::GitHub < Repo
 
-  # has_many :bugs, :dependent => :destroy
+  validates :url  , uniqueness: true, presence: true
+  validates :name , uniqueness: true, presence: true
 
+  before_validation :set_url
+
+  validates :name, format: { with:    /\A[\_\-\.a-zA-Z0-9]+\/[\.\_\-a-zA-Z0-9]+\z/,
+                             message: "needs GitHub repo '<user>/<repo>'" }
+
+  validate :repo_url_presence
+
+  private
+
+  def set_url
+    self.url = "https://api.github.com/repos/#{self.name}/issues"
+  end
+
+  def repo_url_presence
+    lcl = set_url
+    url = URI.parse(lcl)
+    req = Net::HTTP.new(url.host, url.port)
+    req.use_ssl = true
+    res = req.request_head(url.path)
+    return if res.code == "200"
+    errors.add :name, "GitHub repo does not exist"
+  end
 end
 
 # == Schema Information

@@ -33,6 +33,7 @@ class ReposController < ApplicationController
   def sync
     id = params["id"]
     @repo = Repo.find(id)
+    @repo.sync
     redirect_to "/repos"
   end
 

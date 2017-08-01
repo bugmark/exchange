@@ -8,8 +8,10 @@ RSpec.describe Bug, type: :model do
     }
   end
 
-  let(:klas)   { described_class                      }
-  subject      { klas.new(valid_params(Repo.create))  }
+  let(:klas)   { described_class                        }
+  let(:repo)   { Repo.create(name: "asdf", url: "qwer") }
+  subject      { klas.new(valid_params(repo))           }
+
 
   describe "Attributes" do
     it { should respond_to :exref                  }

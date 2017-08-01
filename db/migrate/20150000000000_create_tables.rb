@@ -13,6 +13,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :repos, :exref
     add_index :repos, :uuref
     add_index :repos, :type
+    add_index :repos, :name
+    add_index :repos, :url
     add_index :repos, :jfields, using: :gin
 
     create_table :bugs do |t|
