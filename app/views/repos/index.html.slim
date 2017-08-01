@@ -16,7 +16,7 @@ table.table
     th Action
   - @repos.each do |repo|
     tr
-      th = repo_id_link(repo)
+      td = repo_id_link(repo)
       td = repo&.type&.gsub("Repo::", "")
       td = repo_name_link(repo)
       td = repo_bug_link(repo)

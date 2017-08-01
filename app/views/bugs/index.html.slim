@@ -4,22 +4,23 @@ table width='100%'
       h2 Bugs
     td align='right'
       - if @repo
-        | Bugs for Repo ##{@repo.id}
+        ' Bugs for Repo ##{@repo.id} |
+        = link_to "All Bugs", "/bugs"
       - else
         | All Bugs
 table.table
   tr
     th ID
-    th Type
+    th Repo
     th Title
     th Contracts
     th Create
   - @bugs.each do |bug|
     tr
       td = bug_id_link(bug)
-      td = bug.type
+      td = bug_repo_link(bug)
       td = bug_title_link(bug)
       td = bug_contract_link(bug)
       td
         nobr
-          = bug_forecast_link(bug)
+          = bug_contract_new_link(bug)

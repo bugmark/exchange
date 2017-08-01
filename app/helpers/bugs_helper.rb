@@ -7,6 +7,13 @@ module BugsHelper
     truncate(bug.title)
   end
 
+  def bug_repo_link(bug)
+    repo = bug.repo
+    id   = repo.id
+    name = repo.name
+    raw "<a href='/bugs?repo_id=#{id}'>#{name}</a>"
+  end
+
   def bug_contract_link(bug)
     count = bug.contracts.count
     if count > 0
@@ -16,9 +23,9 @@ module BugsHelper
     end
   end
 
-  def bug_forecast_link(bug)
+  def bug_contract_new_link(bug)
     path = "/contracts/new?type=forecast&bug_id=#{bug.id}"
-    raw "<a href='#{path}'>Forecast</a>"
+    raw "<a href='#{path}'>Contract</a>"
   end
 
   def bug_reward_link(bug)
