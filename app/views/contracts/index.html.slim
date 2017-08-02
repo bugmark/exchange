@@ -27,4 +27,7 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
         td = contract.matures_at.strftime("%b-%d %H:%M:%S")
         td = contract_attach_link(contract)
         td = contract.status
-        td = contract_take_link(contract)
+        td
+          = contract_take_link(contract)
+          '  |
+          = link_to "Resolve", {:action => :resolve, :id => contract.id}

@@ -29,7 +29,7 @@ module BugsHelper
 
   def bug_contract_new_link(bug)
     path = "/contracts/new?type=forecast&bug_id=#{bug.id}"
-    raw "<a href='#{path}'>Contract</a>"
+    raw "<a href='#{path}'>New Contract</a>"
   end
 
   def bug_reward_link(bug)

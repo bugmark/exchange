@@ -10,6 +10,7 @@ class ContractResolve < ApplicationCommand
   def self.find(contract)
     instance              = allocate
     instance.contract     = Contract.find(contract.to_i)
+    binding.pry
     instance.publisher    = instance.contract.publisher
     instance.counterparty = instance.contract.counterparty
     instance
@@ -17,6 +18,7 @@ class ContractResolve < ApplicationCommand
 
   def initialize(contract)
     @contract     = Contract.find(contract.to_i)
+    binding.pry
     @publisher    = contract.publisher
     @counterparty = contract.counterparty
   end

@@ -4,13 +4,17 @@ Rails.application.routes.draw do
 
   get 'static/help'
 
-  resources :contracts
+  resources :contracts do
+    get 'resolve', :on => :member
+  end
   resource  :contract_forecasts , path: "/contracts"
   resources :contract_pubs      , path: "/contracts"
   resources :contract_takes     , path: "/contracts"
-  resources :wallets
+
   resources :users
+
   resources :bugs
+
   resources :repos do
     get 'sync', :on => :member
   end

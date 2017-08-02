@@ -2,7 +2,7 @@ class Contract < ApplicationRecord
   belongs_to :bug , optional: true
   belongs_to :repo, optional: true
 
-  belongs_to :publisher, class_name: "User", foreign_key: 'publisher_id'
+  belongs_to :publisher   , class_name: "User", foreign_key: 'publisher_id'
   belongs_to :counterparty, class_name: "User", foreign_key: 'counterparty_id', optional: true
 
   before_validation :default_values

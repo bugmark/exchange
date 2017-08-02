@@ -18,7 +18,7 @@ module ContractsHelper
     status = contract.status
     if status == "open"
       path = "/contracts/#{contract.id}/edit"
-      raw "<a href='#{path}'>take</a>"
+      raw "<a href='#{path}'>Take</a>"
     else
       "NA"
     end

@@ -1,6 +1,6 @@
 class ContractsController < ApplicationController
 
-  before_action :authenticate_user!, :except => [:index, :show]
+  before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
   # bug_id (optional)
   def index
@@ -49,6 +49,12 @@ class ContractsController < ApplicationController
     else
       render 'contracts/new'
     end
+  end
+
+  def resolve
+    id = params["id"]
+    ContractResolve.new(id).save
+    redirect_to "/contracts"
   end
 
   private

@@ -54,12 +54,17 @@ Next Actions:
 - [DONE] UI: fix contract show page
 
 - [TODO] UI: add a contract resolve link
+- [TODO] UI: add days/hours/minutes for contract maturation
+- [TODO] UI: allow editing of open contracts
+- [TODO] UI: selective repo destroy (no open contracts)
+- [TODO] UI: change action links to buttons
 
 - [TODO] UI: cleanup documentation
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck
 
 - [TODO] END TO END TESTING
+- [TODO] Add feature specs
 
 - [TODO] UI: set clock to pacific time
 - [TODO] UI: color-code contract status
