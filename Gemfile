@@ -22,6 +22,7 @@ gem 'whenever'
 gem 'github_api'
 gem 'nokogiri'
 gem 'rails-ujs'
+gem 'jquery-rails'
 
 gem 'bootstrap_form'
 

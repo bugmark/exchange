@@ -10,19 +10,21 @@ table width='100%'
           | Contracts for Repo ##{@repo.id}
         - else
           | All Contracts
-table.table
-  tr
-    th ID
-    th Price
-    th Expires
-    th Attached To
-    th Status
-    th Action
-  - @contracts.each do |contract|
+table.table.table-striped.table-bordered#xTable width="100%" cellspacing="0"
+  thead
     tr
-      td = contract_id_link(contract)
-      td = "#{contract.token_value} tokens"
-      td = contract.matures_at
-      td = contract_attach_link(contract)
-      td = contract.status
-      td = contract_take_link(contract)
+      th ID
+      th Price
+      th Expires
+      th Attached To
+      th Status
+      th Action
+  tbody
+    - @contracts.each do |contract|
+      tr
+        td = contract_id_link(contract)
+        td = "#{contract.token_value} tokens"
+        td = contract.matures_at.strftime("%b-%d %H:%M:%S")
+        td = contract_attach_link(contract)
+        td = contract.status
+        td = contract_take_link(contract)
