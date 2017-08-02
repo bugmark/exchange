@@ -32,7 +32,6 @@ class Repo < ApplicationRecord
         status:    el["state"]     ,
         synced_at: Time.now
       }
-      binding.pry
       bug = Bug.find_or_create_by(exref: el["id"])
       bug.update_attributes(attrs)
     end
