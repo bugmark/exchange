@@ -37,14 +37,23 @@ Next Actions:
 - [DONE] UI: add font awesome
 - [DONE] UI: add table sorting
 - [DONE] UI: change 'forecast' to 'contract'
+- [DONE] UI: convert layout to slim
+- [DONE] UI: add javascript block
 
-- [TODO] UI: convert layout to slim
-- [TODO] UI: add javascript block
-- [TODO] UI: color-code contract status
+# Aug 02
+
+Next Actions:
+- [DONE] Add a bugmark-guides repo
+- [DONE] Add a bugmark-slides repo
+
 - [TODO] UI: fix repo show page
 - [TODO] UI: fix bug show page
 - [TODO] UI: fix contract show page
+
+- [TODO] UI: add a contract resolve link
+
 - [TODO] UI: set clock to pacific timep
+- [TODO] UI: color-code contract status
 
 - [TODO] UI: add documentation
 

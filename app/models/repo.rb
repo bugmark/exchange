@@ -14,6 +14,10 @@ class Repo < ApplicationRecord
     "rep.#{self.id}"
   end
 
+  def xtype
+    self.type.gsub("Repo::","")
+  end
+
   def sync
     self.update_attribute(:synced_at, Time.now)
     json = open(self.url) {|io| io.read}

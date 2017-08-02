@@ -1,10 +1,10 @@
-h2 REPO ##{@repo.id}
+h2 REPOSITORY #{@repo.xid}
 .row
   .col-md-6
     table.table
       tr
         td Type
-        td = @repo.type
+        td = @repo.xtype
       tr
         td Name
         td = @repo.name

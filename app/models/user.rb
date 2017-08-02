@@ -10,6 +10,10 @@ class User < ApplicationRecord
     self.id
   end
 
+  def xid
+    "usr.#{self.id}"
+  end
+
   # ----- ASSOCIATIONS -----
 
   def published_contracts
