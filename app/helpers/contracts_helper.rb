@@ -1,6 +1,6 @@
 module ContractsHelper
   def contract_id_link(contract)
-    raw "<a href='/contracts/#{contract.id}'>#{contract.id}</a>"
+    raw "<a href='/contracts/#{contract.id}'>#{contract.xid}</a>"
   end
 
   def contract_type_link(contract)
@@ -9,9 +9,9 @@ module ContractsHelper
   end
 
   def contract_attach_link(contract)
-    id   = contract.bug_id || contract.repo_id
-    type = contract.bug_id ? "bugs" : "repos"
-    raw "<a href='/#{type}/#{id}'>#{type[0..-2].capitalize} #{id}</a>"
+    type = contract.attach_type
+    obj  = contract.attach_obj
+    raw "<a href='/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
   def contract_take_link(contract)

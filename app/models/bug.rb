@@ -3,6 +3,10 @@ class Bug < ApplicationRecord
   belongs_to :repo
   has_many :contracts, :dependent => :destroy
 
+  def xid
+    "bug.#{self.id}"
+  end
+
   # ----- SCOPES -----
 
   class << self

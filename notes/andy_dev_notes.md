@@ -31,14 +31,21 @@ Next Actions:
 # Aug 01
 
 Next Actions:
-
 - [DONE] add repo add/remove
 - [DONE] add repo sync
 - [DONE] add repo sync to cron
 - [DONE] UI: add font awesome
+- [DONE] UI: add table sorting
+- [DONE] UI: change 'forecast' to 'contract'
 
-- [TODO] UI: add table sorting
-- [TODO] UI: change 'forecast' to 'contract'
+- [TODO] UI: convert layout to slim
+- [TODO] UI: add javascript block
+- [TODO] UI: color-code contract status
+- [TODO] UI: fix repo show page
+- [TODO] UI: fix bug show page
+- [TODO] UI: fix contract show page
+- [TODO] UI: set clock to pacific timep
+
 - [TODO] UI: add documentation
 
 - [TODO] add callout to blockchain

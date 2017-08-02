@@ -1,11 +1,12 @@
 module BugsHelper
   def bug_id_link(bug)
-    raw "<a href='/bugs/#{bug.id}'>#{bug.id}</a>"
+    raw "<a href='/bugs/#{bug.id}'>#{bug.xid}</a>"
   end
 
   def bug_title_link(bug)
     title = truncate(bug.title)
-    raw "<a href='/bugs/#{bug.id}'>#{title}</a>"
+    # raw "<a href='/bugs/#{bug.id}'>#{title}</a>"
+    title
   end
 
   def bug_repo_link(bug, filter)

@@ -9,7 +9,7 @@ table width='100%'
       - else
         | All Bugs
 
-table.table.table-striped.table-bordered#xTable width="100%" cellspacing="0"
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
   thead
     tr
       th ID
@@ -20,7 +20,7 @@ table.table.table-striped.table-bordered#xTable width="100%" cellspacing="0"
   tbody
     - @bugs.each do |bug|
       tr
-        td = bug.id
+        td = bug_id_link(bug)
         td = bug_repo_link(bug, @repo)
         td = bug_title_link(bug)
         td = bug_contract_link(bug)

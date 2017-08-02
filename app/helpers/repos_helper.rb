@@ -1,6 +1,6 @@
 module ReposHelper
   def repo_id_link(repo)
-    raw "<a href='/repos/#{repo.id}'>#{repo.id}</a>"
+    raw "<a href='/repos/#{repo.id}'>#{repo.xid}</a>"
   end
 
   def repo_name_link(repo)

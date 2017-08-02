@@ -10,6 +10,10 @@ class Repo < ApplicationRecord
   validates :url  , uniqueness: true, presence: true
   validates :name , uniqueness: true, presence: true
 
+  def xid
+    "rep.#{self.id}"
+  end
+
   def sync
     self.update_attribute(:synced_at, Time.now)
     json = open(self.url) {|io| io.read}

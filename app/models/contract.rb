@@ -1,5 +1,5 @@
 class Contract < ApplicationRecord
-  belongs_to :bug, optional: true
+  belongs_to :bug , optional: true
   belongs_to :repo, optional: true
 
   belongs_to :publisher, class_name: "User", foreign_key: 'publisher_id'
@@ -8,6 +8,14 @@ class Contract < ApplicationRecord
   before_validation :default_values
   validates :status, inclusion: {in: %w(open withdrawn taken lapsed resolved)}
   validates :matures_at, presence: true
+
+  def attach_type
+    self.bug_id ? "bugs" : "repos"
+  end
+
+  def attach_obj
+    bug || repo
+  end
 
   # VALID STATUSES
   # > open      - can be taken
@@ -39,6 +47,10 @@ class Contract < ApplicationRecord
 
   def to_i
     self.id
+  end
+
+  def xid
+    "con.#{self.id}"
   end
 
   # ----- SCOPES -----
