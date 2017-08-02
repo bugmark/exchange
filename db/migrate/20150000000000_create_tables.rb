@@ -3,7 +3,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :repos do |t|
       t.string   :type            # Repo::BugZilla, Repo::GitHub, Repo::Cvrf,
       t.string   :name            # mvscorg/xdmarket
-      t.string   :url
+      t.string   :json_url
+      t.string   :html_url
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
       t.string   :exref
@@ -14,14 +15,15 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :repos, :uuref
     add_index :repos, :type
     add_index :repos, :name
-    add_index :repos, :url
+    add_index :repos, :json_url
+    add_index :repos, :html_url
     add_index :repos, :jfields, using: :gin
 
     create_table :bugs do |t|
       t.integer  :repo_id
       t.string   :type             # Bug::BugZilla, Bug::GitHub, Bug::Cvrf
-      t.string   :api_url
-      t.string   :http_url
+      t.string   :json_url
+      t.string   :html_url
       t.string   :title
       t.string   :description
       t.string   :status

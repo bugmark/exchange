@@ -1,16 +1,16 @@
-h2 BUG ##{@bug.id}
+h2 BUG [#{@bug.xid}]
 .row
   .col-md-6
     table.table
       tr
         td Type
-        td = @bug.type
+        td = @bug.xtype
       tr
         td Title
         td = @bug.title
       tr
         td URL
-        td @bug.url
+        td = bug_http_link(@bug)
   .col-md-6
     table.table
       tr

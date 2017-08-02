@@ -29,4 +29,9 @@ module ReposHelper
       count
     end
   end
+
+  def repo_http_link(repo)
+    url = repo.html_url
+    raw "<a href='#{url}' target='_blank'>#{url}</a>"
+  end
 end

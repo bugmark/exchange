@@ -7,8 +7,8 @@ class Repo < ApplicationRecord
   has_many :contracts    , :dependent => :destroy
   has_many :bug_contracts, :through   => :bugs    , :source => :contracts
 
-  validates :url  , uniqueness: true, presence: true
-  validates :name , uniqueness: true, presence: true
+  validates :json_url  , uniqueness: true, presence: true
+  validates :name     , uniqueness: true, presence: true
 
   def xid
     "rep.#{self.id}"
@@ -20,18 +20,19 @@ class Repo < ApplicationRecord
 
   def sync
     self.update_attribute(:synced_at, Time.now)
-    json = open(self.url) {|io| io.read}
+    json = open(self.json_url) {|io| io.read}
     JSON.parse(json).each do |el|
       attrs = {
         repo_id:   self.id         ,
         type:      "Bug::GitHub"   ,
-        api_url:   el["url"]       ,
-        http_url:  el["http_url"]  ,
+        json_url:  el["url"]       ,
+        html_url:  el["html_url"]  ,
         title:     el["title"]     ,
         labels:    el["labels"]    ,
         status:    el["state"]     ,
         synced_at: Time.now
       }
+      binding.pry
       bug = Bug.find_or_create_by(exref: el["id"])
       bug.update_attributes(attrs)
     end

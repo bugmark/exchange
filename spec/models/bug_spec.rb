@@ -8,9 +8,9 @@ RSpec.describe Bug, type: :model do
     }
   end
 
-  let(:klas)   { described_class                        }
-  let(:repo)   { Repo.create(name: "asdf", url: "qwer") }
-  subject      { klas.new(valid_params(repo))           }
+  let(:klas)   { described_class                            }
+  let(:repo)   { Repo.create(name: "asdf", json_url: "qwer") }
+  subject      { klas.new(valid_params(repo))               }
 
 
   describe "Attributes" do
@@ -82,8 +82,8 @@ end
 #  id          :integer          not null, primary key
 #  repo_id     :integer
 #  type        :string
-#  api_url     :string
-#  http_url    :string
+#  json_url     :string
+#  html_url    :string
 #  title       :string
 #  description :string
 #  status      :string

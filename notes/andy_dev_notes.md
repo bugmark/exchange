@@ -6,6 +6,8 @@ CQRS Design:
 - events have a cryptographic signature - merkle-tree style
 - object references - generate object UUID reference *in the client*
 - `SecureRandom.uuid`
+- events are isomorphic with Solidity contract events
+- events can come from Rails app or Blockchain
  
 CQRS TODO:
 - [DONE] rename 'form' to 'commands'
@@ -14,6 +16,8 @@ CQRS TODO:
 - write a Projection class
 - make all the Commands emit events
 - build tests to save and re-play events
+- add the event stream to the UI (account history, etc.)
+- integrate with blockchain
 
 Next Actions:
 - [DONE] add CronJobs scripts
@@ -45,20 +49,17 @@ Next Actions:
 Next Actions:
 - [DONE] Add a bugmark-guides repo
 - [DONE] Add a bugmark-slides repo
-
-- [TODO] UI: fix repo show page
-- [TODO] UI: fix bug show page
-- [TODO] UI: fix contract show page
+- [DONE] UI: fix repo show page
+- [DONE] UI: fix bug show page
+- [DONE] UI: fix contract show page
 
 - [TODO] UI: add a contract resolve link
 
-- [TODO] UI: set clock to pacific timep
+- [TODO] UI: cleanup documentation
+- [TODO] UI: link from bugmark.net to documentation
+- [TODO] UI: create intro slide deck
+
+- [TODO] END TO END TESTING
+
+- [TODO] UI: set clock to pacific time
 - [TODO] UI: color-code contract status
-
-- [TODO] UI: add documentation
-
-- [TODO] add callout to blockchain
-
-- [TODO] generate an event stream for all commands
-- [TODO] add the event stream to the UI (account history, etc.)
-

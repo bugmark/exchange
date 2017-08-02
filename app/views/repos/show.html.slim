@@ -1,4 +1,4 @@
-h2 REPOSITORY #{@repo.xid}
+h2 REPO [#{@repo.xid}]
 .row
   .col-md-6
     table.table
@@ -10,7 +10,7 @@ h2 REPOSITORY #{@repo.xid}
         td = @repo.name
       tr
         td URL
-        td = @repo.url
+        td = repo_http_link(@repo)
   .col-md-6
     table.table
       tr

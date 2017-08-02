@@ -2,8 +2,8 @@ require 'net/http'
 
 class Repo::GitHub < Repo
 
-  validates :url  , uniqueness: true, presence: true
-  validates :name , uniqueness: true, presence: true
+  validates :json_url  , uniqueness: true, presence: true
+  validates :name     , uniqueness: true, presence: true
 
   before_validation :set_url
 
@@ -15,7 +15,8 @@ class Repo::GitHub < Repo
   private
 
   def set_url
-    self.url = "https://api.github.com/repos/#{self.name}/issues"
+    self.html_url = "https://github.com/#{self.name}/issues"
+    self.json_url  = "https://api.github.com/repos/#{self.name}/issues"
   end
 
   def repo_url_presence

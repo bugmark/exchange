@@ -4,7 +4,7 @@ module ContractsHelper
   end
 
   def contract_type_link(contract)
-    type = contract.type.gsub("Contract::", "")
+    type = contract.xtype
     raw "<a href='/contracts/#{contract.id}'>#{type}</a>"
   end
 
@@ -25,15 +25,13 @@ module ContractsHelper
   end
 
   def contract_publisher_link(contract)
-    pid  = contract.publisher_id
-    path = "/users/#{pid}"
-    raw "<a href='#{path}'>#{pid}</a>"
+    usr  = contract.publisher
+    raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
   end
 
   def contract_counterparty_link(contract)
     return "NA" unless contract.counterparty_id
-    pid  = contract.counterparty_id
-    path = "/users/#{pid}"
-    raw "<a href='#{path}'>#{pid}</a>"
+    usr  = contract.counterparty
+    raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
   end
 end

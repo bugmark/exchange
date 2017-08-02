@@ -7,6 +7,10 @@ class Bug < ApplicationRecord
     "bug.#{self.id}"
   end
 
+  def xtype
+    self.type.gsub("Bug::","")
+  end
+
   # ----- SCOPES -----
 
   class << self
@@ -72,8 +76,8 @@ end
 #  id          :integer          not null, primary key
 #  repo_id     :integer
 #  type        :string
-#  api_url     :string
-#  http_url    :string
+#  json_url     :string
+#  html_url    :string
 #  title       :string
 #  description :string
 #  status      :string

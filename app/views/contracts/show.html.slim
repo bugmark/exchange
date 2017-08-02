@@ -1,17 +1,14 @@
-h2 CONTRACT ##{@contract.id}
+h2 CONTRACT [#{@contract.xid}]
 .row
   .col-md-6
     b Details
     table.table
       tr
-        td Type
-        td = @contract.type
+        td Publisher
+        td = contract_publisher_link(@contract)
       tr
-        td Publisher ID
-        td = @contract.publisher_id
-      tr
-        td Counterparty ID
-        td = @contract.counterparty_id || "NA"
+        td Counterparty
+        td = contract_counterparty_link(@contract)
       tr
         td Contract Price
         td = @contract.token_value

@@ -15,7 +15,6 @@ module BugsHelper
     name = repo.name
     l1   = "<a href='/bugs?repo_id=#{id}'><i class='fa fa-filter'></i></a> | "
     l2   = "<a href='/repos/#{id}'>#{name}</a>"
-    dev_log filter
     raw (filter.nil? ? l1 + l2 : l2)
   end
 
@@ -36,5 +35,14 @@ module BugsHelper
   def bug_reward_link(bug)
     path = "contracts/new?type=reward&bug_id=#{bug.id}"
     raw "<a href='#{path}'>Reward</a>"
+  end
+
+  def bug_http_link(bug)
+    url = bug.html_url
+    if url.nil?
+      "NA"
+    else
+      raw "<a href='#{url}' target='_blank'>#{url}</a>"
+    end
   end
 end
