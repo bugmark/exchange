@@ -31,7 +31,7 @@ class ContractResolve < ApplicationCommand
 
   def get_status
     status = "lapsed"
-    status = "resolved" if contract.counterparty.present?
+    status = "awarded" if contract.counterparty.present?
     status
   end
 

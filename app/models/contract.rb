@@ -6,7 +6,7 @@ class Contract < ApplicationRecord
   belongs_to :counterparty, class_name: "User", foreign_key: 'counterparty_id', optional: true
 
   before_validation :default_values
-  validates :status, inclusion: {in: %w(open withdrawn taken lapsed resolved)}
+  validates :status, inclusion: {in: %w(open taken lapsed awarded)}
   validates :matures_at, presence: true
 
   def attach_type
@@ -22,7 +22,7 @@ class Contract < ApplicationRecord
   # > withdrawn - withdrawn by publisher (before taken)
   # > taken     - taken by a counterparty
   # > lapsed    - expired before being taken
-  # > resolved  - in favor of publisher or counterparty
+  # > awarded   - in favor of publisher or counterparty
 
   # returns list of matching bugs
   def match_list
@@ -53,6 +53,22 @@ class Contract < ApplicationRecord
     "con.#{self.id}"
   end
 
+  def matured?
+    self.matures_at < Time.now
+  end
+
+  def unmatured?
+    ! matured?
+  end
+
+  def resolved?
+    %w(awarded lapsed).include?(self.status)
+  end
+
+  def unresolved?
+    ! resolved?
+  end
+
   # ----- SCOPES -----
 
   class << self
@@ -65,8 +81,9 @@ class Contract < ApplicationRecord
     end
 
     def unresolved
-      where("status != ?", "resolved")
+      where("status != ?", "awarded").where("status != ?", "lapsed")
     end
+
   end
 
   private

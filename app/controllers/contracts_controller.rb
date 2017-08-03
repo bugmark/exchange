@@ -5,6 +5,7 @@ class ContractsController < ApplicationController
   # bug_id (optional)
   def index
     @bug = @repo = nil
+    @timestamp = Time.now.strftime("%H:%M:%S")
     case
       when bug_id = params["bug_id"]&.to_i
         @bug       = Bug.find(bug_id)
@@ -69,7 +70,7 @@ class ContractsController < ApplicationController
       type:            "Contract::#{params["type"]&.capitalize}"    ,
       terms:           "Net0"                                       ,
       token_value:     10                                           ,
-      matures_at:      Time.now + 14.days                           ,
+      matures_at:      Time.now + 3.minutes                         ,
       publisher_id:    current_user.id
     }
     key  = "bug_id"  if params["bug_id"]

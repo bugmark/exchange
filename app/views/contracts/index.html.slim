@@ -5,11 +5,11 @@ table width='100%'
     td align='right'
       - case
         - when @bug
-          | Contracts for Bug ##{@bug.id}
+          | Contracts for Bug ##{@bug.id} [#{@timestamp}]
         - when @repo
-          | Contracts for Repo ##{@repo.id}
+          | Contracts for Repo ##{@repo.id} [#{@timestamp}]
         - else
-          | All Contracts
+          | All Contracts [#{@timestamp}]
 table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
   thead
     tr
@@ -33,7 +33,4 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
         td = contract_user_link(contract.counterparty)
         td = contract_status(contract)
         td = contract_awardee(contract)
-        td
-          = contract_take_link(contract)
-          '  |
-          = link_to "Resolve", {:action => :resolve, :id => contract.id}
+        td = contract_actions(contract)

@@ -16,11 +16,11 @@ module ContractsHelper
 
   def contract_take_link(contract)
     status = contract.status
-    if status == "open"
+    if contract.unmatured? && status == "open"
       path = "/contracts/#{contract.id}/edit"
       raw "<a href='#{path}'>Take</a>"
     else
-      "NA"
+      nil
     end
   end
 
@@ -39,14 +39,27 @@ module ContractsHelper
     case contract.status
       when "open"     then raw "<i class='fa fa-unlock'></i> open"
       when "taken"    then raw "<i class='fa fa-lock'></i> taken"
-      when "lapsed"   then raw "<i class='fa fa-close'></i> lapsed"
-      when "resolved" then raw "<i class='fa fa-check'></i> resolved"
+      when "awarded"  then raw "<i class='fa fa-close'></i> awarded"
+      when "lapsed"   then raw "<i class='fa fa-check'></i> lapsed"
+        else "UNKNOWN_CONTRACT_STATE"
     end
   end
 
+  def contract_resolve_link(contract)
+    return nil if contract.resolved?
+    return nil unless contract.matured?
+    link_to "Resolve", {:action => :resolve, :id => contract.id}
+  end
+
+  def contract_actions(contract)
+    take  = contract_take_link(contract)
+    resv  = contract_resolve_link(contract)
+    return "NA" unless [take, resv].any?
+    raw [take, resv].select(&:present?).join(" | ")
+  end
+
   def contract_awardee(contract)
-    states = %w(lapsed resolved)
-    icon = states.include?(contract.status) ? "check" : "gears"
+    icon = contract.resolved? ? "check" : "gears"
     raw "<i class='fa fa-#{icon}'></i> #{contract.awardee}"
   end
 

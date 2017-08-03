@@ -59,17 +59,16 @@ Next Actions:
 
 - [DONE] UI: color-code contract status
 - [DONE] add tests for contract-resolution use cases
-
 - [TODO] UI: add days/hours/minutes for contract maturation
 - [TODO] UI: add selective display of actions
-
-- [TODO] UI: allow editing of open contracts
-- [TODO] UI: selective repo destroy (no open contracts)
-- [TODO] UI: change action links to buttons
+- [TODO] UI: selective repo destroy (no contracts)
 
 - [TODO] UI: cleanup documentation
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck
+
+- [TODO] UI: allow editing of open contracts
+- [TODO] UI: change action links to buttons
 
 - [TODO] END TO END TESTING
 - [TODO] Add feature specs

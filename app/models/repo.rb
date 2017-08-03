@@ -18,6 +18,10 @@ class Repo < ApplicationRecord
     self.type.gsub("Repo::","")
   end
 
+  def has_contracts?
+    contracts.count != 0 || bug_contracts.count != 0
+  end
+
   def sync
     self.update_attribute(:synced_at, Time.now)
     json = open(self.json_url) {|io| io.read}
