@@ -4,7 +4,6 @@ class ContractResolve < ApplicationCommand
   attr_accessor        :counterparty
   attr_delegate_fields :contract
 
-  validates :counterparty_id,     presence: true
   validate  :resolvable_contract
 
   def self.find(contract)
@@ -37,7 +36,7 @@ class ContractResolve < ApplicationCommand
   end
 
   def resolvable_contract
-    if Time.now > contract.matures_at
+    if Time.now < contract.matures_at
       errors.add(:matures_at, "contract has not matured")
     end
   end

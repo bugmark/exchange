@@ -52,9 +52,17 @@ Next Actions:
 - [DONE] UI: fix repo show page
 - [DONE] UI: fix bug show page
 - [DONE] UI: fix contract show page
+- [DONE] UI: add a contract resolve link
+- [DONE] UI: set clock to pacific time
 
-- [TODO] UI: add a contract resolve link
+# Aug 03
+
+- [DONE] UI: color-code contract status
+- [DONE] add tests for contract-resolution use cases
+
 - [TODO] UI: add days/hours/minutes for contract maturation
+- [TODO] UI: add selective display of actions
+
 - [TODO] UI: allow editing of open contracts
 - [TODO] UI: selective repo destroy (no open contracts)
 - [TODO] UI: change action links to buttons
@@ -65,6 +73,3 @@ Next Actions:
 
 - [TODO] END TO END TESTING
 - [TODO] Add feature specs
-
-- [TODO] UI: set clock to pacific time
-- [TODO] UI: color-code contract status
