@@ -2,8 +2,6 @@ pragma solidity ^0.4.11;
 
 import "zeppelin-solidity/contracts/ownership/Ownable.sol";
 
-
-
 contract Market is Ownable {
 
     // Public Data //
@@ -28,8 +26,6 @@ contract Market is Ownable {
 
 	// Hash of all reward contracts
 	mapping (uint => Reward) rewards;
-
-
 
 	function Market() public  // constructor
 	{
