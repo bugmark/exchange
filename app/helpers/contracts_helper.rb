@@ -31,7 +31,7 @@ module ContractsHelper
 
   def contract_mature_date(contract)
     color = Time.now > contract.matures_at ? "red" : "green"
-    date = contract.matures_at.strftime("%b-%d %H:%M:%S")
+    date = contract.matures_at_str
     raw "<span style='color: #{color};'>#{date}</span>"
   end
 

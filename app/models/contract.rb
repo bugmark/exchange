@@ -53,6 +53,10 @@ class Contract < ApplicationRecord
     "con.#{self.id}"
   end
 
+  def matures_at_str
+    self.matures_at.strftime("%b-%d %H:%M:%S")
+  end
+
   def matured?
     self.matures_at < Time.now
   end
