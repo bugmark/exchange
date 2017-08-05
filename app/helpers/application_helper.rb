@@ -23,7 +23,7 @@ module ApplicationHelper
     balance = user.token_balance
     pubs    = user.published_contracts.count
     takes   = user.taken_contracts.count
-    "Trading #{balance}-#{pubs}-#{takes}"
+    "#{user.xid} / #{balance}-#{pubs}-#{takes}"
   end
 
 end

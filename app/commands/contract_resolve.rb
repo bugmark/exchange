@@ -22,9 +22,14 @@ class ContractResolve < ApplicationCommand
 
   def transact_before_save
     contract.status               = get_status
-    contract.awarded_to           = contract.awardee
-    awardee = contract.send(contract.awardee.to_sym)
-    awardee.token_balance += contract.token_value * 2
+    if contract.status == "lapsed"
+      contract.awarded_to = "publisher"
+      contract.publisher.token_balance += contract.token_value
+    else
+      contract.awarded_to = contract.awardee
+      awardee = contract.send(contract.awardee.to_sym)
+      awardee.token_balance += contract.token_value * s
+    end
   end
 
   private

@@ -39,7 +39,7 @@ module ContractsHelper
     case contract.status
       when "open"     then raw "<i class='fa fa-unlock'></i> open"
       when "taken"    then raw "<i class='fa fa-lock'></i> taken"
-      when "awarded"  then raw "<i class='fa fa-close'></i> awarded"
+      when "awarded"  then raw "<i class='fa fa-check'></i> awarded"
       when "lapsed"   then raw "<i class='fa fa-check'></i> lapsed"
         else "UNKNOWN_CONTRACT_STATE"
     end
@@ -59,8 +59,14 @@ module ContractsHelper
   end
 
   def contract_awardee(contract)
-    icon = contract.resolved? ? "check" : "gears"
-    raw "<i class='fa fa-#{icon}'></i> #{contract.awardee}"
+    icon, lbl = if contract.resolved?
+      usr = contract.awardee_user
+      lbl = "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
+      ["check", lbl]
+    else
+      ["gears", contract.awardee]
+    end
+    raw "<i class='fa fa-#{icon}'></i> #{lbl}"
   end
 
   def contract_publisher_link(contract)

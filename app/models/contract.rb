@@ -45,6 +45,10 @@ class Contract < ApplicationRecord
     end
   end
 
+  def awardee_user
+    self.send awardee.to_sym
+  end
+
   def to_i
     self.id
   end
