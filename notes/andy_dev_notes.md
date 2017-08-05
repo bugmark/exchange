@@ -63,8 +63,13 @@ Next Actions:
 - [DONE] UI: add selective display of actions
 - [DONE] UI: selective repo destroy (no contracts)
 
+# Aug 04
+
+- [DONE] Fix demo bugs
+
 # TBD
 
+- [TODO] Feature specs for all pages
 - [TODO] UI: cleanup documentation
 - [TODO] Contract Design V2
 - [TODO] Event Sourcing Full Implementation
