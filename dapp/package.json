@@ -21,6 +21,6 @@
   "homepage": "https://github.com/mvscorg/xdmarket#readme",
   "dependencies": {
     "moment": "^2.18.1",
-    "zeppelin-solidity": "^1.1.0"
+    "zeppelin-solidity": "^1.2.0"
   }
 }
