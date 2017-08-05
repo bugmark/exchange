@@ -59,11 +59,16 @@ Next Actions:
 
 - [DONE] UI: color-code contract status
 - [DONE] add tests for contract-resolution use cases
-- [TODO] UI: add days/hours/minutes for contract maturation
-- [TODO] UI: add selective display of actions
-- [TODO] UI: selective repo destroy (no contracts)
+- [DONE] UI: add days/hours/minutes for contract maturation
+- [DONE] UI: add selective display of actions
+- [DONE] UI: selective repo destroy (no contracts)
+
+# TBD
 
 - [TODO] UI: cleanup documentation
+- [TODO] Contract Design V2
+- [TODO] Event Sourcing Full Implementation
+
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck
 
