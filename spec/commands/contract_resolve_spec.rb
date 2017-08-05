@@ -46,6 +46,7 @@ RSpec.describe ContractResolve, type: :model do
 
   describe "Object Saving" do
     it 'saves the object to the database' do
+      subject.matures_at = Time.now - 1.day
       subject.save
       expect(subject).to be_valid
     end

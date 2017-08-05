@@ -17,8 +17,10 @@ class ApplicationCommand
   def self.attr_delegate_fields(*klas_list)
     klas_list.each do |sym|
       klas = sym.to_s.camelize.constantize
-      fields = klas.attribute_names.map(&:to_sym)
-      delegate *fields, to: sym
+      fields1 = klas.attribute_names.map(&:to_sym)
+      fields2 = klas.attribute_names.map {|x| "#{x}=".to_sym}
+      delegate *fields1, to: sym
+      delegate *fields2, to: sym
     end
   end
 
