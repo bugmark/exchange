@@ -67,18 +67,20 @@ Next Actions:
 
 - [DONE] Fix demo bugs
 
-# TBD
+# Aug 07
+
+- [TODO] Contract Design V2
+
+# Aug 08
 
 - [TODO] Feature specs for all pages
 - [TODO] UI: cleanup documentation
-- [TODO] Contract Design V2
 - [TODO] Event Sourcing Full Implementation
+
+# TBD
 
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck
 
 - [TODO] UI: allow editing of open contracts
 - [TODO] UI: change action links to buttons
-
-- [TODO] END TO END TESTING
-- [TODO] Add feature specs
