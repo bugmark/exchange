@@ -73,9 +73,10 @@ Next Actions:
 
 # Aug 08
 
-- [TODO] Feature specs for all pages
-- [TODO] UI: cleanup documentation
+- [DONE] Add feature specs
+
 - [TODO] Event Sourcing Full Implementation
+- [TODO] UI: cleanup documentation
 
 # TBD
 

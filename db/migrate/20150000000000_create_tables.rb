@@ -80,5 +80,19 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :users, :exref
     add_index :users, :uuref
+
+    create_table :cmd_events do |t|
+      t.string     :type
+      t.string     :uuref
+      t.string     :local_hash
+      t.string     :chain_hash
+      t.jsonb      :payload,  null: false, default: '{}'
+      t.timestamps
+    end
+    add_index :cmd_events, :type
+    add_index :cmd_events, :uuref
+    add_index :cmd_events, :local_hash
+    add_index :cmd_events, :chain_hash
+    add_index :cmd_events, :payload      , using: :gin
   end
 end
