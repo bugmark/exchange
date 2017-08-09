@@ -7,7 +7,7 @@ end
 
 # == Schema Information
 #
-# Table name: cmd_events
+# Table name: events
 #
 #  id         :integer          not null, primary key
 #  type       :string
