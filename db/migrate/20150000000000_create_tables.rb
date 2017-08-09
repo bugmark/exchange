@@ -81,18 +81,25 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :users, :exref
     add_index :users, :uuref
 
-    create_table :events do |t|
+    # the event store...
+    create_table :event_lines do |t|
       t.string     :type
       t.string     :uuref
       t.string     :local_hash
       t.string     :chain_hash
-      t.jsonb      :payload,  null: false, default: '{}'
+      t.jsonb      :data,  null: false, default: '{}'
       t.timestamps
     end
-    add_index :events, :type
-    add_index :events, :uuref
-    add_index :events, :local_hash
-    add_index :events, :chain_hash
-    add_index :events, :payload      , using: :gin
+    add_index :event_lines, :type
+    add_index :event_lines, :uuref
+    add_index :event_lines, :local_hash
+    add_index :event_lines, :chain_hash
+    add_index :event_lines, :data      , using: :gin
+
+    # holds an event counter for a projection
+    create_table :projections do |t|
+      t.string  :name
+      t.integer :event_counter
+    end
   end
 end

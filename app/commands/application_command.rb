@@ -58,6 +58,12 @@ class ApplicationCommand
   end
 
   def transact_before_save
-    # override in subclass
+    raise "transact_before_save method: override in subclass"
   end
-end
+
+  def data
+    raise "data method: override in subclass"
+  end
+
+  end
+

@@ -1,4 +1,4 @@
-class Event < ApplicationRecord
+class EventLine < ApplicationRecord
 
 end
 
