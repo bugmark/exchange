@@ -1,4 +1,4 @@
-class ContractResolve < ApplicationCommand
+class CmContractResolve < ApplicationCommand
 
   attr_subobjects      :contract, :publisher
   attr_accessor        :counterparty

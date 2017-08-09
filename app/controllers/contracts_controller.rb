@@ -24,17 +24,17 @@ class ContractsController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
-    @contract = ContractPub.new(new_opts(params))
+    @contract = CmContractPub.new(new_opts(params))
   end
 
   # id (contract ID)
   def edit
-    @contract = ContractTake.find(params[:id], with_counterparty: current_user)
+    @contract = CmContractTake.find(params[:id], with_counterparty: current_user)
   end
 
   def create
     opts = params["contract_pub"]
-    @contract = ContractPub.new(valid_params(opts))
+    @contract = CmContractPub.new(valid_params(opts))
     if @contract.save
       redirect_to("/contracts/#{@contract.id}")
     else
@@ -44,7 +44,7 @@ class ContractsController < ApplicationController
 
   def update
     opts = params["contract_take"]
-    @contract = ContractTake.find(opts["id"], with_counterparty: current_user)
+    @contract = CmContractTake.find(opts["id"], with_counterparty: current_user)
     if @contract.save
       redirect_to("/contracts/#{@contract.id}")
     else
@@ -54,7 +54,7 @@ class ContractsController < ApplicationController
 
   def resolve
     id = params["id"]
-    ContractResolve.new(id).save
+    CmContractResolve.new(id).save
     redirect_to "/contracts"
   end
 

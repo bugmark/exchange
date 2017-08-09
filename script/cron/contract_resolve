@@ -6,5 +6,5 @@ require "./config/environment"
 
 Contract.pending_resolution.each do |contract|
   puts "RESOLVING CONTRACT #{contract.id}"
-  ContractResolve.new(contract).save
+  CmContractResolve.new(contract).save
 end

@@ -1,4 +1,4 @@
-class ContractPub < ApplicationCommand
+class CmContractPub < ApplicationCommand
 
   attr_subobjects      :contract, :user
   attr_delegate_fields :contract

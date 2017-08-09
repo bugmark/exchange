@@ -1,4 +1,4 @@
-class ContractTake < ApplicationCommand
+class CmContractTake < ApplicationCommand
 
   attr_subobjects      :contract, :counterparty
   attr_delegate_fields :contract
