@@ -32,7 +32,7 @@ class ApplicationCommand
 
   def save
     if valid?
-      transact_before_save      # perform a transaction, if any
+      transact_before_save  # perform a transaction, if any
       subs.each(&:save)     # save all subobjects
     else
       false

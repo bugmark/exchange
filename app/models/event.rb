@@ -1,7 +1,4 @@
-require 'rails_helper'
-
-RSpec.describe CmdEvent, type: :model do
-
+class Event < ApplicationRecord
 
 end
 
