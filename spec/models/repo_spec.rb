@@ -33,7 +33,8 @@ end
 #  id         :integer          not null, primary key
 #  type       :string
 #  name       :string
-#  url        :string
+#  json_url   :string
+#  html_url   :string
 #  jfields    :jsonb            not null
 #  synced_at  :datetime
 #  exref      :string

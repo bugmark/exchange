@@ -4,26 +4,14 @@ end
 
 # == Schema Information
 #
-# Table name: contracts
+# Table name: cmd_events
 #
-#  id              :integer          not null, primary key
-#  type            :string
-#  publisher_id    :integer
-#  counterparty_id :integer
-#  token_value     :float
-#  terms           :string
-#  status          :string
-#  awarded_to      :string
-#  matures_at      :datetime
-#  repo_id         :integer
-#  bug_id          :integer
-#  bug_title       :string
-#  bug_status      :string
-#  bug_labels      :string
-#  bug_presence    :boolean
-#  jfields         :jsonb            not null
-#  exref           :string
-#  uuref           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id         :integer          not null, primary key
+#  type       :string
+#  uuref      :string
+#  local_hash :string
+#  chain_hash :string
+#  payload    :jsonb            not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
