@@ -18,7 +18,7 @@ class ApplicationCommand
     klas_list.each do |sym|
       klas = sym.to_s.camelize.constantize
       fields1 = klas.attribute_names.map(&:to_sym)
-      fields2 = klas.attribute_names.map {|x| "#{x}=".to_sym}
+      fields2 = klas.attribute_names.map { |x| "#{x}=".to_sym }
       delegate *fields1, to: sym
       delegate *fields2, to: sym
     end
@@ -26,14 +26,15 @@ class ApplicationCommand
 
   # return the list of subobjects
   def subobjects
-    subobject_symbols.map {|el| self.send(el)}
+    subobject_symbols.map { |el| self.send(el) }
   end
+
   alias_method :subs, :subobjects
 
   def save
     if valid?
-      transact_before_save  # perform a transaction, if any
-      subs.each(&:save)     # save all subobjects
+      transact_before_save # perform a transaction, if any
+      subs.each(&:save) # save all subobjects
     else
       false
     end
@@ -44,8 +45,8 @@ class ApplicationCommand
       true
     else
       subs.each do |object|
-        object.valid?                         # populate the subobject errors
-        object.errors.each do |field, error|  # transfer the error messages
+        object.valid? # populate the subobject errors
+        object.errors.each do |field, error| # transfer the error messages
           errors.add(field, error)
         end
       end
@@ -54,16 +55,11 @@ class ApplicationCommand
   end
 
   def invalid?
-    ! valid?
+    !valid?
   end
 
   def transact_before_save
     raise "transact_before_save method: override in subclass"
   end
-
-  def data
-    raise "data method: override in subclass"
-  end
-
-  end
+end
 

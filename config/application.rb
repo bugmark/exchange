@@ -17,7 +17,7 @@ module Bugmark
     config.time_zone = "Pacific Time (US & Canada)"
 
     base = "#{config.root}/app"
-    config.autoload_paths += %W(#{base}/commands)
+    config.autoload_paths += %W(#{base}/cqrs)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CmContractResolve, type: :model do
+RSpec.describe Command::ContractResolve, type: :model do
 
   def contract_params
     {

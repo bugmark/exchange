@@ -38,5 +38,5 @@ opts = [
 ]
 
 opts.each do |opt|
-  CmContractPub.new(opt).save
+  Command::ContractPub.new(opt).save
 end
