@@ -5,7 +5,7 @@ require 'capybara/rspec'
 ENV['RAILS_ENV'] ||= 'test'
 #
 # Require custom matchers / macros / etc.  Ruby files only - not `*._spec.rb`.
-require Rails.root.join('spec/rails_support.rb')
+require Rails.root.join('spec/rails_support')
 require File.expand_path('../../config/environment', __FILE__)
 
 # Prevent database truncation if the environment is production(!!)

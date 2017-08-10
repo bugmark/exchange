@@ -4,8 +4,8 @@
 #   include_context 'Integration Environment'
 #   ...
 RSpec.shared_context 'Integration Environment' do
-  let(:orgn)   { FG.create(:org)                                             }
-  let(:team1)  { FG.create(:team, org_id: orgn.id)                           }
+  let(:bug1)   { FG.create(:bug                                              }
+  let(:bug2)   { FG.create(:team, org_id: orgn.id)                           }
   let(:team2)  { FG.create(:team, org_id: orgn.id)                           }
   let(:pagr1)  { Pgr.create(team_id: team1.id)                               }
   let(:pagr2)  { Pgr.create(team_id: team2.id)                               }

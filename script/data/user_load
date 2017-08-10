@@ -2,22 +2,5 @@
 
 require "./config/environment"
 
-opts = [
-  {
-    email:                 "test1@bugmark.net"    ,
-    password:              "bugmark"              ,
-    password_confirmation: "bugmark"
-  },
-  {
-    email:                 "test2@bugmark.net"    ,
-    password:              "bugmark"              ,
-    password_confirmation: "bugmark"
-  },
-  {
-    email:                 "test3@bugmark.net"    ,
-    password:              "bugmark"              ,
-    password_confirmation: "bugmark"
-  }
-]
+3.times { FG.create :user }
 
-User.create opts

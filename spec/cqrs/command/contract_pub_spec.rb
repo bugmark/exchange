@@ -16,7 +16,7 @@ RSpec.describe Command::ContractPub, type: :model do
   describe "Attributes" do
     it { should respond_to :user                   }
     it { should respond_to :contract               }
-    it { should respond_to :token_value        }
+    it { should respond_to :token_value            }
   end
 
   describe "Methods" do

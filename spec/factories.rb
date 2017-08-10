@@ -2,8 +2,14 @@ FG ||= FactoryGirl
 
 FactoryGirl.define do
 
-  factory :bug do
-    sequence :title    do |n| "Bug #{n}" end
+  # factory :bug do
+  #   sequence :title    do |n| "Bug #{n}" end
+  # end
+
+  factory :user do
+    sequence :email do |n| "test#{n}@bugmark.net" end
+    password              "bugmark"
+    password_confirmation "bugmark"
   end
 
 #   factory :org do
@@ -135,26 +141,26 @@ FactoryGirl.define do
 # end
 #
 # derived from http://blog.tobedevoured.com/post/54523066986/rspec-helper-to-add-find-or-create-to-factorygirl
-class FactoryHelper
-  class << self
-    def find_or_create(*args)
-      name, klas = parse_name_and_klas(args.shift)
-      lookup = args.shift
-      target = klas.where(lookup).try(:first)
-      target || FactoryGirl.create(name, lookup)
-    end
-
-    private
-
-    def parse_name_and_klas(name)
-      if name.is_a?(Hash)
-        [name.first[0], name.first[1].to_s.camelize.constantize]
-      else
-        [name, name.to_s.camelize.constantize]
-      end
-    end
-  end
-end
-FH ||= FactoryHelper
+# class FactoryHelper
+#   class << self
+#     def find_or_create(*args)
+#       name, klas = parse_name_and_klas(args.shift)
+#       lookup = args.shift
+#       target = klas.where(lookup).try(:first)
+#       target || FactoryGirl.create(name, lookup)
+#     end
+#
+#     private
+#
+#     def parse_name_and_klas(name)
+#       if name.is_a?(Hash)
+#         [name.first[0], name.first[1].to_s.camelize.constantize]
+#       else
+#         [name, name.to_s.camelize.constantize]
+#       end
+#     end
+#   end
+# end
+# FH ||= FactoryHelper
 
 end
