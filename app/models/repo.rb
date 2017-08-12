@@ -7,7 +7,7 @@ class Repo < ApplicationRecord
   has_many :contracts    , :dependent => :destroy
   has_many :bug_contracts, :through   => :bugs    , :source => :contracts
 
-  validates :json_url  , uniqueness: true, presence: true
+  validates :json_url , uniqueness: true, presence: true
   validates :name     , uniqueness: true, presence: true
 
   def xid

@@ -3,4 +3,3 @@
 require "./config/environment"
 
 3.times { FG.create :user }
-

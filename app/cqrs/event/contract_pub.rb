@@ -16,8 +16,6 @@ module Event
       def from_command(command)
         instance = allocate
 
-        puts "HELLO WORLD"
-
       end
 
       def from_data(data)
