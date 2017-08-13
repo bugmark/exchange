@@ -12,7 +12,7 @@ module ContractCmd
     end
 
     def event_data
-      {}
+      @contract.attributes
     end
 
     def transact_before_project

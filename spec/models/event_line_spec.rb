@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe EventLine, type: :model do
 
-
 end
 
 # == Schema Information

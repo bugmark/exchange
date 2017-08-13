@@ -49,7 +49,7 @@ RSpec.describe ContractCmd::Pub, type: :model do
     end
   end
 
-  describe "Object Saving" do
+  describe "#project" do
     it 'saves the object to the database' do
       subject.project
       expect(subject).to be_valid
@@ -65,14 +65,31 @@ RSpec.describe ContractCmd::Pub, type: :model do
       subject.project
       expect(subject.status).to eq("open")
     end
-  end
 
-  describe "Object Transaction" do
     it 'adjusts the user balance' do
       expect(user.token_balance).to eq(100)
       subject.project
       user.reload
       expect(user.token_balance).to eq(90)
+    end
+  end
+
+  describe "#event_data" do
+    it 'returns a hash' do
+      expect(subject.event_data).to be_a(Hash)
+    end
+
+    it 'has expected hash keys' do
+      keys = subject.event_data.keys
+      expect(keys).to include("id")
+    end
+  end
+
+  describe "#event_save" do
+    it 'creates an event' do
+      expect(EventLine.count).to eq(0)
+      subject.save_event
+      expect(EventLine.count).to eq(1)
     end
   end
 end

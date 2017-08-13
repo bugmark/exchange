@@ -1,7 +1,7 @@
 module RepoCmd
   class GhCreate < ApplicationCommand
 
-    attr_subobjects :repo
+    attr_subobjects      :repo
     attr_delegate_fields :repo
 
     def initialize(args = {})

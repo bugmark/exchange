@@ -1,5 +1,14 @@
+require 'digest/sha2'
+
 class EventLine < ApplicationRecord
 
+  before_save :default_values
+
+  private
+
+  def default_values
+    self.local_hash = "asdf"
+  end
 end
 
 # == Schema Information
