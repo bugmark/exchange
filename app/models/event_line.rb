@@ -1,5 +1,3 @@
-require 'digest/sha2'
-
 class EventLine < ApplicationRecord
 
   before_save :default_values
@@ -7,7 +5,9 @@ class EventLine < ApplicationRecord
   private
 
   def default_values
-    self.local_sha2 = Digest::SHA2.hexdigest
+    prev = EventLine.last
+    self.local_hash = data.hash
+    self.chain_hash = [prev&.chain_hash, self.local_hash].hash
   end
 end
 
