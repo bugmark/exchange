@@ -39,6 +39,10 @@ class ApplicationCommand
     raise "NOT ALLOWED - USE #project"
   end
 
+  def save_event
+    puts "APPEND_EVENT"
+  end
+
   def project
     if valid?
       transact_before_project # perform a transaction, if any
@@ -66,8 +70,11 @@ class ApplicationCommand
     !valid?
   end
 
+  def event_data
+
+  end
+
   def transact_before_project
     raise "transact_before_project method: override in subclass"
   end
 end
-
