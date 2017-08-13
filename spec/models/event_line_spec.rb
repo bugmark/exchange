@@ -7,14 +7,14 @@ end
 
 # == Schema Information
 #
-# Table name: events
+# Table name: event_lines
 #
 #  id         :integer          not null, primary key
 #  type       :string
 #  uuref      :string
 #  local_hash :string
 #  chain_hash :string
-#  payload    :jsonb            not null
+#  data       :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
