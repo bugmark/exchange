@@ -10,6 +10,10 @@ class ContractPub < ApplicationCommand
     @user = User.find(contract.publisher_id)
   end
 
+  def event_data
+    {}
+  end
+
   def transact_before_project
     contract.status = "open"
     user.token_balance -= contract.token_value
