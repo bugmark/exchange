@@ -7,7 +7,7 @@ class EventLine < ApplicationRecord
   private
 
   def default_values
-    self.local_hash = "asdf"
+    self.local_sha2 = Digest::SHA2.hexdigest
   end
 end
 

@@ -85,12 +85,14 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :event_lines do |t|
       t.string     :type
       t.string     :uuref
-      t.string     :local_sha2
-      t.string     :chain_sha2
+      t.integer    :local_hash
+      t.integer    :chain_hash
       t.jsonb      :data,  null: false, default: '{}'
       t.timestamps
     end
     add_index :event_lines, :type
+    add_index :event_lines, :local_hash
+    add_index :event_lines, :chain_hash
     add_index :event_lines, :uuref
     add_index :event_lines, :data      , using: :gin
 
