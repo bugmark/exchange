@@ -20,7 +20,7 @@ FactoryGirl.define do
     password_confirmation "bugmark"
   end
 
-  factory :contract, class: Command::ContractPub do
+  factory :contract, class: ContractPub do
     type        "Contract::Forecast"
     token_value 20
     terms       "Net10"

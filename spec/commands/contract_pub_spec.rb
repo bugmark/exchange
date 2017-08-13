@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Command::ContractPub, type: :model do
+RSpec.describe ContractPub, type: :model do
 
   def valid_params
     {
@@ -53,18 +53,18 @@ RSpec.describe Command::ContractPub, type: :model do
 
   describe "Object Saving" do
     it 'saves the object to the database' do
-      subject.save
+      subject.project
       expect(subject).to be_valid
     end
 
     it 'gets the right object count' do
       expect(Contract.count).to eq(0)
-      subject.save
+      subject.project
       expect(Contract.count).to eq(1)
     end
 
     it 'sets the contract status' do
-      subject.save
+      subject.project
       expect(subject.status).to eq("open")
     end
   end
@@ -72,7 +72,7 @@ RSpec.describe Command::ContractPub, type: :model do
   describe "Object Transaction" do
     it 'adjusts the user balance' do
       expect(user.token_balance).to eq(100)
-      subject.save
+      subject.project
       user.reload
       expect(user.token_balance).to eq(90)
     end
