@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ContractPub, type: :model do
+RSpec.describe ContractCmd::Pub, type: :model do
 
   def valid_params
     {
@@ -30,10 +30,8 @@ RSpec.describe ContractPub, type: :model do
 
   describe "Subobjects" do
     it { should respond_to :subobject_symbols }
-    it { should respond_to :subobjects        }
-    it { should respond_to :subs              }
     it 'returns an array' do
-      expect(subject.subobjects).to be_an(Array)
+      expect(subject.subobject_symbols).to be_an(Array)
     end
   end
 

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ContractResolve, type: :model do
+RSpec.describe ContractCmd::Take, type: :model do
 
   def contract_params
     {
-      token_value: 10            ,
-      publisher_id:    user.id       ,
+      token_value: 10              ,
+      publisher_id:    user.id     ,
       counterparty_id: user.id
     }
   end
@@ -13,20 +13,34 @@ RSpec.describe ContractResolve, type: :model do
   let(:kontrakt) { Contract.create(contract_params)                       }
   let(:user)     { User.create(email: 'xx@yy.com', password: 'yyyyyy')    }
   let(:klas)     { described_class                                        }
-  subject        { klas.find(kontrakt.id)                                 }
+  subject        { klas.find(kontrakt.id, with_counterparty: user)        }
 
   describe "Attributes" do
     it { should respond_to :counterparty           }
     it { should respond_to :contract               }
-    it { should respond_to :token_value        }
+    it { should respond_to :token_value            }
+  end
+
+  describe "Class Methods" do
+    it 'has a find method' do
+      expect(klas).to respond_to(:find)
+    end
+  end
+
+  describe "Object Methods" do
+    it { should respond_to :save                 }
+    it { should respond_to :project              }
+  end
+
+  describe "Object Existence" do
+    it { should be_a klas   }
+    it { should be_valid    }
   end
 
   describe "Subobjects" do
     it { should respond_to :subobject_symbols }
-    it { should respond_to :subobjects        }
-    it { should respond_to :subs              }
     it 'returns an array' do
-      expect(subject.subobjects).to be_an(Array)
+      expect(subject.subobject_symbols).to be_an(Array)
     end
   end
 
@@ -46,7 +60,6 @@ RSpec.describe ContractResolve, type: :model do
 
   describe "Object Saving" do
     it 'saves the object to the database' do
-      subject.matures_at = Time.now - 1.day
       subject.project
       expect(subject).to be_valid
     end
@@ -64,7 +77,7 @@ RSpec.describe ContractResolve, type: :model do
       expect(user.token_balance).to eq(100)
       subject.project
       user.reload
-      expect(user.token_balance).to eq(100)
+      expect(user.token_balance).to eq(90)
     end
   end
 end
