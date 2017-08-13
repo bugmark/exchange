@@ -18,8 +18,8 @@ end
 #  id         :integer          not null, primary key
 #  type       :string
 #  uuref      :string
-#  local_sha2 :string
-#  chain_sha2 :string
+#  local_hash :integer
+#  chain_hash :integer
 #  data       :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
