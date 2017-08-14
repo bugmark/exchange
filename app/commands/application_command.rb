@@ -67,12 +67,11 @@ class ApplicationCommand
   end
 
   def event_data
-    puts "Warning: transact_before_project in base class"
     {}
   end
 
   def transact_before_project
-    puts "Warning: transact_before_project in base class"
+    # override in subclass
   end
 
   # ----- persistence methods
@@ -82,7 +81,9 @@ class ApplicationCommand
   end
 
   def save_event
-    EventLine.new(self.event_data).save
+    base = {klas: self.class.name}
+    data = {data: self.event_data}
+    EventLine.new(data.merge(base)).save
     self
   end
 
@@ -90,7 +91,7 @@ class ApplicationCommand
   def project
     if valid?
       transact_before_project # perform a transaction, if any
-      subs.each(&:save) # save all subobjects
+      subs.each(&:save)       # save all subobjects
     else
       false
     end
@@ -104,7 +105,7 @@ class ApplicationCommand
       true
     else
       subs.each do |object|
-        object.valid? # populate the subobject errors
+        object.valid?                        # populate the subobject errors
         object.errors.each do |field, error| # transfer the error messages
           errors.add(field, error)
         end

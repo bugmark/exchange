@@ -13,10 +13,9 @@ RSpec.describe EventLine, type: :model do
   subject      { klas.new(valid_params)  }
 
   describe "Object Creation" do
-    # it { should be_valid }
+    it { should be_valid }
 
     it 'saves the object to the database' do
-      binding.pry
       subject.save
       expect(subject).to be_valid
     end

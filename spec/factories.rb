@@ -14,12 +14,14 @@ FactoryGirl.define do
   #   repo_id  { FG.create(:repo).id }
   # end
   #
-  # factory :user do
-  #   sequence :email do |n| "test#{n}@bugmark.net" end
-  #   password              "bugmark"
-  #   password_confirmation "bugmark"
-  # end
-  #
+  factory :user, class: UserCmd::Create do
+    to_create {|instance| instance.save_event.project}
+
+    sequence :email do |n| "test#{n}@bugmark.net" end
+    password              "bugmark"
+    password_confirmation "bugmark"
+  end
+
   # factory :contract, class: ContractPub do
   #   type        "Contract::Forecast"
   #   token_value 20

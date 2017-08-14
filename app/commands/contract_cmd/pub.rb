@@ -11,6 +11,14 @@ module ContractCmd
       @user = User.find(contract.publisher_id)
     end
 
+    def self.from_event(event)
+      # data = event.data
+      # instance = allocate
+      # instance.contract = Contract.find(data["contract_id"])
+      # instance.user     = User.find(data["user_id"])
+      # instance
+    end
+
     def event_data
       @contract.attributes
     end

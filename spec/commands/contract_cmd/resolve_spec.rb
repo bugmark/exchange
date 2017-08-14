@@ -4,7 +4,7 @@ RSpec.describe ContractCmd::Resolve, type: :model do
 
   def contract_params
     {
-      token_value: 10            ,
+      token_value:     10            ,
       publisher_id:    user.id       ,
       counterparty_id: user.id
     }

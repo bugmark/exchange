@@ -1,11 +1,8 @@
-require 'securerandom'
-
 class EventLine < ApplicationRecord
 
   before_validation :default_values
 
   validates :klas, presence: true
-  validates :data, presence: true
 
   private
 
@@ -13,8 +10,8 @@ class EventLine < ApplicationRecord
     prev = EventLine.last
     self.data       ||= {}
     self.uuref      ||= SecureRandom.uuid
-    self.local_hash   = [self.uuref, data].hash
-    self.chain_hash   = [prev&.chain_hash, self.local_hash].hash
+    self.local_hash   = [self.uuref, data].hash.to_s
+    self.chain_hash   = [prev&.chain_hash, self.local_hash].hash.to_s
   end
 end
 
