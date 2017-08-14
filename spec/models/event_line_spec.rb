@@ -4,15 +4,23 @@ RSpec.describe EventLine, type: :model do
 
   def valid_params
     {
-      type:      "asdf"      ,
-      json_url:  "qwer"
+      klas:  "TBD"      ,
+      data:  {}
     }
   end
 
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
+  describe "Object Creation" do
+    # it { should be_valid }
 
+    it 'saves the object to the database' do
+      binding.pry
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
 
 end
 
