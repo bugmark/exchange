@@ -4,32 +4,28 @@ require "./config/environment"
 
 opts = [
   {
-    type:   "Contract::Forecast"   ,
-    bug_id: Bug.first.id           ,
+    bug_id:          Bug.first.id  ,
     token_value:     20            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
     matures_at:      Time.now + 1.week
   },
   {
-    type:   "Contract::Forecast"   ,
-    bug_id: Bug.first.id           ,
+    bug_id:          Bug.first.id  ,
     token_value:     15            ,
     terms:           "Net10"       ,
     publisher_id:    User.first.id ,
     matures_at:      Time.now + 1.hour
   },
   {
-    type:   "Contract::Forecast"   ,
-    bug_id: Bug.first.id           ,
+    bug_id:          Bug.first.id  ,
     token_value:     5             ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
     matures_at:      Time.now + 1.day
   },
   {
-    type:   "Contract::Forecast"   ,
-    bug_id: Bug.first.id           ,
+    bug_id:          Bug.first.id  ,
     token_value:     10            ,
     terms:           "Net30"       ,
     publisher_id:    User.first.id ,
@@ -38,5 +34,5 @@ opts = [
 ]
 
 opts.each do |opt|
-  ContractPub.new(opt).save
+  FG.create(:contract, opt)
 end

@@ -4,7 +4,7 @@ module RepoCmd
     attr_subobjects      :repo
     attr_delegate_fields :repo
 
-    def initialize(args = {})
+    def initialize(args)
       @repo = Repo.find_or_create_by(args)
     end
 

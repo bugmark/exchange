@@ -9,7 +9,6 @@ def sync(name)
   }
 
   repo = Repo.find_or_create_by(opts)
-  repo = Repo.find_or_create_by(opts)
   repo.sync
 end
 

@@ -4,12 +4,9 @@ module UserCmd
     attr_subobjects      :user
     attr_delegate_fields :user
 
-    methods = %i(password password= password_confirmation=)
-    delegate *methods, :to => :user
-
-
-    def initialize(args = {})
-      @user = User.find_or_create_by(args)
+    def initialize(args)
+      xargs = args.except *%i(password)
+      @user = User.find_by(xargs) || User.create(args)
     end
 
     # def self.from_event(event)

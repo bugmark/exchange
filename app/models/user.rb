@@ -11,7 +11,7 @@ class User < ApplicationRecord
   end
 
   def xid
-    "usr.#{self.id}"
+    "usr.#{self&.id || 0}"
   end
 
   # ----- ASSOCIATIONS -----

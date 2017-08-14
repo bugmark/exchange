@@ -6,7 +6,7 @@ module ContractCmd
 
     validate :publisher_funds
 
-    def initialize(args = {})
+    def initialize(args)
       @contract = Contract.new(args)
       @user = User.find(contract.publisher_id)
     end
