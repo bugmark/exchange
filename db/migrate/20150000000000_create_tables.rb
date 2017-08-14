@@ -83,14 +83,14 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     # the event store...
     create_table :event_lines do |t|
-      t.string     :type
+      t.string     :klas
       t.string     :uuref
       t.integer    :local_hash
       t.integer    :chain_hash
       t.jsonb      :data,  null: false, default: '{}'
       t.timestamps
     end
-    add_index :event_lines, :type
+    add_index :event_lines, :klas
     add_index :event_lines, :local_hash
     add_index :event_lines, :chain_hash
     add_index :event_lines, :uuref

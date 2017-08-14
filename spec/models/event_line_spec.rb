@@ -21,7 +21,7 @@ end
 # Table name: event_lines
 #
 #  id         :integer          not null, primary key
-#  type       :string
+#  klas       :string
 #  uuref      :string
 #  local_hash :integer
 #  chain_hash :integer
