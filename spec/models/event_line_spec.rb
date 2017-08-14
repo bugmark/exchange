@@ -2,6 +2,18 @@ require 'rails_helper'
 
 RSpec.describe EventLine, type: :model do
 
+  def valid_params
+    {
+      type:      "asdf"      ,
+      json_url:  "qwer"
+    }
+  end
+
+  let(:klas)   { described_class         }
+  subject      { klas.new(valid_params)  }
+
+
+
 end
 
 # == Schema Information

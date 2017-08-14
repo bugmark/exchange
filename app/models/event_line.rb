@@ -1,13 +1,18 @@
+require 'securerandom'
+
 class EventLine < ApplicationRecord
 
   before_save :default_values
+
+  validate :type, presence: true
 
   private
 
   def default_values
     prev = EventLine.last
-    self.local_hash = data.hash
-    self.chain_hash = [prev&.chain_hash, self.local_hash].hash
+    self.uuref      ||= SecureRandom.uuid
+    self.local_hash   = [self.uuref, data].hash
+    self.chain_hash   = [prev&.chain_hash, self.local_hash].hash
   end
 end
 
