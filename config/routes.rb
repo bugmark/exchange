@@ -7,9 +7,8 @@ Rails.application.routes.draw do
   resources :contracts do
     get 'resolve', :on => :member
   end
-  resource  :contract_forecasts , path: "/contracts"
-  resources :contract_pubs      , path: "/contracts"
-  resources :contract_takes     , path: "/contracts"
+  resources :contract_cmd_publishes  , path: "/contracts"
+  resources :contract_cmd_takes      , path: "/contracts"
 
   resources :users
 

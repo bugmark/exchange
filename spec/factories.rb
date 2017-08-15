@@ -37,6 +37,19 @@ FactoryGirl.define do
     matures_at   Time.now + 1.day
     bug_id       { FG.create(:bug).id  }
     publisher_id { FG.create(:user).id }
-  end
+
+    factory :matured_contract do
+      matures_at Time.now - 1.day
+    end
+
+    factory :taken_contract do
+      counterparty_id { FG.create(:user).id }
+    end
+
+    factory :taken_matured_contract do
+      counterparty_id { FG.create(:user).id }
+      matures_at      Time.now - 1.day
+    end
+   end
 
 end

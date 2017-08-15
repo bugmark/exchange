@@ -33,9 +33,9 @@ class ContractsController < ApplicationController
   end
 
   def create
-    opts = params["contract_pub"]
+    opts = params["contract_cmd_publish"]
     @contract = ContractCmd::Publish.new(valid_params(opts))
-    if @contract.save
+    if @contract.save_event.project
       redirect_to("/contracts/#{@contract.id}")
     else
       render 'contracts/new'
@@ -43,9 +43,9 @@ class ContractsController < ApplicationController
   end
 
   def update
-    opts = params["contract_take"]
+    opts = params["contract_cmd_take"]
     @contract = ContractCmd::Take.find(opts["id"], with_counterparty: current_user)
-    if @contract.save
+    if @contract.save_event.project
       redirect_to("/contracts/#{@contract.id}")
     else
       render 'contracts/new'
@@ -54,7 +54,7 @@ class ContractsController < ApplicationController
 
   def resolve
     id = params["id"]
-    ContractCmd::Resolve.new(id).save
+    ContractCmd::Resolve.new(id).save_event.project
     redirect_to "/contracts"
   end
 
