@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Publish, type: :model do
+RSpec.describe ContractCmd::Publish do
 
   def valid_params
     {
@@ -99,15 +99,6 @@ RSpec.describe ContractCmd::Publish, type: :model do
       expect(EventLine.count).to eq(1)
       expect(Contract.count).to eq(1)
     end
-
-    # it 'loads from event' do
-    #   expect(EventLine.count).to eq(0)
-    #   expect(Contract.count).to eq(0)
-    #   subject.save_event
-    #   expect(EventLine.count).to eq(1)
-    #   klas.from_event(EventLine.first).project
-    #   expect(Contract.count).to eq(1)
-    # end
   end
 end
 

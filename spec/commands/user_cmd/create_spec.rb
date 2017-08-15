@@ -1,26 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe RepoCmd::GhCreate do
-
-  require 'rails_helper'
+RSpec.describe UserCmd::Create do
 
   def valid_params
     {
-      json_url: "http://asdf.com",
-      name: "mvscorg/test1"
+      email:    "asdf@qwer.net"   ,
+      password: "gggggg"
     }
   end
 
-  let(:klas) { described_class }
-  subject { klas.new(valid_params) }
+  let(:klas)   { described_class                                        }
+  subject      { klas.new(valid_params)                                 }
 
   describe "Attributes" do
-    it { should respond_to :repo }
+    it { should respond_to :user                   }
   end
 
   describe "Object Existence" do
-    it { should be_a klas }
-    it { should be_valid }
+    it { should be_a klas   }
+    it { should be_valid    }
   end
 
   describe "Subobjects" do
@@ -31,16 +29,16 @@ RSpec.describe RepoCmd::GhCreate do
   end
 
   describe "Delegated Object" do
-    it 'has a present Repo' do
-      expect(subject.repo).to be_present
+    it 'has a present User' do
+      expect(subject.user).to be_present
     end
 
-    it 'has a Repo with the right class' do
-      expect(subject.repo).to be_a(Repo)
+    it 'has a User with the right class' do
+      expect(subject.user).to be_a(User)
     end
 
-    it 'should have a valid Repo' do
-      expect(subject.repo).to be_valid
+    it 'should have a valid User' do
+      expect(subject.user).to be_valid
     end
   end
 
@@ -51,9 +49,9 @@ RSpec.describe RepoCmd::GhCreate do
     end
 
     it 'gets the right object count' do
-      expect(Repo.count).to eq(0)
+      expect(User.count).to eq(0)
       subject.project
-      expect(Repo.count).to eq(1)
+      expect(User.count).to eq(1)
     end
   end
 
@@ -77,11 +75,12 @@ RSpec.describe RepoCmd::GhCreate do
 
     it 'chains with #project' do
       expect(EventLine.count).to eq(0)
-      expect(Repo.count).to eq(0)
+      expect(User.count).to eq(0)
       subject.save_event.project
       expect(EventLine.count).to eq(1)
-      expect(Repo.count).to eq(1)
+      expect(User.count).to eq(1)
     end
   end
 end
+
 
