@@ -8,7 +8,30 @@ module RepoCmd
       @repo = Repo.find_or_create_by(args)
     end
 
-    def sync
+    def self.from_repo(repo)
+      instance = allocate
+      instance.repo = repo
+      instance
+    end
+
+    def transact_before_project
+      sync_bugs
+      repo.synced_at = Time.now
+    end
+
+    def self.from_event(event)
+      instance = allocate
+      instance.repo = Repo.find_or_create_by(event.data)
+      instance
+    end
+
+    def event_data
+      {id: repo.id}
+    end
+
+    private
+
+    def sync_bugs
       json = open(repo.json_url) {|io| io.read}
       JSON.parse(json).each do |el|
         attrs = {
@@ -25,20 +48,6 @@ module RepoCmd
         bug = BugCmd::Sync.new(attrs)
         bug.save_event.project
       end
-    end
-
-    def transact_before_project
-      repo.synced_at = Time.now
-    end
-
-    def self.from_event(event)
-      instance = allocate
-      instance.repo = Repo.find_or_create_by(event.data)
-      instance
-    end
-
-    def event_data
-      {id: repo.id}
     end
   end
 end

@@ -80,9 +80,11 @@ class ApplicationCommand
   end
 
   def save_event
-    base = {klas: self.class.name}
-    data = {data: self.event_data}
-    EventLine.new(data.merge(base)).save
+    if valid?
+      base = {klas: self.class.name}
+      data = {data: self.event_data}
+      EventLine.new(data.merge(base)).save
+    end
     self
   end
 
@@ -91,6 +93,7 @@ class ApplicationCommand
     if valid?
       transact_before_project # perform a transaction, if any
       subs.each(&:save)       # save all subobjects
+      self
     else
       false
     end
@@ -100,6 +103,7 @@ class ApplicationCommand
 
   # validations can live in the Command or the Sub-Object (or both!)
   def valid?
+    binding.pry if subs.first.class == Array
     if super && subs.map(&:valid?).all?
       true
     else
@@ -119,7 +123,6 @@ class ApplicationCommand
 
   private
 
-  # return the list of subobjects
   def subobjects
     subobject_symbols.map { |el| self.send(el) }
   end
