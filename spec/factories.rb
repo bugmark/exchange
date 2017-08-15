@@ -18,7 +18,7 @@ FactoryGirl.define do
     sequence :name     do |n| "mvscorg/test#{n}" end
   end
 
-  factory :bug, class: BugCmd::Create do
+  factory :bug, class: BugCmd::Sync do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
 
@@ -27,7 +27,7 @@ FactoryGirl.define do
     repo_id  { FG.create(:repo).id }
   end
 
-  factory :contract, class: ContractCmd::Pub do
+  factory :contract, class: ContractCmd::Publish do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
 

@@ -24,7 +24,7 @@ class ContractsController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
-    @contract = ContractCmd::Pub.new(new_opts(params))
+    @contract = ContractCmd::Publish.new(new_opts(params))
   end
 
   # id (contract ID)
@@ -34,7 +34,7 @@ class ContractsController < ApplicationController
 
   def create
     opts = params["contract_pub"]
-    @contract = ContractCmd::Pub.new(valid_params(opts))
+    @contract = ContractCmd::Publish.new(valid_params(opts))
     if @contract.save
       redirect_to("/contracts/#{@contract.id}")
     else

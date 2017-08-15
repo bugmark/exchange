@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Pub, type: :model do
+RSpec.describe ContractCmd::Publish, type: :model do
 
   def valid_params
     {

@@ -22,24 +22,24 @@ class Repo < ApplicationRecord
     contracts.count != 0 || bug_contracts.count != 0
   end
 
-  def sync
-    self.update_attribute(:synced_at, Time.now)
-    json = open(self.json_url) {|io| io.read}
-    JSON.parse(json).each do |el|
-      attrs = {
-        repo_id:   self.id         ,
-        type:      "Bug::GitHub"   ,
-        json_url:  el["url"]       ,
-        html_url:  el["html_url"]  ,
-        title:     el["title"]     ,
-        labels:    el["labels"]    ,
-        status:    el["state"]     ,
-        synced_at: Time.now
-      }
-      bug = Bug.find_or_create_by(exref: el["id"])
-      bug.update_attributes(attrs)
-    end
-  end
+  # def sync
+  #   self.update_attribute(:synced_at, Time.now)
+  #   json = open(self.json_url) {|io| io.read}
+  #   JSON.parse(json).each do |el|
+  #     attrs = {
+  #       repo_id:   self.id         ,
+  #       type:      "Bug::GitHub"   ,
+  #       json_url:  el["url"]       ,
+  #       html_url:  el["html_url"]  ,
+  #       title:     el["title"]     ,
+  #       labels:    el["labels"]    ,
+  #       status:    el["state"]     ,
+  #       synced_at: Time.now
+  #     }
+  #     bug = Bug.find_or_create_by(exref: el["id"])
+  #     bug.update_attributes(attrs)
+  #   end
+  # end
 
   # ----- SCOPES -----
 
