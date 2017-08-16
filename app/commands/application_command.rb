@@ -52,10 +52,10 @@ class ApplicationCommand
   def self.attr_delegate_fields(*klas_list)
     klas_list.each do |sym|
       klas = sym.to_s.camelize.constantize
-      fields1 = klas.attribute_names.map(&:to_sym)
-      fields2 = klas.attribute_names.map { |x| "#{x}=".to_sym }
-      delegate *fields1, to: sym
-      delegate *fields2, to: sym
+      getters = klas.attribute_names.map(&:to_sym)
+      setters = klas.attribute_names.map { |x| "#{x}=".to_sym }
+      delegate *getters, to: sym
+      delegate *setters, to: sym
     end
   end
 
@@ -103,7 +103,6 @@ class ApplicationCommand
 
   # validations can live in the Command or the Sub-Object (or both!)
   def valid?
-    binding.pry if subs.first.class == Array
     if super && subs.map(&:valid?).all?
       true
     else
