@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Installs ansible roles on the local machine
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+echo "=== ANSIBLE ROLES INSTALL ==============================="
+cd ~
+mkdir -f g
+cd g
+if [[ -d x-ansible ]] ; then
+  echo "Updating roles"
+  cd x-ansible
+  git pull
+else
+  echo "Cloning roles"
+  sudo rm -rf x-ansible
+  git clone https://github.com/andyl/x-ansible.git
+fi
+echo "DONE."

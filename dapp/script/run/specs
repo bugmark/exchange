@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# start the spec runner
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+export APP="ListCall"
+export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+
+clear
+echo "script/run/specs"
+RUBYOPT=W0 bundle exec guard -c

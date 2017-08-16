@@ -1,0 +1,34 @@
+This week I'm going to work on a hello world dapp.  Here's what I intend to
+produce.  Items are in priority order, will do as many as time permits.
+
+[X] a public repo for the helloworld app (andyl/dhello)
+[X] a solidity contract that fetches and returns items from a blockchain message store
+[X] a web3 integration that depends on Chrome/MetaMask
+[X] a HTML form that allows the user to post a message to the store
+[ ] a HTML page to display the message log
+[X] add bootstrap V4 as the CSS framework
+[X] add react/redux components as needed
+[X] add test framework 
+    (unit tests for contracts and components, integration tests for HTML interface)
+[X] add a webpack configuration for JS, HTML and Contract generation
+[X] add a TMUX configuration for a multi-process dev console 
+    (test runner, web server, webpack watcher, ethereum development node)
+[-] a pure HTML implementation using server-side Truffle for blockchain access
+
+At the end of this process I hope to understand:
+
+- the types of data structures provided by solidity
+- web3 mechanisms for identity and authorization
+- unit testing for web3 interactions and solidity contracts
+- web3 integration testing
+- pros and cons of metamind vs truffle integration
+
+Notes:
+[ ] 
+
+TODO:
+[ ] deploy the app to GitHub pages
+[ ] add Jest tests
+[ ] add integration tests
+[ ] is it possible to show the account ID in the dapp?
+
