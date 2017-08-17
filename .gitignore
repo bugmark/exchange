@@ -26,8 +26,10 @@
 /db/backups/*
 /db/schema*
 /db/backups*
+/node_modules
 /node_modules/
 /jsn/node_modules/
+/eth/node_modules/
 /public/assets/
 /public/system/
 /public/system*/
@@ -35,7 +37,5 @@
 /public/qrcodes/
 /public/packs
 /public/all_packs
-/node_modules
-/node_modules
 /app/assets/stylesheets/.sass-cache/
 yarn-error.log
