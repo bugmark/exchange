@@ -1,4 +1,4 @@
-class OffersController < ApplicationController
+class BidsController < ApplicationController
 
   before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
@@ -24,6 +24,7 @@ class OffersController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
+    @bid = Bid.new
     # @contract = ContractCmd::Publish.new(new_opts(params))
   end
 

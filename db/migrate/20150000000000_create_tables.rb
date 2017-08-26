@@ -41,27 +41,36 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :labels , using: :gin
     add_index :bugs, :jfields, using: :gin
 
-    create_table :bids do |t|
-      t.string  :type                  # BugZilla, GitHub, CVE
-      t.integer :contract_id
-      t.string  :exref
-      t.string  :uuref
+    %i(bids asks).each do |table|
+      create_table table do |t|
+        t.string   :type                  # BugZilla, GitHub, CVE
+        t.integer  :user_id
+        t.integer  :contract_id
+        t.integer  :token_id
+        t.string   :status
+        t.datetime :offer_expiration
+        t.datetime :contract_maturation
+        # ----- match fields -----
+        t.integer  :repo_id
+        t.integer  :bug_id
+        t.string   :bug_title
+        t.string   :bug_status
+        t.string   :bug_labels
+        t.boolean  :bug_presence
+        # ----- match fields -----
+        t.jsonb    :jfields,  null: false, default: '{}'
+        t.string   :exref
+        t.string   :uuref
+      end
+      add_index table, :type
+      add_index table, :user_id
+      add_index table, :contract_id
+      add_index table, :exref
+      add_index table, :uuref
+      add_index table, :repo_id
+      add_index table, :bug_id
+      add_index table, :jfields, using: :gin
     end
-    add_index :bids, :type
-    add_index :bids, :contract_id
-    add_index :bids, :exref
-    add_index :bids, :uuref
-
-    create_table :asks do |t|
-      t.string  :type                  # BugZilla, GitHub, CVE
-      t.integer :contract_id
-      t.string  :exref
-      t.string  :uuref
-    end
-    add_index :asks, :type
-    add_index :asks, :contract_id
-    add_index :asks, :exref
-    add_index :asks, :uuref
 
     create_table :contracts do |t|
       t.string   :type                # forecast, reward
