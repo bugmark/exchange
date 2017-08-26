@@ -1,4 +1,4 @@
-class Bug::BugZilla < Bug
+class Bid::GitHub < Bid
 
 end
 

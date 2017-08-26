@@ -1,4 +1,4 @@
-class Bug::BugZilla < Bug
+class Bid::Cve < Bid
 
 end
 

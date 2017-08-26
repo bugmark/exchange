@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :bugs
 
+  resources :offers
+
   resources :repos do
     get 'sync', :on => :member
   end

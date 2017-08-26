@@ -1,4 +1,4 @@
-class Bug::BugZilla < Bug
+class Ask::GitHub < Ask
 
 end
 

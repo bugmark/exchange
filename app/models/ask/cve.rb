@@ -1,6 +1,4 @@
-class Bug::Cvrf < Bug
-
-  # belongs_to :repo
+class Ask::Cve < Ask
 
 end
 
