@@ -1,1 +1,23 @@
-| Offers Hello World
+.row
+  .col-md-6
+    div style='text-align: center'
+      h4 Bids
+    table.table.table-striped.table-bordered.table-hover width="100%" cellspacing="0"
+      thead
+        tr
+          th ID
+      tbody
+        - @bids.each do |bid|
+          tr
+            td = bid.id
+  .col-md-6
+    div style='text-align: center'
+      h4 Asks
+    table.table.table-striped.table-bordered.table-hover width="100%" cellspacing="0"
+      thead
+        tr
+          th ID
+      tbody
+        - @asks.each do |ask|
+          tr
+            td = ask.id

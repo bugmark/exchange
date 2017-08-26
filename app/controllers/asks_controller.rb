@@ -2,9 +2,20 @@ class OffersController < ApplicationController
 
   before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
+  # bug_id (optional)
   def index
-    @bids = Bid.all
-    @asks = Ask.all
+    # @bug = @repo = nil
+    # @timestamp = Time.now.strftime("%H:%M:%S")
+    # case
+    #   when bug_id = params["bug_id"]&.to_i
+    #     @bug       = Bug.find(bug_id)
+    #     @contracts = Contract.where(bug_id: bug_id)
+    #   when repo_id = params["repo_id"]&.to_i
+    #     @repo      = Repo.find(repo_id)
+    #     @contracts = Contract.where(repo_id: repo_id)
+    #   else
+    #     @contracts = Contract.all
+    # end
   end
 
   def show

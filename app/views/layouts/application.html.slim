@@ -26,6 +26,12 @@ html[lang="en-US"]
       = yield
       hr
       footer
+        div[style="text-align: center"]
+          small
+            - if Rails.env.development?
+              = raw debug_text
+            - else
+              | Powered by BugMark
 
     = javascript_include_tag :application
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"]

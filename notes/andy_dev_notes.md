@@ -69,14 +69,29 @@ Next Actions:
 
 # Aug 07
 
-- [TODO] Contract Design V2
+- [TODO] Publish Contract Design V2
 
 # Aug 08
 
 - [DONE] Add feature specs
 
-- [TODO] Event Sourcing Full Implementation
-- [TODO] UI: cleanup documentation
+# Aug 19
+
+- [DONE] Event sourcing full implementation
+
+# Aug 24
+
+- [DONE] Publish Trading Mechanics V2 plan
+
+# Aug 25
+
+- [DONE] Push V2 branch
+
+# Aug 26
+
+- [TODO] add bid/ask models
+- [TODO] contract change from forecast to repo type
+- [TODO] UI: upgrade to bootstrap beta
 
 # TBD
 

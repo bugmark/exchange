@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def debug_text
+    "<b>#{params["controller"]}##{params["action"]}</b>"
+  end
+
   def nav_link(label, path, opts = {})
 
     delopt = opts[:method] == "delete"
