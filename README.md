@@ -110,25 +110,7 @@ Session participant:
 
 ### Desktop Sharing
 
-Visit this url:
-
-https://www.webrtc-experiment.com/desktop-sharing
-
-- Install the desktop-sharing plugin on Chrome
-- Share the desktop 
-- Use `script/util/sshchat` to publish the connection url 
-
-Pro Tips:
-
-- Configure the desktop-sharing plugin with a fixed room name (like "bugmark").
-  This will make it possible for team members to bookmark the room, and will
-  enable remote sessions to auto-reconnect if a stream is interrupted.
-
-- Share the entire desktop, not an appbugmarktion window.  The reason is that the
-  app-window sharing seems to resize/crop incorrectly.
-
-- The session participant should experiment with full-screen (F11) or normal
-  browser sizing to get the best image.
+Use Google Hangouts.
 
 ## Google Hangouts
 
