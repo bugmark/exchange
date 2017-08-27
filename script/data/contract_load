@@ -33,6 +33,6 @@ opts = [
   }
 ]
 
-opts.each do |opt|
-  FG.create(:contract, opt)
-end
+# opts.each do |opt|
+#   FG.create(:contract, opt)
+# end

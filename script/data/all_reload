@@ -14,9 +14,6 @@ script/data/user_load
 echo Load GH data
 script/data/gh_load
 
-#echo Load CVE data
-#bundle exec script/data/cve_load
-
 echo Load Contracts
 bundle exec script/data/contract_load
 

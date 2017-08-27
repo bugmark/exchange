@@ -46,7 +46,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
         t.string   :type                  # BugZilla, GitHub, CVE
         t.integer  :user_id
         t.integer  :contract_id
-        t.integer  :token_id
+        t.integer  :token_value
         t.string   :status
         t.datetime :offer_expiration
         t.datetime :contract_maturation

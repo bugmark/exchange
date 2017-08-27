@@ -3,18 +3,17 @@ hr
 - if @bid.errors.any?
   .alert.alert-danger Please fix the errors below.
 = bootstrap_form_for(@bid) do |f|
-  /= f.hidden_field :type
-  /= f.hidden_field :publisher_id
-  /= f.hidden_field :terms
+  = f.hidden_field :type
+  = f.hidden_field :user_id
   .row
-    /.col-md-6 = f.number_field    :token_value, label: "Tokens"
-    /.col-md-6 = f.datetime_field  :matures_at
+    .col-md-6 = f.number_field    :token_value, label: "Tokens"
+    .col-md-6 = f.datetime_field  :matures_at
   div style='background: lightgrey; padding: 4px;'
     | Match Criteria (blank for "don't care")
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
     .row
-      /.col-md-6 = f.number_field  :repo_id      , label: "Repo ID"
-      /.col-md-6 = f.number_field  :bug_id       , label: "Bug ID"
+      .col-md-6 = f.number_field  :repo_id      , label: "Repo ID"
+      .col-md-6 = f.number_field  :bug_id       , label: "Bug ID"
     .row
       /.col-md-6 = f.text_field    :bug_title    , label: "Bug Title (substring match)"
       /.col-md-6 = f.text_field    :bug_labels   , label: "Bug Labels (comma separated, substring match)"
