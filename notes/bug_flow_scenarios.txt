@@ -118,35 +118,3 @@ SCENARIO : Steve thinks he can fix a bug and wants to get paid 100 BugCoin.  Joe
 
 
 SCENARIO : Stakes in the Contract are Re-Sold
-
-SOME MORE NOTES HERE FROM ANDY
-==============================
-
-Some ideas to note:
-- two demos - Sep21 and Oct27
-- design session expected late sept
-
-Other stuff we're gonna need:
-- On the 27th, I'd like a documentation fix service that works like a REAL SAAS
--- BugCoinKarma edition only - no Gold
--- reselling(?)
--- image badges on a repo level
--- image badges on an issue level 
--- Easy registration with GitHub credentials
--- Lost-password emails - general registraiton capabilities
--- Great UI - per our design session
--- Marketing documentation (landing page)
--- Email Notifications of Bids, Asks and Watching, etc.
--- Training materials - screencasts, white paper, user-guide
--- Testimonials - teams who are using the system
--- Identify (contact?) some repositories that could use documentation improvement (ethereum etc.)
--- Community Forum
--- Execution and Integration with Solidity Contracts (exact configuration TBD)
----- public or private blockchain??
----- transaction or just datastore??
--- Admin Tools - invite capabilities, etc.
--- User 'Trading Activity' page - trading history, open offers, awards, etc.
--- User Profile page - reset password, etc.
--- [SYSADMIN MONITORING] InfluxDB Application Metrics & Grafana Pages
--- Some form of API or CLI way to interact with BugMark (nice to have??)
-

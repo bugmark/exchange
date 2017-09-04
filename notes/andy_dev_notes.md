@@ -5,16 +5,16 @@ CQRS Design:
 - events are persisted by a Projection object
 - events have a cryptographic signature - merkle-tree style
 - object references - generate object UUID reference *in the client*
-- `SecureRandom.uuid`
+- "SecureRandom.uuid"
 - events are isomorphic with Solidity contract events
 - events can come from Rails app or Blockchain
  
 CQRS TODO:
 - [DONE] rename 'form' to 'commands'
 - [DONE] add a 'ref' field to all objects (uuref and exref)
+- [DONE] write a Projection class
+- [DONE] make all the Commands emit events
 - write a user registration controller that uses commands
-- write a Projection class
-- make all the Commands emit events
 - build tests to save and re-play events
 - add the event stream to the UI (account history, etc.)
 - integrate with blockchain
@@ -92,11 +92,12 @@ Next Actions:
 - [DONE] add bid/ask models
 - [DONE] UI: upgrade to bootstrap beta
 
+# Sep 04
+
+- [TODO] build out Offers and Contracts page
+
 # TBD
 
 - [TODO] contract change from forecast to repo type
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck
-
-- [TODO] UI: allow editing of open contracts
-- [TODO] UI: change action links to buttons
