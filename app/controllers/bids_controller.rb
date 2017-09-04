@@ -24,8 +24,7 @@ class BidsController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
-    @bid = Bid.new
-    # @contract = ContractCmd::Publish.new(new_opts(params))
+    @bid = BidCmd::Create.new(new_opts(params))
   end
 
   # id (contract ID)
@@ -56,17 +55,17 @@ class BidsController < ApplicationController
   private
 
   def valid_params(params)
-    fields = Contract.attribute_names.map(&:to_sym)
+    fields = Bid.attribute_names.map(&:to_sym)
     params.permit(fields)
   end
 
   def new_opts(params)
     opts = {
-      type:            "Contract::#{params["type"]&.capitalize}"    ,
-      terms:           "Net0"                                       ,
-      token_value:     10                                           ,
-      matures_at:      Time.now + 3.minutes                         ,
-      publisher_id:    current_user.id
+      type:                 "Bid::#{params["type"]&.capitalize}"    ,
+      terms:                "Net0"                                       ,
+      token_value:          10                                           ,
+      contract_maturation:  Time.now + 3.minutes                         ,
+      publisher_id:         current_user.id
     }
     key  = "bug_id"  if params["bug_id"]
     key  = "repo_id" if params["repo_id"]

@@ -89,12 +89,12 @@ Next Actions:
 
 # Aug 26
 
-- [TODO] add bid/ask models
-- [TODO] contract change from forecast to repo type
-- [TODO] UI: upgrade to bootstrap beta
+- [DONE] add bid/ask models
+- [DONE] UI: upgrade to bootstrap beta
 
 # TBD
 
+- [TODO] contract change from forecast to repo type
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck
 
