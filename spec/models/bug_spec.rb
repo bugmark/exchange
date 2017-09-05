@@ -88,6 +88,7 @@ end
 #  description :string
 #  status      :string
 #  labels      :text             default([]), is an Array
+#  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  synced_at   :datetime
 #  exref       :string

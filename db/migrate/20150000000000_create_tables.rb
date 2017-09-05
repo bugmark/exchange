@@ -1,5 +1,8 @@
 class CreateTables < ActiveRecord::Migration[5.1]
   def change
+
+    enable_extension "hstore"
+
     create_table :repos do |t|
       t.string   :type            # Repo::BugZilla, Repo::GitHub, Repo::Cvrf,
       t.string   :name            # mvscorg/xdmarket
