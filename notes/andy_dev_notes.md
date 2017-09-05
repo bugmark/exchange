@@ -94,6 +94,8 @@ Next Actions:
 
 # Sep 04
 
+- [TODO] build out bids/new page
+- [TODO] build out asks/new page
 - [TODO] build out Offers and Contracts page
 
 # TBD
