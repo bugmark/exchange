@@ -26,6 +26,7 @@ MARKETING  Testimonials - teams who are using the system
 MARKETING  Identify/Contact repos that need doccco improvement (ethereum)
 COMMUNITY  BugMark Forum (discourse)
 COMMUNITY  BugMark Slack
+COMMUNITY  Contribution Guidelines, etc. (eating our own dogfood - see https://www.docker.com/contribute)
 BLOCKCHAIN Live Integration with Solidity Contracts (configuration TBD)
 ADMIN      invite capabilities, etc.
 MONITORING InfluxDB Application Metrics & Grafana Pages
