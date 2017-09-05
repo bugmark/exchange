@@ -3,9 +3,11 @@ require 'net/http'
 class Repo::GitHub < Repo
 
   validates :json_url  , uniqueness: true, presence: true
-  validates :name     , uniqueness: true, presence: true
+  validates :name      , uniqueness: true, presence: true
 
   before_validation :set_url
+
+  hstore_accessor :xfields, :etag => :string
 
   validates :name, format: { with:    /\A[\_\-\.a-zA-Z0-9]+\/[\.\_\-a-zA-Z0-9]+\z/,
                              message: "needs GitHub repo '<user>/<repo>'" }

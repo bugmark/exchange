@@ -1,5 +1,7 @@
 class Bug::GitHub < Bug
 
+  hstore_accessor :xfields, :etag => :string
+
 end
 
 # == Schema Information

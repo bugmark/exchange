@@ -16,8 +16,11 @@ UI         User Profile page - reset password, etc.
 ONBOARDING Easy registration with GitHub credentials
 ONBOARDING Lost-password emails - general registraiton capabilities
 ONBOARDING Training materials - screencasts, white paper, user-guide
+GITHUB     authenticated requests - https://github.com/blog/1509-personal-api-tokens
+GITHUB     ETAG conditional requests - https://developer.github.com/v3/#conditional-requests
 GITHUB     image badges on a repo level
 GITHUB     image badges on an issue level
+GITHUB     issue webhooks - https://developer.github.com/v3/activity/events/types/#issuesevent
 MARKETING  Marketing documentation (landing page)
 MARKETING  Testimonials - teams who are using the system
 MARKETING  Identify/Contact repos that need doccco improvement (ethereum)
