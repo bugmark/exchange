@@ -25,6 +25,7 @@ class Repo::GitHub < Repo
     req = Net::HTTP.new(url.host, url.port)
     req.use_ssl = true
     res = req.request_head(url.path)
+    binding.pry if res.code != "200"
     return if res.code == "200"
     errors.add :name, "GitHub repo does not exist"
   end

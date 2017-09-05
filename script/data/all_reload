@@ -14,7 +14,7 @@ script/data/user_load
 echo Load GH data
 script/data/gh_load
 
-echo Load Contracts
-bundle exec script/data/contract_load
+echo Load Bids
+bundle exec script/data/bid_load
 
 echo Done.

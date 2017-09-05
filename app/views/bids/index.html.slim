@@ -1,2 +1,6 @@
 h2 BIDS
-| Under Construction
+
+table.table
+  - @bids.each do |bid|
+    tr
+      td = bid.id

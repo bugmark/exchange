@@ -92,14 +92,26 @@ Next Actions:
 - [DONE] add bid/ask models
 - [DONE] UI: upgrade to bootstrap beta
 
-# Sep 04
+# Sep 05
+
+- [TODO] add etag field to repo and bug as xfields
+- [TODO] add user authentication to GitHub calls
+- [TODO] add conditional fetch (etag) to GitHub calls
+
+- [TODO] add a GitHub api wrapper class (record calls and rate limits)
+
+- [TODO] create bid/ask commands
+- [TODO] create bid/ask loading scripts
 
 - [TODO] build out bids/new page
 - [TODO] build out asks/new page
-- [TODO] build out Offers and Contracts page
+
+- [TODO] build out Offers page
+- [TODO] build out Contracts page
+
+- [TODO] contract change from forecast to repo type
 
 # TBD
 
-- [TODO] contract change from forecast to repo type
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck

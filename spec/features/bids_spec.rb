@@ -19,4 +19,4 @@ describe "Bids" do
     visit "/bids/new"
     expect(page.body).to have_content("New Bid")
   end
-end     #
+end

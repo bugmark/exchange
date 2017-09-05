@@ -1,25 +1,25 @@
 class BidsController < ApplicationController
 
-  before_action :authenticate_user!, :except => [:index, :show, :resolve]
+  before_action :authenticate_user!, :except => [:index, :show]
 
   # bug_id (optional)
   def index
-    # @bug = @repo = nil
-    # @timestamp = Time.now.strftime("%H:%M:%S")
-    # case
-    #   when bug_id = params["bug_id"]&.to_i
-    #     @bug       = Bug.find(bug_id)
-    #     @contracts = Contract.where(bug_id: bug_id)
-    #   when repo_id = params["repo_id"]&.to_i
-    #     @repo      = Repo.find(repo_id)
-    #     @contracts = Contract.where(repo_id: repo_id)
-    #   else
-    #     @contracts = Contract.all
-    # end
+    @bug = @repo = nil
+    @timestamp = Time.now.strftime("%H:%M:%S")
+    case
+      when bug_id = params["bug_id"]&.to_i
+        @bug  = Bug.find(bug_id)
+        @bids = Bid.where(bug_id: bug_id)
+      when repo_id = params["repo_id"]&.to_i
+        @repo = Repo.find(repo_id)
+        @bids = Bid.where(repo_id: repo_id)
+      else
+        @bids = Bid.all
+    end
   end
 
   def show
-    # @contract = Contract.find(params["id"])
+    @bid = Bid.find(params["id"])
   end
 
   # bug_id or repo_id, type(forecast | reward)

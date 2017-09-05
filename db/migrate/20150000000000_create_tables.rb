@@ -5,6 +5,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :name            # mvscorg/xdmarket
       t.string   :json_url
       t.string   :html_url
+      t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
       t.string   :exref
@@ -18,6 +19,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :repos, :json_url
     add_index :repos, :html_url
     add_index :repos, :jfields, using: :gin
+    add_index :repos, :xfields, using: :gin
 
     create_table :bugs do |t|
       t.integer  :repo_id
@@ -27,7 +29,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :title
       t.string   :description
       t.string   :status
-      t.text     :labels, array: true, default: []
+      t.text     :labels,   array: true, default: []
+      t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
       t.string   :exref
@@ -40,6 +43,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :type
     add_index :bugs, :labels , using: :gin
     add_index :bugs, :jfields, using: :gin
+    add_index :bugs, :xfields, using: :gin
 
     %i(bids asks).each do |table|
       create_table table do |t|

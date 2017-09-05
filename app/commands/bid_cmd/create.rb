@@ -23,7 +23,7 @@ module BidCmd
     private
 
     def user_funds
-      if user.token_balance < contract.token_value
+      if user.token_balance < bid.token_value
         errors.add(:token_value, "not enough funds in user account")
       end
     end

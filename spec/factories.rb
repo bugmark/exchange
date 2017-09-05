@@ -27,6 +27,21 @@ FactoryGirl.define do
     repo_id  { FG.create(:repo).id }
   end
 
+  factory :bid, class: BidCmd::Create do
+    to_create {|instance| instance.save_event.project}
+    initialize_with { new(attributes) }
+
+    type                "Bid::GitHub"
+    token_value         20
+    contract_maturation Time.now + 1.day
+    bug_id              { FG.create(:bug).id  }
+    user_id             { FG.create(:user).id }
+
+    factory :matured_bid do
+      matures_at Time.now - 1.day
+    end
+   end
+
   factory :contract, class: ContractCmd::Publish do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
