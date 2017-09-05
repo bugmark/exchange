@@ -13,6 +13,11 @@ describe "Contracts" do
     expect(page).to_not be_nil
   end
 
+  it "renders /new" do
+    visit "/contracts/new"
+    expect(page).to_not be_nil
+  end
+
   it "takes an open contract" do
     login_as user, :scope => :user
     hydrate contract

@@ -24,7 +24,8 @@ class BidsController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
-    @bid = BidCmd::Create.new(new_opts(params))
+    # @bid = BidCmd::Create.new(new_opts(params))
+    @bid = Bid.new
   end
 
   # id (contract ID)
