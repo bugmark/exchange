@@ -102,14 +102,14 @@ Next Actions:
 - [DONE] add conditional fetch (etag) to GitHub calls
 - [DONE] add a GitHub api wrapper class (record calls and rate limits)
 - [DONE] add VCR mocking for GitHub testing
+- [DONE] create bid/ask loading scripts
+- [DONE] create bid/ask commands
 
-- [TODO] create bid/ask commands
-- [TODO] create bid/ask loading scripts
-
-- [TODO] build out bids/new page
-- [TODO] build out asks/new page
+- [TODO] build out bids/new page w/feature specs
+- [TODO] build out asks/new page w/feature specs
 
 - [TODO] build out Offers page
+- [TODO] create a Contract/cross command
 - [TODO] build out Contracts page
 
 - [TODO] contract change from forecast to repo type

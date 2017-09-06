@@ -39,6 +39,21 @@ FactoryGirl.define do
     end
    end
 
+  factory :ask, class: AskCmd::Create do
+    to_create {|instance| instance.save_event.project}
+    initialize_with { new(attributes) }
+
+    type                "Ask::GitHub"
+    token_value         20
+    contract_maturation Time.now + 1.day
+    bug_id              { FG.create(:bug).id  }
+    user_id             { FG.create(:user).id }
+
+    factory :matured_ask do
+      matures_at Time.now - 1.day
+    end
+  end
+
   factory :contract, class: ContractCmd::Publish do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
