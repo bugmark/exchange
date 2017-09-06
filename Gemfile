@@ -18,7 +18,10 @@ gem 'dotenv'
 gem 'hstore_accessor'
 gem 'jsonb_accessor'
 gem 'colored'
-gem 'github_api'
+
+gem 'octokit'
+gem 'faraday-http-cache'
+
 gem 'nokogiri'
 gem 'rails-ujs'
 gem 'jquery-rails'
