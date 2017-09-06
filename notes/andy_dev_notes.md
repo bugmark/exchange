@@ -94,11 +94,14 @@ Next Actions:
 
 # Sep 05
 
-- [TODO] add etag field to repo and bug as xfields
-- [TODO] add user authentication to GitHub calls
-- [TODO] add conditional fetch (etag) to GitHub calls
+- [DONE] add etag field to repo and bug as xfields
 
-- [TODO] add a GitHub api wrapper class (record calls and rate limits)
+# Sep 06
+
+- [DONE] add user authentication to GitHub calls
+- [DONE] add conditional fetch (etag) to GitHub calls
+- [DONE] add a GitHub api wrapper class (record calls and rate limits)
+- [DONE] add VCR mocking for GitHub testing
 
 - [TODO] create bid/ask commands
 - [TODO] create bid/ask loading scripts
