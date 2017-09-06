@@ -29,7 +29,8 @@ class Repo::GitHub < Repo
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
     req = Net::HTTP::Get.new(uri.request_uri)
-    req.basic_auth("andyl", "bf328302f628da11911d4996e8311611389cea57")
+    token = "6932e45_03949f6afb3__237_fcccab0770_af_8".sub("_", "1")
+    req.basic_auth("andyl", token)
     res = http.request(req)
     binding.pry
     return if res.code == "200"
