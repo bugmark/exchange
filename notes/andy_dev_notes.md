@@ -108,9 +108,12 @@ Next Actions:
 - [TODO] build out bids/new page w/feature specs
 - [TODO] build out asks/new page w/feature specs
 
-- [TODO] build out Offers page
+- [TODO] build out Offers page                    
 - [TODO] create a Contract/cross command
 - [TODO] build out Contracts page
+- [TODO] build out user trading page
+- [TODO] test multi-party contracts
+- [TODO] enable contract resale
 
 - [TODO] contract change from forecast to repo type
 
