@@ -38,8 +38,6 @@ module RepoCmd
           repo_id:   self.id         ,
           type:      "Bug::GitHub"   ,
           exref:     el["id"]        ,
-          json_url:  el["url"]       ,
-          html_url:  el["html_url"]  ,
           title:     el["title"]     ,
           labels:    el["labels"]    ,
           status:    el["state"]     ,

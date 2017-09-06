@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe Repo, :type => :model do
   def valid_params
     {
-      name:     "asdf"      ,
-      json_url:  "qwer"
+      name:     "asdf/qwer"
     }
   end
 
@@ -26,8 +25,6 @@ RSpec.describe Repo, :type => :model do
   end
 
   describe "Data Sync" do
-    # use_vcr_cassette
-
     it "does something" do
       VCR.use_cassette 'model/repo' do
         response = Octokit.repo 'mvscorg/bugmark'
@@ -44,8 +41,6 @@ end
 #  id         :integer          not null, primary key
 #  type       :string
 #  name       :string
-#  json_url   :string
-#  html_url   :string
 #  xfields    :hstore           not null
 #  jfields    :jsonb            not null
 #  synced_at  :datetime

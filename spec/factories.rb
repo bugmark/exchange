@@ -13,8 +13,6 @@ FactoryGirl.define do
   factory :repo, class: RepoCmd::GhCreate do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
-
-    sequence :json_url do |n| "http://placeholder#{n}.com" end
     sequence :name     do |n| "mvscorg/test#{n}" end
   end
 
@@ -23,7 +21,6 @@ FactoryGirl.define do
     initialize_with { new(attributes) }
 
     sequence :title do |n| "Bug #{n}" end
-    sequence :json_url do |n| "http://placeholder#{n}.com" end
     repo_id  { FG.create(:repo).id }
   end
 

@@ -1,7 +1,5 @@
 class Bug::GitHub < Bug
 
-  hstore_accessor :xfields, :etag => :string
-
 end
 
 # == Schema Information
@@ -11,8 +9,6 @@ end
 #  id          :integer          not null, primary key
 #  repo_id     :integer
 #  type        :string
-#  json_url    :string
-#  html_url    :string
 #  title       :string
 #  description :string
 #  status      :string

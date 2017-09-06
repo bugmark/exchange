@@ -4,7 +4,7 @@ RSpec.describe Contract, type: :model do
 
   def valid_params
     {
-      token_value: 10                  ,
+      token_value:     10                  ,
       publisher_id:    user.id
     }
   end
