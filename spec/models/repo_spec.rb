@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Repo, type: :model do
+RSpec.describe Repo, :type => :model do
   def valid_params
     {
       name:     "asdf"      ,
@@ -22,6 +22,17 @@ RSpec.describe Repo, type: :model do
     it 'saves the object to the database' do
       subject.save
       expect(subject).to be_valid
+    end
+  end
+
+  describe "Data Sync" do
+    # use_vcr_cassette
+
+    it "does something" do
+      VCR.use_cassette 'model/repo' do
+        response = Octokit.repo 'mvscorg/bugmark'
+        expect(response).to_not be_nil
+      end
     end
   end
 end
