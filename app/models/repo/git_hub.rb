@@ -18,16 +18,20 @@ class Repo::GitHub < Repo
 
   def set_url
     self.html_url = "https://github.com/#{self.name}/issues"
-    self.json_url  = "https://api.github.com/repos/#{self.name}/issues"
+    self.json_url = "https://api.github.com/repos/#{self.name}/issues"
   end
 
   def repo_url_presence
     lcl = set_url
-    url = URI.parse(lcl)
-    req = Net::HTTP.new(url.host, url.port)
-    req.use_ssl = true
-    res = req.request_head(url.path)
-    binding.pry if res.code != "200"
+    uri = URI.parse(lcl)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    req = Net::HTTP::Get.new(uri.request_uri)
+    req.basic_auth("andyl", "bf328302f628da11911d4996e8311611389cea57")
+    res = http.request(req)
+    binding.pry
     return if res.code == "200"
     errors.add :name, "GitHub repo does not exist"
   end

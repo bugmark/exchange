@@ -15,6 +15,6 @@ echo Load GH data
 script/data/gh_load
 
 echo Load Bids
-# bundle exec script/data/bid_load
+bundle exec script/data/bid_load
 
 echo Done.
