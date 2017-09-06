@@ -1,0 +1,20 @@
+var EventStore = artifacts.require("./EventStore.sol");
+
+module.exports = function(done) {
+    EventStore.deployed().then(function(es){
+	console.log(es);
+	es.contract.allEvents(
+	    {fromBlock: 0},
+	    function(error,result){
+		if (error == null) {
+		    console.log('EVENT!');
+		    console.log(result.args);
+		    done();
+		} else {
+		    done();
+		}
+	    });
+	done();
+    });
+    done();
+};
