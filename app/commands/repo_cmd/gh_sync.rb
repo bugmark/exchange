@@ -12,7 +12,6 @@ module RepoCmd
       instance = allocate
       instance.repo = repo
       instance
-      binding.pry
     end
 
     def transact_before_project
@@ -33,9 +32,8 @@ module RepoCmd
     private
 
     def sync_bugs
-      json = open(repo.json_url) {|io| io.read}
-      binding.pry
-      JSON.parse(json).each do |el|
+      issues = Octokit.issues(repo.name)
+      issues.each do |el|
         attrs = {
           repo_id:   self.id         ,
           type:      "Bug::GitHub"   ,
@@ -48,7 +46,6 @@ module RepoCmd
           synced_at: Time.now
         }
         bug = BugCmd::Sync.new(attrs)
-        binding.pry
         bug.save_event.project
       end
     end

@@ -1,6 +1,6 @@
 Octokit.configure do |c|
   c.login    = 'andyl'
-  c.password = 'b0dd9095b49f07a2897b1aa2e010478800d68eb6'
+  c.password = '03d5a8f96096366' + 'ab4ad80b6e823c3d49b82fee2'
 end
 
 stack = Faraday::RackBuilder.new do |builder|

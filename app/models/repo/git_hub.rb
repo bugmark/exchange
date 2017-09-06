@@ -22,18 +22,8 @@ class Repo::GitHub < Repo
   end
 
   def repo_url_presence
-    lcl = set_url
-    uri = URI.parse(lcl)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-    req = Net::HTTP::Get.new(uri.request_uri)
-    token = "6932e45_03949f6afb3__237_fcccab0770_af_8".sub("_", "1")
-    req.basic_auth("andyl", token)
-    res = http.request(req)
-    binding.pry
-    return if res.code == "200"
+    repo = Octokit.repo(self.name)
+    return if repo.present?
     errors.add :name, "GitHub repo does not exist"
   end
 end
