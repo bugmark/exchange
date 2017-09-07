@@ -69,11 +69,6 @@ module BidsHelper
     raw "<i class='fa fa-#{icon}'></i> #{lbl}"
   end
 
-  def bid_user_link(bid)
-    usr  = bid.user
-    raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
-  end
-
   def bid_counterparty_link(bid)
     return "NA" unless bid.counterparty_id
     usr  = bid.counterparty

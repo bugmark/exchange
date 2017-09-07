@@ -7,18 +7,13 @@ module ReposHelper
     truncate(repo.name)
   end
 
-  def repo_contract_new_link(repo)
-    path = "contracts/new?type=forecast&repo_id=#{repo.id}"
-    raw "<a href='#{path}'>Contract</a>"
-  end
-
   def repo_bid_new_link(repo)
-    path = "bids/new?type=forecast&repo_id=#{repo.id}"
+    path = "bids/new?type=git_hub&repo_id=#{repo.id}"
     raw "<a href='#{path}'>Bid</a>"
   end
 
   def repo_ask_new_link(repo)
-    path = "asks/new?type=forecast&repo_id=#{repo.id}"
+    path = "asks/new?type=git_hub&repo_id=#{repo.id}"
     raw "<a href='#{path}'>Ask</a>"
   end
 
@@ -49,10 +44,9 @@ module ReposHelper
   def repo_actions(repo)
     cbid  = repo_bid_new_link(repo)
     cask  = repo_ask_new_link(repo)
-    cnew  = repo_contract_new_link(repo)
     csync = link_to "Sync", {:action => :sync, :id => repo.id}
     cdest = repo_destroy_link(repo)
-    raw [cbid,cask,cnew,csync,cdest].select(&:present?).join(" | ")
+    raw [cbid,cask,csync,cdest].select(&:present?).join(" | ")
   end
 
   def repo_http_link(repo)

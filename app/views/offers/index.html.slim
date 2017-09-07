@@ -6,11 +6,13 @@
       thead
         tr
           th ID
+          th User
           th Tokens
       tbody
         - @bids.each do |bid|
           tr
             td = bid_id_link(bid)
+            td = bid_user_link(bid.user)
             td = bid.token_value
   .col-md-6
     div style='text-align: center'
@@ -19,9 +21,11 @@
       thead
         tr
           th ID
+          th User
           th Tokens
       tbody
         - @asks.each do |ask|
           tr
             td = ask_id_link(ask)
+            td = ask_user_link(ask.user)
             td = ask.token_value

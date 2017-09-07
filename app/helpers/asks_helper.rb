@@ -69,11 +69,6 @@ module AsksHelper
     raw "<i class='fa fa-#{icon}'></i> #{lbl}"
   end
 
-  def ask_user_link(ask)
-    usr  = ask.user
-    raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
-  end
-
   def ask_counterparty_link(ask)
     return "NA" unless ask.counterparty_id
     usr  = ask.counterparty
