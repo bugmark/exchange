@@ -15,8 +15,12 @@ Rails.application.routes.draw do
   resources :bugs
 
   resources :offers
+
   resources :bids
+  resources :bid_cmd_creates, path: "/bids"
+
   resources :asks
+  resources :ask_cmd_creates, path: "/asks"
 
   resources :repos do
     get 'sync', :on => :member

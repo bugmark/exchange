@@ -25,32 +25,30 @@ class BidsController < ApplicationController
   # bug_id or repo_id, type(forecast | reward)
   def new
     @bid = BidCmd::Create.new(new_opts(params))
-    # @bid = Bid.new
   end
 
   # id (contract ID)
   def edit
-    # @contract = ContractCmd::Take.find(params[:id], with_counterparty: current_user)
+    # @bid = ContractCmd::Take.find(params[:id], with_counterparty: current_user)
   end
 
   def create
-    opts = params["contract_cmd_publish"]
-    binding.pry
-    # @contract = ContractCmd::Publish.new(valid_params(opts))
-    # if @contract.save_event.project
-    #   redirect_to("/contracts/#{@contract.id}")
-    # else
-    #   render 'contracts/new'
-    # end
+    opts = params["bid_cmd_create"]
+    @bid = BidCmd::Create.new(valid_params(opts))
+    if @bid.save_event.project
+      redirect_to("/bids/#{@bid.id}")
+    else
+      render 'bids/new'
+    end
   end
 
   def update
     # opts = params["contract_cmd_take"]
-    # @contract = ContractCmd::Take.find(opts["id"], with_counterparty: current_user)
-    # if @contract.save_event.project
-    #   redirect_to("/contracts/#{@contract.id}")
+    # @bid = ContractCmd::Take.find(opts["id"], with_counterparty: current_user)
+    # if @bid.save_event.project
+    #   redirect_to("/bids/#{@bid.id}")
     # else
-    #   render 'contracts/new'
+    #   render 'bids/new'
     # end
   end
 

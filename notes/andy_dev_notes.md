@@ -104,9 +104,9 @@ Next Actions:
 - [DONE] add VCR mocking for GitHub testing
 - [DONE] create bid/ask loading scripts
 - [DONE] create bid/ask commands
-
-- [TODO] build out bids/new page w/feature specs
-- [TODO] build out asks/new page w/feature specs
+- [DONE] build out bids/new page
+- [DONE] build out asks/new page
+- [DONE] contract change from forecast to repo type
 
 - [TODO] build out Offers page                    
 - [TODO] create a Contract/cross command
@@ -115,7 +115,8 @@ Next Actions:
 - [TODO] test multi-party contracts
 - [TODO] enable contract resale
 
-- [TODO] contract change from forecast to repo type
+- [TODO] add specs for models, commands, features
+- [TODO] enable event replay
 
 # TBD
 

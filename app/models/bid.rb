@@ -2,7 +2,18 @@ class Bid < ApplicationRecord
 
   before_validation :default_values
 
-  belongs_to :contract
+  belongs_to :user
+  belongs_to :contract, optional: true
+  belongs_to :bug,      optional: true
+  belongs_to :repo,     optional: true
+
+  def xid
+    "bid.#{self.id}"
+  end
+
+  def match_list
+    []
+  end
 
   private
 
