@@ -28,29 +28,29 @@ module BugsHelper
   end
 
   def bug_contract_new_link(bug)
-    path = "/contracts/new?type=forecast&bug_id=#{bug.id}"
+    path = "/contracts/new?type=git_hub&bug_id=#{bug.id}"
     raw "<a href='#{path}'>Contract</a>"
   end
 
   def bug_ask_new_link(bug)
-    path = "/asks/new?type=forecast&bug_id=#{bug.id}"
+    path = "/asks/new?type=git_hub&bug_id=#{bug.id}"
     raw "<a href='#{path}'>Ask</a>"
   end
 
   def bug_bid_new_link(bug)
-    path = "/bids/new?type=forecast&bug_id=#{bug.id}"
+    path = "/bids/new?type=git_hub&bug_id=#{bug.id}"
     raw "<a href='#{path}'>Bid</a>"
   end
 
-  def bug_reward_link(bug)
-    path = "contracts/new?type=reward&bug_id=#{bug.id}"
-    raw "<a href='#{path}'>Reward</a>"
-  end
+  # def bug_reward_link(bug)
+  #   path = "contracts/new?type=reward&bug_id=#{bug.id}"
+  #   raw "<a href='#{path}'>Reward</a>"
+  # end
 
   def bug_actions(bug)
-    cbid  = bug_bid_new_link(bug)
-    cask  = bug_ask_new_link(bug)
-    cnew  = bug_contract_new_link(bug)
+    cbid = bug_bid_new_link(bug)
+    cask = bug_ask_new_link(bug)
+    cnew = bug_contract_new_link(bug)
     raw [cbid,cask,cnew].select(&:present?).join(" | ")
   end
 

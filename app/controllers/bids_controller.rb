@@ -24,8 +24,8 @@ class BidsController < ApplicationController
 
   # bug_id or repo_id, type(forecast | reward)
   def new
-    # @bid = BidCmd::Create.new(new_opts(params))
-    @bid = Bid.new
+    @bid = BidCmd::Create.new(new_opts(params))
+    # @bid = Bid.new
   end
 
   # id (contract ID)
@@ -34,7 +34,8 @@ class BidsController < ApplicationController
   end
 
   def create
-    # opts = params["contract_cmd_publish"]
+    opts = params["contract_cmd_publish"]
+    binding.pry
     # @contract = ContractCmd::Publish.new(valid_params(opts))
     # if @contract.save_event.project
     #   redirect_to("/contracts/#{@contract.id}")
@@ -62,11 +63,10 @@ class BidsController < ApplicationController
 
   def new_opts(params)
     opts = {
-      type:                 "Bid::#{params["type"]&.capitalize}"    ,
-      terms:                "Net0"                                       ,
-      token_value:          10                                           ,
-      contract_maturation:  Time.now + 3.minutes                         ,
-      publisher_id:         current_user.id
+      type:                 "Bid::#{params["type"]&.camelize}"      ,
+      token_value:          10                                      ,
+      contract_maturation:  Time.now + 3.minutes                    ,
+      user_id:              current_user.id
     }
     key  = "bug_id"  if params["bug_id"]
     key  = "repo_id" if params["repo_id"]

@@ -62,11 +62,10 @@ class AsksController < ApplicationController
 
   def new_opts(params)
     opts = {
-      type:            "Contract::#{params["type"]&.capitalize}"    ,
-      terms:           "Net0"                                       ,
-      token_value:     10                                           ,
-      matures_at:      Time.now + 3.minutes                         ,
-      publisher_id:    current_user.id
+      type:                "Contract::#{params["type"]&.capitalize}"    ,
+      token_value:         10                                           ,
+      contract_maturation: Time.now + 3.minutes                         ,
+      user_id:             current_user.id
     }
     key  = "bug_id"  if params["bug_id"]
     key  = "repo_id" if params["repo_id"]

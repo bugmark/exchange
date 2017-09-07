@@ -1,5 +1,7 @@
 class Ask < ApplicationRecord
 
+  belongs_to :contract
+
 end
 
 # == Schema Information

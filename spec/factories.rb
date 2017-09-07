@@ -35,7 +35,7 @@ FactoryGirl.define do
     user_id             { FG.create(:user).id }
 
     factory :matured_bid do
-      matures_at Time.now - 1.day
+      contract_maturation Time.now - 1.day
     end
    end
 
@@ -50,33 +50,33 @@ FactoryGirl.define do
     user_id             { FG.create(:user).id }
 
     factory :matured_ask do
-      matures_at Time.now - 1.day
+      contract_maturation Time.now - 1.day
     end
   end
 
-  factory :contract, class: ContractCmd::Publish do
-    to_create {|instance| instance.save_event.project}
-    initialize_with { new(attributes) }
-
-    type         "Contract::Forecast"
-    token_value  20
-    terms        "Net10"
-    matures_at   Time.now + 1.day
-    bug_id       { FG.create(:bug).id  }
-    publisher_id { FG.create(:user).id }
-
-    factory :matured_contract do
-      matures_at Time.now - 1.day
-    end
-
-    factory :taken_contract do
-      counterparty_id { FG.create(:user).id }
-    end
-
-    factory :taken_matured_contract do
-      counterparty_id { FG.create(:user).id }
-      matures_at      Time.now - 1.day
-    end
-   end
+  # factory :contract, class: ContractCmd::Publish do
+  #   to_create {|instance| instance.save_event.project}
+  #   initialize_with { new(attributes) }
+  #
+  #   type         "Contract::GitHub"
+  #   token_value  20
+  #   terms        "Net10"
+  #   contract_maturation   Time.now + 1.day
+  #   bug_id       { FG.create(:bug).id  }
+  #   # user_id      { FG.create(:user).id }
+  #
+  #   factory :matured_contract do
+  #     contract_maturation Time.now - 1.day
+  #   end
+  #
+  #   factory :taken_contract do
+  #     counterparty_id { FG.create(:user).id }
+  #   end
+  #
+  #   factory :taken_matured_contract do
+  #     counterparty_id { FG.create(:user).id }
+  #     contract_maturation      Time.now - 1.day
+  #   end
+  #  end
 
 end

@@ -75,13 +75,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :contracts do |t|
       t.string   :type                # forecast, reward
-      t.integer  :publisher_id
-      t.integer  :counterparty_id
       t.float    :token_value
       t.string   :terms               # eg Net0, Net30
       t.string   :status              # open, taken, resolved, ...
       t.string   :awarded_to          # publisher, counterparty
-      t.datetime :matures_at
+      t.datetime :contract_maturation
       # ----- match fields
       t.integer  :repo_id
       t.integer  :bug_id
@@ -99,8 +97,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :contracts, :uuref
     add_index :contracts, :repo_id
     add_index :contracts, :bug_id
-    add_index :contracts, :publisher_id
-    add_index :contracts, :counterparty_id
     add_index :contracts, :jfields, using: :gin
 
     create_table :users do |t|

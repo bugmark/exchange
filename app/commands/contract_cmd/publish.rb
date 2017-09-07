@@ -8,7 +8,7 @@ module ContractCmd
 
     def initialize(args)
       @contract = Contract.new(args)
-      @user = User.find(contract.publisher_id)
+      # @user = User.find(contract.publisher_id)
     end
 
     def event_data

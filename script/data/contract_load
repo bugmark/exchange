@@ -4,32 +4,28 @@ require "./config/environment"
 
 opts = [
   {
-    bug_id:          Bug.first.id  ,
-    token_value:     20            ,
-    terms:           "Net10"       ,
-    publisher_id:    User.first.id ,
-    matures_at:      Time.now + 1.week
+    bug_id:              Bug.first.id  ,
+    token_value:         20            ,
+    user_id:             User.first.id ,
+    contract_maturation: Time.now + 1.week
   },
   {
-    bug_id:          Bug.first.id  ,
-    token_value:     15            ,
-    terms:           "Net10"       ,
-    publisher_id:    User.first.id ,
-    matures_at:      Time.now + 1.hour
+    bug_id:              Bug.first.id  ,
+    token_value:         15            ,
+    user_id:             User.first.id ,
+    contract_maturation: Time.now + 1.hour
   },
   {
-    bug_id:          Bug.first.id  ,
-    token_value:     5             ,
-    terms:           "Net30"       ,
-    publisher_id:    User.first.id ,
-    matures_at:      Time.now + 1.day
+    bug_id:              Bug.first.id  ,
+    token_value:         5             ,
+    user_id:             User.first.id ,
+    contract_maturation: Time.now + 1.day
   },
   {
-    bug_id:          Bug.first.id  ,
-    token_value:     10            ,
-    terms:           "Net30"       ,
-    publisher_id:    User.first.id ,
-    matures_at:      Time.now - 1.hour
+    bug_id:              Bug.first.id  ,
+    token_value:         10            ,
+    user_id:             User.first.id ,
+    contract_maturation: Time.now - 1.hour
   }
 ]
 

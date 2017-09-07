@@ -1,31 +1,17 @@
-class Bid < ApplicationRecord
-
-  before_validation :default_values
-
-  belongs_to :contract
-
-  private
-
-  def default_values
-    self.type         ||= 'Bid::GitHub'
-    self.status       ||= 'open'
-    self.bug_presence ||= true
-    self.contract_maturation   ||= Time.now + 1.week
-  end
+class Contract::GitHub < Contract
 
 end
 
 # == Schema Information
 #
-# Table name: bids
+# Table name: contracts
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  user_id             :integer
-#  contract_id         :integer
-#  token_value         :integer
+#  token_value         :float
+#  terms               :string
 #  status              :string
-#  offer_expiration    :datetime
+#  awarded_to          :string
 #  contract_maturation :datetime
 #  repo_id             :integer
 #  bug_id              :integer
@@ -36,4 +22,6 @@ end
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #

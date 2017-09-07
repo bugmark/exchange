@@ -25,7 +25,7 @@ RSpec.describe Repo, :type => :model do
   end
 
   describe "Data Sync" do
-    it "does something" do
+    it 'records a GitHub Api interaction' do
       VCR.use_cassette 'model/repo' do
         response = Octokit.repo 'mvscorg/bugmark'
         expect(response).to_not be_nil

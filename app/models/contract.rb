@@ -2,12 +2,12 @@ class Contract < ApplicationRecord
   belongs_to :bug , optional: true
   belongs_to :repo, optional: true
 
-  belongs_to :publisher   , class_name: "User", foreign_key: 'publisher_id'
-  belongs_to :counterparty, class_name: "User", foreign_key: 'counterparty_id', optional: true
+  has_many :bids
+  has_many :asks
 
   before_validation :default_values
   validates :status, inclusion: {in: %w(open taken lapsed awarded)}
-  validates :matures_at, presence: true
+  validates :contract_maturation, presence: true
 
   def attach_type
     self.bug_id ? "bugs" : "repos"
@@ -57,12 +57,12 @@ class Contract < ApplicationRecord
     "con.#{self.id}"
   end
 
-  def matures_at_str
-    self.matures_at.strftime("%b-%d %H:%M:%S")
+  def contract_maturation_str
+    self.contract_maturation.strftime("%b-%d %H:%M:%S")
   end
 
   def matured?
-    self.matures_at < Time.now
+    self.contract_maturation < Time.now
   end
 
   def unmatured?
@@ -85,7 +85,7 @@ class Contract < ApplicationRecord
     end
 
     def expired
-      where("matures_at < ?", Time.now)
+      where("contract_maturation < ?", Time.now)
     end
 
     def unresolved
@@ -99,7 +99,7 @@ class Contract < ApplicationRecord
   def default_values
     self.status       ||= 'open'
     self.bug_presence ||= true
-    self.matures_at   ||= Time.now + 1.week
+    self.contract_maturation   ||= Time.now + 1.week
   end
 
   def match_attrs
@@ -117,24 +117,22 @@ end
 #
 # Table name: contracts
 #
-#  id              :integer          not null, primary key
-#  type            :string
-#  publisher_id    :integer
-#  counterparty_id :integer
-#  token_value     :float
-#  terms           :string
-#  status          :string
-#  awarded_to      :string
-#  matures_at      :datetime
-#  repo_id         :integer
-#  bug_id          :integer
-#  bug_title       :string
-#  bug_status      :string
-#  bug_labels      :string
-#  bug_presence    :boolean
-#  jfields         :jsonb            not null
-#  exref           :string
-#  uuref           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                  :integer          not null, primary key
+#  type                :string
+#  token_value         :float
+#  terms               :string
+#  status              :string
+#  awarded_to          :string
+#  contract_maturation :datetime
+#  repo_id             :integer
+#  bug_id              :integer
+#  bug_title           :string
+#  bug_status          :string
+#  bug_labels          :string
+#  bug_presence        :boolean
+#  jfields             :jsonb            not null
+#  exref               :string
+#  uuref               :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
