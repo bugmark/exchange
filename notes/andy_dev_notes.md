@@ -109,9 +109,12 @@ Next Actions:
 - [DONE] contract change from forecast to repo type
 - [DONE] build out Offers page                    
 
-- [TODO] create a Contract/cross command
+- [TODO] create a contract data-load script
 - [TODO] build out Contracts page
+
+- [TODO] create a Contract/cross command
 - [TODO] build out user trading page
+
 - [TODO] test multi-party contracts
 - [TODO] enable contract resale
 

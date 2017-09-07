@@ -12,6 +12,40 @@ class Ask < ApplicationRecord
   def match_list
     []
   end
+
+  # ----- scopes -----
+
+  class << self
+    def base_scope
+      where(false)
+    end
+
+    def by_id(id)
+      where(id: id)
+    end
+
+    def by_bugid(id)
+      where(bug_id: id)
+    end
+
+    def by_repoid(id)
+      where(repo_id: id)
+    end
+
+    def by_title(string)
+      where("title ilike ?", string)
+    end
+
+    def by_status(status)
+      where("status ilike ?", status)
+    end
+
+    def by_labels(labels)
+      # where(labels: labels)
+      where(false)
+    end
+  end
+
 end
 
 # == Schema Information

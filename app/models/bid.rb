@@ -15,12 +15,46 @@ class Bid < ApplicationRecord
     []
   end
 
+  # ----- scopes -----
+
+  class << self
+    def base_scope
+      where(false)
+    end
+
+    def by_id(id)
+      where(id: id)
+    end
+
+    def by_bugid(id)
+      where(bug_id: id)
+    end
+
+    def by_repoid(id)
+      where(repo_id: id)
+    end
+
+    def by_title(string)
+      where("title ilike ?", string)
+    end
+
+    def by_status(status)
+      where("status ilike ?", status)
+    end
+
+    def by_labels(labels)
+      # where(labels: labels)
+      where(false)
+    end
+  end
+
   private
 
   def default_values
     self.type         ||= 'Bid::GitHub'
     self.status       ||= 'open'
     self.bug_presence ||= true
+    self.token_value  ||= 10
     self.contract_maturation   ||= Time.now + 1.week
   end
 
