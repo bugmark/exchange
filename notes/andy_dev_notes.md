@@ -107,8 +107,8 @@ Next Actions:
 - [DONE] build out bids/new page
 - [DONE] build out asks/new page
 - [DONE] contract change from forecast to repo type
+- [DONE] build out Offers page                    
 
-- [TODO] build out Offers page                    
 - [TODO] create a Contract/cross command
 - [TODO] build out Contracts page
 - [TODO] build out user trading page

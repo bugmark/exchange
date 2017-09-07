@@ -6,7 +6,7 @@ class Ask < ApplicationRecord
   belongs_to :repo,     optional: true
 
   def xid
-    "bid.#{self.id}"
+    "ask.#{self.id}"
   end
 
   def match_list
