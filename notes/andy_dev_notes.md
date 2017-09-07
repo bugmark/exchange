@@ -102,18 +102,28 @@ Next Actions:
 - [DONE] add conditional fetch (etag) to GitHub calls
 - [DONE] add a GitHub api wrapper class (record calls and rate limits)
 - [DONE] add VCR mocking for GitHub testing
-- [DONE] create bid/ask loading scripts
 - [DONE] create bid/ask commands
+- [DONE] create bid/ask loading scripts
 - [DONE] build out bids/new page
 - [DONE] build out asks/new page
 - [DONE] contract change from forecast to repo type
 - [DONE] build out Offers page                    
 
-- [TODO] create a contract data-load script
-- [TODO] build out Contracts page
+# Sep 07
 
-- [TODO] create a Contract/cross command
+- [TODO] create an ask#cross method
+- [TODO] create ContractCmd::Cross
+- [TODO] create script/data/contract_load
+- [TODO] add ask/cross button to /offers page
+
+- [TODO] build out Contracts page
+- [TODO] create ContractCmd::Resolve
+- [TODO] add resolve button to /contracts page
+
 - [TODO] build out user trading page
+
+- [TODO] add cron process for contract cross
+- [TODO] add cron process for contract resolve
 
 - [TODO] test multi-party contracts
 - [TODO] enable contract resale
