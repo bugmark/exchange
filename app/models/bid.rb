@@ -64,7 +64,7 @@ class Bid < ApplicationRecord
     def scope_for(base, key, val)
       case key
         when :bug_id then
-          base.by_id(val)
+          base.by_bugid(val)
         when :repo_id then
           base.by_repoid(val)
         when :bug_title then
