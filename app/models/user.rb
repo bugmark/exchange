@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
   before_save :default_values
 
+  has_many :bids
+  has_many :asks
+
   def to_i
     self.id
   end

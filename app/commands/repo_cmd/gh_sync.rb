@@ -32,7 +32,7 @@ module RepoCmd
     private
 
     def sync_bugs
-      issues = Octokit.issues(repo.name)
+      issues = Octokit.issues(repo.name) # uses ETAG to make conditional request
       issues.each do |el|
         attrs = {
           repo_id:   self.id         ,

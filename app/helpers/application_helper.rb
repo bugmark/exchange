@@ -24,10 +24,11 @@ module ApplicationHelper
   end
 
   def trading_summary(user)
-    balance = user.token_balance
-    pubs    = user.published_contracts.count
-    takes   = user.taken_contracts.count
-    "#{user.xid} / #{balance}-#{pubs}-#{takes}"
+    balance   = user.token_balance
+    # bids      = user.bids.count
+    # asks      = user.asks.count
+    # contracts = 0 #TODO: create a user#contracts function...
+    "#{user.email} / #{balance} tokens"
   end
 
 end

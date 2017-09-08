@@ -13,6 +13,10 @@ class Ask < ApplicationRecord
     @bidcross ||= Bid.cross(cross_attrs)
   end
 
+  def contract_maturation_str
+    self.contract_maturation.strftime("%b-%d %H:%M:%S")
+  end
+
   # ----- scopes -----
 
   class << self

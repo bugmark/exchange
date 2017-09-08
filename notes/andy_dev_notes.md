@@ -102,6 +102,7 @@ Next Actions:
 - [DONE] add conditional fetch (etag) to GitHub calls
 - [DONE] add a GitHub api wrapper class (record calls and rate limits)
 - [DONE] add VCR mocking for GitHub testing
+
 - [DONE] create bid/ask commands
 - [DONE] create bid/ask loading scripts
 - [DONE] build out bids/new page
@@ -111,14 +112,16 @@ Next Actions:
 
 # Sep 07
 
-- [DONE] create an bid#cross method
+- [DONE] create a Bid#cross method
 - [DONE] create ContractCmd::Cross
+- [DONE] create script/data/contract_load
 
-- [TODO] create script/data/contract_load
+# Sep 08
+
+- [TODO] build out Contracts page
 
 - [TODO] add ask/cross button to /offers page
 
-- [TODO] build out Contracts page
 - [TODO] create ContractCmd::Resolve
 - [TODO] add resolve button to /contracts page
 

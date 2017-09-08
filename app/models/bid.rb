@@ -15,6 +15,10 @@ class Bid < ApplicationRecord
     @buglist ||= Bug.match(match_attrs)
   end
 
+  def contract_maturation_str
+    self.contract_maturation.strftime("%b-%d %H:%M:%S")
+  end
+
   # -----
 
   class << self
