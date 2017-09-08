@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+# contract_cross
+
+# 1. loop thru ask aspects
+#    - sorted from narrow to broad
+     - sub-sort on [price asc, entry date desc]
+# 2. for each aspect, attempt to make a cross
+
+require "./config/environment"
+
+Contract.pending_resolution.each do |contract|
+  puts "RESOLVING CONTRACT #{contract.id}"
+  ContractResolve.new(contract).save
+end

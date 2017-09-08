@@ -1,0 +1,42 @@
+h2 BID [#{@bid.xid}]
+.row
+  .col-md-6
+    b Details
+    table.table
+      tr
+        td Status
+        td = @bid.status
+      tr
+        td User
+        td = bid_user_link(@bid)
+      tr
+        td Contract Price
+        td = @bid.token_value
+  .col-md-6
+    b Actions
+    table.table
+      tr
+        td Attached To
+        td # contract_attach_link(@bid)
+      tr
+        td Action
+        td # contract_take_link(@bid)
+hr
+b Matching Bugs (#{@bid.match_list.count})
+table.table
+  - if @bid.match_list.count > 0
+    tr
+      th ID
+      th Type
+      th Title
+      th Contracts
+      th Create
+  - @bid.match_list.each do |bug|
+    tr
+      td = bug_id_link(bug)
+      td = bug.type
+      td = bug_title_link(bug)
+      td = bug_contract_link(bug)
+      td
+        nobr
+          = bug_contract_link(bug)

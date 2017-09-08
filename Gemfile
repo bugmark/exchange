@@ -15,8 +15,13 @@ gem 'jbuilder'    , '~> 2.5'
 gem 'redis'       , '~> 3.0'
 gem 'bcrypt'      , '~> 3.1.7'
 gem 'dotenv'
+gem 'hstore_accessor'
+gem 'jsonb_accessor'
 gem 'colored'
-gem 'github_api'
+
+gem 'octokit'
+gem 'faraday-http-cache'
+
 gem 'nokogiri'
 gem 'rails-ujs'
 gem 'jquery-rails'
@@ -41,6 +46,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

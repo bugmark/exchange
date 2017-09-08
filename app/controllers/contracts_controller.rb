@@ -32,7 +32,7 @@ class ContractsController < ApplicationController
     @contract = ContractCmd::Take.find(params[:id], with_counterparty: current_user)
   end
 
-  def create
+  def createp
     opts = params["contract_cmd_publish"]
     @contract = ContractCmd::Publish.new(valid_params(opts))
     if @contract.save_event.project
@@ -67,11 +67,10 @@ class ContractsController < ApplicationController
 
   def new_opts(params)
     opts = {
-      type:            "Contract::#{params["type"]&.capitalize}"    ,
-      terms:           "Net0"                                       ,
-      token_value:     10                                           ,
-      matures_at:      Time.now + 3.minutes                         ,
-      publisher_id:    current_user.id
+      type:                 "Contract::#{params["type"]&.capitalize}"    ,
+      token_value:          10                                           ,
+      contract_maturation:  Time.now + 3.minutes                         ,
+      user_id:              current_user.id
     }
     key  = "bug_id"  if params["bug_id"]
     key  = "repo_id" if params["repo_id"]

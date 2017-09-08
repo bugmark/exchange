@@ -1,10 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Repo, type: :model do
+RSpec.describe Repo, :type => :model do
   def valid_params
     {
-      name:     "asdf"      ,
-      json_url:  "qwer"
+      name:     "asdf/qwer"
     }
   end
 
@@ -24,6 +23,15 @@ RSpec.describe Repo, type: :model do
       expect(subject).to be_valid
     end
   end
+
+  describe "Data Sync" do
+    it 'records a GitHub Api interaction' do
+      VCR.use_cassette 'model/repo' do
+        response = Octokit.repo 'mvscorg/bugmark'
+        expect(response).to_not be_nil
+      end
+    end
+  end
 end
 
 # == Schema Information
@@ -33,8 +41,7 @@ end
 #  id         :integer          not null, primary key
 #  type       :string
 #  name       :string
-#  json_url   :string
-#  html_url   :string
+#  xfields    :hstore           not null
 #  jfields    :jsonb            not null
 #  synced_at  :datetime
 #  exref      :string

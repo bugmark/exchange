@@ -22,8 +22,8 @@ end
 #  id         :integer          not null, primary key
 #  klas       :string
 #  uuref      :string
-#  local_hash :integer
-#  chain_hash :integer
+#  local_hash :string
+#  chain_hash :string
 #  data       :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

@@ -32,14 +32,12 @@ module RepoCmd
     private
 
     def sync_bugs
-      json = open(repo.json_url) {|io| io.read}
-      JSON.parse(json).each do |el|
+      issues = Octokit.issues(repo.name) # uses ETAG to make conditional request
+      issues.each do |el|
         attrs = {
           repo_id:   self.id         ,
           type:      "Bug::GitHub"   ,
           exref:     el["id"]        ,
-          json_url:  el["url"]       ,
-          html_url:  el["html_url"]  ,
           title:     el["title"]     ,
           labels:    el["labels"]    ,
           status:    el["state"]     ,

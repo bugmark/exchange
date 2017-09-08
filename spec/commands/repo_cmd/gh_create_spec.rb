@@ -6,7 +6,6 @@ RSpec.describe RepoCmd::GhCreate do
 
   def valid_params
     {
-      json_url: "http://asdf.com",
       name: "mvscorg/test1"
     }
   end

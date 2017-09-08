@@ -42,8 +42,8 @@ module ContractCmd
     end
 
     def resolvable_contract
-      if Time.now < contract.matures_at
-        errors.add(:matures_at, "contract has not matured")
+      if Time.now < contract.contract_maturation
+        errors.add(:contract_maturation, "contract has not matured")
       end
     end
   end

@@ -11,8 +11,7 @@ end
 #  id         :integer          not null, primary key
 #  type       :string
 #  name       :string
-#  json_url   :string
-#  html_url   :string
+#  xfields    :hstore           not null
 #  jfields    :jsonb            not null
 #  synced_at  :datetime
 #  exref      :string

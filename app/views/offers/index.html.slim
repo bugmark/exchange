@@ -1,0 +1,31 @@
+.row
+  .col-md-6
+    div style='text-align: center'
+      h4 Bids
+    table.table.table-striped.table-bordered.table-hover width="100%" cellspacing="0"
+      thead
+        tr
+          th ID
+          th User
+          th Tokens
+      tbody
+        - @bids.each do |bid|
+          tr
+            td = bid_id_link(bid)
+            td = bid_user_link(bid.user)
+            td = bid.token_value
+  .col-md-6
+    div style='text-align: center'
+      h4 Asks
+    table.table.table-striped.table-bordered.table-hover width="100%" cellspacing="0"
+      thead
+        tr
+          th ID
+          th User
+          th Tokens
+      tbody
+        - @asks.each do |ask|
+          tr
+            td = ask_id_link(ask)
+            td = ask_user_link(ask.user)
+            td = ask.token_value

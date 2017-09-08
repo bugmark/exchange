@@ -80,6 +80,8 @@ class ApplicationCommand
   end
 
   def save_event
+    valid?
+    # puts errors.inspect unless valid?
     if valid?
       base = {klas: self.class.name}
       data = {data: self.event_data}
@@ -90,6 +92,8 @@ class ApplicationCommand
 
   # pro*jekt* - create a projection - an aggregate data view
   def project
+    valid?
+    # puts errors.inspect unless valid?
     if valid?
       transact_before_project # perform a transaction, if any
       subs.each(&:save)       # save all subobjects

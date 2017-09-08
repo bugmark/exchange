@@ -1,0 +1,36 @@
+DEMO PLAN
+=========
+
+Some ideas to note:
+- two demos - Sep21 and Oct27
+- design session expected late sept
+
+On the 27th, we'd like a documentation fix market that works like a REAL SAAS
+
+[ ] TRADING    BugCoinKarma edition only - no Gold
+[ ] TRADING    market price, reselling, etc.
+[ ] UI         Great UI - per our design session
+[ ] UI         Email Notifications of Bids, Asks and Watching, etc.
+[ ] UI         User 'Trading' page - trading history, open offers, awards, etc.
+[ ] UI         User Profile page - reset password, etc.
+[ ] ONBOARDING Easy registration with GitHub credentials
+[ ] ONBOARDING Lost-password emails - general registraiton capabilities
+[ ] ONBOARDING Training materials - screencasts, white paper, user-guide
+[ ] GITHUB     authenticated requests - https://github.com/blog/1509-personal-api-tokens
+[ ] GITHUB     ETAG conditional requests - https://developer.github.com/v3/#conditional-requests
+[ ] GITHUB     image badges on a repo level
+[ ] GITHUB     image badges on an issue level
+[ ] GITHUB     issue webhooks - https://developer.github.com/v3/activity/events/types/#issuesevent
+[ ] MARKETING  Marketing documentation (landing page)
+[ ] MARKETING  Testimonials - teams who are using the system
+[ ] MARKETING  Identify/Contact repos that need doccco improvement (ethereum)
+[ ] COMMUNITY  BugMark Forum (discourse)
+[ ] COMMUNITY  BugMark Slack
+[ ] COMMUNITY  BugMark Blog
+[ ] COMMUNITY  Contribution Guidelines, etc. (eating our own dogfood - see https://www.docker.com/contribute)
+[ ] BLOCKCHAIN Live Integration with Solidity Contracts (configuration TBD)
+[ ] MISC       invite capabilities, etc.
+[ ] MISC       search
+[ ] MISC       private repos
+[ ] MONITORING InfluxDB Application Metrics & Grafana Pages
+[ ] API        An API and/or CLI way to interact with BugMark

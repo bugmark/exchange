@@ -1,10 +1,12 @@
 class CreateTables < ActiveRecord::Migration[5.1]
   def change
+
+    enable_extension "hstore"
+
     create_table :repos do |t|
       t.string   :type            # Repo::BugZilla, Repo::GitHub, Repo::Cvrf,
       t.string   :name            # mvscorg/xdmarket
-      t.string   :json_url
-      t.string   :html_url
+      t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
       t.string   :exref
@@ -15,19 +17,17 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :repos, :uuref
     add_index :repos, :type
     add_index :repos, :name
-    add_index :repos, :json_url
-    add_index :repos, :html_url
     add_index :repos, :jfields, using: :gin
+    add_index :repos, :xfields, using: :gin
 
     create_table :bugs do |t|
       t.integer  :repo_id
-      t.string   :type             # Bug::BugZilla, Bug::GitHub, Bug::Cvrf
-      t.string   :json_url
-      t.string   :html_url
+      t.string   :type             # BugZilla, GitHub, Cve
       t.string   :title
       t.string   :description
       t.string   :status
-      t.text     :labels, array: true, default: []
+      t.text     :labels,   array: true, default: []
+      t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
       t.string   :exref
@@ -40,16 +40,46 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :type
     add_index :bugs, :labels , using: :gin
     add_index :bugs, :jfields, using: :gin
+    add_index :bugs, :xfields, using: :gin
+
+    %i(bids asks).each do |table|
+      create_table table do |t|
+        t.string   :type                  # BugZilla, GitHub, CVE
+        t.integer  :user_id
+        t.integer  :contract_id
+        t.integer  :token_value
+        t.string   :status
+        t.datetime :offer_expiration
+        t.datetime :contract_maturation
+        # ----- match fields -----
+        t.integer  :repo_id
+        t.integer  :bug_id
+        t.string   :bug_title
+        t.string   :bug_status
+        t.string   :bug_labels
+        t.boolean  :bug_presence
+        # ----- match fields -----
+        t.jsonb    :jfields,  null: false, default: '{}'
+        t.string   :exref
+        t.string   :uuref
+      end
+      add_index table, :type
+      add_index table, :user_id
+      add_index table, :contract_id
+      add_index table, :exref
+      add_index table, :uuref
+      add_index table, :repo_id
+      add_index table, :bug_id
+      add_index table, :jfields, using: :gin
+    end
 
     create_table :contracts do |t|
       t.string   :type                # forecast, reward
-      t.integer  :publisher_id
-      t.integer  :counterparty_id
       t.float    :token_value
       t.string   :terms               # eg Net0, Net30
       t.string   :status              # open, taken, resolved, ...
       t.string   :awarded_to          # publisher, counterparty
-      t.datetime :matures_at
+      t.datetime :contract_maturation
       # ----- match fields
       t.integer  :repo_id
       t.integer  :bug_id
@@ -67,8 +97,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :contracts, :uuref
     add_index :contracts, :repo_id
     add_index :contracts, :bug_id
-    add_index :contracts, :publisher_id
-    add_index :contracts, :counterparty_id
     add_index :contracts, :jfields, using: :gin
 
     create_table :users do |t|

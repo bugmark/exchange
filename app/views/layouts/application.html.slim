@@ -7,28 +7,35 @@ html[lang="en-US"]
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
     = stylesheet_link_tag 'application.css'
-    link[rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" crossorigin="anonymous"]
+    link[rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous"]
     link[rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css" crossorigin="anonymous"]
   body
-    nav.navbar.navbar-toggleable-md.navbar-inverse.fixed-top.bg-inverse
+    nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
       button.navbar-toggler.navbar-toggler-right[type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"]
         span.navbar-toggler-icon
       a.navbar-brand[href="/"] BugMark
       .collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          = nav_link("Home"      , "/")
-          = nav_link("Repos"     , "/repos")
-          = nav_link("Bugs"      , "/bugs")
+          = nav_link("Home"      , "/"         )
+          = nav_link("Repos"     , "/repos"    )
+          = nav_link("Bugs"      , "/bugs"     )
+          = nav_link("Offers"    , "/offers"   )
           = nav_link("Contracts" , "/contracts")
         = render "layouts/devise"
     .container-fluid[style="margin-top: 65px;"]
       = yield
       hr
       footer
+        div[style="text-align: center"]
+          small
+            - if Rails.env.development?
+              = raw debug_text
+            - else
+              | Powered by BugMark
 
     = javascript_include_tag :application
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"]
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"]
     script[src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" crossorigin="anonymous"]
-    script[src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" crossorigin="anonymous"]
+    script[src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous"]
     = yield :page_js

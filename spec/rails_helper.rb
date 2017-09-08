@@ -49,4 +49,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = "spec/_vcr"
+  c.hook_into :webmock
+end
+
+
+
 
