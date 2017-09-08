@@ -1,3 +1,7 @@
+require 'factory_girl'
+require_relative "../app/commands/application_command"
+Dir["app/commands/**/*.rb"].each {|f| require_relative "../#{f}"}
+
 FG ||= FactoryGirl
 
 FactoryGirl.define do
