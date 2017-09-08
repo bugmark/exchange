@@ -7,20 +7,17 @@ h2 CONTRACT [#{@contract.xid}]
         td Status
         td = @contract.status
       tr
-        td Publisher
-        td # contract_publisher_link(@contract)
+        td Bids
+        td = contract_bid_link(@contract)
       tr
-        td Counterparty
-        td # contract_counterparty_link(@contract)
+        td Asks
+        td = contract_ask_link(@contract)
       tr
         td Contract Price
         td = @contract.token_value
   .col-md-6
     b Actions
     table.table
-      tr
-        td Attached To
-        td # contract_attach_link(@contract)
       tr
         td Action
         td = contract_take_link(@contract)
@@ -42,4 +39,4 @@ table.table
       td = bug_contract_link(bug)
       td
         nobr
-          # bug_contract_new_link(bug)
+          = bug_actions(bug)

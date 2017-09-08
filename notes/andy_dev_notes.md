@@ -119,13 +119,13 @@ Next Actions:
 # Sep 08
 
 - [TODO] build out Contracts page
+- [TODO] build out user trading page
 
 - [TODO] add ask/cross button to /offers page
 
 - [TODO] create ContractCmd::Resolve
 - [TODO] add resolve button to /contracts page
 
-- [TODO] build out user trading page
 
 - [TODO] add cron process for contract cross
 - [TODO] add cron process for contract resolve

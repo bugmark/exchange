@@ -3,15 +3,17 @@ module ContractsHelper
     raw "<a href='/contracts/#{contract.id}'>#{contract.xid}</a>"
   end
 
+  def contract_bid_link(contract)
+    raw contract.bids.map {|b| bid_id_link(b)}.join(" | ")
+  end
+
+  def contract_ask_link(contract)
+    raw contract.asks.map {|a| ask_id_link(a)}.join(" | ")
+  end
+
   def contract_type_link(contract)
     type = contract.xtype
     raw "<a href='/contracts/#{contract.id}'>#{type}</a>"
-  end
-
-  def contract_attach_link(contract)
-    type = contract.attach_type
-    obj  = contract.attach_obj
-    raw "<a href='/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
   def contract_take_link(contract)
@@ -22,11 +24,6 @@ module ContractsHelper
     else
       nil
     end
-  end
-
-  def contract_user_link(usr)
-    return "NA" if usr.nil?
-    raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
   end
 
   def contract_mature_date(contract)

@@ -8,7 +8,7 @@ h2 ASK [#{@ask.xid}]
         td = @ask.status
       tr
         td User
-        td = bid_user_link(@ask)
+        td = ask_user_link(@ask.user)
       tr
         td Contract Price
         td = @ask.token_value

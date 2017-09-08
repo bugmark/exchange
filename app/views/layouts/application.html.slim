@@ -36,6 +36,9 @@ html[lang="en-US"]
     = javascript_include_tag :application
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"]
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"]
+    script[src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js" crossorigin="anonymous"]
     script[src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" crossorigin="anonymous"]
     script[src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous"]
+    coffee:
+      $(-> $('.ttip').tooltip())
     = yield :page_js
