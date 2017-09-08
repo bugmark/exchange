@@ -1,7 +1,13 @@
 DEMO PLAN
 =========
 
-Some ideas to note:
+
+Notes:
+
+- We are going to handle actionable issues in github.
+
+Scheduling:
+
 - two demos - Sep21 and Oct27
 - design session expected late sept
 
