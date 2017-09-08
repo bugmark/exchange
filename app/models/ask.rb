@@ -9,8 +9,8 @@ class Ask < ApplicationRecord
     "ask.#{self.id}"
   end
 
-  def match_list
-    []
+  def cross_list
+    @bidcross ||= Bid.cross(cross_attrs)
   end
 
   # ----- scopes -----
@@ -44,6 +44,19 @@ class Ask < ApplicationRecord
       # where(labels: labels)
       where(false)
     end
+  end
+
+  private
+
+  def cross_attrs
+    {
+      bug_id:       self.bug_id,
+      repo_id:      self.repo_id,
+      bug_title:    self.bug_title,
+      bug_status:   self.bug_status,
+      bug_labels:   self.bug_labels,
+      bug_presence: self.bug_presence
+    }
   end
 
 end

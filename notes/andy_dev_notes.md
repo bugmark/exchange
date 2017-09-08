@@ -111,9 +111,11 @@ Next Actions:
 
 # Sep 07
 
-- [TODO] create an ask#cross method
-- [TODO] create ContractCmd::Cross
+- [DONE] create an bid#cross method
+- [DONE] create ContractCmd::Cross
+
 - [TODO] create script/data/contract_load
+
 - [TODO] add ask/cross button to /offers page
 
 - [TODO] build out Contracts page

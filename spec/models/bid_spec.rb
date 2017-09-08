@@ -63,14 +63,14 @@ RSpec.describe Bid, type: :model do
     end
   end
 
-  describe ".match" do
+  describe ".cross" do
     before(:each) { subject.save}
 
-    # it 'matches id' do
-    #   expect(subject).to_not be_nil
-    #   expect(klas.count).to eq(1)
-    #   expect(klas.match({id: subject.id}).length).to eq(1)
-    # end
+    it 'crosses id' do
+      expect(subject).to_not be_nil
+      expect(klas.count).to eq(1)
+      expect(klas.cross({id: subject.id}).length).to eq(1)
+    end
   end
 
 end

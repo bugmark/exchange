@@ -12,10 +12,10 @@ class Bid < ApplicationRecord
   end
 
   def match_list
-    []
+    @buglist ||= Bug.match(match_attrs)
   end
 
-  # ----- scopes -----
+  # -----
 
   class << self
     def base_scope
@@ -46,6 +46,32 @@ class Bid < ApplicationRecord
       # where(labels: labels)
       where(false)
     end
+
+    # -----
+
+    def cross(attrs)
+      attrs.without_blanks.reduce(base_scope) do |acc, (key, val)|
+        scope_for(acc, key, val)
+      end
+    end
+
+    private
+
+    def scope_for(base, key, val)
+      case key
+        when :bug_id then
+          base.by_id(val)
+        when :repo_id then
+          base.by_repoid(val)
+        when :bug_title then
+          base.by_title(val)
+        when :bug_status then
+          base.by_status(val)
+        when :bug_labels then
+          base.by_labels(val)
+        else base
+      end
+    end
   end
 
   private
@@ -58,6 +84,15 @@ class Bid < ApplicationRecord
     self.contract_maturation   ||= Time.now + 1.week
   end
 
+  def match_attrs
+    {
+      id:      self.bug_id,
+      repo_id: self.repo_id,
+      title:   self.bug_title,
+      status:  self.bug_status,
+      labels:  self.bug_labels
+    }
+  end
 end
 
 # == Schema Information
