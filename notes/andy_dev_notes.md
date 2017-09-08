@@ -126,7 +126,6 @@ Next Actions:
 - [TODO] create ContractCmd::Resolve
 - [TODO] add resolve button to /contracts page
 
-
 - [TODO] add cron process for contract cross
 - [TODO] add cron process for contract resolve
 

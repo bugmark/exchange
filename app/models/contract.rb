@@ -4,10 +4,16 @@ class Contract < ApplicationRecord
 
   has_many :bids
   has_many :asks
+  has_many :bid_users, :through => :bids, :source => "user"
+  has_many :ask_users, :through => :asks, :source => "user"
 
   before_validation :default_values
   validates :status, inclusion: {in: %w(open taken lapsed awarded)}
   validates :contract_maturation, presence: true
+
+  def users
+    (bid_users + ask_users).uniq
+  end
 
   def attach_type
     self.bug_id ? "bugs" : "repos"

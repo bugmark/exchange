@@ -6,7 +6,7 @@ table.table
 div style='background: lightgrey;'
   b Account Balance: #{@user.token_balance} Tokens
 div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
-  b Active Bids (#{@user.bids.count}):
+  b Bids (#{@user.bids.count}):
   table.table
     - if @user.bids.count > 0
       tr
@@ -25,7 +25,7 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
         td = bid.contract_id ? "true" : "false"
         td TBD (cancel)
 div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
-  b Active Asks (#{@user.asks.count}):
+  b Asks (#{@user.asks.count}):
   table.table
     - if @user.asks.count > 0
       tr
@@ -45,23 +45,21 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
         td TBD (cancel)
 
 div style='background: lightyellow'
-  b Contracts (#{@user.taken_contracts.count}):
+  b Contracts (#{@user.contracts.count}):
   table.table
-    - if @user.taken_contracts.count > 0
+    - if @user.contracts.count > 0
       tr
         th ID
         th Tokens
         th Matures
-        th For
         th Status
-        th Publisher
-        th Counterparty
-    - @user.taken_contracts.each do |contract|
+        th Bid
+        th Ask
+    - @user.contracts.each do |contract|
       tr
         td = contract_id_link(contract)
         td = contract.token_value
         td = contract.contract_maturation_str
-        td = contract_attach_link(contract)
         td = contract.status
-        td = contract_publisher_link(contract)
-        td = contract_counterparty_link(contract)
+        td = contract_bid_link(contract)
+        td = contract_ask_link(contract)

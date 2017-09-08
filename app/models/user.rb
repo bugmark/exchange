@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_many :bids
   has_many :asks
+  has_many :bid_contracts, :through => :bids, :source => 'contract'
+  has_many :ask_contracts, :through => :asks, :source => 'contract'
 
   def to_i
     self.id
@@ -15,6 +17,10 @@ class User < ApplicationRecord
 
   def xid
     "usr.#{self&.id || 0}"
+  end
+
+  def contracts
+    (bid_contracts + ask_contracts).uniq
   end
 
   # ----- ASSOCIATIONS -----
