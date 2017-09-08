@@ -9,6 +9,10 @@ class Ask < ApplicationRecord
     "ask.#{self.id}"
   end
 
+  def to_i
+    self.id
+  end
+
   def cross_list
     @bidcross ||= Bid.cross(cross_attrs)
   end
