@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "./config/environment"
+
+puts "Users:  #{User.count}"
+puts "Repos:  #{Repo.count}"
+puts "Bugs:   #{Bug.count}"
+puts "Bids:   #{Bid.count}"
+puts "Asks:   #{Ask.count}"
+puts "Contracts: #{Contract.count}"
