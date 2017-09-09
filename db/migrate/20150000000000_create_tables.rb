@@ -77,7 +77,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                # forecast, reward
       t.string   :terms               # eg Net0, Net30
       t.string   :status              # open, taken, resolved, ...
-      t.string   :awarded_to          # publisher, counterparty
+      t.string   :awarded_to          # bidder, asker
       t.datetime :contract_maturation
       # ----- match fields
       t.integer  :repo_id

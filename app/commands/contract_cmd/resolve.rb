@@ -24,7 +24,7 @@ module ContractCmd
     def transact_before_project
       contract.status = get_status
       if contract.status == "lapsed"
-        contract.awarded_to = "publisher"
+        contract.awarded_to = "bidder"
         contract.publisher.token_balance += contract.token_value
       else
         contract.awarded_to = contract.awardee

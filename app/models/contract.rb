@@ -32,11 +32,9 @@ class Contract < ApplicationRecord
   end
 
   # VALID STATUSES
-  # > open      - can be taken
-  # > withdrawn - withdrawn by publisher (before taken)
-  # > taken     - taken by a counterparty
-  # > lapsed    - expired before being taken
-  # > awarded   - in favor of publisher or counterparty
+  # > open      - active
+  # > matured   - past mature date
+  # > resolved  - assigned
 
   # returns list of matching bugs
   def match_list
