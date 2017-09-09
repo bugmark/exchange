@@ -11,6 +11,7 @@ class Bid < ApplicationRecord
     "bid.#{self.id}"
   end
 
+  # generate list of matching bugs
   def match_list
     @buglist ||= Bug.match(match_attrs)
   end
@@ -22,6 +23,10 @@ class Bid < ApplicationRecord
   # -----
 
   class << self
+    def unassigned
+      where(contract_id: nil)
+    end
+
     def base_scope
       where(false)
     end
@@ -54,7 +59,7 @@ class Bid < ApplicationRecord
     # -----
 
     def cross(attrs)
-      attrs.without_blanks.reduce(base_scope) do |acc, (key, val)|
+      attrs.without_blanks.reduce(unassigned) do |acc, (key, val)|
         scope_for(acc, key, val)
       end
     end
@@ -77,8 +82,6 @@ class Bid < ApplicationRecord
       end
     end
   end
-
-  private
 
   def default_values
     self.type         ||= 'Bid::GitHub'

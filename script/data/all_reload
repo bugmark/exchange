@@ -20,8 +20,8 @@ bundle exec script/data/bid_load
 echo Load Asks
 bundle exec script/data/ask_load
 
-echo Load Contracts
-bundle exec script/data/contract_load
+# echo Load Contracts
+# bundle exec script/data/contract_load
 
 echo Counts
 bundle exec script/data/all_count
