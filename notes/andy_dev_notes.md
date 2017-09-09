@@ -102,7 +102,6 @@ Next Actions:
 - [DONE] add conditional fetch (etag) to GitHub calls
 - [DONE] add a GitHub api wrapper class (record calls and rate limits)
 - [DONE] add VCR mocking for GitHub testing
-
 - [DONE] create bid/ask commands
 - [DONE] create bid/ask loading scripts
 - [DONE] build out bids/new page
