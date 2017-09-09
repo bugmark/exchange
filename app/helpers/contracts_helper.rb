@@ -35,9 +35,8 @@ module ContractsHelper
   def contract_status(contract)
     case contract.status
       when "open"     then raw "<i class='fa fa-unlock'></i> open"
-      when "taken"    then raw "<i class='fa fa-lock'></i> taken"
-      when "awarded"  then raw "<i class='fa fa-check'></i> awarded"
-      when "lapsed"   then raw "<i class='fa fa-check'></i> lapsed"
+      when "matured"  then raw "<i class='fa fa-lock'></i> taken"
+      when "resolved" then raw "<i class='fa fa-check'></i> awarded"
         else "UNKNOWN_CONTRACT_STATE"
     end
   end
