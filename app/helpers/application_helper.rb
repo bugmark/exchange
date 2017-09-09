@@ -28,6 +28,7 @@ module ApplicationHelper
     <em>#{user.xid}</em></br>
     #{user.asks.count} asks</br>
     #{user.bids.count} bids</br>
+    #{user.contracts.count} contracts</br>
     #{user.token_balance} tokens
     """
   end

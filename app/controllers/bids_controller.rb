@@ -61,14 +61,14 @@ class BidsController < ApplicationController
 
   def new_opts(params)
     opts = {
-      type:                 "Bid::#{params["type"]&.camelize}"      ,
-      token_value:          10                                      ,
-      contract_maturation:  Time.now + 3.minutes                    ,
+      type:                 "Bid::#{params["type"]&.camelize || 'GitHub'}"   ,
+      token_value:          10                                               ,
+      contract_maturation:  Time.now + 3.minutes                             ,
       user_id:              current_user.id
     }
     key  = "bug_id"  if params["bug_id"]
     key  = "repo_id" if params["repo_id"]
     id   = params["bug_id"] || params["repo_id"]
-    opts.merge({key => id})
+    opts.merge({key => id}).without_blanks
   end
 end

@@ -1,5 +1,7 @@
 class Ask < ApplicationRecord
 
+  before_validation :default_values
+
   belongs_to :user
   belongs_to :contract, optional: true
   belongs_to :bug,      optional: true
@@ -55,6 +57,14 @@ class Ask < ApplicationRecord
   end
 
   private
+
+  def default_values
+    self.type                ||= 'Ask::GitHub'
+    self.status              ||= 'open'
+    self.bug_presence        ||= true
+    self.token_value         ||= 10
+    self.contract_maturation ||= Time.now + 1.week
+  end
 
   def cross_attrs
     {
