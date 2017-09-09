@@ -26,6 +26,10 @@ class Ask < ApplicationRecord
   # ----- scopes -----
 
   class << self
+    def unassigned
+      where(contract_id: nil)
+    end
+
     def base_scope
       where(false)
     end

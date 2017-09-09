@@ -23,6 +23,10 @@ class Bid < ApplicationRecord
   # -----
 
   class << self
+    def assigned
+      where.not(contract_id: nil)
+    end
+
     def unassigned
       where(contract_id: nil)
     end

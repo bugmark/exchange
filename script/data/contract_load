@@ -2,7 +2,7 @@
 
 require "./config/environment"
 
-# TODO: only loop over Asks with null contract_ids & before mature-date
-Ask.all.each do |ask|
+# TODO: only loop over Asks before mature-date
+Ask.unassigned.each do |ask|
   ContractCmd::Cross.new(ask).save_event.project
 end

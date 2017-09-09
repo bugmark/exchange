@@ -77,20 +77,23 @@ end
 
 # == Schema Information
 #
-# Table name: bugs
+# Table name: bids
 #
-#  id          :integer          not null, primary key
-#  repo_id     :integer
-#  type        :string
-#  title       :string
-#  description :string
-#  status      :string
-#  labels      :text             default([]), is an Array
-#  xfields     :hstore           not null
-#  jfields     :jsonb            not null
-#  synced_at   :datetime
-#  exref       :string
-#  uuref       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                  :integer          not null, primary key
+#  type                :string
+#  user_id             :integer
+#  contract_id         :integer
+#  token_value         :integer
+#  status              :string
+#  offer_expiration    :datetime
+#  contract_maturation :datetime
+#  repo_id             :integer
+#  bug_id              :integer
+#  bug_title           :string
+#  bug_status          :string
+#  bug_labels          :string
+#  bug_presence        :boolean
+#  jfields             :jsonb            not null
+#  exref               :string
+#  uuref               :string
 #

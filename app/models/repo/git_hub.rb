@@ -6,6 +6,10 @@ class Repo::GitHub < Repo
 
   validate :repo_presence
 
+  def html_url
+    "https://github.com/#{self.name}"
+  end
+
   private
 
   def repo_presence

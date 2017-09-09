@@ -23,6 +23,14 @@ class Contract < ApplicationRecord
     bug || repo
   end
 
+  def bid_tokens
+    bids.reduce(0) {|acc, bid| acc + bid.token_value}
+  end
+
+  def ask_tokens
+    asks.reduce(0) {|acc, ask| acc + ask.token_value}
+  end
+
   # VALID STATUSES
   # > open      - can be taken
   # > withdrawn - withdrawn by publisher (before taken)
@@ -125,7 +133,6 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  token_value         :float
 #  terms               :string
 #  status              :string
 #  awarded_to          :string
