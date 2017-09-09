@@ -8,7 +8,7 @@ class Contract < ApplicationRecord
   has_many :ask_users, :through => :asks, :source => "user"
 
   before_validation :default_values
-  validates :status, inclusion: {in: %w(open taken lapsed awarded)}
+  validates :status, inclusion: {in: %w(open matured resolved)}
   validates :contract_maturation, presence: true
 
   def users
@@ -29,6 +29,19 @@ class Contract < ApplicationRecord
 
   def ask_tokens
     asks.reduce(0) {|acc, ask| acc + ask.token_value}
+  end
+
+  def distribution_tokens
+    bid_tokens + ask_tokens
+  end
+
+  def bidder_allocation
+    total_bids = bid_tokens
+    total_dist = distribution_tokens
+    bids.reduce({}) do |acc, bid|
+      acc[bid.id] = ((bid.token_value.to_f / total_bids) * total_dist).to_i
+      acc
+    end
   end
 
   # VALID STATUSES
@@ -53,7 +66,7 @@ class Contract < ApplicationRecord
 
   def awardee
     self.awarded_to || begin
-      match_assertion ? "publisher" : "counterparty"
+      match_assertion ? "bidder" : "asker"
     end
   end
 
@@ -82,7 +95,7 @@ class Contract < ApplicationRecord
   end
 
   def resolved?
-    %w(awarded lapsed).include?(self.status)
+    self.status == 'resolved'
   end
 
   def unresolved?
@@ -96,12 +109,16 @@ class Contract < ApplicationRecord
       expired.unresolved
     end
 
+    def matured
+      where("contract_maturation < ?", Time.now)
+    end
+
     def expired
       where("contract_maturation < ?", Time.now)
     end
 
     def unresolved
-      where("status != ?", "awarded").where("status != ?", "lapsed")
+      where("status != ?", "resolved").where("status != ?", "open")
     end
 
   end

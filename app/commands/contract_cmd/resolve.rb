@@ -1,8 +1,8 @@
 module ContractCmd
   class Resolve < ApplicationCommand
 
-    attr_subobjects :contract, :publisher
-    attr_accessor :counterparty
+    attr_subobjects :contract
+    attr_accessor :bids, :asks
     attr_delegate_fields :contract
 
     validate :resolvable_contract
@@ -10,36 +10,35 @@ module ContractCmd
     def self.find(contract)
       instance = allocate
       instance.contract = Contract.find(contract.to_i)
-      instance.publisher = instance.contract.publisher
-      instance.counterparty = instance.contract.counterparty
+      instance.bids     = instance.contract.bids
+      instance.asks     = instance.contract.asks
       instance
     end
 
     def initialize(contract)
       @contract = Contract.find(contract.to_i)
-      @publisher = @contract.publisher
-      @counterparty = @contract.counterparty
+      @bids     = @contract.bids
+      @asks     = @contract.asks
     end
 
     def transact_before_project
-      contract.status = get_status
-      if contract.status == "lapsed"
-        contract.awarded_to = "bidder"
-        contract.publisher.token_balance += contract.token_value
+      contract.status = "resolved"
+      contract.awarded_to = contract.awardee
+      if contract.awarded_to == "asker"
+        # TODO: use a command!
+        asker = contacts.asks.first.user
+        asker.token_balance += contract.distribution_tokens
       else
-        contract.awarded_to = contract.awardee
-        awardee = contract.send(contract.awardee.to_sym)
-        awardee.token_balance += contract.token_value * 2
+        # TODO: use a command!
+        # TODO: devise a more consistent way to save sub-objects...
+        contract.bidder_allocation.each do |bid_id, allocation|
+          usr = Bid.find(bid_id).user
+          usr.update_attribute(:token_balance, usr.token_balance + allocation)
+        end
       end
     end
 
     private
-
-    def get_status
-      status = "lapsed"
-      status = "awarded" if contract.counterparty.present?
-      status
-    end
 
     def resolvable_contract
       if Time.now < contract.contract_maturation
