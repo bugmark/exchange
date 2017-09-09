@@ -122,9 +122,10 @@ Next Actions:
 - [DONE] build out user trading page
 - [DONE] add specs for models, commands, features
 
+- [TODO] create ContractCmd::Resolve
+
 - [TODO] add ask/cross button to /offers page
 
-- [TODO] create ContractCmd::Resolve
 - [TODO] add resolve button to /contracts page
 
 - [TODO] add cron process for contract cross
