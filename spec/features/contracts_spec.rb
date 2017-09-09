@@ -2,6 +2,8 @@
 #
 # describe "Contracts" do
 #
+# TODO: Fixme
+#
 #   let(:user)     { FG.create(:user).user              }
 #   let(:contract) { FG.create(:contract).contract      }
 #   let(:matured)  { FG.create(:matured_contract)       }

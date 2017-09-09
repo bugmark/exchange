@@ -118,14 +118,14 @@ Next Actions:
 
 # Sep 08
 
-- [TODO] build out Contracts page
+- [DONE] build out Contracts page
+- [DONE] build out user trading page
+- [DONE] add specs for models, commands, features
 
 - [TODO] add ask/cross button to /offers page
 
 - [TODO] create ContractCmd::Resolve
 - [TODO] add resolve button to /contracts page
-
-- [TODO] build out user trading page
 
 - [TODO] add cron process for contract cross
 - [TODO] add cron process for contract resolve
@@ -133,7 +133,6 @@ Next Actions:
 - [TODO] test multi-party contracts
 - [TODO] enable contract resale
 
-- [TODO] add specs for models, commands, features
 - [TODO] enable event replay
 
 # TBD

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   get 'static/home'
-
   get 'static/help'
+  get 'static/test'
 
   resources :contracts do
     get 'resolve', :on => :member

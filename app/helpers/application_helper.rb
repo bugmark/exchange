@@ -23,12 +23,19 @@ module ApplicationHelper
     }
   end
 
+  def ttip_content(user)
+    """
+    <em>#{user.xid}</em></br>
+    #{user.asks.count} asks</br>
+    #{user.bids.count} bids</br>
+    #{user.contracts.count} contracts</br>
+    #{user.token_balance} tokens
+    """
+  end
+
   def trading_summary(user)
     balance   = user.token_balance
-    # bids      = user.bids.count
-    # asks      = user.asks.count
-    # contracts = 0 #TODO: create a user#contracts function...
-    "#{user.email} / #{balance} tokens"
+    raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.email} / #{balance} tokens</span>"
   end
 
 end

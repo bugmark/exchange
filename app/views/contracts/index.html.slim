@@ -14,11 +14,10 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
   thead
     tr
       th ID
-      th For
+      th Bid
+      th Ask
       th Tokens
       th Matures
-      th Pub.
-      th CP
       th Status
       th Awardee
       th Action
@@ -26,11 +25,10 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
     - @contracts.each do |contract|
       tr
         td = contract_id_link(contract)
-        td # contract_attach_link(contract)
+        td = contract_bid_link(contract)
+        td = contract_ask_link(contract)
         td = contract.token_value
         td = contract_mature_date(contract)
-        td # contract_user_link(contract.publisher)
-        td # contract_user_link(contract.counterparty)
         td = contract_status(contract)
         td = contract_awardee(contract)
         td = contract_actions(contract)
