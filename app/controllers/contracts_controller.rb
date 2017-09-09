@@ -53,8 +53,8 @@ class ContractsController < ApplicationController
   end
 
   def resolve
-    id = params["id"]
-    ContractCmd::Resolve.new(id).save_event.project
+    contract_id = params["id"]
+    ContractCmd::Resolve.new(contract_id).save_event.project
     redirect_to "/contracts"
   end
 
