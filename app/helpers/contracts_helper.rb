@@ -16,15 +16,15 @@ module ContractsHelper
     raw "<a href='/contracts/#{contract.id}'>#{type}</a>"
   end
 
-  def contract_take_link(contract)
-    status = contract.status
-    if contract.unmatured? && status == "open"
-      path = "/contracts/#{contract.id}/edit"
-      raw "<a href='#{path}'>Take</a>"
-    else
-      nil
-    end
-  end
+  # def contract_take_link(contract)
+  #   status = contract.status
+  #   if contract.unmatured? && status == "open"
+  #     path = "/contracts/#{contract.id}/edit"
+  #     raw "<a href='#{path}'>Take</a>"
+  #   else
+  #     nil
+  #   end
+  # end
 
   def contract_mature_date(contract)
     color = Time.now > contract.contract_maturation ? "red" : "green"
@@ -35,9 +35,8 @@ module ContractsHelper
   def contract_status(contract)
     case contract.status
       when "open"     then raw "<i class='fa fa-unlock'></i> open"
-      when "taken"    then raw "<i class='fa fa-lock'></i> taken"
-      when "awarded"  then raw "<i class='fa fa-check'></i> awarded"
-      when "lapsed"   then raw "<i class='fa fa-check'></i> lapsed"
+      when "matured"  then raw "<i class='fa fa-lock'></i> taken"
+      when "resolved" then raw "<i class='fa fa-check'></i> awarded"
         else "UNKNOWN_CONTRACT_STATE"
     end
   end
@@ -66,14 +65,14 @@ module ContractsHelper
     raw "<i class='fa fa-#{icon}'></i> #{lbl}"
   end
 
-  def contract_publisher_link(contract)
-    usr  = contract.publisher
-    raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
-  end
+  # def contract_publisher_link(contract)
+  #   usr  = contract.publisher
+  #   raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
+  # end
 
-  def contract_counterparty_link(contract)
-    return "NA" unless contract.counterparty_id
-    usr  = contract.counterparty
-    raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
-  end
+  # def contract_counterparty_link(contract)
+  #   return "NA" unless contract.counterparty_id
+  #   usr  = contract.counterparty
+  #   raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
+  # end
 end

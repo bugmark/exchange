@@ -2,18 +2,19 @@ module ContractCmd
   class Cross < ApplicationCommand
 
     attr_subobjects :contract, :ask
-    attr_reader :cross_list
+    attr_reader     :cross_list
     attr_delegate_fields :contract
 
     validate :cross_integrity
 
-    def initialize(ask)
-      @ask = Ask.where(contract_id: nil).find(ask.to_i)
-      @contract = Contract.new
+    def initialize(ask, contract_opts = {})
+      @ask        = Ask.where(contract_id: nil).find(ask.to_i)
+      @contract   = Contract.new(contract_opts)
       @cross_list = bin_pack(ask.token_value, ask&.cross_list)
     end
 
     def transact_before_project
+      contract.assign_attributes(ask.cross_attrs)
       contract.save
       ask.contract_id = contract.id
       cross_list.each { |bid| bid.update_attributes(contract_id: contract.id) }

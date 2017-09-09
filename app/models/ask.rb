@@ -60,16 +60,6 @@ class Ask < ApplicationRecord
     end
   end
 
-  private
-
-  def default_values
-    self.type                ||= 'Ask::GitHub'
-    self.status              ||= 'open'
-    self.bug_presence        ||= true
-    self.token_value         ||= 10
-    self.contract_maturation ||= Time.now + 1.week
-  end
-
   def cross_attrs
     {
       bug_id:       self.bug_id,
@@ -81,6 +71,15 @@ class Ask < ApplicationRecord
     }
   end
 
+  private
+
+  def default_values
+    self.type                ||= 'Ask::GitHub'
+    self.status              ||= 'open'
+    self.bug_presence        ||= true
+    self.token_value         ||= 10
+    self.contract_maturation ||= Time.now + 1.week
+  end
 end
 
 # == Schema Information
