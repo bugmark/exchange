@@ -58,7 +58,7 @@ div style='background: lightyellow'
     - @user.contracts.each do |contract|
       tr
         td = contract_id_link(contract)
-        td = contract.token_value
+        td B#{contract.bid_tokens} / A#{contract.ask_tokens}
         td = contract.contract_maturation_str
         td = contract.status
         td = contract_bid_link(contract)
