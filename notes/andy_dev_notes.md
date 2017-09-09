@@ -122,6 +122,9 @@ Next Actions:
 - [DONE] build out user trading page
 - [DONE] add specs for models, commands, features
 
+- [TODO] show bid/ask token amounts in contract
+- [TODO] constrain crosses by token amounts - partial fill
+
 - [TODO] create ContractCmd::Resolve
 
 - [TODO] add ask/cross button to /offers page

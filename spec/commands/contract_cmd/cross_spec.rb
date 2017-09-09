@@ -79,7 +79,7 @@ RSpec.describe ContractCmd::Cross do
     # end
   end
 
-  describe "#event_save" do
+  describe "#event_save" do #.
     it 'creates an event' do
       expect(EventLine.count).to eq(0)
       subject.save_event
@@ -92,6 +92,67 @@ RSpec.describe ContractCmd::Cross do
       subject.save_event.project
       expect(EventLine.count).to eq(5)   # TODO: retest
       expect(Contract.count).to eq(0)
+    end
+  end
+
+  describe "crossing" do
+
+    let(:lcl_ask) { FG.create(:ask, token_value: 10).ask }
+
+    context "with single bid" do
+      it 'matches higher values' do
+        _bid1 = FG.create(:bid, token_value: 11).bid
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it 'matches equal values' do
+        _bid1 = FG.create(:bid, token_value: 10).bid
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it 'fails to match lower values' do
+        _bid1 = FG.create(:bid, token_value: 9).bid
+        expect(Contract.count).to eq(0)
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(0)
+      end
+    end
+
+    context "with multiple bids" do
+      it 'matches higher value' do
+        _bid1 = FG.create(:bid, token_value: 6).bid
+        _bid2 = FG.create(:bid, token_value: 6).bid
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it 'matches equal value' do
+        _bid1 = FG.create(:bid, token_value: 5).bid
+        _bid2 = FG.create(:bid, token_value: 5).bid
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it 'fails to match lower value' do
+        _bid1 = FG.create(:bid, token_value: 4).bid
+        _bid2 = FG.create(:bid, token_value: 4).bid
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(0)
+      end
+    end
+    
+    context "with extra bids" do
+      it 'does minimal matching' do
+        _bid1 = FG.create(:bid, token_value: 6).bid
+        _bid2 = FG.create(:bid, token_value: 6).bid
+        _bid3 = FG.create(:bid, token_value: 6).bid
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(1)
+        expect(Bid.assigned.count).to eq(2)
+        expect(Bid.unassigned.count).to eq(1)
+      end
     end
   end
 end

@@ -75,7 +75,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :contracts do |t|
       t.string   :type                # forecast, reward
-      t.float    :token_value
       t.string   :terms               # eg Net0, Net30
       t.string   :status              # open, taken, resolved, ...
       t.string   :awarded_to          # publisher, counterparty

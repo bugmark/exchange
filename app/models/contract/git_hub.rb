@@ -8,7 +8,6 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  token_value         :float
 #  terms               :string
 #  status              :string
 #  awarded_to          :string

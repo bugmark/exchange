@@ -27,7 +27,7 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
         td = contract_id_link(contract)
         td = contract_bid_link(contract)
         td = contract_ask_link(contract)
-        td = contract.token_value
+        td B#{contract.bid_tokens} / A#{contract.ask_tokens}
         td = contract_mature_date(contract)
         td = contract_status(contract)
         td = contract_awardee(contract)

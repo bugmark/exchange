@@ -8,12 +8,12 @@ module ReposHelper
   end
 
   def repo_bid_new_link(repo)
-    path = "bids/new?type=git_hub&repo_id=#{repo.id}"
+    path = "/bids/new?type=git_hub&repo_id=#{repo.id}"
     raw "<a href='#{path}'>Bid</a>"
   end
 
   def repo_ask_new_link(repo)
-    path = "asks/new?type=git_hub&repo_id=#{repo.id}"
+    path = "/asks/new?type=git_hub&repo_id=#{repo.id}"
     raw "<a href='#{path}'>Ask</a>"
   end
 
