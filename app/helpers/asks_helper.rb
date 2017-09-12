@@ -14,19 +14,21 @@ module AsksHelper
     raw "<a href='/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
-  def ask_take_link(ask)
-    status = ask.status
-    if ask.unmatured? && status == "open"
-      path = "/asks/#{ask.id}/edit"
-      raw "<a href='#{path}'>Take</a>"
-    else
-      nil
-    end
-  end
-
   def ask_user_link(usr)
     return "NA" if usr.nil?
     raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
+  end
+
+  def ask_cross_count(ask)
+    count = ask.cross_list.count
+    return count if count == 0
+    value = ask.cross_value
+    "#{count} (#{value} tokens)"
+  end
+
+  def ask_cross_link(ask)
+    return "TBD" if ask.cross_value < ask.token_value
+    raw "<a href='/offers/#{ask.id}/cross'>cross</a>"
   end
 
   def ask_mature_date(ask)

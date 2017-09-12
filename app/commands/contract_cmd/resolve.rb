@@ -7,14 +7,6 @@ module ContractCmd
 
     validate :resolvable_contract
 
-    def self.find(contract)
-      instance = allocate
-      instance.contract = Contract.find(contract.to_i)
-      instance.bids     = instance.contract.bids
-      instance.asks     = instance.contract.asks
-      instance
-    end
-
     def initialize(contract)
       @contract = Contract.find(contract.to_i)
       @bids     = @contract.bids

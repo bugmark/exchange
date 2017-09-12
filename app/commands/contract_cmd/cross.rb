@@ -7,8 +7,8 @@ module ContractCmd
 
     validate :cross_integrity
 
-    def initialize(ask, contract_opts = {})
-      @ask        = Ask.where(contract_id: nil).find(ask.to_i)
+    def initialize(ask_param, contract_opts = {})
+      @ask        = Ask.where(contract_id: nil).find(ask_param.to_i)
       @contract   = Contract.new(contract_opts)
       @cross_list = bin_pack(ask.token_value, ask&.cross_list)
     end

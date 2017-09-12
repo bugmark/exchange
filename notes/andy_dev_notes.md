@@ -127,20 +127,27 @@ Next Actions:
 - [DONE] test multi-party contracts
 - [DONE] constrain crosses by token amounts - partial fill
 - [DONE] create ContractCmd::Resolve
+- [DONE] fix contract page parameters
+- [DONE] add resolve button to /contracts page
 
-# Sep 10
+# Sep 11
 
-- [TODO] fix contract page parameters
-- [TODO] add resolve button to /contracts page
-- [TODO] add ask/cross button to /offers page
+- [DONE] add ask/cross button to /offers page
+
+# Sep 12
+
+- [TODO] feature specs for all pages
+
+- [TODO] enable bid-side resale
+- [TODO] enable ask-side resale
+
+- [TODO] create a bid/take link
+- [TODO] create an ask/take link
 
 # TBD
 
-- [TODO] enable contract resale
-
 - [TODO] add cron process for contract cross
 - [TODO] add cron process for contract resolve
-
 - [TODO] enable event replay
 
 - [TODO] UI: link from bugmark.net to documentation
