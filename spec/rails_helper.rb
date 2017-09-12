@@ -17,9 +17,19 @@ require 'rspec/rails'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+require 'vcr'
+
+VCR.configure do |c|
+  c.cassette_library_dir = "spec/_vcr"
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+end
+
+USE_VCR = {vcr: {allow_playback_repeats: true}}
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  # config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -49,12 +59,7 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-require 'vcr'
 
-VCR.configure do |c|
-  c.cassette_library_dir = "spec/_vcr"
-  c.hook_into :webmock
-end
 
 
 

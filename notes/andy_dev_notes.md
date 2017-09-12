@@ -136,7 +136,8 @@ Next Actions:
 
 # Sep 12
 
-- [TODO] feature specs for all pages
+- [DONE] fix VCR configuration
+- [DONE] feature specs for all pages
 
 - [TODO] enable bid-side resale
 - [TODO] enable ask-side resale

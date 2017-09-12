@@ -15,4 +15,4 @@ describe "Offers" do
     expect(page).to_not be_nil
   end
 
-end #.
+end

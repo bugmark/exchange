@@ -3,15 +3,10 @@ require 'rails_helper'
 describe "Bugs" do
 
   let(:user) { FG.create(:user).user           }
-  let(:repo) do
-    zz = Repo.new(name: "aaa/bbb", type: "Repo::GitHub")
-    zz.save(validate: false)
-    zz
-  end
+  let(:repo) { FG.create(:repo).repo           }
   let(:bug)  { Bug.create(repo_id: repo.id, type: "Bug::GitHub")    }
 
-  it "renders index" do
-
+  it "renders index", USE_VCR do
     hydrate(bug)
     visit "/bugs"
     expect(page).to_not be_nil

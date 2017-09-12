@@ -1,0 +1,118 @@
+{
+  "contract_name": "EventStore",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "creator",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "blockCreatedOn",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id1",
+          "type": "uint256"
+        },
+        {
+          "name": "id2",
+          "type": "uint256"
+        },
+        {
+          "name": "id3",
+          "type": "uint256"
+        }
+      ],
+      "name": "log",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "id1",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "id2",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "id3",
+          "type": "uint256"
+        }
+      ],
+      "name": "GenericEvent",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000f57600080fd5b5b60008054600160a060020a03191633600160a060020a0316179055436001555b5b610186806100406000396000f300606060405263ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166302d05d3f811461005357806378f7cac61461008f578063d1ed7a3c146100b4575b600080fd5b341561005e57600080fd5b6100666100e4565b60405173ffffffffffffffffffffffffffffffffffffffff909116815260200160405180910390f35b341561009a57600080fd5b6100a2610100565b60405190815260200160405180910390f35b34156100bf57600080fd5b6100d0600435602435604435610106565b604051901515815260200160405180910390f35b60005473ffffffffffffffffffffffffffffffffffffffff1681565b60015481565b60007fd558d3fca8fb7d12341de968b9cc753e480e202f5333b2353994f2e650acc6a084848460405180848152602001838152602001828152602001935050505060405180910390a15060015b93925050505600a165627a7a7230582005cfff0e74f08c92a5b7a9274e66a351cb26b017852c056e2733fa0f1b0b280a0029",
+  "networks": {
+    "1505233768113": {
+      "events": {
+        "0xd558d3fca8fb7d12341de968b9cc753e480e202f5333b2353994f2e650acc6a0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "id1",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id2",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "name": "id3",
+              "type": "uint256"
+            }
+          ],
+          "name": "GenericEvent",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xb9a842983a84ac7566ab3d413cf79dd89acd6ac3",
+      "updated_at": 1505233802182
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1505233802182
+}

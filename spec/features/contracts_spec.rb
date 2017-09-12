@@ -6,8 +6,13 @@ describe "Contracts" do
   let(:contract) { Contract.create                    }
   let(:taken)    { FG.create(:taken_contract)         }
 
-  it "renders" do
+  it "renders index" do
     visit "/contracts"
+    expect(page).to_not be_nil
+  end
+
+  it "renders show" do
+    visit "/contracts/#{contract.id}"
     expect(page).to_not be_nil
   end
 end

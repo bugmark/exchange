@@ -17,6 +17,7 @@ FactoryGirl.define do
   factory :repo, class: RepoCmd::GhCreate do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
+
     type     "Repo::GitHub"
     name     "mvscorg/bugmark"
   end

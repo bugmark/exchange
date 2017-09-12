@@ -3,13 +3,15 @@ require 'rails_helper'
 describe "Bids" do
 
   let(:user)     { FG.create(:user).user              }
-  # let(:contract) { FG.create(:contract).contract      }
-  let(:matured)  { FG.create(:matured_contract)       }
-  let(:taken)    { FG.create(:taken_contract)         }
-  let(:tak_mat)  { FG.create(:taken_matured_contract) }
+  let(:bid)      { FG.create(:bid).bid                }
 
-  it "renders" do
+  it "renders index" do
     visit "/bids"
+    expect(page).to_not be_nil
+  end
+
+  it "renders show", USE_VCR do
+    visit "/bids/#{bid.id}"
     expect(page).to_not be_nil
   end
 

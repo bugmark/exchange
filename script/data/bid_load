@@ -4,13 +4,13 @@ require "./config/environment"
 
 opts = [
   {
-    bug_id:               Bug.first.id  ,
+    bug_id:               Bug.third.id  ,
     token_value:          10            ,
     user_id:              User.first.id ,
     contract_maturation:  Time.now + 1.week
   },
   {
-    bug_id:               Bug.first.id  ,
+    bug_id:               Bug.second.id  ,
     token_value:          15            ,
     user_id:              User.second.id ,
     contract_maturation:  Time.now + 1.hour
@@ -22,7 +22,7 @@ opts = [
     contract_maturation:  Time.now + 1.day
   },
   {
-    bug_id:               Bug.first.id  ,
+    bug_id:               Bug.third.id  ,
     token_value:          20            ,
     user_id:              User.first.id ,
     contract_maturation:  Time.now - 1.hour
