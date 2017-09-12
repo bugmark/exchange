@@ -19,6 +19,10 @@ class Ask < ApplicationRecord
     @bidcross ||= Bid.cross(cross_attrs)
   end
 
+  def cross_value
+    @cl_value ||= cross_list.reduce(0) {|acc, bid| acc + bid.token_value}
+  end
+
   def contract_maturation_str
     self.contract_maturation.strftime("%b-%d %H:%M:%S")
   end

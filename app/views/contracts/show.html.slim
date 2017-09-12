@@ -14,13 +14,13 @@ h2 CONTRACT [#{@contract.xid}]
         td = contract_ask_link(@contract)
       tr
         td Contract Price
-        td = @contract.token_value
+        td # @contract.token_value
   .col-md-6
     b Actions
     table.table
       tr
         td Action
-        td = contract_take_link(@contract)
+        td # contract_take_link(@contract)
 hr
 b Matching Bugs (#{@contract.match_list.count})
 table.table

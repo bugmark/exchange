@@ -32,7 +32,7 @@ class ContractsController < ApplicationController
     @contract = ContractCmd::Take.find(params[:id], with_counterparty: current_user)
   end
 
-  def createp
+  def create
     opts = params["contract_cmd_publish"]
     @contract = ContractCmd::Publish.new(valid_params(opts))
     if @contract.save_event.project

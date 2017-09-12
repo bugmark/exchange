@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   resources :bugs
 
-  resources :offers
+  resources :offers do
+    get 'cross', :on => :member
+  end
 
   resources :bids
   resources :bid_cmd_creates, path: "/bids"
