@@ -32,7 +32,7 @@ RSpec.describe Repo, :type => :model do
       end
     end
   end
-end
+end #
 
 # == Schema Information
 #

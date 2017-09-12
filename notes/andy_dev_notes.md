@@ -134,6 +134,8 @@ Next Actions:
 
 - [DONE] add ask/cross button to /offers page
 
+# Sep 12
+
 - [TODO] feature specs for all pages
 
 - [TODO] enable bid-side resale
@@ -146,7 +148,6 @@ Next Actions:
 
 - [TODO] add cron process for contract cross
 - [TODO] add cron process for contract resolve
-
 - [TODO] enable event replay
 
 - [TODO] UI: link from bugmark.net to documentation

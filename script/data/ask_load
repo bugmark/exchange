@@ -5,13 +5,13 @@ require "./config/environment"
 opts = [
   {
     bug_id:               Bug.first.id  ,
-    token_value:          30            ,
+    token_value:          10            ,
     user_id:              User.first.id ,
     contract_maturation:  Time.now + 1.week
   },
   {
     bug_id:               Bug.first.id  ,
-    token_value:          25            ,
+    token_value:          5             ,
     user_id:              User.first.id ,
     contract_maturation:  Time.now + 1.hour
   },
@@ -24,6 +24,12 @@ opts = [
   {
     bug_id:               Bug.first.id  ,
     token_value:          20            ,
+    user_id:              User.first.id ,
+    contract_maturation:  Time.now - 1.hour
+  },
+  {
+    bug_id:               Bug.third.id  ,
+    token_value:          5             ,
     user_id:              User.first.id ,
     contract_maturation:  Time.now - 1.hour
   }
