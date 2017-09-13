@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     get 'cross', :on => :member
   end
 
+  resources :predictions
+
   resources :bids
   resources :bid_cmd_creates, path: "/bids"
 

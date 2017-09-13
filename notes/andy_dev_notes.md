@@ -141,8 +141,13 @@ Next Actions:
 
 # Sep 13
 
-- [TODO] enable a prediction (dynamic) contract type
-- [TODO] add buy-side odds
+- [DONE] enable a prediction (dynamic) contract type
+- [DONE] add buy-side odds
+
+- [TODO] add a predictions page
+
+- [TODO] add cross button to offers#index
+- [TODO] add cross button to asks#show
 
 - [TODO] add bid-cancel button
 - [TODO] enable bid-side resale

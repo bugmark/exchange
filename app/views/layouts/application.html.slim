@@ -16,11 +16,12 @@ html[lang="en-US"]
       a.navbar-brand[href="/"] BugMark
       .collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          = nav_link("Home"      , "/"         )
-          = nav_link("Repos"     , "/repos"    )
-          = nav_link("Bugs"      , "/bugs"     )
-          = nav_link("Offers"    , "/offers"   )
-          = nav_link("Contracts" , "/contracts")
+          = nav_link("Home"        , "/"            )
+          = nav_link("Repos"       , "/repos"       )
+          = nav_link("Bugs"        , "/bugs"        )
+          = nav_link("Offers"      , "/offers"      )
+          = nav_link("Contracts"   , "/contracts"   )
+          = nav_link("Predictions" , "/predictions" )
         = render "layouts/devise"
     .container-fluid[style="margin-top: 65px;"]
       = yield

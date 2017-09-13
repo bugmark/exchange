@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Bid, type: :model do
+RSpec.describe Ask, type: :model do
 
   def valid_params(user)
     {
@@ -64,21 +64,11 @@ RSpec.describe Bid, type: :model do
     end
   end
 
-  describe ".cross" do
-    before(:each) { subject.save}
-
-    it 'crosses id' do
-      expect(subject).to_not be_nil
-      expect(klas.count).to eq(1)
-      expect(klas.cross({id: subject.id}).length).to eq(1)
-    end
-  end
-
 end
 
 # == Schema Information
 #
-# Table name: bids
+# Table name: asks
 #
 #  id                  :integer          not null, primary key
 #  type                :string
@@ -98,6 +88,4 @@ end
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
-#  stake               :integer          default(1), not null
-#  counter             :integer          default(1), not null
 #

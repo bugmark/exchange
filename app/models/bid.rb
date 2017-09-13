@@ -89,6 +89,7 @@ class Bid < ApplicationRecord
 
   def default_values
     self.type         ||= 'Bid::GitHub'
+    self.style        ||= 'fixed'
     self.status       ||= 'open'
     self.bug_presence ||= true
     self.token_value  ||= 10

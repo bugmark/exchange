@@ -6,12 +6,14 @@
       thead
         tr
           th ID
+          th Style
           th User
           th Tokens
       tbody
         - @bids.each do |bid|
           tr
             td = bid_id_link(bid)
+            td = bid.style
             td = bid_user_link(bid.user)
             td = bid.token_value
   .col-md-7
@@ -21,6 +23,7 @@
       thead
         tr
           th ID
+          th Style
           th User
           th Tokens
           th Matches
@@ -29,6 +32,7 @@
         - @asks.each do |ask|
           tr
             td = ask_id_link(ask)
+            td = ask.style
             td = ask_user_link(ask.user)
             td = ask.token_value
             td = ask_cross_count(ask)
