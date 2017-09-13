@@ -72,8 +72,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  style               :string
 #  user_id             :integer
+#  ownership           :string
 #  contract_id         :integer
 #  token_value         :integer
 #  status              :string

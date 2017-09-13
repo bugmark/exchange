@@ -105,6 +105,14 @@ class Contract < ApplicationRecord
   # ----- SCOPES -----
 
   class << self
+    def fixed
+      where("style == ?", "fixed")
+    end
+
+    def dynamic
+      where("style == ?", "dynamic")
+    end
+
     def pending_resolution
       expired.unresolved
     end
@@ -148,8 +156,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  style               :string
 #  status              :string
+#  ownership           :string
 #  awarded_to          :string
 #  contract_maturation :datetime
 #  repo_id             :integer

@@ -8,8 +8,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  style               :string
 #  status              :string
+#  ownership           :string
 #  awarded_to          :string
 #  contract_maturation :datetime
 #  repo_id             :integer

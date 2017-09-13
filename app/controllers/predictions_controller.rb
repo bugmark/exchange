@@ -1,7 +1,6 @@
 class PredictionsController < ApplicationController
 
   def index
-    @bids = Bid.unassigned
-    @asks = Ask.unassigned
+    @contracts = Contract.dynamic.unresolved
   end
 end

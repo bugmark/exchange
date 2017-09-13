@@ -6,15 +6,16 @@ class ContractsController < ApplicationController
   def index
     @bug = @repo = nil
     @timestamp = Time.now.strftime("%H:%M:%S")
+    base_scope = Contract.fixed.unresolved
     case
       when bug_id = params["bug_id"]&.to_i
         @bug       = Bug.find(bug_id)
-        @contracts = Contract.where(bug_id: bug_id)
+        @contracts = base_scope.where(bug_id: bug_id)
       when repo_id = params["repo_id"]&.to_i
         @repo      = Repo.find(repo_id)
-        @contracts = Contract.where(repo_id: repo_id)
+        @contracts = base_scope.where(repo_id: repo_id)
       else
-        @contracts = Contract.all
+        @contracts = base_scope
     end
   end
 
