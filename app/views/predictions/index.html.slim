@@ -1,1 +1,34 @@
-| Predictions Hello World
+table width='100%'
+  tr
+    td
+      h2 Predictions
+    td align='right'
+      - case
+        - when @bug
+          | Contracts for Bug ##{@bug.id} [#{@timestamp}]
+        - when @repo
+          | Contracts for Repo ##{@repo.id} [#{@timestamp}]
+        - else
+          | All Contracts [#{@timestamp}]
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
+  thead
+    tr
+      th ID
+      th Bid
+      th Ask
+      th Tokens
+      th Matures
+      th Status
+      th Awardee
+      th Action
+  tbody
+    - @contracts.each do |contract|
+      tr
+        td = contract_id_link(contract)
+        td = contract_bid_link(contract)
+        td = contract_ask_link(contract)
+        td B#{contract.bid_tokens} / A#{contract.ask_tokens}
+        td = contract_mature_date(contract)
+        td = contract_status(contract)
+        td = contract.awardee
+        td = contract_actions(contract)

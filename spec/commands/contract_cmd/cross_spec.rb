@@ -18,7 +18,7 @@ RSpec.describe ContractCmd::Cross do #.
     it { should_not be_valid    }
   end
 
-  describe "Subobjects" do
+  describe "Subobjects", USE_VCR do
     it { should respond_to :subobject_symbols }
     it 'returns an array' do
       expect(subject.subobject_symbols).to be_an(Array)

@@ -13,7 +13,7 @@ RSpec.describe Bid, type: :model do
   subject      { klas.new(valid_params(user))               }
 
   describe "Attributes" do
-    it { should respond_to :style                  }
+    it { should respond_to :ownership              }
     it { should respond_to :exref                  }
     it { should respond_to :uuref                  }
   end

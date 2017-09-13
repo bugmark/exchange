@@ -105,12 +105,12 @@ class Contract < ApplicationRecord
   # ----- SCOPES -----
 
   class << self
-    def fixed
-      where("style == ?", "fixed")
+    def constant
+      where(ownership: 'constant')
     end
 
-    def dynamic
-      where("style == ?", "dynamic")
+    def extensible
+      where(ownership: 'extensible')
     end
 
     def pending_resolution
@@ -136,6 +136,7 @@ class Contract < ApplicationRecord
   def default_values
     self.status       ||= 'open'
     self.bug_presence ||= true
+    self.ownership    ||= 'constant'
     self.contract_maturation   ||= Time.now + 1.week
   end
 

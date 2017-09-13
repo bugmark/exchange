@@ -79,8 +79,8 @@ class Ask < ApplicationRecord
 
   def default_values
     self.type                ||= 'Ask::GitHub'
-    self.style               ||= 'fixed'
     self.status              ||= 'open'
+    self.ownership           ||= 'constant'
     self.bug_presence        ||= true
     self.token_value         ||= 10
     self.contract_maturation ||= Time.now + 1.week
