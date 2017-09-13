@@ -12,25 +12,25 @@ opts = [
   {
     bug_id:               Bug.first.id  ,
     token_value:          5             ,
-    user_id:              User.first.id ,
+    user_id:              User.second.id ,
     contract_maturation:  Time.now + 1.hour
   },
   {
     bug_id:               Bug.third.id  ,
     token_value:          15            ,
-    user_id:              User.first.id ,
+    user_id:              User.last.id ,
     contract_maturation:  Time.now + 1.day
   },
   {
     bug_id:               Bug.third.id  ,
     token_value:          20            ,
-    user_id:              User.first.id ,
+    user_id:              User.last.id ,
     contract_maturation:  Time.now - 1.hour
   },
   {
     bug_id:               Bug.first.id  ,
     token_value:          5             ,
-    user_id:              User.first.id ,
+    user_id:              User.last.id ,
     contract_maturation:  Time.now - 1.hour
   }
 ]

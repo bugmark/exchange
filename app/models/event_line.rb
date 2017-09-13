@@ -14,17 +14,3 @@ class EventLine < ApplicationRecord
     self.chain_hash   = [prev&.chain_hash, self.local_hash].hash.to_s
   end
 end
-
-# == Schema Information
-#
-# Table name: event_lines
-#
-#  id         :integer          not null, primary key
-#  klas       :string
-#  uuref      :string
-#  local_hash :string
-#  chain_hash :string
-#  data       :jsonb            not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#

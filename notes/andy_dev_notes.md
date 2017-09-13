@@ -139,6 +139,12 @@ Next Actions:
 - [DONE] fix VCR configuration
 - [DONE] feature specs for all pages
 
+# Sep 13
+
+- [TODO] enable a prediction (dynamic) contract type
+- [TODO] add buy-side odds
+
+- [TODO] add bid-cancel button
 - [TODO] enable bid-side resale
 - [TODO] enable ask-side resale
 

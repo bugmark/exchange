@@ -22,17 +22,3 @@ RSpec.describe EventLine, type: :model do
   end
 
 end
-
-# == Schema Information
-#
-# Table name: event_lines
-#
-#  id         :integer          not null, primary key
-#  klas       :string
-#  uuref      :string
-#  local_hash :string
-#  chain_hash :string
-#  data       :jsonb            not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
