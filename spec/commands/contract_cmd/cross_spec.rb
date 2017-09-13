@@ -13,7 +13,7 @@ RSpec.describe ContractCmd::Cross do #.
     it { should respond_to :cross_list    }
   end
 
-  describe "Object Existence" do
+  describe "Object Existence", USE_VCR do
     it { should be_a klas       }
     it { should_not be_valid    }
   end
