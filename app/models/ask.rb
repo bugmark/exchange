@@ -85,3 +85,27 @@ class Ask < ApplicationRecord
     self.contract_maturation ||= Time.now + 1.week
   end
 end
+
+# == Schema Information
+#
+# Table name: asks
+#
+#  id                  :integer          not null, primary key
+#  type                :string
+#  style               :string
+#  user_id             :integer
+#  contract_id         :integer
+#  token_value         :integer
+#  status              :string
+#  offer_expiration    :datetime
+#  contract_maturation :datetime
+#  repo_id             :integer
+#  bug_id              :integer
+#  bug_title           :string
+#  bug_status          :string
+#  bug_labels          :string
+#  bug_presence        :boolean
+#  jfields             :jsonb            not null
+#  exref               :string
+#  uuref               :string
+#

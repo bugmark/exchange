@@ -64,9 +64,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
         t.string   :exref
         t.string   :uuref
       end
-      # ODDS (eg 4:1, 1:4)
-      add_column :bids, :stake,   :integer, null: false, default: 1
-      add_column :bids, :counter, :integer, null: false, default: 1
       add_index table, :type
       add_index table, :user_id
       add_index table, :contract_id
@@ -76,6 +73,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :bug_id
       add_index table, :jfields, using: :gin
     end
+    # ODDS (eg 4:1, 1:4)
+    add_column :bids, :stake,   :integer, null: false, default: 1
+    add_column :bids, :counter, :integer, null: false, default: 1
 
     create_table :contracts do |t|
       t.string   :type                # GitHub, BugZilla, ...
