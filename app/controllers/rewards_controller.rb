@@ -7,6 +7,7 @@ class RewardsController < ApplicationController
     @bug = @repo = nil
     @timestamp = Time.now.strftime("%H:%M:%S")
     base_scope = Contract.reward.unresolved
+    binding.pry
     case
       when bug_id = params["bug_id"]&.to_i
         @bug       = Bug.find(bug_id)

@@ -137,7 +137,7 @@ class Contract < ApplicationRecord
     self.status       ||= 'open'
     self.mode         ||= 'reward'
     self.bug_presence ||= true
-    self.contract_maturation ||= Time.now + 1.week
+    self.contract_maturation   ||= Time.now + 1.week
   end
 
   def match_attrs
