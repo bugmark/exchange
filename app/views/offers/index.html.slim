@@ -8,12 +8,14 @@
           th ID
           th User
           th Tokens
+          th Action
       tbody
         - @bids.each do |bid|
           tr
             td = bid_id_link(bid)
             td = bid_user_link(bid.user)
             td = bid.token_value
+            td = bid_actions(bid)
   .col-md-7
     div style='text-align: center'
       h4 Open Asks
@@ -32,4 +34,4 @@
             td = ask_user_link(ask.user)
             td = ask.token_value
             td = ask_cross_count(ask)
-            td = ask_cross_link(ask)
+            td = ask_actions(ask)

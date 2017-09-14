@@ -20,6 +20,22 @@ class Bid < ApplicationRecord
     self.contract_maturation.strftime("%b-%d %H:%M:%S")
   end
 
+  def attach_type
+    self.bug_id ? "bugs" : "repos"
+  end
+
+  def attach_obj
+    bug || repo
+  end
+
+  def matured?
+    self.contract_maturation < Time.now
+  end
+
+  def unmatured?
+    ! matured?
+  end
+
   # -----
 
   class << self

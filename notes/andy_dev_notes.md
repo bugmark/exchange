@@ -149,12 +149,23 @@ Next Actions:
 - [DONE] rename RewardCmd to RewardCmd
 - [DONE] rename 'contracts' to 'rewards'
 
-- [TODO] add bid-cancel button
+# Sep 14
+
+- [TODO] add bid/cancel link on offers#index
+- [TODO] add ask/cancel link on offers#index
+- [TODO] add bid/cancel link on offers#show
+- [TODO] add ask/cancel link on offers#show
+
+- [TODO] create a bid/take link on offers#index
+- [TODO] create an ask/take link on offers#index
+- [TODO] create a bid/take link on offers#show
+- [TODO] create an ask/take link on offers#show
+
 - [TODO] enable bid-side resale
 - [TODO] enable ask-side resale
 
-- [TODO] create a bid/take link
-- [TODO] create an ask/take link
+- [TODO] add mode to /bid/new
+- [TODO] add mode to /ask/new
 
 # TBD
 

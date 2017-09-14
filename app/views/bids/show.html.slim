@@ -17,10 +17,10 @@ h2 BID [#{@bid.xid}]
     table.table
       tr
         td Attached To
-        td # contract_attach_link(@bid)
+        td = bid_attach_link(@bid)
       tr
         td Action
-        td # contract_take_link(@bid)
+        td TBD
 hr
 b Matching Bugs (#{@bid.match_list.count})
 table.table
@@ -31,12 +31,12 @@ table.table
       th Title
       th Contracts
       th Create
-  - @bid.match_list.each do |bug|
+  - @bid.match_list.each do |bid|
     tr
-      td = bug_id_link(bug)
-      td = bug.type
-      td = bug_title_link(bug)
-      td = bug_contract_link(bug)
+      td = bug_id_link(bid)
+      td = bid.type
+      td = bug_title_link(bid)
+      td = bug_contract_link(bid)
       td
         nobr
-          = bug_contract_link(bug)
+          = bug_contract_link(bid)

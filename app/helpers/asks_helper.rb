@@ -26,10 +26,30 @@ module AsksHelper
     "#{count} (#{value} tokens)"
   end
 
+  # ----- actions
+
+  def ask_cancel_link(ask)
+    nil
+  end
+
+  def ask_take_link(ask)
+    nil
+  end
+
   def ask_cross_link(ask)
-    return "TBD" if ask.cross_value < ask.token_value
+    return nil if ask.cross_value < ask.token_value
     raw "<a href='/offers/#{ask.id}/cross'>cross</a>"
   end
+
+  def ask_actions(ask)
+    canc  = ask_cancel_link(ask)
+    take  = ask_take_link(ask)
+    cros  = ask_cross_link(ask)
+    return "NA" unless [canc, take, cros].any?
+    raw [canc, take, cros].select(&:present?).join(" | ")
+  end
+
+  # -----
 
   def ask_mature_date(ask)
     color = Time.now > ask.ask_maturation ? "red" : "green"
@@ -51,13 +71,6 @@ module AsksHelper
     return nil if ask.resolved?
     return nil unless ask.matured?
     link_to "Resolve", {:action => :resolve, :id => ask.id}
-  end
-
-  def ask_actions(ask)
-    take  = ask_take_link(ask)
-    resv  = ask_resolve_link(ask)
-    return "NA" unless [take, resv].any?
-    raw [take, resv].select(&:present?).join(" | ")
   end
 
   def ask_awardee(ask)
