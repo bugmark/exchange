@@ -1,6 +1,6 @@
 module ContractsHelper
   def contract_id_link(contract)
-    raw "<a href='/contracts/#{contract.id}'>#{contract.xid}</a>"
+    raw "<a href='/rewards/#{contract.id}'>#{contract.xid}</a>"
   end
 
   def contract_bid_link(contract)
@@ -13,7 +13,7 @@ module ContractsHelper
 
   def contract_type_link(contract)
     type = contract.xtype
-    raw "<a href='/contracts/#{contract.id}'>#{type}</a>"
+    raw "<a href='/rewards/#{contract.id}'>#{type}</a>"
   end
 
   def contract_mature_date(contract)

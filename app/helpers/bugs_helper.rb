@@ -21,7 +21,7 @@ module BugsHelper
   def bug_contract_link(bug)
     count = bug.contracts.count
     if count > 0
-      raw "<a href='/contracts?bug_id=#{bug.id}'>#{count}</a>"
+      raw "<a href='/rewards?bug_id=#{bug.id}'>#{count}</a>"
     else
       count
     end

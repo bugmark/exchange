@@ -105,6 +105,14 @@ class Contract < ApplicationRecord
   # ----- SCOPES -----
 
   class << self
+    def reward
+      where(mode: 'reward')
+    end
+
+    def forecast
+      where(mode: 'forecast')
+    end
+
     def pending_resolution
       expired.unresolved
     end
@@ -118,7 +126,7 @@ class Contract < ApplicationRecord
     end
 
     def unresolved
-      where("status != ?", "resolved").where("status != ?", "open")
+      where("status != ?", "resolved")
     end
 
   end
@@ -127,6 +135,7 @@ class Contract < ApplicationRecord
 
   def default_values
     self.status       ||= 'open'
+    self.mode         ||= 'reward'
     self.bug_presence ||= true
     self.contract_maturation   ||= Time.now + 1.week
   end
@@ -148,7 +157,7 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  terms               :string
+#  mode                :string
 #  status              :string
 #  awarded_to          :string
 #  contract_maturation :datetime

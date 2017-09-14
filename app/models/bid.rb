@@ -89,10 +89,11 @@ class Bid < ApplicationRecord
 
   def default_values
     self.type         ||= 'Bid::GitHub'
+    self.mode         ||= 'reward'
     self.status       ||= 'open'
     self.bug_presence ||= true
     self.token_value  ||= 10
-    self.contract_maturation   ||= Time.now + 1.week
+    self.contract_maturation ||= Time.now + 1.week
   end
 
   def match_attrs
@@ -112,6 +113,7 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  user_id             :integer
 #  contract_id         :integer
 #  token_value         :integer
@@ -127,4 +129,6 @@ end
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
+#  stake               :integer          default(1), not null
+#  counter             :integer          default(1), not null
 #

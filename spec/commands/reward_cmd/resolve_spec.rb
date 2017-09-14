@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Resolve, type: :model do
+RSpec.describe RewardCmd::Resolve, type: :model do
 
   include_context 'Integration Environment'
 
   let(:ask)      { ask1.ask                                               }
-  let(:contract) { ContractCmd::Cross.new(ask).project.contract           }
+  let(:contract) { RewardCmd::Cross.new(ask).project.contract           }
   let(:klas)     { described_class                                        }
   subject        { klas.new(contract)                                     }
 

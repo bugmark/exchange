@@ -4,19 +4,12 @@ Rails.application.routes.draw do
   get 'static/help'
   get 'static/test'
 
-  resources :contracts do
-    get 'resolve', :on => :member
+  resources :repos do
+    get 'sync', :on => :member
   end
-  resources :contract_cmd_publishes  , path: "/contracts"
-  resources :contract_cmd_takes      , path: "/contracts"
-
-  resources :users
+  resources :repo_git_hubs      , path: "/repos"
 
   resources :bugs
-
-  resources :offers do
-    get 'cross', :on => :member
-  end
 
   resources :bids
   resources :bid_cmd_creates, path: "/bids"
@@ -24,10 +17,19 @@ Rails.application.routes.draw do
   resources :asks
   resources :ask_cmd_creates, path: "/asks"
 
-  resources :repos do
-    get 'sync', :on => :member
+  resources :offers do
+    get 'cross', :on => :member
   end
-  resources :repo_git_hubs      , path: "/repos"
+
+  resources :rewards do
+    get 'resolve', :on => :member
+  end
+  resources :reward_cmd_publishes , path: "/rewards"
+  resources :reward_cmd_takes     , path: "/rewards"
+
+  resources :forecasts
+
+  resources :users
 
   root "static#home"
 

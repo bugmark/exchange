@@ -13,8 +13,9 @@ RSpec.describe Bid, type: :model do
   subject      { klas.new(valid_params(user))               }
 
   describe "Attributes" do
+    it { should respond_to :mode                   }
     it { should respond_to :exref                  }
-    it { should respond_to :uuref                  }  
+    it { should respond_to :uuref                  }
   end
 
   describe "#uuref" do
@@ -81,6 +82,7 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  user_id             :integer
 #  contract_id         :integer
 #  token_value         :integer
@@ -96,4 +98,6 @@ end
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
+#  stake               :integer          default(1), not null
+#  counter             :integer          default(1), not null
 #

@@ -112,7 +112,7 @@ Next Actions:
 # Sep 07
 
 - [DONE] create a Bid#cross method
-- [DONE] create ContractCmd::Cross
+- [DONE] create RewardCmd::Cross
 - [DONE] create script/data/contract_load
 
 # Sep 08
@@ -126,7 +126,7 @@ Next Actions:
 
 - [DONE] test multi-party contracts
 - [DONE] constrain crosses by token amounts - partial fill
-- [DONE] create ContractCmd::Resolve
+- [DONE] create RewardCmd::Resolve
 - [DONE] fix contract page parameters
 - [DONE] add resolve button to /contracts page
 
@@ -139,6 +139,17 @@ Next Actions:
 - [DONE] fix VCR configuration
 - [DONE] feature specs for all pages
 
+# Sep 13
+
+- [DONE] enable a prediction (dynamic) contract type
+- [DONE] add buy-side odds
+- [DONE] add a forecasts page
+- [DONE] add cross button to offers#index
+- [DONE] add cross button to asks#show
+- [DONE] rename RewardCmd to RewardCmd
+- [DONE] rename 'contracts' to 'rewards'
+
+- [TODO] add bid-cancel button
 - [TODO] enable bid-side resale
 - [TODO] enable ask-side resale
 

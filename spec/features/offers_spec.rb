@@ -2,17 +2,17 @@ require 'rails_helper'
 
 describe "Offers" do
 
-# TODO: Fixme
+  let(:ask) { FG.create(:ask).ask              }
+  let(:bid) { FG.create(:bid).bid              }
 
-  let(:user)     { FG.create(:user).user              }
-  let(:contract) { FG.create(:contract).contract      }
-  let(:matured)  { FG.create(:matured_contract)       }
-  let(:taken)    { FG.create(:taken_contract)         }
-  let(:tak_mat)  { FG.create(:taken_matured_contract) }
-
-  it "renders" do
+  it "renders index (empty)" do
     visit "/offers"
     expect(page).to_not be_nil
   end
 
+  it "renders index (with element)", USE_VCR do
+    hydrate(ask, bid)
+    visit "/offers"
+    expect(page).to_not be_nil #
+  end
 end

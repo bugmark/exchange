@@ -7,11 +7,11 @@ class OffersController < ApplicationController
 
   def cross
     ask_id = params["id"]
-    result = ContractCmd::Cross.new(ask_id).save_event.project
+    result = RewardCmd::Cross.new(ask_id).save_event.project
     if result
-      redirect_to "/contracts/#{result.id}"
+      redirect_to "/rewards/#{result.id}"
     else
-      redirect_to "/contracts"
+      redirect_to "/rewards"
     end
   end
 end

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Cross do #.
+RSpec.describe RewardCmd::Cross do
 
   include_context 'Integration Environment'
 
-  let(:klas)   { described_class                                        }
-  subject      { klas.new(ask1.ask)                                     }
+  let(:klas)   { described_class                  }
+  subject      { klas.new(ask1.ask)               }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :ask           }
@@ -13,20 +13,20 @@ RSpec.describe ContractCmd::Cross do #.
     it { should respond_to :cross_list    }
   end
 
-  describe "Object Existence" do
+  describe "Object Existence", USE_VCR do
     it { should be_a klas       }
     it { should_not be_valid    }
   end
 
-  describe "Subobjects" do
+  describe "Subobjects", USE_VCR do
     it { should respond_to :subobject_symbols }
     it 'returns an array' do
       expect(subject.subobject_symbols).to be_an(Array)
     end
   end
 
-  describe "Delegated Object" do
-    before(:each) do hydrate(bid1) end
+  describe "Delegated Object", USE_VCR do
+    before(:each) { hydrate(bid1) }
 
     it 'has a present Contract' do
       expect(subject.contract).to be_present
@@ -41,7 +41,7 @@ RSpec.describe ContractCmd::Cross do #.
     end
   end
 
-  describe "#project" do
+  describe "#project", USE_VCR do
     before(:each) do hydrate(bid1) end
 
     it 'saves the object to the database' do

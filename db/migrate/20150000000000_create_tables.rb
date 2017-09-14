@@ -45,10 +45,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
     %i(bids asks).each do |table|
       create_table table do |t|
         t.string   :type                  # BugZilla, GitHub, CVE
+        t.string   :mode                  # reward, forecast
         t.integer  :user_id
         t.integer  :contract_id
         t.integer  :token_value
-        t.string   :status
+        t.string   :status                # open, closed
         t.datetime :offer_expiration
         t.datetime :contract_maturation
         # ----- match fields -----
@@ -72,9 +73,13 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :bug_id
       add_index table, :jfields, using: :gin
     end
+    # ODDS (eg 4:1, 1:4)
+    add_column :bids, :stake,   :integer, null: false, default: 1
+    add_column :bids, :counter, :integer, null: false, default: 1
 
-    create_table :contracts do |t|
+    create_table :rewards do |t|
       t.string   :type                # GitHub, BugZilla, ...
+      t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
       t.string   :awarded_to          # bidder, asker
       t.datetime :contract_maturation
@@ -91,11 +96,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
-    add_index :contracts, :exref
-    add_index :contracts, :uuref
-    add_index :contracts, :repo_id
-    add_index :contracts, :bug_id
-    add_index :contracts, :jfields, using: :gin
+    add_index :rewards, :exref
+    add_index :rewards, :uuref
+    add_index :rewards, :repo_id
+    add_index :rewards, :bug_id
+    add_index :rewards, :jfields, using: :gin
 
     create_table :users do |t|
       t.boolean  :admin

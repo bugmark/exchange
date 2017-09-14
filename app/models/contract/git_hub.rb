@@ -8,7 +8,7 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  terms               :string
+#  mode                :string
 #  status              :string
 #  awarded_to          :string
 #  contract_maturation :datetime

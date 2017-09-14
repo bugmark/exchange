@@ -8,6 +8,7 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  user_id             :integer
 #  contract_id         :integer
 #  token_value         :integer
@@ -23,4 +24,6 @@ end
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
+#  stake               :integer          default(1), not null
+#  counter             :integer          default(1), not null
 #
