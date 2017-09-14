@@ -25,8 +25,8 @@ RSpec.describe ContractCmd::Cross do #.
     end
   end
 
-  describe "Delegated Object" do
-    before(:each) do hydrate(bid1) end
+  describe "Delegated Object", USE_VCR do
+    before(:each) { hydrate(bid1) }
 
     it 'has a present Contract' do
       expect(subject.contract).to be_present
@@ -41,7 +41,7 @@ RSpec.describe ContractCmd::Cross do #.
     end
   end
 
-  describe "#project" do
+  describe "#project", USE_VCR do
     before(:each) do hydrate(bid1) end
 
     it 'saves the object to the database' do

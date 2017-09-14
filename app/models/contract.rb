@@ -105,12 +105,12 @@ class Contract < ApplicationRecord
   # ----- SCOPES -----
 
   class << self
-    def constant
-      where(ownership: 'constant')
+    def reward
+      where(mode: 'reward')
     end
 
-    def extensible
-      where(ownership: 'extensible')
+    def forecast
+      where(mode: 'forecast')
     end
 
     def pending_resolution
@@ -135,9 +135,9 @@ class Contract < ApplicationRecord
 
   def default_values
     self.status       ||= 'open'
+    self.mode         ||= 'reward'
     self.bug_presence ||= true
-    self.ownership    ||= 'constant'
-    self.contract_maturation   ||= Time.now + 1.week
+    self.contract_maturation ||= Time.now + 1.week
   end
 
   def match_attrs
@@ -157,8 +157,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  status              :string
-#  ownership           :string
 #  awarded_to          :string
 #  contract_maturation :datetime
 #  repo_id             :integer

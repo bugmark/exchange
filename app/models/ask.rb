@@ -15,6 +15,14 @@ class Ask < ApplicationRecord
     self.id
   end
 
+  def attach_type
+    self.bug_id ? "bugs" : "repos"
+  end
+
+  def attach_obj
+    bug || repo
+  end
+
   def cross_list
     @bidcross ||= Bid.cross(cross_attrs)
   end
@@ -79,8 +87,8 @@ class Ask < ApplicationRecord
 
   def default_values
     self.type                ||= 'Ask::GitHub'
+    self.mode                ||= 'reward'
     self.status              ||= 'open'
-    self.ownership           ||= 'constant'
     self.bug_presence        ||= true
     self.token_value         ||= 10
     self.contract_maturation ||= Time.now + 1.week
@@ -93,8 +101,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  user_id             :integer
-#  ownership           :string
 #  contract_id         :integer
 #  token_value         :integer
 #  status              :string

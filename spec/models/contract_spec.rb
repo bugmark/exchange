@@ -59,8 +59,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  status              :string
-#  ownership           :string
 #  awarded_to          :string
 #  contract_maturation :datetime
 #  repo_id             :integer

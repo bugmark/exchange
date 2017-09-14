@@ -7,7 +7,7 @@ describe "Predictions" do
   let(:taken)    { FG.create(:taken_contract)         }
 
   it "renders index" do
-    visit "/predictions"
+    visit "/forecasts"
     expect(page).to_not be_nil
   end
 end

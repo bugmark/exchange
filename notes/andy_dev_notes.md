@@ -143,11 +143,12 @@ Next Actions:
 
 - [DONE] enable a prediction (dynamic) contract type
 - [DONE] add buy-side odds
+- [DONE] add a forecasts page
+- [DONE] add cross button to offers#index
+- [DONE] add cross button to asks#show
 
-- [TODO] add a predictions page
-
-- [TODO] add cross button to offers#index
-- [TODO] add cross button to asks#show
+- [TODO] rename ContractCmd to RewardCmd
+- [TODO] rename 'contracts' to 'rewards'
 
 - [TODO] add bid-cancel button
 - [TODO] enable bid-side resale

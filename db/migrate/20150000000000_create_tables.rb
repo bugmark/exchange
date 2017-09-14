@@ -45,8 +45,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     %i(bids asks).each do |table|
       create_table table do |t|
         t.string   :type                  # BugZilla, GitHub, CVE
+        t.string   :mode                  # reward, forecast
         t.integer  :user_id
-        t.string   :ownership             # extensible, constant
         t.integer  :contract_id
         t.integer  :token_value
         t.string   :status                # open, closed
@@ -79,8 +79,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :contracts do |t|
       t.string   :type                # GitHub, BugZilla, ...
+      t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
-      t.string   :ownership           # extensible, constant
       t.string   :awarded_to          # bidder, asker
       t.datetime :contract_maturation
       # ----- match fields

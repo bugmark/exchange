@@ -13,7 +13,7 @@ RSpec.describe Ask, type: :model do
   subject      { klas.new(valid_params(user))               }
 
   describe "Attributes" do
-    it { should respond_to :ownership              }
+    it { should respond_to :mode                   }
     it { should respond_to :exref                  }
     it { should respond_to :uuref                  }
   end
@@ -72,8 +72,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  user_id             :integer
-#  ownership           :string
 #  contract_id         :integer
 #  token_value         :integer
 #  status              :string

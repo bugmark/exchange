@@ -89,8 +89,8 @@ class Bid < ApplicationRecord
 
   def default_values
     self.type         ||= 'Bid::GitHub'
+    self.mode         ||= 'reward'
     self.status       ||= 'open'
-    self.ownership    ||= 'constant'
     self.bug_presence ||= true
     self.token_value  ||= 10
     self.contract_maturation ||= Time.now + 1.week
@@ -113,8 +113,8 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  mode                :string
 #  user_id             :integer
-#  ownership           :string
 #  contract_id         :integer
 #  token_value         :integer
 #  status              :string
