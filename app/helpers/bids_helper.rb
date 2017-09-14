@@ -14,6 +14,12 @@ module BidsHelper
     raw "<a href='/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
+  # ----- actions
+
+  def bid_cancel_link(ask)
+    nil
+  end
+
   def bid_take_link(bid)
     status = bid.status
     if bid.unmatured? && status == "open"
@@ -23,6 +29,15 @@ module BidsHelper
       nil
     end
   end
+
+  def bid_actions(bid)
+    canc  = bid_cancel_link(bid)
+    take  = bid_take_link(bid)
+    return "NA" unless [take, canc].any?
+    raw [canc, take].select(&:present?).join(" | ")
+  end
+
+  # -----
 
   def bid_user_link(usr)
     return "NA" if usr.nil?
@@ -49,13 +64,6 @@ module BidsHelper
     return nil if bid.resolved?
     return nil unless bid.matured?
     link_to "Resolve", {:action => :resolve, :id => bid.id}
-  end
-
-  def bid_actions(bid)
-    take  = bid_take_link(bid)
-    resv  = bid_resolve_link(bid)
-    return "NA" unless [take, resv].any?
-    raw [take, resv].select(&:present?).join(" | ")
   end
 
   def bid_awardee(bid)
