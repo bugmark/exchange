@@ -29,7 +29,7 @@ class BidsController < ApplicationController
 
   # id (contract ID)
   def edit
-    # @bid = ContractCmd::Take.find(params[:id], with_counterparty: current_user)
+    # @bid = RewardCmd::Take.find(params[:id], with_counterparty: current_user)
   end
 
   def create
@@ -44,7 +44,7 @@ class BidsController < ApplicationController
 
   def update
     # opts = params["contract_cmd_take"]
-    # @bid = ContractCmd::Take.find(opts["id"], with_counterparty: current_user)
+    # @bid = RewardCmd::Take.find(opts["id"], with_counterparty: current_user)
     # if @bid.save_event.project
     #   redirect_to("/bids/#{@bid.id}")
     # else

@@ -112,7 +112,7 @@ Next Actions:
 # Sep 07
 
 - [DONE] create a Bid#cross method
-- [DONE] create ContractCmd::Cross
+- [DONE] create RewardCmd::Cross
 - [DONE] create script/data/contract_load
 
 # Sep 08
@@ -126,7 +126,7 @@ Next Actions:
 
 - [DONE] test multi-party contracts
 - [DONE] constrain crosses by token amounts - partial fill
-- [DONE] create ContractCmd::Resolve
+- [DONE] create RewardCmd::Resolve
 - [DONE] fix contract page parameters
 - [DONE] add resolve button to /contracts page
 
@@ -147,7 +147,7 @@ Next Actions:
 - [DONE] add cross button to offers#index
 - [DONE] add cross button to asks#show
 
-- [TODO] rename ContractCmd to RewardCmd
+- [TODO] rename RewardCmd to RewardCmd
 - [TODO] rename 'contracts' to 'rewards'
 
 - [TODO] add bid-cancel button

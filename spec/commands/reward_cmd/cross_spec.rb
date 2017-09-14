@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Cross do #.
+RSpec.describe RewardCmd::Cross do
 
   include_context 'Integration Environment'
 
-  let(:klas)   { described_class                                        }
-  subject      { klas.new(ask1.ask)                                     }
+  let(:klas)   { described_class                  }
+  subject      { klas.new(ask1.ask)               }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :ask           }

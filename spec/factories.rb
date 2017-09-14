@@ -60,7 +60,7 @@ FactoryGirl.define do
     end
   end
 
-  # factory :contract, class: ContractCmd::Publish do
+  # factory :contract, class: RewardCmd::Publish do
   #   to_create {|instance| instance.save_event.project}
   #   initialize_with { new(attributes) }
   #

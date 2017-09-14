@@ -1,4 +1,4 @@
-module ContractCmd
+module RewardCmd
   class Cross < ApplicationCommand
 
     attr_subobjects :contract, :ask

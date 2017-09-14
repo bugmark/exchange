@@ -21,11 +21,11 @@ Rails.application.routes.draw do
     get 'cross', :on => :member
   end
 
-  resources :contracts do
+  resources :rewards do
     get 'resolve', :on => :member
   end
-  resources :contract_cmd_publishes  , path: "/contracts"
-  resources :contract_cmd_takes      , path: "/contracts"
+  resources :reward_cmd_publishes , path: "/rewards"
+  resources :reward_cmd_takes     , path: "/rewards"
 
   resources :forecasts
 

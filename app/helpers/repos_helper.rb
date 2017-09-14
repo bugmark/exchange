@@ -21,7 +21,7 @@ module ReposHelper
     count  = repo.contracts.count
     blbl   = repo.bug_contracts.count > 0 ? "*" : ""
     if count > 0
-      raw "<a href='/contracts?repo_id=#{repo.id}'>#{count}</a> #{blbl}"
+      raw "<a href='/rewards?repo_id=#{repo.id}'>#{count}</a> #{blbl}"
     else
       "0 #{blbl}"
     end
