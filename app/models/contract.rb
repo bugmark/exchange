@@ -126,7 +126,7 @@ class Contract < ApplicationRecord
     end
 
     def unresolved
-      where("status != ?", "resolved").where("status != ?", "open")
+      where("status != ?", "resolved")
     end
 
   end

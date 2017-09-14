@@ -146,9 +146,8 @@ Next Actions:
 - [DONE] add a forecasts page
 - [DONE] add cross button to offers#index
 - [DONE] add cross button to asks#show
-
-- [TODO] rename RewardCmd to RewardCmd
-- [TODO] rename 'contracts' to 'rewards'
+- [DONE] rename RewardCmd to RewardCmd
+- [DONE] rename 'contracts' to 'rewards'
 
 - [TODO] add bid-cancel button
 - [TODO] enable bid-side resale
