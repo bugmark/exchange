@@ -77,7 +77,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_column :bids, :stake,   :integer, null: false, default: 1
     add_column :bids, :counter, :integer, null: false, default: 1
 
-    create_table :rewards do |t|
+    create_table :contracts do |t|
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
@@ -96,11 +96,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
-    add_index :rewards, :exref
-    add_index :rewards, :uuref
-    add_index :rewards, :repo_id
-    add_index :rewards, :bug_id
-    add_index :rewards, :jfields, using: :gin
+    add_index :contracts, :exref
+    add_index :contracts, :uuref
+    add_index :contracts, :repo_id
+    add_index :contracts, :bug_id
+    add_index :contracts, :jfields, using: :gin
 
     create_table :users do |t|
       t.boolean  :admin
