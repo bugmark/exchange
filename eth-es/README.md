@@ -1,46 +1,53 @@
 
-# need to write events to a smart contract and then read them out again.
+# Bugmark smart contract logger
 
-EVENTS:
+This is a tiny logging application that allows you to log data to the blockchain via the command line.
 
-- user
+Event logging is very low cost compared to writing contract state to the blockchain.  
 
-- repo
+# Use
 
-- bug
+Log three byte32 sized numbers to the blockchain as events:
 
-BugCreate
+`truffle exec commands/log_event.js 1 2 3`
 
+Read the log from the blockchain:
 
-- bid
+`truffle exec commands/show_events.js [start_block_number]`
 
+The optional parameter ***start_block_number*** is the block number at which to start looking for events.
 
-- cross
+# Install dependencies
 
-IMPLEMENTATION CHOICES:
-- top-level container(s):  map, array
-- inner objects(s): structs, maps
-- use containment or references between objects?
-- all events need timestamps, yes?
-- how to enforce ordering?  what happens if two insert transactions happen
-  in the same block?
-- should different events be:
-  a) different structs
-  b) different types in an enum
-  c) native solidity events ( are these readable historically ? )
+## Make sure you have a recent node
 
+We're using the 7 and 8.x series, but some earlier versions might do.
 
+## The packages required by this module
 
+`npm install`
 
+## Testrpc too
 
+`npm install -g ethereumjs-testrpc`
 
+# Run Testrpc in it's own terminal
 
+testrpc &
 
-https://ethereum.stackexchange.com/questions/15998/what-is-the-best-practice-to-store-and-retreive-large-data-in-solidity-smart-contracts
+# In the /eth-es directory, compile and migrate 
 
+truffle compile
+truffle migrate
 
+# Then log some data to the testrpc blockchain
 
+truffle exec commands/log_event.js 1 2 3
+truffle exec commands/log_event.js 4 5 6
 
+# Then take a look at the log!
+
+truffle exec commands/show_events.js
 
 
 
