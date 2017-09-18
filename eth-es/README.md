@@ -49,7 +49,7 @@ We're using the 7 and 8.x series, but some earlier versions might do.
 
 # Then take a look at the log!
 
-truffle exec commands/show_events.js
+`truffle exec commands/show_events.js`
 
 
 
