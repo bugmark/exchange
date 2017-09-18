@@ -33,19 +33,19 @@ We're using the 7 and 8.x series, but some earlier versions might do.
 
 # Run Testrpc in it's own terminal
 
-testrpc &
+`testrpc`
 
 # In the /eth-es directory, compile and migrate 
 
-truffle compile
+`truffle compile`
 
-truffle migrate
+`truffle migrate`
 
 # Then log some data to the testrpc blockchain
 
-truffle exec commands/log_event.js 1 2 3
+`truffle exec commands/log_event.js 1 2 3`
 
-truffle exec commands/log_event.js 4 5 6
+`truffle exec commands/log_event.js 4 5 6`
 
 # Then take a look at the log!
 
