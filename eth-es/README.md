@@ -38,11 +38,13 @@ testrpc &
 # In the /eth-es directory, compile and migrate 
 
 truffle compile
+
 truffle migrate
 
 # Then log some data to the testrpc blockchain
 
 truffle exec commands/log_event.js 1 2 3
+
 truffle exec commands/log_event.js 4 5 6
 
 # Then take a look at the log!
