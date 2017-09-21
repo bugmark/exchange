@@ -27,11 +27,6 @@ class BidsController < ApplicationController
     @bid = BidCmd::Create.new(new_opts(params))
   end
 
-  # id (contract ID)
-  def edit
-    # @bid = RewardCmd::Take.find(params[:id], with_counterparty: current_user)
-  end
-
   def create
     opts = params["bid_cmd_create"]
     @bid = BidCmd::Create.new(valid_params(opts))
