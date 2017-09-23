@@ -152,7 +152,9 @@ Next Actions:
 # Sep 23
 
 - [DONE] add namespaces for "core" and "bugfix" apps
-- [TODO] add home page for "core" and "bugfix"
+- [DONE] add home page for "core" and "bugfix"
+
+- [TODO] fix 
 
 # TBD
 

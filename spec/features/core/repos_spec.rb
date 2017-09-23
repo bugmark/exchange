@@ -15,4 +15,24 @@ describe "Repos", USE_VCR do
     visit "/core/repos/#{repo1.id}"
     expect(page).to_not be_nil
   end
+
+  it "clicks thru to show" do
+    visit "/core/repos"
+    click_on "rep.#{repo1.id}"
+    expect(page).to_not be_nil
+  end
+
+  # TODO: fixme
+  # it "takes a bid", USE_VCR do
+  #   login_as(user, :scope => :user)
+  #   hydrate(bug)
+  #   expect(Bid.count).to eq(0)
+  #   expect(Bug.count).to eq(1)
+  #
+  #   visit "/core/bugs"
+  #   click_on "Bid"
+  #   click_on "Create Create"
+  #
+  #   expect(Bid.count).to eq(1)
+  # end
 end
