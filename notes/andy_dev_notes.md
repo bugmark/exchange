@@ -149,7 +149,12 @@ Next Actions:
 - [DONE] rename RewardCmd to RewardCmd
 - [DONE] rename 'contracts' to 'rewards'
 
-# Sep 14
+# Sep 23
+
+- [DONE] add namespaces for "core" and "bugfix" apps
+- [TODO] add home page for "core" and "bugfix"
+
+# TBD
 
 - [TODO] add bid/cancel link on offers#index
 - [TODO] add ask/cancel link on offers#index
@@ -166,8 +171,6 @@ Next Actions:
 
 - [TODO] add mode to /bid/new
 - [TODO] add mode to /ask/new
-
-# TBD
 
 - [TODO] add cron process for contract cross
 - [TODO] add cron process for contract resolve
