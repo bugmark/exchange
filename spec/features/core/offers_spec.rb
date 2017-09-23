@@ -6,13 +6,13 @@ describe "Offers" do
   let(:bid) { FG.create(:bid).bid              }
 
   it "renders index (empty)" do
-    visit "/offers"
+    visit "/core/offers"
     expect(page).to_not be_nil
   end
 
   it "renders index (with element)", USE_VCR do
     hydrate(ask, bid)
-    visit "/offers"
+    visit "/core/offers"
     expect(page).to_not be_nil #
   end
 end

@@ -4,7 +4,7 @@ RSpec.describe StaticController, type: :controller do
 
   describe "GET #home" do
     it "returns http success" do
-      get :homes
+      get :home
       expect(response).to have_http_status(:success)
     end
   end
@@ -15,5 +15,4 @@ RSpec.describe StaticController, type: :controller do
       expect(response).to have_http_status(:success)
     end
   end
-
 end

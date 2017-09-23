@@ -11,10 +11,10 @@ describe "User" do
     expect(page).to_not be_nil
   end
 
-  it "renders /users/:id" do
+  it "renders /core/users/:id" do
     login_as user, :scope => :user
 
-    visit "/users/#{user.id}"
+    visit "/core/users/#{user.id}"
     expect(page).to_not be_nil
   end
-end
+end #

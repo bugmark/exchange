@@ -7,12 +7,12 @@ describe "Repos", USE_VCR do
   before(:each) { hydrate(repo1) }
 
   it "renders index" do
-    visit "/repos"
+    visit "/core/repos"
     expect(page).to_not be_nil
   end
 
   it "renders show" do
-    visit "/repos/#{repo1.id}"
+    visit "/core/repos/#{repo1.id}"
     expect(page).to_not be_nil
   end
 end

@@ -1,6 +1,6 @@
 module BugsHelper
   def bug_id_link(bug)
-    raw "<a href='/bugs/#{bug.id}'>#{bug.xid}</a>"
+    raw "<a href='/core/bugs/#{bug.id}'>#{bug.xid}</a>"
   end
 
   def bug_title_link(bug)
@@ -13,15 +13,15 @@ module BugsHelper
     repo = bug.repo
     id   = repo.id
     name = repo.name
-    l1   = "<a href='/bugs?repo_id=#{id}'><i class='fa fa-filter'></i></a> | "
-    l2   = "<a href='/repos/#{id}'>#{name}</a>"
+    l1   = "<a href='/core/bugs?repo_id=#{id}'><i class='fa fa-filter'></i></a> | "
+    l2   = "<a href='/core/repos/#{id}'>#{name}</a>"
     raw (filter.nil? ? l1 + l2 : l2)
   end
 
   def bug_contract_link(bug)
     count = bug.contracts.count
     if count > 0
-      raw "<a href='/rewards?bug_id=#{bug.id}'>#{count}</a>"
+      raw "<a href='/core/rewards?bug_id=#{bug.id}'>#{count}</a>"
     else
       count
     end
@@ -33,12 +33,12 @@ module BugsHelper
   # end
 
   def bug_ask_new_link(bug)
-    path = "/asks/new?type=git_hub&bug_id=#{bug.id}"
+    path = "/core/asks/new?type=git_hub&bug_id=#{bug.id}"
     raw "<a href='#{path}'>Ask</a>"
   end
 
   def bug_bid_new_link(bug)
-    path = "/bids/new?type=git_hub&bug_id=#{bug.id}"
+    path = "/core/bids/new?type=git_hub&bug_id=#{bug.id}"
     raw "<a href='#{path}'>Bid</a>"
   end
 

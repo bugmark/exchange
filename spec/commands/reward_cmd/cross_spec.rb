@@ -68,13 +68,13 @@ RSpec.describe RewardCmd::Cross do
     end
   end
 
-  describe "#event_data" do
+  describe "#event_data", USE_VCR do
     it 'returns a hash' do
       expect(subject.event_data).to be_a(Hash)
     end
   end
 
-  describe "#event_save" do #.
+  describe "#event_save", USE_VCR do
     it 'creates an event' do
       expect(EventLine.count).to eq(0)
       subject.save_event
@@ -90,7 +90,7 @@ RSpec.describe RewardCmd::Cross do
     end
   end
 
-  describe "crossing" do
+  describe "crossing", USE_VCR do
 
     let(:lcl_ask) { FG.create(:ask, token_value: 10).ask }
 
