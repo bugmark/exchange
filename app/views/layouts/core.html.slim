@@ -1,0 +1,13 @@
+- content_for :navbar do
+  ul.navbar-nav.mr-auto
+    = nav_link("Core"        , "/core/home"        )
+    = nav_link("Repos"       , "/core/repos"       )
+    = nav_link("Bugs"        , "/core/bugs"        )
+    = nav_link("Offers"      , "/core/offers"      )
+    = nav_link("Rewards"     , "/core/rewards"     )
+    = nav_link("Forecasts"   , "/core/forecasts"   )
+
+- content_for :body do
+  = yield
+
+= render template: "layouts/application"
