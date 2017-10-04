@@ -39,9 +39,9 @@ module Core
       opts = params["bid_cmd_create"]
       @bid = BidCmd::Create.new(valid_params(opts))
       if @bid.save_event.project
-        redirect_to("/bids/#{@bid.id}")
+        redirect_to("/core/bids/#{@bid.id}")
       else
-        render 'bids/new'
+        render 'core/bids/new'
       end
     end
 

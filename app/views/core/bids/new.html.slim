@@ -2,7 +2,7 @@ h2 New Bid
 hr
 - if @bid.errors.any?
   .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@bid) do |f|
+= bootstrap_form_for(@bid, url: '/core/bids') do |f|
   = f.hidden_field :type
   = f.hidden_field :user_id
   .row
@@ -21,5 +21,5 @@ hr
       .col-md-6 = f.text_field    :bug_status   , label: "Bug Status (open | closed)"
       .col-md-6
         p style='height: 25px;'
-        = f.check_box     :bug_presence , label: "Bug Presence?"
+        | f.check_box     :bug_presence , label: "Bug Presence?"
   = f.submit

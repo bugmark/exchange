@@ -11,6 +11,10 @@ module BidCmd
       @user = User.find(bid.user_id)
     end
 
+    def price
+      0
+    end
+
     def event_data
       @bid.attributes
     end
