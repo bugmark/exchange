@@ -154,7 +154,9 @@ Next Actions:
 - [DONE] add namespaces for "core" and "bugfix" apps
 - [DONE] add home page for "core" and "bugfix"
 
-- [TODO] fix 
+# Oct 3
+
+- [TODO] all tests pass
 
 # TBD
 

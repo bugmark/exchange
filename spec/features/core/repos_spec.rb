@@ -16,11 +16,24 @@ describe "Repos", USE_VCR do
     expect(page).to_not be_nil
   end
 
+  # it "click thru to new" do
+  #   visit "/core/repos"
+  #   click_on "Add New GitHub Repo"
+  #   expect(page).to_not be_nil
+  # end
+
   it "clicks thru to show" do
     visit "/core/repos"
     click_on "rep.#{repo1.id}"
     expect(page).to_not be_nil
   end
+
+  it "click thru to bug index" do
+    hydrate(bug1)
+    visit "/core/repos"
+    find('.buglink').click
+    expect(page).to_not be_nil
+  end #
 
   # TODO: fixme
   # it "takes a bid", USE_VCR do
