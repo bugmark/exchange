@@ -35,7 +35,8 @@ FactoryGirl.define do
     initialize_with { new(attributes) }
 
     type                "Bid::GitHub"
-    token_value         20
+    price               0.20
+    volume              1
     contract_maturation Time.now + 1.day
     bug_id              { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
@@ -50,7 +51,8 @@ FactoryGirl.define do
     initialize_with { new(attributes) }
 
     type                "Ask::GitHub"
-    token_value         20
+    price               0.20
+    volume              1
     contract_maturation Time.now + 1.day
     bug_id              { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }

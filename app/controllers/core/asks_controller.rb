@@ -65,7 +65,7 @@ module Core
     def new_opts(params)
       opts = {
         type: "Ask::#{params["type"]&.camelize || 'GitHub'}",
-        token_value: 10,
+        price: 0.50,
         contract_maturation: Time.now + 3.minutes,
         user_id: current_user.id
       }

@@ -6,7 +6,7 @@ hr
   = f.hidden_field :type
   = f.hidden_field :user_id
   .row
-    .col-md-6 = f.number_field :token_value, label: "Tokens"
+    .col-md-6 = f.number_field :price, label: "Price"
     .col-md-6 = f.datetime_field :contract_maturation
   div style='background: lightgrey; padding: 4px;'
     | Match Criteria (blank for "don't care")

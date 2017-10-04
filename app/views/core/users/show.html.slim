@@ -19,7 +19,7 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
     - @user.bids.each do |bid|
       tr
         td = bid_id_link(bid)
-        td = bid.token_value
+        td = bid.price
         td = bid.contract_maturation_str
         td = bid.status
         td = bid.contract_id ? "true" : "false"
@@ -38,7 +38,7 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
     - @user.asks.each do |ask|
       tr
         td = ask_id_link(ask)
-        td = ask.token_value
+        td = ask.price
         td = ask.contract_maturation_str
         td = ask.status
         td = ask.contract_id ? "true" : "false"

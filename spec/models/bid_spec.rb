@@ -82,10 +82,12 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  mode                :string
 #  user_id             :integer
 #  contract_id         :integer
-#  token_value         :integer
+#  volume              :integer
+#  price               :integer
+#  price_limit         :boolean          default(FALSE)
+#  all_or_none         :boolean          default(FALSE)
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
@@ -94,10 +96,7 @@ end
 #  bug_title           :string
 #  bug_status          :string
 #  bug_labels          :string
-#  bug_presence        :boolean
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
-#  stake               :integer          default(1), not null
-#  counter             :integer          default(1), not null
 #

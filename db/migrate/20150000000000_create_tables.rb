@@ -44,12 +44,14 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     %i(bids asks).each do |table|
       create_table table do |t|
-        t.string   :type                  # BugZilla, GitHub, CVE
-        t.string   :mode                  # reward, forecast
+        t.string   :type                         # BugZilla, GitHub, CVE
         t.integer  :user_id
         t.integer  :contract_id
-        t.integer  :token_value
-        t.string   :status                # open, closed
+        t.integer  :volume     , default: 1      # Greater than zero
+        t.float    :price      , default: 0.50   # between 0.00 and 1.00
+        t.boolean  :price_limit, default: false
+        t.boolean  :all_or_none, default: false
+        t.string   :status                       # open, closed
         t.datetime :offer_expiration
         t.datetime :contract_maturation
         # ----- match fields -----
@@ -58,7 +60,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
         t.string   :bug_title
         t.string   :bug_status
         t.string   :bug_labels
-        t.boolean  :bug_presence
+        # t.boolean  :bug_presence                # get rid of this??
         # ----- match fields -----
         t.jsonb    :jfields,  null: false, default: '{}'
         t.string   :exref
@@ -73,9 +75,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :bug_id
       add_index table, :jfields, using: :gin
     end
-    # ODDS (eg 4:1, 1:4)
-    add_column :bids, :stake,   :integer, null: false, default: 1
-    add_column :bids, :counter, :integer, null: false, default: 1
+    # add_column :bids, :stake,   :integer, null: false, default: 1
+    # add_column :bids, :counter, :integer, null: false, default: 1
 
     create_table :contracts do |t|
       t.string   :type                # GitHub, BugZilla, ...

@@ -14,7 +14,7 @@ h2 CONTRACT [#{@contract.xid}]
         td = contract_ask_link(@contract)
       tr
         td Contract Price
-        td # @contract.token_value
+        td = @contract.price
   .col-md-6
     b Actions
     table.table

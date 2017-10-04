@@ -72,7 +72,7 @@ module Core
     def new_opts(params)
       opts = {
         type: "Contract::#{params["type"]&.capitalize}",
-        token_value: 10,
+        price: 0.10,
         contract_maturation: Time.now + 3.minutes,
         user_id: current_user.id
       }

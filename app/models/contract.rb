@@ -24,11 +24,13 @@ class Contract < ApplicationRecord
   end
 
   def bid_tokens
-    bids.reduce(0) {|acc, bid| acc + bid.token_value}
+    # bids.reduce(0) {|acc, bid| acc + bid.token_value}
+    0
   end
 
   def ask_tokens
-    asks.reduce(0) {|acc, ask| acc + ask.token_value}
+    # asks.reduce(0) {|acc, ask| acc + ask.token_value}
+    0
   end
 
   def distribution_tokens
@@ -39,7 +41,8 @@ class Contract < ApplicationRecord
     total_bids = bid_tokens
     total_dist = distribution_tokens
     bids.reduce({}) do |acc, bid|
-      acc[bid.id] = ((bid.token_value.to_f / total_bids) * total_dist).to_i
+      # acc[bid.id] = ((bid.token_value.to_f / total_bids) * total_dist).to_i
+      acc[bid.id] = 1
       acc
     end
   end

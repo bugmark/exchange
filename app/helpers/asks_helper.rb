@@ -36,8 +36,10 @@ module AsksHelper
     nil
   end
 
+  # TODO: fixme
   def ask_cross_link(ask)
-    return nil if ask.cross_value < ask.token_value
+    return nil
+    return nil if ask.cross_value < ask.price
     raw "<a href='/offers/#{ask.id}/cross'>cross</a>"
   end
 
