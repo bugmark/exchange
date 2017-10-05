@@ -1,6 +1,6 @@
 # BugMark README
 
-BugMark - A Blockchain Market for Software Vulnerabilities and Issues
+BugMark - A Market for Software Issues and Information
 
 This readme covers the config and install of the bugmark software components.
 
