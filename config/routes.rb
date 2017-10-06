@@ -19,11 +19,9 @@ Rails.application.routes.draw do
       get 'cross', :on => :member
     end
 
-    resources :rewards do
+    resources :contracts do
       get 'resolve', :on => :member
     end
-
-    resources :forecasts
 
     resources :users
 

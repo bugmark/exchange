@@ -1,5 +1,5 @@
 module Core
-  class RewardsController < ApplicationController
+  class ContractsController < ApplicationController
 
   layout 'core'
 
