@@ -13,27 +13,18 @@ RSpec.describe Ask, type: :model do
   subject      { klas.new(valid_params(user))               }
 
   describe "Attributes" do
-    it { should respond_to :mode                   }
     it { should respond_to :exref                  }
     it { should respond_to :uuref                  }
-  end
-
-  describe "#uuref" do
-    it 'generates a string' do
-      subject.save
-      expect(subject.uuref).to be_a(String)
-    end #
-
-    it 'generates a 36-character string' do
-      subject.save
-      expect(subject.uuref.length).to eq(36)
-    end
   end
 
   describe "Associations" do
     it { should respond_to(:user)         }
     it { should respond_to(:repo)         }
     it { should respond_to(:contract)     }
+  end
+
+  describe "Instance Methods" do
+    it { should respond_to(:matching_bids) }
   end
 
   describe "Object Creation" do
@@ -64,6 +55,17 @@ RSpec.describe Ask, type: :model do
     end
   end
 
+  describe "#uuref" do
+    it 'generates a string' do
+      subject.save
+      expect(subject.uuref).to be_a(String)
+    end #
+
+    it 'generates a 36-character string' do
+      subject.save
+      expect(subject.uuref.length).to eq(36)
+    end
+  end
 end
 
 # == Schema Information

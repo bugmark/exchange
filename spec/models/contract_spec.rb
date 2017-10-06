@@ -68,7 +68,6 @@ end
 #  bug_title           :string
 #  bug_status          :string
 #  bug_labels          :string
-#  bug_presence        :boolean
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string

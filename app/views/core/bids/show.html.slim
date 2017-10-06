@@ -22,16 +22,16 @@ h2 BID [#{@bid.xid}]
         td Action
         td TBD
 hr
-b Matching Bugs (#{@bid.match_list.count})
+b Matching Bugs (#{@bid.matching_bugs.count})
 table.table
-  - if @bid.match_list.count > 0
+  - if @bid.matching_bugs.count > 0
     tr
       th ID
       th Type
       th Title
       th Contracts
       th Create
-  - @bid.match_list.each do |bid|
+  - @bid.matching_bugs.each do |bid|
     tr
       td = bug_id_link(bid)
       td = bid.type

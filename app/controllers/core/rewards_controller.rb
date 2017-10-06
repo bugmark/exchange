@@ -28,17 +28,17 @@ module Core
 
     # bug_id or repo_id, type(forecast | reward)
     def new
-      @contract = RewardCmd::Publish.new(new_opts(params))
+      @contract = ContractCmd::Publish.new(new_opts(params))
     end
 
     # id (contract ID)
     def edit
-      @contract = RewardCmd::Take.find(params[:id], with_counterparty: current_user)
+      @contract = ContractCmd::Take.find(params[:id], with_counterparty: current_user)
     end
 
     def create
       opts = params["contract_cmd_publish"]
-      @contract = RewardCmd::Publish.new(valid_params(opts))
+      @contract = ContractCmd::Publish.new(valid_params(opts))
       if @contract.save_event.project
         redirect_to("/rewards/#{@contract.id}")
       else
@@ -48,7 +48,7 @@ module Core
 
     def update
       opts = params["contract_cmd_take"]
-      @contract = RewardCmd::Take.find(opts["id"], with_counterparty: current_user)
+      @contract = ContractCmd::Take.find(opts["id"], with_counterparty: current_user)
       if @contract.save_event.project
         redirect_to("/rewards/#{@contract.id}")
       else
@@ -58,7 +58,7 @@ module Core
 
     def resolve
       contract_id = params["id"]
-      RewardCmd::Resolve.new(contract_id).save_event.project
+      ContractCmd::Resolve.new(contract_id).save_event.project
       redirect_to "/rewards"
     end
 

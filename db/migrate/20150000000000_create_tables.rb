@@ -60,7 +60,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
         t.string   :bug_title
         t.string   :bug_status
         t.string   :bug_labels
-        # t.boolean  :bug_presence                # get rid of this??
         # ----- match fields -----
         t.jsonb    :jfields,  null: false, default: '{}'
         t.string   :exref
@@ -75,8 +74,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :bug_id
       add_index table, :jfields, using: :gin
     end
-    # add_column :bids, :stake,   :integer, null: false, default: 1
-    # add_column :bids, :counter, :integer, null: false, default: 1
 
     create_table :contracts do |t|
       t.string   :type                # GitHub, BugZilla, ...
@@ -90,7 +87,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :bug_title
       t.string   :bug_status
       t.string   :bug_labels
-      t.boolean  :bug_presence
       # -----
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref

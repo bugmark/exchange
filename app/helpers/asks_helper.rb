@@ -20,7 +20,7 @@ module AsksHelper
   end
 
   def ask_cross_count(ask)
-    count = ask.cross_list.count
+    count = ask.matching_bugs.count
     return count if count == 0
     value = ask.cross_value
     "#{count} (#{value} tokens)"

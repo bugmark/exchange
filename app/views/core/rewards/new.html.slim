@@ -21,5 +21,5 @@ hr
       .col-md-6 = f.text_field    :bug_status   , label: "Bug Status (open | closed)"
       .col-md-6
         p style='height: 25px;'
-        = f.check_box     :bug_presence , label: "Bug Presence?"
+        | f.check_box     :bug_presence , label: "Bug Presence?"
   = f.submit

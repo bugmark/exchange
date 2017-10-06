@@ -23,12 +23,12 @@ class Ask < ApplicationRecord
     bug || repo
   end
 
-  def cross_list
-    @bidcross ||= Bid.cross(cross_attrs)
+  def matching_bids
+    @bidmatch ||= Bid.match(cross_attrs)
   end
 
   def cross_value
-    @cl_value ||= cross_list.reduce(0) {|acc, bid| acc + bid.price}
+    @cl_value ||= matching_bids.reduce(0) {|acc, bid| acc + bid.price}
   end
 
   def contract_maturation_str
@@ -79,7 +79,6 @@ class Ask < ApplicationRecord
       bug_title:    self.bug_title,
       bug_status:   self.bug_status,
       bug_labels:   self.bug_labels,
-      # bug_presence: self.bug_presence
     }
   end
 
@@ -88,7 +87,6 @@ class Ask < ApplicationRecord
   def default_values
     self.type                ||= 'Ask::GitHub'
     self.status              ||= 'open'
-    # self.bug_presence        ||= true
     self.price               ||= 0.10
     self.contract_maturation ||= Time.now + 1.week
   end

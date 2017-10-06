@@ -1,5 +1,5 @@
-module RewardCmd
-  class Cross < ApplicationCommand
+module ContractCmd
+  class CrossFromAsk < ApplicationCommand
 
     attr_subobjects :contract, :ask
     attr_reader     :cross_list
@@ -10,7 +10,7 @@ module RewardCmd
     def initialize(ask_param, contract_opts = {})
       @ask        = Ask.where(contract_id: nil).find(ask_param.to_i)
       @contract   = Contract.new(contract_opts)
-      @cross_list = bin_pack(ask.token_value, ask&.cross_list)
+      @cross_list = bin_pack(ask.price, ask&.matching_bugs)
     end
 
     def transact_before_project
@@ -28,9 +28,9 @@ module RewardCmd
     # https://en.wikipedia.org/wiki/Bin_packing_problem
     # https://en.wikipedia.org/wiki/Knapsack_problem
     def bin_pack(target_price, bid_list = [])
-      sorted_bids = bid_list.to_a.sort_by { |bid| bid.token_value }
+      sorted_bids = bid_list.to_a.sort_by { |bid| bid.price }
       rtotal, rlist = sorted_bids.reduce([0, []]) do |(acc, list), bid|
-        acc, list = [acc + bid.token_value, list << bid] if acc < target_price
+        acc, list = [acc + bid.price, list << bid] if acc < target_price
         [acc, list]
       end
       rtotal >= target_price ? rlist : []

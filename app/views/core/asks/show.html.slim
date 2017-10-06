@@ -22,13 +22,13 @@ h2 ASK [#{@ask.xid}]
         td Action
         td = ask_cross_link(@ask)
 hr
-b Crossing Bids (#{@ask.cross_list.count})
+b Crossing Bids (#{@ask.matching_bids.count})
 table.table
-  - if @ask.cross_list.count > 0
+  - if @ask.matching_bids.count > 0
     tr
       th ID
       th Type
-  - @ask.cross_list.each do |bid|
+  - @ask.matching_bids.each do |bid|
     tr
       td = bid_id_link(bid)
       td = bid.type

@@ -52,19 +52,12 @@ class Contract < ApplicationRecord
   # > matured   - past mature date
   # > resolved  - assigned
 
-  # returns list of matching bugs
-  def match_list
+  def matching_bugs
     @bugmatch ||= Bug.match(match_attrs)
   end
 
-  # returns boolean result of the match assertion
   def match_assertion
-    match_length = match_list.count
-    if self.bug_presence
-      match_length > 0
-    else
-      match_length == 0
-    end
+    matching_bugs.count > 0
   end
 
   def awardee
@@ -139,7 +132,6 @@ class Contract < ApplicationRecord
   def default_values
     self.status       ||= 'open'
     self.mode         ||= 'reward'
-    self.bug_presence ||= true
     self.contract_maturation   ||= Time.now + 1.week
   end
 
@@ -169,7 +161,6 @@ end
 #  bug_title           :string
 #  bug_status          :string
 #  bug_labels          :string
-#  bug_presence        :boolean
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string

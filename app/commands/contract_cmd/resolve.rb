@@ -1,4 +1,4 @@
-module RewardCmd
+module ContractCmd
   class Resolve < ApplicationCommand
 
     attr_subobjects :contract
