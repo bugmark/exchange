@@ -1,0 +1,25 @@
+h2 New Bid
+hr
+- if @bid.errors.any?
+  .alert.alert-danger Please fix the errors below.
+= bootstrap_form_for(@bid, url: '/core/bids') do |f|
+  = f.hidden_field :type
+  = f.hidden_field :user_id
+  .row
+    .col-md-6 = f.number_field    :price, label: "Price"
+    .col-md-6 = f.datetime_field  :contract_maturation
+  div style='background: lightgrey; padding: 4px;'
+    | Match Criteria (blank for "don't care")
+  div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
+    .row
+      .col-md-6 = f.number_field  :repo_id      , label: "Repo ID"
+      .col-md-6 = f.number_field  :bug_id       , label: "Bug ID"
+    .row
+      .col-md-6 = f.text_field    :bug_title    , label: "Bug Title (substring match)"
+      .col-md-6 = f.text_field    :bug_labels   , label: "Bug Labels (comma separated, substring match)"
+    .row
+      .col-md-6 = f.text_field    :bug_status   , label: "Bug Status (open | closed)"
+      .col-md-6
+        p style='height: 25px;'
+        | f.check_box     :bug_presence , label: "Bug Presence?"
+  = f.submit

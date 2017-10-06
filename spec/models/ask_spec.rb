@@ -13,27 +13,18 @@ RSpec.describe Ask, type: :model do
   subject      { klas.new(valid_params(user))               }
 
   describe "Attributes" do
-    it { should respond_to :mode                   }
     it { should respond_to :exref                  }
     it { should respond_to :uuref                  }
-  end
-
-  describe "#uuref" do
-    it 'generates a string' do
-      subject.save
-      expect(subject.uuref).to be_a(String)
-    end #
-
-    it 'generates a 36-character string' do
-      subject.save
-      expect(subject.uuref.length).to eq(36)
-    end
   end
 
   describe "Associations" do
     it { should respond_to(:user)         }
     it { should respond_to(:repo)         }
     it { should respond_to(:contract)     }
+  end
+
+  describe "Instance Methods" do
+    it { should respond_to(:matching_bids) }
   end
 
   describe "Object Creation" do
@@ -64,6 +55,17 @@ RSpec.describe Ask, type: :model do
     end
   end
 
+  describe "#uuref" do
+    it 'generates a string' do
+      subject.save
+      expect(subject.uuref).to be_a(String)
+    end #
+
+    it 'generates a 36-character string' do
+      subject.save
+      expect(subject.uuref.length).to eq(36)
+    end
+  end
 end
 
 # == Schema Information
@@ -72,10 +74,11 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  mode                :string
 #  user_id             :integer
 #  contract_id         :integer
-#  token_value         :integer
+#  volume              :integer          default(1)
+#  price               :float            default(0.5)
+#  all_or_none         :boolean          default(FALSE)
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
@@ -84,7 +87,6 @@ end
 #  bug_title           :string
 #  bug_status          :string
 #  bug_labels          :string
-#  bug_presence        :boolean
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string

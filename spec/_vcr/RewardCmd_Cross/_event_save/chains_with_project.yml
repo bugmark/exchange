@@ -1,0 +1,86 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/mvscorg/bugmark
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.6.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic YW5keWw6MDNkNWE4Zjk2MDk2MzY2YWI0YWQ4MGI2ZTgyM2MzZDQ5YjgyZmVlMg==
+      If-Modified-Since:
+      - Mon, 18 Sep 2017 09:44:10 GMT
+      If-None-Match:
+      - W/"3ad8627b36e5a539a5119d47810fb520"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 23 Sep 2017 22:13:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4996'
+      X-Ratelimit-Reset:
+      - '1506207623'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - W/"5323b376feb1fe7723ca90b80bf04313"
+      Last-Modified:
+      - Mon, 18 Sep 2017 09:44:10 GMT
+      X-Oauth-Scopes:
+      - admin:org, admin:org_hook, admin:public_key, admin:repo_hook, gist, notifications,
+        repo, user
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.050894'
+      X-Github-Request-Id:
+      - 8A02:2D5B6:6B8F301:A3C5194:59C6DC82
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":93794717,"name":"bugmark","full_name":"mvscorg/bugmark","owner":{"login":"mvscorg","id":23067251,"avatar_url":"https://avatars3.githubusercontent.com/u/23067251?v=4","gravatar_id":"","url":"https://api.github.com/users/mvscorg","html_url":"https://github.com/mvscorg","followers_url":"https://api.github.com/users/mvscorg/followers","following_url":"https://api.github.com/users/mvscorg/following{/other_user}","gists_url":"https://api.github.com/users/mvscorg/gists{/gist_id}","starred_url":"https://api.github.com/users/mvscorg/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/mvscorg/subscriptions","organizations_url":"https://api.github.com/users/mvscorg/orgs","repos_url":"https://api.github.com/users/mvscorg/repos","events_url":"https://api.github.com/users/mvscorg/events{/privacy}","received_events_url":"https://api.github.com/users/mvscorg/received_events","type":"Organization","site_admin":false},"private":false,"html_url":"https://github.com/mvscorg/bugmark","description":"BugMark
+        - Software Issue Marketplace","fork":false,"url":"https://api.github.com/repos/mvscorg/bugmark","forks_url":"https://api.github.com/repos/mvscorg/bugmark/forks","keys_url":"https://api.github.com/repos/mvscorg/bugmark/keys{/key_id}","collaborators_url":"https://api.github.com/repos/mvscorg/bugmark/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/mvscorg/bugmark/teams","hooks_url":"https://api.github.com/repos/mvscorg/bugmark/hooks","issue_events_url":"https://api.github.com/repos/mvscorg/bugmark/issues/events{/number}","events_url":"https://api.github.com/repos/mvscorg/bugmark/events","assignees_url":"https://api.github.com/repos/mvscorg/bugmark/assignees{/user}","branches_url":"https://api.github.com/repos/mvscorg/bugmark/branches{/branch}","tags_url":"https://api.github.com/repos/mvscorg/bugmark/tags","blobs_url":"https://api.github.com/repos/mvscorg/bugmark/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/mvscorg/bugmark/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/mvscorg/bugmark/git/refs{/sha}","trees_url":"https://api.github.com/repos/mvscorg/bugmark/git/trees{/sha}","statuses_url":"https://api.github.com/repos/mvscorg/bugmark/statuses/{sha}","languages_url":"https://api.github.com/repos/mvscorg/bugmark/languages","stargazers_url":"https://api.github.com/repos/mvscorg/bugmark/stargazers","contributors_url":"https://api.github.com/repos/mvscorg/bugmark/contributors","subscribers_url":"https://api.github.com/repos/mvscorg/bugmark/subscribers","subscription_url":"https://api.github.com/repos/mvscorg/bugmark/subscription","commits_url":"https://api.github.com/repos/mvscorg/bugmark/commits{/sha}","git_commits_url":"https://api.github.com/repos/mvscorg/bugmark/git/commits{/sha}","comments_url":"https://api.github.com/repos/mvscorg/bugmark/comments{/number}","issue_comment_url":"https://api.github.com/repos/mvscorg/bugmark/issues/comments{/number}","contents_url":"https://api.github.com/repos/mvscorg/bugmark/contents/{+path}","compare_url":"https://api.github.com/repos/mvscorg/bugmark/compare/{base}...{head}","merges_url":"https://api.github.com/repos/mvscorg/bugmark/merges","archive_url":"https://api.github.com/repos/mvscorg/bugmark/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/mvscorg/bugmark/downloads","issues_url":"https://api.github.com/repos/mvscorg/bugmark/issues{/number}","pulls_url":"https://api.github.com/repos/mvscorg/bugmark/pulls{/number}","milestones_url":"https://api.github.com/repos/mvscorg/bugmark/milestones{/number}","notifications_url":"https://api.github.com/repos/mvscorg/bugmark/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/mvscorg/bugmark/labels{/name}","releases_url":"https://api.github.com/repos/mvscorg/bugmark/releases{/id}","deployments_url":"https://api.github.com/repos/mvscorg/bugmark/deployments","created_at":"2017-06-08T21:50:37Z","updated_at":"2017-09-18T09:44:10Z","pushed_at":"2017-09-23T22:06:53Z","git_url":"git://github.com/mvscorg/bugmark.git","ssh_url":"git@github.com:mvscorg/bugmark.git","clone_url":"https://github.com/mvscorg/bugmark.git","svn_url":"https://github.com/mvscorg/bugmark","homepage":"https://bugmark.net","size":20930,"stargazers_count":1,"watchers_count":1,"language":"JavaScript","has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":2,"mirror_url":null,"open_issues_count":35,"forks":2,"open_issues":35,"watchers":1,"default_branch":"master","permissions":{"admin":true,"push":true,"pull":true},"allow_squash_merge":true,"allow_merge_commit":true,"allow_rebase_merge":true,"organization":{"login":"mvscorg","id":23067251,"avatar_url":"https://avatars3.githubusercontent.com/u/23067251?v=4","gravatar_id":"","url":"https://api.github.com/users/mvscorg","html_url":"https://github.com/mvscorg","followers_url":"https://api.github.com/users/mvscorg/followers","following_url":"https://api.github.com/users/mvscorg/following{/other_user}","gists_url":"https://api.github.com/users/mvscorg/gists{/gist_id}","starred_url":"https://api.github.com/users/mvscorg/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/mvscorg/subscriptions","organizations_url":"https://api.github.com/users/mvscorg/orgs","repos_url":"https://api.github.com/users/mvscorg/repos","events_url":"https://api.github.com/users/mvscorg/events{/privacy}","received_events_url":"https://api.github.com/users/mvscorg/received_events","type":"Organization","site_admin":false},"network_count":2,"subscribers_count":5}'
+    http_version: 
+  recorded_at: Sat, 23 Sep 2017 22:13:22 GMT
+recorded_with: VCR 3.0.3

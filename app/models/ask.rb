@@ -23,12 +23,20 @@ class Ask < ApplicationRecord
     bug || repo
   end
 
-  def cross_list
-    @bidcross ||= Bid.cross(cross_attrs)
+  def reserve
+    self.volume * self.price
   end
 
-  def cross_value
-    @cl_value ||= cross_list.reduce(0) {|acc, bid| acc + bid.token_value}
+  def complementary_reserve
+    self.volume - reserve
+  end
+
+  def matching_bids
+    @bidmatch ||= Bid.match(cross_attrs)
+  end
+
+  def matching_bid_reserve
+    @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve}
   end
 
   def contract_maturation_str
@@ -79,7 +87,6 @@ class Ask < ApplicationRecord
       bug_title:    self.bug_title,
       bug_status:   self.bug_status,
       bug_labels:   self.bug_labels,
-      bug_presence: self.bug_presence
     }
   end
 
@@ -87,10 +94,9 @@ class Ask < ApplicationRecord
 
   def default_values
     self.type                ||= 'Ask::GitHub'
-    self.mode                ||= 'reward'
     self.status              ||= 'open'
-    self.bug_presence        ||= true
-    self.token_value         ||= 10
+    self.price               ||= 0.10
+    self.volume              ||= 1
     self.contract_maturation ||= Time.now + 1.week
   end
 end
@@ -101,10 +107,11 @@ end
 #
 #  id                  :integer          not null, primary key
 #  type                :string
-#  mode                :string
 #  user_id             :integer
 #  contract_id         :integer
-#  token_value         :integer
+#  volume              :integer          default(1)
+#  price               :float            default(0.5)
+#  all_or_none         :boolean          default(FALSE)
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
@@ -113,7 +120,6 @@ end
 #  bug_title           :string
 #  bug_status          :string
 #  bug_labels          :string
-#  bug_presence        :boolean
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string

@@ -17,15 +17,15 @@ module AskCmd
 
     def transact_before_project
       ask.status = "open"
-      user.token_balance -= ask.token_value
+      # user.token_balance -= ask.token_value
     end
 
     private
 
     def user_funds
-      if user.token_balance < ask.token_value
-        errors.add(:token_value, "not enough funds in user account")
-      end
+      # if user.token_balance < ask.token_value
+      #   errors.add(:token_value, "not enough funds in user account")
+      # end
     end
   end
 end

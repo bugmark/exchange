@@ -1,0 +1,30 @@
+table width='100%'
+  tr
+    td
+      h2 Repos
+    td align='right'
+      a href="/core/repos/new" Add New GitHub Repo
+
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
+  thead
+    tr
+      th ID
+      th Format | Name
+      th Bugs
+      th Synced
+      th Contracts
+      th Action
+  tbody
+    - @repos.each do |repo|
+      tr
+        td = core_repo_id_link(repo)
+        td
+          = repo&.type&.gsub("Repo::", "")
+          '  |
+          = core_repo_name_link(repo)
+        td = core_repo_bug_link(repo)
+        td = repo.synced_at&.strftime("%b-%d %H:%M:%S") || "NA"
+        td = core_repo_contract_link(repo)
+        td = repo_actions(repo)
+hr
+small * means there are contracts against repo bugs

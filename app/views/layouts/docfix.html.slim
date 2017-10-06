@@ -1,0 +1,8 @@
+- content_for :navbar do
+  ul.navbar-nav.mr-auto
+    = nav_link("Docfix"      , "/core/docfix"      )
+
+- content_for :body do
+  = yield
+
+= render template: "layouts/application"

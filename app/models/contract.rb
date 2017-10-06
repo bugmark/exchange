@@ -24,11 +24,13 @@ class Contract < ApplicationRecord
   end
 
   def bid_tokens
-    bids.reduce(0) {|acc, bid| acc + bid.token_value}
+    # bids.reduce(0) {|acc, bid| acc + bid.token_value}
+    0
   end
 
   def ask_tokens
-    asks.reduce(0) {|acc, ask| acc + ask.token_value}
+    # asks.reduce(0) {|acc, ask| acc + ask.token_value}
+    0
   end
 
   def distribution_tokens
@@ -39,7 +41,8 @@ class Contract < ApplicationRecord
     total_bids = bid_tokens
     total_dist = distribution_tokens
     bids.reduce({}) do |acc, bid|
-      acc[bid.id] = ((bid.token_value.to_f / total_bids) * total_dist).to_i
+      # acc[bid.id] = ((bid.token_value.to_f / total_bids) * total_dist).to_i
+      acc[bid.id] = 1
       acc
     end
   end
@@ -49,19 +52,12 @@ class Contract < ApplicationRecord
   # > matured   - past mature date
   # > resolved  - assigned
 
-  # returns list of matching bugs
-  def match_list
+  def matching_bugs
     @bugmatch ||= Bug.match(match_attrs)
   end
 
-  # returns boolean result of the match assertion
   def match_assertion
-    match_length = match_list.count
-    if self.bug_presence
-      match_length > 0
-    else
-      match_length == 0
-    end
+    matching_bugs.count > 0
   end
 
   def awardee
@@ -136,7 +132,6 @@ class Contract < ApplicationRecord
   def default_values
     self.status       ||= 'open'
     self.mode         ||= 'reward'
-    self.bug_presence ||= true
     self.contract_maturation   ||= Time.now + 1.week
   end
 
@@ -166,7 +161,6 @@ end
 #  bug_title           :string
 #  bug_status          :string
 #  bug_labels          :string
-#  bug_presence        :boolean
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string

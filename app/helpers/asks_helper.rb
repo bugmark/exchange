@@ -1,11 +1,11 @@
 module AsksHelper
   def ask_id_link(ask)
-    raw "<a href='/asks/#{ask.id}'>#{ask.xid}</a>"
+    raw "<a href='/core/asks/#{ask.id}'>#{ask.xid}</a>"
   end
 
   def ask_type_link(ask)
     type = ask.xtype
-    raw "<a href='/asks/#{ask.id}'>#{type}</a>"
+    raw "<a href='/core/asks/#{ask.id}'>#{type}</a>"
   end
 
   def ask_attach_link(ask)
@@ -20,9 +20,9 @@ module AsksHelper
   end
 
   def ask_cross_count(ask)
-    count = ask.cross_list.count
+    count = ask.matching_bids.count
     return count if count == 0
-    value = ask.cross_value
+    value = ask.matching_bid_reserve
     "#{count} (#{value} tokens)"
   end
 
@@ -36,9 +36,11 @@ module AsksHelper
     nil
   end
 
+  # TODO: fixme
   def ask_cross_link(ask)
-    return nil if ask.cross_value < ask.token_value
-    raw "<a href='/offers/#{ask.id}/cross'>cross</a>"
+    return nil
+    return nil if ask.matching_bid_reserve < ask.price
+    raw "<a href='/core/offers/#{ask.id}/cross'>cross</a>"
   end
 
   def ask_actions(ask)

@@ -1,7 +1,7 @@
 doctype html
 html[lang="en-US"]
   head
-    title BugMark
+    title = @page_title || "BugMark"
     = csrf_meta_tags
     link[href="/img/bugfav.ico" rel="icon" type="image/x-icon"]
     meta[charset="utf-8"]
@@ -15,16 +15,15 @@ html[lang="en-US"]
         span.navbar-toggler-icon
       a.navbar-brand[href="/"] BugMark
       .collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          = nav_link("Home"        , "/"            )
-          = nav_link("Repos"       , "/repos"       )
-          = nav_link("Bugs"        , "/bugs"        )
-          = nav_link("Offers"      , "/offers"      )
-          = nav_link("Rewards"     , "/rewards"     )
-          = nav_link("Forecasts"   , "/forecasts"   )
+        - if ! content_for?(:navbar)
+          ul.navbar-nav.mr-auto
+            = nav_link("Core"        , "/core/home"   )
+            = nav_link("Docfix"      , "/docfix/home" )
+        - else
+          = content_for(:navbar)
         = render "layouts/devise"
     .container-fluid[style="margin-top: 65px;"]
-      = yield
+      = content_for?(:body) ? content_for(:body) : yield
       hr
       footer
         div[style="text-align: center"]

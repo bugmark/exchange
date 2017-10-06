@@ -1,11 +1,11 @@
 module BidsHelper
   def bid_id_link(bid)
-    raw "<a href='/bids/#{bid.id}'>#{bid.xid}</a>"
+    raw "<a href='/core/bids/#{bid.id}'>#{bid.xid}</a>"
   end
 
   def bid_type_link(bid)
     type = bid.xtype
-    raw "<a href='/bids/#{bid.id}'>#{type}</a>"
+    raw "<a href='/core/bids/#{bid.id}'>#{type}</a>"
   end
 
   def bid_attach_link(bid)
@@ -23,7 +23,7 @@ module BidsHelper
   def bid_take_link(bid)
     status = bid.status
     if bid.unmatured? && status == "open"
-      path = "/bids/#{bid.id}/edit"
+      path = "/core/bids/#{bid.id}/edit"
       raw "<a href='#{path}'>Take</a>"
     else
       nil

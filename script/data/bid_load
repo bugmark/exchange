@@ -4,44 +4,51 @@ require "./config/environment"
 
 opts = [
   {
-    bug_id:               Bug.third.id  ,
-    token_value:          10            ,
-    user_id:              User.first.id ,
-    contract_maturation:  Time.now + 1.week
-  },
-  {
     bug_id:               Bug.second.id  ,
-    token_value:          15            ,
+    price:                0.90           ,
+    volume:               5              ,
     user_id:              User.second.id ,
     contract_maturation:  Time.now + 1.hour
   },
   {
+    bug_id:               Bug.third.id  ,
+    price:                0.50          ,
+    volume:               1             ,
+    user_id:              User.first.id ,
+    contract_maturation:  Time.now + 1.hour
+  },
+  {
     bug_id:               Bug.first.id  ,
-    token_value:          5             ,
+    price:                0.75          ,
+    volume:               10            ,
     user_id:              User.third.id ,
     contract_maturation:  Time.now + 1.day
   },
   {
     bug_id:               Bug.third.id  ,
-    token_value:          20            ,
+    price:                0.20          ,
+    volume:               2             ,
     user_id:              User.first.id ,
     contract_maturation:  Time.now - 1.hour
   },
   {
     bug_id:               Bug.second.id  ,
-    token_value:          5              ,
+    price:                0.50           ,
+    volume:               2              ,
     user_id:              User.third.id  ,
     contract_maturation:  Time.now - 1.hour
   },
   {
     bug_id:               Bug.second.id  ,
-    token_value:          10             ,
+    price:                0.10           ,
+    volume:               10             ,
     user_id:              User.first.id  ,
     contract_maturation:  Time.now - 1.hour
   },
   {
     bug_id:               Bug.second.id  ,
-    token_value:          10             ,
+    price:                0.10           ,
+    volume:               5              ,
     user_id:              User.third.id  ,
     contract_maturation:  Time.now - 1.hour
   }

@@ -4,32 +4,32 @@ Rails.application.routes.draw do
   get 'static/help'
   get 'static/test'
 
-  resources :repos do
-    get 'sync', :on => :member
+  namespace :core do
+
+    resource :home
+
+    resources :repos do
+      get 'sync', :on => :member
+    end
+    resources :repo_git_hubs        , path: "/core/repos"
+    resources :bugs
+    resources :bids
+    resources :asks
+    resources :offers do
+      get 'cross', :on => :member
+    end
+
+    resources :contracts do
+      get 'resolve', :on => :member
+    end
+
+    resources :users
+
   end
-  resources :repo_git_hubs      , path: "/repos"
 
-  resources :bugs
-
-  resources :bids
-  resources :bid_cmd_creates, path: "/bids"
-
-  resources :asks
-  resources :ask_cmd_creates, path: "/asks"
-
-  resources :offers do
-    get 'cross', :on => :member
+  namespace :docfix do
+    resource :home
   end
-
-  resources :rewards do
-    get 'resolve', :on => :member
-  end
-  resources :reward_cmd_publishes , path: "/rewards"
-  resources :reward_cmd_takes     , path: "/rewards"
-
-  resources :forecasts
-
-  resources :users
 
   root "static#home"
 

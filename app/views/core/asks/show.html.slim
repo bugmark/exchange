@@ -1,0 +1,34 @@
+h2 ASK [#{@ask.xid}]
+.row
+  .col-md-6
+    b Details
+    table.table
+      tr
+        td Status
+        td = @ask.status
+      tr
+        td User
+        td = ask_user_link(@ask.user)
+      tr
+        td Contract Price
+        td = @ask.price
+  .col-md-6
+    b Actions
+    table.table
+      tr
+        td Attached To
+        td = ask_attach_link(@ask)
+      tr
+        td Action
+        td = ask_cross_link(@ask)
+hr
+b Crossing Bids (#{@ask.matching_bids.count})
+table.table
+  - if @ask.matching_bids.count > 0
+    tr
+      th ID
+      th Type
+  - @ask.matching_bids.each do |bid|
+    tr
+      td = bid_id_link(bid)
+      td = bid.type
