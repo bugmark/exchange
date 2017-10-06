@@ -164,16 +164,24 @@ Next Actions:
 
 # Oct 6
 
-- [TODO] render contract/show
-- [TODO] get rid of bug presence in UI
+- [DONE] render contract/show
+- [DONE] get rid of bug presence in UI
+
+- [TODO] fix resolve
 - [TODO] add volume and price in offer/new
 - [TODO] add contract maturation range for offers
 - [TODO] add contract maturation date with range date - 2 days
-- [TODO] add API
-- [TODO] use swagger for api docco
+
 - [TODO] implement commands
 
 # TBD
+
+- [TODO] add price limits
+
+- [TODO] add bid/ask date ranges
+
+- [TODO] add API
+- [TODO] use swagger for api docco
 
 - [TODO] add bid/cancel link on offers#index
 - [TODO] add ask/cancel link on offers#index
@@ -187,9 +195,6 @@ Next Actions:
 
 - [TODO] enable bid-side resale
 - [TODO] enable ask-side resale
-
-- [TODO] add mode to /bid/new
-- [TODO] add mode to /ask/new
 
 - [TODO] add cron process for contract cross
 - [TODO] add cron process for contract resolve
