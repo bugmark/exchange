@@ -6,6 +6,8 @@ RSpec.describe Contract, type: :model do
 
   def valid_params
     {
+      price:  0.2,
+      volume: 1
     }
   end
 

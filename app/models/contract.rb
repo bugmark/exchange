@@ -10,6 +10,8 @@ class Contract < ApplicationRecord
   before_validation :default_values
   validates :status, inclusion: {in: %w(open matured resolved)}
   validates :contract_maturation, presence: true
+  validates :volume, numericality: {only_integer: true, greater_than: 0}
+  validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
   def users
     (bid_users + ask_users).uniq
@@ -126,8 +128,7 @@ class Contract < ApplicationRecord
   private
 
   def default_values
-    self.status       ||= 'open'
-    self.mode         ||= 'reward'
+    self.status                ||= 'open'
     self.contract_maturation   ||= Time.now + 1.week
   end
 

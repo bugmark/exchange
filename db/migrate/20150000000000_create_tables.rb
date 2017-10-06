@@ -102,7 +102,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :users do |t|
       t.boolean  :admin
-      t.integer  :token_balance
+      t.float    :token_balance, default: 0.0
       t.string   :exref
       t.string   :uuref
       t.timestamps

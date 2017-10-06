@@ -15,11 +15,10 @@ describe "Bids" do
     expect(page).to_not be_nil
   end
 
-  # TODO: fixme
-  # it "renders /new" do
-  #   login_as user, :scope => :user
-  #
-  #   visit "/core/bids/new"
-  #   expect(page.body).to have_content("New Bid")
-  # end
+  it "renders /new" do
+    login_as user, :scope => :user
+
+    visit "/core/bids/new"
+    expect(page.body).to have_content("New Bid")
+  end
 end

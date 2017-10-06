@@ -4,8 +4,8 @@ RSpec.describe ContractCmd::CrossFromAsk do
 
   include_context 'Integration Environment'
 
-  let(:klas)   { described_class                  }
-  subject      { klas.new(ask1.ask)               }
+  let(:klas)   { described_class                                     }
+  subject      { klas.new(ask1.ask, price: 0.2, volume: 1)           }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :ask           }

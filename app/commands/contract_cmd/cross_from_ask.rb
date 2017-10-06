@@ -15,6 +15,8 @@ module ContractCmd
 
     def transact_before_project
       contract.assign_attributes(ask.cross_attrs)
+      contract.price  = ask.price
+      contract.volume = ask.volume
       contract.save
       ask.contract_id = contract.id
       cross_list.each { |bid| bid.update_attributes(contract_id: contract.id) }

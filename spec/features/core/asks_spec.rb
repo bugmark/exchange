@@ -15,11 +15,10 @@ describe "Asks" do
     expect(page).to_not be_nil
   end
 
-  # TODO: fixme
-  # it "renders new" do
-  #   login_as user, :scope => :user
-  #
-  #   visit "/core/asks/new"
-  #   expect(page.body).to have_content("New Ask")
-  # end
+  it "renders new" do
+    login_as user, :scope => :user
+
+    visit "/core/asks/new"
+    expect(page.body).to have_content("New Ask")
+  end
 end
