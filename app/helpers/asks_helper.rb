@@ -20,9 +20,9 @@ module AsksHelper
   end
 
   def ask_cross_count(ask)
-    count = ask.matching_bugs.count
+    count = ask.matching_bids.count
     return count if count == 0
-    value = ask.cross_value
+    value = ask.matching_bid_reserve
     "#{count} (#{value} tokens)"
   end
 
@@ -39,7 +39,7 @@ module AsksHelper
   # TODO: fixme
   def ask_cross_link(ask)
     return nil
-    return nil if ask.cross_value < ask.price
+    return nil if ask.matching_bid_reserve < ask.price
     raw "<a href='/core/offers/#{ask.id}/cross'>cross</a>"
   end
 

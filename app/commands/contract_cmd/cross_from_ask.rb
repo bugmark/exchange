@@ -10,7 +10,7 @@ module ContractCmd
     def initialize(ask_param, contract_opts = {})
       @ask        = Ask.where(contract_id: nil).find(ask_param.to_i)
       @contract   = Contract.new(contract_opts)
-      @cross_list = bin_pack(ask.price, ask&.matching_bugs)
+      @cross_list = gen_cross(ask)
     end
 
     def transact_before_project
@@ -22,18 +22,10 @@ module ContractCmd
 
     private
 
-    # Combine bids and asks to form a contract.
-    # TODO: Review/optimize this implementation
-    # See:
-    # https://en.wikipedia.org/wiki/Bin_packing_problem
-    # https://en.wikipedia.org/wiki/Knapsack_problem
-    def bin_pack(target_price, bid_list = [])
-      sorted_bids = bid_list.to_a.sort_by { |bid| bid.price }
-      rtotal, rlist = sorted_bids.reduce([0, []]) do |(acc, list), bid|
-        acc, list = [acc + bid.price, list << bid] if acc < target_price
-        [acc, list]
-      end
-      rtotal >= target_price ? rlist : []
+    def gen_cross(ask)
+      return [] if ask.empty?
+      bid = ask.matching_bids.find {|bid| bid.value == ask.complementary_value}
+      bid ? [bid] : []
     end
 
     def cross_integrity

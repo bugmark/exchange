@@ -15,6 +15,14 @@ class Bid < ApplicationRecord
     @buglist ||= Bug.match(match_attrs)
   end
 
+  def reserve
+    self.volume * self.price
+  end
+
+  def complementary_reserve
+    self.volume - self.price
+  end
+
   def contract_maturation_str
     self.contract_maturation.strftime("%b-%d %H:%M:%S")
   end
