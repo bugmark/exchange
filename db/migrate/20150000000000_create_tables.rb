@@ -49,7 +49,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
         t.integer  :contract_id
         t.integer  :volume     , default: 1      # Greater than zero
         t.float    :price      , default: 0.50   # between 0.00 and 1.00
-        t.boolean  :price_limit, default: false
         t.boolean  :all_or_none, default: false
         t.string   :status                       # open, closed
         t.datetime :offer_expiration

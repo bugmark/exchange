@@ -109,9 +109,8 @@ end
 #  type                :string
 #  user_id             :integer
 #  contract_id         :integer
-#  volume              :integer
-#  price               :integer
-#  price_limit         :boolean          default(FALSE)
+#  volume              :integer          default(1)
+#  price               :float            default(0.5)
 #  all_or_none         :boolean          default(FALSE)
 #  status              :string
 #  offer_expiration    :datetime

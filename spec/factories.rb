@@ -51,7 +51,7 @@ FactoryGirl.define do
     initialize_with { new(attributes) }
 
     type                "Ask::GitHub"
-    price               0.20
+    price               0.40
     volume              1
     contract_maturation Time.now + 1.day
     bug_id              { FG.create(:bug).id  }

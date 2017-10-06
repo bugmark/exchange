@@ -23,8 +23,8 @@ module ContractCmd
     private
 
     def gen_cross(ask)
-      return [] if ask.empty?
-      bid = ask.matching_bids.find {|bid| bid.value == ask.complementary_value}
+      return [] unless ask.present?
+      bid = ask.matching_bids.find {|bid| bid.reserve == ask.complementary_reserve}
       bid ? [bid] : []
     end
 
