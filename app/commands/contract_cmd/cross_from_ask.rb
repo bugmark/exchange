@@ -39,4 +39,3 @@ module ContractCmd
     end
   end
 end
-
