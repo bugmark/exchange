@@ -1,4 +1,4 @@
-class Bid < ApplicationRecord
+class Bid < ApplicationOffer
 
   before_validation :default_values
 
@@ -7,20 +7,8 @@ class Bid < ApplicationRecord
   belongs_to :bug,      optional: true
   belongs_to :repo,     optional: true
 
-  def xid
-    "bid.#{self.id}"
-  end
-
-  def matching_bugs
-    @buglist ||= Bug.match(match_attrs)
-  end
-
-  def reserve
-    self.volume * self.price
-  end
-
-  def complementary_reserve
-    self.volume - self.price
+  def xtag
+    "bid"
   end
 
   def contract_maturation_str

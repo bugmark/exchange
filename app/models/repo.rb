@@ -6,8 +6,8 @@ class Repo < ApplicationRecord
 
   validates :name     , uniqueness: true, presence: true
 
-  def xid
-    "rep.#{self.id}"
+  def xtag
+    "rep"
   end
 
   def xtype

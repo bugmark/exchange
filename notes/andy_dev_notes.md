@@ -158,9 +158,20 @@ Next Actions:
 
 - [TODO] all tests pass
 
-# Oct 4
+# Oct 5
 
 - [TODO] build ContractCmd::Cross
+
+# Oct 6
+
+- [TODO] render contract/show
+- [TODO] get rid of bug presence in UI
+- [TODO] add volume and price in offer/new
+- [TODO] add contract maturation range for offers
+- [TODO] add contract maturation date with range date - 2 days
+- [TODO] add API
+- [TODO] use swagger for api docco
+- [TODO] implement commands
 
 # TBD
 

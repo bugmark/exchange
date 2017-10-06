@@ -80,6 +80,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :status              # open, matured, resolved
       t.string   :awarded_to          # bidder, asker
       t.datetime :contract_maturation
+      t.integer  :volume
+      t.float    :price
       # ----- match fields
       t.integer  :repo_id
       t.integer  :bug_id

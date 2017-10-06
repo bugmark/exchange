@@ -1,6 +1,6 @@
 module ContractsHelper
   def contract_id_link(contract)
-    raw "<a href='/rewards/#{contract.id}'>#{contract.xid}</a>"
+    raw "<a href='/core/contracts/#{contract.id}'>#{contract.xid}</a>"
   end
 
   def contract_bid_link(contract)

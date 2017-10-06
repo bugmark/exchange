@@ -1,4 +1,4 @@
-class Ask < ApplicationRecord
+class Ask < ApplicationOffer
 
   before_validation :default_values
 
@@ -7,12 +7,8 @@ class Ask < ApplicationRecord
   belongs_to :bug,      optional: true
   belongs_to :repo,     optional: true
 
-  def xid
-    "ask.#{self.id}"
-  end
-
-  def to_i
-    self.id
+  def xtag
+    "ask"
   end
 
   def attach_type
@@ -21,18 +17,6 @@ class Ask < ApplicationRecord
 
   def attach_obj
     bug || repo
-  end
-
-  def reserve
-    self.volume * self.price
-  end
-
-  def complementary_reserve
-    self.volume - reserve
-  end
-
-  def matching_bids
-    @bidmatch ||= Bid.match(cross_attrs)
   end
 
   def matching_bid_reserve

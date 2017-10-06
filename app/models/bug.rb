@@ -3,8 +3,8 @@ class Bug < ApplicationRecord
   belongs_to :repo
   has_many :contracts, :dependent => :destroy
 
-  def xid
-    "bug.#{self.id}"
+  def xtag
+    "bug"
   end
 
   def xtype

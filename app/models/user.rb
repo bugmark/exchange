@@ -11,12 +11,8 @@ class User < ApplicationRecord
   has_many :bid_contracts, :through => :bids, :source => 'contract'
   has_many :ask_contracts, :through => :asks, :source => 'contract'
 
-  def to_i
-    self.id
-  end
-
-  def xid
-    "usr.#{self&.id || 0}"
+  def xtag
+    "usr"
   end
 
   def contracts

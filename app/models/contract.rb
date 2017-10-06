@@ -70,12 +70,8 @@ class Contract < ApplicationRecord
     self.send awardee.to_sym
   end
 
-  def to_i
-    self.id
-  end
-
-  def xid
-    "con.#{self.id}"
+  def xtag
+    "con"
   end
 
   def contract_maturation_str
