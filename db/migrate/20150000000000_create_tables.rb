@@ -44,15 +44,16 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     %i(bids asks).each do |table|
       create_table table do |t|
-        t.string   :type                         # BugZilla, GitHub, CVE
-        t.integer  :user_id
-        t.integer  :contract_id
-        t.integer  :volume     , default: 1      # Greater than zero
-        t.float    :price      , default: 0.50   # between 0.00 and 1.00
-        t.boolean  :all_or_none, default: false
-        t.string   :status                       # open, closed
-        t.datetime :offer_expiration
-        t.datetime :contract_maturation
+        t.string    :type                         # BugZilla, GitHub, CVE
+        t.integer   :user_id
+        t.integer   :contract_id
+        t.integer   :volume     , default: 1      # Greater than zero
+        t.float     :price      , default: 0.50   # between 0.00 and 1.00
+        t.boolean   :all_or_none, default: false
+        t.string    :status                       # open, closed
+        t.datetime  :offer_expiration
+        t.datetime  :contract_maturation
+        t.tsrange   :maturation_period
         # ----- match fields -----
         t.integer  :repo_id
         t.integer  :bug_id
@@ -71,7 +72,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :uuref
       add_index table, :repo_id
       add_index table, :bug_id
-      add_index table, :jfields, using: :gin
+      add_index table, :maturation_period, using: :gist
+      add_index table, :jfields          , using: :gin
     end
 
     create_table :contracts do |t|

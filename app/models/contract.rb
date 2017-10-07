@@ -153,6 +153,8 @@ end
 #  status              :string
 #  awarded_to          :string
 #  contract_maturation :datetime
+#  volume              :integer
+#  price               :float
 #  repo_id             :integer
 #  bug_id              :integer
 #  bug_title           :string

@@ -58,7 +58,7 @@ end
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
-#  token_balance          :integer
+#  token_balance          :float            default(0.0)
 #  exref                  :string
 #  uuref                  :string
 #  created_at             :datetime         not null

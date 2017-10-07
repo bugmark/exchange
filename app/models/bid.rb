@@ -71,6 +71,10 @@ class Bid < ApplicationOffer
       where(false)
     end
 
+    def by_maturation_period(range)
+      where("maturation_period && tsrange(?, ?)", range.begin, range.end)
+    end
+
     # -----
 
     def match(attrs)
@@ -99,10 +103,10 @@ class Bid < ApplicationOffer
   end
 
   def default_values
-    self.type         ||= 'Bid::GitHub'
-    self.status       ||= 'open'
-    self.price        ||= 0.10
-    self.contract_maturation ||= Time.now + 1.week
+    self.type              ||= 'Bid::GitHub'
+    self.status            ||= 'open'
+    self.price             ||= 0.10
+    self.maturation_period ||= Time.now+1.minute..Time.now+1.week
   end
 
   def match_attrs
@@ -130,6 +134,7 @@ end
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
+#  maturation_period   :tsrange
 #  repo_id             :integer
 #  bug_id              :integer
 #  bug_title           :string

@@ -24,7 +24,15 @@ class Ask < ApplicationOffer
   end
 
   def contract_maturation_str
-    self.contract_maturation.strftime("%b-%d %H:%M:%S")
+    self.maturation_date.strftime("%b-%d %H:%M:%S")
+  end
+
+  def maturation_date=(date)
+    self.maturation_period = date-2.days..date
+  end
+
+  def maturation_date
+    maturation_period.end
   end
 
   # ----- scopes -----
@@ -62,6 +70,10 @@ class Ask < ApplicationOffer
       # where(labels: labels)
       where(false)
     end
+
+    def by_maturation_period(range)
+      where("maturation_period && tsrange(?, ?)", range.begin, range.end)
+    end
   end
 
   def cross_attrs
@@ -77,11 +89,11 @@ class Ask < ApplicationOffer
   private
 
   def default_values
-    self.type                ||= 'Ask::GitHub'
-    self.status              ||= 'open'
-    self.price               ||= 0.10
-    self.volume              ||= 1
-    self.contract_maturation ||= Time.now + 1.week
+    self.type               ||= 'Ask::GitHub'
+    self.status             ||= 'open'
+    self.price              ||= 0.10
+    self.volume             ||= 1
+    self.maturation_period  ||= Time.now+1.minute..Time.now+1.week
   end
 end
 
@@ -99,6 +111,7 @@ end
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
+#  maturation_period   :tsrange
 #  repo_id             :integer
 #  bug_id              :integer
 #  bug_title           :string

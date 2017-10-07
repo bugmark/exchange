@@ -92,6 +92,7 @@ end
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
+#  maturation_period   :tsrange
 #  repo_id             :integer
 #  bug_id              :integer
 #  bug_title           :string
