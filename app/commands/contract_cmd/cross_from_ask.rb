@@ -14,9 +14,6 @@ module ContractCmd
     end
 
     def transact_before_project
-      contract.assign_attributes(ask.cross_attrs)
-      contract.price  = ask.price
-      contract.volume = ask.volume
       contract.save
       ask.contract_id = contract.id
       cross_list.each { |bid| bid.update_attributes(contract_id: contract.id) }
@@ -27,7 +24,14 @@ module ContractCmd
     def gen_cross(ask)
       return [] unless ask.present?
       bid = ask.matching_bids.find {|bid| bid.reserve == ask.complementary_reserve}
-      bid ? [bid] : []
+      if bid
+        contract.assign_attributes(ask.cross_attrs)
+        contract.price  = ask.price
+        contract.volume = ask.volume
+        [bid]
+      else
+        []
+      end
     end
 
     def cross_integrity

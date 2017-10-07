@@ -167,10 +167,15 @@ Next Actions:
 - [DONE] render contract/show
 - [DONE] get rid of bug presence in UI
 
-- [TODO] fix resolve
+# Oct 7
+
+- [DONE] add contract maturation_period for offers
+- [DONE] add contract maturation date with range date - 2 days
+
 - [TODO] add volume and price in offer/new
-- [TODO] add contract maturation range for offers
-- [TODO] add contract maturation date with range date - 2 days
+- [TODO] add maturation_period for offers
+
+- [TODO] fix resolve
 
 - [TODO] implement commands
 

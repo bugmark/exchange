@@ -43,7 +43,7 @@ describe "Repos", USE_VCR do
 
     visit "/core/bugs"
     click_on "Bid"
-    click_on "Create Create" #....
+    click_on "Create Create"
 
     expect(Bid.count).to eq(1)
   end
