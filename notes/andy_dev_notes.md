@@ -173,7 +173,7 @@ Next Actions:
 - [DONE] add contract maturation date with range date - 2 days
 
 - [TODO] add volume and price in offer/new
-- [TODO] add maturation_period for offers
+- [TODO] add maturation_period for offers/new
 
 - [TODO] fix resolve
 
