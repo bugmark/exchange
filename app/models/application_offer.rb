@@ -11,6 +11,10 @@ class ApplicationOffer < ApplicationRecord
     self.volume * self.price
   end
 
+  def attach_type
+    self.bug_id ? "bugs" : "repos"
+  end
+
   def complementary_reserve
     self.volume - reserve
   end
@@ -21,5 +25,17 @@ class ApplicationOffer < ApplicationRecord
 
   def matching_bids
     @bidmatch ||= Bid.match(cross_attrs)
+  end
+
+  def contract_maturation_str
+    self.maturation_date.strftime("%b-%d %H:%M:%S")
+  end
+
+  def maturation_date=(date)
+    self.maturation_period = date-2.days..date
+  end
+
+  def maturation_date
+    maturation_period.end
   end
 end

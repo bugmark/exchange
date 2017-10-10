@@ -3,6 +3,7 @@ module BidCmd
 
     attr_subobjects :bid, :user
     attr_delegate_fields :bid
+    attr_vdelegate :maturation_date, :bid
 
     validate :user_funds
 
@@ -11,16 +12,12 @@ module BidCmd
       @user = User.find(bid.user_id)
     end
 
-    def price
-      0
-    end
-
     def event_data
       @bid.attributes
     end
 
     def transact_before_project
-      bid.status = "open"
+      # bid.status = "open"
       # TODO: fixme
       # user.token_balance -= bid.token_value
     end

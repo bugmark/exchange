@@ -3,6 +3,7 @@ module AskCmd
 
     attr_subobjects :ask, :user
     attr_delegate_fields :ask
+    attr_vdelegate :maturation_date, :ask
 
     validate :user_funds
 
@@ -16,7 +17,6 @@ module AskCmd
     end
 
     def transact_before_project
-      ask.status = "open"
       # user.token_balance -= ask.token_value
     end
 

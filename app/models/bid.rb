@@ -11,14 +11,6 @@ class Bid < ApplicationOffer
     "bid"
   end
 
-  def contract_maturation_str
-    self.contract_maturation.strftime("%b-%d %H:%M:%S")
-  end
-
-  def attach_type
-    self.bug_id ? "bugs" : "repos"
-  end
-
   def attach_obj
     bug || repo
   end

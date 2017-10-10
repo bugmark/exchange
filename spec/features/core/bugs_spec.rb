@@ -26,7 +26,7 @@ describe "Bugs" do
 
     visit "/core/bugs"
     click_on "Bid"
-    click_on "Create Create"
+    click_on "Create Bid"
 
     expect(Bid.count).to eq(1)
   end

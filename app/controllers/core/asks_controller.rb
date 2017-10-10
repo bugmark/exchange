@@ -66,7 +66,10 @@ module Core
       opts = {
         type: "Ask::#{params["type"]&.camelize || 'GitHub'}",
         price: 0.50,
-        contract_maturation: Time.now + 3.minutes,
+        volume:     5,
+        status:     "open",
+        bug_status: "closed",
+        maturation_date: Time.now + 3.minutes,
         user_id: current_user.id
       }
       key = "bug_id" if params["bug_id"]

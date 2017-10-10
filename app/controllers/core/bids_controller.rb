@@ -25,7 +25,6 @@ module Core
       @bid = Bid.find(params["id"])
     end
 
-    # bug_id or repo_id, type(forecast | reward)
     def new
       @bid = BidCmd::Create.new(new_opts(params))
     end
@@ -41,6 +40,7 @@ module Core
       if @bid.save_event.project
         redirect_to("/core/bids/#{@bid.id}")
       else
+        binding.pry
         render 'core/bids/new'
       end
     end
@@ -64,10 +64,12 @@ module Core
 
     def new_opts(params)
       opts = {
-        type: "Bid::#{params["type"]&.camelize || 'GitHub'}",
-        price: 0.50,
-        contract_maturation: Time.now + 3.minutes,
-        user_id: current_user.id
+        type:    "Bid::#{params["type"]&.camelize || 'GitHub'}",
+        volume:  5,
+        price:   0.50,
+        bug_status:  "closed",
+        user_id:     current_user.id,
+        maturation_date: Time.now + 3.minutes,
       }
       key = "bug_id" if params["bug_id"]
       key = "repo_id" if params["repo_id"]

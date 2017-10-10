@@ -23,18 +23,6 @@ class Ask < ApplicationOffer
     @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve}
   end
 
-  def contract_maturation_str
-    self.maturation_date.strftime("%b-%d %H:%M:%S")
-  end
-
-  def maturation_date=(date)
-    self.maturation_period = date-2.days..date
-  end
-
-  def maturation_date
-    maturation_period.end
-  end
-
   # ----- scopes -----
 
   class << self

@@ -59,6 +59,13 @@ class ApplicationCommand
     end
   end
 
+  def self.attr_vdelegate(method, klas_sym)
+    getter = method
+    setter = "#{method}=".to_sym
+    delegate getter, to: klas_sym
+    delegate setter, to: klas_sym
+  end
+
   # ----- template methods - override in subclass
 
   def self.from_event(_event)
