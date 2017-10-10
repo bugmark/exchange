@@ -14,8 +14,14 @@ h2 BUG [#{@bug.xid}]
   .col-md-6
     table.table
       tr
+        td Bids
+        td TBD
+      tr
+        td Asks
+        td TBD
+      tr
         td Contracts
         td = bug_contract_link(@bug)
       tr
         td Create
-        td = bug_contract_link(@bug)
+        td = bug_actions(@bug)

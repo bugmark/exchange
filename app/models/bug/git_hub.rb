@@ -1,10 +1,5 @@
 class Bug::GitHub < Bug
 
-  # TODO: fixme
-  def html_url
-    "https://github.com/TBD"
-  end
-
 end
 
 # == Schema Information

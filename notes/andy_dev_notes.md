@@ -183,6 +183,12 @@ Next Actions:
 
 # Oct 10
 
+- [DONE] add documentation to bid/ask new
+
+- [TODO] fix url on bug#show
+- [TODO] add bid-count (with link) to bug#show
+- [TODO] add ask-count (with link) to bug#show
+
 - [TODO] fix cross
 - [TODO] fix resolve
 - [TODO] implement commands with correct amounts

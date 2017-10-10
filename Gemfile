@@ -15,8 +15,8 @@ gem 'jbuilder'    , '~> 2.5'
 gem 'redis'       , '~> 3.0'
 gem 'bcrypt'      , '~> 3.1.7'
 gem 'dotenv'
-gem 'hstore_accessor'
-gem 'jsonb_accessor'
+gem 'hstore_accessor'            # hstore fields
+gem 'jsonb_accessor'             # jsonb fields
 gem 'colored'
 
 gem 'octokit'

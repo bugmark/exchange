@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Bug, type: :model do
 
-  def valid_params(repo)
+  def valid_params(repo, extra_params = {})
     {
       repo_id: repo.id
-    }
+    }.merge(extra_params)
   end
 
   let(:klas)   { described_class                            }
@@ -72,7 +72,16 @@ RSpec.describe Bug, type: :model do
       expect(klas.match({id: subject.id}).length).to eq(1)
     end
   end
+  
+  describe "#html_url" do
+    it { should respond_to :html_url                   }
+    it { should respond_to :html_url=                  }
 
+    it "sets the html_url" do
+      sub = klas.new(valid_params(repo, {html_url: "asdf"})) #
+      expect(sub.html_url).to eq("asdf")
+    end
+  end
 end
 
 # == Schema Information
