@@ -172,21 +172,23 @@ Next Actions:
 - [DONE] add contract maturation_period for offers
 - [DONE] add contract maturation date with range date - 2 days
 
-- [TODO] add volume and price in offer/new
-- [TODO] add maturation_period for offers/new
+# Oct 8
 
+- [DONE] update design for reselling and position allocation
+
+# Oct 9
+
+- [DONE] add volume and price in offer/new
+- [DONE] add maturation_period for offers/new
+
+- [TODO] fix cross
 - [TODO] fix resolve
-
-- [TODO] implement commands
+- [TODO] implement commands with correct amounts
 
 # TBD
 
 - [TODO] add price limits
-
 - [TODO] add bid/ask date ranges
-
-- [TODO] add API
-- [TODO] use swagger for api docco
 
 - [TODO] add bid/cancel link on offers#index
 - [TODO] add ask/cancel link on offers#index
@@ -207,3 +209,6 @@ Next Actions:
 
 - [TODO] UI: link from bugmark.net to documentation
 - [TODO] UI: create intro slide deck
+
+- [TODO] add API
+- [TODO] use swagger for api docco
