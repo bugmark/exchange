@@ -1,4 +1,11 @@
-h2 New Ask
+.row
+  .col-md-6
+    h2 New Ask
+  .col-md-6
+    small
+      | Asks are an offer to <b>sell</b> fixes or information.
+          For a fix: Ask => fixed/true.
+          For information: Bid => found/true.
 hr
 - if @ask.errors.any?
   .alert.alert-danger Please fix the errors below.
@@ -6,10 +13,17 @@ hr
   = f.hidden_field :type
   = f.hidden_field :user_id
   .row
-    .col-md-4 = f.number_field    :volume         , label: "Volume"
+    .col-md-4 = f.number_field    :volume         , label: "Units"
     .col-md-4 = f.number_field    :price          , label: "Price"
     .col-md-4 = f.datetime_field  :maturation_date, label: "Maturation Date"
-  div style='background: lightgrey; padding: 4px;'
+  .row
+    .col-md-12
+      small
+        | Bids and Asks are defined in Standard Units.
+           BugMark trades standard units that payoff either 1 token or 0 tokens.
+           The price for a unit varies between 0.00 and 1.00 tokens.
+           For all contracts, the Bid Price and the Ask Price always total 1.00.
+  div style='background: lightgrey; padding: 4px; margin-top: 10px;'
     | Match Criteria (blank for "don't care")
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
     .row
@@ -19,4 +33,8 @@ hr
     .row
       .col-md-6 = f.text_field :bug_title, label: "Bug Title (substring match)"
       .col-md-6 = f.text_field :bug_labels, label: "Bug Labels (comma separated, substring match)"
-  = f.submit "Create Ask"
+  small
+    | BugMark contracts are resolved on the maturation date.
+       If the Match Params hit on one or more issue, the
+       contract resolves to TRUE, otherwise FALSE.
+  p style='margin-top: 10px;' = f.submit "Create Ask"

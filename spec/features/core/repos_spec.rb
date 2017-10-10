@@ -35,13 +35,26 @@ describe "Repos", USE_VCR do
     expect(page).to_not be_nil
   end
 
-  it "takes a bid", USE_VCR do
+  it "creates an ask", USE_VCR do
+    login_as(usr1, :scope => :user)
+    hydrate(bug1)
+    expect(Ask.count).to eq(0)
+    expect(Bug.count).to eq(1)
+
+    visit "/core/repos"
+    click_on "Ask"
+    click_on "Create Ask"
+
+    expect(Ask.count).to eq(1)
+  end
+
+  it "creates a bid", USE_VCR do
     login_as(usr1, :scope => :user)
     hydrate(bug1)
     expect(Bid.count).to eq(0)
     expect(Bug.count).to eq(1)
 
-    visit "/core/bugs"
+    visit "/core/repos"
     click_on "Bid"
     click_on "Create Bid"
 

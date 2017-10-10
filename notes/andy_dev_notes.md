@@ -181,6 +181,8 @@ Next Actions:
 - [DONE] add volume and price in offer/new
 - [DONE] add maturation_period for offers/new
 
+# Oct 10
+
 - [TODO] fix cross
 - [TODO] fix resolve
 - [TODO] implement commands with correct amounts
