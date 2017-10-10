@@ -38,4 +38,12 @@ class ApplicationOffer < ApplicationRecord
   def maturation_date
     maturation_period.end
   end
+
+  def matured?
+    self.maturation_date < Time.now
+  end
+
+  def unmatured?
+    ! matured?
+  end
 end

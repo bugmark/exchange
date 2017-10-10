@@ -39,9 +39,9 @@ module Core
       opts = params["ask_cmd_create"]
       @ask = AskCmd::Create.new(valid_params(opts))
       if @ask.save_event.project
-        redirect_to("/asks/#{@ask.id}")
+        redirect_to("/core/asks/#{@ask.id}")
       else
-        render 'asks/new'
+        render 'core/asks/new'
       end
     end
 

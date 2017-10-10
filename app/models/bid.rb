@@ -15,14 +15,6 @@ class Bid < ApplicationOffer
     bug || repo
   end
 
-  def matured?
-    self.contract_maturation < Time.now
-  end
-
-  def unmatured?
-    ! matured?
-  end
-
   # -----
 
   class << self
