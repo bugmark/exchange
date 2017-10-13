@@ -1,18 +1,21 @@
-class Ask::GitHub < Ask
+class Offer::BidSell < Offer
 
 end
 
 # == Schema Information
 #
-# Table name: asks
+# Table name: offers
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  repo_type           :string
 #  user_id             :integer
-#  contract_id         :integer
+#  parent_id           :integer
+#  position_id         :integer
+#  counter_id          :integer
 #  volume              :integer          default(1)
 #  price               :float            default(0.5)
-#  all_or_none         :boolean          default(FALSE)
+#  aon                 :boolean          default(FALSE)
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime

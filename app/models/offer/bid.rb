@@ -1,4 +1,4 @@
-class Ask < ApplicationOffer
+class Offer::Bid < Offer
 
   before_validation :default_values
 
@@ -8,24 +8,20 @@ class Ask < ApplicationOffer
   belongs_to :repo,     optional: true
 
   def xtag
-    "ask"
-  end
-
-  def attach_type
-    self.bug_id ? "bugs" : "repos"
+    "bid"
   end
 
   def attach_obj
     bug || repo
   end
 
-  def matching_bid_reserve
-    @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve}
-  end
-
-  # ----- scopes -----
+  # -----
 
   class << self
+    def assigned
+      where.not(contract_id: nil)
+    end
+
     def unassigned
       where(contract_id: nil)
     end
@@ -62,40 +58,66 @@ class Ask < ApplicationOffer
     def by_maturation_period(range)
       where("maturation_period && tsrange(?, ?)", range.begin, range.end)
     end
-  end
 
-  def cross_attrs
-    {
-      bug_id:       self.bug_id,
-      repo_id:      self.repo_id,
-      bug_title:    self.bug_title,
-      bug_status:   self.bug_status,
-      bug_labels:   self.bug_labels,
-    }
-  end
+    # -----
 
-  private
+    def match(attrs)
+      attrs.without_blanks.reduce(unassigned) do |acc, (key, val)|
+        scope_for(acc, key, val)
+      end
+    end
+
+    private
+
+    def scope_for(base, key, val)
+      case key
+        when :bug_id then
+          base.by_bugid(val)
+        when :repo_id then
+          base.by_repoid(val)
+        when :bug_title then
+          base.by_title(val)
+        when :bug_status then
+          base.by_status(val)
+        when :bug_labels then
+          base.by_labels(val)
+        else base
+      end
+    end
+  end
 
   def default_values
-    self.type               ||= 'Ask::GitHub'
-    self.status             ||= 'open'
-    self.price              ||= 0.10
-    self.volume             ||= 1
-    self.maturation_period  ||= Time.now+1.minute..Time.now+1.week
+    self.type              ||= 'Bid::GitHub'
+    self.status            ||= 'open'
+    self.price             ||= 0.10
+    self.maturation_period ||= Time.now+1.minute..Time.now+1.week
+  end
+
+  def match_attrs
+    {
+      id:      self.bug_id,
+      repo_id: self.repo_id,
+      title:   self.bug_title,
+      status:  self.bug_status,
+      labels:  self.bug_labels
+    }
   end
 end
 
 # == Schema Information
 #
-# Table name: asks
+# Table name: offers
 #
 #  id                  :integer          not null, primary key
 #  type                :string
+#  repo_type           :string
 #  user_id             :integer
-#  contract_id         :integer
+#  parent_id           :integer
+#  position_id         :integer
+#  counter_id          :integer
 #  volume              :integer          default(1)
 #  price               :float            default(0.5)
-#  all_or_none         :boolean          default(FALSE)
+#  aon                 :boolean          default(FALSE)
 #  status              :string
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
