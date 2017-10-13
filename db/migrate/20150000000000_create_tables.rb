@@ -42,39 +42,66 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :jfields, using: :gin
     add_index :bugs, :xfields, using: :gin
 
-    %i(bids asks).each do |table|
-      create_table table do |t|
-        t.string    :type                         # BugZilla, GitHub, CVE
-        t.integer   :user_id
-        t.integer   :contract_id
-        t.integer   :volume     , default: 1      # Greater than zero
-        t.float     :price      , default: 0.50   # between 0.00 and 1.00
-        t.boolean   :all_or_none, default: false
-        t.string    :status                       # open, closed
-        t.datetime  :offer_expiration
-        t.datetime  :contract_maturation
-        t.tsrange   :maturation_period
-        # ----- statement start -----
-        t.integer  :repo_id
-        t.integer  :bug_id
-        t.string   :bug_title
-        t.string   :bug_status
-        t.string   :bug_labels
-        # ----- statement end -----
-        t.jsonb    :jfields,  null: false, default: '{}'
-        t.string   :exref
-        t.string   :uuref
-      end
-      add_index table, :type
-      add_index table, :user_id
-      add_index table, :contract_id
-      add_index table, :exref
-      add_index table, :uuref
-      add_index table, :repo_id
-      add_index table, :bug_id
-      add_index table, :maturation_period, using: :gist
-      add_index table, :jfields          , using: :gin
+    create_table :offers do |t|
+      t.string    :type                    # BidBuy, BidSell, AskBuy, AskSell
+      t.string    :repo_type               # BugZilla, GitHub, CVE
+      t.integer   :user_id                 # the party who made the offer
+      t.integer   :parent_id               # for ReOffers - an Offer
+      t.integer   :position_id             # for SaleOffers - a Position
+      t.integer   :counter_id              # the counterparty - an Offer
+      t.integer   :volume, default: 1      # Greater than zero
+      t.float     :price , default: 0.50   # between 0.00 and 1.00
+      t.boolean   :aon   , default: false  # All Or None
+      t.string    :status                  # open, closed
+      t.datetime  :offer_expiration
+      t.datetime  :contract_maturation
+      t.tsrange   :maturation_period
+      # ----- statement start -----
+      t.integer  :repo_id
+      t.integer  :bug_id
+      t.string   :bug_title
+      t.string   :bug_status
+      t.string   :bug_labels
+      # ----- statement end -----
+      t.jsonb    :jfields,  null: false, default: '{}'
+      t.string   :exref
+      t.string   :uuref
     end
+    add_index :offers, :type
+    add_index :offers, :user_id
+    add_index :offers, :counter_id
+    add_index :offers, :exref
+    add_index :offers, :uuref
+    add_index :offers, :repo_id
+    add_index :offers, :bug_id
+    add_index :offers, :maturation_period, using: :gist
+    add_index :offers, :jfields          , using: :gin
+
+    create_table :positions do |t|
+      t.integer  :offer_id
+      t.integer  :escrow_id
+      t.integer  :parent_id
+      t.string   :exref
+      t.string   :uuref
+      t.timestamps
+    end
+    add_index :positions, :offer_id
+    add_index :positions, :escrow_id
+    add_index :positions, :parent_id
+    add_index :positions, :exref
+    add_index :positions, :uuref
+
+    create_table :escrows do |t|
+      t.integer  :contract_id
+      t.integer  :parent_id
+      t.string   :exref
+      t.string   :uuref
+      t.timestamps
+    end
+    add_index :escrows, :contract_id
+    add_index :escrows, :parent_id
+    add_index :escrows, :exref
+    add_index :escrows, :uuref
 
     create_table :contracts do |t|
       t.string   :type                # GitHub, BugZilla, ...

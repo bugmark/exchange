@@ -191,12 +191,15 @@ Next Actions:
 
 # Oct 13
 
-- [TODO] rename 'match params' to 'statement'
-- [TODO] add positions
-- [TODO] add escrow
-- [TODO] add ERD diagram
+- [DONE] rename 'match params' to 'statement'
 
-- Q: collapse 'bids/asks' into 'offers'?
+- [TODO] add positions
+- [TODO] add escrows
+
+- [TODO] add ERD diagram for Rails Models
+- [TODO] add GraphViz for contract structures
+- [TODO] collapse 'bids/asks' into offers(?)
+- [TODO] add matcher object (GitHub, CVE, etc.)
 
 - [TODO] fix cross
 - [TODO] fix resolve
