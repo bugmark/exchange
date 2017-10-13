@@ -49,6 +49,7 @@ group :development, :test do
   gem 'vcr'
   gem 'webmock'
   gem 'launchy'
+  gem 'rails-erd'            # generate ERD diagrams
 end
 
 group :development do

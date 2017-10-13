@@ -192,9 +192,22 @@ Next Actions:
 # Oct 13
 
 - [DONE] rename 'match params' to 'statement'
+- [DONE] add positions
+- [DONE] add escrows
 
-- [TODO] add positions
-- [TODO] add escrows
+- [TODO] add specs for positions
+- [TODO] add specs for escrows
+
+- [TODO] add factories for positions
+- [TODO] add factories for escrows
+
+- [TODO] design Position/Escrow commands
+- [TODO] build out data loading scripts
+
+- [TODO] get offer-page working
+- [TODO] get bid/new and ask/new working
+
+- [TODO] restore all specs
 
 - [TODO] add ERD diagram for Rails Models
 - [TODO] add GraphViz for contract structures
