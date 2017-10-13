@@ -18,13 +18,13 @@ Rails.application.routes.draw do
     resources :offers do
       get 'cross', :on => :member
     end
+    resources :full_offers
 
     resources :contracts do
       get 'resolve', :on => :member
     end
 
     resources :users
-
   end
 
   namespace :docfix do

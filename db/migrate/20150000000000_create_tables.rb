@@ -54,13 +54,13 @@ class CreateTables < ActiveRecord::Migration[5.1]
         t.datetime  :offer_expiration
         t.datetime  :contract_maturation
         t.tsrange   :maturation_period
-        # ----- match fields -----
+        # ----- statement start -----
         t.integer  :repo_id
         t.integer  :bug_id
         t.string   :bug_title
         t.string   :bug_status
         t.string   :bug_labels
-        # ----- match fields -----
+        # ----- statement end -----
         t.jsonb    :jfields,  null: false, default: '{}'
         t.string   :exref
         t.string   :uuref
@@ -84,13 +84,13 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.datetime :contract_maturation
       t.integer  :volume
       t.float    :price
-      # ----- match fields
+      # ----- statement start
       t.integer  :repo_id
       t.integer  :bug_id
       t.string   :bug_title
       t.string   :bug_status
       t.string   :bug_labels
-      # -----
+      # ----- statement end
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref

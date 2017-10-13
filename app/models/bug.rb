@@ -1,8 +1,11 @@
 class Bug < ApplicationRecord
 
-  belongs_to :repo
-  has_many :contracts, :dependent => :destroy
-  hstore_accessor :xfields, :html_url => :string    # add field to hstore
+  belongs_to      :repo
+  has_many        :contracts, :dependent => :destroy
+  has_many        :bids
+  has_many        :asks
+
+  hstore_accessor :xfields  , :html_url  => :string    # add field to hstore
 
   def xtag
     "bug"

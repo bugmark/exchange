@@ -27,6 +27,14 @@ module BugsHelper
     end
   end
 
+  def bug_bids_link(bug)
+    bug.bids.count
+  end
+
+  def bug_asks_link(bug)
+    bug.asks.count
+  end
+
   # def bug_contract_new_link(bug)
   #   path = "/contracts/new?type=git_hub&bug_id=#{bug.id}"
   #   raw "<a href='#{path}'>Contract</a>"

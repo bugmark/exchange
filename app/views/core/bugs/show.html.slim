@@ -15,10 +15,10 @@ h2 BUG [#{@bug.xid}]
     table.table
       tr
         td Bids
-        td TBD
+        td = bug_bids_link(@bug)
       tr
         td Asks
-        td TBD
+        td = bug_asks_link(@bug)
       tr
         td Contracts
         td = bug_contract_link(@bug)

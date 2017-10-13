@@ -185,9 +185,18 @@ Next Actions:
 
 - [DONE] add documentation to bid/ask new
 
-- [TODO] fix url on bug#show
-- [TODO] add bid-count (with link) to bug#show
-- [TODO] add ask-count (with link) to bug#show
+- [DONE] fix url on bug#show
+- [DONE] add bid-count (with link) to bug#show
+- [DONE] add ask-count (with link) to bug#show
+
+# Oct 13
+
+- [TODO] rename 'match params' to 'statement'
+- [TODO] add positions
+- [TODO] add escrow
+- [TODO] add ERD diagram
+
+- Q: collapse 'bids/asks' into 'offers'?
 
 - [TODO] fix cross
 - [TODO] fix resolve
