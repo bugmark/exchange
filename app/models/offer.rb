@@ -16,15 +16,10 @@ class Offer < ApplicationRecord
     # ----- scopes -----
 
     def assigned
-      # where.not(contract_id: nil)
-      # left_outer_joins(:position).where.not( position: { offer_id: nil } )
       where("id IN (SELECT offer_id FROM positions)")
     end
 
     def unassigned
-      # where(contract_id: nil)
-      # left_outer_joins(:position).where( position: { offer_id: nil } )
-      # left_outer_joins(:contacts).where( contacts: { id: nil } )
       where("id NOT IN (SELECT offer_id FROM positions)")
     end
 

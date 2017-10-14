@@ -8,15 +8,15 @@ module ContractCmd
     validate :cross_integrity
 
     def initialize(ask_param, contract_opts = {})
-      @ask        = Offer::Ask::Buy.where(contract_id: nil).find(ask_param.to_i)
+      @ask        = Offer::Ask::Buy.unassigned.find(ask_param.to_i)
       @contract   = Contract.new(contract_opts)
       @cross_list = gen_cross(ask)
     end
 
     def transact_before_project
       contract.save
-      ask.contract_id = contract.id
-      cross_list.each { |bid| bid.update_attributes(contract_id: contract.id) }
+      # ask.contract_id = contract.id
+      # cross_list.each { |bid| bid.update_attributes(contract_id: contract.id) }
     end
 
     private

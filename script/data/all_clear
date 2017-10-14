@@ -4,7 +4,8 @@ require './config/environment'
 
 Repo.destroy_all
 User.destroy_all
-Bid.destroy_all
-Ask.destroy_all
+Offer.destroy_all
+Escrow.destroy_all
+Position.destroy_all
 Contract.destroy_all
 EventLine.destroy_all
