@@ -2,7 +2,7 @@ module AskBuyCmd
   class Create < ApplicationCommand
 
     attr_subobjects :ask, :user
-    attr_delegate_fields :ask
+    attr_delegate_fields :ask, class_name: "Offer::Ask::Buy"
     attr_vdelegate :maturation_date, :ask
 
     validate :user_funds

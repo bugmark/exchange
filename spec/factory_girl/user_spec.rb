@@ -7,5 +7,4 @@ RSpec.describe 'User Factory' do
     FG.create(:user)
     expect(User.count).to eq(1)
   end
-
 end

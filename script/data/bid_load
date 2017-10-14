@@ -55,5 +55,5 @@ opts = [
 ]
 
 opts.each do |opt|
-  FG.create(:bid, opt)
+  FG.create(:bid_buy, opt)
 end

@@ -211,10 +211,14 @@ Next Actions:
 - [x] rebuild offer commands   (with specs)
 - [x] build positions commands (with specs)
 - [x] build escrow commands    (with specs)
-
-- [ ] add factories for positions
-- [ ] add factories for escrows
-- [ ] add factories for offers
+- [x] add factories for bid_buy
+- [x] add spec for bid-buy-factory
+- [x] add factories for positions
+- [x] add spec for position-factory
+- [x] add factories for escrows
+- [x] add spec for escrow-factory
+- [x] add factories for ask_buy
+- [x] add spec for ask_buy-factory
 
 - [ ] build out data loading scripts
 
@@ -223,6 +227,7 @@ Next Actions:
 
 - [ ] add specs for all commands
 - [ ] restore all feature specs
+- [ ] add factory_girl specs for all factories
 
 - [ ] add GraphViz for contract structures
 

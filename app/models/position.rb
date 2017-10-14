@@ -5,7 +5,7 @@ class Position < ApplicationRecord
   belongs_to :parent      , class_name: "Position" , optional: true
   has_many   :children    , class_name: "Escrow"
 
-end #
+end
 
 # == Schema Information
 #

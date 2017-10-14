@@ -30,7 +30,7 @@ FactoryGirl.define do
     repo_id  { FG.create(:repo).id }
   end
 
-  factory :bid, class: BidBuyCmd::Create do
+  factory :bid_buy, class: BidBuyCmd::Create do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
 
@@ -43,23 +43,28 @@ FactoryGirl.define do
     factory :matured_bid do
       contract_maturation Time.now - 1.day
     end
-   end
+  end
 
-  # factory :ask, class: AskCmd::Create do
-  #   to_create {|instance| instance.save_event.project}
-  #   initialize_with { new(attributes) }
-  #
-  #   type                "Ask::GitHub"
-  #   price               0.40
-  #   volume              1
-  #   contract_maturation Time.now + 1.day
-  #   bug_id              { FG.create(:bug).id  }
-  #   user_id             { FG.create(:user).id }
-  #
-  #   factory :matured_ask do
-  #     contract_maturation Time.now - 1.day
-  #   end
-  # end
+  factory :ask_buy, class: AskBuyCmd::Create do
+    to_create {|instance| instance.save_event.project}
+    initialize_with { new(attributes) }
+
+    price               0.40
+    volume              1
+    contract_maturation Time.now + 1.day
+    bug_id              { FG.create(:bug).id  }
+    user_id             { FG.create(:user).id }
+
+    factory :matured_ask do
+      contract_maturation Time.now - 1.day
+    end
+  end
+
+  factory :position do
+  end
+
+  factory :escrow do
+  end
 
   # factory :contract, class: ContractCmd::Publish do
   #   to_create {|instance| instance.save_event.project}
