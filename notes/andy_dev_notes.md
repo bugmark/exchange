@@ -197,24 +197,32 @@ Next Actions:
 - [DONE] add escrows
 - [DONE] add specs for escrows
 - [DONE] add ERD diagram for Rails Models
+- [DONE] add specs for positions
+- [DONE] collapse 'bids/asks' into offers(?)
 
 - [TODO] add specs for offers
-- [TODO] add specs for positions
 
 - [TODO] add factories for positions
 - [TODO] add factories for escrows
+- [TODO] add factories for offers
+
+- [TODO] offer: change 'bug_' to 'statement_'(?)
 
 - [TODO] design Position/Escrow commands
+- [TODO] add matcher object for offers (GitHub, CVE, etc.)
+
+- [TODO] rebuild offer commands   (with specs)
+- [TODO] build positions commands (with specs)
+- [TODO] build escrow commands    (with specs)
+
 - [TODO] build out data loading scripts
 
 - [TODO] get offer-page working
 - [TODO] get bid/new and ask/new working
 
-- [TODO] restore all specs
+- [TODO] restore all feature specs
 
 - [TODO] add GraphViz for contract structures
-- [TODO] collapse 'bids/asks' into offers(?)
-- [TODO] add matcher object (GitHub, CVE, etc.)
 
 - [TODO] fix cross
 - [TODO] fix resolve

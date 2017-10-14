@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Offer::BidBuy, type: :model do
+RSpec.describe Offer::Bid::Buy, type: :model do
   def valid_params
     {
-      name: "asdf/qwer",
+      # name: "asdf/qwer",
     }
   end
 

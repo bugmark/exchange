@@ -13,8 +13,8 @@ RSpec.describe Escrow, type: :model do
 
   describe "Associations" do
     it { should respond_to(:contract)             }
-    it { should respond_to(:parent_escrow)        }
-    it { should respond_to(:child_escrow)         }
+    it { should respond_to(:parent )              }
+    it { should respond_to(:child)                }
     it { should respond_to(:positions)            }
     it { should respond_to(:bid_positions)        }
     it { should respond_to(:ask_positions)        }

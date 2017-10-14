@@ -1,8 +1,8 @@
 class Escrow < ApplicationRecord
 
-  belongs_to :contract     , optional: true
-  belongs_to :parent_escrow, class_name: "Escrow", foreign_key: "parent_id", optional: true
-  has_one    :child_escrow , class_name: "Escrow", foreign_key: "parent_id"
+  belongs_to :contract , optional: true
+  belongs_to :parent   , class_name: "Escrow", foreign_key: "parent_id", optional: true
+  has_one    :child    , class_name: "Escrow", foreign_key: "parent_id"
 
   has_many   :positions
   has_many   :bid_positions , -> { where(side: 'bid') }, class_name: "Position"

@@ -1,4 +1,4 @@
-class Offer::BidSell < Offer
+class Offer::Bid::Buy < Offer::Bid
 
 end
 

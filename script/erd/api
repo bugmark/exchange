@@ -29,7 +29,7 @@ orientation: vertical
 polymorphism: true
 sort: true
 warn: false
-title: BugMark API
+title: BugMark API Models
 exclude: null
 only: #{klasnames}
 "

@@ -11,19 +11,21 @@ RSpec.describe Position, type: :model do
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
-  # describe "Associations" do
-  #   it { should respond_to(:offer)                }
-  #   it { should respond_to(:parent_escrow)        }
-  # end
-  #
-  # describe "Object Creation" do
-  #   it { should be_valid }
-  #
-  #   it 'saves the object to the database' do
-  #     subject.save
-  #     expect(subject).to be_valid
-  #   end
-  # end
+  describe "Associations" do
+    it { should respond_to(:buy_offer)            }
+    it { should respond_to(:sell_offers)          }
+    it { should respond_to(:parent)               }
+    it { should respond_to(:children)             }
+  end
+
+  describe "Object Creation" do
+    it { should be_valid }
+
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
 end
 
 # == Schema Information

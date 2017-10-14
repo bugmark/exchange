@@ -2,76 +2,12 @@ class Offer::Ask < Offer
 
   before_validation :default_values
 
-  belongs_to :user
-  belongs_to :contract, optional: true
-  belongs_to :bug,      optional: true
-  belongs_to :repo,     optional: true
-
   def xtag
     "ask"
   end
 
-  def attach_type
-    self.bug_id ? "bugs" : "repos"
-  end
-
-  def attach_obj
-    bug || repo
-  end
-
   def matching_bid_reserve
     @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve}
-  end
-
-  # ----- scopes -----
-
-  class << self
-    def unassigned
-      where(contract_id: nil)
-    end
-
-    def base_scope
-      where(false)
-    end
-
-    def by_id(id)
-      where(id: id)
-    end
-
-    def by_bugid(id)
-      where(bug_id: id)
-    end
-
-    def by_repoid(id)
-      where(repo_id: id)
-    end
-
-    def by_title(string)
-      where("title ilike ?", string)
-    end
-
-    def by_status(status)
-      where("status ilike ?", status)
-    end
-
-    def by_labels(labels)
-      # where(labels: labels)
-      where(false)
-    end
-
-    def by_maturation_period(range)
-      where("maturation_period && tsrange(?, ?)", range.begin, range.end)
-    end
-  end
-
-  def cross_attrs
-    {
-      bug_id:       self.bug_id,
-      repo_id:      self.repo_id,
-      bug_title:    self.bug_title,
-      bug_status:   self.bug_status,
-      bug_labels:   self.bug_labels,
-    }
   end
 
   private
