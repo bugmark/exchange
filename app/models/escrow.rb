@@ -1,5 +1,16 @@
 class Escrow < ApplicationRecord
 
+  belongs_to :contract     , optional: true
+  belongs_to :parent_escrow, class_name: "Escrow", foreign_key: "parent_id", optional: true
+  has_one    :child_escrow , class_name: "Escrow", foreign_key: "parent_id"
+
+  has_many   :positions
+  has_many   :bid_positions , -> { where(side: 'bid') }, class_name: "Position"
+  has_many   :ask_positions , -> { where(side: 'ask') }, class_name: "Position"
+
+  # has_many   :fixed_offers
+  # has_many   :unfixed_offers
+
 end
 
 # == Schema Information

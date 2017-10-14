@@ -192,11 +192,14 @@ Next Actions:
 # Oct 13
 
 - [DONE] rename 'match params' to 'statement'
+- [DONE] add offers
 - [DONE] add positions
 - [DONE] add escrows
+- [DONE] add specs for escrows
+- [DONE] add ERD diagram for Rails Models
 
+- [TODO] add specs for offers
 - [TODO] add specs for positions
-- [TODO] add specs for escrows
 
 - [TODO] add factories for positions
 - [TODO] add factories for escrows
@@ -209,7 +212,6 @@ Next Actions:
 
 - [TODO] restore all specs
 
-- [TODO] add ERD diagram for Rails Models
 - [TODO] add GraphViz for contract structures
 - [TODO] collapse 'bids/asks' into offers(?)
 - [TODO] add matcher object (GitHub, CVE, etc.)

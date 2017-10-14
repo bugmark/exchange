@@ -81,6 +81,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :offer_id
       t.integer  :escrow_id
       t.integer  :parent_id
+      t.string   :side            # 'bid' or 'ask'
       t.string   :exref
       t.string   :uuref
       t.timestamps
@@ -90,6 +91,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :positions, :parent_id
     add_index :positions, :exref
     add_index :positions, :uuref
+    add_index :positions, :side
 
     create_table :escrows do |t|
       t.integer  :contract_id
