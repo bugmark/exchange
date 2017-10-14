@@ -205,12 +205,12 @@ Next Actions:
 - [x] add specs for offers
 - [x] offer: change 'bug_' to 'statement_'(?)
 
-- [ ] design Position/Escrow/Offer commands
-- [ ] add matcher object for offers (GitHub, CVE, etc.)
+# Oct 14
 
-- [ ] rebuild offer commands   (with specs)
-- [ ] build positions commands (with specs)
-- [ ] build escrow commands    (with specs)
+- [x] design Position/Escrow/Offer commands
+- [x] rebuild offer commands   (with specs)
+- [x] build positions commands (with specs)
+- [x] build escrow commands    (with specs)
 
 - [ ] add factories for positions
 - [ ] add factories for escrows
@@ -225,9 +225,12 @@ Next Actions:
 
 - [ ] add GraphViz for contract structures
 
+- [ ] add matcher object for offers (GitHub, CVE, etc.)
 - [ ] fix cross
 - [ ] fix resolve
 - [ ] implement commands with correct amounts
+
+# 
 
 # TBD
 
