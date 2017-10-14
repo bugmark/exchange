@@ -3,27 +3,30 @@ require 'rails_helper'
 RSpec.describe Offer, type: :model do
   def valid_params
     {
-      email:    "asdf@qwer.net"   ,
-      password: "gggggg"
+      user_id: user.id     ,
+      status:  'open'
     }
   end
 
+  let(:user)   { FG.create(:user)        }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
-  # describe "Associations" do
-  #   it { should respond_to(:published_contracts)     }
-  #   it { should respond_to(:taken_contracts)         }
-  # end
+  describe "Associations" do
+    it { should respond_to(:user)               }
+    it { should respond_to(:bug)                }
+    it { should respond_to(:repo)               }
+    it { should respond_to(:position)           }
+  end
 
-  # describe "Object Creation" do
-  #   it { should be_valid }
-  #
-  #   it 'saves the object to the database' do
-  #     subject.save
-  #     expect(subject).to be_valid
-  #   end
-  # end
+  describe "Object Creation" do
+    it { should be_valid }
+
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
 end
 
 # == Schema Information

@@ -3,6 +3,7 @@ class Offer < ApplicationRecord
   belongs_to :user
   belongs_to :bug,      optional: true
   belongs_to :repo,     optional: true
+  belongs_to :position, optional: true
 
   validates :status, inclusion: {in: %w(open matured resolved)}
   validates :volume, numericality: {only_integer: true, greater_than: 0}
@@ -151,7 +152,7 @@ class Offer < ApplicationRecord
   private
 
   def default_values
-    {}
+    {status: 'open'}
   end
 end
 

@@ -1,17 +1,17 @@
 # require 'rails_helper'
 #
-# RSpec.describe Ask, type: :model do
-#
-#   def valid_params(user)
-#     {
-#       user_id: user.id
-#     }
-#   end
-#
-#   let(:klas)   { described_class                            }
-#   let(:user)   { FG.create(:user)                           }
-#   subject      { klas.new(valid_params(user))               }
-#
+RSpec.describe Offer::Ask, type: :model do
+
+  def valid_params(user)
+    {
+      # user_id: user.id
+    }
+  end
+
+  let(:klas)   { described_class                            }
+  let(:user)   { FG.create(:user)                           }
+  subject      { klas.new(valid_params(user))               }
+
 #   describe "Attributes" do
 #     it { should respond_to :exref                  }
 #     it { should respond_to :uuref                  }
@@ -115,7 +115,7 @@
 #       expect(subject.uuref.length).to eq(36)
 #     end
 #   end
-# end
+end
 
 # == Schema Information
 #
