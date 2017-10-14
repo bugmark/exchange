@@ -221,6 +221,7 @@ Next Actions:
 - [ ] get offer-page working
 - [ ] get bid/new and ask/new working
 
+- [ ] add specs for all commands
 - [ ] restore all feature specs
 
 - [ ] add GraphViz for contract structures

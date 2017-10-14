@@ -2,7 +2,7 @@ module BidBuyCmd
   class Create < ApplicationCommand
 
     attr_subobjects :bid, :user
-    attr_delegate_fields :bid
+    attr_delegate_fields :bid, class_name: "Offer::Bid::Buy"
     attr_vdelegate :maturation_date, :bid
 
     validate :user_funds
