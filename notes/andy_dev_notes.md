@@ -219,24 +219,21 @@ Next Actions:
 - [x] add spec for escrow-factory
 - [x] add factories for ask_buy
 - [x] add spec for ask_buy-factory
-
-- [ ] build out data loading scripts
-
-- [ ] get offer-page working
-- [ ] get bid/new and ask/new working
+- [x] build out data loading scripts
+- [x] get offer-page working
+- [x] get bid/new and ask/new working
+- [x] get bid/create and ask/create working
 
 - [ ] add specs for all commands
 - [ ] restore all feature specs
 - [ ] add factory_girl specs for all factories
-
 - [ ] add GraphViz for contract structures
+- [ ] add PaperTrail for object changes
 
 - [ ] add matcher object for offers (GitHub, CVE, etc.)
 - [ ] fix cross
 - [ ] fix resolve
 - [ ] implement commands with correct amounts
-
-# 
 
 # TBD
 

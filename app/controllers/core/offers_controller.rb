@@ -4,8 +4,8 @@ module Core
     layout 'core'
 
     def index
-      @bids = Bid.unassigned
-      @asks = Ask.unassigned
+      @bids = Offer::Bid.unassigned
+      @asks = Offer::Ask.unassigned
     end
 
     def cross

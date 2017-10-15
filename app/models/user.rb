@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   before_save :default_values
 
-  has_many :bids
-  has_many :asks
+  has_many :bids, class_name: "Offer::Bid"
+  has_many :asks, class_name: "Offer::Ask"
   has_many :bid_contracts, :through => :bids, :source => 'contract'
   has_many :ask_contracts, :through => :asks, :source => 'contract'
 
@@ -16,7 +16,8 @@ class User < ApplicationRecord
   end
 
   def contracts
-    (bid_contracts + ask_contracts).uniq
+    # (bid_contracts + ask_contracts).uniq
+    []
   end
 
   # ----- ASSOCIATIONS -----

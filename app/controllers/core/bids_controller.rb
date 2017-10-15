@@ -12,21 +12,21 @@ module Core
       case
         when bug_id = params["bug_id"]&.to_i
           @bug = Bug.find(bug_id)
-          @bids = Bid.where(bug_id: bug_id)
+          @bids = Offer::Bid.where(bug_id: bug_id)
         when repo_id = params["repo_id"]&.to_i
           @repo = Repo.find(repo_id)
-          @bids = Bid.where(repo_id: repo_id)
+          @bids = Offer::Bid.where(repo_id: repo_id)
         else
-          @bids = Bid.all
+          @bids = Offer::Bid.all
       end
     end
 
     def show
-      @bid = Bid.find(params["id"])
+      @bid = Offer::Bid.find(params["id"])
     end
 
     def new
-      @bid = BidCmd::Create.new(new_opts(params))
+      @bid = BidBuyCmd::Create.new(new_opts(params))
     end
 
     # id (contract ID)
@@ -35,8 +35,8 @@ module Core
     end
 
     def create
-      opts = params["bid_cmd_create"]
-      @bid = BidCmd::Create.new(valid_params(opts))
+      opts = params["bid_buy_cmd_create"]
+      @bid = BidBuyCmd::Create.new(valid_params(opts))
       if @bid.save_event.project
         redirect_to("/core/bids/#{@bid.id}")
       else
@@ -58,18 +58,18 @@ module Core
     private
 
     def valid_params(params)
-      fields = Bid.attribute_names.map(&:to_sym)
+      fields = Offer::Bid.attribute_names.map(&:to_sym)
       params.permit(fields)
     end
 
     def new_opts(params)
       opts = {
-        type:    "Bid::#{params["type"]&.camelize || 'GitHub'}",
-        volume:  5,
-        price:   0.50,
-        bug_status:  "closed",
-        user_id:     current_user.id,
-        maturation_date: Time.now + 3.minutes,
+        price:       0.50                     ,
+        volume:      5                        ,
+        user_id:     current_user.id          ,
+        status:      "open"                   ,
+        bug_status:  "closed"                 ,
+        maturation_date: Time.now + 3.minutes ,
       }
       key = "bug_id" if params["bug_id"]
       key = "repo_id" if params["repo_id"]

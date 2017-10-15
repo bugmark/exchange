@@ -22,12 +22,12 @@ module Core
     end
 
     def show
-      @ask = Ask.find(params["id"])
+      @ask = Offer::Ask.find(params["id"])
     end
 
     # bug_id or repo_id, type(forecast | reward)
     def new
-      @ask = AskCmd::Create.new(new_opts(params))
+      @ask = AskBuyCmd::Create.new(new_opts(params))
     end
 
     # id (contract ID)
@@ -36,8 +36,8 @@ module Core
     end
 
     def create
-      opts = params["ask_cmd_create"]
-      @ask = AskCmd::Create.new(valid_params(opts))
+      opts = params["ask_buy_cmd_create"]
+      @ask = AskBuyCmd::Create.new(valid_params(opts))
       if @ask.save_event.project
         redirect_to("/core/asks/#{@ask.id}")
       else
@@ -58,18 +58,17 @@ module Core
     private
 
     def valid_params(params)
-      fields = Ask.attribute_names.map(&:to_sym)
+      fields = Offer::Ask.attribute_names.map(&:to_sym)
       params.permit(fields)
     end
 
     def new_opts(params)
       opts = {
-        type: "Ask::#{params["type"]&.camelize || 'GitHub'}",
-        price: 0.50,
-        volume:     5,
-        status:     "open",
-        bug_status: "closed",
-        maturation_date: Time.now + 3.minutes,
+        price:      0.50                      ,
+        volume:     5                         ,
+        status:     "open"                    ,
+        bug_status: "closed"                  ,
+        maturation_date: Time.now + 3.minutes ,
         user_id: current_user.id
       }
       key = "bug_id" if params["bug_id"]
