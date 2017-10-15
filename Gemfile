@@ -22,6 +22,7 @@ gem 'colored'
 gem 'octokit'
 gem 'faraday-http-cache'
 
+gem 'graphviz'                   # graph generator
 gem 'nokogiri'
 gem 'rails-ujs'
 gem 'jquery-rails'

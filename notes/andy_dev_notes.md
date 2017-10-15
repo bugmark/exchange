@@ -223,10 +223,11 @@ Next Actions:
 - [x] get offer-page working
 - [x] get bid/new and ask/new working
 - [x] get bid/create and ask/create working
+- [x] restore all feature specs
 
-- [ ] restore all feature specs
 - [ ] add specs for all commands
 - [ ] add factory_girl specs for all factories
+
 - [ ] add GraphViz for contract structures
 - [ ] add PaperTrail for object changes
 
