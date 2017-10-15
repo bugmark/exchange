@@ -224,8 +224,8 @@ Next Actions:
 - [x] get bid/new and ask/new working
 - [x] get bid/create and ask/create working
 
-- [ ] add specs for all commands
 - [ ] restore all feature specs
+- [ ] add specs for all commands
 - [ ] add factory_girl specs for all factories
 - [ ] add GraphViz for contract structures
 - [ ] add PaperTrail for object changes

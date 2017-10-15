@@ -7,6 +7,5 @@ RSpec.describe 'Bug Factory' do
     FG.create(:bug)
     expect(Bug.count).to eq(1)
   end
-
 end
 

@@ -4,11 +4,13 @@ module ContractsHelper
   end
 
   def contract_bid_link(contract)
-    raw contract.bids.map {|b| bid_id_link(b)}.join(" | ")
+    # raw contract.bids.map {|b| bid_id_link(b)}.join(" | ")
+    ""
   end
 
   def contract_ask_link(contract)
-    raw contract.asks.map {|a| ask_id_link(a)}.join(" | ")
+    # raw contract.asks.map {|a| ask_id_link(a)}.join(" | ")
+    ""
   end
 
   def contract_type_link(contract)

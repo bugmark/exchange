@@ -28,11 +28,13 @@ module BugsHelper
   end
 
   def bug_bids_link(bug)
-    bug.bids.count
+    # bug.bids.count
+    ""
   end
 
   def bug_asks_link(bug)
-    bug.asks.count
+    # bug.asks.count
+    ""
   end
 
   # def bug_contract_new_link(bug)
