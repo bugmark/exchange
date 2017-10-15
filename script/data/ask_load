@@ -38,5 +38,5 @@ opts = [
 ]
 
 opts.each do |opt|
-  FG.create(:ask_buy, opt)
+  FG.create(:buy_ask, opt)
 end

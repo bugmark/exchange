@@ -1,6 +1,15 @@
 class Offer::Buy < Offer
 
+  validate  :user_funds
 
+  private
+
+  def user_funds
+    # if user.token_balance < bid.token_value
+    if false
+      errors.add(:token_value, "not enough funds in user account")
+    end
+  end
 end
 
 # == Schema Information

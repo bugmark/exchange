@@ -7,7 +7,7 @@ class Offer::Buy::Ask < Offer::Buy
   end
 
   def matching_bid_reserve
-    @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve}
+    @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve_value}
   end
 
   private

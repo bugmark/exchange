@@ -21,6 +21,14 @@ class Offer < ApplicationRecord
       where(status: status)
     end
 
+    def poolable
+      where(poolable: true)
+    end
+
+    def not_poolable
+      where(poolable: false)
+    end
+
     def assigned
       where("id IN (SELECT offer_id FROM positions)")
     end
@@ -93,7 +101,7 @@ class Offer < ApplicationRecord
 
   # ----- instance methods -----
 
-  def reserve
+  def reserve_value
     self.volume * self.price
   end
 
@@ -105,8 +113,8 @@ class Offer < ApplicationRecord
     bug || repo
   end
 
-  def complementary_reserve
-    self.volume - reserve
+  def complementary_reserve_value
+    self.volume - reserve_value
   end
 
   def matching_bugs

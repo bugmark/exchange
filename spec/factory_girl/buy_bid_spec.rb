@@ -1,9 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe 'AskBuy Factory' do
+RSpec.describe 'BuyBid Factory' do
   it "runs without params", USE_VCR do
     expect(Offer.count).to eq(0)
-    FG.create(:ask_buy)
+    FG.create(:buy_bid)
     expect(Offer.count).to eq(1)
   end
-end
+end #.
+

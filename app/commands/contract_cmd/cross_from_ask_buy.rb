@@ -23,7 +23,7 @@ module ContractCmd
 
     def gen_cross(ask)
       return [] unless ask.present?
-      bid = ask.matching_bids.find {|bid| bid.reserve == ask.complementary_reserve}
+      bid = ask.matching_bids.find {|bid| bid.reserve_value == ask.complementary_reserve_value}
       if bid
         contract.assign_attributes(ask.cross_attrs)
         contract.price  = ask.price

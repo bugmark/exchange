@@ -5,8 +5,6 @@ module BidBuyCmd
     attr_delegate_fields :bid, class_name: "Offer::Buy::Bid"
     attr_vdelegate :maturation_date, :bid
 
-    validate :user_funds
-
     def initialize(args)
       @bid  = Offer::Buy::Bid.new(args)
       @user = User.find(bid.user_id)
@@ -21,13 +19,5 @@ module BidBuyCmd
       # user.token_balance -= bid.token_value
     end
 
-    private
-
-    def user_funds
-      # if user.token_balance < bid.token_value
-      if false
-        errors.add(:token_value, "not enough funds in user account")
-      end
-    end
   end
 end

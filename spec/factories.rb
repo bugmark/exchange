@@ -30,12 +30,12 @@ FactoryGirl.define do
     repo_id  { FG.create(:repo).id }
   end
 
-  factory :bid_buy, class: BidBuyCmd::Create do
+  factory :buy_bid, class: BidBuyCmd::Create do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
 
     price               0.20
-    volume              1
+    volume              10
     contract_maturation Time.now + 1.day
     bug_id              { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
@@ -45,12 +45,12 @@ FactoryGirl.define do
     end
   end
 
-  factory :ask_buy, class: AskBuyCmd::Create do
+  factory :buy_ask, class: AskBuyCmd::Create do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
 
     price               0.40
-    volume              1
+    volume              10
     contract_maturation Time.now + 1.day
     bug_id              { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }

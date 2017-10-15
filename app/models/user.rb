@@ -9,10 +9,11 @@ class User < ApplicationRecord
 
   before_save :default_values
 
-  has_many :bids, class_name: "Offer::Buy::Bid"
-  has_many :asks, class_name: "Offer::Buy::Ask"
-  has_many :bid_contracts, :through => :bids, :source => 'contract'
-  has_many :ask_contracts, :through => :asks, :source => 'contract'
+  has_many :offers     , class_name: "Offer"
+  has_many :buy_offers , class_name: "Offer::Buy"
+  has_many :bids       , class_name: "Offer::Buy::Bid"
+  has_many :asks       , class_name: "Offer::Buy::Ask"
+  has_many :sell_offers, class_name: "Offer::Sell"
 
   def xtag
     "usr"
@@ -35,10 +36,22 @@ class User < ApplicationRecord
     []
   end
 
-  # ----- ACCOUNT -----
+  # ----- ACCOUNT BALANCES AND RESERVES-----
 
-  def ether_balance
-    0
+  def token_reserve_poolable
+    buy_offers.with_status("open").poolable.map(&:reserve_value).max || 0.0
+  end
+
+  def token_reserve_not_poolable
+    buy_offers.with_status("open").not_poolable.map(&:reserve_value).sum || 0.0
+  end
+
+  def token_reserve
+    token_reserve_poolable + token_reserve_not_poolable
+  end
+
+  def token_available
+    token_balance - token_reserve
   end
 
   # ----- SCOPES -----
