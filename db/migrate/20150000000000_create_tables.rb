@@ -53,7 +53,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.float     :price , default: 0.50     # between 0.00 and 1.00
       t.boolean   :poolable, default: true   # for reserve pooling
       t.boolean   :aon     , default: false  # All Or None
-      t.string    :status                    # open, closed
+      t.string    :status                    # open, suspended, cancelled, ...
       t.datetime  :offer_expiration
       t.datetime  :contract_maturation
       t.tsrange   :maturation_period

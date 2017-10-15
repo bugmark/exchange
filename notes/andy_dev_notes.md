@@ -231,6 +231,9 @@ Next Actions:
 - [x] add PaperTrail for object changes
 - [x] bid_buy/ask_buy: design configurable reserves
 
+- [ ] combine bid_buy/ask_buy into offer_buy?
+- [ ] combine bid_sell/ask_sell into offer_sell?
+
 - [ ] bid_buy/ask_buy: generate reserves
 - [ ] bid_buy/ask_buy: add specs
 - [ ] bid_buy/ask_buy: show reserves on user-detail page

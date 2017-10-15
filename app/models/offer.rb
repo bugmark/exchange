@@ -7,7 +7,7 @@ class Offer < ApplicationRecord
   belongs_to :repo,     optional: true
   belongs_to :position, optional: true
 
-  validates :status, inclusion: {in: %w(open matured resolved)}
+  validates :status, inclusion: {in: %w(open suspended crossed expired cancelled)}
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
@@ -15,7 +15,11 @@ class Offer < ApplicationRecord
 
   class << self
 
-    # ----- scopes -----
+    # ----- basic scopes -----
+
+    def with_status(status)
+      where(status: status)
+    end
 
     def assigned
       where("id IN (SELECT offer_id FROM positions)")
@@ -32,6 +36,8 @@ class Offer < ApplicationRecord
     def by_id(id)
       where(id: id)
     end
+
+    # ----- statement scopes -----
 
     def by_bugid(id)
       where(bug_id: id)
