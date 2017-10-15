@@ -225,12 +225,29 @@ Next Actions:
 - [x] get bid/create and ask/create working
 - [x] restore all feature specs
 
-- [ ] add GraphViz for contract structures
+# Oct 15
 
-- [ ] add specs for all commands
+- [x] add GraphViz for contract structures
+- [x] add PaperTrail for object changes
+- [x] bid_buy/ask_buy: design configurable reserves
+
+- [ ] bid_buy/ask_buy: generate reserves
+- [ ] bid_buy/ask_buy: add specs
+- [ ] bid_buy/ask_buy: show reserves on user-detail page
+- [ ] bid_buy/ask_buy: add a cancel command
+- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+
+- [ ] cross: generate escrow
+- [ ] cross: generate positions
+- [ ] cross: generate re-offers
+- [ ] cross: generate contract-graph
+- [ ] cross: suspend invalid offers
+- [ ] cross: handle reserves and escrow transfer
+
+- [ ] add specs for ask_buy_cmd
+- [ ] add specs for bid_buy_cmd
+- [ ] add specs for contract_cmd
 - [ ] add factory_girl specs for all factories
-
-- [ ] add PaperTrail for object changes
 
 - [ ] add matcher object for offers (GitHub, CVE, etc.)
 - [ ] fix cross

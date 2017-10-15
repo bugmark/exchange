@@ -32,6 +32,7 @@ gem 'devise'                      # authentication
 gem 'whenever'                    # cron jobs
 gem 'slim-rails'                  # slim templates
 gem 'tzinfo-data'                 # timezone support
+gem 'paper_trail'                 # model versioning
 
 # ----- pry production support  -----
 gem 'pry-rails'     # upgraded repl

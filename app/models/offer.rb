@@ -1,5 +1,7 @@
 class Offer < ApplicationRecord
 
+  has_paper_trail
+
   belongs_to :user
   belongs_to :bug,      optional: true
   belongs_to :repo,     optional: true

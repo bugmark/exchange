@@ -1,5 +1,7 @@
 class Position < ApplicationRecord
 
+  has_paper_trail
+
   has_one    :buy_offer   , class_name: "Offer"
   has_many   :sell_offers , class_name: "Offer"
   belongs_to :parent      , class_name: "Position" , optional: true

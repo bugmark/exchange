@@ -1,5 +1,7 @@
 class Escrow < ApplicationRecord
 
+  has_paper_trail
+
   belongs_to :contract , optional: true
   belongs_to :parent   , class_name: "Escrow", foreign_key: "parent_id", optional: true
   has_one    :child    , class_name: "Escrow", foreign_key: "parent_id"

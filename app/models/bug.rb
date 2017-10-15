@@ -1,5 +1,7 @@
 class Bug < ApplicationRecord
 
+  has_paper_trail
+
   belongs_to      :repo
   has_many        :contracts, :dependent => :destroy
   has_many        :bids
