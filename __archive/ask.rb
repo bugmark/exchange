@@ -1,16 +1,25 @@
-# require 'rails_helper'
+# class Offer::Ask < Offer
 #
-RSpec.describe Offer::Ask, type: :model do
-
-  def valid_params(user)
-    {}
-  end
-
-  let(:klas)   { described_class                            }
-  let(:user)   { FG.create(:user)                           }
-  subject      { klas.new(valid_params(user))               }
-
-end
+#   before_validation :default_values
+#
+#   def xtag
+#     "ask"
+#   end
+#
+#   def matching_bid_reserve
+#     @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve}
+#   end
+#
+#   private
+#
+#   def default_values
+#     self.type               ||= 'Ask::GitHub'
+#     self.status             ||= 'open'
+#     self.price              ||= 0.10
+#     self.volume             ||= 1
+#     self.maturation_period  ||= Time.now+1.minute..Time.now+1.week
+#   end
+# end
 
 # == Schema Information
 #

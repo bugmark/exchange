@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Offer::Ask::Sell, type: :model do
+RSpec.describe Offer::Buy::Ask, type: :model do
   def valid_params
     {}
   end

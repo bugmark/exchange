@@ -230,6 +230,7 @@ Next Actions:
 - [x] add GraphViz for contract structures
 - [x] add PaperTrail for object changes
 - [x] bid_buy/ask_buy: design configurable reserves
+- [x] refactor buy/sell offers
 
 - [ ] combine bid_buy/ask_buy into offer_buy?
 - [ ] combine bid_sell/ask_sell into offer_sell?

@@ -1,4 +1,12 @@
-class Offer::Ask::Sell < Offer::Ask
+require 'rails_helper'
+
+RSpec.describe Offer::Sell::Ask, type: :model do
+  def valid_params
+    {}
+  end
+
+  let(:klas)   { described_class         }
+  subject      { klas.new(valid_params)  }
 
 end
 

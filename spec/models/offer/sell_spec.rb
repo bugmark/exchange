@@ -1,20 +1,14 @@
-class Offer::Bid < Offer
+require 'rails_helper'
 
-  before_validation :default_values
+RSpec.describe Offer::Sell, type: :model do
 
-  def xtag
-    "bid"
+  def valid_params(user)
+    {}
   end
 
-  private
-
-  def default_values
-    self.type              ||= 'Bid::GitHub'
-    self.status            ||= 'open'
-    self.price             ||= 0.10
-    self.maturation_period ||= Time.now+1.minute..Time.now+1.week
-  end
-
+  let(:klas)   { described_class                            }
+  let(:user)   { FG.create(:user)                           }
+  subject      { klas.new(valid_params(user))               }
 
 end
 

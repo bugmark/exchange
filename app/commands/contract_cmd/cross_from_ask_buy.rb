@@ -8,7 +8,7 @@ module ContractCmd
     validate :cross_integrity
 
     def initialize(ask_param, contract_opts = {})
-      @ask        = Offer::Ask::Buy.unassigned.find(ask_param.to_i)
+      @ask        = Offer::Buy::Ask.unassigned.find(ask_param.to_i)
       @contract   = Contract.new(contract_opts)
       @cross_list = gen_cross(ask)
     end

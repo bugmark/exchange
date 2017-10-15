@@ -1,12 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Offer::Bid::Buy, type: :model do
-  def valid_params
+RSpec.describe Offer::Buy, type: :model do
+
+  def valid_params(user)
     {}
   end
 
-  let(:klas)   { described_class         }
-  subject      { klas.new(valid_params)  }
+  let(:klas)   { described_class                            }
+  let(:user)   { FG.create(:user)                           }
+  subject      { klas.new(valid_params(user))               }
 
 end
 

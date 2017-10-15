@@ -1,12 +1,20 @@
-require 'rails_helper'
+class Offer::Bid < Offer
 
-RSpec.describe Offer::Ask::Buy, type: :model do
-  def valid_params
-    {}
-  end
+  # before_validation :default_values
+  #
+  # def xtag
+  #   "bid"
+  # end
+  #
+  # private
+  #
+  # def default_values
+  #   self.type              ||= 'Bid::GitHub'
+  #   self.status            ||= 'open'
+  #   self.price             ||= 0.10
+  #   self.maturation_period ||= Time.now+1.minute..Time.now+1.week
+  # end
 
-  let(:klas)   { described_class         }
-  subject      { klas.new(valid_params)  }
 
 end
 

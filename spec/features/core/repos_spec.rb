@@ -38,26 +38,26 @@ describe "Repos", USE_VCR do
   it "creates an ask", USE_VCR do
     login_as(usr1, :scope => :user)
     hydrate(bug1)
-    expect(Offer::Ask.count).to eq(0)
+    expect(Offer::Buy::Ask.count).to eq(0)
     expect(Bug.count).to eq(1)
 
     visit "/core/repos"
     click_on "Ask"
     click_on "Create Ask"
 
-    expect(Offer::Ask.count).to eq(1)
+    expect(Offer::Buy::Ask.count).to eq(1)
   end
 
   it "creates a bid", USE_VCR do
     login_as(usr1, :scope => :user)
     hydrate(bug1)
-    expect(Offer::Bid.count).to eq(0)
+    expect(Offer::Buy::Bid.count).to eq(0)
     expect(Bug.count).to eq(1)
 
     visit "/core/repos"
     click_on "Bid"
     click_on "Create Bid"
 
-    expect(Offer::Bid.count).to eq(1)
+    expect(Offer::Buy::Bid.count).to eq(1)
   end
 end

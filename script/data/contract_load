@@ -4,6 +4,6 @@ require "./config/environment"
 
 # TODO: only loop over Asks before mature-date and expire-date
 
-Offer::Ask::Buy.unassigned.each do |ask|
+Offer::Buy::Ask.unassigned.each do |ask|
   ContractCmd::CrossFromAskBuy.new(ask, contract_maturation: Time.now).save_event.project
 end

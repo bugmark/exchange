@@ -22,7 +22,7 @@ module Core
     end
 
     def show
-      @ask = Offer::Ask.find(params["id"])
+      @ask = Offer::Buy::Ask.find(params["id"])
     end
 
     # bug_id or repo_id, type(forecast | reward)
@@ -58,7 +58,7 @@ module Core
     private
 
     def valid_params(params)
-      fields = Offer::Ask.attribute_names.map(&:to_sym)
+      fields = Offer::Buy::Ask.attribute_names.map(&:to_sym)
       params.permit(fields)
     end
 

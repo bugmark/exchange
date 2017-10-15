@@ -2,13 +2,13 @@ module AskBuyCmd
   class Create < ApplicationCommand
 
     attr_subobjects :ask, :user
-    attr_delegate_fields :ask, class_name: "Offer::Ask::Buy"
+    attr_delegate_fields :ask, class_name: "Offer::Buy::Ask"
     attr_vdelegate :maturation_date, :ask
 
     validate :user_funds
 
     def initialize(args)
-      @ask  = Offer::Ask::Buy.new(args)
+      @ask  = Offer::Buy::Ask.new(args)
       @user = User.find(ask.user_id)
     end
 

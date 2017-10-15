@@ -1,6 +1,6 @@
-class Offer::Bid::Buy < Offer::Bid
-
-end
+# class Offer::Ask::Buy < Offer::Ask
+#
+# end
 
 # == Schema Information
 #

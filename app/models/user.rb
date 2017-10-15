@@ -9,8 +9,8 @@ class User < ApplicationRecord
 
   before_save :default_values
 
-  has_many :bids, class_name: "Offer::Bid"
-  has_many :asks, class_name: "Offer::Ask"
+  has_many :bids, class_name: "Offer::Buy::Bid"
+  has_many :asks, class_name: "Offer::Buy::Ask"
   has_many :bid_contracts, :through => :bids, :source => 'contract'
   has_many :ask_contracts, :through => :asks, :source => 'contract'
 

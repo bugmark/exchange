@@ -114,7 +114,7 @@ class Offer < ApplicationRecord
   end
 
   def matching_bids
-    @bidmatch ||= Bid.match(cross_attrs)
+    @bidmatch ||= Offer::Buy::Bid.match(cross_attrs)
   end
 
   def contract_maturation_str

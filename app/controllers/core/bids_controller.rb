@@ -12,17 +12,17 @@ module Core
       case
         when bug_id = params["bug_id"]&.to_i
           @bug = Bug.find(bug_id)
-          @bids = Offer::Bid.where(bug_id: bug_id)
+          @bids = Offer::Buy::Bid.where(bug_id: bug_id)
         when repo_id = params["repo_id"]&.to_i
           @repo = Repo.find(repo_id)
-          @bids = Offer::Bid.where(repo_id: repo_id)
+          @bids = Offer::Buy::Bid.where(repo_id: repo_id)
         else
-          @bids = Offer::Bid.all
+          @bids = Offer::Buy::Bid.all
       end
     end
 
     def show
-      @bid = Offer::Bid.find(params["id"])
+      @bid = Offer::Buy::Bid.find(params["id"])
     end
 
     def new
@@ -58,7 +58,7 @@ module Core
     private
 
     def valid_params(params)
-      fields = Offer::Bid.attribute_names.map(&:to_sym)
+      fields = Offer::Buy::Bid.attribute_names.map(&:to_sym)
       params.permit(fields)
     end
 
