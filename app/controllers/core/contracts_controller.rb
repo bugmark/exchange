@@ -62,6 +62,25 @@ module Core
       redirect_to "/rewards"
     end
 
+    def graph
+      @contract_id = params["id"]
+      respond_to do |format|
+        format.html
+        format.png do
+          require 'graphviz'
+          @contract_id = params["id"]
+          g = GraphViz.new( :G, :type => :digraph )
+          hello = g.add_nodes("HELLO")
+          world = g.add_nodes("WORLD")
+          contr = g.add_nodes("CONTRACT #{@contract_id}")
+          g.add_edges(hello, world)
+          g.add_edges(world, contr)
+          g.output(png: "/tmp/contract#{@contract_id}.png")
+          send_data(File.read("/tmp/contract#{@contract_id}.png"), disposition: 'inline', type: 'image/png', filename: 'img.png')
+        end
+      end
+    end
+
     private
 
     def valid_params(params)

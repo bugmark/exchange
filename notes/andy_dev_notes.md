@@ -225,10 +225,11 @@ Next Actions:
 - [x] get bid/create and ask/create working
 - [x] restore all feature specs
 
+- [ ] add GraphViz for contract structures
+
 - [ ] add specs for all commands
 - [ ] add factory_girl specs for all factories
 
-- [ ] add GraphViz for contract structures
 - [ ] add PaperTrail for object changes
 
 - [ ] add matcher object for offers (GitHub, CVE, etc.)
