@@ -17,6 +17,7 @@ end
 #  offer_id   :integer
 #  escrow_id  :integer
 #  parent_id  :integer
+#  side       :string
 #  exref      :string
 #  uuref      :string
 #  created_at :datetime         not null

@@ -43,16 +43,17 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :xfields, using: :gin
 
     create_table :offers do |t|
-      t.string    :type                    # BidBuy, BidSell, AskBuy, AskSell
-      t.string    :repo_type               # BugZilla, GitHub, CVE
-      t.integer   :user_id                 # the party who made the offer
-      t.integer   :parent_id               # for ReOffers - an Offer
-      t.integer   :position_id             # for SaleOffers - a Position
-      t.integer   :counter_id              # the counterparty - an Offer
-      t.integer   :volume, default: 1      # Greater than zero
-      t.float     :price , default: 0.50   # between 0.00 and 1.00
-      t.boolean   :aon   , default: false  # All Or None
-      t.string    :status                  # open, closed
+      t.string    :type                      # BidBuy, BidSell, AskBuy, AskSell
+      t.string    :repo_type                 # BugZilla, GitHub, CVE
+      t.integer   :user_id                   # the party who made the offer
+      t.integer   :parent_id                 # for ReOffers - an Offer
+      t.integer   :position_id               # for SaleOffers - a Position
+      t.integer   :counter_id                # the counterparty - an Offer
+      t.integer   :volume, default: 1        # Greater than zero
+      t.float     :price , default: 0.50     # between 0.00 and 1.00
+      t.boolean   :poolable, default: true   # for reserve pooling
+      t.boolean   :aon     , default: false  # All Or None
+      t.string    :status                    # open, closed
       t.datetime  :offer_expiration
       t.datetime  :contract_maturation
       t.tsrange   :maturation_period
@@ -70,6 +71,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :type
     add_index :offers, :user_id
     add_index :offers, :counter_id
+    add_index :offers, :poolable
     add_index :offers, :exref
     add_index :offers, :uuref
     add_index :offers, :repo_id
