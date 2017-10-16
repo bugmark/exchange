@@ -1,4 +1,4 @@
-module AskBuyCmd
+module BuyAskCmd
   class Create < ApplicationCommand
 
     attr_subobjects :ask, :user

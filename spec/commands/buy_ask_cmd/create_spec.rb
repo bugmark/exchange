@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AskBuyCmd::Create do
+RSpec.describe BuyAskCmd::Create do
 
   def valid_params
     {

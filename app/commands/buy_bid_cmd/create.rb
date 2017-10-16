@@ -1,4 +1,4 @@
-module BidBuyCmd
+module BuyBidCmd
   class Create < ApplicationCommand
 
     attr_subobjects :bid, :user

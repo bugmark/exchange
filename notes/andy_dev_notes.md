@@ -239,10 +239,9 @@ Next Actions:
 # Oct 16
 
 - [x] test Offer::Buy.user_funds validation
+- [x] bid_buy/ask_buy: show reserves on user-detail page
 
-- [ ] bid_buy/ask_buy: show reserves on user-detail page
-- [ ] bid_buy/ask_buy: add a cancel command
-- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+- [ ] combine bid_buy/ask_buy into offer_buy
 
 - [ ] cross: generate escrow
 - [ ] cross: generate positions
@@ -256,12 +255,14 @@ Next Actions:
 - [ ] add specs for contract_cmd
 - [ ] add factory_girl specs for all factories
 
+- [ ] bid_buy/ask_buy: add a cancel command
+- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+
 - [ ] add matcher object for offers (GitHub, CVE, etc.)
 - [ ] fix cross
 - [ ] fix resolve
 - [ ] implement commands with correct amounts
 
-- [ ] combine bid_buy/ask_buy into offer_buy
 - [ ] combine bid_sell/ask_sell into offer_sell
 
 # TBD
