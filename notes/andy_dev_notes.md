@@ -240,8 +240,7 @@ Next Actions:
 
 - [x] test Offer::Buy.user_funds validation
 - [x] bid_buy/ask_buy: show reserves on user-detail page
-
-- [ ] combine bid_buy/ask_buy into offer_buy
+- [x] combine bid_buy/ask_buy into offer_buy
 
 - [ ] cross: generate escrow
 - [ ] cross: generate positions
@@ -262,8 +261,6 @@ Next Actions:
 - [ ] fix cross
 - [ ] fix resolve
 - [ ] implement commands with correct amounts
-
-- [ ] combine bid_sell/ask_sell into offer_sell
 
 # TBD
 

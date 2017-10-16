@@ -43,7 +43,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :xfields, using: :gin
 
     create_table :offers do |t|
-      t.string    :type                      # BidBuy, BidSell, AskBuy, AskSell
+      t.string    :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string    :repo_type                 # BugZilla, GitHub, CVE
       t.integer   :user_id                   # the party who made the offer
       t.integer   :parent_id                 # for ReOffers - an Offer

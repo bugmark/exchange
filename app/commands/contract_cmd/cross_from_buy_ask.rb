@@ -1,5 +1,5 @@
 module ContractCmd
-  class CrossFromAskBuy < ApplicationCommand
+  class CrossFromBuyAsk < ApplicationCommand
 
     attr_subobjects :contract, :ask
     attr_reader     :cross_list

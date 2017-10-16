@@ -1,23 +1,26 @@
-# require 'rails_helper'
-#
-# RSpec.describe ContractCmd::CrossFromAsk do
-#
-#   include_context 'Integration Environment'
-#
-#   let(:klas)   { described_class                                     }
-#   subject      { klas.new(ask1.ask, price: 0.2, volume: 1)           }
-#
-#   describe "Attributes", USE_VCR do
-#     it { should respond_to :ask           }
-#     it { should respond_to :contract      }
-#     it { should respond_to :cross_list    }
-#   end
-#
-#   describe "Object Existence", USE_VCR do
-#     it { should be_a klas       }
-#     it { should_not be_valid    }
-#   end
-#
+require 'rails_helper'
+
+RSpec.describe ContractCmd::CrossFromBuyAsk do
+
+  include_context 'Integration Environment'
+
+  let(:ask)    { FG.create(:buy_ask, user_id: user.id).ask           }
+  let(:bid)    { FG.create(:buy_bid, user_id: user.id).bid           }
+  let(:user)   { FG.create(:user).user                               }
+  let(:klas)   { described_class                                     }
+  subject      { klas.new(ask, price: 0.2, volume: 1)                }
+
+  describe "Attributes", USE_VCR do
+    it { should respond_to :ask           }
+    it { should respond_to :contract      }
+    it { should respond_to :cross_list    }
+  end
+
+  describe "Object Existence", USE_VCR do
+    it { should be_a klas       }
+    it { should_not be_valid    }
+  end
+
 #   describe "Subobjects", USE_VCR do
 #     it { should respond_to :subobject_symbols }
 #     it 'returns an array' do
@@ -165,5 +168,5 @@
   #     end
   #   end
   # end
-# end
+end
 
