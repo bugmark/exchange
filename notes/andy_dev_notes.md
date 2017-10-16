@@ -69,7 +69,7 @@ Next Actions:
 
 # Aug 07
 
-- [ ] Publish Contract Design V2
+- [x] Publish Contract Design V2
 
 # Aug 08
 
@@ -231,12 +231,18 @@ Next Actions:
 - [x] add PaperTrail for object changes
 - [x] bid_buy/ask_buy: design configurable reserves
 - [x] refactor buy/sell offers
+- [x] add user-reserves methods
+- [x] bid_buy/ask_buy: generate reserves
+- [x] bid_buy/ask_buy: add specs
+- [x] write Offer::Buy.user_funds validation
+
+# Oct 16
+
+- [ ] test Offer::Buy.user_funds validation
 
 - [ ] combine bid_buy/ask_buy into offer_buy?
 - [ ] combine bid_sell/ask_sell into offer_sell?
 
-- [ ] bid_buy/ask_buy: generate reserves
-- [ ] bid_buy/ask_buy: add specs
 - [ ] bid_buy/ask_buy: show reserves on user-detail page
 - [ ] bid_buy/ask_buy: add a cancel command
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page

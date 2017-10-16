@@ -148,7 +148,8 @@ RSpec.describe User, type: :model do
     end
 
     it "has a value with two asks" do
-      genask(poolable: false); genask
+      genask(poolable: false)
+      genask
       expect(Offer.count).to eq(2)
       expect(usr.token_available).to eq(92.0)
     end

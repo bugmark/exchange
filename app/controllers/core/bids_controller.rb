@@ -40,7 +40,6 @@ module Core
       if @bid.save_event.project
         redirect_to("/core/bids/#{@bid.id}")
       else
-        binding.pry
         render 'core/bids/new'
       end
     end

@@ -12,6 +12,7 @@ FactoryGirl.define do
 
     sequence :email do |n| "test#{n}@bugmark.net" end
     password              "bugmark"
+    token_balance         100.0
   end
 
   factory :repo, class: RepoCmd::GhCreate do
