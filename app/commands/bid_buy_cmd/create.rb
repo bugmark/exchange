@@ -16,8 +16,6 @@ module BidBuyCmd
 
     def transact_before_project
       bid.status = "open"
-      # user.token_balance -= bid.token_value
     end
-
   end
 end

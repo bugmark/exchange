@@ -238,10 +238,7 @@ Next Actions:
 
 # Oct 16
 
-- [ ] test Offer::Buy.user_funds validation
-
-- [ ] combine bid_buy/ask_buy into offer_buy?
-- [ ] combine bid_sell/ask_sell into offer_sell?
+- [x] test Offer::Buy.user_funds validation
 
 - [ ] bid_buy/ask_buy: show reserves on user-detail page
 - [ ] bid_buy/ask_buy: add a cancel command
@@ -263,6 +260,9 @@ Next Actions:
 - [ ] fix cross
 - [ ] fix resolve
 - [ ] implement commands with correct amounts
+
+- [ ] combine bid_buy/ask_buy into offer_buy
+- [ ] combine bid_sell/ask_sell into offer_sell
 
 # TBD
 

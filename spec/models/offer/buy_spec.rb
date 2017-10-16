@@ -3,13 +3,64 @@ require 'rails_helper'
 RSpec.describe Offer::Buy, type: :model do
 
   def valid_params(user)
-    {}
+    {
+      status:  "open"    ,
+      user_id: usr.id
+    }
   end
 
-  let(:klas)   { described_class                            }
-  let(:user)   { FG.create(:user)                           }
-  subject      { klas.new(valid_params(user))               }
+  def genbid(args = {})
+    FG.create(:buy_bid, {user_id: usr.id}.merge(args)).bid
+  end
 
+  def genask(args = {})
+    FG.create(:buy_ask, {user_id: usr.id}.merge(args)).ask
+  end
+
+  let(:usr)    { FG.create(:user, token_balance: 100.0).user }
+  let(:klas)   { described_class                             }
+  let(:user)   { FG.create(:user).user                       }
+  subject      { klas.new(valid_params(user))                }
+
+  describe "Object Creation", USE_VCR do
+    it { should be_valid }
+
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
+
+  describe "Excess Volume", USE_VCR do
+    it 'handles the base case' do
+      tstbid = genbid
+      expect(tstbid).to be_valid
+    end
+
+    it 'detects an invalid balance' do
+      tstbid = genbid(volume: 10000)
+      expect(tstbid).to_not be_valid
+      msgs = tstbid.errors.messages
+      expect(msgs.keys).to include(:volume)
+    end
+  end
+
+  describe "Invalid Reserve", USE_VCR do
+    it "handles the base case" do
+      expect(Offer.count).to eq(0)
+      tstbid1 = genbid(price: 0.5, volume: 175)
+      expect(tstbid1).to be_valid
+    end
+
+    it "handles the overflow case" do
+      tstbid1 = genbid(price: 0.5, volume: 175)
+      expect(Offer.count).to eq(1)
+      expect(tstbid1).to be_valid
+      tstbid2 = genbid(price: 0.5, volume: 175)
+      expect(tstbid2).to_not be_valid
+      expect(Offer.count).to eq(1)
+    end
+  end
 end
 
 # == Schema Information

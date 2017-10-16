@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
   end
 
   let(:usr) { FG.create(:user, token_balance: 100.0).user }
-  let(:ask) { FG.create(:buy_ask, user_id: user.id) }
+  let(:ask) { FG.create(:buy_ask, user_id: user.id)       }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 

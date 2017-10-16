@@ -5,6 +5,18 @@ class Offer::Buy < Offer
   private
 
   def user_funds
+    return unless id.nil?
+
+    if user.nil?
+      errors.add(:user, "must be present")
+      return
+    end
+
+    if reserve_value > user&.token_balance
+      errors.add(:volume, "offer larger than user balance")
+      return
+    end
+
     val1 = reserve_value - user.token_reserve_not_poolable
     val2 = user.token_balance - user.token_reserve_poolable
     unless 0 <= val1 && val1 < val2
