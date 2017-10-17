@@ -64,6 +64,16 @@ class Offer < ApplicationRecord
   end
 
   # ----- CROSS UTILS -----
+  class << self
+    def with_cross(price)
+      where('price >= ?', price)
+    end
+  end
+
+  def cross_offers
+    base = self.class.with_cross(price)
+    self.id.nil? ? base : base.where.not(id: self.id)
+  end
 
   # ----- INSTANCE METHODS -----
 

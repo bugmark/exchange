@@ -249,9 +249,8 @@ Next Actions:
 - [x] add specs for buy_bid_cmd
 - [x] add factory_girl specs for all factories
 - [x] create MatchUtils module methods
-
-- [ ] Define Overlap methods  (offer & contract)
-- [ ] Define Cross methods    (offer)
+- [x] Define Overlap methods  (offer & contract)
+- [x] Define Cross methods    (offer)
 
 - [ ] Test matching
 - [ ] Test overlapping
