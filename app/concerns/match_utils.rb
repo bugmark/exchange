@@ -11,16 +11,16 @@ module MatchUtils
     }
   end
 
-  def matching_bugs()            Bug.match(match_attrs)              end
-  def matching_contracts()       Contract.match(match_attrs)         end
-  def matching_offers()          Offer.match(match_attrs)            end
+  def match_bugs()            Bug.match(match_attrs)              end
+  def match_contracts()       Contract.match(match_attrs)         end
+  def match_offers()          Offer.match(match_attrs)            end
 
-  def matching_buy_offers()      Offer::Buy.match(match_attrs)       end
-  def matching_buy_bid_offers()  Offer::Buy::Bid.match(match_attrs)  end
-  def matching_buy_ask_offers()  Offer::Buy::Ask.match(match_attrs)  end
-  def matching_sell_offers()     Offer::Sell.match(match_attrs)      end
-  def matching_sell_bid_offers() Offer::Sell::Bid.match(match_attrs) end
-  def matching_sell_ask_offers() Offer::Sell::Ask.match(match_attrs) end
+  def match_buy_offers()      Offer::Buy.match(match_attrs)       end
+  def match_buy_bid_offers()  Offer::Buy::Bid.match(match_attrs)  end
+  def match_buy_ask_offers()  Offer::Buy::Ask.match(match_attrs)  end
+  def match_sell_offers()     Offer::Sell.match(match_attrs)      end
+  def match_sell_bid_offers() Offer::Sell::Bid.match(match_attrs) end
+  def match_sell_ask_offers() Offer::Sell::Ask.match(match_attrs) end
 
   module ClassMethods
 

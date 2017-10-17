@@ -66,7 +66,7 @@ class Offer < ApplicationRecord
   # ----- CROSS UTILS -----
   class << self
     def with_cross(price)
-      where('price >= ?', price)
+      where('price <= ?', price)
     end
   end
 

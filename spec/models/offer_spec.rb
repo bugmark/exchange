@@ -1,14 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Offer, type: :model do
-  def valid_params
+  def valid_params(extras = {})
     {
       user_id: user.id                                      ,
       maturation_period: Time.now-1.week..Time.now+1.week   ,
       status:  'open'                                       ,
-    }
+    }.merge(extras)
   end
 
+  def offer3(extras) klas.new(valid_params(extras)) end
   let(:offer2) { klas.new(valid_params)  }
   let(:user)   { FG.create(:user)        }
   let(:klas)   { described_class         }
@@ -27,7 +28,7 @@ RSpec.describe Offer, type: :model do
   end
 
   describe "Instance Methods" do
-    it { should respond_to(:matching_bugs) }
+    it { should respond_to(:match_bugs) }
   end
 
   describe "Object Creation" do
@@ -106,6 +107,27 @@ RSpec.describe Offer, type: :model do
 
     it "returns zero with base offer" do
       result = subject.overlap_offers
+      expect(result.count).to eq(0)
+    end
+  end
+
+  describe "#cross_offers" do
+    before(:each) { subject.save }
+
+    it "returns none" do
+      result = subject.cross_offers
+      expect(result.count).to eq(0)
+    end
+
+    it "returns one with high price" do
+      obj = offer3(price: 0.9)
+      result = obj.cross_offers
+      expect(result.count).to eq(1)
+    end
+
+    it "returns zero with low price" do
+      obj = offer3(price: 0.1)
+      result = obj.cross_offers
       expect(result.count).to eq(0)
     end
   end

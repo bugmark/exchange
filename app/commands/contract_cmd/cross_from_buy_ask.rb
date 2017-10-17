@@ -9,7 +9,8 @@ module ContractCmd
 
     def initialize(ask_param, contract_opts = {})
       @ask        = Offer::Buy::Ask.unassigned.find(ask_param.to_i)
-      @contract   = @ask.match_contract || Contract.new(contract_opts)
+      @contract   = @ask.match_contracts.first || Contract.new(contract_opts)
+      @escrow     = Escrow.new
       @cross_list = gen_cross(ask)
     end
 
@@ -22,16 +23,17 @@ module ContractCmd
     private
 
     def gen_cross(ask)
-      return [] unless ask.present?
-      bid = ask.matching_bids.find {|bid| bid.reserve_value == ask.complementary_reserve_value}
-      if bid
-        contract.assign_attributes(ask.match_attrs)
-        contract.price  = ask.price
-        contract.volume = ask.volume
-        [bid]
-      else
-        []
-      end
+      # return [] unless ask.present?
+      # bid = ask.matching_bids.find {|bid| bid.reserve_value == ask.complementary_reserve_value}
+      # if bid
+      #   contract.assign_attributes(ask.match_attrs)
+      #   contract.price  = ask.price
+      #   contract.volume = ask.volume
+      #   [bid]
+      # else
+      #   []
+      # end
+      []
     end
 
     def cross_integrity

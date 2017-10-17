@@ -251,11 +251,13 @@ Next Actions:
 - [x] create MatchUtils module methods
 - [x] Define Overlap methods  (offer & contract)
 - [x] Define Cross methods    (offer)
+- [x] add price limits
+- [x] add bid/ask date ranges
+- [x] Test matching
+- [x] Test overlapping
+- [x] Test crossing
 
-- [ ] Test matching
-- [ ] Test overlapping
-- [ ] Test crossing
-
+- [ ] cross: fix cross
 - [ ] cross: generate escrow
 - [ ] cross: generate positions
 - [ ] cross: generate re-offers
@@ -269,14 +271,10 @@ Next Actions:
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
 - [ ] add matcher object for offers (GitHub, CVE, etc.)
-- [ ] fix cross
 - [ ] fix resolve
 - [ ] implement commands with correct amounts
 
 # TBD
-
-- [ ] add price limits
-- [ ] add bid/ask date ranges
 
 - [ ] add bid/cancel link on offers#index
 - [ ] add ask/cancel link on offers#index
@@ -294,9 +292,6 @@ Next Actions:
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve
 - [ ] enable event replay
-
-- [ ] UI: link from bugmark.net to documentation
-- [ ] UI: create intro slide deck
 
 - [ ] add API
 - [ ] use swagger for api docco

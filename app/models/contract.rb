@@ -101,7 +101,7 @@ class Contract < ApplicationRecord
   # > resolved  - assigned
 
   def match_assertion
-    matching_bugs.count > 0
+    match_bugs.count > 0
   end
 
   def awardee
