@@ -52,10 +52,10 @@ RSpec.describe ContractCmd::Resolve, type: :model do
   # TODO: fixme
   # describe "Object Transaction" do
   #   it 'adjusts the user balance' do
-  #     expect(user.token_balance).to eq(100)
+  #     expect(user.balance).to eq(100)
   #     subject.project
   #     user.reload
-  #     expect(user.token_balance).to eq(100)
+  #     expect(user.balance).to eq(100)
   #   end
   # end
 end

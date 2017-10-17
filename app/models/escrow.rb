@@ -10,6 +10,15 @@ class Escrow < ApplicationRecord
   has_many   :bid_positions , -> { where(side: 'bid') }, class_name: "Position"
   has_many   :ask_positions , -> { where(side: 'ask') }, class_name: "Position"
 
+  def set_association(contract)
+    if tail = contract.escrow_tail
+      parent_id = tail.id
+    else
+      contract_id = contract.id
+    end
+    self
+  end
+
   # has_many   :fixed_offers
   # has_many   :unfixed_offers
 
@@ -22,6 +31,8 @@ end
 #  id          :integer          not null, primary key
 #  contract_id :integer
 #  parent_id   :integer
+#  bid_value   :float            default(0.0)
+#  ask_value   :float            default(0.0)
 #  exref       :string
 #  uuref       :string
 #  created_at  :datetime         not null

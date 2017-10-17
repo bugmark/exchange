@@ -51,21 +51,33 @@ class User < ApplicationRecord
   end
 
   def token_available
-    token_balance - token_reserve
+    balance - token_reserve
   end
 
   # ----- SCOPES -----
 
   class << self
     def low_balance
-      where('token_balance < 100')
+      where('balance < 100')
     end
+  end
+
+  # ----- INSTANCE METHODS -----
+
+  def decrement(amount)
+    self.balance = self.balance - amount
+    self
+  end
+
+  def increment(amount)
+    self.balance = self.balance + amount
+    self
   end
 
   private
 
   def default_values
-    self.token_balance ||= 100
+    self.balance ||= 100
   end
 end
 
@@ -75,7 +87,7 @@ end
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
-#  token_balance          :float            default(0.0)
+#  balance                :float            default(0.0)
 #  exref                  :string
 #  uuref                  :string
 #  created_at             :datetime         not null

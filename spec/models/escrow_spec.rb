@@ -37,6 +37,8 @@ end
 #  id          :integer          not null, primary key
 #  contract_id :integer
 #  parent_id   :integer
+#  bid_value   :float            default(0.0)
+#  ask_value   :float            default(0.0)
 #  exref       :string
 #  uuref       :string
 #  created_at  :datetime         not null

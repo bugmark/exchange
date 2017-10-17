@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
     FG.create(:buy_ask, {user_id: usr.id}.merge(args)) #
   end
 
-  let(:usr) { FG.create(:user, token_balance: 100.0).user }
+  let(:usr) { FG.create(:user, balance: 100.0).user }
   let(:ask) { FG.create(:buy_ask, user_id: user.id)       }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
@@ -58,13 +58,13 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "token_balance" do
+  describe "balance" do
     it "is a float" do
-      expect(subject.token_balance).to be_a(Float)
+      expect(subject.balance).to be_a(Float)
     end
 
     it "has a default value" do
-      expect(usr.token_balance).to eq(100.0)
+      expect(usr.balance).to eq(100.0)
     end
   end
 
@@ -169,7 +169,7 @@ end
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
-#  token_balance          :float            default(0.0)
+#  balance                :float            default(0.0)
 #  exref                  :string
 #  uuref                  :string
 #  created_at             :datetime         not null

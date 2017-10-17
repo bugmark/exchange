@@ -29,12 +29,12 @@ module ApplicationHelper
     #{user.asks.count} asks</br>
     #{user.bids.count} bids</br>
     #{user.contracts.count} contracts</br>
-    #{user.token_balance} tokens
+    #{user.balance} tokens
     """
   end
 
   def trading_summary(user)
-    balance   = user.token_balance
+    balance   = user.balance
     raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.email} / #{balance} tokens</span>"
   end
 

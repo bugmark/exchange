@@ -4,7 +4,7 @@ table.table
       h3 Trading Activity
     td align='right' #{@user.xid} / #{@user.email}
 div style='background: lightgrey;'
-  b Account Balance: #{@user.token_balance} Tokens (Available: #{@user.token_available} / Reserve: #{@user.token_reserve})
+  b Account Balance: #{@user.balance} Tokens (Available: #{@user.token_available} / Reserve: #{@user.token_reserve})
 div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
   b Bids (#{@user.bids.count}):
   table.table

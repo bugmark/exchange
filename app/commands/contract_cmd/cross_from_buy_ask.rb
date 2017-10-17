@@ -1,44 +1,48 @@
 module ContractCmd
   class CrossFromBuyAsk < ApplicationCommand
 
-    attr_subobjects :contract, :ask, :escrow
-    attr_reader     :cross_list
+    attr_subobjects :contract, :ask, :escrow, :bid
     attr_delegate_fields :contract
 
     validate :cross_integrity
 
     def initialize(ask_param, contract_opts = {})
-      @ask        = Offer::Buy::Ask.unassigned.find(ask_param.to_i)
-      @contract   = @ask.match_contracts.first || Contract.new(contract_opts)
-      @escrow     = Escrow.new
-      @cross_list = gen_cross(ask)
+      @ask      = Offer::Buy::Ask.unassigned.find(ask_param.to_i)
+      @contract = @ask.match_contracts.first || Contract.new(contract_opts)
+      @escrow   = Escrow.new
+      @bid      = gen_cross(ask).first
     end
 
     def transact_before_project
       contract.save
-      # ask.contract_id = contract.id
-      # cross_list.each { |bid| bid.update_attributes(contract_id: contract.id) }
+      escrow.assign_attributes(bid_value: bid.value, ask_value: ask.value)
+      escrow.set_association.save
+      Position.create(volume: bid.volume, price: bid.price, offer_id: bid.id, escrow_id: escrow.id, side: 'bid')
+      Position.create(volume: ask.volume, price: ask.price, offer_id: ask.id, escrow_id: escrow.id, side: 'ask')
+      bid.update_attribute :status, 'crossed'
+      ask.update_attribute :status, 'crossed'
+      bid.user.decrement(bid.value).save
+      ask.user.decrement(bid.value).save
     end
 
     private
 
     def gen_cross(ask)
-      # return [] unless ask.present?
-      # bid = ask.matching_bids.find {|bid| bid.reserve_value == ask.complementary_reserve_value}
-      # if bid
-      #   contract.assign_attributes(ask.match_attrs)
-      #   contract.price  = ask.price
-      #   contract.volume = ask.volume
-      #   [bid]
-      # else
-      #   []
-      # end
-      []
+      return [] unless ask.present?
+      bids = Offer::Buy::Bid.not_open.matches(ask).complements(ask).with_volume(ask.volume)
+      if bids.count > 0
+        bid = bids.first
+        contract.assign_attributes(ask.match_attrs)
+        contract.price  = ask.price
+        contract.volume = ask.volume
+        [bid]
+      else
+        []
+      end
     end
 
     def cross_integrity
-      # TODO: check balances on both sides of the cross to ensure they are valid
-      if @cross_list.length == 0
+      if @bid.nil?
         errors.add :id, "no crosses found"
       end
       if @ask.nil?

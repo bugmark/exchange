@@ -77,10 +77,10 @@ RSpec.describe ContractCmd::CrossFromBuyAsk do
 #     end
 
     # it 'adjusts the user balance' do
-    #   expect(usr1.token_balance).to eq(100)
+    #   expect(usr1.balance).to eq(100)
     #   subject.project
     #   usr1.reload
-    #   expect(usr1.token_balance).to eq(80)
+    #   expect(usr1.balance).to eq(80)
     # end
   # end
 

@@ -4,13 +4,15 @@ class Contract < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :bug , optional: true
-  belongs_to :repo, optional: true
+  # belongs_to :bug , optional: true
+  # belongs_to :repo, optional: true
 
   has_many :bids
   has_many :asks
   has_many :bid_users, :through => :bids, :source => "user"
   has_many :ask_users, :through => :asks, :source => "user"
+
+  has_one  :escrow
 
   before_validation :default_values
   validates :status, inclusion: {in: %w(open matured resolved)}
@@ -59,6 +61,14 @@ class Contract < ApplicationRecord
   end
 
   # ----- INSTANCE METHODS -----
+  def escrow_tail
+    return nil unless escrow = self.escrow
+    while escrow.child do
+      escrow = escrow.child
+    end
+    escrow
+  end
+
   def users
     (bid_users + ask_users).uniq
   end

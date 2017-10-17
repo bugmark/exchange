@@ -118,6 +118,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :escrows do |t|
       t.integer  :contract_id
       t.integer  :parent_id
+      t.float    :bid_value,     default: 0.0
+      t.float    :ask_value,     default: 0.0
       t.string   :exref
       t.string   :uuref
       t.timestamps
@@ -129,7 +131,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :users do |t|
       t.boolean  :admin
-      t.float    :token_balance, default: 0.0
+      t.float    :balance, default: 0.0
       t.string   :exref
       t.string   :uuref
       t.timestamps

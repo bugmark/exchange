@@ -17,17 +17,12 @@ class Offer < ApplicationRecord
 
   # ----- BASIC SCOPES -----
   class << self
-    def with_status(status)
-      where(status: status)
-    end
+    def poolable()             where(poolable: true)      end
+    def not_poolable()         where(poolable: false)     end
+    def with_status(status)    where(status: status)      end
+    def without_status(status) where.not(status: status)  end
 
-    def poolable
-      where(poolable: true)
-    end
-
-    def not_poolable
-      where(poolable: false)
-    end
+    def not_open() without_status('open') end
 
     def assigned
       where("id IN (SELECT offer_id FROM positions)")
@@ -40,6 +35,11 @@ class Offer < ApplicationRecord
     def by_maturation_period(range)
       where("maturation_period && tsrange(?, ?)", range.begin, range.end)
     end
+
+    def is_buy_ask()  where(type: "Offer::Buy::Ask") end
+    def is_buy_bid()  where(type: "Offer::Buy::Bid") end
+    def is_sell_ask() where(type: "Offer::Sell::Ask") end
+    def is_sell_bid() where(type: "Offer::Sell::Bid") end
   end
 
   # ----- OVERLAP UTILS -----
@@ -51,11 +51,15 @@ class Offer < ApplicationRecord
     def by_overlap_maturation_date(date)
       where("maturation_period @> ?::timestamp", date)
     end
+
+    def overlaps(offer)
+      base = by_overlap_maturation_period(offer.maturation_period)
+      offer.id.nil? ? base : base.where.not(id: offer.id)
+    end
   end
 
   def overlap_offers
-    base = self.class.by_overlap_maturation_period(self.maturation_period)
-    self.id.nil? ? base : base.where.not(id: self.id)
+    self.class.overlaps(self)
   end
 
   def overlap_contracts
@@ -68,11 +72,25 @@ class Offer < ApplicationRecord
     def with_cross(price)
       where('price <= ?', price)
     end
+
+    def with_price(price)
+      where(price: price)
+    end
+
+    def complements(offer)
+      base = with_price(1.0 - offer.price)
+      offer.id.nil? ? base : base.where.not(id: self.id)
+    end
+
+    def crosses(offer)
+      complement = 1.0 - offer.price
+      base = with_cross(complement)
+      offer.id.nil? ? base : base.where.not(id: self.id)
+    end
   end
 
   def cross_offers
-    base = self.class.with_cross(price)
-    self.id.nil? ? base : base.where.not(id: self.id)
+    self.class.crosses(self)
   end
 
   # ----- INSTANCE METHODS -----
@@ -80,6 +98,7 @@ class Offer < ApplicationRecord
   def reserve_value
     self.volume * self.price
   end
+  alias_method :value, :reserve_value
 
   def attach_type
     self.stm_bug_id ? "bugs" : "repos"

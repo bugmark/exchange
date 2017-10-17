@@ -17,7 +17,7 @@ RSpec.describe Offer::Buy, type: :model do
     FG.create(:buy_ask, valid_params.merge(args)).ask
   end
 
-  let(:usr)    { FG.create(:user, token_balance: 100.0).user }
+  let(:usr)    { FG.create(:user, balance: 100.0).user }
   let(:klas)   { described_class                             }
   let(:user)   { FG.create(:user).user                       }
   subject      { klas.new(valid_params)                      }
