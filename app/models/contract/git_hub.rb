@@ -14,14 +14,16 @@ end
 #  contract_maturation :datetime
 #  volume              :integer
 #  price               :float
-#  repo_id             :integer
-#  bug_id              :integer
-#  bug_title           :string
-#  bug_status          :string
-#  bug_labels          :string
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  stm_repo_id         :integer
+#  stm_bug_id          :integer
+#  stm_title           :string
+#  stm_status          :string
+#  stm_labels          :string
+#  stm_xfields         :hstore           not null
+#  stm_jfields         :jsonb            not null
 #

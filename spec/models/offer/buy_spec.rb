@@ -82,12 +82,14 @@ end
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
 #  maturation_period   :tsrange
-#  repo_id             :integer
-#  bug_id              :integer
-#  bug_title           :string
-#  bug_status          :string
-#  bug_labels          :string
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
+#  stm_repo_id         :integer
+#  stm_bug_id          :integer
+#  stm_title           :string
+#  stm_status          :string
+#  stm_labels          :string
+#  stm_xfields         :hstore           not null
+#  stm_jfields         :jsonb            not null
 #

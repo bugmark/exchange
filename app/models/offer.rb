@@ -1,5 +1,7 @@
 class Offer < ApplicationRecord
 
+  include Statement #
+
   has_paper_trail
 
   belongs_to :user
@@ -125,6 +127,10 @@ class Offer < ApplicationRecord
     @bidmatch ||= Offer::Buy::Bid.match(cross_attrs)
   end
 
+  def matching_contracts
+    @conmatch ||= Contract.match(match_attrs)
+  end
+
   def contract_maturation_str
     self.maturation_date.strftime("%b-%d %H:%M:%S")
   end
@@ -191,12 +197,14 @@ end
 #  offer_expiration    :datetime
 #  contract_maturation :datetime
 #  maturation_period   :tsrange
-#  repo_id             :integer
-#  bug_id              :integer
-#  bug_title           :string
-#  bug_status          :string
-#  bug_labels          :string
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
+#  stm_repo_id         :integer
+#  stm_bug_id          :integer
+#  stm_title           :string
+#  stm_status          :string
+#  stm_labels          :string
+#  stm_xfields         :hstore           not null
+#  stm_jfields         :jsonb            not null
 #

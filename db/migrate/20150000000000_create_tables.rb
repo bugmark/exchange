@@ -21,12 +21,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :repos, :xfields, using: :gin
 
     create_table :bugs do |t|
-      t.integer  :repo_id
+      # t.integer  :repo_id
       t.string   :type             # BugZilla, GitHub, Cve
-      t.string   :title
-      t.string   :description
-      t.string   :status
-      t.text     :labels,   array: true, default: []
+      # t.string   :title
+      # t.string   :description
+      # t.string   :status
+      # t.text     :labels,   array: true, default: []
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.datetime :synced_at
@@ -36,9 +36,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :bugs, :exref
     add_index :bugs, :uuref
-    add_index :bugs, :repo_id
+    # add_index :bugs, :repo_id
     add_index :bugs, :type
-    add_index :bugs, :labels , using: :gin
+    # add_index :bugs, :labels , using: :gin
     add_index :bugs, :jfields, using: :gin
     add_index :bugs, :xfields, using: :gin
 
@@ -58,11 +58,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.datetime  :contract_maturation
       t.tsrange   :maturation_period
       # ----- statement start -----
-      t.integer  :repo_id
-      t.integer  :bug_id
-      t.string   :bug_title
-      t.string   :bug_status
-      t.string   :bug_labels
+      # t.integer  :repo_id
+      # t.integer  :bug_id
+      # t.string   :bug_title
+      # t.string   :bug_status
+      # t.string   :bug_labels
       # ----- statement end -----
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
@@ -74,10 +74,55 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :poolable
     add_index :offers, :exref
     add_index :offers, :uuref
-    add_index :offers, :repo_id
-    add_index :offers, :bug_id
+    # add_index :offers, :repo_id
+    # add_index :offers, :bug_id
     add_index :offers, :maturation_period, using: :gist
     add_index :offers, :jfields          , using: :gin
+
+    create_table :contracts do |t|
+      t.string   :type                # GitHub, BugZilla, ...
+      t.string   :mode                # reward, forecast
+      t.string   :status              # open, matured, resolved
+      t.string   :awarded_to          # bidder, asker
+      t.datetime :contract_maturation
+      t.integer  :volume
+      t.float    :price
+      # ----- statement start
+      # t.integer  :repo_id
+      # t.integer  :bug_id
+      # t.string   :bug_title
+      # t.string   :bug_status
+      # t.string   :bug_labels
+      # ----- statement end
+      t.jsonb    :jfields,  null: false, default: '{}'
+      t.string   :exref
+      t.string   :uuref
+      t.timestamps
+    end
+    add_index :contracts, :exref
+    add_index :contracts, :uuref
+    # add_index :contracts, :repo_id
+    # add_index :contracts, :bug_id
+    add_index :contracts, :jfields, using: :gin
+
+    # ----- STATEMENT FIELDS -----
+    %i(bugs offers contracts).each do |table|
+      add_column table, :stm_repo_id , :integer
+      add_column table, :stm_bug_id  , :integer
+      add_column table, :stm_title   , :string
+      add_column table, :stm_status  , :string
+      add_column table, :stm_labels  , :string
+      add_column table, :stm_xfields , :hstore , null: false, default: {}
+      add_column table, :stm_jfields , :jsonb  , null: false, default: '{}'
+
+      add_index table, :stm_repo_id
+      add_index table, :stm_bug_id
+      add_index table, :stm_title
+      add_index table, :stm_status
+      add_index table, :stm_labels
+      add_index table, :stm_xfields  , :using => :gin
+      add_index table, :stm_jfields  , :using => :gin
+    end
 
     create_table :positions do |t|
       t.integer  :offer_id
@@ -106,32 +151,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :escrows, :parent_id
     add_index :escrows, :exref
     add_index :escrows, :uuref
-
-    create_table :contracts do |t|
-      t.string   :type                # GitHub, BugZilla, ...
-      t.string   :mode                # reward, forecast
-      t.string   :status              # open, matured, resolved
-      t.string   :awarded_to          # bidder, asker
-      t.datetime :contract_maturation
-      t.integer  :volume
-      t.float    :price
-      # ----- statement start
-      t.integer  :repo_id
-      t.integer  :bug_id
-      t.string   :bug_title
-      t.string   :bug_status
-      t.string   :bug_labels
-      # ----- statement end
-      t.jsonb    :jfields,  null: false, default: '{}'
-      t.string   :exref
-      t.string   :uuref
-      t.timestamps
-    end
-    add_index :contracts, :exref
-    add_index :contracts, :uuref
-    add_index :contracts, :repo_id
-    add_index :contracts, :bug_id
-    add_index :contracts, :jfields, using: :gin
 
     create_table :users do |t|
       t.boolean  :admin

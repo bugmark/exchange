@@ -1,7 +1,7 @@
 module ContractCmd
   class CrossFromBuyAsk < ApplicationCommand
 
-    attr_subobjects :contract, :ask
+    attr_subobjects :contract, :ask, :escrow
     attr_reader     :cross_list
     attr_delegate_fields :contract
 
@@ -9,7 +9,7 @@ module ContractCmd
 
     def initialize(ask_param, contract_opts = {})
       @ask        = Offer::Buy::Ask.unassigned.find(ask_param.to_i)
-      @contract   = Contract.new(contract_opts)
+      @contract   = @ask.match_contract || Contract.new(contract_opts)
       @cross_list = gen_cross(ask)
     end
 
