@@ -18,6 +18,47 @@ class Contract < ApplicationRecord
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
+  # ----- SCOPES -----
+  class << self
+    def reward
+      where(mode: 'reward')
+    end
+
+    def forecast
+      where(mode: 'forecast')
+    end
+
+    def pending_resolution
+      expired.unresolved
+    end
+
+    def matured
+      where("contract_maturation < ?", Time.now)
+    end
+
+    def expired
+      where("contract_maturation < ?", Time.now)
+    end
+
+    def unresolved
+      where("stm_status != ?", "resolved")
+    end
+
+  end
+
+  # ----- OVERLAP UTILS -----
+  class << self
+    def by_overlap_maturation_period(beg, fin)
+      where('contract_maturation > ?::timestamp', beg).
+        where('contract_maturation < ?::timestamp', fin)
+    end
+  end
+
+  def overlap_offers
+    Offer.by_overlap_maturation_date(self.maturation_date)
+  end
+
+  # ----- INSTANCE METHODS -----
   def users
     (bid_users + ask_users).uniq
   end
@@ -95,35 +136,6 @@ class Contract < ApplicationRecord
 
   def unresolved?
     ! resolved?
-  end
-
-  # ----- SCOPES -----
-
-  class << self
-    def reward
-      where(mode: 'reward')
-    end
-
-    def forecast
-      where(mode: 'forecast')
-    end
-
-    def pending_resolution
-      expired.unresolved
-    end
-
-    def matured
-      where("contract_maturation < ?", Time.now)
-    end
-
-    def expired
-      where("contract_maturation < ?", Time.now)
-    end
-
-    def unresolved
-      where("stm_status != ?", "resolved")
-    end
-
   end
 
   private

@@ -59,7 +59,8 @@ class Offer < ApplicationRecord
   end
 
   def overlap_contracts
-    Contract.by_overlap_maturation_period(self.maturation_period.begin, self.maturation_period.end)
+    beg, fin = [self.maturation_period.begin, self.maturation_period.end]
+    Contract.by_overlap_maturation_period(beg, fin)
   end
 
   # ----- CROSS UTILS -----
