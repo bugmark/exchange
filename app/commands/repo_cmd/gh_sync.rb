@@ -36,14 +36,14 @@ module RepoCmd
       issues.each do |el|
         binding.pry unless el["html_url"]
         attrs = {
-          repo_id:   self.id         ,
-          type:      "Bug::GitHub"   ,
-          exref:     el["id"]        ,
-          title:     el["title"]     ,
-          labels:    el["labels"]    ,
-          status:    el["state"]     ,
-          html_url:  el["html_url"]  ,
-          synced_at: Time.now
+          stm_repo_id:   self.id       ,
+          type:        "Bug::GitHub"   ,
+          exref:       el["id"]        ,
+          stm_title:   el["title"]     ,
+          stm_labels:  el["labels"]    ,
+          stm_status:  el["state"]     ,
+          html_url:    el["html_url"]  ,
+          synced_at:   Time.now
         }
         bug = BugCmd::Sync.new(attrs)
         bug.save_event.project

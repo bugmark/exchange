@@ -20,7 +20,7 @@ class Offer::Buy < Offer
     val1 = reserve_value - user.token_reserve_not_poolable
     val2 = user.token_balance - user.token_reserve_poolable
     unless 0 <= val1 && val1 < val2
-      errors.add(:volume, "not enough funds in user account")
+      errors.add(:volume, "not enough funds in user account") #
     end
   end
 end

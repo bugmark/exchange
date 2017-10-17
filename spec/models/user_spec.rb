@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
   end
 
   def genask(args = {})
-    FG.create(:buy_ask, {user_id: usr.id}.merge(args))
+    FG.create(:buy_ask, {user_id: usr.id}.merge(args)) #
   end
 
   let(:usr) { FG.create(:user, token_balance: 100.0).user }

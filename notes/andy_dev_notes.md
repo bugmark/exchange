@@ -242,6 +242,15 @@ Next Actions:
 - [x] bid_buy/ask_buy: show reserves on user-detail page
 - [x] combine bid_buy/ask_buy into offer_buy
 
+# Oct 17
+
+- [x] create statement fields
+- [x] add specs for buy_ask_cmd
+- [x] add specs for buy_bid_cmd
+- [x] add factory_girl specs for all factories
+
+- [ ] create Statement module with match methods
+
 - [ ] cross: generate escrow
 - [ ] cross: generate positions
 - [ ] cross: generate re-offers
@@ -249,10 +258,7 @@ Next Actions:
 - [ ] cross: suspend invalid offers
 - [ ] cross: handle reserves and escrow transfer
 
-- [ ] add specs for ask_buy_cmd
-- [ ] add specs for bid_buy_cmd
 - [ ] add specs for contract_cmd
-- [ ] add factory_girl specs for all factories
 
 - [ ] bid_buy/ask_buy: add a cancel command
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page

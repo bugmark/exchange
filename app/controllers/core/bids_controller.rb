@@ -10,12 +10,12 @@ module Core
       @bug = @repo = nil
       @timestamp = Time.now.strftime("%H:%M:%S")
       case
-        when bug_id = params["bug_id"]&.to_i
-          @bug = Bug.find(bug_id)
-          @bids = Offer::Buy::Bid.where(bug_id: bug_id)
-        when repo_id = params["repo_id"]&.to_i
-          @repo = Repo.find(repo_id)
-          @bids = Offer::Buy::Bid.where(repo_id: repo_id)
+        when stm_bug_id = params["stm_bug_id"]&.to_i
+          @bug = Bug.find(stm_bug_id)
+          @bids = Offer::Buy::Bid.where(stm_bug_id: stm_bug_id)
+        when stm_repo_id = params["stm_repo_id"]&.to_i
+          @repo = Repo.find(stm_repo_id)
+          @bids = Offer::Buy::Bid.where(stm_repo_id: stm_repo_id)
         else
           @bids = Offer::Buy::Bid.all
       end
@@ -67,12 +67,12 @@ module Core
         volume:      5                        ,
         user_id:     current_user.id          ,
         status:      "open"                   ,
-        bug_status:  "closed"                 ,
+        stm_status:  "closed"                 ,
         maturation_date: Time.now + 3.minutes ,
       }
-      key = "bug_id" if params["bug_id"]
-      key = "repo_id" if params["repo_id"]
-      id = params["bug_id"] || params["repo_id"]
+      key = "stm_bug_id" if params["stm_bug_id"]
+      key = "stm_repo_id" if params["stm_repo_id"]
+      id = params["stm_bug_id"] || params["stm_repo_id"]
       opts.merge({key => id}).without_blanks
     end
   end

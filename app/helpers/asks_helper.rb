@@ -9,6 +9,7 @@ module AsksHelper
   end
 
   def ask_attach_link(ask)
+    return ""
     type = ask.attach_type
     obj  = ask.attach_obj
     raw "<a href='/core/#{type}/#{obj.id}'>#{obj.xid}</a>"

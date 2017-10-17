@@ -123,7 +123,7 @@ class Contract < ApplicationRecord
     end
 
     def unresolved
-      where("status != ?", "resolved")
+      where("stm_status != ?", "resolved")
     end
 
   end
@@ -137,11 +137,11 @@ class Contract < ApplicationRecord
 
   def match_attrs
     {
-      id:      self.bug_id,
-      repo_id: self.repo_id,
-      title:   self.bug_title,
-      status:  self.bug_status,
-      labels:  self.bug_labels
+      # id:      self.bug_id,
+      stm_repo_id: self.stm_repo_id,
+      stm_title:   self.stm_title,
+      stm_status:  self.stm_status,
+      stm_labels:  self.stm_labels
     }
   end
 end

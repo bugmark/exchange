@@ -4,7 +4,7 @@ RSpec.describe Bug, type: :model do
 
   def valid_params(repo, extra_params = {})
     {
-      repo_id: repo.id
+      stm_repo_id: repo.id
     }.merge(extra_params)
   end
 
@@ -15,13 +15,13 @@ RSpec.describe Bug, type: :model do
 
   describe "Attributes" do
     it { should respond_to :exref                  }
-    it { should respond_to :uuref                  }  
+    it { should respond_to :uuref                  }
   end
 
   describe "#uuref" do
     it 'generates a string' do
       subject.save
-      expect(subject.uuref).to be_a(String)
+      expect(subject.uuref).to be_a(String) #.
     end
 
     it 'generates a 36-character string' do

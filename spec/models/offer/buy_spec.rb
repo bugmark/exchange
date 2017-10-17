@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Offer::Buy, type: :model do
 
-  def valid_params(user)
+  def valid_params
     {
       status:  "open"    ,
       user_id: usr.id
@@ -10,24 +10,24 @@ RSpec.describe Offer::Buy, type: :model do
   end
 
   def genbid(args = {})
-    FG.create(:buy_bid, {user_id: usr.id}.merge(args)).bid
+    FG.create(:buy_bid, valid_params.merge(args)).bid
   end
 
   def genask(args = {})
-    FG.create(:buy_ask, {user_id: usr.id}.merge(args)).ask
+    FG.create(:buy_ask, valid_params.merge(args)).ask
   end
 
   let(:usr)    { FG.create(:user, token_balance: 100.0).user }
   let(:klas)   { described_class                             }
   let(:user)   { FG.create(:user).user                       }
-  subject      { klas.new(valid_params(user))                }
+  subject      { klas.new(valid_params)                      }
 
   describe "Object Creation", USE_VCR do
     it { should be_valid }
 
     it 'saves the object to the database' do
       subject.save
-      expect(subject).to be_valid
+      expect(subject).to be_valid #
     end
   end
 

@@ -27,8 +27,8 @@ FactoryGirl.define do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
 
-    sequence :title do |n| "Bug #{n}" end
-    repo_id  { FG.create(:repo).id }
+    sequence    :stm_title do |n| "Bug #{n}" end
+    stm_repo_id { FG.create(:repo).id }
   end
 
   factory :buy_bid, class: BuyBidCmd::Create do
@@ -37,8 +37,9 @@ FactoryGirl.define do
 
     price               0.20
     volume              10
+    status              "open"
     contract_maturation Time.now + 1.day
-    bug_id              { FG.create(:bug).id  }
+    stm_bug_id          { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
 
     factory :matured_bid do
@@ -53,7 +54,7 @@ FactoryGirl.define do
     price               0.40
     volume              10
     contract_maturation Time.now + 1.day
-    bug_id              { FG.create(:bug).id  }
+    stm_bug_id          { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
 
     factory :matured_ask do

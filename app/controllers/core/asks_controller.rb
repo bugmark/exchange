@@ -13,9 +13,9 @@ module Core
         when bug_id = params["bug_id"]&.to_i
           @bug = Bug.find(bug_id)
           @asks = Ask.where(bug_id: bug_id)
-        when repo_id = params["repo_id"]&.to_i
-          @repo = Repo.find(repo_id)
-          @asks = Ask.where(repo_id: repo_id)
+        when stm_repo_id = params["stm_repo_id"]&.to_i
+          @repo = Repo.find(stm_repo_id)
+          @asks = Ask.where(stm_repo_id: stm_repo_id)
         else
           @asks = Ask.all
       end
@@ -67,13 +67,13 @@ module Core
         price:      0.50                      ,
         volume:     5                         ,
         status:     "open"                    ,
-        bug_status: "closed"                  ,
+        stm_status: "closed"                  ,
         maturation_date: Time.now + 3.minutes ,
         user_id: current_user.id
       }
-      key = "bug_id" if params["bug_id"]
-      key = "repo_id" if params["repo_id"]
-      id = params["bug_id"] || params["repo_id"]
+      key = "stm_bug_id" if params["stm_bug_id"]
+      key = "stm_repo_id" if params["stm_repo_id"]
+      id = params["stm_bug_id"] || params["stm_repo_id"]
       opts.merge({key => id}).without_blanks
     end
   end

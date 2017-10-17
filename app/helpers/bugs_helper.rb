@@ -4,7 +4,7 @@ module BugsHelper
   end
 
   def bug_title_link(bug)
-    title = truncate(bug.title)
+    title = truncate(bug.stm_title)
     # raw "<a href='/bugs/#{bug.id}'>#{title}</a>"
     title
   end
@@ -19,7 +19,8 @@ module BugsHelper
   end
 
   def bug_contract_link(bug)
-    count = bug.contracts.count
+    # count = bug.contracts.count
+    count = 0
     if count > 0
       raw "<a href='/core/rewards?bug_id=#{bug.id}'>#{count}</a>"
     else

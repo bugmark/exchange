@@ -18,6 +18,7 @@ module CoreReposHelper
   end
 
   def core_repo_contract_link(repo)
+    return "0"
     count  = repo.contracts.count
     blbl   = repo.bug_contracts.count > 0 ? "*" : ""
     if count > 0

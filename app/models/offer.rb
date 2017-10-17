@@ -5,8 +5,8 @@ class Offer < ApplicationRecord
   has_paper_trail
 
   belongs_to :user
-  belongs_to :bug,      optional: true
-  belongs_to :repo,     optional: true
+  belongs_to :bug,      optional: true  , foreign_key: "stm_bug_id"
+  belongs_to :repo,     optional: true  , foreign_key: "stm_repo_id"
   belongs_to :position, optional: true
 
   validates :status, inclusion: {in: %w(open suspended crossed expired cancelled)}
@@ -86,15 +86,15 @@ class Offer < ApplicationRecord
 
     def scope_for(base, key, val)
       case key
-        when :bug_id then
+        when :stm_bug_id then
           base.by_bugid(val)
-        when :repo_id then
+        when :stm_repo_id then
           base.by_repoid(val)
-        when :bug_title then
+        when :stm_title then
           base.by_title(val)
-        when :bug_status then
+        when :stm_status then
           base.by_status(val)
-        when :bug_labels then
+        when :stm_labels then
           base.by_labels(val)
         else base
       end
@@ -108,7 +108,7 @@ class Offer < ApplicationRecord
   end
 
   def attach_type
-    self.bug_id ? "bugs" : "repos"
+    self.stm_bug_id ? "bugs" : "repos"
   end
 
   def attach_obj
@@ -124,7 +124,8 @@ class Offer < ApplicationRecord
   end
 
   def matching_bids
-    @bidmatch ||= Offer::Buy::Bid.match(cross_attrs)
+    # @bidmatch ||= Offer::Buy::Bid.match(cross_attrs)
+    []
   end
 
   def matching_contracts
@@ -153,28 +154,28 @@ class Offer < ApplicationRecord
 
   def cross_attrs
     {
-      bug_id:       self.bug_id,
-      repo_id:      self.repo_id,
-      bug_title:    self.bug_title,
-      bug_status:   self.bug_status,
-      bug_labels:   self.bug_labels,
+      stm_bug_id:  self.stm_bug_id  ,
+      stm_repo_id: self.stm_repo_id ,
+      stm_title:   self.stm_title   ,
+      stm_status:  self.stm_status  ,
+      stm_labels:  self.stm_labels  ,
     }
   end
 
   def match_attrs
     {
-      id:      self.bug_id,
-      repo_id: self.repo_id,
-      title:   self.bug_title,
-      status:  self.bug_status,
-      labels:  self.bug_labels
+      stm_bug_id:  self.stm_bug_id   ,
+      stm_repo_id: self.stm_repo_id  ,
+      stm_title:   self.stm_title    ,
+      stm_status:  self.stm_status   ,
+      stm_labels:  self.stm_labels   ,
     }
   end
 
   private
 
   def default_values
-    {status: 'open'}
+    self.status ||= 'open'
   end
 end
 

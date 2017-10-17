@@ -2,9 +2,9 @@ class Repo < ApplicationRecord
 
   has_paper_trail
 
-  has_many :bugs         , :dependent => :destroy
-  has_many :contracts    , :dependent => :destroy
-  has_many :bug_contracts, :through   => :bugs    , :source => :contracts
+  has_many :bugs         , :dependent => :destroy , :foreign_key => :stm_repo_id
+  # has_many :contracts    , :dependent => :destroy
+  has_many :bug_contracts, :through   => :bugs    , :source      => :contracts
 
   validates :name     , uniqueness: true, presence: true
 
@@ -17,6 +17,7 @@ class Repo < ApplicationRecord
   end
 
   def has_contracts?
+    return false
     contracts.count != 0 || bug_contracts.count != 0
   end
 

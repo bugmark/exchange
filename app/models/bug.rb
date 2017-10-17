@@ -2,8 +2,8 @@ class Bug < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to      :repo
-  has_many        :contracts, :dependent => :destroy
+  belongs_to      :repo,      :foreign_key => :stm_repo_id
+  has_many        :contracts, :dependent   => :destroy
   has_many        :bids
   has_many        :asks
 
@@ -30,7 +30,7 @@ class Bug < ApplicationRecord
     end
 
     def by_repoid(id)
-      where(repo_id: id)
+      where(stm_repo_id: id)
     end
 
     def by_title(string)
@@ -38,7 +38,7 @@ class Bug < ApplicationRecord
     end
 
     def by_status(status)
-      where("status ilike ?", status)
+      where("stm_status ilike ?", status)
     end
 
     def by_labels(labels)
@@ -60,13 +60,13 @@ class Bug < ApplicationRecord
       case key
         when :id then
           base.by_id(val)
-        when :repo_id then
+        when :stm_repo_id then
           base.by_repoid(val)
-        when :title then
+        when :stm_title then
           base.by_title(val)
-        when :status then
+        when :stm_status then
           base.by_status(val)
-        when :labels then
+        when :stm_labels then
           base.by_labels(val)
         else base
       end

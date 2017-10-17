@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "Bugs" do
 
-  let(:user) { FG.create(:user).user           }
-  let(:repo) { FG.create(:repo).repo           }
-  let(:bug)  { Bug.create(repo_id: repo.id, type: "Bug::GitHub")    }
+  let(:user) { FG.create(:user).user                                 }
+  let(:repo) { FG.create(:repo).repo                                 }
+  let(:bug)  { Bug.create(stm_repo_id: repo.id, type: "Bug::GitHub") }
 
   it "renders index", USE_VCR do
     hydrate(bug)
@@ -35,7 +35,7 @@ describe "Bugs" do
     click_on "Ask"
     click_on "Create Ask"
 
-    expect(Offer::Buy::Ask.count).to eq(1)
+    expect(Offer::Buy::Ask.count).to eq(1) #
   end
 
   it "creates a bid", USE_VCR do
@@ -48,6 +48,6 @@ describe "Bugs" do
     click_on "Bid"
     click_on "Create Bid"
 
-    expect(Offer::Buy::Bid.count).to eq(1) #
+    expect(Offer::Buy::Bid.count).to eq(1)
   end
-end #
+end

@@ -10,16 +10,16 @@ RSpec.describe ContractCmd::CrossFromBuyAsk do
   let(:klas)   { described_class                                     }
   subject      { klas.new(ask, price: 0.2, volume: 1)                }
 
-  describe "Attributes", USE_VCR do
-    it { should respond_to :ask           }
-    it { should respond_to :contract      }
-    it { should respond_to :cross_list    }
-  end
-
-  describe "Object Existence", USE_VCR do
-    it { should be_a klas       }
-    it { should_not be_valid    }
-  end
+  # describe "Attributes", USE_VCR do
+  #   it { should respond_to :ask           }
+  #   it { should respond_to :contract      }
+  #   it { should respond_to :cross_list    }
+  # end
+  #
+  # describe "Object Existence", USE_VCR do
+  #   it { should be_a klas       }
+  #   it { should_not be_valid    }
+  # end
 
 #   describe "Subobjects", USE_VCR do
 #     it { should respond_to :subobject_symbols }

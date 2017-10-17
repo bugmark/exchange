@@ -6,5 +6,5 @@ RSpec.describe 'BuyBid Factory' do
     FG.create(:buy_bid)
     expect(Offer.count).to eq(1)
   end
-end #.
+end
 

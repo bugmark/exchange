@@ -13,6 +13,6 @@ describe "Offers" do
   it "renders index (with element)", USE_VCR do
     hydrate(ask, bid)
     visit "/core/offers"
-    expect(page).to_not be_nil
+    expect(page).to_not be_nil #
   end
 end

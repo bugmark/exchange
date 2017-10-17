@@ -6,7 +6,7 @@ module BuyBidCmd
     attr_vdelegate :maturation_date, :bid
 
     def initialize(args)
-      @bid  = Offer::Buy::Bid.new(args)
+      @bid  = Offer::Buy::Bid.new(default_values.merge(args))
       @user = User.find(bid.user_id)
     end
 
@@ -16,6 +16,14 @@ module BuyBidCmd
 
     def transact_before_project
       bid.status = "open"
+    end
+
+    private
+
+    def default_values
+      {
+        status: "open"
+      }
     end
   end
 end
