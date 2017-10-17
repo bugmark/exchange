@@ -1,5 +1,7 @@
 class Contract < ApplicationRecord
 
+  include StatementUtils
+
   has_paper_trail
 
   belongs_to :bug , optional: true
@@ -135,15 +137,15 @@ class Contract < ApplicationRecord
     self.contract_maturation   ||= Time.now + 1.week
   end
 
-  def match_attrs
-    {
-      # id:      self.bug_id,
-      stm_repo_id: self.stm_repo_id,
-      stm_title:   self.stm_title,
-      stm_status:  self.stm_status,
-      stm_labels:  self.stm_labels
-    }
-  end
+  # def match_attrs
+  #   {
+  #     # id:      self.bug_id,
+  #     stm_repo_id: self.stm_repo_id,
+  #     stm_title:   self.stm_title,
+  #     stm_status:  self.stm_status,
+  #     stm_labels:  self.stm_labels
+  #   }
+  # end
 end
 
 # == Schema Information

@@ -12,22 +12,9 @@ RSpec.describe Bug, type: :model do
   let(:repo)   { Repo.create(name: "asdf/qwer")             }
   subject      { klas.new(valid_params(repo))               }
 
-
   describe "Attributes" do
     it { should respond_to :exref                  }
     it { should respond_to :uuref                  }
-  end
-
-  describe "#uuref" do
-    it 'generates a string' do
-      subject.save
-      expect(subject.uuref).to be_a(String) #.
-    end
-
-    it 'generates a 36-character string' do
-      subject.save
-      expect(subject.uuref.length).to eq(36)
-    end
   end
 
   describe "Associations" do
@@ -72,7 +59,19 @@ RSpec.describe Bug, type: :model do
       expect(klas.match({id: subject.id}).length).to eq(1)
     end
   end
-  
+
+  describe "#uuref" do
+    it 'generates a string' do
+      subject.save
+      expect(subject.uuref).to be_a(String) #.
+    end
+
+    it 'generates a 36-character string' do
+      subject.save
+      expect(subject.uuref.length).to eq(36)
+    end
+  end
+
   describe "#html_url" do
     it { should respond_to :html_url                   }
     it { should respond_to :html_url=                  }

@@ -1,6 +1,6 @@
 class Offer < ApplicationRecord
 
-  include Statement #
+  include StatementUtils
 
   has_paper_trail
 
@@ -16,9 +16,7 @@ class Offer < ApplicationRecord
   before_validation :default_values
 
   class << self
-
-    # ----- basic scopes -----
-
+    # ----- SCOPES -----
     def with_status(status)
       where(status: status)
     end
@@ -39,65 +37,8 @@ class Offer < ApplicationRecord
       where("id NOT IN (SELECT offer_id FROM positions)")
     end
 
-    def base_scope
-      where(false)
-    end
-
-    def by_id(id)
-      where(id: id)
-    end
-
-    # ----- statement scopes -----
-
-    def by_bugid(id)
-      where(bug_id: id)
-    end
-
-    def by_repoid(id)
-      where(repo_id: id)
-    end
-
-    def by_title(string)
-      where("title ilike ?", string)
-    end
-
-    def by_status(status)
-      where("status ilike ?", status)
-    end
-
-    def by_labels(labels)
-      # where(labels: labels)
-      where(false)
-    end
-
     def by_maturation_period(range)
       where("maturation_period && tsrange(?, ?)", range.begin, range.end)
-    end
-
-    # ----- class methods -----
-
-    def match(attrs)
-      attrs.without_blanks.reduce(unassigned) do |acc, (key, val)|
-        scope_for(acc, key, val)
-      end
-    end
-
-    private
-
-    def scope_for(base, key, val)
-      case key
-        when :stm_bug_id then
-          base.by_bugid(val)
-        when :stm_repo_id then
-          base.by_repoid(val)
-        when :stm_title then
-          base.by_title(val)
-        when :stm_status then
-          base.by_status(val)
-        when :stm_labels then
-          base.by_labels(val)
-        else base
-      end
     end
   end
 
@@ -162,15 +103,15 @@ class Offer < ApplicationRecord
     }
   end
 
-  def match_attrs
-    {
-      stm_bug_id:  self.stm_bug_id   ,
-      stm_repo_id: self.stm_repo_id  ,
-      stm_title:   self.stm_title    ,
-      stm_status:  self.stm_status   ,
-      stm_labels:  self.stm_labels   ,
-    }
-  end
+  # def match_attrs
+  #   {
+  #     stm_bug_id:  self.stm_bug_id   ,
+  #     stm_repo_id: self.stm_repo_id  ,
+  #     stm_title:   self.stm_title    ,
+  #     stm_status:  self.stm_status   ,
+  #     stm_labels:  self.stm_labels   ,
+  #   }
+  # end
 
   private
 
