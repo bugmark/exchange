@@ -1,6 +1,6 @@
 class Contract < ApplicationRecord
 
-  include StatementUtils
+  include MatchUtils
 
   has_paper_trail
 
@@ -58,10 +58,6 @@ class Contract < ApplicationRecord
   # > open      - active
   # > matured   - past mature date
   # > resolved  - assigned
-
-  def matching_bugs
-    @bugmatch ||= Bug.match(match_attrs)
-  end
 
   def match_assertion
     matching_bugs.count > 0
@@ -136,16 +132,6 @@ class Contract < ApplicationRecord
     self.status                ||= 'open'
     self.contract_maturation   ||= Time.now + 1.week
   end
-
-  # def match_attrs
-  #   {
-  #     # id:      self.bug_id,
-  #     stm_repo_id: self.stm_repo_id,
-  #     stm_title:   self.stm_title,
-  #     stm_status:  self.stm_status,
-  #     stm_labels:  self.stm_labels
-  #   }
-  # end
 end
 
 # == Schema Information

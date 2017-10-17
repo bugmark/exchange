@@ -25,7 +25,7 @@ module ContractCmd
       return [] unless ask.present?
       bid = ask.matching_bids.find {|bid| bid.reserve_value == ask.complementary_reserve_value}
       if bid
-        contract.assign_attributes(ask.cross_attrs)
+        contract.assign_attributes(ask.match_attrs)
         contract.price  = ask.price
         contract.volume = ask.volume
         [bid]

@@ -248,8 +248,14 @@ Next Actions:
 - [x] add specs for buy_ask_cmd
 - [x] add specs for buy_bid_cmd
 - [x] add factory_girl specs for all factories
+- [x] create MatchUtils module methods
 
-- [ ] create Statement module with match methods
+- [ ] Define Overlap methods  (offer & contract)
+- [ ] Define Cross methods    (offer)
+
+- [ ] Test matching
+- [ ] Test overlapping
+- [ ] Test crossing
 
 - [ ] cross: generate escrow
 - [ ] cross: generate positions

@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe Offer, type: :model do
   def valid_params
     {
-      user_id: user.id     ,
-      status:  'open'
+      user_id: user.id                                      ,
+      maturation_period: Time.now-1.week..Time.now+1.week   ,
+      status:  'open'                                       ,
     }
   end
 
+  let(:offer2) { klas.new(valid_params)  }
   let(:user)   { FG.create(:user)        }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
@@ -63,6 +65,48 @@ RSpec.describe Offer, type: :model do
       expect(subject).to_not be_nil
       expect(klas.count).to eq(1)
       expect(klas.match({id: subject.id}).length).to eq(1)
+    end
+  end
+
+  describe ".by_overlap_maturation_period" do
+    before(:each) { subject.save }
+
+    it "returns a range search" do
+      result = klas.by_overlap_maturation_period(Time.now..Time.now+1.minute)
+      expect(result.length).to eq(1)
+    end
+
+    it "returns zero when there is a miss" do
+      result = klas.by_overlap_maturation_period(Time.now-2.years..Time.now-1.year)
+      expect(result.length).to eq(0)
+    end
+  end
+
+  describe ".by_overlap_maturation_date" do
+    before(:each) { subject.save }
+
+    it "returns a date search" do
+      result = klas.by_overlap_maturation_date(Time.now)
+      expect(result.length).to eq(1)
+    end
+
+    it "returns zero when there is a miss" do
+      result = klas.by_overlap_maturation_date(Time.now-2.years)
+      expect(result.length).to eq(0)
+    end
+  end
+
+  describe "#overlap_offers" do
+    before(:each) { subject.save }
+
+    it "returns one with alternate offer" do
+      result = offer2.overlap_offers
+      expect(result.count).to eq(1)
+    end
+
+    it "returns zero with base offer" do
+      result = subject.overlap_offers
+      expect(result.count).to eq(0)
     end
   end
 

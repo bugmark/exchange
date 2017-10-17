@@ -1,6 +1,6 @@
 class Offer < ApplicationRecord
 
-  include StatementUtils
+  include MatchUtils
 
   has_paper_trail
 
@@ -15,8 +15,8 @@ class Offer < ApplicationRecord
 
   before_validation :default_values
 
+  # ----- BASIC SCOPES -----
   class << self
-    # ----- SCOPES -----
     def with_status(status)
       where(status: status)
     end
@@ -42,7 +42,29 @@ class Offer < ApplicationRecord
     end
   end
 
-  # ----- instance methods -----
+  # ----- OVERLAP UTILS -----
+  class << self
+    def by_overlap_maturation_period(range)
+      where("maturation_period && tsrange(?, ?)", range.begin, range.end)
+    end
+
+    def by_overlap_maturation_date(date)
+      where("maturation_period @> ?::timestamp", date)
+    end
+  end
+
+  def overlap_offers
+    base = self.class.by_overlap_maturation_period(self.maturation_period)
+    self.id.nil? ? base : base.where.not(id: self.id)
+  end
+
+  def overlap_contracts
+    Contract.by_overlap_maturation_period(self.maturation_period.begin, self.maturation_period.end)
+  end
+
+  # ----- CROSS UTILS -----
+
+  # ----- INSTANCE METHODS -----
 
   def reserve_value
     self.volume * self.price
@@ -58,19 +80,6 @@ class Offer < ApplicationRecord
 
   def complementary_reserve_value
     self.volume - reserve_value
-  end
-
-  def matching_bugs
-    @bugmatch ||= Bug.match(match_attrs)
-  end
-
-  def matching_bids
-    # @bidmatch ||= Offer::Buy::Bid.match(cross_attrs)
-    []
-  end
-
-  def matching_contracts
-    @conmatch ||= Contract.match(match_attrs)
   end
 
   def contract_maturation_str
@@ -92,26 +101,6 @@ class Offer < ApplicationRecord
   def unmatured?
     ! matured?
   end
-
-  def cross_attrs
-    {
-      stm_bug_id:  self.stm_bug_id  ,
-      stm_repo_id: self.stm_repo_id ,
-      stm_title:   self.stm_title   ,
-      stm_status:  self.stm_status  ,
-      stm_labels:  self.stm_labels  ,
-    }
-  end
-
-  # def match_attrs
-  #   {
-  #     stm_bug_id:  self.stm_bug_id   ,
-  #     stm_repo_id: self.stm_repo_id  ,
-  #     stm_title:   self.stm_title    ,
-  #     stm_status:  self.stm_status   ,
-  #     stm_labels:  self.stm_labels   ,
-  #   }
-  # end
 
   private
 

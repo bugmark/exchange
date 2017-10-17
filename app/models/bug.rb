@@ -1,6 +1,6 @@
 class Bug < ApplicationRecord
 
-  include StatementUtils
+  include MatchUtils
 
   has_paper_trail
 
