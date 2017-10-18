@@ -274,10 +274,16 @@ Next Actions:
 - [x] build out data loading script for contracts
 - [x] refactor escrows to use acts_as_list
 - [x] change expiration and maturation date field names
+- [x] update cross to use new escrow strategy 
 
-- [ ] update cross to use new escrow strategy 
+- [ ] /repo/:id  - add bids/asks/contracts
+- [ ] /bug/:id   - add bids/asks/contracts
+- [ ] /offers    - ...
+- [ ] /bids/:id  - ...
+- [ ] /asks/:id  - ...
+- [ ] /contracts - ...
+- [ ] /users/:id - show AVAILABLE_BALANCE
 
-- [ ] run UI end-to-end and update screens
 - [ ] deploy to production
 
 - [ ] sale: add offer_sell_cmd/create

@@ -8,12 +8,12 @@ module CoreReposHelper
   end
 
   def core_repo_bid_new_link(repo)
-    path = "/core/bids/new?type=git_hub&repo_id=#{repo.id}"
+    path = "/core/bids/new?type=git_hub&stm_repo_id=#{repo.id}"
     raw "<a href='#{path}'>Bid</a>"
   end
 
   def core_repo_ask_new_link(repo)
-    path = "/core/asks/new?type=git_hub&repo_id=#{repo.id}"
+    path = "/core/asks/new?type=git_hub&stm_repo_id=#{repo.id}"
     raw "<a href='#{path}'>Ask</a>"
   end
 
@@ -22,7 +22,7 @@ module CoreReposHelper
     count  = repo.contracts.count
     blbl   = repo.bug_contracts.count > 0 ? "*" : ""
     if count > 0
-      raw "<a href='/core/rewards?repo_id=#{repo.id}'>#{count}</a> #{blbl}"
+      raw "<a href='/core/rewards?stm_repo_id=#{repo.id}'>#{count}</a> #{blbl}"
     else
       "0 #{blbl}"
     end
@@ -31,7 +31,7 @@ module CoreReposHelper
   def core_repo_bug_link(repo)
     count = repo.bugs.count
     if count > 0
-      raw "<a class='buglink' href='/core/bugs?repo_id=#{repo.id}'>#{count}</a>"
+      raw "<a class='buglink' href='/core/bugs?stm_repo_id=#{repo.id}'>#{count}</a>"
     else
       count
     end
@@ -47,7 +47,9 @@ module CoreReposHelper
     cask  = core_repo_ask_new_link(repo)
     csync = link_to "Sync", {:action => :sync, :id => repo.id}
     cdest = core_repo_destroy_link(repo)
-    raw [cbid,cask,csync,cdest].select(&:present?).join(" | ")
+    # TODO: add sync and destroy
+    # raw [cbid,cask,csync,cdest].select(&:present?).join(" | ")
+    raw [cbid,cask].select(&:present?).join(" | ")
   end
 
   def core_repo_http_link(repo)

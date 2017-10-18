@@ -12,12 +12,12 @@ module Core
       case
         when bug_id = params["bug_id"]&.to_i
           @bug = Bug.find(bug_id)
-          @asks = Ask.where(bug_id: bug_id)
+          @asks = Offer::Buy::Ask.where(bug_id: bug_id)
         when stm_repo_id = params["stm_repo_id"]&.to_i
           @repo = Repo.find(stm_repo_id)
-          @asks = Ask.where(stm_repo_id: stm_repo_id)
+          @asks = Offer::Buy::Ask.where(stm_repo_id: stm_repo_id)
         else
-          @asks = Ask.all
+          @asks = Offer::Buy::Ask.all
       end
     end
 

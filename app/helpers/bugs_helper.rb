@@ -13,7 +13,7 @@ module BugsHelper
     repo = bug.repo
     id   = repo.id
     name = repo.name
-    l1   = "<a href='/core/bugs?repo_id=#{id}'><i class='fa fa-filter'></i></a> | "
+    l1   = "<a href='/core/bugs?stm_repo_id=#{id}'><i class='fa fa-filter'></i></a> | "
     l2   = "<a href='/core/repos/#{id}'>#{name}</a>"
     raw (filter.nil? ? l1 + l2 : l2)
   end
@@ -22,7 +22,7 @@ module BugsHelper
     # count = bug.contracts.count
     count = 0
     if count > 0
-      raw "<a href='/core/rewards?bug_id=#{bug.id}'>#{count}</a>"
+      raw "<a href='/core/rewards?stm_bug_id=#{bug.id}'>#{count}</a>"
     else
       count
     end
@@ -44,12 +44,12 @@ module BugsHelper
   # end
 
   def bug_ask_new_link(bug)
-    path = "/core/asks/new?type=git_hub&bug_id=#{bug.id}"
+    path = "/core/asks/new?type=git_hub&stm_bug_id=#{bug.id}"
     raw "<a href='#{path}'>Ask</a>"
   end
 
   def bug_bid_new_link(bug)
-    path = "/core/bids/new?type=git_hub&bug_id=#{bug.id}"
+    path = "/core/bids/new?type=git_hub&stm_bug_id=#{bug.id}"
     raw "<a href='#{path}'>Bid</a>"
   end
 
