@@ -12,13 +12,13 @@ class Contract < ApplicationRecord
   # has_many :bid_users, :through => :bids, :source => "user"
   # has_many :ask_users, :through => :asks, :source => "user"
 
-  has_one  :escrow
+  has_many  :escrows, -> {order(:position => :asc)}
 
   before_validation :default_values
   validates :status, inclusion: {in: %w(open matured resolved)}
   validates :contract_maturation, presence: true
   validates :volume, numericality: {only_integer: true, greater_than: 0}
-  validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
+  validates :price , numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
   # ----- SCOPES -----
   class << self

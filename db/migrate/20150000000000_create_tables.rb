@@ -118,8 +118,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :positions, :side
 
     create_table :escrows do |t|
+      t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
-      t.integer  :parent_id
       t.float    :bid_value,     default: 0.0
       t.float    :ask_value,     default: 0.0
       t.string   :exref
@@ -127,7 +127,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :escrows, :contract_id
-    add_index :escrows, :parent_id
+    add_index :escrows, :sequence
     add_index :escrows, :exref
     add_index :escrows, :uuref
 

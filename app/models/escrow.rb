@@ -2,9 +2,11 @@ class Escrow < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :contract , optional: true
+  belongs_to :contract
   belongs_to :parent   , class_name: "Escrow", foreign_key: "parent_id", optional: true
   has_one    :child    , class_name: "Escrow", foreign_key: "parent_id"
+
+  acts_as_list :scope => :contract
 
   has_many   :positions
   has_many   :bid_positions , -> { where(side: 'bid') }, class_name: "Position"
@@ -29,8 +31,8 @@ end
 # Table name: escrows
 #
 #  id          :integer          not null, primary key
+#  place       :integer
 #  contract_id :integer
-#  parent_id   :integer
 #  bid_value   :float            default(0.0)
 #  ask_value   :float            default(0.0)
 #  exref       :string

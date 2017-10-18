@@ -33,6 +33,7 @@ gem 'whenever'                    # cron jobs
 gem 'slim-rails'                  # slim templates
 gem 'tzinfo-data'                 # timezone support
 gem 'paper_trail'                 # model versioning
+gem 'acts_as_list'                # sortable lists by position
 
 # ----- pry production support  -----
 gem 'pry-rails'     # upgraded repl
