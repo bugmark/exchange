@@ -33,8 +33,8 @@ class Offer < ApplicationRecord
       where("id NOT IN (SELECT offer_id FROM positions)")
     end
 
-    def by_maturation_period(range)
-      where("maturation_period && tsrange(?, ?)", range.begin, range.end)
+    def by_maturation_range(range)
+      where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
 
     def is_buy_ask()  where(type: "Offer::Buy::Ask") end
@@ -45,16 +45,16 @@ class Offer < ApplicationRecord
 
   # ----- OVERLAP UTILS -----
   class << self
-    def by_overlap_maturation_period(range)
-      where("maturation_period && tsrange(?, ?)", range.begin, range.end)
+    def by_overlap_maturation_range(range)
+      where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
 
-    def by_overlap_maturation_date(date)
-      where("maturation_period @> ?::timestamp", date)
+    def by_overlap_maturation(date)
+      where("maturation_range @> ?::timestamp", date)
     end
 
     def overlaps(offer)
-      base = by_overlap_maturation_period(offer.maturation_period)
+      base = by_overlap_maturation_range(offer.maturation_range)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
   end
@@ -64,8 +64,8 @@ class Offer < ApplicationRecord
   end
 
   def overlap_contracts
-    beg, fin = [self.maturation_period.begin, self.maturation_period.end]
-    Contract.by_overlap_maturation_period(beg, fin)
+    beg, fin = [self.maturation_range.begin, self.maturation_range.end]
+    Contract.by_overlap_maturation_range(beg, fin)
   end
 
   # ----- CROSS UTILS -----
@@ -114,20 +114,21 @@ class Offer < ApplicationRecord
     self.volume - reserve_value
   end
 
-  def contract_maturation_str
-    self.maturation_date.strftime("%b-%d %H:%M:%S")
+  def maturation_str
+    self.maturation.strftime("%b-%d %H:%M:%S")
   end
 
-  def maturation_date=(date)
-    self.maturation_period = date-2.days..date
+  def maturation=(date)
+    tdate = date.to_time
+    self.maturation_range = tdate-2.days..tdate
   end
 
-  def maturation_date
-    maturation_period.end
+  def maturation
+    maturation_range.end
   end
 
   def matured?
-    self.maturation_date < Time.now
+    self.maturation < Time.now
   end
 
   def unmatured?
@@ -146,29 +147,29 @@ end
 #
 # Table name: offers
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  repo_type           :string
-#  user_id             :integer
-#  parent_id           :integer
-#  position_id         :integer
-#  counter_id          :integer
-#  volume              :integer          default(1)
-#  price               :float            default(0.5)
-#  poolable            :boolean          default(TRUE)
-#  aon                 :boolean          default(FALSE)
-#  status              :string
-#  offer_expiration    :datetime
-#  contract_maturation :datetime
-#  maturation_period   :tsrange
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  stm_bug_id          :integer
-#  stm_repo_id         :integer
-#  stm_title           :string
-#  stm_status          :string
-#  stm_labels          :string
-#  stm_xfields         :hstore           not null
-#  stm_jfields         :jsonb            not null
+#  id               :integer          not null, primary key
+#  type             :string
+#  repo_type        :string
+#  user_id          :integer
+#  parent_id        :integer
+#  position_id      :integer
+#  counter_id       :integer
+#  volume           :integer          default(1)
+#  price            :float            default(0.5)
+#  poolable         :boolean          default(TRUE)
+#  aon              :boolean          default(FALSE)
+#  status           :string
+#  expiration       :datetime
+#  maturation       :datetime
+#  maturation_range :tsrange
+#  jfields          :jsonb            not null
+#  exref            :string
+#  uuref            :string
+#  stm_bug_id       :integer
+#  stm_repo_id      :integer
+#  stm_title        :string
+#  stm_status       :string
+#  stm_labels       :string
+#  stm_xfields      :hstore           not null
+#  stm_jfields      :jsonb            not null
 #

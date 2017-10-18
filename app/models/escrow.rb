@@ -1,9 +1,9 @@
 class Escrow < ApplicationRecord
 
   has_paper_trail
-  acts_as_list :scope => :contract
+  acts_as_list :scope => :contract, :column => :sequence
 
-  belongs_to :contract
+  belongs_to :contract, optional: true
 
   has_many   :positions
   has_many   :bid_positions , -> { where(side: 'bid') }, class_name: "Position"

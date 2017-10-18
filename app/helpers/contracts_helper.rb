@@ -19,8 +19,8 @@ module ContractsHelper
   end
 
   def contract_mature_date(contract)
-    color = Time.now > contract.contract_maturation ? "red" : "green"
-    date = contract.contract_maturation_str
+    color = Time.now > contract.maturation ? "red" : "green"
+    date = contract.maturation_str
     raw "<span style='color: #{color};'>#{date}</span>"
   end
 

@@ -4,11 +4,10 @@ RSpec.describe Contract, type: :model do
 
   include_context 'Integration Environment'
 
-  def valid_params
+  def valid_params(opts = {})
     {
-      price:  0.2,
-      volume: 1
-    }
+
+    }.merge(opts)
   end
 
   let(:user) { User.create email: "asdf@qwer.net", password: "gggggg" }
@@ -16,7 +15,7 @@ RSpec.describe Contract, type: :model do
   subject    { klas.new(valid_params)                                 }
 
   describe "Associations" do
-    it { should respond_to(:escrow)            }
+    it { should respond_to(:escrows)            }
   end
 
   describe "Attributes" do
@@ -38,31 +37,6 @@ RSpec.describe Contract, type: :model do
     end
   end
 
-  describe "#escrow" do
-    it "returns nil when empty" do
-      expect(subject.escrow).to be_nil
-    end
-
-    it "returns an escrow when it exists" do
-      subject.save
-      Escrow.create(contract_id: subject.id)
-      expect(subject.escrow).to be_present
-    end
-
-    it "sets the escrow association" do
-      subject.save
-      Escrow.new.set_association(subject).save
-      subject.reload
-      expect(subject.escrow).to be_present
-    end
-  end
-
-  # describe "#escrow_tail" do
-  #   it "returns nil when empty"
-  #   it "returns the child with one"
-  #   it "returns the child with two"
-  # end
-
   describe "#uuref" do
     it 'holds a string' do
       subject.save
@@ -81,24 +55,22 @@ end
 #
 # Table name: contracts
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  mode                :string
-#  status              :string
-#  awarded_to          :string
-#  contract_maturation :datetime
-#  volume              :integer
-#  price               :float
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  stm_bug_id          :integer
-#  stm_repo_id         :integer
-#  stm_title           :string
-#  stm_status          :string
-#  stm_labels          :string
-#  stm_xfields         :hstore           not null
-#  stm_jfields         :jsonb            not null
+#  id          :integer          not null, primary key
+#  type        :string
+#  mode        :string
+#  status      :string
+#  awarded_to  :string
+#  maturation  :datetime
+#  jfields     :jsonb            not null
+#  exref       :string
+#  uuref       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  stm_bug_id  :integer
+#  stm_repo_id :integer
+#  stm_title   :string
+#  stm_status  :string
+#  stm_labels  :string
+#  stm_xfields :hstore           not null
+#  stm_jfields :jsonb            not null
 #

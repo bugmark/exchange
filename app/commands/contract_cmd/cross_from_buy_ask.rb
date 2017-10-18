@@ -14,9 +14,13 @@ module ContractCmd
     end
 
     def transact_before_project
+      # TODO: pick best-fit maturation date
+      contract.assign_attributes(ask.match_attrs)
+      contract.maturation = ask.maturation
       contract.save
-      escrow.assign_attributes(bid_value: bid.value, ask_value: ask.value)
-      escrow.set_association(contract).save
+      escrow.assign_attributes(contract_id: contract.id, bid_value: bid.value, ask_value: ask.value)
+      escrow.save
+      # TODO: pick best-fit price
       Position.create(volume: bid.volume, price: bid.price, offer_id: bid.id, escrow_id: escrow.id, side: 'bid')
       Position.create(volume: ask.volume, price: ask.price, offer_id: ask.id, escrow_id: escrow.id, side: 'ask')
       bid.update_attribute :status, 'crossed'
@@ -28,13 +32,11 @@ module ContractCmd
     private
 
     def gen_cross(ask)
+      # TODO: enable partial crosses, multi-party crosses
       return [] unless ask.present?
       bids = Offer::Buy::Bid.with_status('open').matches(ask).complements(ask).with_volume(ask.volume)
       if bids.count > 0
         bid = bids.first
-        contract.assign_attributes(ask.match_attrs)
-        contract.price  = ask.price
-        contract.volume = ask.volume
         [bid]
       else
         []

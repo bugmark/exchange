@@ -3,8 +3,8 @@ module OfferBuyCmd
 
     attr_subobjects :offer, :user
     attr_reader     :typ
-    attr_delegate_fields :offer, class_name: "Offer::Buy"
-    attr_vdelegate :maturation_date, :offer
+    attr_delegate_fields :offer     , class_name: "Offer::Buy"
+    attr_vdelegate       :maturation, :offer
 
     def initialize(typ, offer_args)
       @typ   = typ

@@ -92,7 +92,7 @@ module Core
       opts = {
         type: "Contract::#{params["type"]&.capitalize}",
         price: 0.10,
-        contract_maturation: Time.now + 3.minutes,
+        maturation: Time.now + 3.minutes,
         user_id: current_user.id
       }
       key = "stm_bug_id" if params["stm_bug_id"]

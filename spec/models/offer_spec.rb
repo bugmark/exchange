@@ -4,7 +4,7 @@ RSpec.describe Offer, type: :model do
   def valid_params(extras = {})
     {
       user_id: user.id                                      ,
-      maturation_period: Time.now-1.week..Time.now+1.week   ,
+      maturation_range: Time.now-1.week..Time.now+1.week   ,
       status:  'open'                                       ,
     }.merge(extras)
   end
@@ -69,30 +69,30 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  describe ".by_overlap_maturation_period" do
+  describe ".by_overlap_maturation_range" do
     before(:each) { subject.save }
 
     it "returns a range search" do
-      result = klas.by_overlap_maturation_period(Time.now..Time.now+1.minute)
+      result = klas.by_overlap_maturation_range(Time.now..Time.now+1.minute)
       expect(result.length).to eq(1)
     end
 
     it "returns zero when there is a miss" do
-      result = klas.by_overlap_maturation_period(Time.now-2.years..Time.now-1.year)
+      result = klas.by_overlap_maturation_range(Time.now-2.years..Time.now-1.year)
       expect(result.length).to eq(0)
     end
   end
 
-  describe ".by_overlap_maturation_date" do
+  describe ".by_overlap_maturation" do
     before(:each) { subject.save }
 
     it "returns a date search" do
-      result = klas.by_overlap_maturation_date(Time.now)
+      result = klas.by_overlap_maturation(Time.now)
       expect(result.length).to eq(1)
     end
 
     it "returns zero when there is a miss" do
-      result = klas.by_overlap_maturation_date(Time.now-2.years)
+      result = klas.by_overlap_maturation(Time.now-2.years)
       expect(result.length).to eq(0)
     end
   end
@@ -158,29 +158,29 @@ end
 #
 # Table name: offers
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  repo_type           :string
-#  user_id             :integer
-#  parent_id           :integer
-#  position_id         :integer
-#  counter_id          :integer
-#  volume              :integer          default(1)
-#  price               :float            default(0.5)
-#  poolable            :boolean          default(TRUE)
-#  aon                 :boolean          default(FALSE)
-#  status              :string
-#  offer_expiration    :datetime
-#  contract_maturation :datetime
-#  maturation_period   :tsrange
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  stm_bug_id          :integer
-#  stm_repo_id         :integer
-#  stm_title           :string
-#  stm_status          :string
-#  stm_labels          :string
-#  stm_xfields         :hstore           not null
-#  stm_jfields         :jsonb            not null
+#  id               :integer          not null, primary key
+#  type             :string
+#  repo_type        :string
+#  user_id          :integer
+#  parent_id        :integer
+#  position_id      :integer
+#  counter_id       :integer
+#  volume           :integer          default(1)
+#  price            :float            default(0.5)
+#  poolable         :boolean          default(TRUE)
+#  aon              :boolean          default(FALSE)
+#  status           :string
+#  expiration       :datetime
+#  maturation       :datetime
+#  maturation_range :tsrange
+#  jfields          :jsonb            not null
+#  exref            :string
+#  uuref            :string
+#  stm_bug_id       :integer
+#  stm_repo_id      :integer
+#  stm_title        :string
+#  stm_status       :string
+#  stm_labels       :string
+#  stm_xfields      :hstore           not null
+#  stm_jfields      :jsonb            not null
 #

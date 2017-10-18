@@ -15,7 +15,7 @@ describe "Bugs" do
   it "renders show", USE_VCR do
     hydrate(bug)
     visit "/core/bugs/#{bug.id}"
-    expect(page).to_not be_nil
+    expect(page).to_not be_nil #.
   end
 
   it "clicks thru to show", USE_VCR do
@@ -35,7 +35,7 @@ describe "Bugs" do
     click_on "Ask"
     click_on "Create Ask"
 
-    expect(Offer::Buy::Ask.count).to eq(1) #
+    expect(Offer::Buy::Ask.count).to eq(1)
   end
 
   it "creates a bid", USE_VCR do

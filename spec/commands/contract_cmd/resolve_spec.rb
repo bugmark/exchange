@@ -36,7 +36,7 @@ RSpec.describe ContractCmd::Resolve, type: :model do
   # TODO: fixme
   # describe "Object Saving" do
   #   it 'saves the object to the database' do
-  #     subject.contract_maturation = Time.now - 1.day
+  #     subject.maturation = Time.now - 1.day
   #     subject.project
   #     expect(subject).to be_valid
   #   end

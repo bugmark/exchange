@@ -169,7 +169,7 @@ Next Actions:
 
 # Oct 7
 
-- [x] add contract maturation_period for offers
+- [x] add contract maturation_range for offers
 - [x] add contract maturation date with range date - 2 days
 
 # Oct 8
@@ -179,7 +179,7 @@ Next Actions:
 # Oct 9
 
 - [x] add volume and price in offer/new
-- [x] add maturation_period for offers/new
+- [x] add maturation_range for offers/new
 
 # Oct 10
 
@@ -272,8 +272,10 @@ Next Actions:
 - [x] test data-loading scripts
 - [x] add specs for contract_cmd
 - [x] build out data loading script for contracts
+- [x] refactor escrows to use acts_as_list
+- [x] change expiration and maturation date field names
 
-- [ ] refactor escrows to use acts_as_list
+- [ ] update cross to use new escrow strategy 
 
 - [ ] run UI end-to-end and update screens
 - [ ] deploy to production

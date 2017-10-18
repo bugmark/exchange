@@ -14,10 +14,12 @@ class Contract < ApplicationRecord
 
   has_many :escrows, -> {order(:sequence => :asc)}
 
+  has_many :positions, :through => :escrows
+
   before_validation :default_values
 
   validates :status, inclusion: {in: %w(open matured resolved)}
-  validates :contract_maturation, presence: true
+  validates :maturation, presence: true
 
   # ----- SCOPES -----
   class << self
@@ -34,29 +36,28 @@ class Contract < ApplicationRecord
     end
 
     def matured
-      where("contract_maturation < ?", Time.now)
+      where("maturation < ?", Time.now)
     end
 
     def expired
-      where("contract_maturation < ?", Time.now)
+      where("maturation < ?", Time.now)
     end
 
     def unresolved
       where("stm_status != ?", "resolved")
     end
-
   end
 
   # ----- OVERLAP UTILS -----
   class << self
-    def by_overlap_maturation_period(beg, fin)
-      where('contract_maturation > ?::timestamp', beg).
-        where('contract_maturation < ?::timestamp', fin)
+    def by_overlap_maturation_range(beg, fin)
+      where('maturation > ?::timestamp', beg).
+        where('maturation < ?::timestamp', fin)
     end
   end
 
   def overlap_offers
-    Offer.by_overlap_maturation_date(self.maturation_date)
+    Offer.by_overlap_maturation(self.maturation)
   end
 
   # ----- INSTANCE METHODS -----
@@ -120,12 +121,12 @@ class Contract < ApplicationRecord
     "con"
   end
 
-  def contract_maturation_str
-    self.contract_maturation.strftime("%b-%d %H:%M:%S")
+  def maturation_str
+    self.maturation.strftime("%b-%d %H:%M:%S")
   end
 
   def matured?
-    self.contract_maturation < Time.now
+    self.maturation < Time.now
   end
 
   def unmatured?
@@ -143,8 +144,8 @@ class Contract < ApplicationRecord
   private
 
   def default_values
-    self.status                ||= 'open'
-    self.contract_maturation   ||= Time.now + 1.week
+    self.status       ||= 'open'
+    self.maturation   ||= Time.now + 1.week
   end
 end
 
@@ -152,24 +153,22 @@ end
 #
 # Table name: contracts
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  mode                :string
-#  status              :string
-#  awarded_to          :string
-#  contract_maturation :datetime
-#  volume              :integer
-#  price               :float
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  stm_bug_id          :integer
-#  stm_repo_id         :integer
-#  stm_title           :string
-#  stm_status          :string
-#  stm_labels          :string
-#  stm_xfields         :hstore           not null
-#  stm_jfields         :jsonb            not null
+#  id          :integer          not null, primary key
+#  type        :string
+#  mode        :string
+#  status      :string
+#  awarded_to  :string
+#  maturation  :datetime
+#  jfields     :jsonb            not null
+#  exref       :string
+#  uuref       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  stm_bug_id  :integer
+#  stm_repo_id :integer
+#  stm_title   :string
+#  stm_status  :string
+#  stm_labels  :string
+#  stm_xfields :hstore           not null
+#  stm_jfields :jsonb            not null
 #

@@ -47,9 +47,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.boolean   :poolable, default: true   # for reserve pooling
       t.boolean   :aon     , default: false  # All Or None
       t.string    :status                    # open, suspended, cancelled, ...
-      t.datetime  :offer_expiration
-      t.datetime  :contract_maturation
-      t.tsrange   :maturation_period
+      t.datetime  :expiration
+      t.datetime  :maturation
+      t.tsrange   :maturation_range
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref
@@ -60,15 +60,15 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :poolable
     add_index :offers, :exref
     add_index :offers, :uuref
-    add_index :offers, :maturation_period, using: :gist
-    add_index :offers, :jfields          , using: :gin
+    add_index :offers, :maturation_range, using: :gist
+    add_index :offers, :jfields         , using: :gin
 
     create_table :contracts do |t|
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
       t.string   :awarded_to          # bidder, asker
-      t.datetime :contract_maturation
+      t.datetime :maturation
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref

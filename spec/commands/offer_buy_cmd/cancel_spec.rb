@@ -20,7 +20,7 @@ RSpec.describe OfferBuyCmd::Cancel do
   describe "Subobjects", USE_VCR do
     it { should respond_to :subobject_symbols }
     it 'returns an array' do
-      expect(subject.subobject_symbols).to be_an(Array)
+      expect(subject.subobject_symbols).to be_an(Array) #
     end
   end
 
@@ -67,7 +67,7 @@ RSpec.describe OfferBuyCmd::Cancel do
     end
   end
 
-  describe "#event_save" do
+  describe "#event_save", USE_VCR do
     it 'creates an event' do
       expect(EventLine.count).to eq(0)
       subject.save_event
