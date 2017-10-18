@@ -35,12 +35,13 @@ gem 'tzinfo-data'                 # timezone support
 gem 'paper_trail'                 # model versioning
 gem 'acts_as_list'                # sortable lists by position
 
+gem 'factory_girl_rails'          # for data loading in production
+
 # ----- pry production support  -----
 gem 'pry-rails'     # upgraded repl
 gem 'hirb'          # display objects as tables
 
 group :development, :test do
-  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
