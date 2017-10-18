@@ -280,10 +280,11 @@ Next Actions:
 - [x] /repo/:id  - add bids/asks/contracts
 - [x] /bug/:id   - namespace bug helpers
 - [x] /bug/:id   - add offers/contracts
+- [x] /offers    - make namespaced offers helper
+- [x] /offers    - filter by repo
+- [x] /offers    - filter by bug
+- [x] /offers    - filter by user
 
-- [ ] /offers    - filter by repo
-- [ ] /offers    - filter by bug
-- [ ] /offers    - ...
 - [ ] /bids/:id  - ...
 - [ ] /asks/:id  - ...
 - [ ] /contracts - ...
