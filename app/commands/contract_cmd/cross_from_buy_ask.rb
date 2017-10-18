@@ -16,7 +16,7 @@ module ContractCmd
     def transact_before_project
       contract.save
       escrow.assign_attributes(bid_value: bid.value, ask_value: ask.value)
-      escrow.set_association.save
+      escrow.set_association(contract).save
       Position.create(volume: bid.volume, price: bid.price, offer_id: bid.id, escrow_id: escrow.id, side: 'bid')
       Position.create(volume: ask.volume, price: ask.price, offer_id: ask.id, escrow_id: escrow.id, side: 'ask')
       bid.update_attribute :status, 'crossed'
@@ -29,8 +29,8 @@ module ContractCmd
 
     def gen_cross(ask)
       return [] unless ask.present?
-      bids = Offer::Buy::Bid.not_open.matches(ask).complements(ask).with_volume(ask.volume)
-      if bids.count > 0
+      bids = Offer::Buy::Bid.with_status('open').matches(ask).complements(ask).with_volume(ask.volume)
+      if bids.count > 0 #
         bid = bids.first
         contract.assign_attributes(ask.match_attrs)
         contract.price  = ask.price

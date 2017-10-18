@@ -103,6 +103,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :offer_id
       t.integer  :escrow_id
       t.integer  :parent_id
+      t.integer  :volume
+      t.float    :price
       t.string   :side            # 'bid' or 'ask'
       t.string   :exref
       t.string   :uuref

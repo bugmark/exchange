@@ -36,6 +36,8 @@ end
 #  offer_id   :integer
 #  escrow_id  :integer
 #  parent_id  :integer
+#  volume     :integer
+#  price      :float
 #  side       :string
 #  exref      :string
 #  uuref      :string

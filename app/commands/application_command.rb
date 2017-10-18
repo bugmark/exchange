@@ -113,7 +113,10 @@ class ApplicationCommand
 
   # validations can live in the Command or the Sub-Object (or both!)
   def valid?
-    return false if subs.map(&:nil?).any?
+    if subs.map(&:nil?).any?
+      errors.add(:base, "missing sub-object")
+      return false
+    end
     if super && subs.map(&:valid?).all?
       true
     else

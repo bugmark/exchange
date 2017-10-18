@@ -12,9 +12,9 @@ class Escrow < ApplicationRecord
 
   def set_association(contract)
     if tail = contract.escrow_tail
-      parent_id = tail.id
+      self.parent_id = tail.id
     else
-      contract_id = contract.id
+      self.contract_id = contract.id
     end
     self
   end

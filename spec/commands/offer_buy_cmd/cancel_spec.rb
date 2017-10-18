@@ -38,7 +38,7 @@ RSpec.describe OfferBuyCmd::Cancel do
     end
   end
 
-  describe "#event_data" do
+  describe "#event_data", USE_VCR do
     it 'returns a hash' do
       expect(subject.event_data).to be_a(Hash)
     end
@@ -66,7 +66,6 @@ RSpec.describe OfferBuyCmd::Cancel do
       expect(Offer.with_status('cancelled').count).to eq(1)
     end
   end
-
 
   describe "#event_save" do
     it 'creates an event' do

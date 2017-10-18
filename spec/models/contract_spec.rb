@@ -38,6 +38,31 @@ RSpec.describe Contract, type: :model do
     end
   end
 
+  describe "#escrow" do
+    it "returns nil when empty" do
+      expect(subject.escrow).to be_nil
+    end
+
+    it "returns an escrow when it exists" do
+      subject.save
+      Escrow.create(contract_id: subject.id)
+      expect(subject.escrow).to be_present
+    end
+
+    it "sets the escrow association" do
+      subject.save
+      Escrow.new.set_association(subject).save
+      subject.reload
+      expect(subject.escrow).to be_present
+    end
+  end
+
+  # describe "#escrow_tail" do
+  #   it "returns nil when empty"
+  #   it "returns the child with one"
+  #   it "returns the child with two"
+  # end
+
   describe "#uuref" do
     it 'holds a string' do
       subject.save
@@ -69,8 +94,8 @@ end
 #  uuref               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  stm_repo_id         :integer
 #  stm_bug_id          :integer
+#  stm_repo_id         :integer
 #  stm_title           :string
 #  stm_status          :string
 #  stm_labels          :string

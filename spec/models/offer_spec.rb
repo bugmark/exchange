@@ -176,8 +176,8 @@ end
 #  jfields             :jsonb            not null
 #  exref               :string
 #  uuref               :string
-#  stm_repo_id         :integer
 #  stm_bug_id          :integer
+#  stm_repo_id         :integer
 #  stm_title           :string
 #  stm_status          :string
 #  stm_labels          :string

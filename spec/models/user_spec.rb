@@ -71,13 +71,13 @@ RSpec.describe User, type: :model do
   describe "#token_reserve_poolable", USE_VCR do
     it "has a value with one bid" do
       genbid
-      expect(usr.token_reserve_poolable).to eq(2.0)
+      expect(usr.token_reserve_poolable).to eq(6.0)
     end
 
     it "has a value with two bids" do
       genbid; genbid
       expect(Offer.count).to eq(2)
-      expect(usr.token_reserve_poolable).to eq(2.0)
+      expect(usr.token_reserve_poolable).to eq(6.0)
     end
 
     it "has a value with one ask" do
@@ -95,20 +95,20 @@ RSpec.describe User, type: :model do
       genbid; genask
       expect(Offer::Buy::Bid.count).to eq(1)
       expect(Offer::Buy::Ask.count).to eq(1)
-      expect(usr.token_reserve_poolable).to eq(4.0)
+      expect(usr.token_reserve_poolable).to eq(6.0)
     end
   end
 
   describe "#token_reserve_not_poolable", USE_VCR do
     it "has a value with one bid" do
       genbid(poolable: false)
-      expect(usr.token_reserve_not_poolable).to eq(2.0)
+      expect(usr.token_reserve_not_poolable).to eq(6.0)
     end
 
     it "has a value with two bids" do
       genbid(poolable: false); genbid(poolable: false)
       expect(Offer.count).to eq(2)
-      expect(usr.token_reserve_not_poolable).to eq(4.0)
+      expect(usr.token_reserve_not_poolable).to eq(12.0)
     end
 
     it "has a value with one ask" do
@@ -125,7 +125,7 @@ RSpec.describe User, type: :model do
     it "has a value with a bid and an ask" do
       genbid(poolable: false); genask(poolable: false)
       expect(Offer::Buy::Bid.count).to eq(1)
-      expect(Offer::Buy::Ask.count).to eq(1)
+      expect(Offer::Buy::Ask.count).to eq(0)
       expect(usr.token_reserve_not_poolable).to eq(6.0)
     end
   end
@@ -133,13 +133,13 @@ RSpec.describe User, type: :model do
   describe "#token_available", USE_VCR do
     it "has a value with one bid" do
       genbid(poolable: false)
-      expect(usr.token_available).to eq(98.0)
+      expect(usr.token_available).to eq(94.0)
     end
 
     it "has a value with two bids" do
       genbid(poolable: false); genbid(poolable: false)
       expect(Offer.count).to eq(2)
-      expect(usr.token_available).to eq(96.0)
+      expect(usr.token_available).to eq(88.0)
     end
 
     it "has a value with one ask" do
@@ -158,7 +158,7 @@ RSpec.describe User, type: :model do
       genbid; genask(poolable: false)
       expect(Offer::Buy::Bid.count).to eq(1)
       expect(Offer::Buy::Ask.count).to eq(1)
-      expect(usr.token_available).to eq(94.0)
+      expect(usr.token_available).to eq(90.0)
     end
   end
 end

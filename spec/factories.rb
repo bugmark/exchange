@@ -35,7 +35,7 @@ FactoryGirl.define do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(:bid, attributes) }
 
-    price               0.20
+    price               0.60
     volume              10
     status              "open"
     contract_maturation Time.now + 1.day
