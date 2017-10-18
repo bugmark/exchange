@@ -35,7 +35,7 @@ end
 # Table name: escrows
 #
 #  id          :integer          not null, primary key
-#  place       :integer
+#  sequence    :integer
 #  contract_id :integer
 #  bid_value   :float            default(0.0)
 #  ask_value   :float            default(0.0)
