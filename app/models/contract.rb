@@ -12,7 +12,7 @@ class Contract < ApplicationRecord
   # has_many :bid_users, :through => :bids, :source => "user"
   # has_many :ask_users, :through => :asks, :source => "user"
 
-  has_many  :escrows, -> {order(:position => :asc)}
+  has_many  :escrows, -> {order(:sequence => :asc)}
 
   before_validation :default_values
   validates :status, inclusion: {in: %w(open matured resolved)}
