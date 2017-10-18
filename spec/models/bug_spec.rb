@@ -72,6 +72,18 @@ RSpec.describe Bug, type: :model do
     end
   end
 
+  describe "stm_bug_id" do
+    it "starts empty" do
+      expect(subject.stm_bug_id).to be_nil
+    end
+
+    it "fills when saved" do
+      subject.save
+      expect(subject.stm_bug_id).to_not be_nil
+      expect(subject.stm_bug_id).to eq(subject.id)
+    end
+  end
+
   describe "#html_url" do
     it { should respond_to :html_url                   }
     it { should respond_to :html_url=                  }

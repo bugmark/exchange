@@ -7,10 +7,10 @@ class Contract < ApplicationRecord
   # belongs_to :bug , optional: true
   # belongs_to :repo, optional: true
 
-  has_many :bids
-  has_many :asks
-  has_many :bid_users, :through => :bids, :source => "user"
-  has_many :ask_users, :through => :asks, :source => "user"
+  # has_many :bids
+  # has_many :asks
+  # has_many :bid_users, :through => :bids, :source => "user"
+  # has_many :ask_users, :through => :asks, :source => "user"
 
   has_one  :escrow
 

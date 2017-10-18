@@ -4,33 +4,33 @@ require "./config/environment"
 
 opts = [
   {
-    bug_id:               Bug.second.id  ,
+    stm_bug_id:           Bug.second.id  ,
     price:                0.10           ,
     volume:               5              ,
     user_id:              User.first.id  ,
     contract_maturation:  Time.now + 1.week
   },
   {
-    bug_id:               Bug.third.id   ,
+    stm_bug_id:           Bug.third.id   ,
     price:                0.50           ,
     volume:               1              ,
     user_id:              User.second.id ,
     contract_maturation:  Time.now + 1.hour
   },
   {
-    bug_id:               Bug.third.id  ,
+    stm_bug_id:           Bug.third.id  ,
     price:                0.15            ,
     user_id:              User.last.id ,
     contract_maturation:  Time.now + 1.day
   },
   {
-    bug_id:               Bug.third.id   ,
+    stm_bug_id:           Bug.third.id   ,
     price:                0.20           ,
     user_id:              User.last.id   ,
     contract_maturation:  Time.now - 1.hour
   },
   {
-    bug_id:               Bug.first.id  ,
+    stm_bug_id:           Bug.first.id  ,
     price:                0.5           ,
     user_id:              User.last.id  ,
     contract_maturation:  Time.now - 1.hour

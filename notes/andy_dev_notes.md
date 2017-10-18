@@ -261,6 +261,7 @@ Next Actions:
 - [x] cross: generate escrow
 - [x] cross: generate positions
 - [x] set default offer to non-poolable
+- [x] auto-update Bug#stm_bug_id
 
 - [ ] build out data loading scripts for offers
 - [ ] run and edit UI

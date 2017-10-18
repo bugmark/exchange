@@ -82,8 +82,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     # ----- STATEMENT FIELDS -----
     %i(bugs offers contracts).each do |table|
-      add_column table, :stm_repo_id , :integer
       add_column table, :stm_bug_id  , :integer
+      add_column table, :stm_repo_id , :integer
       add_column table, :stm_title   , :string
       add_column table, :stm_status  , :string
       add_column table, :stm_labels  , :string
