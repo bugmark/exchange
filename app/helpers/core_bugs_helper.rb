@@ -18,11 +18,19 @@ module CoreBugsHelper
     raw (filter.nil? ? l1 + l2 : l2)
   end
 
-  def core_bug_contract_link(bug)
-    # count = bug.contracts.count
-    count = 0
+  def core_bug_offer_link(bug)
+    count = bug.offers.count
     if count > 0
-      raw "<a href='/core/rewards?stm_bug_id=#{bug.id}'>#{count}</a>"
+      raw "<a class='offerlink' href='/core/offers?stm_bug_id=#{bug.id}'>#{count}</a>"
+    else
+      count
+    end
+  end
+
+  def core_bug_contract_link(bug)
+    count = bug.contracts.count
+    if count > 0
+      raw "<a class='contractlink' href='/core/contracts?stm_bug_id=#{bug.id}'>#{count}</a>"
     else
       count
     end
