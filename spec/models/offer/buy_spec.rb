@@ -10,11 +10,11 @@ RSpec.describe Offer::Buy, type: :model do
   end
 
   def genbid(args = {})
-    FG.create(:buy_bid, valid_params.merge(args)).bid
+    FG.create(:buy_bid, valid_params.merge(args)).offer
   end
 
   def genask(args = {})
-    FG.create(:buy_ask, valid_params.merge(args)).ask
+    FG.create(:buy_ask, valid_params.merge(args)).offer
   end
 
   let(:usr)    { FG.create(:user, balance: 100.0).user }

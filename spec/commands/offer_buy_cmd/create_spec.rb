@@ -1,20 +1,22 @@
 require 'rails_helper'
 
-RSpec.describe BuyBidCmd::Create do
+RSpec.describe OfferBuyCmd::Create do
 
-  def valid_params
+  def valid_params(args = {})
     {
       user_id: user.id
-    }
+    }.merge(args)
   end
+
+  def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
   let(:user)   { FG.create(:user).user                                  }
   let(:klas)   { described_class                                        }
-  subject      { klas.new(valid_params)                                 }
+  subject      { klas.new(:bid, valid_params)                           }
 
   describe "Attributes" do
     it { should respond_to :user                   }
-    it { should respond_to :bid                    }
+    it { should respond_to :offer                  }
   end
 
   describe "Object Existence" do

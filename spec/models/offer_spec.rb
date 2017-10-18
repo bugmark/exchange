@@ -97,6 +97,15 @@ RSpec.describe Offer, type: :model do
     end
   end
 
+  describe ".open" do
+    it "works" do
+      subject.save
+      expect(Offer.open.count).to eq(1)
+      expect(Offer.not_open.count).to eq(0)
+    end
+
+  end
+
   describe "#overlap_offers" do
     before(:each) { subject.save }
 

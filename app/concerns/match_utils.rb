@@ -53,6 +53,10 @@ module MatchUtils
 
     # -----
 
+    def matches(obj)
+      match(obj.match_attrs)
+    end
+
     def match(attrs)
       attrs.without_blanks.reduce(base_scope) do |acc, (key, val)|
         scope_for(acc, key, val)

@@ -22,6 +22,7 @@ class Offer < ApplicationRecord
     def with_status(status)    where(status: status)      end
     def without_status(status) where.not(status: status)  end
 
+    def open()     with_status('open')    end
     def not_open() without_status('open') end
 
     def assigned
@@ -71,6 +72,10 @@ class Offer < ApplicationRecord
   class << self
     def with_price(price)
       where(price: price)
+    end
+
+    def with_volume(volume)
+      where(volume: volume)
     end
 
     def complements(offer)

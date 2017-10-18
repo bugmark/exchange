@@ -31,9 +31,9 @@ FactoryGirl.define do
     stm_repo_id { FG.create(:repo).id }
   end
 
-  factory :buy_bid, class: BuyBidCmd::Create do
+  factory :buy_bid, class: OfferBuyCmd::Create do
     to_create {|instance| instance.save_event.project}
-    initialize_with { new(attributes) }
+    initialize_with { new(:bid, attributes) }
 
     price               0.20
     volume              10
@@ -47,9 +47,9 @@ FactoryGirl.define do
     end
   end
 
-  factory :buy_ask, class: BuyAskCmd::Create do
+  factory :buy_ask, class: OfferBuyCmd::Create do
     to_create {|instance| instance.save_event.project}
-    initialize_with { new(attributes) }
+    initialize_with { new(:ask, attributes) }
 
     price               0.40
     volume              10

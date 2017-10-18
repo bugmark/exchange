@@ -19,7 +19,8 @@ RSpec.describe Bug, type: :model do
 
   describe "Associations" do
     it { should respond_to(:repo)         }
-    it { should respond_to(:contracts)    }
+    it { should respond_to(:bids)         }
+    it { should respond_to(:asks)         }
   end
 
   describe "Object Creation" do
@@ -77,7 +78,7 @@ RSpec.describe Bug, type: :model do
       expect(subject.stm_bug_id).to be_nil
     end
 
-    it "fills when saved" do
+    it "fills when saved" do  #
       subject.save
       expect(subject.stm_bug_id).to_not be_nil
       expect(subject.stm_bug_id).to eq(subject.id)

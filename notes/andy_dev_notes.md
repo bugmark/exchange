@@ -262,9 +262,13 @@ Next Actions:
 - [x] cross: generate positions
 - [x] set default offer to non-poolable
 - [x] auto-update Bug#stm_bug_id
+- [x] build out data loading scripts for offers
+- [x] run and edit UI
 
-- [ ] build out data loading scripts for offers
-- [ ] run and edit UI
+# Oct 18
+
+- [ ] merge buy_bid_cmd and buy_ask_cmd into offer_buy_cmd/create
+- [ ] write offer_buy_cmd/cancel
 
 - [ ] add specs for contract_cmd
 
@@ -273,8 +277,8 @@ Next Actions:
 - [ ] run UI end-to-end and update screens
 - [ ] deploy to production
 
-- [ ] sale: add sell_bid_cmd/create
-- [ ] sale: add sell_ask_cmd/create
+- [ ] sale: add offer_sell_cmd/create
+- [ ] sale: add offer_sell_cmd/cancel
 
 - [ ] cross: add contract_cmd/cross_from_sell_ask
 - [ ] cross: make cross match buy and sell
