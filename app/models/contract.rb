@@ -12,13 +12,12 @@ class Contract < ApplicationRecord
   # has_many :bid_users, :through => :bids, :source => "user"
   # has_many :ask_users, :through => :asks, :source => "user"
 
-  has_many  :escrows, -> {order(:sequence => :asc)}
+  has_many :escrows, -> {order(:sequence => :asc)}
 
   before_validation :default_values
+
   validates :status, inclusion: {in: %w(open matured resolved)}
   validates :contract_maturation, presence: true
-  validates :volume, numericality: {only_integer: true, greater_than: 0}
-  validates :price , numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
   # ----- SCOPES -----
   class << self
@@ -61,13 +60,6 @@ class Contract < ApplicationRecord
   end
 
   # ----- INSTANCE METHODS -----
-  def escrow_tail
-    return nil unless escrow = self.escrow
-    while escrow.child do
-      escrow = escrow.child
-    end
-    escrow
-  end
 
   def users
     (bid_users + ask_users).uniq

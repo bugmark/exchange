@@ -69,8 +69,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :status              # open, matured, resolved
       t.string   :awarded_to          # bidder, asker
       t.datetime :contract_maturation
-      t.integer  :volume
-      t.float    :price
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref
