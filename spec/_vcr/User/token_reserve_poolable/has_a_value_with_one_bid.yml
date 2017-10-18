@@ -1,0 +1,76 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/mvscorg/bugmark
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.6.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic YW5keWw6MDNkNWE4Zjk2MDk2MzY2YWI0YWQ4MGI2ZTgyM2MzZDQ5YjgyZmVlMg==
+      If-Modified-Since:
+      - Sun, 15 Oct 2017 09:02:29 GMT
+      If-None-Match:
+      - '"02a6b03344ba9dc24570b1eae696e0fd"'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 304
+      message: Not Modified
+    headers:
+      Date:
+      - Sun, 15 Oct 2017 21:05:29 GMT
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - GitHub.com
+      Status:
+      - 304 Not Modified
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4996'
+      X-Ratelimit-Reset:
+      - '1508102264'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"02a6b03344ba9dc24570b1eae696e0fd"'
+      Last-Modified:
+      - Sun, 15 Oct 2017 09:02:29 GMT
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.056161'
+      X-Github-Request-Id:
+      - D524:2D5B6:1D403389:29D23439:59E3CD99
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Sun, 15 Oct 2017 21:05:29 GMT
+recorded_with: VCR 3.0.3

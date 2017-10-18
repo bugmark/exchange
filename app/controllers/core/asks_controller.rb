@@ -12,22 +12,22 @@ module Core
       case
         when bug_id = params["bug_id"]&.to_i
           @bug = Bug.find(bug_id)
-          @asks = Ask.where(bug_id: bug_id)
-        when repo_id = params["repo_id"]&.to_i
-          @repo = Repo.find(repo_id)
-          @asks = Ask.where(repo_id: repo_id)
+          @asks = Offer::Buy::Ask.where(bug_id: bug_id)
+        when stm_repo_id = params["stm_repo_id"]&.to_i
+          @repo = Repo.find(stm_repo_id)
+          @asks = Offer::Buy::Ask.where(stm_repo_id: stm_repo_id)
         else
-          @asks = Ask.all
+          @asks = Offer::Buy::Ask.all
       end
     end
 
     def show
-      @ask = Ask.find(params["id"])
+      @ask = Offer::Buy::Ask.find(params["id"])
     end
 
     # bug_id or repo_id, type(forecast | reward)
     def new
-      @ask = AskCmd::Create.new(new_opts(params))
+      @ask = OfferBuyCmd::Create.new(:ask, new_opts(params))
     end
 
     # id (contract ID)
@@ -36,12 +36,12 @@ module Core
     end
 
     def create
-      opts = params["ask_cmd_create"]
-      @ask = AskCmd::Create.new(valid_params(opts))
+      opts = params["offer_buy_cmd_create"]
+      @ask = OfferBuyCmd::Create.new(:ask, valid_params(opts))
       if @ask.save_event.project
-        redirect_to("/asks/#{@ask.id}")
+        redirect_to("/core/asks/#{@ask.id}")
       else
-        render 'asks/new'
+        render 'core/asks/new'
       end
     end
 
@@ -58,20 +58,22 @@ module Core
     private
 
     def valid_params(params)
-      fields = Ask.attribute_names.map(&:to_sym)
+      fields = Offer::Buy::Ask.attribute_names.map(&:to_sym)
       params.permit(fields)
     end
 
     def new_opts(params)
       opts = {
-        type: "Ask::#{params["type"]&.camelize || 'GitHub'}",
-        price: 0.50,
-        contract_maturation: Time.now + 3.minutes,
+        price:      0.50                      ,
+        volume:     5                         ,
+        status:     "open"                    ,
+        stm_status: "closed"                  ,
+        maturation: Time.now + 3.minutes ,
         user_id: current_user.id
       }
-      key = "bug_id" if params["bug_id"]
-      key = "repo_id" if params["repo_id"]
-      id = params["bug_id"] || params["repo_id"]
+      key = "stm_bug_id" if params["stm_bug_id"]
+      key = "stm_repo_id" if params["stm_repo_id"]
+      id = params["stm_bug_id"] || params["stm_repo_id"]
       opts.merge({key => id}).without_blanks
     end
   end

@@ -4,6 +4,6 @@ hr
 hr
 - if @repo.errors.any?
   .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@repo) do |f|
+= bootstrap_form_for(@repo, url: "/core/repos") do |f|
   = f.text_field   :name, placeholder: "<GitHub Account Name>/<GitHub Repo Name>"
   = f.submit

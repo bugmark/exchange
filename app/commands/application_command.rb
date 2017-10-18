@@ -49,14 +49,20 @@ class ApplicationCommand
   end
 
   # delegate all fields of a subobject to the subobject
-  def self.attr_delegate_fields(*klas_list)
-    klas_list.each do |sym|
-      klas = sym.to_s.camelize.constantize
-      getters = klas.attribute_names.map(&:to_sym)
-      setters = klas.attribute_names.map { |x| "#{x}=".to_sym }
-      delegate *getters, to: sym
-      delegate *setters, to: sym
-    end
+  def self.attr_delegate_fields(sym, opts = {})  #class_name
+    klas_name = opts[:class_name] || sym
+    klas    = klas_name.to_s.camelize.constantize
+    getters = klas.attribute_names.map(&:to_sym)
+    setters = klas.attribute_names.map { |x| "#{x}=".to_sym }
+    delegate *getters, to: sym
+    delegate *setters, to: sym
+  end
+
+  def self.attr_vdelegate(method, klas_sym)
+    getter = method
+    setter = "#{method}=".to_sym
+    delegate getter, to: klas_sym
+    delegate setter, to: klas_sym
   end
 
   # ----- template methods - override in subclass
@@ -107,6 +113,10 @@ class ApplicationCommand
 
   # validations can live in the Command or the Sub-Object (or both!)
   def valid?
+    if subs.map(&:nil?).any?
+      errors.add(:base, "missing sub-object")
+      return false
+    end
     if super && subs.map(&:valid?).all?
       true
     else

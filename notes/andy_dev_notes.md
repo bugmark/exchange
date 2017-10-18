@@ -10,179 +10,323 @@ CQRS Design:
 - events can come from Rails app or Blockchain
  
 CQRS TODO:
-- [DONE] rename 'form' to 'commands'
-- [DONE] add a 'ref' field to all objects (uuref and exref)
-- [DONE] write a Projection class
-- [DONE] make all the Commands emit events
+- [x] rename 'form' to 'commands'
+- [x] add a 'ref' field to all objects (uuref and exref)
+- [x] write a Projection class
+- [x] make all the Commands emit events
 - write a user registration controller that uses commands
 - build tests to save and re-play events
 - add the event stream to the UI (account history, etc.)
 - integrate with blockchain
 
 Next Actions:
-- [DONE] add CronJobs scripts
-- [DONE] update CronJobs on production deploy
+- [x] add CronJobs scripts
+- [x] update CronJobs on production deploy
 
 # Jul 31
 
 Next Actions:
-- [DONE] add a resolve command and contract support methods
-- [DONE] add a resolve script
-- [DONE] launch resolve script from production cron
-- [DONE] add a weekly account top-up script
-- [DONE] launch top-up script from production cron
+- [x] add a resolve command and contract support methods
+- [x] add a resolve script
+- [x] launch resolve script from production cron
+- [x] add a weekly account top-up script
+- [x] launch top-up script from production cron
 
 # Aug 01
 
 Next Actions:
-- [DONE] add repo add/remove
-- [DONE] add repo sync
-- [DONE] add repo sync to cron
-- [DONE] UI: add font awesome
-- [DONE] UI: add table sorting
-- [DONE] UI: change 'forecast' to 'contract'
-- [DONE] UI: convert layout to slim
-- [DONE] UI: add javascript block
+- [x] add repo add/remove
+- [x] add repo sync
+- [x] add repo sync to cron
+- [x] UI: add font awesome
+- [x] UI: add table sorting
+- [x] UI: change 'forecast' to 'contract'
+- [x] UI: convert layout to slim
+- [x] UI: add javascript block
 
 # Aug 02
 
 Next Actions:
-- [DONE] Add a bugmark-guides repo
-- [DONE] Add a bugmark-slides repo
-- [DONE] UI: fix repo show page
-- [DONE] UI: fix bug show page
-- [DONE] UI: fix contract show page
-- [DONE] UI: add a contract resolve link
-- [DONE] UI: set clock to pacific time
+- [x] Add a bugmark-guides repo
+- [x] Add a bugmark-slides repo
+- [x] UI: fix repo show page
+- [x] UI: fix bug show page
+- [x] UI: fix contract show page
+- [x] UI: add a contract resolve link
+- [x] UI: set clock to pacific time
 
 # Aug 03
 
-- [DONE] UI: color-code contract status
-- [DONE] add tests for contract-resolution use cases
-- [DONE] UI: add days/hours/minutes for contract maturation
-- [DONE] UI: add selective display of actions
-- [DONE] UI: selective repo destroy (no contracts)
+- [x] UI: color-code contract status
+- [x] add tests for contract-resolution use cases
+- [x] UI: add days/hours/minutes for contract maturation
+- [x] UI: add selective display of actions
+- [x] UI: selective repo destroy (no contracts)
 
 # Aug 04
 
-- [DONE] Fix demo bugs
+- [x] Fix demo bugs
 
 # Aug 07
 
-- [TODO] Publish Contract Design V2
+- [x] Publish Contract Design V2
 
 # Aug 08
 
-- [DONE] Add feature specs
+- [x] Add feature specs
 
 # Aug 19
 
-- [DONE] Event sourcing full implementation
+- [x] Event sourcing full implementation
 
 # Aug 24
 
-- [DONE] Publish Trading Mechanics V2 plan
+- [x] Publish Trading Mechanics V2 plan
 
 # Aug 25
 
-- [DONE] Push V2 branch
+- [x] Push V2 branch
 
 # Aug 26
 
-- [DONE] add bid/ask models
-- [DONE] UI: upgrade to bootstrap beta
+- [x] add bid/ask models
+- [x] UI: upgrade to bootstrap beta
 
 # Sep 05
 
-- [DONE] add etag field to repo and bug as xfields
+- [x] add etag field to repo and bug as xfields
 
 # Sep 06
 
-- [DONE] add user authentication to GitHub calls
-- [DONE] add conditional fetch (etag) to GitHub calls
-- [DONE] add a GitHub api wrapper class (record calls and rate limits)
-- [DONE] add VCR mocking for GitHub testing
-- [DONE] create bid/ask commands
-- [DONE] create bid/ask loading scripts
-- [DONE] build out bids/new page
-- [DONE] build out asks/new page
-- [DONE] contract change from forecast to repo type
-- [DONE] build out Offers page                    
+- [x] add user authentication to GitHub calls
+- [x] add conditional fetch (etag) to GitHub calls
+- [x] add a GitHub api wrapper class (record calls and rate limits)
+- [x] add VCR mocking for GitHub testing
+- [x] create bid/ask commands
+- [x] create bid/ask loading scripts
+- [x] build out bids/new page
+- [x] build out asks/new page
+- [x] contract change from forecast to repo type
+- [x] build out Offers page                    
 
 # Sep 07
 
-- [DONE] create a Bid#cross method
-- [DONE] create ContractCmd::Cross
-- [DONE] create script/data/contract_load
+- [x] create a Bid#cross method
+- [x] create ContractCmd::Cross
+- [x] create script/data/contract_load
 
 # Sep 08
 
-- [DONE] build out Contracts page
-- [DONE] build out user trading page
-- [DONE] add specs for models, commands, features
-- [DONE] show bid/ask token amounts in contract
+- [x] build out Contracts page
+- [x] build out user trading page
+- [x] add specs for models, commands, features
+- [x] show bid/ask token amounts in contract
 
 # Sep 09
 
-- [DONE] test multi-party contracts
-- [DONE] constrain crosses by token amounts - partial fill
-- [DONE] create ContractCmd::Resolve
-- [DONE] fix contract page parameters
-- [DONE] add resolve button to /contracts page
+- [x] test multi-party contracts
+- [x] constrain crosses by token amounts - partial fill
+- [x] create ContractCmd::Resolve
+- [x] fix contract page parameters
+- [x] add resolve button to /contracts page
 
 # Sep 11
 
-- [DONE] add ask/cross button to /offers page
+- [x] add ask/cross button to /offers page
 
 # Sep 12
 
-- [DONE] fix VCR configuration
-- [DONE] feature specs for all pages
+- [x] fix VCR configuration
+- [x] feature specs for all pages
 
 # Sep 13
 
-- [DONE] enable a prediction (dynamic) contract type
-- [DONE] add buy-side odds
-- [DONE] add a forecasts page
-- [DONE] add cross button to offers#index
-- [DONE] add cross button to asks#show
-- [DONE] rename ContractCmd to ContractCmd
-- [DONE] rename 'contracts' to 'rewards'
+- [x] enable a prediction (dynamic) contract type
+- [x] add buy-side odds
+- [x] add a forecasts page
+- [x] add cross button to offers#index
+- [x] add cross button to asks#show
+- [x] rename ContractCmd to ContractCmd
+- [x] rename 'contracts' to 'rewards'
 
 # Sep 23
 
-- [DONE] add namespaces for "core" and "bugfix" apps
-- [DONE] add home page for "core" and "bugfix"
+- [x] add namespaces for "core" and "bugfix" apps
+- [x] add home page for "core" and "bugfix"
 
 # Oct 3
 
-- [TODO] all tests pass
+- [x] all tests pass
 
-# Oct 4
+# Oct 5
 
-- [TODO] build ContractCmd::Cross
+- [x] build ContractCmd::Cross
+
+# Oct 6
+
+- [x] render contract/show
+- [x] get rid of bug presence in UI
+
+# Oct 7
+
+- [x] add contract maturation_range for offers
+- [x] add contract maturation date with range date - 2 days
+
+# Oct 8
+
+- [x] update design for reselling and position allocation
+
+# Oct 9
+
+- [x] add volume and price in offer/new
+- [x] add maturation_range for offers/new
+
+# Oct 10
+
+- [x] add documentation to bid/ask new
+- [x] fix url on bug#show
+- [x] add bid-count (with link) to bug#show
+- [x] add ask-count (with link) to bug#show
+
+# Oct 12
+
+- [x] finalize the contract design
+
+# Oct 13
+
+- [x] rename 'match params' to 'statement'
+- [x] add offers
+- [x] add positions
+- [x] add escrows
+- [x] add specs for escrows
+- [x] add ERD diagram for Rails Models
+- [x] add specs for positions
+- [x] collapse 'bids/asks' into offers(?)
+- [x] add specs for offers
+- [x] offer: change 'bug_' to 'statement_'(?)
+
+# Oct 14
+
+- [x] design Position/Escrow/Offer commands
+- [x] rebuild offer commands   (with specs)
+- [x] build positions commands (with specs)
+- [x] build escrow commands    (with specs)
+- [x] add factories for bid_buy
+- [x] add spec for bid-buy-factory
+- [x] add factories for positions
+- [x] add spec for position-factory
+- [x] add factories for escrows
+- [x] add spec for escrow-factory
+- [x] add factories for ask_buy
+- [x] add spec for ask_buy-factory
+- [x] build out data loading scripts
+- [x] get offer-page working
+- [x] get bid/new and ask/new working
+- [x] get bid/create and ask/create working
+- [x] restore all feature specs
+
+# Oct 15
+
+- [x] add GraphViz for contract structures
+- [x] add PaperTrail for object changes
+- [x] bid_buy/ask_buy: design configurable reserves
+- [x] refactor buy/sell offers
+- [x] add user-reserves methods
+- [x] bid_buy/ask_buy: generate reserves
+- [x] bid_buy/ask_buy: add specs
+- [x] write Offer::Buy.user_funds validation
+
+# Oct 16
+
+- [x] test Offer::Buy.user_funds validation
+- [x] bid_buy/ask_buy: show reserves on user-detail page
+- [x] combine bid_buy/ask_buy into offer_buy
+
+# Oct 17
+
+- [x] create statement fields
+- [x] add specs for buy_ask_cmd
+- [x] add specs for buy_bid_cmd
+- [x] add factory_girl specs for all factories
+- [x] create MatchUtils module methods
+- [x] Define Overlap methods  (offer & contract)
+- [x] Define Cross methods    (offer)
+- [x] add price limits
+- [x] add bid/ask date ranges
+- [x] Test matching
+- [x] Test overlapping
+- [x] Test crossing
+- [x] add matcher object for offers (GitHub, CVE, etc.)
+- [x] cross: fix cross
+- [x] cross: generate escrow
+- [x] cross: generate positions
+- [x] set default offer to non-poolable
+- [x] auto-update Bug#stm_bug_id
+- [x] build out data loading scripts for offers
+- [x] run and edit UI
+
+# Oct 18
+
+- [x] merge buy_bid_cmd and buy_ask_cmd into offer_buy_cmd/create
+- [x] write offer_buy_cmd/cancel with specs
+- [x] test data-loading scripts
+- [x] add specs for contract_cmd
+- [x] build out data loading script for contracts
+- [x] refactor escrows to use acts_as_list
+- [x] change expiration and maturation date field names
+- [x] update cross to use new escrow strategy 
+- [x] /repo      - add offers   count/link
+- [x] /repo      - add contract count/link
+- [x] /repo/:id  - add bids/asks/contracts
+- [x] /bug/:id   - namespace bug helpers
+- [x] /bug/:id   - add offers/contracts
+- [x] /offers    - make namespaced offers helper
+- [x] /offers    - filter by repo
+- [x] /offers    - filter by bug
+- [x] /offers    - filter by user
+- [x] /bids/:id  - ...
+- [x] /asks/:id  - ...
+- [x] /contracts - ...
+- [x] /users/:id - show AVAILABLE_BALANCE
+- [x] navbar     - show AVAILABLE_BALANCE
+
+- [ ] deploy to production
+
+- [ ] sale: add offer_sell_cmd/create
+- [ ] sale: add offer_sell_cmd/cancel
+
+- [ ] cross: add contract_cmd/cross_from_sell_ask
+- [ ] cross: make cross match buy and sell
+
+- [ ] add UI support for crosses
+
+- [ ] bid_buy/ask_buy: add a cancel command
+- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+
+- [ ] fix resolve
 
 # TBD
 
-- [TODO] add bid/cancel link on offers#index
-- [TODO] add ask/cancel link on offers#index
-- [TODO] add bid/cancel link on offers#show
-- [TODO] add ask/cancel link on offers#show
+- [ ] cross: enable partial volume match
+- [ ] cross: enable poolable offers
+- [ ] cross: generate re-offers
+- [ ] cross: handle release of reserves
+- [ ] cross: suspend invalid offers
+- [ ] cross: generate contract-graph
 
-- [TODO] create a bid/take link on offers#index
-- [TODO] create an ask/take link on offers#index
-- [TODO] create a bid/take link on offers#show
-- [TODO] create an ask/take link on offers#show
+- [ ] add bid/cancel link on offers#index
+- [ ] add ask/cancel link on offers#index
+- [ ] add bid/cancel link on offers#show
+- [ ] add ask/cancel link on offers#show
 
-- [TODO] enable bid-side resale
-- [TODO] enable ask-side resale
+- [ ] create a bid/take link on offers#index
+- [ ] create an ask/take link on offers#index
+- [ ] create a bid/take link on offers#show
+- [ ] create an ask/take link on offers#show
 
-- [TODO] add mode to /bid/new
-- [TODO] add mode to /ask/new
+- [ ] add cron process for contract cross
+- [ ] add cron process for contract resolve
+- [ ] enable event replay
 
-- [TODO] add cron process for contract cross
-- [TODO] add cron process for contract resolve
-- [TODO] enable event replay
-
-- [TODO] UI: link from bugmark.net to documentation
-- [TODO] UI: create intro slide deck
+- [ ] add API
+- [ ] use swagger for api docco

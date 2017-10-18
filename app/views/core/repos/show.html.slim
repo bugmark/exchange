@@ -17,5 +17,11 @@ h2 REPO [#{@repo.xid}]
         td Bugs
         td = core_repo_bug_link(@repo)
       tr
+        td Offers
+        td = core_repo_offer_link(@repo)
+      tr
+        td Contracts
+        td = core_repo_contract_link(@repo)
+      tr
         td Actions
         td = repo_actions(@repo)

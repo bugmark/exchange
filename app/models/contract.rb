@@ -1,15 +1,66 @@
 class Contract < ApplicationRecord
-  belongs_to :bug , optional: true
-  belongs_to :repo, optional: true
 
-  has_many :bids
-  has_many :asks
-  has_many :bid_users, :through => :bids, :source => "user"
-  has_many :ask_users, :through => :asks, :source => "user"
+  include MatchUtils
+
+  has_paper_trail
+
+  # belongs_to :bug , optional: true
+  # belongs_to :repo, optional: true
+
+  # has_many :bids
+  # has_many :asks
+  # has_many :bid_users, :through => :bids, :source => "user"
+  # has_many :ask_users, :through => :asks, :source => "user"
+
+  has_many :escrows, -> {order(:sequence => :asc)}
+
+  has_many :positions, :through => :escrows
 
   before_validation :default_values
+
   validates :status, inclusion: {in: %w(open matured resolved)}
-  validates :contract_maturation, presence: true
+  validates :maturation, presence: true
+
+  # ----- SCOPES -----
+  class << self
+    def reward
+      where(mode: 'reward')
+    end
+
+    def forecast
+      where(mode: 'forecast')
+    end
+
+    def pending_resolution
+      expired.unresolved
+    end
+
+    def matured
+      where("maturation < ?", Time.now)
+    end
+
+    def expired
+      where("maturation < ?", Time.now)
+    end
+
+    def unresolved
+      where("stm_status != ?", "resolved")
+    end
+  end
+
+  # ----- OVERLAP UTILS -----
+  class << self
+    def by_overlap_maturation_range(beg, fin)
+      where('maturation > ?::timestamp', beg).
+        where('maturation < ?::timestamp', fin)
+    end
+  end
+
+  def overlap_offers
+    Offer.by_overlap_maturation(self.maturation)
+  end
+
+  # ----- INSTANCE METHODS -----
 
   def users
     (bid_users + ask_users).uniq
@@ -52,12 +103,8 @@ class Contract < ApplicationRecord
   # > matured   - past mature date
   # > resolved  - assigned
 
-  def matching_bugs
-    @bugmatch ||= Bug.match(match_attrs)
-  end
-
   def match_assertion
-    matching_bugs.count > 0
+    match_bugs.count > 0
   end
 
   def awardee
@@ -70,20 +117,16 @@ class Contract < ApplicationRecord
     self.send awardee.to_sym
   end
 
-  def to_i
-    self.id
+  def xtag
+    "con"
   end
 
-  def xid
-    "con.#{self.id}"
-  end
-
-  def contract_maturation_str
-    self.contract_maturation.strftime("%b-%d %H:%M:%S")
+  def maturation_str
+    self.maturation.strftime("%b-%d %H:%M:%S")
   end
 
   def matured?
-    self.contract_maturation < Time.now
+    self.maturation < Time.now
   end
 
   def unmatured?
@@ -98,51 +141,11 @@ class Contract < ApplicationRecord
     ! resolved?
   end
 
-  # ----- SCOPES -----
-
-  class << self
-    def reward
-      where(mode: 'reward')
-    end
-
-    def forecast
-      where(mode: 'forecast')
-    end
-
-    def pending_resolution
-      expired.unresolved
-    end
-
-    def matured
-      where("contract_maturation < ?", Time.now)
-    end
-
-    def expired
-      where("contract_maturation < ?", Time.now)
-    end
-
-    def unresolved
-      where("status != ?", "resolved")
-    end
-
-  end
-
   private
 
   def default_values
     self.status       ||= 'open'
-    self.mode         ||= 'reward'
-    self.contract_maturation   ||= Time.now + 1.week
-  end
-
-  def match_attrs
-    {
-      id:      self.bug_id,
-      repo_id: self.repo_id,
-      title:   self.bug_title,
-      status:  self.bug_status,
-      labels:  self.bug_labels
-    }
+    self.maturation   ||= Time.now + 1.week
   end
 end
 
@@ -150,20 +153,22 @@ end
 #
 # Table name: contracts
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  mode                :string
-#  status              :string
-#  awarded_to          :string
-#  contract_maturation :datetime
-#  repo_id             :integer
-#  bug_id              :integer
-#  bug_title           :string
-#  bug_status          :string
-#  bug_labels          :string
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id          :integer          not null, primary key
+#  type        :string
+#  mode        :string
+#  status      :string
+#  awarded_to  :string
+#  maturation  :datetime
+#  jfields     :jsonb            not null
+#  exref       :string
+#  uuref       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  stm_bug_id  :integer
+#  stm_repo_id :integer
+#  stm_title   :string
+#  stm_status  :string
+#  stm_labels  :string
+#  stm_xfields :hstore           not null
+#  stm_jfields :jsonb            not null
 #

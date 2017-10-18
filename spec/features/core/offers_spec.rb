@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "Offers" do
 
-  let(:ask) { FG.create(:ask).ask              }
-  let(:bid) { FG.create(:bid).bid              }
+  let(:ask) { FG.create(:buy_ask).offer          }
+  let(:bid) { FG.create(:buy_bid).offer          }
 
   it "renders index (empty)" do
     visit "/core/offers"

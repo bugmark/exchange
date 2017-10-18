@@ -1,71 +1,33 @@
 class Bug < ApplicationRecord
 
-  belongs_to :repo
-  has_many :contracts, :dependent => :destroy
+  include MatchUtils
 
-  def xid
-    "bug.#{self.id}"
+  has_paper_trail
+
+  after_save :update_stm_ids
+
+  belongs_to :repo     , :foreign_key => :stm_repo_id
+  has_many   :offers   , :foreign_key => :stm_bug_id,  :dependent => :destroy
+  has_many   :contracts, :foreign_key => :stm_bug_id,  :dependent => :destroy
+  has_many   :bids
+  has_many   :asks
+
+  hstore_accessor :xfields  , :html_url  => :string    # add field to hstore
+
+  def xtag
+    "bug"
   end
 
   def xtype
     self.type.gsub("Bug::","")
   end
 
-  # ----- SCOPES -----
+  private
 
-  class << self
-
-    def base_scope
-      where(false)
-    end
-
-    def by_id(id)
-      where(id: id)
-    end
-
-    def by_repoid(id)
-      where(repo_id: id)
-    end
-
-    def by_title(string)
-      where("title ilike ?", string)
-    end
-
-    def by_status(status)
-      where("status ilike ?", status)
-    end
-
-    def by_labels(labels)
-      # where(labels: labels)
-      where(false)
-    end
-
-    # -----
-
-    def match(attrs)
-      attrs.without_blanks.reduce(base_scope) do |acc, (key, val)|
-        scope_for(acc, key, val)
-      end
-    end
-
-    private
-
-    def scope_for(base, key, val)
-      case key
-        when :id then
-          base.by_id(val)
-        when :repo_id then
-          base.by_repoid(val)
-        when :title then
-          base.by_title(val)
-        when :status then
-          base.by_status(val)
-        when :labels then
-          base.by_labels(val)
-        else base
-      end
-    end
-
+  def update_stm_ids
+    return if self.id.nil?
+    return if self.stm_bug_id.present?
+    update_attribute :stm_bug_id, self.id
   end
 end
 
@@ -74,12 +36,7 @@ end
 # Table name: bugs
 #
 #  id          :integer          not null, primary key
-#  repo_id     :integer
 #  type        :string
-#  title       :string
-#  description :string
-#  status      :string
-#  labels      :text             default([]), is an Array
 #  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  synced_at   :datetime
@@ -87,4 +44,11 @@ end
 #  uuref       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  stm_bug_id  :integer
+#  stm_repo_id :integer
+#  stm_title   :string
+#  stm_status  :string
+#  stm_labels  :string
+#  stm_xfields :hstore           not null
+#  stm_jfields :jsonb            not null
 #

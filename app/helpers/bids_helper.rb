@@ -9,9 +9,10 @@ module BidsHelper
   end
 
   def bid_attach_link(bid)
-    type = bid.attach_type
-    obj  = bid.attach_obj
-    raw "<a href='/#{type}/#{obj.id}'>#{obj.xid}</a>"
+    return ""
+    # type = bid.attach_type
+    # obj  = bid.attach_obj
+    # raw "<a href='/core/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
   # ----- actions

@@ -9,9 +9,10 @@ module AsksHelper
   end
 
   def ask_attach_link(ask)
-    type = ask.attach_type
-    obj  = ask.attach_obj
-    raw "<a href='/#{type}/#{obj.id}'>#{obj.xid}</a>"
+    return ""
+    # type = ask.attach_type
+    # obj  = ask.attach_obj
+    # raw "<a href='/core/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
   def ask_user_link(usr)
@@ -20,10 +21,11 @@ module AsksHelper
   end
 
   def ask_cross_count(ask)
-    count = ask.matching_bids.count
-    return count if count == 0
-    value = ask.matching_bid_reserve
-    "#{count} (#{value} tokens)"
+    return ""
+    # count = ask.matching_bids.count
+    # return count if count == 0
+    # value = ask.matching_bid_reserve
+    # "#{count} (#{value} tokens)"
   end
 
   # ----- actions

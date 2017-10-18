@@ -13,7 +13,7 @@ RSpec.describe UserCmd::Create do
   subject      { klas.new(valid_params)                                 }
 
   describe "Attributes" do
-    it { should respond_to :user                   }
+    it { should respond_to :user                                        }
   end
 
   describe "Object Existence" do

@@ -1,37 +1,24 @@
-.row
-  .col-md-5
-    div style='text-align: center'
-      h4 Open Bids
-    table.table.table-striped.table-bordered.table-hover width="100%" cellspacing="0"
-      thead
-        tr
-          th ID
-          th User
-          th Tokens
-          th Action
-      tbody
-        - @bids.each do |bid|
-          tr
-            td = bid_id_link(bid)
-            td = bid_user_link(bid.user)
-            td = bid.price
-            td = bid_actions(bid)
-  .col-md-7
-    div style='text-align: center'
-      h4 Open Asks
-    table.table.table-striped.table-bordered.table-hover width="100%" cellspacing="0"
-      thead
-        tr
-          th ID
-          th User
-          th Tokens
-          th Matches
-          th Action
-      tbody
-        - @asks.each do |ask|
-          tr
-            td = ask_id_link(ask)
-            td = ask_user_link(ask.user)
-            td = ask.price
-            td = ask_cross_count(ask)
-            td = ask_actions(ask)
+table width='100%'
+  tr
+    td
+      h2 Offers
+    td align='right' = core_offer_header(@filter)
+
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
+  thead
+    tr
+      th ID
+      th User
+      th Volume
+      th Price
+      th Action
+  tbody
+    - @offers.each do |offer|
+      tr
+        td = core_offer_id_link(offer)
+        td = core_offer_user_link(offer.user)
+        td = offer.volume
+        td = offer.price
+        td
+          nobr
+            = core_offer_actions(offer)

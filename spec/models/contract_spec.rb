@@ -4,9 +4,10 @@ RSpec.describe Contract, type: :model do
 
   include_context 'Integration Environment'
 
-  def valid_params
+  def valid_params(opts = {})
     {
-    }
+
+    }.merge(opts)
   end
 
   let(:user) { User.create email: "asdf@qwer.net", password: "gggggg" }
@@ -14,10 +15,7 @@ RSpec.describe Contract, type: :model do
   subject    { klas.new(valid_params)                                 }
 
   describe "Associations" do
-    it { should respond_to(:repo)              }
-    it { should respond_to(:bug)               }
-    it { should respond_to(:bids)              }
-    it { should respond_to(:asks)              }
+    it { should respond_to(:escrows)            }
   end
 
   describe "Attributes" do
@@ -57,20 +55,22 @@ end
 #
 # Table name: contracts
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  mode                :string
-#  status              :string
-#  awarded_to          :string
-#  contract_maturation :datetime
-#  repo_id             :integer
-#  bug_id              :integer
-#  bug_title           :string
-#  bug_status          :string
-#  bug_labels          :string
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id          :integer          not null, primary key
+#  type        :string
+#  mode        :string
+#  status      :string
+#  awarded_to  :string
+#  maturation  :datetime
+#  jfields     :jsonb            not null
+#  exref       :string
+#  uuref       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  stm_bug_id  :integer
+#  stm_repo_id :integer
+#  stm_title   :string
+#  stm_status  :string
+#  stm_labels  :string
+#  stm_xfields :hstore           not null
+#  stm_jfields :jsonb            not null
 #

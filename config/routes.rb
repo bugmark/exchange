@@ -11,20 +11,21 @@ Rails.application.routes.draw do
     resources :repos do
       get 'sync', :on => :member
     end
-    resources :repo_git_hubs        , path: "/core/repos"
+    resources :repo_git_hubs, path: "/core/repos"
     resources :bugs
     resources :bids
     resources :asks
     resources :offers do
       get 'cross', :on => :member
     end
+    resources :full_offers
 
     resources :contracts do
       get 'resolve', :on => :member
+      get 'graph'  , :on => :member
     end
 
     resources :users
-
   end
 
   namespace :docfix do

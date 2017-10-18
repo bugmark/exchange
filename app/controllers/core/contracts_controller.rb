@@ -5,18 +5,18 @@ module Core
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
-    # bug_id (optional)
+    # stm_bug_id (optional)
     def index
       @bug = @repo = nil
       @timestamp = Time.now.strftime("%H:%M:%S")
-      base_scope = Contract.reward.unresolved
+      base_scope = Contract.all
       case
-        when bug_id = params["bug_id"]&.to_i
-          @bug = Bug.find(bug_id)
-          @contracts = base_scope.where(bug_id: bug_id)
-        when repo_id = params["repo_id"]&.to_i
-          @repo = Repo.find(repo_id)
-          @contracts = base_scope.where(repo_id: repo_id)
+        when stm_bug_id = params["stm_bug_id"]&.to_i
+          @bug = Bug.find(stm_bug_id)
+          @contracts = base_scope.where(stm_bug_id: stm_bug_id)
+        when stm_repo_id = params["stm_repo_id"]&.to_i
+          @repo = Repo.find(stm_repo_id)
+          @contracts = base_scope.where(stm_repo_id: stm_repo_id)
         else
           @contracts = base_scope
       end
@@ -26,7 +26,7 @@ module Core
       @contract = Contract.find(params["id"])
     end
 
-    # bug_id or repo_id, type(forecast | reward)
+    # stm_bug_id or stm_repo_id, type(forecast | reward)
     def new
       @contract = ContractCmd::Publish.new(new_opts(params))
     end
@@ -62,6 +62,25 @@ module Core
       redirect_to "/rewards"
     end
 
+    def graph
+      @contract_id = params["id"]
+      respond_to do |format|
+        format.html
+        format.png do
+          require 'graphviz'
+          @contract_id = params["id"]
+          g = GraphViz.new( :G, :type => :digraph )
+          hello = g.add_nodes("HELLO")
+          world = g.add_nodes("WORLD")
+          contr = g.add_nodes("CONTRACT #{@contract_id}")
+          g.add_edges(hello, world)
+          g.add_edges(world, contr)
+          g.output(png: "/tmp/contract#{@contract_id}.png")
+          send_data(File.read("/tmp/contract#{@contract_id}.png"), disposition: 'inline', type: 'image/png', filename: 'img.png')
+        end
+      end
+    end
+
     private
 
     def valid_params(params)
@@ -73,12 +92,12 @@ module Core
       opts = {
         type: "Contract::#{params["type"]&.capitalize}",
         price: 0.10,
-        contract_maturation: Time.now + 3.minutes,
+        maturation: Time.now + 3.minutes,
         user_id: current_user.id
       }
-      key = "bug_id" if params["bug_id"]
-      key = "repo_id" if params["repo_id"]
-      id = params["bug_id"] || params["repo_id"]
+      key = "stm_bug_id" if params["stm_bug_id"]
+      key = "stm_repo_id" if params["stm_repo_id"]
+      id = params["stm_bug_id"] || params["stm_repo_id"]
       opts.merge({key => id})
     end
   end

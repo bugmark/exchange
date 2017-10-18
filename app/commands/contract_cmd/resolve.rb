@@ -19,13 +19,13 @@ module ContractCmd
       if contract.awarded_to == "asker"
         # TODO: use a command!
         asker = contacts.asks.first.user
-        asker.token_balance += contract.distribution_tokens
+        asker.balance += contract.distribution_tokens
       else
         # TODO: use a command!
         # TODO: devise a more consistent way to save sub-objects...
         contract.bidder_allocation.each do |bid_id, allocation|
           usr = Bid.find(bid_id).user
-          usr.update_attribute(:token_balance, usr.token_balance + allocation)
+          usr.update_attribute(:balance, usr.balance + allocation)
         end
       end
     end
@@ -33,8 +33,8 @@ module ContractCmd
     private
 
     def resolvable_contract
-      if Time.now < contract.contract_maturation
-        errors.add(:contract_maturation, "contract has not matured")
+      if Time.now < contract.maturation
+        errors.add(:maturation, "contract has not matured")
       end
     end
   end

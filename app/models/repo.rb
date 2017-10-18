@@ -1,13 +1,15 @@
 class Repo < ApplicationRecord
 
-  has_many :bugs         , :dependent => :destroy
-  has_many :contracts    , :dependent => :destroy
-  has_many :bug_contracts, :through   => :bugs    , :source => :contracts
+  has_paper_trail
+
+  has_many :bugs     , :dependent => :destroy, :foreign_key => :stm_repo_id
+  has_many :offers   , :dependent => :destroy, :foreign_key => :stm_repo_id
+  has_many :contracts, :dependent => :destroy, :foreign_key => :stm_repo_id
 
   validates :name     , uniqueness: true, presence: true
 
-  def xid
-    "rep.#{self.id}"
+  def xtag
+    "rep"
   end
 
   def xtype
@@ -15,6 +17,7 @@ class Repo < ApplicationRecord
   end
 
   def has_contracts?
+    return false
     contracts.count != 0 || bug_contracts.count != 0
   end
 

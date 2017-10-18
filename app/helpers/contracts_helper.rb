@@ -1,14 +1,16 @@
 module ContractsHelper
   def contract_id_link(contract)
-    raw "<a href='/rewards/#{contract.id}'>#{contract.xid}</a>"
+    raw "<a href='/core/contracts/#{contract.id}'>#{contract.xid}</a>"
   end
 
   def contract_bid_link(contract)
-    raw contract.bids.map {|b| bid_id_link(b)}.join(" | ")
+    # raw contract.bids.map {|b| bid_id_link(b)}.join(" | ")
+    ""
   end
 
   def contract_ask_link(contract)
-    raw contract.asks.map {|a| ask_id_link(a)}.join(" | ")
+    # raw contract.asks.map {|a| ask_id_link(a)}.join(" | ")
+    ""
   end
 
   def contract_type_link(contract)
@@ -17,8 +19,8 @@ module ContractsHelper
   end
 
   def contract_mature_date(contract)
-    color = Time.now > contract.contract_maturation ? "red" : "green"
-    date = contract.contract_maturation_str
+    color = Time.now > contract.maturation ? "red" : "green"
+    date = contract.maturation_str
     raw "<span style='color: #{color};'>#{date}</span>"
   end
 

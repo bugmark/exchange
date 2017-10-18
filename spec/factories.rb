@@ -1,6 +1,6 @@
 require 'factory_girl'
 require_relative "../app/commands/application_command"
-Dir["app/commands/**/*.rb"].each {|f| require_relative "../#{f}"}
+# Dir["app/commands/**/*.rb"].each {|f| require_relative "../#{f}"}
 
 FG ||= FactoryGirl
 
@@ -12,6 +12,7 @@ FactoryGirl.define do
 
     sequence :email do |n| "test#{n}@bugmark.net" end
     password              "bugmark"
+    balance         100.0
   end
 
   factory :repo, class: RepoCmd::GhCreate do
@@ -26,40 +27,52 @@ FactoryGirl.define do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(attributes) }
 
-    sequence :title do |n| "Bug #{n}" end
-    repo_id  { FG.create(:repo).id }
+    sequence    :stm_title do |n| "Bug #{n}" end
+    stm_repo_id { FG.create(:repo).id }
   end
 
-  factory :bid, class: BidCmd::Create do
+  factory :buy_bid, class: OfferBuyCmd::Create do
     to_create {|instance| instance.save_event.project}
-    initialize_with { new(attributes) }
+    initialize_with { new(:bid, attributes) }
 
-    type                "Bid::GitHub"
-    price               0.20
-    volume              1
-    contract_maturation Time.now + 1.day
-    bug_id              { FG.create(:bug).id  }
+    price               0.60
+    volume              10
+    status              "open"
+    maturation Time.now + 1.day
+    stm_bug_id          { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
 
     factory :matured_bid do
-      contract_maturation Time.now - 1.day
+      maturation Time.now - 1.day
     end
-   end
+  end
 
-  factory :ask, class: AskCmd::Create do
+  factory :buy_ask, class: OfferBuyCmd::Create do
     to_create {|instance| instance.save_event.project}
-    initialize_with { new(attributes) }
+    initialize_with { new(:ask, attributes) }
 
-    type                "Ask::GitHub"
     price               0.40
-    volume              1
-    contract_maturation Time.now + 1.day
-    bug_id              { FG.create(:bug).id  }
+    volume              10
+    maturation Time.now + 1.day
+    stm_bug_id          { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
 
     factory :matured_ask do
-      contract_maturation Time.now - 1.day
+      maturation Time.now - 1.day
     end
+  end
+
+  factory :position do
+  end
+
+  factory :escrow do
+  end
+
+  factory :base_contract, class: Contract do
+
+    status              'open'
+    maturation Time.now + 1.minute
+
   end
 
   # factory :contract, class: ContractCmd::Publish do
@@ -69,12 +82,12 @@ FactoryGirl.define do
   #   type         "Contract::GitHub"
   #   token_value  20
   #   terms        "Net10"
-  #   contract_maturation   Time.now + 1.day
+  #   maturation   Time.now + 1.day
   #   bug_id       { FG.create(:bug).id  }
   #   # user_id      { FG.create(:user).id }
   #
   #   factory :matured_contract do
-  #     contract_maturation Time.now - 1.day
+  #     maturation Time.now - 1.day
   #   end
   #
   #   factory :taken_contract do
@@ -83,7 +96,7 @@ FactoryGirl.define do
   #
   #   factory :taken_matured_contract do
   #     counterparty_id { FG.create(:user).id }
-  #     contract_maturation      Time.now - 1.day
+  #     maturation      Time.now - 1.day
   #   end
   #  end
 

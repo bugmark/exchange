@@ -2,37 +2,25 @@ require 'rails_helper'
 
 RSpec.describe Bug, type: :model do
 
-  def valid_params(repo)
+  def valid_params(repo, extra_params = {})
     {
-      repo_id: repo.id
-    }
+      stm_repo_id: repo.id
+    }.merge(extra_params)
   end
 
   let(:klas)   { described_class                            }
   let(:repo)   { Repo.create(name: "asdf/qwer")             }
   subject      { klas.new(valid_params(repo))               }
 
-
   describe "Attributes" do
     it { should respond_to :exref                  }
-    it { should respond_to :uuref                  }  
-  end
-
-  describe "#uuref" do
-    it 'generates a string' do
-      subject.save
-      expect(subject.uuref).to be_a(String)
-    end
-
-    it 'generates a 36-character string' do
-      subject.save
-      expect(subject.uuref.length).to eq(36)
-    end
+    it { should respond_to :uuref                  }
   end
 
   describe "Associations" do
     it { should respond_to(:repo)         }
-    it { should respond_to(:contracts)    }
+    it { should respond_to(:bids)         }
+    it { should respond_to(:asks)         }
   end
 
   describe "Object Creation" do
@@ -73,6 +61,39 @@ RSpec.describe Bug, type: :model do
     end
   end
 
+  describe "#uuref" do
+    it 'generates a string' do
+      subject.save
+      expect(subject.uuref).to be_a(String) #.
+    end
+
+    it 'generates a 36-character string' do
+      subject.save
+      expect(subject.uuref.length).to eq(36)
+    end
+  end
+
+  describe "stm_bug_id" do
+    it "starts empty" do
+      expect(subject.stm_bug_id).to be_nil
+    end
+
+    it "fills when saved" do  #
+      subject.save
+      expect(subject.stm_bug_id).to_not be_nil
+      expect(subject.stm_bug_id).to eq(subject.id)
+    end
+  end
+
+  describe "#html_url" do
+    it { should respond_to :html_url                   }
+    it { should respond_to :html_url=                  }
+
+    it "sets the html_url" do
+      sub = klas.new(valid_params(repo, {html_url: "asdf"})) #
+      expect(sub.html_url).to eq("asdf")
+    end
+  end
 end
 
 # == Schema Information
@@ -80,12 +101,7 @@ end
 # Table name: bugs
 #
 #  id          :integer          not null, primary key
-#  repo_id     :integer
 #  type        :string
-#  title       :string
-#  description :string
-#  status      :string
-#  labels      :text             default([]), is an Array
 #  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  synced_at   :datetime
@@ -93,4 +109,11 @@ end
 #  uuref       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  stm_bug_id  :integer
+#  stm_repo_id :integer
+#  stm_title   :string
+#  stm_status  :string
+#  stm_labels  :string
+#  stm_xfields :hstore           not null
+#  stm_jfields :jsonb            not null
 #

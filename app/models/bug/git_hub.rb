@@ -1,9 +1,5 @@
 class Bug::GitHub < Bug
 
-  def html_url
-    "https://github.com/TBD"
-  end
-
 end
 
 # == Schema Information
@@ -11,12 +7,7 @@ end
 # Table name: bugs
 #
 #  id          :integer          not null, primary key
-#  repo_id     :integer
 #  type        :string
-#  title       :string
-#  description :string
-#  status      :string
-#  labels      :text             default([]), is an Array
 #  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  synced_at   :datetime
@@ -24,4 +15,11 @@ end
 #  uuref       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  stm_bug_id  :integer
+#  stm_repo_id :integer
+#  stm_title   :string
+#  stm_status  :string
+#  stm_labels  :string
+#  stm_xfields :hstore           not null
+#  stm_jfields :jsonb            not null
 #

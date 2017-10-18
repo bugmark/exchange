@@ -7,15 +7,18 @@ h2 BUG [#{@bug.xid}]
         td = @bug.xtype
       tr
         td Title
-        td = @bug.title
+        td = @bug.stm_title
       tr
         td URL
-        td = bug_http_link(@bug)
+        td = core_bug_http_link(@bug)
   .col-md-6
     table.table
       tr
+        td Offers
+        td = core_bug_offer_link(@bug)
+      tr
         td Contracts
-        td = bug_contract_link(@bug)
+        td = core_bug_contract_link(@bug)
       tr
         td Create
-        td = bug_contract_link(@bug)
+        td = core_bug_actions(@bug)
