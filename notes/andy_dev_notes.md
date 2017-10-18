@@ -271,8 +271,9 @@ Next Actions:
 - [x] write offer_buy_cmd/cancel with specs
 - [x] test data-loading scripts
 - [x] add specs for contract_cmd
+- [x] build out data loading script for contracts
 
-- [ ] build out data loading script for contracts
+- [ ] refactor escrows to use acts_as_list
 
 - [ ] run UI end-to-end and update screens
 - [ ] deploy to production

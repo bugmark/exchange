@@ -49,7 +49,7 @@ RSpec.describe OfferBuyCmd::Cancel do
     end
   end
 
-  describe "#project" do
+  describe "#project", USE_VCR do
     it 'saves the object to the database' do
       subject.project
       expect(subject).to be_valid

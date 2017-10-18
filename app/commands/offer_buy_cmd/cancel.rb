@@ -16,4 +16,4 @@ module OfferBuyCmd
       offer.status = "cancelled"
     end
   end
-end
+end #
