@@ -256,25 +256,43 @@ Next Actions:
 - [x] Test matching
 - [x] Test overlapping
 - [x] Test crossing
+- [x] add matcher object for offers (GitHub, CVE, etc.)
+- [x] cross: fix cross
+- [x] cross: generate escrow
+- [x] cross: generate positions
+- [x] set default offer to non-poolable
 
-- [ ] cross: fix cross
-- [ ] cross: generate escrow
-- [ ] cross: generate positions
-- [ ] cross: generate re-offers
-- [ ] cross: generate contract-graph
-- [ ] cross: suspend invalid offers
-- [ ] cross: handle reserves and escrow transfer
+- [ ] build out data loading scripts for offers
+- [ ] run and edit UI
 
 - [ ] add specs for contract_cmd
+
+- [ ] build out data loading script for contracts
+
+- [ ] run UI end-to-end and update screens
+- [ ] deploy to production
+
+- [ ] sale: add sell_bid_cmd/create
+- [ ] sale: add sell_ask_cmd/create
+
+- [ ] cross: add contract_cmd/cross_from_sell_ask
+- [ ] cross: make cross match buy and sell
+
+- [ ] add UI support for crosses
 
 - [ ] bid_buy/ask_buy: add a cancel command
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
-- [ ] add matcher object for offers (GitHub, CVE, etc.)
 - [ ] fix resolve
-- [ ] implement commands with correct amounts
 
 # TBD
+
+- [ ] cross: enable partial volume match
+- [ ] cross: enable poolable offers
+- [ ] cross: generate re-offers
+- [ ] cross: handle release of reserves
+- [ ] cross: suspend invalid offers
+- [ ] cross: generate contract-graph
 
 - [ ] add bid/cancel link on offers#index
 - [ ] add ask/cancel link on offers#index
@@ -285,9 +303,6 @@ Next Actions:
 - [ ] create an ask/take link on offers#index
 - [ ] create a bid/take link on offers#show
 - [ ] create an ask/take link on offers#show
-
-- [ ] enable bid-side resale
-- [ ] enable ask-side resale
 
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve

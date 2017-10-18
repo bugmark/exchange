@@ -69,23 +69,20 @@ class Offer < ApplicationRecord
 
   # ----- CROSS UTILS -----
   class << self
-    def with_cross(price)
-      where('price <= ?', price)
-    end
-
     def with_price(price)
       where(price: price)
     end
 
     def complements(offer)
-      base = with_price(1.0 - offer.price)
-      offer.id.nil? ? base : base.where.not(id: self.id)
+      complement = 1.0 - offer.price
+      base = with_price(complement)
+      offer.id.nil? ? base : base.where.not(id: offer.id)
     end
 
     def crosses(offer)
       complement = 1.0 - offer.price
-      base = with_cross(complement)
-      offer.id.nil? ? base : base.where.not(id: self.id)
+      base = where('price >= ?', complement)
+      offer.id.nil? ? base : base.where.not(id: offer.id)
     end
   end
 
@@ -135,7 +132,8 @@ class Offer < ApplicationRecord
   private
 
   def default_values
-    self.status ||= 'open'
+    self.status   ||= 'open'
+    self.poolable = false
   end
 end
 
