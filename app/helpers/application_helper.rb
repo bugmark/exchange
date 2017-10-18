@@ -34,7 +34,8 @@ module ApplicationHelper
   end
 
   def trading_summary(user)
-    balance   = user.balance
+    # balance  = user.balance
+    balance  = user.token_available
     raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.email} / #{balance} tokens</span>"
   end
 

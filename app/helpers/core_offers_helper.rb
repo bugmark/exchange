@@ -17,6 +17,12 @@ module CoreOffersHelper
     raw "<a href='/core/users/#{usr.id}'>#{usr.xid}</a>"
   end
 
+  def core_offer_attach_link(offer)
+    type = offer.attach_type
+    obj  = offer.attach_obj
+    raw "<a href='/core/#{type}/#{obj.id}'>#{obj.xid}</a>"
+  end
+
   # ----- actions -----
 
   def core_offer_cancel_link(_offer)

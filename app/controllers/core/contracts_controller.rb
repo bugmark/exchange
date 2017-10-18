@@ -9,7 +9,7 @@ module Core
     def index
       @bug = @repo = nil
       @timestamp = Time.now.strftime("%H:%M:%S")
-      base_scope = Contract.unresolved
+      base_scope = Contract.all
       case
         when stm_bug_id = params["stm_bug_id"]&.to_i
           @bug = Bug.find(stm_bug_id)

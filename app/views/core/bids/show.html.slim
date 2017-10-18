@@ -8,16 +8,19 @@ h2 BID [#{@bid.xid}]
         td = @bid.stm_status
       tr
         td User
-        td = bid_user_link(@bid)
+        td = core_offer_user_link(@bid)
       tr
-        td Contract Price
+        td Volume
+        td = @bid.volume
+      tr
+        td Price
         td = @bid.price
   .col-md-6
     b Actions
     table.table
       tr
         td Attached To
-        td = bid_attach_link(@bid)
+        td = core_offer_attach_link(@bid)
       tr
         td Action
         td TBD

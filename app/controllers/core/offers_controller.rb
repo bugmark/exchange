@@ -7,7 +7,7 @@ module Core
 
     def index
       @filter = set_filter(params)
-      @offers = @filter ? @filter.obj.offers.unassigned : Offer::Buy.unassigned
+      @offers = @filter ? @filter.obj.offers : Offer.all
     end
 
     def cross
