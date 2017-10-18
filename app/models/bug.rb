@@ -4,10 +4,10 @@ class Bug < ApplicationRecord
 
   has_paper_trail
 
-  after_save :update_stm_bug_id
+  after_save :update_stm_ids
 
-  belongs_to :repo,      :foreign_key => :stm_repo_id
-  # has_many   :contracts, :dependent   => :destroy
+  belongs_to :repo     , :foreign_key => :stm_repo_id
+  has_many   :contracts, :foreign_key => :stm_bug_id,  :dependent => :destroy
   has_many   :bids
   has_many   :asks
 
@@ -23,7 +23,7 @@ class Bug < ApplicationRecord
 
   private
 
-  def update_stm_bug_id
+  def update_stm_ids
     return if self.id.nil?
     return if self.stm_bug_id.present?
     update_attribute :stm_bug_id, self.id

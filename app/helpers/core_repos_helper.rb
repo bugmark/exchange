@@ -17,17 +17,6 @@ module CoreReposHelper
     raw "<a href='#{path}'>Ask</a>"
   end
 
-  def core_repo_contract_link(repo)
-    return "0"
-    count  = repo.contracts.count
-    blbl   = repo.bug_contracts.count > 0 ? "*" : ""
-    if count > 0
-      raw "<a href='/core/rewards?stm_repo_id=#{repo.id}'>#{count}</a> #{blbl}"
-    else
-      "0 #{blbl}"
-    end
-  end
-
   def core_repo_bug_link(repo)
     count = repo.bugs.count
     if count > 0
@@ -36,6 +25,26 @@ module CoreReposHelper
       count
     end
   end
+
+  def core_repo_offer_link(repo)
+    count = repo.offers.count
+    if count > 0
+      raw "<a class='offerlink' href='/core/offers?stm_repo_id=#{repo.id}'>#{count}</a>"
+    else
+      count
+    end
+  end
+
+  def core_repo_contract_link(repo)
+    count  = repo.contracts.count
+    if count > 0
+      raw "<a class='contractlink' href='/core/contracts?stm_repo_id=#{repo.id}'>#{count}</a>"
+    else
+      count
+    end
+  end
+
+
 
   def core_repo_destroy_link(repo)
     return nil if repo.has_contracts?

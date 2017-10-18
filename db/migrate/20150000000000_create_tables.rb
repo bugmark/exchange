@@ -36,20 +36,20 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :bugs, :xfields, using: :gin
 
     create_table :offers do |t|
-      t.string    :type                      # BuyBid, SellBid, BuyAsl, SellAsk
-      t.string    :repo_type                 # BugZilla, GitHub, CVE
-      t.integer   :user_id                   # the party who made the offer
-      t.integer   :parent_id                 # for ReOffers - an Offer
-      t.integer   :position_id               # for SaleOffers - a Position
-      t.integer   :counter_id                # the counterparty - an Offer
-      t.integer   :volume, default: 1        # Greater than zero
-      t.float     :price , default: 0.50     # between 0.00 and 1.00
-      t.boolean   :poolable, default: true   # for reserve pooling
-      t.boolean   :aon     , default: false  # All Or None
-      t.string    :status                    # open, suspended, cancelled, ...
-      t.datetime  :expiration
-      t.datetime  :maturation
-      t.tsrange   :maturation_range
+      t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
+      t.string   :repo_type                 # BugZilla, GitHub, CVE
+      t.integer  :user_id                   # the party who made the offer
+      t.integer  :parent_id                 # for ReOffers - an Offer
+      t.integer  :position_id               # for SaleOffers - a Position
+      t.integer  :counter_id                # the counterparty - an Offer
+      t.integer  :volume, default: 1        # Greater than zero
+      t.float    :price , default: 0.50     # between 0.00 and 1.00
+      t.boolean  :poolable, default: true   # for reserve pooling
+      t.boolean  :aon     , default: false  # All Or None
+      t.string   :status                    # open, suspended, cancelled, ...
+      t.datetime :expiration
+      t.datetime :maturation
+      t.tsrange  :maturation_range
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref

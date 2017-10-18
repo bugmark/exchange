@@ -275,14 +275,19 @@ Next Actions:
 - [x] refactor escrows to use acts_as_list
 - [x] change expiration and maturation date field names
 - [x] update cross to use new escrow strategy 
+- [x] /repo      - add offers   count/link
+- [x] /repo      - add contract count/link
+- [x] /repo/:id  - add bids/asks/contracts
 
-- [ ] /repo/:id  - add bids/asks/contracts
 - [ ] /bug/:id   - add bids/asks/contracts
+- [ ] /offers    - filter by repo
+- [ ] /offers    - filter by bug
 - [ ] /offers    - ...
 - [ ] /bids/:id  - ...
 - [ ] /asks/:id  - ...
 - [ ] /contracts - ...
 - [ ] /users/:id - show AVAILABLE_BALANCE
+- [ ] navbar     - show AVAILABLE_BALANCE
 
 - [ ] deploy to production
 
