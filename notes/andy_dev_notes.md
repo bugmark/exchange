@@ -267,8 +267,8 @@ Next Actions:
 
 # Oct 18
 
-- [ ] merge buy_bid_cmd and buy_ask_cmd into offer_buy_cmd/create
-- [ ] write offer_buy_cmd/cancel
+- [x] merge buy_bid_cmd and buy_ask_cmd into offer_buy_cmd/create
+- [x] write offer_buy_cmd/cancel with specs
 
 - [ ] add specs for contract_cmd
 
