@@ -15,15 +15,17 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
       th ID
       th Repo
       th Title
+      th Offers
       th Contracts
       th Action
   tbody
     - @bugs.each do |bug|
       tr
-        td = bug_id_link(bug)
-        td = bug_repo_link(bug, @repo)
-        td = bug_title_link(bug)
-        td = bug_contract_link(bug)
+        td = core_bug_id_link(bug)
+        td = core_bug_repo_link(bug, @repo)
+        td = core_bug_title_link(bug)
+        td = core_bug_contract_link(bug)
+        td = core_bug_contract_link(bug)
         td
           nobr
-            = bug_actions(bug)
+            = core_bug_actions(bug)

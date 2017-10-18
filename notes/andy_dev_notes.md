@@ -278,8 +278,10 @@ Next Actions:
 - [x] /repo      - add offers   count/link
 - [x] /repo      - add contract count/link
 - [x] /repo/:id  - add bids/asks/contracts
+- [x] /bug/:id   - namespace bug helpers
 
-- [ ] /bug/:id   - add bids/asks/contracts
+- [ ] /bug/:id   - add offers/contracts
+
 - [ ] /offers    - filter by repo
 - [ ] /offers    - filter by bug
 - [ ] /offers    - ...

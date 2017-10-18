@@ -10,18 +10,18 @@ h2 BUG [#{@bug.xid}]
         td = @bug.stm_title
       tr
         td URL
-        td = bug_http_link(@bug)
+        td = core_bug_http_link(@bug)
   .col-md-6
     table.table
       tr
         td Bids
-        td = bug_bids_link(@bug)
+        td = core_bug_bids_link(@bug)
       tr
         td Asks
-        td = bug_asks_link(@bug)
+        td = core_bug_asks_link(@bug)
       tr
         td Contracts
-        td = bug_contract_link(@bug)
+        td = core_bug_contract_link(@bug)
       tr
         td Create
-        td = bug_actions(@bug)
+        td = core_bug_actions(@bug)

@@ -33,10 +33,10 @@ table.table
       th Create
   - @bid.match_bugs.each do |bid|
     tr
-      td = bug_id_link(bid)
+      td = core_bug_id_link(bid)
       td = bid.type
-      td = bug_title_link(bid)
-      td = bug_contract_link(bid)
+      td = core_bug_title_link(bid)
+      td = core_bug_contract_link(bid)
       td
         nobr
-          = bug_contract_link(bid)
+          = core_bug_contract_link(bid)

@@ -1,15 +1,15 @@
-module BugsHelper
-  def bug_id_link(bug)
+module CoreBugsHelper
+  def core_bug_id_link(bug)
     raw "<a href='/core/bugs/#{bug.id}'>#{bug.xid}</a>"
   end
 
-  def bug_title_link(bug)
+  def core_bug_title_link(bug)
     title = truncate(bug.stm_title)
     # raw "<a href='/bugs/#{bug.id}'>#{title}</a>"
     title
   end
 
-  def bug_repo_link(bug, filter)
+  def core_bug_repo_link(bug, filter)
     repo = bug.repo
     id   = repo.id
     name = repo.name
@@ -18,7 +18,7 @@ module BugsHelper
     raw (filter.nil? ? l1 + l2 : l2)
   end
 
-  def bug_contract_link(bug)
+  def core_bug_contract_link(bug)
     # count = bug.contracts.count
     count = 0
     if count > 0
@@ -28,12 +28,12 @@ module BugsHelper
     end
   end
 
-  def bug_bids_link(bug)
+  def core_bug_bids_link(bug)
     # bug.bids.count
     ""
   end
 
-  def bug_asks_link(bug)
+  def core_bug_asks_link(bug)
     # bug.asks.count
     ""
   end
@@ -43,23 +43,23 @@ module BugsHelper
   #   raw "<a href='#{path}'>Contract</a>"
   # end
 
-  def bug_ask_new_link(bug)
+  def core_bug_ask_new_link(bug)
     path = "/core/asks/new?type=git_hub&stm_bug_id=#{bug.id}"
     raw "<a href='#{path}'>Ask</a>"
   end
 
-  def bug_bid_new_link(bug)
+  def core_bug_bid_new_link(bug)
     path = "/core/bids/new?type=git_hub&stm_bug_id=#{bug.id}"
     raw "<a href='#{path}'>Bid</a>"
   end
 
-  def bug_actions(bug)
-    cbid = bug_bid_new_link(bug)
-    cask = bug_ask_new_link(bug)
+  def core_bug_actions(bug)
+    cbid = core_bug_bid_new_link(bug)
+    cask = core_bug_ask_new_link(bug)
     raw [cbid,cask].select(&:present?).join(" | ")
   end
 
-  def bug_http_link(bug)
+  def core_bug_http_link(bug)
     url = bug.html_url
     if url.nil?
       "NA"
