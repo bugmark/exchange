@@ -270,8 +270,7 @@ Next Actions:
 - [x] merge buy_bid_cmd and buy_ask_cmd into offer_buy_cmd/create
 - [x] write offer_buy_cmd/cancel with specs
 - [x] test data-loading scripts
-
-- [ ] add specs for contract_cmd
+- [x] add specs for contract_cmd
 
 - [ ] build out data loading script for contracts
 

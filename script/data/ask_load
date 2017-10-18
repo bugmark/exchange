@@ -18,20 +18,23 @@ opts = [
     contract_maturation:  Time.now + 1.hour
   },
   {
-    stm_bug_id:           Bug.third.id  ,
-    price:                0.15            ,
-    user_id:              User.last.id ,
+    stm_bug_id:           Bug.first.id  ,
+    price:                0.25          ,
+    volume:               10            ,
+    user_id:              User.last.id  ,
     contract_maturation:  Time.now + 1.day
   },
   {
     stm_bug_id:           Bug.third.id   ,
-    price:                0.20           ,
+    price:                0.80           ,
+    volume:               2              ,
     user_id:              User.last.id   ,
     contract_maturation:  Time.now - 1.hour
   },
   {
     stm_bug_id:           Bug.first.id  ,
-    price:                0.5           ,
+    price:                0.50          ,
+    volume:               2             ,
     user_id:              User.last.id  ,
     contract_maturation:  Time.now - 1.hour
   }

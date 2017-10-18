@@ -42,7 +42,7 @@ RSpec.describe ContractCmd::CrossFromBuyAsk do
   describe "#project - invalid subject", USE_VCR do
     before(:each) { hydrate(bid) }
 
-    it 'detects an invalid object' do #..
+    it 'detects an invalid object' do #...
       subject.project
       expect(subject).to be_valid
     end

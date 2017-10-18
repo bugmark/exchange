@@ -1,0 +1,78 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/mvscorg/bugmark
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.6.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic YW5keWw6MDNkNWE4Zjk2MDk2MzY2YWI0YWQ4MGI2ZTgyM2MzZDQ5YjgyZmVlMg==
+      If-Modified-Since:
+      - Sun, 15 Oct 2017 09:02:29 GMT
+      If-None-Match:
+      - W/"15835d5b725a77af291d8bf4db087f1b"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 304
+      message: Not Modified
+    headers:
+      Date:
+      - Wed, 18 Oct 2017 14:20:05 GMT
+      Content-Type:
+      - application/octet-stream
+      Server:
+      - GitHub.com
+      Status:
+      - 304 Not Modified
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4996'
+      X-Ratelimit-Reset:
+      - '1508338743'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding
+      Etag:
+      - '"15835d5b725a77af291d8bf4db087f1b"'
+      Last-Modified:
+      - Sun, 15 Oct 2017 09:02:29 GMT
+      Access-Control-Expose-Headers:
+      - ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset,
+        X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Expect-Ct:
+      - max-age=2592000; report-uri="https://api.github.com/_private/browser/errors"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.053130'
+      X-Github-Request-Id:
+      - 9072:2D5B6:1FAA28CA:2CB86901:59E76315
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Wed, 18 Oct 2017 14:20:05 GMT
+recorded_with: VCR 3.0.3

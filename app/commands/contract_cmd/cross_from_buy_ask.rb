@@ -30,7 +30,7 @@ module ContractCmd
     def gen_cross(ask)
       return [] unless ask.present?
       bids = Offer::Buy::Bid.with_status('open').matches(ask).complements(ask).with_volume(ask.volume)
-      if bids.count > 0 #
+      if bids.count > 0
         bid = bids.first
         contract.assign_attributes(ask.match_attrs)
         contract.price  = ask.price
