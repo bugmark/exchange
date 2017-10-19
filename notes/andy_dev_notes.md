@@ -293,7 +293,13 @@ Next Actions:
 
 # Oct 19
 
-- [ ] test associations: positions, user, offer, sell offer
+- [x] test associations: positions, user, offer, sell offer
+- [x] add transfer object
+
+- [ ] build sell-offer spec
+
+- [ ] make a transfer model & spec
+- [ ] test associations: transfer, selloffer, buyoffer, positions...
 
 - [ ] sale: add offer_sell_cmd/create
 - [ ] sale: add offer_sell_cmd/cancel
