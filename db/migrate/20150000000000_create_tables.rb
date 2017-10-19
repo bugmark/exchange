@@ -131,6 +131,19 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :escrows, :exref
     add_index :escrows, :uuref
 
+    create_table :transfers do |t|
+      t.integer :sell_offer_id
+      t.integer :buy_offer_id
+      t.integer :parent_position_id
+      t.integer :seller_position_id
+      t.integer :buyer_position_id
+    end
+    add_index :transfers, :sell_offer_id
+    add_index :transfers, :buy_offer_id
+    add_index :transfers, :parent_position_id
+    add_index :transfers, :seller_position_id
+    add_index :transfers, :buyer_position_id
+
     create_table :users do |t|
       t.boolean  :admin
       t.float    :balance, default: 0.0
