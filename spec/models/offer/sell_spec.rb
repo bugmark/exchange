@@ -16,7 +16,7 @@ RSpec.describe Offer::Sell, type: :model do
   end
 
   let(:user)   { FG.create(:user).user                        }
-  let(:pos1)   { Position.new(position_params)                }
+  let(:pos1)   { Position.create(position_params)             }
   let(:boff)   { FG.create(:buy_bid, user_id: user.id).offer  }
   let(:soff)   { Offer::Sell::Bid.create(soff_params)         }
 
@@ -41,7 +41,6 @@ RSpec.describe Offer::Sell, type: :model do
     before(:each) do hydrate(soff) end
 
     it "finds the user" do
-      binding.pry
       expect(soff.parent_position).to eq(pos1)
     end
   end
