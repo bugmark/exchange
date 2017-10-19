@@ -1,4 +1,4 @@
-module AsksHelper
+module CoreAsksHelper
   def ask_id_link(ask)
     raw "<a href='/core/asks/#{ask.id}'>#{ask.xid}</a>"
   end
@@ -15,7 +15,7 @@ module AsksHelper
     # raw "<a href='/core/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
-  def ask_user_link(usr)
+  def core_ask_user_link(usr)
     return "NA" if usr.nil?
     raw "<a href='/users/#{usr.id}'>#{usr.xid}</a>"
   end

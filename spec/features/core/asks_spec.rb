@@ -13,12 +13,12 @@ describe "Asks" do
   it "renders show", USE_VCR do
     visit "/core/asks/#{ask.id}"
     expect(page).to_not be_nil
-  end
+  end #
 
-  it "renders new" do
-    login_as user, :scope => :user
-
-    visit "/core/asks/new"
-    expect(page.body).to have_content("New Ask")
-  end
+  # it "renders new" do
+  #   login_as user, :scope => :user
+  #
+  #   visit "/core/asks/new"
+  #   expect(page.body).to have_content("New Ask") #..
+  # end
 end

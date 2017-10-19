@@ -1,6 +1,7 @@
 class Offer::Sell::Ask < Offer::Buy
 
   def side() "ask" end
+  alias_method :xtag, :side
 
 end
 

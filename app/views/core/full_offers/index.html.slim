@@ -31,7 +31,7 @@
         - @asks.each do |ask|
           tr
             td = ask_id_link(ask)
-            td = ask_user_link(ask.user)
+            td = core_ask_user_link(ask.user)
             td = ask.price
             td = ask_cross_count(ask)
             td = ask_actions(ask)

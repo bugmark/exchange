@@ -3,6 +3,7 @@ class Offer::Buy::Bid < Offer::Buy
   before_validation :default_values
 
   def side() "bid" end
+  alias_method :xtag, :side
 
   private
 
