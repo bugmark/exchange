@@ -4,54 +4,47 @@ RSpec.describe Offer::Sell, type: :model do
 
   def soff_params(user = {})
     {
-
+      parent_position_id: pos1.id
     }
   end
 
   def position_params(opts = {})
     {
-      user_id:  user.id       ,
-      offer_id: boff.id       ,
+      user_id:      user.id       ,
+      buy_offer_id: boff.id       ,
     }.merge(opts)
   end
 
-  let(:user)    { FG.create(:user).user                        }
-  let(:pos1)    { klas.new(position_params)                    }
-  let(:boff)    { FG.create(:buy_bid, user_id: user.id).offer  }
-  let(:soff)    { Offer::Sell::Bid.create soff_params          }
+  let(:user)   { FG.create(:user).user                        }
+  let(:pos1)   { Position.new(position_params)                }
+  let(:boff)   { FG.create(:buy_bid, user_id: user.id).offer  }
+  let(:soff)   { Offer::Sell::Bid.create(soff_params)         }
 
-  let(:klas)   { described_class                            }
-  subject      { klas.new(soff_params)                      }
+  let(:klas)   { described_class                              }
+  subject      { klas.new(soff_params)                        }
 
   describe "Associations", USE_VCR do
-    it { should respond_to(:parent_position)      }
-    # it { should respond_to(:sell_offers)          }
-    # it { should respond_to(:parent)               }
-    # it { should respond_to(:children)             }
-    # it { should respond_to(:user)                 }
-    # it { should respond_to(:escrow)               }
+    it { should respond_to(:parent_position)        }
+    it { should respond_to(:transfer)               }
   end
 
-  # describe "Object Creation", USE_VCR do
-  #   it { should be_valid }
-  #
-  #   it 'saves the object to the database' do
-  #     subject.save
-  #     expect(subject).to be_valid
-  #   end
-  # end
-  #
-  # describe "Associations", USE_VCR do
-  #   before(:each) do hydrate(pos1) end
-  #
-  #   it "finds the user" do
-  #     expect(pos1.user).to eq(user)
-  #   end
-  #
-  #   it "finds the offer" do
-  #     expect(pos1.buy_offer).to eq(boff)
-  #   end
-  # end
+  describe "Object Creation", USE_VCR do
+    it { should be_valid }
+
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
+
+  describe "Associations", USE_VCR do
+    before(:each) do hydrate(soff) end
+
+    it "finds the user" do
+      binding.pry
+      expect(soff.parent_position).to eq(pos1)
+    end
+  end
 end
 
 # == Schema Information

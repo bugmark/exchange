@@ -47,7 +47,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.boolean  :aon     , default: false  # All Or None
       t.string   :status                    # open, suspended, cancelled, ...
       t.datetime :expiration
-      t.datetime :maturation
       t.tsrange  :maturation_range
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
