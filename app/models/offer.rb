@@ -11,7 +11,7 @@ class Offer < ApplicationRecord
   belongs_to :parent_position, optional: true, class_name: "Position", :foreign_key => :parent_position_id
   has_one    :reoffer_parent                 , class_name: "Offer"   , :foreign_key => :reoffer_parent_id
   belongs_to :reoffer_child  , optional: true, class_name: "Offer"   , :foreign_key => :reoffer_parent_id
-  # belongs_to :transfer       , optional: true
+  belongs_to :transfer       , optional: true
 
   validates :status, inclusion:    {in: %w(open suspended crossed expired cancelled)}
   validates :volume, numericality: {only_integer: true, greater_than: 0}

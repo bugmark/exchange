@@ -1,34 +1,38 @@
 module OfferSellCmd
   class Create < ApplicationCommand
 
-    attr_subobjects :offer, :position
-    attr_delegate_fields :offer     , class_name: "Offer::Sell"
-    attr_vdelegate       :maturation, :offer
+    attr_subobjects      :sell_offer, :parent_position
+    attr_delegate_fields :sell_offer, class_name: "Offer::Sell"
 
     def initialize(position, volume, price)
-      @position = position
-      @offer = klas.new(default_values.merge(offer_args))
-      @user  = User.find(offer.user_id)
+      @parent_position = position
+      @volume          = volume
+      @price           = price
+      @sell_offer      = klas.new(sell_offer_params)
     end
 
     def event_data
-      offer.attributes
+      sell_offer.attributes
     end
 
-    def transact_before_project
-      offer.status = "open"
-    end
+    # def transact_before_project
+    #   offer.status = "open"
+    # end
 
     private
 
     def klas
-      position.offer.side == :bid ? Offer::Sell::Bid : Offer::Sell::Ask
+      parent_position.side == :bid ? Offer::Sell::Bid : Offer::Sell::Ask
     end
 
-    def default_values
+    def sell_offer_params
       {
-        status: "open"
-      }
+        status:  "open"                         ,
+        volume:  @volume                        ,
+        price:   @price                         ,
+        user_id: parent_position.user.id        ,
+        parent_position_id: parent_position.id  ,
+      }.merge(parent_position.buy_offer.match_attrs)
     end
   end
 end

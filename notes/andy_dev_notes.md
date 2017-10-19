@@ -298,9 +298,8 @@ Next Actions:
 - [x] build sell-offer spec
 - [x] make a transfer model & spec
 - [x] test associations: transfer, selloffer, buyoffer, positions...
-
-- [ ] sale: add offer_sell_cmd/create
-- [ ] sale: add offer_sell_cmd/cancel
+- [x] sale: add offer_sell_cmd/create
+- [x] sale: add offer_sell_cmd/cancel
 
 - [ ] cross: add contract_cmd/cross_from_sell_ask
 - [ ] cross: make cross match buy and sell

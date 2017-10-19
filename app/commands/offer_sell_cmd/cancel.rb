@@ -2,7 +2,7 @@ module OfferSellCmd
   class Cancel < ApplicationCommand
 
     attr_subobjects :offer
-    attr_delegate_fields :offer, class_name: "Offer::Buy"
+    attr_delegate_fields :offer, class_name: "Offer::Sell"
 
     def initialize(offer)
       @offer = offer
@@ -16,4 +16,4 @@ module OfferSellCmd
       offer.status = "cancelled"
     end
   end
-end #
+end
