@@ -62,6 +62,15 @@ FactoryGirl.define do
     end
   end
 
+  # factory :sell_bid, class: Offer::Sell::Bid do
+  #   # to_create {|instance| instance.save_event.project}
+  #   # initialize_with { new(:ask, attributes) }
+  #
+  #   price               0.40
+  #   volume              10
+  #   user_id             { FG.create(:user).id }
+  # end
+
   factory :position do
   end
 

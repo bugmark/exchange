@@ -136,12 +136,16 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer :parent_position_id
       t.integer :seller_position_id
       t.integer :buyer_position_id
+      t.string  :exref
+      t.string  :uuref
     end
     add_index :transfers, :sell_offer_id
     add_index :transfers, :buy_offer_id
     add_index :transfers, :parent_position_id
     add_index :transfers, :seller_position_id
     add_index :transfers, :buyer_position_id
+    add_index :transfers, :exref
+    add_index :transfers, :uuref
 
     create_table :users do |t|
       t.boolean  :admin
