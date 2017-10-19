@@ -2,13 +2,14 @@ class Position < ApplicationRecord
 
   has_paper_trail
 
-  has_one    :buy_offer   , class_name: "Offer"
+  belongs_to :buy_offer   , class_name: "Offer"   , :foreign_key => :offer_id , optional: true
   has_many   :sell_offers , class_name: "Offer"
-  belongs_to :user        , optional: true
-  # belongs_to :parent      , class_name: "Position" , optional: true
-  # has_many   :children    , class_name: "Position" , optional: true
+  belongs_to :user                                , optional: true
+  belongs_to :escrow                              , optional: true
+  belongs_to :parent      , class_name: "Position", optional: true
+  has_many   :children    , class_name: "Position"
 
-  # validate side (bid|ask)
+  # ----- INSTANCE METHODS -----
 
 end
 
