@@ -63,7 +63,6 @@ end
 #  aon                :boolean          default(FALSE)
 #  status             :string
 #  expiration         :datetime
-#  maturation         :datetime
 #  maturation_range   :tsrange
 #  jfields            :jsonb            not null
 #  exref              :string
