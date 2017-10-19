@@ -2,9 +2,7 @@ class Offer::Buy::Ask < Offer::Buy
 
   before_validation :default_values
 
-  def xtag
-    "ask"
-  end
+  def side() "ask" end
 
   def matching_bid_reserve
     @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve_value}

@@ -37,10 +37,15 @@ class Offer < ApplicationRecord
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
 
-    def is_buy_ask()  where(type: "Offer::Buy::Ask") end
-    def is_buy_bid()  where(type: "Offer::Buy::Bid") end
+    def is_buy_ask()  where(type: "Offer::Buy::Ask")  end
+    def is_buy_bid()  where(type: "Offer::Buy::Bid")  end
     def is_sell_ask() where(type: "Offer::Sell::Ask") end
     def is_sell_bid() where(type: "Offer::Sell::Bid") end
+
+    def on_bid_side() is_buy_bid.or(is_sell_bid)       end
+    def on_ask_side() is_buy_ask.or(is_sell_ask)       end
+    def with_buy_intent() is_buy_ask.or(is_buy_bid)    end
+    def with_sell_intent() is_sell_ask.or(is_sell_bid) end
   end
 
   # ----- OVERLAP UTILS -----

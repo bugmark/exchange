@@ -1,5 +1,8 @@
 class Offer::Sell < Offer
 
+  def intent
+    "sell"
+  end
 
 end
 

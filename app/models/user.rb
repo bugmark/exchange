@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :asks       , class_name: "Offer::Buy::Ask"
   has_many :sell_offers, class_name: "Offer::Sell"
 
+  has_many :positions
+
   def xtag
     "usr"
   end

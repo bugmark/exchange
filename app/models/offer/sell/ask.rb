@@ -1,5 +1,6 @@
 class Offer::Sell::Ask < Offer::Buy
 
+  def side() "ask" end
 
 end
 

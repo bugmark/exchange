@@ -103,7 +103,35 @@ RSpec.describe Offer, type: :model do
       expect(Offer.open.count).to eq(1)
       expect(Offer.not_open.count).to eq(0)
     end
+  end
 
+  describe ".on_bid_side" do
+    before(:each) do
+      Offer::Buy::Bid.create(valid_params)
+      Offer::Buy::Ask.create(valid_params)
+      Offer::Sell::Bid.create(valid_params)
+      Offer::Sell::Ask.create(valid_params)
+    end
+    
+    it "baselines" do
+      expect(Offer.count).to eq(4)
+    end
+
+    it "returns bid_side" do
+      expect(Offer.on_bid_side.count).to eq(2)
+    end
+    
+    it "returns ask_side" do
+      expect(Offer.on_ask_side.count).to eq(2)
+    end
+     
+    it "returns buy_intent" do
+      expect(Offer.with_buy_intent.count).to eq(2)
+    end
+    
+    it "returns sell_intent" do
+      expect(Offer.with_sell_intent.count).to eq(2)
+    end
   end
 
   describe "#overlap_offers" do

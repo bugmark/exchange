@@ -2,9 +2,7 @@ class Offer::Buy::Bid < Offer::Buy
 
   before_validation :default_values
 
-  def xtag
-    "bid"
-  end
+  def side() "bid" end
 
   private
 

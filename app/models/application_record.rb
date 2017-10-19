@@ -6,7 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
   before_save :update_uuref
 
   def xid
-    "#{xtag}.#{self&.id || 0}"
+    "#{side}.#{self&.id || 0}"
   end
 
   def to_i

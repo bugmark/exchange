@@ -99,6 +99,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :positions do |t|
       t.integer  :offer_id
+      t.integer  :user_id
       t.integer  :escrow_id
       t.integer  :parent_id
       t.integer  :volume
@@ -109,6 +110,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :positions, :offer_id
+    add_index :positions, :user_id
     add_index :positions, :escrow_id
     add_index :positions, :parent_id
     add_index :positions, :exref

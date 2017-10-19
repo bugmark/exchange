@@ -289,8 +289,7 @@ Next Actions:
 - [x] /contracts - ...
 - [x] /users/:id - show AVAILABLE_BALANCE
 - [x] navbar     - show AVAILABLE_BALANCE
-
-- [ ] deploy to production
+- [x] deploy to production
 
 - [ ] sale: add offer_sell_cmd/create
 - [ ] sale: add offer_sell_cmd/cancel
@@ -298,12 +297,15 @@ Next Actions:
 - [ ] cross: add contract_cmd/cross_from_sell_ask
 - [ ] cross: make cross match buy and sell
 
-- [ ] add UI support for crosses
+- [ ] add UI support for selling and crosses
 
 - [ ] bid_buy/ask_buy: add a cancel command
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
-- [ ] fix resolve
+- [ ] put 'my positions' on /users/:id
+
+- [ ] get resolve command working
+- [ ] add resolve command to UI
 
 # TBD
 

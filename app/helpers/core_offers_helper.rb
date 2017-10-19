@@ -9,7 +9,7 @@ module CoreOffersHelper
   end
 
   def core_offer_id_link(offer)
-    raw "<a href='/core/#{offer.xtag}s/#{offer.id}'>#{offer.xid}</a>"
+    raw "<a href='/core/#{offer.side}s/#{offer.id}'>#{offer.xid}</a>"
   end
 
   def core_offer_user_link(usr)

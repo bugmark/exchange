@@ -2,6 +2,10 @@ class Offer::Buy < Offer
 
   validate  :user_funds
 
+  def intent
+    "buy"
+  end
+
   private
 
   def user_funds
