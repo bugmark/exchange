@@ -25,7 +25,7 @@ RSpec.describe ContractCmd::CrossFromBuyAsk do
   describe "Subobjects", USE_VCR do
     it { should respond_to :subobject_symbols }
     it 'returns an array' do
-      expect(subject.subobject_symbols).to be_an(Array) #
+      expect(subject.subobject_symbols).to be_an(Array)
     end
   end
 
@@ -35,14 +35,14 @@ RSpec.describe ContractCmd::CrossFromBuyAsk do
     end
 
     it 'has a Contract with the right class' do
-      expect(subject.contract).to be_a(Contract) #
+      expect(subject.contract).to be_a(Contract)
     end
   end
 
   describe "#project - invalid subject", USE_VCR do
     before(:each) { hydrate(bid) }
 
-    it 'detects an invalid object' do #...
+    it 'detects an invalid object' do
       subject.project
       expect(subject).to be_valid
     end

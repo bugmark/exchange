@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Position, type: :model do
   def valid_params(opts = {})
     {
-      user_id:  user.id       ,
-      offer_id: boff.id
+      user_id:      user.id       ,
+      buy_offer_id: boff.id
     }.merge(opts)
   end
 
@@ -50,16 +50,16 @@ end
 #
 # Table name: positions
 #
-#  id         :integer          not null, primary key
-#  offer_id   :integer
-#  user_id    :integer
-#  escrow_id  :integer
-#  parent_id  :integer
-#  volume     :integer
-#  price      :float
-#  side       :string
-#  exref      :string
-#  uuref      :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :integer          not null, primary key
+#  buy_offer_id :integer
+#  user_id      :integer
+#  escrow_id    :integer
+#  parent_id    :integer
+#  volume       :integer
+#  price        :float
+#  side         :string
+#  exref        :string
+#  uuref        :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #

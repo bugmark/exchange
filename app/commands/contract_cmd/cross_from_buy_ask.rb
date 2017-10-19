@@ -21,8 +21,8 @@ module ContractCmd
       escrow.assign_attributes(contract_id: contract.id, bid_value: bid.value, ask_value: ask.value)
       escrow.save
       # TODO: pick best-fit price
-      Position.create(volume: bid.volume, price: bid.price, offer_id: bid.id, escrow_id: escrow.id, side: 'bid')
-      Position.create(volume: ask.volume, price: ask.price, offer_id: ask.id, escrow_id: escrow.id, side: 'ask')
+      Position.create(volume: bid.volume, price: bid.price, buy_offer_id: bid.id, escrow_id: escrow.id, side: 'bid')
+      Position.create(volume: ask.volume, price: ask.price, buy_offer_id: ask.id, escrow_id: escrow.id, side: 'ask')
       bid.update_attribute :status, 'crossed'
       ask.update_attribute :status, 'crossed'
       bid.user.decrement(bid.value).save

@@ -40,8 +40,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :repo_type                 # BugZilla, GitHub, CVE
       t.integer  :user_id                   # the party who made the offer
       t.integer  :parent_id                 # for ReOffers - an Offer
-      t.integer  :position_id               # for SaleOffers - a Position
-      t.integer  :counter_id                # the counterparty - an Offer
+      t.integer  :parent_position_id        # for SaleOffers - a Position
       t.integer  :volume, default: 1        # Greater than zero
       t.float    :price , default: 0.50     # between 0.00 and 1.00
       t.boolean  :poolable, default: true   # for reserve pooling
@@ -56,7 +55,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :offers, :type
     add_index :offers, :user_id
-    add_index :offers, :counter_id
+    add_index :offers, :parent_position_id
     add_index :offers, :poolable
     add_index :offers, :exref
     add_index :offers, :uuref
@@ -98,7 +97,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
 
     create_table :positions do |t|
-      t.integer  :offer_id
+      t.integer  :buy_offer_id
       t.integer  :user_id
       t.integer  :escrow_id
       t.integer  :parent_id
@@ -109,7 +108,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
-    add_index :positions, :offer_id
+    add_index :positions, :buy_offer_id
     add_index :positions, :user_id
     add_index :positions, :escrow_id
     add_index :positions, :parent_id

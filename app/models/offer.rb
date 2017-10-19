@@ -7,7 +7,8 @@ class Offer < ApplicationRecord
   belongs_to :user
   belongs_to :bug,      optional: true  , foreign_key: "stm_bug_id"
   belongs_to :repo,     optional: true  , foreign_key: "stm_repo_id"
-  belongs_to :position, optional: true
+  belongs_to :position, optional: true  , foreign_key: "buy_offer_id"
+  belongs_to :parent_position, optional: true, class_name: "Position", :foreign_key => :parent_position_id
 
   validates :status, inclusion: {in: %w(open suspended crossed expired cancelled)}
   validates :volume, numericality: {only_integer: true, greater_than: 0}
@@ -26,11 +27,11 @@ class Offer < ApplicationRecord
     def not_open() without_status('open') end
 
     def assigned
-      where("id IN (SELECT offer_id FROM positions)")
+      where("id IN (SELECT buy_offer_id FROM positions)")
     end
 
     def unassigned
-      where("id NOT IN (SELECT offer_id FROM positions)")
+      where("id NOT IN (SELECT buy_offer_id FROM positions)")
     end
 
     def by_maturation_range(range)
@@ -152,29 +153,28 @@ end
 #
 # Table name: offers
 #
-#  id               :integer          not null, primary key
-#  type             :string
-#  repo_type        :string
-#  user_id          :integer
-#  parent_id        :integer
-#  position_id      :integer
-#  counter_id       :integer
-#  volume           :integer          default(1)
-#  price            :float            default(0.5)
-#  poolable         :boolean          default(TRUE)
-#  aon              :boolean          default(FALSE)
-#  status           :string
-#  expiration       :datetime
-#  maturation       :datetime
-#  maturation_range :tsrange
-#  jfields          :jsonb            not null
-#  exref            :string
-#  uuref            :string
-#  stm_bug_id       :integer
-#  stm_repo_id      :integer
-#  stm_title        :string
-#  stm_status       :string
-#  stm_labels       :string
-#  stm_xfields      :hstore           not null
-#  stm_jfields      :jsonb            not null
+#  id                 :integer          not null, primary key
+#  type               :string
+#  repo_type          :string
+#  user_id            :integer
+#  parent_id          :integer
+#  parent_position_id :integer
+#  volume             :integer          default(1)
+#  price              :float            default(0.5)
+#  poolable           :boolean          default(TRUE)
+#  aon                :boolean          default(FALSE)
+#  status             :string
+#  expiration         :datetime
+#  maturation         :datetime
+#  maturation_range   :tsrange
+#  jfields            :jsonb            not null
+#  exref              :string
+#  uuref              :string
+#  stm_bug_id         :integer
+#  stm_repo_id        :integer
+#  stm_title          :string
+#  stm_status         :string
+#  stm_labels         :string
+#  stm_xfields        :hstore           not null
+#  stm_jfields        :jsonb            not null
 #
