@@ -291,6 +291,10 @@ Next Actions:
 - [x] navbar     - show AVAILABLE_BALANCE
 - [x] deploy to production
 
+# Oct 19
+
+- [ ] test associations: positions, user, offer, sell offer
+
 - [ ] sale: add offer_sell_cmd/create
 - [ ] sale: add offer_sell_cmd/cancel
 
