@@ -39,7 +39,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string   :repo_type                 # BugZilla, GitHub, CVE
       t.integer  :user_id                   # the party who made the offer
-      t.integer  :parent_id                 # for ReOffers - an Offer
+      t.integer  :reoffer_parent_id         # for ReOffers - an Offer
       t.integer  :parent_position_id        # for SaleOffers - a Position
       t.integer  :volume, default: 1        # Greater than zero
       t.float    :price , default: 0.50     # between 0.00 and 1.00
@@ -55,6 +55,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :offers, :type
     add_index :offers, :user_id
+    add_index :offers, :reoffer_parent_id
     add_index :offers, :parent_position_id
     add_index :offers, :poolable
     add_index :offers, :exref

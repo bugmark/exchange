@@ -24,7 +24,7 @@ RSpec.describe Offer::Sell, type: :model do
   subject      { klas.new(soff_params)                      }
 
   describe "Associations", USE_VCR do
-    # it { should respond_to(:buy_offer)            }
+    it { should respond_to(:parent_position)      }
     # it { should respond_to(:sell_offers)          }
     # it { should respond_to(:parent)               }
     # it { should respond_to(:children)             }
@@ -62,7 +62,7 @@ end
 #  type               :string
 #  repo_type          :string
 #  user_id            :integer
-#  parent_id          :integer
+#  reoffer_parent_id  :integer
 #  parent_position_id :integer
 #  volume             :integer          default(1)
 #  price              :float            default(0.5)

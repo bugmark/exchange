@@ -13,7 +13,7 @@ end
 #  type               :string
 #  repo_type          :string
 #  user_id            :integer
-#  parent_id          :integer
+#  reoffer_parent_id  :integer
 #  parent_position_id :integer
 #  volume             :integer          default(1)
 #  price              :float            default(0.5)
