@@ -7,7 +7,7 @@ module Core
 
     def index
       @filter = set_filter(params)
-      @offers = @filter ? @filter.obj.offers : Offer.all
+      @offers = @filter ? @filter.obj.offers.open : Offer.open
     end
 
     def cross
@@ -21,7 +21,7 @@ module Core
     end
 
     def retract
-      OfferBuyCmd::Cancel.new(params["id"]).save_event.project
+      OfferCmd::Retract.new(params["id"]).save_event.project
       redirect_to "/core/offers"
     end
 

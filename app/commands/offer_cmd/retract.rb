@@ -5,7 +5,7 @@ module OfferCmd
     attr_delegate_fields :offer, class_name: "Offer"
 
     def initialize(offer)
-      @offer = offer
+      @offer = Offer.find(offer.to_i)
     end
 
     def event_data
