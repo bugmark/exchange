@@ -1,27 +1,24 @@
 module ContractCmd
   class CrossFromSellAsk < ApplicationCommand
 
-    attr_subobjects :contract, :ask, :escrow, :bid
-    attr_delegate_fields :contract
+    attr_subobjects :transfer, :ask, :bid
+    attr_delegate_fields :transfer
 
     validate :cross_integrity
 
     def initialize(ask_param, contract_opts = {})
-      @ask      = Offer::Buy::Ask.unassigned.find(ask_param.to_i)
-      @contract = @ask.match_contracts.first || Contract.new(contract_opts)
-      @escrow   = Escrow.new
+      @ask      = Offer::Sell::Ask.unassigned.find(ask_param.to_i)
+      @transfer = Transfer.new
       @bid      = gen_cross(ask).first
     end
 
     def transact_before_project
-      contract.save
-      escrow.assign_attributes(bid_value: bid.value, ask_value: ask.value)
-      escrow.set_association.save
-      Position.create(volume: bid.volume, price: bid.price, offer_id: bid.id, escrow_id: escrow.id, side: 'bid')
-      Position.create(volume: ask.volume, price: ask.price, offer_id: ask.id, escrow_id: escrow.id, side: 'ask')
+      bpos = Position.create(parent: ask.parent_position, volume: ask.volume, price: ask.price, user: bid.user)
+      # TODO: create a seller position
+      transfer.update_attributes(transfer_opts(bpos))
       bid.update_attribute :status, 'crossed'
       ask.update_attribute :status, 'crossed'
-      bid.user.decrement(bid.value).save
+      bid.user.increment(bid.value).save
       ask.user.decrement(bid.value).save
     end
 
@@ -29,16 +26,23 @@ module ContractCmd
 
     def gen_cross(ask)
       return [] unless ask.present?
-      bids = Offer::Buy::Bid.not_open.matches(ask).complements(ask).with_volume(ask.volume)
+      bids = Offer::Buy::Bid.open.matches(ask).equals(ask).with_volume(ask.volume)
       if bids.count > 0
         bid = bids.first
-        contract.assign_attributes(ask.match_attrs)
-        contract.price  = ask.price
-        contract.volume = ask.volume
         [bid]
       else
         []
       end
+    end
+
+    def transfer_opts(spos)
+      {
+        sell_offer:      ask,
+        buy_offer:       bid,
+        parent_position: ask.parent_position,
+        buyer_position:  bpos,
+        # buyer_position_id:  "TBD"
+      }
     end
 
     def cross_integrity

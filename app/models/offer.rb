@@ -87,6 +87,10 @@ class Offer < ApplicationRecord
       where(volume: volume)
     end
 
+    def equals(offer)
+      with_price(offer.price)
+    end
+
     def complements(offer)
       complement = 1.0 - offer.price
       base = with_price(complement)

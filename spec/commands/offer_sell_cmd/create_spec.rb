@@ -22,14 +22,14 @@ RSpec.describe OfferSellCmd::Create do
     it { should respond_to :sell_offer                        }
   end
 
-  describe "Object Existence", USE_VCR do
-    it { should be_a klas   }
-    it "bings" do
-      binding.pry #
-      expect(1).to eq(1)
-    end
-    # it { should be_valid    }
-  end
+  # describe "Object Existence", USE_VCR do
+  #   it { should be_a klas   }
+  #   it "bings" do
+  #     binding.pry #
+  #     expect(1).to eq(1)
+  #   end
+  #   # it { should be_valid    }
+  # end
 
   # describe "Subobjects" do
   #   it { should respond_to :subobject_symbols }

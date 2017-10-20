@@ -300,16 +300,16 @@ Next Actions:
 - [x] test associations: transfer, selloffer, buyoffer, positions...
 - [x] sale: add offer_sell_cmd/create
 - [x] sale: add offer_sell_cmd/cancel
+- [x] cross: add contract_cmd/cross_from_sell_ask
 
-- [ ] cross: add contract_cmd/cross_from_sell_ask
+- [ ] put 'my positions' on /users/:id
+
 - [ ] cross: make cross match buy and sell
 
 - [ ] add UI support for selling and crosses
 
 - [ ] bid_buy/ask_buy: add a cancel command
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
-
-- [ ] put 'my positions' on /users/:id
 
 - [ ] get resolve command working
 - [ ] add resolve command to UI
