@@ -18,11 +18,11 @@ module ContractCmd
       contract.assign_attributes(ask.match_attrs)
       contract.maturation = ask.maturation
       contract.save
-      escrow.assign_attributes(contract_id: contract.id, bid_value: bid.value, ask_value: ask.value)
+      escrow.assign_attributes(contract: contract, bid_value: bid.value, ask_value: ask.value)
       escrow.save
       # TODO: pick best-fit price
-      Position.create(volume: bid.volume, price: bid.price, buy_offer_id: bid.id, escrow_id: escrow.id, side: 'bid')
-      Position.create(volume: ask.volume, price: ask.price, buy_offer_id: ask.id, escrow_id: escrow.id, side: 'ask')
+      Position.create(volume: bid.volume, price: bid.price, user: bid.user, buy_offer: bid, escrow: escrow, side: 'bid')
+      Position.create(volume: ask.volume, price: ask.price, user: ask.user, buy_offer: ask, escrow: escrow, side: 'ask')
       bid.update_attribute :status, 'crossed'
       ask.update_attribute :status, 'crossed'
       bid.user.decrement(bid.value).save

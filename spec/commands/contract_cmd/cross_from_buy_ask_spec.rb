@@ -106,31 +106,38 @@ RSpec.describe ContractCmd::CrossFromBuyAsk do
     end
   end
 
-  # describe "crossing", USE_VCR do
-  #
-  #   let(:lcl_ask) { FG.create(:ask, token_value: 10).ask }
-  #
-  #   context "with single bid" do
-  #     it 'matches higher values' do
-  #       _bid1 = FG.create(:bid, token_value: 11).bid
-  #       klas.new(lcl_ask).project
-  #       expect(Contract.count).to eq(1)
-  #     end
-  #
-  #     it 'matches equal values' do
-  #       _bid1 = FG.create(:bid, token_value: 10).bid
-  #       klas.new(lcl_ask).project
-  #       expect(Contract.count).to eq(1)
-  #     end
-  #
-  #     it 'fails to match lower values' do
-  #       _bid1 = FG.create(:bid, token_value: 9).bid
-  #       expect(Contract.count).to eq(0)
-  #       klas.new(lcl_ask).project
-  #       expect(Contract.count).to eq(0)
-  #     end
-  #   end
-  #
+  describe "crossing", USE_VCR do
+    let(:lcl_ask) { FG.create(:buy_ask).offer }
+
+    context "with single bid" do
+      it 'matches higher values' do
+        FG.create(:buy_bid)
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(1)
+        expect(Position.count).to eq(2)
+      end
+
+      it 'generates position ownership' do
+        FG.create(:buy_bid)
+        klas.new(lcl_ask).project
+        expect(Position.first.user_id).to_not be_nil
+        expect(Position.last.user_id).to_not be_nil
+      end
+
+      it 'matches equal values' do
+        FG.create(:buy_bid)
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it 'fails to match lower values' do
+        FG.create(:buy_bid, price: 0.1, volume: 1)
+        expect(Contract.count).to eq(0)
+        klas.new(lcl_ask).project
+        expect(Contract.count).to eq(0)
+      end
+    end
+
   #   context "with multiple bids" do
   #     it 'matches higher value' do
   #       _bid1 = FG.create(:bid, token_value: 6).bid
@@ -165,6 +172,6 @@ RSpec.describe ContractCmd::CrossFromBuyAsk do
   #       expect(Bid.unassigned.count).to eq(1)
   #     end
   #   end
-  # end
+  end
 end
 
