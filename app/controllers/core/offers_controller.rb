@@ -20,6 +20,11 @@ module Core
       end
     end
 
+    def retract
+      OfferBuyCmd::Cancel.new(params["id"]).save_event.project
+      redirect_to "/core/offers"
+    end
+
     private
 
     def set_filter(params)

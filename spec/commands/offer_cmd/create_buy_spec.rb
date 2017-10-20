@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OfferBuyCmd::Create do
+RSpec.describe OfferCmd::CreateBuy do
 
   def valid_params(args = {})
     {

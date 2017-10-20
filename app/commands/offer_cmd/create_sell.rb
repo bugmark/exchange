@@ -1,5 +1,5 @@
-module OfferSellCmd
-  class Create < ApplicationCommand
+module OfferCmd
+  class CreateSell < ApplicationCommand
 
     attr_subobjects      :sell_offer, :parent_position
     attr_delegate_fields :sell_offer, class_name: "Offer::Sell"

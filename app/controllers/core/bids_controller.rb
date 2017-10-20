@@ -26,7 +26,7 @@ module Core
     end
 
     def new
-      @bid = OfferBuyCmd::Create.new(:bid, new_opts(params))
+      @bid = OfferCmd::CreateBuy.new(:bid, new_opts(params))
     end
 
     # id (contract ID)
@@ -35,8 +35,8 @@ module Core
     end
 
     def create
-      opts = params["offer_buy_cmd_create"]
-      @bid = OfferBuyCmd::Create.new(:bid, valid_params(opts))
+      opts = params["offer_cmd_create_buy"]
+      @bid = OfferCmd::CreateBuy.new(:bid, valid_params(opts))
       if @bid.save_event.project
         redirect_to("/core/bids/#{@bid.id}")
       else

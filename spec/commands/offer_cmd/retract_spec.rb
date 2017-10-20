@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OfferBuyCmd::Cancel do
+RSpec.describe OfferCmd::Retract do
 
   let(:ask)    { FG.create(:buy_ask).offer                              }
   let(:bid)    { FG.create(:buy_bid).offer                              }
@@ -9,7 +9,7 @@ RSpec.describe OfferBuyCmd::Cancel do
   subject      { klas.new(bid)                                          }
 
   describe "Attributes", USE_VCR do
-    it { should respond_to :offer                  }
+    it { should respond_to :offer                  } #
   end
 
   describe "Object Existence", USE_VCR do
@@ -59,11 +59,11 @@ RSpec.describe OfferBuyCmd::Cancel do
       hydrate(bid)
       expect(Offer.count).to eq(1)
       expect(Offer.with_status('open').count).to eq(1)
-      expect(Offer.with_status('cancelled').count).to eq(0)
+      expect(Offer.with_status('retracted').count).to eq(0)
       subject.project
       expect(Offer.count).to eq(1)
       expect(Offer.with_status('open').count).to eq(0)
-      expect(Offer.with_status('cancelled').count).to eq(1)
+      expect(Offer.with_status('retracted').count).to eq(1)
     end
   end
 

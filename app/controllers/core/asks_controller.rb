@@ -27,7 +27,7 @@ module Core
 
     # bug_id or repo_id, type(forecast | reward)
     def new
-      @ask = OfferBuyCmd::Create.new(:ask, new_opts(params))
+      @ask = OfferCmd::CreateBuy.new(:ask, new_opts(params))
     end
 
     # id (contract ID)
@@ -36,8 +36,8 @@ module Core
     end
 
     def create
-      opts = params["offer_buy_cmd_create"]
-      @ask = OfferBuyCmd::Create.new(:ask, valid_params(opts))
+      opts = params["offer_cmd_create_buy"]
+      @ask = OfferCmd::CreateBuy.new(:ask, valid_params(opts))
       if @ask.save_event.project
         redirect_to("/core/asks/#{@ask.id}")
       else

@@ -1,5 +1,5 @@
-module OfferBuyCmd
-  class Create < ApplicationCommand
+module OfferCmd
+  class CreateBuy < ApplicationCommand
 
     attr_subobjects :offer, :user
     attr_reader     :typ

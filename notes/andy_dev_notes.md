@@ -303,15 +303,14 @@ Next Actions:
 - [x] cross: add contract_cmd/cross_from_sell_ask
 - [x] put 'my positions' on /users/:id
 
+- [ ] offer actions: cross / cancel / take
+- [ ] position actions: sell / resolve
+- [ ] contract actions: resolve
+- [ ] get resolve command working
+
 - [ ] cross: make cross match buy and sell
 
-- [ ] add UI support for selling and crosses
-
-- [ ] bid_buy/ask_buy: add a cancel command
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
-
-- [ ] get resolve command working
-- [ ] add resolve command to UI
 
 # TBD
 
@@ -335,6 +334,8 @@ Next Actions:
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve
 - [ ] enable event replay
+
+- [ ] get volume cancellation working
 
 - [ ] add API
 - [ ] use swagger for api docco

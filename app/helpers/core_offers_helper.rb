@@ -25,8 +25,12 @@ module CoreOffersHelper
 
   # ----- actions -----
 
-  def core_offer_cancel_link(_offer)
+  def core_offer_cross_link(offer)
     nil
+  end
+
+  def core_offer_retract_link(offer)
+    raw "<a href='/core/offers/#{offer.id}/retract' data-confirm='Are you sure?'>Retract</a>"
   end
 
   def core_offer_take_link(offer)
@@ -40,9 +44,10 @@ module CoreOffersHelper
   end
 
   def core_offer_actions(offer)
-    canc  = core_offer_cancel_link(offer)
+    cros  = core_offer_cross_link(offer)
+    canc  = core_offer_retract_link(offer)
     take  = core_offer_take_link(offer)
-    return "NA" unless [take, canc].any?
-    raw [canc, take].select(&:present?).join(" | ")
+    return "NA" unless [cros, take, canc].any?
+    raw [canc, take, cros].select(&:present?).join(" | ")
   end
 end

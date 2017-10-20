@@ -1,8 +1,8 @@
-module OfferBuyCmd
-  class Cancel < ApplicationCommand
+module OfferCmd
+  class Retract < ApplicationCommand
 
     attr_subobjects :offer
-    attr_delegate_fields :offer, class_name: "Offer::Buy"
+    attr_delegate_fields :offer, class_name: "Offer"
 
     def initialize(offer)
       @offer = offer
@@ -13,7 +13,7 @@ module OfferBuyCmd
     end
 
     def transact_before_project
-      offer.status = "cancelled"
+      offer.status = "retracted"
     end
   end
 end #
