@@ -301,8 +301,7 @@ Next Actions:
 - [x] sale: add offer_sell_cmd/create
 - [x] sale: add offer_sell_cmd/cancel
 - [x] cross: add contract_cmd/cross_from_sell_ask
-
-- [ ] put 'my positions' on /users/:id
+- [x] put 'my positions' on /users/:id
 
 - [ ] cross: make cross match buy and sell
 

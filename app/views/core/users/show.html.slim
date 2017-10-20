@@ -14,7 +14,6 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
         th Tokens
         th Matures
         th Status
-        th Crossed?
         th Action
     - @user.bids.each do |bid|
       tr
@@ -22,7 +21,6 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
         td = bid.price
         td = bid.maturation_str
         td = bid.status
-        td bid.contract_id ? "true" : "false"
         td TBD (cancel)
 div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
   b Asks (#{@user.asks.count}):
@@ -33,7 +31,6 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
         th Tokens
         th Matures
         th Status
-        th Crossed?
         th Action
     - @user.asks.each do |ask|
       tr
@@ -41,25 +38,20 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
         td = ask.price
         td = ask.maturation_str
         td = ask.status
-        td ask.contract_id ? "true" : "false"
         td TBD (cancel)
 
 div style='background: lightyellow'
   b Positions (#{@user.positions.count}):
   table.table
-    - if @user.contracts.count > 0
+    - if @user.positions.count > 0
       tr
         th ID
-        th Tokens
         th Matures
         th Status
-        th Bid
-        th Ask
-    - @user.contracts.each do |contract|
+        th Action
+    - @user.positions.each do |position|
       tr
-        td = contract_id_link(contract)
-        td B#{contract.bid_tokens} / A#{contract.ask_tokens}
-        td = contract.maturation_str
-        td = contract.status
-        td = contract_bid_link(contract)
-        td = contract_ask_link(contract)
+        td = position.xid
+        td = position.contract.maturation_str
+        td = position.contract.status
+        td TBD
