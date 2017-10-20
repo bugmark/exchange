@@ -303,12 +303,17 @@ Next Actions:
 - [x] cross: add contract_cmd/cross_from_sell_ask
 - [x] put 'my positions' on /users/:id
 
-- [ ] offer actions: cross / cancel / take
-- [ ] position actions: sell / resolve
-- [ ] contract actions: resolve
+- [ ] /offers        - cross | retract | take
+- [ ] /offers/:id    - cross | retract | take 
+- [ ] /contacts      - resolve
+- [ ] /contracts/:id - resolve
+- [ ] /users/:id     - resolve | sell
+
 - [ ] get resolve command working
 
 - [ ] cross: make cross match buy and sell
+- [ ] cross: add sell/bid=>sell/ask cross
+- [ ] cross: add buy/bid=>buy/ask cross
 
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
@@ -321,21 +326,12 @@ Next Actions:
 - [ ] cross: suspend invalid offers
 - [ ] cross: generate contract-graph
 
-- [ ] add bid/cancel link on offers#index
-- [ ] add ask/cancel link on offers#index
-- [ ] add bid/cancel link on offers#show
-- [ ] add ask/cancel link on offers#show
-
-- [ ] create a bid/take link on offers#index
-- [ ] create an ask/take link on offers#index
-- [ ] create a bid/take link on offers#show
-- [ ] create an ask/take link on offers#show
-
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve
 - [ ] enable event replay
 
 - [ ] get volume cancellation working
 
-- [ ] add API
-- [ ] use swagger for api docco
+- [ ] add Restful API
+- [ ] add GraphQL API
+- [ ] use swagger for resultful api docco
