@@ -307,6 +307,8 @@ Next Actions:
 
 - [x] specify cross methods
 
+# Oct 21
+
 - [ ] add offer/qualification methods w/specs
 
 - [ ] create Bundle::Expand

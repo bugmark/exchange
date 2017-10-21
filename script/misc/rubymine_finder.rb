@@ -35,7 +35,7 @@ class RubymineFinder
     @opts ||= begin
       args = case filetype
              when :coffee then %w(app/assets/ spec/     )
-             when :lib    then %w(lib/        spec/lib/ )
+             when :libs    then %w(lib/        spec/lib/ )
              else              %w(app/        spec/     )
              end
       Opts.new(filetype, *args)
@@ -45,7 +45,7 @@ class RubymineFinder
   def filetype
     @type ||= case src_path.to_s
     when /coffee/   then :coffee
-    when /lib/      then :lib
+    when /lib/      then :libs
     else :other
     end
   end

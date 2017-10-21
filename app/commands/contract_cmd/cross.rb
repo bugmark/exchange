@@ -15,6 +15,8 @@ module ContractCmd
     end
 
     def transact_before_project
+
+
       # TODO: pick best-fit maturation date
       contract.assign_attributes(ask.match_attrs)
       contract.maturation = ask.maturation
