@@ -46,10 +46,10 @@ class Offer < ApplicationRecord
     def is_sell_ask() where(type: "Offer::Sell::Ask") end
     def is_sell_bid() where(type: "Offer::Sell::Bid") end
 
-    def on_bid_side() is_buy_bid.or(is_sell_bid)       end
-    def on_ask_side() is_buy_ask.or(is_sell_ask)       end
-    def with_buy_intent() is_buy_ask.or(is_buy_bid)    end
-    def with_sell_intent() is_sell_ask.or(is_sell_bid) end
+    def is_bid()  is_buy_bid.or(is_sell_bid)   end
+    def is_ask()  is_buy_ask.or(is_sell_ask)   end
+    def is_buy()  is_buy_ask.or(is_buy_bid)    end
+    def is_sell() is_sell_ask.or(is_sell_bid)  end
   end
 
   # ----- OVERLAP UTILS -----
@@ -79,27 +79,18 @@ class Offer < ApplicationRecord
 
   # ----- CROSS UTILS -----
   class << self
-    def with_price(price)
-      where(price: price)
-    end
-
     def with_volume(volume)
       where(volume: volume)
     end
 
-    def equals(offer)
-      with_price(offer.price)
-    end
-
-    def complements(offer)
+    def align_complement(offer)
       complement = 1.0 - offer.price
-      base = with_price(complement)
+      base = where('price >= ?', complement)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
 
-    def crosses(offer)
-      complement = 1.0 - offer.price
-      base = where('price >= ?', complement)
+    def align_equal(offer)
+      base = where('price >= ?', offer.price)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
   end

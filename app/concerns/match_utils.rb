@@ -11,6 +11,7 @@ module MatchUtils
     }
   end
 
+  def match()                 Offer.match(match_attrs)            end
   def match_bugs()            Bug.match(match_attrs)              end
   def match_contracts()       Contract.match(match_attrs)         end
   def match_offers()          Offer.match(match_attrs)            end

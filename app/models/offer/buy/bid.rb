@@ -5,9 +5,15 @@ class Offer::Buy::Bid < Offer::Buy
   def side() "bid" end
   alias_method :xtag, :side
 
-  def qualified_counteroffers
-    []
+  def qualified_counteroffers(cross_type)
+    base = match.open.overlaps(self)
+    case cross_type
+      when :expand  then base.is_buy_ask.align_complement(self)
+      when :realloc then base.is_sell_bid.align_equal(self)
+      else Offer.none
+    end
   end
+  alias_method :counters, :qualified_counteroffers
 
   private
 
@@ -15,7 +21,7 @@ class Offer::Buy::Bid < Offer::Buy
     self.type              ||= 'Bid::GitHub'
     self.stm_status        ||= 'open'
     self.price             ||= 0.10
-    self.maturation_range ||= Time.now+1.minute..Time.now+1.week
+    self.maturation_range  ||= Time.now+1.minute..Time.now+1.week
   end
 
 end

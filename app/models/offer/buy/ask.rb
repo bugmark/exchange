@@ -9,9 +9,15 @@ class Offer::Buy::Ask < Offer::Buy
     @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve_value}
   end
 
-  def qualified_counteroffers
-    []
+  def qualified_counteroffers(cross_type)
+    base = match.open.overlaps(self)
+    case cross_type
+      when :expand  then base.is_buy_bid.align_complement(self)
+      when :realloc then base.is_sell_ask.align_equal(self)
+      else Offer.none
+    end
   end
+  alias_method :counters, :qualified_counteroffers
 
   private
 

@@ -3,9 +3,15 @@ class Offer::Sell::Bid < Offer::Buy
   def side() "bid" end
   alias_method :xtag, :side
 
-  def qualified_counteroffers
-    []
+  def qualified_counteroffers(cross_type)
+    base = match.open.overlaps(self)
+    case cross_type
+      when :realloc then base.is_buy_bid.align_equal(self)
+      when :reduce  then base.is_sell_ask.align_complement(self)
+      else Offer.none
+    end
   end
+  alias_method :counters, :qualified_counteroffers
 
 end
 
