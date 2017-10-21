@@ -46,10 +46,10 @@ class Offer < ApplicationRecord
     def is_sell_ask() where(type: "Offer::Sell::Ask") end
     def is_sell_bid() where(type: "Offer::Sell::Bid") end
 
-    def is_bid()  is_buy_bid.or(is_sell_bid)   end
-    def is_ask()  is_buy_ask.or(is_sell_ask)   end
-    def is_buy()  is_buy_ask.or(is_buy_bid)    end
-    def is_sell() is_sell_ask.or(is_sell_bid)  end
+    def is_bid()  where('type like ?', "%Bid") end
+    def is_ask()  where('type like ?', "%Ask") end
+    def is_buy()  where('type like ?', "Offer::Buy%") end
+    def is_sell() where('type like ?', "Offer::Sell%") end
   end
 
   # ----- OVERLAP UTILS -----

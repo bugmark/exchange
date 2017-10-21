@@ -9,7 +9,7 @@ RSpec.describe Offer, type: :model do
     }.merge(extras)
   end
 
-  def offer3(extras) klas.new(valid_params(extras)) end
+  def offer3(extras) Offer::Buy::Bid.new(valid_params(extras)) end
   let(:offer2) { klas.new(valid_params)  }
   let(:user)   { FG.create(:user)        }
   let(:klas)   { described_class         }
@@ -105,7 +105,7 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  describe ".on_bid_side" do
+  describe ".is_bid" do
     before(:each) do
       Offer::Buy::Bid.create(valid_params)
       Offer::Buy::Ask.create(valid_params)
@@ -118,23 +118,23 @@ RSpec.describe Offer, type: :model do
     end
 
     it "returns bid_side" do
-      expect(Offer.on_bid_side.count).to eq(2)
+      expect(Offer.is_bid.count).to eq(2) #
     end
     
     it "returns ask_side" do
-      expect(Offer.on_ask_side.count).to eq(2)
+      expect(Offer.is_ask.count).to eq(2)
     end
      
     it "returns buy_intent" do
-      expect(Offer.with_buy_intent.count).to eq(2)
+      expect(Offer.is_buy.count).to eq(2)
     end
     
     it "returns sell_intent" do
-      expect(Offer.with_sell_intent.count).to eq(2)
+      expect(Offer.is_sell.count).to eq(2)
     end
   end
 
-  describe "#overlap_offers" do
+  describe "#overlap_offers" do #
     before(:each) { subject.save }
 
     it "returns one with alternate offer" do
@@ -144,27 +144,6 @@ RSpec.describe Offer, type: :model do
 
     it "returns zero with base offer" do
       result = subject.overlap_offers
-      expect(result.count).to eq(0)
-    end
-  end
-
-  describe "#cross_offers" do
-    before(:each) { subject.save }
-
-    it "returns none" do
-      result = subject.cross_offers
-      expect(result.count).to eq(0)
-    end
-
-    it "returns one with high price" do
-      obj = offer3(price: 0.9)
-      result = obj.cross_offers
-      expect(result.count).to eq(1)
-    end
-
-    it "returns zero with low price" do
-      obj = offer3(price: 0.1)
-      result = obj.cross_offers
       expect(result.count).to eq(0)
     end
   end
