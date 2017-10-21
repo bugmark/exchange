@@ -1,3 +1,5 @@
+require 'ext/array'  # for allsums method...
+
 module ContractCmd
   class Cross < ApplicationCommand
 
@@ -5,6 +7,7 @@ module ContractCmd
     attr_delegate_fields :src_offer
 
     validate :cross_integrity
+    validate :compatible_volumes
 
     def initialize(offer, commit_type)
       @commit_type = commit_type
@@ -31,9 +34,24 @@ module ContractCmd
       if counters.nil? || counters.blank?
         errors.add :id, "no qualified counteroffers found"
       end
+    end
+
+    def compatible_volumes
 
       if offer.aon? && offer.volume > counters.pluck(:volume).sum
-        errors.add :id, "not enough counteroffer volume (AON)"
+        errors.add :base, "Err1: not enough counteroffer volume (AON)"
+      end
+
+      counter_pool = counters.where(aon: false).pluck(volume).sum
+      counter_aon  = counters.where(aon: true).pluck(volume)
+      allsums      = counter_aon.allsums
+
+      if offer.aon? && ! allsums.include?(([0, offer.volume - counter_pool].max))
+        errors.add :base, "Err2: no volume match"
+      end
+
+      if counter_pool == 0 && allsums[1..-1].min > offer.volme
+        errors.add :base, "Err3: no volume match (counteroffer AON)"
       end
     end
   end
