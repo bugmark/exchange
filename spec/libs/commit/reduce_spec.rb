@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Commit::Expand do
+RSpec.describe Commit::Reduce do
 
 end

@@ -1,5 +1,4 @@
-require 'rails_helper'
-
-Rspec.describe Commit::Reduce do
-
+module Commit
+  class Reduce
+  end
 end

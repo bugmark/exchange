@@ -13,8 +13,8 @@ module ContractCmd
     end
 
     def transact_before_project
-      bundle = Bundle.new(commit_type, offer, counters).generate
-      _result = Commit.new(commit_type, bundle).generate
+      bundle = Bundle.init(commit_type, offer, counters).generate
+      _result = Commit.init(commit_type, bundle).generate
     end
 
     private
