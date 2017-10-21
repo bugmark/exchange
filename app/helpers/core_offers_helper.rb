@@ -35,7 +35,7 @@ module CoreOffersHelper
 
   def core_offer_take_link(offer)
     status = offer.status
-    if offer.unmatured? && status == "open"
+    if offer.is_unmatured? && status == "open"
       path = "/core/bids/#{offer.id}/edit"
       raw "<a href='#{path}'>Take</a>"
     else

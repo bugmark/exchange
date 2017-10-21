@@ -73,7 +73,7 @@ module CoreAsksHelper
 
   def ask_resolve_link(ask)
     return nil if ask.resolved?
-    return nil unless ask.matured?
+    return nil unless ask.is_matured?
     link_to "Resolve", {:action => :resolve, :id => ask.id}
   end
 

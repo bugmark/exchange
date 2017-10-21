@@ -35,7 +35,7 @@ module ContractsHelper
 
   def contract_resolve_link(contract)
     return nil if contract.resolved?
-    return nil unless contract.matured?
+    return nil unless contract.is_matured?
     link_to "resolve", {:action => :resolve, :id => contract.id}
   end
 

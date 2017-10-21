@@ -4,6 +4,7 @@ class Offer::Sell::Ask < Offer::Buy
   alias_method :xtag, :side
 
   def qualified_counteroffers(cross_type)
+    return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type
       when :realloc then base.is_buy_ask.align_equal(self)

@@ -131,12 +131,22 @@ class Offer < ApplicationRecord
     self.maturation_range.end
   end
 
-  def matured?
+  # ----- predicates -----
+
+  def is_matured?
     self.maturation < Time.now
   end
 
-  def unmatured?
-    ! matured?
+  def is_unmatured?
+    ! is_matured?
+  end
+
+  def is_open?
+    self.status == 'open'
+  end
+
+  def is_not_open?
+    ! is_open?
   end
 
   private

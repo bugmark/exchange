@@ -310,7 +310,7 @@ Next Actions:
 # Oct 21
 
 - [x] add offer#qualified_counteroffer methods
-- [ ] clean up specs
+- [x] clean up specs
 
 - [ ] create Bundle::Expand
 - [ ] create Bundle::Reallocate
