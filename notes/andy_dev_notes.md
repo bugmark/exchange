@@ -303,6 +303,20 @@ Next Actions:
 - [x] cross: add contract_cmd/cross_from_sell_ask
 - [x] put 'my positions' on /users/:id
 
+# Oct 20
+
+- [x] specify cross methods
+
+- [ ] add offer/qualification methods w/specs
+
+- [ ] create Bundle::Expand
+- [ ] create Bundle::Reallocate
+- [ ] create Bundle::Reduce
+
+- [ ] create Commit::Expand
+- [ ] create Commit::Reallocate
+- [ ] create Commit::Reduce
+
 - [ ] /offers        - cross | retract | take
 - [ ] /offers/:id    - cross | retract | take 
 - [ ] /contacts      - resolve
@@ -310,12 +324,6 @@ Next Actions:
 - [ ] /users/:id     - resolve | sell
 
 - [ ] get resolve command working
-
-- [ ] cross: make cross match buy and sell
-- [ ] cross: add sell/bid=>sell/ask cross
-- [ ] cross: add buy/bid=>buy/ask cross
-
-- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
 # TBD
 
@@ -325,6 +333,12 @@ Next Actions:
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers
 - [ ] cross: generate contract-graph
+
+- [ ] cross: make cross match buy and sell
+- [ ] cross: add sell/bid=>sell/ask cross
+- [ ] cross: add buy/bid=>buy/ask cross
+
+- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve

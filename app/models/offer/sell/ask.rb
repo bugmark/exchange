@@ -3,6 +3,10 @@ class Offer::Sell::Ask < Offer::Buy
   def side() "ask" end
   alias_method :xtag, :side
 
+  def qualified_counteroffers
+    []
+  end
+
 end
 
 # == Schema Information

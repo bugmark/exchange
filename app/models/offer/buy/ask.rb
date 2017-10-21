@@ -9,6 +9,10 @@ class Offer::Buy::Ask < Offer::Buy
     @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve_value}
   end
 
+  def qualified_counteroffers
+    []
+  end
+
   private
 
   def default_values
