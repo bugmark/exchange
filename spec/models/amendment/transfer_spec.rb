@@ -40,46 +40,46 @@ RSpec.describe Amendment::Transfer, type: :model do
   let(:klas)   { described_class                              }
   subject      { klas.new(valid_params)                       }
 
-  describe "Associations", USE_VCR do
-    it { should respond_to(:sell_offer)            }
-    it { should respond_to(:buy_offer)             }
-    it { should respond_to(:parent_position)       }
-    it { should respond_to(:seller_position)       }
-    it { should respond_to(:buyer_position)        }
-  end
-
-  describe "Object Creation", USE_VCR do
-    it { should be_valid }
-
-    it 'saves the object to the database' do
-      subject.save
-      expect(subject).to be_valid
-    end
-  end
-
-  describe "Associations", USE_VCR do
-    before(:each) do hydrate(tran) end
-
-    it "finds the sell offer" do
-      expect(tran.sell_offer).to eq(soff)
-    end
-
-    it "finds the buy offer" do
-      expect(tran.buy_offer).to eq(boff)
-    end
-
-    it "finds the parent_position" do
-      expect(tran.parent_position).to eq(ppos)
-    end
-
-    it "finds the buyer_position" do
-      expect(tran.buyer_position).to eq(bpos)
-    end
-
-    it "finds the seller_position" do
-      expect(tran.seller_position).to eq(spos)
-    end
-  end
+  # describe "Associations", USE_VCR do
+  #   it { should respond_to(:sell_offer)            }
+  #   it { should respond_to(:buy_offer)             }
+  #   it { should respond_to(:parent_position)       }
+  #   it { should respond_to(:seller_position)       }
+  #   it { should respond_to(:buyer_position)        }
+  # end
+  #
+  # describe "Object Creation", USE_VCR do
+  #   it { should be_valid }
+  #
+  #   it 'saves the object to the database' do
+  #     subject.save
+  #     expect(subject).to be_valid
+  #   end
+  # end
+  #
+  # describe "Associations", USE_VCR do
+  #   before(:each) do hydrate(tran) end
+  #
+  #   it "finds the sell offer" do
+  #     expect(tran.sell_offer).to eq(soff)
+  #   end
+  #
+  #   it "finds the buy offer" do
+  #     expect(tran.buy_offer).to eq(boff)
+  #   end
+  #
+  #   it "finds the parent_position" do
+  #     expect(tran.parent_position).to eq(ppos)
+  #   end
+  #
+  #   it "finds the buyer_position" do
+  #     expect(tran.buyer_position).to eq(bpos)
+  #   end
+  #
+  #   it "finds the seller_position" do
+  #     expect(tran.seller_position).to eq(spos)
+  #   end
+  # end
 end
 
 # == Schema Information

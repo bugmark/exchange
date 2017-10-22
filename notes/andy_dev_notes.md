@@ -316,13 +316,18 @@ Next Actions:
 
 # Oct 22
 
-- [ ] define Amendment::Expand
-- [ ] define Amendment::Transfer
-- [ ] define Amendment::Reduce
-- [ ] define Amendment::Resolve
+- [x] define Amendment::Expand
+- [x] define Amendment::Transfer
+- [x] define Amendment::Reduce
+- [x] define Amendment::Resolve
+- [x] write Amendment spec
+
+- [ ] update contract spec
+- [ ] write Amendment spec
+- [ ] write Amendment::Expand
 
 - [ ] write Commit#expand
-- [ ] write Commit#realloc
+- [ ] write Commit#transfer
 - [ ] write Commit#reduce
 
 - [ ] test Bundle
