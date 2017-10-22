@@ -1,12 +1,11 @@
-module Bundle
-  def self.init(type, offer, counters)
-    klas = case type
-      when :expand  then Bundle::Expand
-      when :realloc then Bundle::Realloc
-      when :reduce  then Bundle::Reduce
-      else rase "Unrecognized type #{type}"
-    end
-    klas.new(offer, counters)
+class Bundle
+
+  attr_reader :type, :offer, :counters
+
+  def self.initialize(type, offer, counters)
+    @type     = type
+    @offer    = offer
+    @counters = counters
   end
 
   def generate
@@ -32,6 +31,7 @@ module Bundle
     end
 
     {
+      type:  type                    ,
       offer: [offer, pool_volume]    ,
       counter: pool_offers
     }

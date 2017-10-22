@@ -311,14 +311,23 @@ Next Actions:
 
 - [x] add offer#qualified_counteroffer methods
 - [x] clean up specs
+- [x] create Bundle
+- [x] write new cross
 
-- [ ] create Bundle::Expand
-- [ ] create Bundle::Reallocate
-- [ ] create Bundle::Reduce
+# Oct 22
 
-- [ ] create Commit::Expand
-- [ ] create Commit::Reallocate
-- [ ] create Commit::Reduce
+- [ ] define Amendment::Expand
+- [ ] define Amendment::Transfer
+- [ ] define Amendment::Reduce
+- [ ] define Amendment::Resolve
+
+- [ ] write Commit#expand
+- [ ] write Commit#realloc
+- [ ] write Commit#reduce
+
+- [ ] test Bundle
+- [ ] test Commit
+- [ ] test ContractCmd::Cross
 
 - [ ] /offers        - cross | retract | take
 - [ ] /offers/:id    - cross | retract | take 
@@ -333,8 +342,10 @@ Next Actions:
 - [ ] cross: enable partial volume match
 - [ ] cross: enable poolable offers
 - [ ] cross: generate re-offers
+
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers
+
 - [ ] cross: generate contract-graph
 
 - [ ] cross: make cross match buy and sell

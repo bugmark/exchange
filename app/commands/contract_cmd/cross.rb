@@ -4,6 +4,7 @@ module ContractCmd
   class Cross < ApplicationCommand
 
     attr_subobjects :offer, :counters, :commit_type
+    attr_reader :commit_type
     attr_delegate_fields :src_offer
 
     validate :cross_integrity
@@ -16,7 +17,7 @@ module ContractCmd
     end
 
     def transact_before_project
-      bundle = Bundle.init(commit_type, offer, counters).generate
+      bundle  = Bundle.new(commit_type, offer, counters).generate
       _result = Commit.init(commit_type, bundle).generate
     end
 
