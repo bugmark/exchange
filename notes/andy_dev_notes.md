@@ -321,9 +321,9 @@ Next Actions:
 - [x] define Amendment::Reduce
 - [x] define Amendment::Resolve
 - [x] write Amendment spec
+- [x] update contract spec
+- [x] add timestamps to all models
 
-- [ ] update contract spec
-- [ ] write Amendment spec
 - [ ] write Amendment::Expand
 
 - [ ] write Commit#expand

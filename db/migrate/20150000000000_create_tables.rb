@@ -52,6 +52,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref
+      t.timestamps
     end
     add_index :offers, :type
     add_index :offers, :user_id
@@ -142,6 +143,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref
+      t.timestamps
     end
     add_index :amendments, :contract_id
     add_index :amendments, :sequence
@@ -179,6 +181,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :projections do |t|
       t.string  :name
       t.integer :event_counter
+      t.timestamps
     end
   end
 end

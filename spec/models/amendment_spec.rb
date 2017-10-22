@@ -63,4 +63,6 @@ end
 #  jfields     :jsonb            not null
 #  exref       :string
 #  uuref       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #

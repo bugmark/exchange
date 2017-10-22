@@ -31,6 +31,8 @@ end
 #  jfields            :jsonb            not null
 #  exref              :string
 #  uuref              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #  stm_bug_id         :integer
 #  stm_repo_id        :integer
 #  stm_title          :string

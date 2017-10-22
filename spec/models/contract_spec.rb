@@ -16,6 +16,7 @@ RSpec.describe Contract, type: :model do
 
   describe "Associations" do
     it { should respond_to(:escrows)            }
+    it { should respond_to(:amendments)         }
   end
 
   describe "Attributes" do
