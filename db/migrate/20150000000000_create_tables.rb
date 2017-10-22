@@ -48,6 +48,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :status                    # open, suspended, cancelled, ...
       t.datetime :expiration
       t.tsrange  :maturation_range
+      t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref
@@ -60,6 +61,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :exref
     add_index :offers, :uuref
     add_index :offers, :maturation_range, using: :gist
+    add_index :offers, :xfields         , using: :gin
     add_index :offers, :jfields         , using: :gin
 
     create_table :contracts do |t|
@@ -68,6 +70,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :status              # open, matured, resolved
       t.string   :awarded_to          # bidder, asker
       t.datetime :maturation
+      t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
       t.string   :uuref
@@ -75,6 +78,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :contracts, :exref
     add_index :contracts, :uuref
+    add_index :contracts, :xfields, using: :gin
     add_index :contracts, :jfields, using: :gin
 
     # ----- STATEMENT FIELDS -----
@@ -130,22 +134,21 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :escrows, :exref
     add_index :escrows, :uuref
 
-    create_table :transfers do |t|
-      t.integer :sell_offer_id
-      t.integer :buy_offer_id
-      t.integer :parent_position_id
-      t.integer :seller_position_id
-      t.integer :buyer_position_id
-      t.string  :exref
-      t.string  :uuref
+    create_table :amendments do |t|
+      t.string   :type               # expand, transfer, reduce, resolve
+      t.integer  :sequence           # SORTABLE POSITION USING ACTS_AS_LIST
+      t.integer  :contract_id
+      t.hstore   :xfields,  null: false, default: {}
+      t.jsonb    :jfields,  null: false, default: '{}'
+      t.string   :exref
+      t.string   :uuref
     end
-    add_index :transfers, :sell_offer_id
-    add_index :transfers, :buy_offer_id
-    add_index :transfers, :parent_position_id
-    add_index :transfers, :seller_position_id
-    add_index :transfers, :buyer_position_id
-    add_index :transfers, :exref
-    add_index :transfers, :uuref
+    add_index :amendments, :contract_id
+    add_index :amendments, :sequence
+    add_index :amendments, :xfields, using: :gin
+    add_index :amendments, :jfields, using: :gin
+    add_index :amendments, :exref
+    add_index :amendments, :uuref
 
     create_table :users do |t|
       t.boolean  :admin

@@ -61,6 +61,7 @@ end
 #  status      :string
 #  awarded_to  :string
 #  maturation  :datetime
+#  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  exref       :string
 #  uuref       :string

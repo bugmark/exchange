@@ -63,6 +63,7 @@ end
 #  status             :string
 #  expiration         :datetime
 #  maturation_range   :tsrange
+#  xfields            :hstore           not null
 #  jfields            :jsonb            not null
 #  exref              :string
 #  uuref              :string

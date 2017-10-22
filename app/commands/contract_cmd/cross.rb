@@ -5,7 +5,7 @@ module ContractCmd
 
     attr_subobjects :offer, :counters, :commit_type
     attr_reader :commit_type
-    attr_delegate_fields :src_offer
+    # attr_delegate_fields :src_offer
 
     validate :cross_integrity
     validate :compatible_volumes

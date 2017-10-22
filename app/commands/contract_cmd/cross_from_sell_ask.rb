@@ -1,14 +1,14 @@
 module ContractCmd
   class CrossFromSellAsk < ApplicationCommand
 
-    attr_subobjects :transfer, :ask, :bid
-    attr_delegate_fields :transfer
+    # attr_subobjects :transfer, :ask, :bid
+    # attr_delegate_fields :transfer
 
     validate :cross_integrity
 
     def initialize(ask_param, contract_opts = {})
       @ask      = Offer::Sell::Ask.unassigned.find(ask_param.to_i)
-      @transfer = Transfer.new
+      @transfer = String.new # Amendment::Transfer.new
       @bid      = gen_cross(ask).first
     end
 

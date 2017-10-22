@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Transfer, type: :model do
+RSpec.describe Amendment::Transfer, type: :model do
 
   def valid_params() {} end
 
@@ -84,14 +84,14 @@ end
 
 # == Schema Information
 #
-# Table name: transfers
+# Table name: amendments
 #
-#  id                 :integer          not null, primary key
-#  sell_offer_id      :integer
-#  buy_offer_id       :integer
-#  parent_position_id :integer
-#  seller_position_id :integer
-#  buyer_position_id  :integer
-#  exref              :string
-#  uuref              :string
+#  id          :integer          not null, primary key
+#  type        :string
+#  sequence    :integer
+#  contract_id :integer
+#  xfields     :hstore           not null
+#  jfields     :jsonb            not null
+#  exref       :string
+#  uuref       :string
 #

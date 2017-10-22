@@ -12,7 +12,8 @@ class Contract < ApplicationRecord
   # has_many :bid_users, :through => :bids, :source => "user"
   # has_many :ask_users, :through => :asks, :source => "user"
 
-  has_many :escrows, -> {order(:sequence => :asc)}
+  has_many :escrows   , -> {order(:sequence => :asc)}
+  has_many :amendments, -> {order(:sequence => :asc)}
 
   has_many :positions, :through => :escrows
 
@@ -159,6 +160,7 @@ end
 #  status      :string
 #  awarded_to  :string
 #  maturation  :datetime
+#  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  exref       :string
 #  uuref       :string
