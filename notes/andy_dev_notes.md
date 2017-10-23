@@ -327,8 +327,9 @@ Next Actions:
 # Oct 23
 
 - [x] write Amendment::Expand
+- [x] add amendment_id to offer, position, escrow
 
-- [ ] add amendment_id to offer, position, escrow
+- [ ] add escrow types 
 
 - [ ] write Commit#expand
 - [ ] write Commit#transfer

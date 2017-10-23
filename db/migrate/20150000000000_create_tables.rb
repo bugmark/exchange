@@ -126,6 +126,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :positions, :side
 
     create_table :escrows do |t|
+      t.string   :type
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
       t.integer  :amendment_id
@@ -135,6 +136,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
+    add_index :escrows, :type
     add_index :escrows, :contract_id
     add_index :escrows, :amendment_id
     add_index :escrows, :sequence

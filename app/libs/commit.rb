@@ -20,8 +20,12 @@ class Commit
     min_end      = all_offers.map {|o| o.maturation_range.end}.min
 
     # find or generate contract
+    matching = bundle.offer.match_contracts.overlap(max_start..min_end)
+    selected = matching&.sort_by {|c| c.escrows.count}.first
     contract = bundle.offer.match_contracts.first || Contract.new(contract_opts)
     escrow   = Escrow.new
+
+    contract.maturation = [max_start, min_end].avg_time unless selected.present?
 
     maturation   = contract.persisted? ? contract.maturation : [max_start, min_end].avg_time
     avg_cprice   = bundle.counters.map(&:price).avg

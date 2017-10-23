@@ -62,6 +62,7 @@ end
 # Table name: escrows
 #
 #  id           :integer          not null, primary key
+#  type         :string
 #  sequence     :integer
 #  contract_id  :integer
 #  amendment_id :integer
