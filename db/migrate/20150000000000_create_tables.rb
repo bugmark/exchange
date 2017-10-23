@@ -39,6 +39,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string   :repo_type                 # BugZilla, GitHub, CVE
       t.integer  :user_id                   # the party who made the offer
+      t.integer  :amendment_id              # the generating amendment
       t.integer  :reoffer_parent_id         # for ReOffers - an Offer
       t.integer  :parent_position_id        # for SaleOffers - a Position
       t.integer  :volume, default: 1        # Greater than zero
@@ -56,6 +57,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :offers, :type
     add_index :offers, :user_id
+    add_index :offers, :amendment_id
     add_index :offers, :reoffer_parent_id
     add_index :offers, :parent_position_id
     add_index :offers, :poolable
@@ -104,6 +106,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :positions do |t|
       t.integer  :buy_offer_id
       t.integer  :user_id
+      t.integer  :amendment_id
       t.integer  :escrow_id
       t.integer  :parent_id
       t.integer  :volume
@@ -115,6 +118,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :positions, :buy_offer_id
     add_index :positions, :user_id
+    add_index :positions, :amendment_id
     add_index :positions, :escrow_id
     add_index :positions, :parent_id
     add_index :positions, :exref
@@ -124,6 +128,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :escrows do |t|
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
+      t.integer  :amendment_id
       t.float    :bid_value,     default: 0.0
       t.float    :ask_value,     default: 0.0
       t.string   :exref
@@ -131,6 +136,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :escrows, :contract_id
+    add_index :escrows, :amendment_id
     add_index :escrows, :sequence
     add_index :escrows, :exref
     add_index :escrows, :uuref
@@ -139,33 +145,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type               # expand, transfer, reduce, resolve
       t.integer  :sequence           # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
-
-      # ----- EXPAND -----
-      t.integer  :exp_sell_bid_id
-      t.integer  :exp_buy_bid_id
-      t.integer  :exp_sell_ask_id
-      t.integer  :exp_buy_ask_id
-      t.integer  :exp_resell_bid_id
-      t.integer  :exp_rebuy_bid_id
-      t.integer  :exp_resell_ask_id
-      t.integer  :exp_rebuy_ask_id
-      t.integer  :exp_bid_position_id
-      t.integer  :exp_ask_position_id
-      t.integer  :exp_escrow_id
-
-      # ----- TRANSFER -----
-      t.integer  :trn_sell_offer_id
-      t.integer  :trn_buy_offer_id
-      t.integer  :trn_parent_position_id
-      t.integer  :trn_seller_position_id
-      t.integer  :trn_buyer_position_id
-
-      # ----- REDUCE -----
-      t.integer  :red_escrow_id
-
-      # ----- RESOLVE -----
-      t.integer   :res_escrow_id
-
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
@@ -174,7 +153,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :amendments, :sequence
     add_index :amendments, :contract_id
-
     add_index :amendments, :xfields, using: :gin
     add_index :amendments, :jfields, using: :gin
     add_index :amendments, :exref

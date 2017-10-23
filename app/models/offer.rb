@@ -17,6 +17,8 @@ class Offer < ApplicationRecord
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
+  belongs_to :amendment, optional: true
+
   before_validation :default_values
 
   # ----- BASIC SCOPES -----
@@ -165,6 +167,7 @@ end
 #  type               :string
 #  repo_type          :string
 #  user_id            :integer
+#  amendment_id       :integer
 #  reoffer_parent_id  :integer
 #  parent_position_id :integer
 #  volume             :integer          default(1)

@@ -20,6 +20,7 @@ RSpec.describe Offer, type: :model do
     it { should respond_to(:bug)                }
     it { should respond_to(:repo)               }
     it { should respond_to(:position)           }
+    it { should respond_to(:amendment)          }
   end
 
   describe "Attributes" do
@@ -169,6 +170,7 @@ end
 #  type               :string
 #  repo_type          :string
 #  user_id            :integer
+#  amendment_id       :integer
 #  reoffer_parent_id  :integer
 #  parent_position_id :integer
 #  volume             :integer          default(1)

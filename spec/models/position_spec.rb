@@ -22,6 +22,7 @@ RSpec.describe Position, type: :model do
     it { should respond_to(:children)             }
     it { should respond_to(:user)                 }
     it { should respond_to(:escrow)               }
+    it { should respond_to(:amendment)            }
   end
 
   describe "Object Creation", USE_VCR do
@@ -53,6 +54,7 @@ end
 #  id           :integer          not null, primary key
 #  buy_offer_id :integer
 #  user_id      :integer
+#  amendment_id :integer
 #  escrow_id    :integer
 #  parent_id    :integer
 #  volume       :integer

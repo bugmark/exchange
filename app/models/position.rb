@@ -14,6 +14,8 @@ class Position < ApplicationRecord
   has_many   :children       , class_name: "Position"
   has_one    :contract       , :through => :escrow
 
+  belongs_to :amendment, optional: true
+
   # belongs_to :child_transfer , class_name: "Transfer"
   # belongs_to :parent_transfer, class_name: "Transfer"
 
@@ -28,6 +30,7 @@ end
 #  id           :integer          not null, primary key
 #  buy_offer_id :integer
 #  user_id      :integer
+#  amendment_id :integer
 #  escrow_id    :integer
 #  parent_id    :integer
 #  volume       :integer

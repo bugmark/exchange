@@ -39,13 +39,13 @@ RSpec.describe Amendment::Transfer, type: :model do
   let(:klas)   { described_class                              }
   subject      { klas.new(valid_params)                       }
 
-  describe "Associations", USE_VCR do
-    it { should respond_to(:sell_offer)            }
-    it { should respond_to(:buy_offer)             }
-    it { should respond_to(:parent_position)       }
-    it { should respond_to(:seller_position)       }
-    it { should respond_to(:buyer_position)        }
-  end
+  # describe "Associations", USE_VCR do
+  #   it { should respond_to(:sell_offer)            }
+  #   it { should respond_to(:buy_offer)             }
+  #   it { should respond_to(:parent_position)       }
+  #   it { should respond_to(:seller_position)       }
+  #   it { should respond_to(:buyer_position)        }
+  # end
 
   describe "Object Creation", USE_VCR do
     it { should be_valid }
@@ -56,61 +56,43 @@ RSpec.describe Amendment::Transfer, type: :model do
     end
   end
 
-  describe "Associations", USE_VCR do
-    before(:each) do hydrate(tran) end
-
-    it "finds the sell offer" do
-      expect(tran.sell_offer).to eq(soff)
-    end
-
-    it "finds the buy offer" do
-      expect(tran.buy_offer).to eq(boff)
-    end
-
-    it "finds the parent_position" do
-      expect(tran.parent_position).to eq(ppos)
-    end
-
-    it "finds the buyer_position" do
-      expect(tran.buyer_position).to eq(bpos)
-    end
-
-    it "finds the seller_position" do
-      expect(tran.seller_position).to eq(spos)
-    end
-  end
+  # describe "Associations", USE_VCR do
+  #   before(:each) do hydrate(tran) end
+  #
+  #   it "finds the sell offer" do
+  #     expect(tran.sell_offer).to eq(soff)
+  #   end
+  #
+  #   it "finds the buy offer" do
+  #     expect(tran.buy_offer).to eq(boff)
+  #   end
+  #
+  #   it "finds the parent_position" do
+  #     expect(tran.parent_position).to eq(ppos)
+  #   end
+  #
+  #   it "finds the buyer_position" do
+  #     expect(tran.buyer_position).to eq(bpos)
+  #   end
+  #
+  #   it "finds the seller_position" do
+  #     expect(tran.seller_position).to eq(spos)
+  #   end
+  # end
 end
 
 # == Schema Information
 #
 # Table name: amendments
 #
-#  id                     :integer          not null, primary key
-#  type                   :string
-#  sequence               :integer
-#  contract_id            :integer
-#  exp_sell_bid_id        :integer
-#  exp_buy_bid_id         :integer
-#  exp_sell_ask_id        :integer
-#  exp_buy_ask_id         :integer
-#  exp_resell_bid_id      :integer
-#  exp_rebuy_bid_id       :integer
-#  exp_resell_ask_id      :integer
-#  exp_rebuy_ask_id       :integer
-#  exp_bid_position_id    :integer
-#  exp_ask_position_id    :integer
-#  exp_escrow_id          :integer
-#  trn_sell_offer_id      :integer
-#  trn_buy_offer_id       :integer
-#  trn_parent_position_id :integer
-#  trn_seller_position_id :integer
-#  trn_buyer_position_id  :integer
-#  red_escrow_id          :integer
-#  res_escrow_id          :integer
-#  xfields                :hstore           not null
-#  jfields                :jsonb            not null
-#  exref                  :string
-#  uuref                  :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id          :integer          not null, primary key
+#  type        :string
+#  sequence    :integer
+#  contract_id :integer
+#  xfields     :hstore           not null
+#  jfields     :jsonb            not null
+#  exref       :string
+#  uuref       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
