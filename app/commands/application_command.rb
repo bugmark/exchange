@@ -114,7 +114,7 @@ class ApplicationCommand
   # validations can live in the Command or the Sub-Object (or both!)
   def valid?
     if subs.map(&:nil?).any?
-      errors.add(:base, "missing sub-object")
+      errors.add(:base, "missing sub-object (#{missing_subobjects.join(', ')})")
       return false
     end
     if super && subs.map(&:valid?).all?
@@ -141,5 +141,12 @@ class ApplicationCommand
   end
 
   alias_method :subs, :subobjects
+
+  def missing_subobjects
+    subobject_symbols.
+      map {|el| [el, self.send(el)]}.
+      select {|el| el.last.nil?}.
+      map {|el| el.first}
+  end
 
 end

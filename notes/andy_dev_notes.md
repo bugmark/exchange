@@ -328,8 +328,7 @@ Next Actions:
 
 - [x] write Amendment::Expand
 - [x] add amendment_id to offer, position, escrow
-
-- [ ] add escrow types 
+- [x] add escrow types 
 
 - [ ] write Commit#expand
 - [ ] write Commit#transfer

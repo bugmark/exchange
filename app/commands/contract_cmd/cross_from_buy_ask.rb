@@ -34,8 +34,8 @@ module ContractCmd
     def gen_cross(ask)
       # TODO: enable partial crosses, multi-party crosses
       return [] unless ask.present?
-      bids = Offer::Buy::Bid.with_status('open').matches(ask).complements(ask).with_volume(ask.volume)
-      if bids.count > 0
+      bids = ask.qualified_counteroffers(:expand)
+      unless bids.empty?
         bid = bids.first
         [bid]
       else
