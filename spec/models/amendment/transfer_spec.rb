@@ -4,7 +4,7 @@ RSpec.describe Amendment::Transfer, type: :model do
 
   def valid_params() {} end
 
-  def soff_params(userz = {})
+  def soff_params
 
     {
       parent_position_id: ppos.id    ,
@@ -40,60 +40,77 @@ RSpec.describe Amendment::Transfer, type: :model do
   let(:klas)   { described_class                              }
   subject      { klas.new(valid_params)                       }
 
-  # describe "Associations", USE_VCR do
-  #   it { should respond_to(:sell_offer)            }
-  #   it { should respond_to(:buy_offer)             }
-  #   it { should respond_to(:parent_position)       }
-  #   it { should respond_to(:seller_position)       }
-  #   it { should respond_to(:buyer_position)        }
-  # end
-  #
-  # describe "Object Creation", USE_VCR do
-  #   it { should be_valid }
-  #
-  #   it 'saves the object to the database' do
-  #     subject.save
-  #     expect(subject).to be_valid
-  #   end
-  # end
-  #
-  # describe "Associations", USE_VCR do
-  #   before(:each) do hydrate(tran) end
-  #
-  #   it "finds the sell offer" do
-  #     expect(tran.sell_offer).to eq(soff)
-  #   end
-  #
-  #   it "finds the buy offer" do
-  #     expect(tran.buy_offer).to eq(boff)
-  #   end
-  #
-  #   it "finds the parent_position" do
-  #     expect(tran.parent_position).to eq(ppos)
-  #   end
-  #
-  #   it "finds the buyer_position" do
-  #     expect(tran.buyer_position).to eq(bpos)
-  #   end
-  #
-  #   it "finds the seller_position" do
-  #     expect(tran.seller_position).to eq(spos)
-  #   end
-  # end
+  describe "Foreign Keys" do
+    it { should respond_to(:sell_offer_id)            }
+    it { should respond_to(:buy_offer_id)            }
+  end
+
+  describe "Associations", USE_VCR do
+    it { should respond_to(:sell_offer)            }
+    it { should respond_to(:buy_offer)             }
+    it { should respond_to(:parent_position)       }
+    it { should respond_to(:seller_position)       }
+    it { should respond_to(:buyer_position)        }
+  end
+
+  describe "Object Creation", USE_VCR do
+    it { should be_valid }
+
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
+
+  describe "#sell_offer_id" do
+    it 'sets a value' do
+      subject.sell_offer_id = 1
+      expect(subject.sell_offer_id).to eq(1)
+    end
+  end
+
+  describe "Associations", USE_VCR do
+    before(:each) do hydrate(tran) end
+
+    it "finds the sell offer" do
+      expect(tran.sell_offer).to eq(soff)
+    end
+
+    it "finds the buy offer" do
+      expect(tran.buy_offer).to eq(boff)
+    end
+
+    it "finds the parent_position" do
+      expect(tran.parent_position).to eq(ppos)
+    end
+
+    it "finds the buyer_position" do
+      expect(tran.buyer_position).to eq(bpos)
+    end
+
+    it "finds the seller_position" do
+      expect(tran.seller_position).to eq(spos)
+    end
+  end
 end
 
 # == Schema Information
 #
 # Table name: amendments
 #
-#  id          :integer          not null, primary key
-#  type        :string
-#  sequence    :integer
-#  contract_id :integer
-#  xfields     :hstore           not null
-#  jfields     :jsonb            not null
-#  exref       :string
-#  uuref       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                 :integer          not null, primary key
+#  type               :string
+#  sequence           :integer
+#  contract_id        :integer
+#  sell_offer_id      :integer
+#  buy_offer_id       :integer
+#  parent_position_id :integer
+#  seller_position_id :integer
+#  buyer_position_id  :integer
+#  xfields            :hstore           not null
+#  jfields            :jsonb            not null
+#  exref              :string
+#  uuref              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
 #
