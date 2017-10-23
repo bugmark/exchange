@@ -324,7 +324,9 @@ Next Actions:
 - [x] update contract spec
 - [x] add timestamps to all models
 
-- [ ] write Amendment::Expand
+# Oct 23
+
+- [x] write Amendment::Expand
 
 - [ ] write Commit#expand
 - [ ] write Commit#transfer

@@ -139,11 +139,33 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type               # expand, transfer, reduce, resolve
       t.integer  :sequence           # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
-      t.integer  :sell_offer_id
-      t.integer  :buy_offer_id
-      t.integer  :parent_position_id
-      t.integer  :seller_position_id
-      t.integer  :buyer_position_id
+
+      # ----- EXPAND -----
+      t.integer  :exp_sell_bid_id
+      t.integer  :exp_buy_bid_id
+      t.integer  :exp_sell_ask_id
+      t.integer  :exp_buy_ask_id
+      t.integer  :exp_resell_bid_id
+      t.integer  :exp_rebuy_bid_id
+      t.integer  :exp_resell_ask_id
+      t.integer  :exp_rebuy_ask_id
+      t.integer  :exp_bid_position_id
+      t.integer  :exp_ask_position_id
+      t.integer  :exp_escrow_id
+
+      # ----- TRANSFER -----
+      t.integer  :trn_sell_offer_id
+      t.integer  :trn_buy_offer_id
+      t.integer  :trn_parent_position_id
+      t.integer  :trn_seller_position_id
+      t.integer  :trn_buyer_position_id
+
+      # ----- REDUCE -----
+      t.integer  :red_escrow_id
+
+      # ----- RESOLVE -----
+      t.integer   :res_escrow_id
+
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
       t.string   :exref
@@ -152,11 +174,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :amendments, :sequence
     add_index :amendments, :contract_id
-    add_index :amendments, :sell_offer_id
-    add_index :amendments, :buy_offer_id
-    add_index :amendments, :parent_position_id
-    add_index :amendments, :seller_position_id
-    add_index :amendments, :buyer_position_id
+
     add_index :amendments, :xfields, using: :gin
     add_index :amendments, :jfields, using: :gin
     add_index :amendments, :exref

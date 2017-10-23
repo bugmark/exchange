@@ -5,27 +5,26 @@ RSpec.describe Amendment::Transfer, type: :model do
   def valid_params() {} end
 
   def soff_params
-
     {
-      parent_position_id: ppos.id    ,
-      user_id:            user.id
+      parent_position: ppos    ,
+      user:            user
     }
   end
 
   def position_params(opts = {})
     {
-      user_id:      user.id       ,
-      buy_offer_id: boff.id       ,
+      user:      user       ,
+      buy_offer: boff       ,
     }.merge(opts)
   end
 
   def megatran
     klas.create({
-      sell_offer_id:        soff.id     ,
-      buy_offer_id:         boff.id     ,
-      parent_position_id:   ppos.id     ,
-      seller_position_id:   spos.id     ,
-      buyer_position_id:    bpos.id     ,
+      sell_offer:        soff     ,
+      buy_offer:         boff     ,
+      parent_position:   ppos     ,
+      seller_position:   spos     ,
+      buyer_position:    bpos     ,
     })
   end
 
@@ -39,11 +38,6 @@ RSpec.describe Amendment::Transfer, type: :model do
 
   let(:klas)   { described_class                              }
   subject      { klas.new(valid_params)                       }
-
-  describe "Foreign Keys" do
-    it { should respond_to(:sell_offer_id)            }
-    it { should respond_to(:buy_offer_id)            }
-  end
 
   describe "Associations", USE_VCR do
     it { should respond_to(:sell_offer)            }
@@ -59,13 +53,6 @@ RSpec.describe Amendment::Transfer, type: :model do
     it 'saves the object to the database' do
       subject.save
       expect(subject).to be_valid
-    end
-  end
-
-  describe "#sell_offer_id" do
-    it 'sets a value' do
-      subject.sell_offer_id = 1
-      expect(subject.sell_offer_id).to eq(1)
     end
   end
 
@@ -98,19 +85,32 @@ end
 #
 # Table name: amendments
 #
-#  id                 :integer          not null, primary key
-#  type               :string
-#  sequence           :integer
-#  contract_id        :integer
-#  sell_offer_id      :integer
-#  buy_offer_id       :integer
-#  parent_position_id :integer
-#  seller_position_id :integer
-#  buyer_position_id  :integer
-#  xfields            :hstore           not null
-#  jfields            :jsonb            not null
-#  exref              :string
-#  uuref              :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
+#  id                     :integer          not null, primary key
+#  type                   :string
+#  sequence               :integer
+#  contract_id            :integer
+#  exp_sell_bid_id        :integer
+#  exp_buy_bid_id         :integer
+#  exp_sell_ask_id        :integer
+#  exp_buy_ask_id         :integer
+#  exp_resell_bid_id      :integer
+#  exp_rebuy_bid_id       :integer
+#  exp_resell_ask_id      :integer
+#  exp_rebuy_ask_id       :integer
+#  exp_bid_position_id    :integer
+#  exp_ask_position_id    :integer
+#  exp_escrow_id          :integer
+#  trn_sell_offer_id      :integer
+#  trn_buy_offer_id       :integer
+#  trn_parent_position_id :integer
+#  trn_seller_position_id :integer
+#  trn_buyer_position_id  :integer
+#  red_escrow_id          :integer
+#  res_escrow_id          :integer
+#  xfields                :hstore           not null
+#  jfields                :jsonb            not null
+#  exref                  :string
+#  uuref                  :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #
