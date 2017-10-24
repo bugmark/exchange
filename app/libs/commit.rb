@@ -1,47 +1,62 @@
+require 'ostruct'
+
 class Commit
 
   attr_reader :type, :bundle, :contract, :escrow, :amendment
 
   TYPES = %i(expand transfer reduce)
 
-  def initialize(commit_type, bundle)
-    @type   = commit_type
+  def initialize(bundle)
+    @type   = bundle.type
     @bundle = bundle
-    raise "BAD commit type (#{commit_type})" unless TYPES.include(commit_type)
+    raise "BAD commit type (#{type})" unless TYPES.include?(type)
   end
 
-  def generate() self.send(commit_type) end
+  def generate() self.send(type); self end
 
   private
 
-  def type_klas()      @type.to_s.capitalize                  end
-  def amendment_klas() "Amendment::#{type_klas}".constantize  end
-  def escrow_klas()    "Escrow::#{type_klas}".constantize     end
+  def expand_position(offer, ctx, price)
+    posargs = {
+      volume:    offer.volume      ,
+      price:     price             ,
+      amendment: ctx.amendment     ,
+      offer:     ctx.offer         ,
+      escrow:    ctx.escrow        ,
+      user:      offer.user        ,
+    }
+    Position.create(posargs)
+    # refund release
+    # generate reoffer
+    # capture escrow - update user balance
+    offer.obj.update_attribute(:status, 'crossed')
+  end
 
   def expand
-    all_offers   = [bundle.offer] + bundle.counters
-    max_start    = all_offers.map {|o| o.maturation_range.begin}.max
-    min_end      = all_offers.map {|o| o.maturation_range.end}.min
+    ctx = OpenStruct.new
+    ctx.all_offers = [bundle.offer] + bundle.counters
+    ctx.max_start  = ctx.all_offers.map {|o| o.obj.maturation_range.begin}.max
+    ctx.min_end    = ctx.all_offers.map {|o| o.obj.maturation_range.end}.min
 
     # find or generate contract
-    matching  = bundle.offer.match_contracts.overlap(max_start..min_end)
-    selected  = matching&.sort_by {|c| c.escrows.count}.first
-    contract  = bundle.offer.match_contracts.first || Contract.new(contract_opts)
-    amendment = Amendment::Expand.create(contract: contract, escrow: escrow)
-    escrow    = Escrow::Expand.create(contract: contract, amendment: amendment)
-
-    contract.maturation = [max_start, min_end].avg_time unless selected.present?
-
-    maturation   = contract.persisted? ? contract.maturation : [max_start, min_end].avg_time
-    avg_cprice   = bundle.counters.map(&:price).avg
-
-    ([bundle.offer] + bundle.counters).each do |offer|
-      Position.create(amendment: amendment, escrow: escrow, offer: offer)
-      # refund release
-      # generate reoffer
-      # capture escrow - update user balance
-      offer.update_attribute(status, 'crossed')
+    ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
+    ctx.selected  = ctx.matching.sort_by {|c| c.escrows.count}.first
+    ctx.contract  = @contract = ctx.selected || begin
+      date = [ctx.max_start, ctx.min_end].avg_time
+      attr = bundle.offer.obj.match_attrs.merge(maturation: date)
+      Contract.create(attr)
     end
+
+    # generate amendment, escrow, price
+    ctx.amendment = Amendment::Expand.create(contract: contract)
+    ctx.escrow    = Escrow::Expand.create(contract: contract, amendment: amendment)
+
+    # calculate offer/counter price
+    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.max
+    ctx.offer_price   = 1.0 - ctx.counter_price
+
+    expand_position(bundle.offer, ctx, ctx.offer_price)
+    bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
   end
 
   def transfer

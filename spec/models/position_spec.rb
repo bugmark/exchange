@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Position, type: :model do
   def valid_params(opts = {})
     {
-      user_id:      user.id       ,
-      buy_offer_id: boff.id
+      user:  user       ,
+      offer: boff
     }.merge(opts)
   end
 
@@ -16,7 +16,7 @@ RSpec.describe Position, type: :model do
   let(:pos1)    { klas.new(valid_params)                       }
 
   describe "Associations", USE_VCR do
-    it { should respond_to(:buy_offer)            }
+    it { should respond_to(:offer)                }
     it { should respond_to(:sell_offers)          }
     it { should respond_to(:parent)               }
     it { should respond_to(:children)             }
@@ -42,7 +42,7 @@ RSpec.describe Position, type: :model do
     end
 
     it "finds the offer" do
-      expect(pos1.buy_offer).to eq(boff)
+      expect(pos1.offer).to eq(boff)
     end
   end
 end
@@ -52,7 +52,7 @@ end
 # Table name: positions
 #
 #  id           :integer          not null, primary key
-#  buy_offer_id :integer
+#  offer_id     :integer
 #  user_id      :integer
 #  amendment_id :integer
 #  escrow_id    :integer

@@ -12,7 +12,7 @@ RSpec.describe OfferCmd::CreateSell do
 
   let(:user)   { FG.create(:user)                                           }
   let(:bof1)   { FG.create(:buy_bid, user_id: user.id).offer                }
-  let(:pos1)   { Position.create(buy_offer_id: bof1.id, user_id: user.id)   }
+  let(:pos1)   { Position.create(offer: bof1, user: user)                   }
   let(:user)   { FG.create(:user).user                                      }
   let(:klas)   { described_class                                            }
   subject      { klas.new(pos1, 10, 0.4)                                    }

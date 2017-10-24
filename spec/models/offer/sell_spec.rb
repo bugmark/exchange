@@ -10,8 +10,8 @@ RSpec.describe Offer::Sell, type: :model do
 
   def position_params(opts = {})
     {
-      user_id:      user.id       ,
-      buy_offer_id: boff.id       ,
+      user_id:  user.id       ,
+      offer_id: boff.id       ,
     }.merge(opts)
   end
 

@@ -51,7 +51,7 @@ class Contract < ApplicationRecord
 
   # ----- OVERLAP UTILS -----
   class << self
-    def by_overlap_maturation_range(beg, fin)
+    def overlap(beg, fin)
       where('maturation > ?::timestamp', beg).
         where('maturation < ?::timestamp', fin)
     end

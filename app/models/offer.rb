@@ -32,11 +32,11 @@ class Offer < ApplicationRecord
     def not_open() without_status('open') end
 
     def assigned
-      where("id IN (SELECT buy_offer_id FROM positions)")
+      where("id IN (SELECT offer_id FROM positions)")
     end
 
     def unassigned
-      where("id NOT IN (SELECT buy_offer_id FROM positions)")
+      where("id NOT IN (SELECT offer_id FROM positions)")
     end
 
     def by_maturation_range(range)

@@ -34,7 +34,6 @@ module RepoCmd
     def sync_bugs
       issues = Octokit.issues(repo.name) # uses ETAG to make conditional request
       issues.each do |el|
-        binding.pry unless el["html_url"]
         attrs = {
           stm_repo_id:   self.id       ,
           type:        "Bug::GitHub"   ,

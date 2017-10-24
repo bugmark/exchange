@@ -11,7 +11,6 @@ def sync(name)
   repo_cmd = RepoCmd::GhCreate.new(opts)
   repo_cmd.save_event.project
   item = RepoCmd::GhSync.from_repo(repo_cmd.repo)
-  binding.pry if item.nil?
   item.save_event.project
 end
 

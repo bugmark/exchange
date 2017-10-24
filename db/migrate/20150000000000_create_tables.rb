@@ -104,7 +104,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
 
     create_table :positions do |t|
-      t.integer  :buy_offer_id
+      t.integer  :offer_id
       t.integer  :user_id
       t.integer  :amendment_id
       t.integer  :escrow_id
@@ -116,7 +116,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
-    add_index :positions, :buy_offer_id
+    add_index :positions, :offer_id
     add_index :positions, :user_id
     add_index :positions, :amendment_id
     add_index :positions, :escrow_id

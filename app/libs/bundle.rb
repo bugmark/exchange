@@ -1,16 +1,18 @@
+require 'ostruct'
+
 class Bundle
 
   attr_reader :type, :offer, :counters
 
-  def self.initialize(type, offer, counters)
+  def initialize(type, offer, counters)
     @type     = type
     @offer    = offer
     @counters = counters
   end
 
   def generate
-    counter_aon  = "..."
-    counter_alt  = "..."
+    counter_aon  = counters.where(aon: true)
+    counter_alt  = counters.where(aon: false)
     pool_offers = []
     pool_volume  = 0
 
@@ -25,15 +27,15 @@ class Bundle
       headroom = offer.volume - pool_volume
       if headroom > 0
         tmp = [headroom, offer.volume].min
-        pool_offers << [offer, tmp]
+        pool_offers << OpenStruct.new(obj: offer, vol: tmp)
         pool_volume += tmp
       end
     end
 
-    {
-      type:  type                    ,
-      offer: [offer, pool_volume]    ,
-      counter: pool_offers
-    }
+    OpenStruct.new({
+      type:     type                    ,
+      offer:    OpenStruct.new(vol: pool_volume, obj: offer) ,
+      counters: pool_offers
+    })
   end
 end

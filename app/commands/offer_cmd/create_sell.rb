@@ -32,7 +32,7 @@ module OfferCmd
         price:   @price                         ,
         user_id: parent_position.user.id        ,
         parent_position_id: parent_position.id  ,
-      }.merge(parent_position.buy_offer.match_attrs)
+      }.merge(parent_position.offer.match_attrs)
     end
   end
 end

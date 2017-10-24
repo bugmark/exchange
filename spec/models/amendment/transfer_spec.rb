@@ -13,15 +13,15 @@ RSpec.describe Amendment::Transfer, type: :model do
 
   def position_params(opts = {})
     {
-      user:      user       ,
-      buy_offer: boff       ,
+      user:  user       ,
+      offer: boff       ,
     }.merge(opts)
   end
 
   def megatran
     klas.create({
+      offer:             boff     ,
       sell_offer:        soff     ,
-      buy_offer:         boff     ,
       parent_position:   ppos     ,
       seller_position:   spos     ,
       buyer_position:    bpos     ,
