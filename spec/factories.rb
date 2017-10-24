@@ -62,51 +62,31 @@ FactoryGirl.define do
     end
   end
 
-  # factory :sell_bid, class: Offer::Sell::Bid do
-  #   # to_create {|instance| instance.save_event.project}
-  #   # initialize_with { new(:ask, attributes) }
-  #
-  #   price               0.40
-  #   volume              10
-  #   user_id             { FG.create(:user).id }
-  # end
+  factory :sell_bid, class: OfferCmd::CreateSell do
+    to_create {|instance| instance.save_event.project}
+    initialize_with { new(FG.create(:position), attributes) }
+
+    price               0.40
+    volume              10
+  end
 
   factory :position do
+    offer    { FG.create(:buy_bid).offer   }
+    contract { FG.create(:contract)        }
+    user     { FG.create(:user).user       }
   end
 
   factory :escrow do
+    contract { FG.create(:contract) }
   end
 
-  factory :base_contract, class: Contract do
+  factory :contract do
+    status     'open'
+    type       "Contract::GitHub"
+    maturation Time.now + 1.day
 
-    status              'open'
-    maturation Time.now + 1.minute
-
-  end
-
-  # factory :contract, class: ContractCmd::Publish do
-  #   to_create {|instance| instance.save_event.project}
-  #   initialize_with { new(attributes) }
-  #
-  #   type         "Contract::GitHub"
-  #   token_value  20
-  #   terms        "Net10"
-  #   maturation   Time.now + 1.day
-  #   bug_id       { FG.create(:bug).id  }
-  #   # user_id      { FG.create(:user).id }
-  #
-  #   factory :matured_contract do
-  #     maturation Time.now - 1.day
-  #   end
-  #
-  #   factory :taken_contract do
-  #     counterparty_id { FG.create(:user).id }
-  #   end
-  #
-  #   factory :taken_matured_contract do
-  #     counterparty_id { FG.create(:user).id }
-  #     maturation      Time.now - 1.day
-  #   end
-  #  end
-
+    factory :matured_contract do
+      maturation Time.now - 1.day
+    end
+   end
 end

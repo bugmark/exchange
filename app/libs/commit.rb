@@ -1,3 +1,6 @@
+#-integration_test: commands/contract_cmd/cross/expand
+# integration_test: commands/contract_cmd/cross/transfer
+
 require 'ostruct'
 
 class Commit
@@ -16,27 +19,38 @@ class Commit
 
   private
 
-  def expand_position(offer, ctx, price)
-    posargs = {
-      volume:    offer.volume      ,
-      price:     price             ,
-      amendment: ctx.amendment     ,
-      offer:     ctx.offer         ,
-      escrow:    ctx.escrow        ,
-      user:      offer.obj.user    ,
-    }
-    Position.create(posargs)
-    # refund release
-    # generate reoffer
-    # capture escrow - update user balance
-    offer.obj.update_attribute(:status, 'crossed')
-  end
-
-  def expand
-    ctx = OpenStruct.new
+  def base_context
+    ctx            = OpenStruct.new
     ctx.all_offers = [bundle.offer] + bundle.counters
     ctx.max_start  = ctx.all_offers.map {|o| o.obj.maturation_range.begin}.max
     ctx.min_end    = ctx.all_offers.map {|o| o.obj.maturation_range.end}.min
+    ctx
+  end
+
+  def gen_connectors(ctx, amendment_klas, escrow_klas)
+    ctx.amendment = amendment_klas.create(contract: ctx.contract)
+    ctx.escrow    = escrow_klas.create(contract: ctx.contract, amendment: ctx.amendment)
+  end
+
+  def expand_position(offer, ctx, price)
+    posargs = {
+      volume:     offer.volume      ,
+      price:      price             ,
+      amendment:  ctx.amendment     ,
+      offer:      ctx.offer         ,
+      escrow:     ctx.escrow        ,
+      user:       offer.obj.user    ,
+    }
+    Position.create(posargs)
+    # TODO
+    # refund release
+    # generate reoffer
+    # capture escrow - update user balance
+    offer.obj.update_attribute(:status, 'crossed') #
+  end
+
+  def expand
+    ctx = base_context
 
     # find or generate contract
     ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
@@ -47,39 +61,53 @@ class Commit
       Contract.create(attr)
     end
 
-    # generate amendment, escrow, price
-    ctx.amendment = Amendment::Expand.create(contract: contract)
-    ctx.escrow    = Escrow::Expand.create(contract: contract, amendment: amendment)
+    # generate amendment and escrow
+    gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
 
-    # calculate offer/counter price
+    # calculate price for offer and counter
     ctx.counter_price = bundle.counters.map {|el| el.obj.price}.max
     ctx.offer_price   = 1.0 - ctx.counter_price
 
+    # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
   end
 
   def transfer
-    ctx            = OpenStruct.new
-    ctx.all_offers = [bundle.offer] + bundle.counters
+    ctx = base_context
 
-    contract  = "find contract"
-    amendment = Amendment::Transfer.create(contract: contract)
-    escrow    = Escrow::Transfer.create(contract: contract, amendment: amendment)
+    # look up contract
+    ctx.contract  = bundle.offer.obj.position.contract
 
-    ([bundle.offer] + bundle.counters).each do |offer|
-      # create positions
-      #
-    end
+    binding.pry
+
+    # generate amendment & escrow
+    gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)
+
+    # calculate price for offer and counters
+    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.max
+    ctx.offer_price   = 1.0 - ctx.counter_price
+
+    # generate artifacts
+    expand_position(bundle.offer, ctx, ctx.offer_price)
+    bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
   end
 
   def reduce
-    contract = "find contract"
-    escrow   = "generate escrow with negative values"
-    amendment = Amendment::Reduce.create(contract: contract, escrow: escrow)
-    [offer1, offer2].each do |offer|
-      # generate zero-value position
-      # transfer escrow back to stakeholders
-    end
+    ctx = base_context
+
+    # look up contract
+    ctx.contract = bundle.offer.obj.position.contract
+
+    # generate amendment, escrow, price
+    gen_connectors(ctx, Amendment::Reduce, Escrow::Reduce)
+
+    # calculate price for offer and counter
+    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.max
+    ctx.offer_price   = 1.0 - ctx.counter_price
+
+    # generate artifacts
+    expand_position(bundle.offer, ctx, ctx.offer_price)
+    bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
   end
 end

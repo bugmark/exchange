@@ -15,11 +15,11 @@ RSpec.describe OfferCmd::CreateSell do
   let(:pos1)   { Position.create(offer: bof1, user: user)                   }
   let(:user)   { FG.create(:user).user                                      }
   let(:klas)   { described_class                                            }
-  subject      { klas.new(pos1, 10, 0.4)                                    }
+  subject      { klas.new(pos1, volume: 10, price: 0.4)                     }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :parent_position                   }
-    it { should respond_to :sell_offer                        }
+    it { should respond_to :offer                             }
   end
 
   # describe "Object Existence", USE_VCR do

@@ -73,6 +73,7 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
 
     # it 'adjusts the user balance' do
+    # TODO
     #   expect(usr1.balance).to eq(100.0)
     #   expect(usr2.balance).to eq(100.0)
     #   subject.project

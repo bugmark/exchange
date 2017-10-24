@@ -1,4 +1,7 @@
-require 'ext/array'  # for allsums method...
+# integration_test  commands/contract_cmd/cross/expand
+# integration_test:  commands/contract_cmd/cross/transfer
+
+require 'ext/array'
 
 module ContractCmd
   class Cross < ApplicationCommand

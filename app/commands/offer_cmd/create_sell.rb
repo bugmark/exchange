@@ -1,23 +1,24 @@
 module OfferCmd
   class CreateSell < ApplicationCommand
 
-    attr_subobjects      :sell_offer, :parent_position
+    attr_subobjects      :offer #, :parent_position
+    attr_reader          :parent_position
     attr_delegate_fields :sell_offer, class_name: "Offer::Sell"
 
-    def initialize(position, volume, price)
+    def initialize(position, attr)
       @parent_position = position
-      @volume          = volume
-      @price           = price
-      @sell_offer      = klas.new(sell_offer_params)
+      @volume          = attr[:volume]
+      @price           = attr[:price]
+      @offer           = klas.new(sell_offer_params)
     end
 
     def event_data
-      sell_offer.attributes
+      offer.attributes
     end
 
-    # def transact_before_project
-    #   offer.status = "open"
-    # end
+    def transact_before_project
+      offer.status = "open"
+    end
 
     private
 
@@ -26,12 +27,15 @@ module OfferCmd
     end
 
     def sell_offer_params
+      time_base = parent_position&.contract&.maturation || Time.now
+      range     = time_base-1.hour..time_base+1.hour
       {
-        status:  "open"                         ,
-        volume:  @volume                        ,
-        price:   @price                         ,
-        user_id: parent_position.user.id        ,
-        parent_position_id: parent_position.id  ,
+        status:  "open"                           ,
+        volume:  @volume                          ,
+        price:   @price                           ,
+        user:    parent_position.user             ,
+        parent_position: parent_position          ,
+        maturation_range: range                   ,
       }.merge(parent_position.offer.match_attrs)
     end
   end

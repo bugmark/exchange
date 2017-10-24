@@ -8,7 +8,7 @@ RSpec.describe Amendment, type: :model do
 
   def gen_amendment(opts = {}) klas.create(valid_params(opts)) end
 
-  let(:contract) { FG.create(:base_contract)  }
+  let(:contract) { FG.create(:contract)       }
   let(:klas)     { described_class            }
   subject        { klas.new(valid_params)     }
 
