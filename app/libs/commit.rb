@@ -23,7 +23,7 @@ class Commit
       amendment: ctx.amendment     ,
       offer:     ctx.offer         ,
       escrow:    ctx.escrow        ,
-      user:      offer.user        ,
+      user:      offer.obj.user    ,
     }
     Position.create(posargs)
     # refund release
@@ -60,6 +60,9 @@ class Commit
   end
 
   def transfer
+    ctx            = OpenStruct.new
+    ctx.all_offers = [bundle.offer] + bundle.counters
+
     contract  = "find contract"
     amendment = Amendment::Transfer.create(contract: contract)
     escrow    = Escrow::Transfer.create(contract: contract, amendment: amendment)

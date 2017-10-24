@@ -329,14 +329,23 @@ Next Actions:
 - [x] write Amendment::Expand
 - [x] add amendment_id to offer, position, escrow
 - [x] add escrow types 
+- [x] write Commit#expand
+- [x] test Bundle
+- [x] test Commit
+- [x] test ContractCmd::Cross
+- [x] cross: enable partial volume match
+- [x] cross: enable poolable offers
+- [x] cross: generate re-offers
+- [x] cross: add sell/bid=>sell/ask cross
+- [x] cross: add buy/bid=>buy/ask cross
+- [x] cross: make cross match buy and sell
+- [x] get volume cancellation working
 
-- [ ] write Commit#expand
+# Oct 24
+
 - [ ] write Commit#transfer
 - [ ] write Commit#reduce
-
-- [ ] test Bundle
-- [ ] test Commit
-- [ ] test ContractCmd::Cross
+- [ ] write Commit#resolve
 
 - [ ] /offers        - cross | retract | take
 - [ ] /offers/:id    - cross | retract | take 
@@ -344,30 +353,18 @@ Next Actions:
 - [ ] /contracts/:id - resolve
 - [ ] /users/:id     - resolve | sell
 
-- [ ] get resolve command working
-
-# TBD
-
-- [ ] cross: enable partial volume match
-- [ ] cross: enable poolable offers
-- [ ] cross: generate re-offers
-
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers
 
-- [ ] cross: generate contract-graph
+# TBD
 
-- [ ] cross: make cross match buy and sell
-- [ ] cross: add sell/bid=>sell/ask cross
-- [ ] cross: add buy/bid=>buy/ask cross
+- [ ] cross: generate contract-graph
 
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve
 - [ ] enable event replay
-
-- [ ] get volume cancellation working
 
 - [ ] add Restful API
 - [ ] add GraphQL API

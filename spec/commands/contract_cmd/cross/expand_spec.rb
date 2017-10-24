@@ -83,94 +83,95 @@ RSpec.describe ContractCmd::Cross::Expand do
     # end
   end
 
-  # describe "#event_data", USE_VCR do
-  #   it 'returns a hash' do
-  #     expect(subject.event_data).to be_a(Hash)
-  #   end
-  # end
+  describe "#event_data", USE_VCR do
+    it 'returns a hash' do
+      expect(subject.event_data).to be_a(Hash)
+    end
+  end
 
-  # describe "#event_save", USE_VCR do
-  #   it 'creates an event' do
-  #     expect(EventLine.count).to eq(0)
-  #     subject.save_event
-  #     expect(EventLine.count).to eq(4)
-  #   end
-  #
-  #   it 'chains with #project' do
-  #     expect(EventLine.count).to eq(0)
-  #     expect(Contract.count).to eq(0)
-  #     subject.save_event.project
-  #     expect(EventLine.count).to eq(4)   # TODO: retest
-  #     expect(Contract.count).to eq(0)
-  #   end
-  # end
+  describe "#event_save", USE_VCR do
+    it 'creates an event' do
+      expect(EventLine.count).to eq(0)
+      subject.save_event
+      expect(EventLine.count).to eq(4)
+    end
+
+    it 'chains with #project' do
+      expect(EventLine.count).to eq(0)
+      expect(Contract.count).to eq(0)
+      subject.save_event.project
+      expect(EventLine.count).to eq(4)   # TODO: retest
+      expect(Contract.count).to eq(0)
+    end
+  end
 
   describe "crossing", USE_VCR do
     let(:lcl_ask) { FG.create(:buy_ask).offer }
 
-    # context "with single bid" do
-    #   it 'matches higher values' do
-    #     FG.create(:buy_bid)
-    #     klas.new(lcl_ask).project
-    #     expect(Contract.count).to eq(1)
-    #     expect(Position.count).to eq(2)
-    #   end
-    #
-    #   it 'generates position ownership' do
-    #     FG.create(:buy_bid)
-    #     klas.new(lcl_ask).project
-    #     expect(Position.first.user_id).to_not be_nil
-    #     expect(Position.last.user_id).to_not be_nil
-    #   end
-    #
-    #   it 'matches equal values' do
-    #     FG.create(:buy_bid)
-    #     klas.new(lcl_ask).project
-    #     expect(Contract.count).to eq(1)
-    #   end
-    #
-    #   it 'fails to match lower values' do
-    #     FG.create(:buy_bid, price: 0.1, volume: 1)
-    #     expect(Contract.count).to eq(0)
-    #     klas.new(lcl_ask).project
-    #     expect(Contract.count).to eq(0)
-    #   end
-    # end
+    context "with single bid" do
+      it 'matches higher values' do
+        FG.create(:buy_bid)
+        DINGDING = 1
+        klas.new(lcl_ask, :expand).project
+        expect(Contract.count).to eq(1)
+        expect(Position.count).to eq(2)
+      end
 
-    # context "with multiple bids" do
-    #   it 'matches higher value' do
-    #     _bid1 = FG.create(:bid, token_value: 6).bid
-    #     _bid2 = FG.create(:bid, token_value: 6).bid
-    #     klas.new(lcl_ask).project
-    #     expect(Contract.count).to eq(1)
-    #   end
-    #
-    #   it 'matches equal value' do
-    #     _bid1 = FG.create(:bid, token_value: 5).bid
-    #     _bid2 = FG.create(:bid, token_value: 5).bid
-    #     klas.new(lcl_ask).project
-    #     expect(Contract.count).to eq(1)
-    #   end
-    #
-    #   it 'fails to match lower value' do
-    #     _bid1 = FG.create(:bid, token_value: 4).bid
-    #     _bid2 = FG.create(:bid, token_value: 4).bid
-    #     klas.new(lcl_ask).project
-    #     expect(Contract.count).to eq(0)
-    #   end
-    # end
+      it 'generates position ownership' do
+        FG.create(:buy_bid)
+        klas.new(lcl_ask, :expand).project
+        expect(Position.first.user_id).to_not be_nil
+        expect(Position.last.user_id).to_not be_nil
+      end
 
-    # context "with extra bids" do
-    #   it 'does minimal matching' do
-    #     _bid1 = FG.create(:bid, token_value: 6).bid
-    #     _bid2 = FG.create(:bid, token_value: 6).bid
-    #     _bid3 = FG.create(:bid, token_value: 6).bid
-    #     klas.new(lcl_ask).project
-    #     expect(Contract.count).to eq(1)
-    #     expect(Bid.assigned.count).to eq(2)
-    #     expect(Bid.unassigned.count).to eq(1)
-    #   end
-    # end
+      it 'matches equal values' do
+        FG.create(:buy_bid)
+        klas.new(lcl_ask, :expand).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it 'fails to match lower values' do
+        FG.create(:buy_bid, price: 0.1, volume: 1)
+        expect(Contract.count).to eq(0)
+        klas.new(lcl_ask, :expand).project
+        expect(Contract.count).to eq(0)
+      end
+    end
+
+    context "with multiple bids" do
+      it 'matches higher value' do
+        _bid1 = FG.create(:buy_bid, price: 0.5, volume: 10).offer
+        _bid2 = FG.create(:buy_bid, price: 0.5, volume: 10).offer
+        klas.new(lcl_ask, :expand).project
+        expect(Contract.count).to eq(0)
+      end
+
+      it 'matches equal value' do
+        _bid1 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
+        _bid2 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
+        klas.new(lcl_ask, :expand).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it 'fails to match lower value' do
+        _bid1 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
+        _bid2 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
+        klas.new(lcl_ask, :expand).project
+        expect(Contract.count).to eq(1)
+      end
+    end
+
+    context "with extra bids" do
+      it 'does minimal matching' do
+        _bid1 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
+        _bid2 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
+        _bid3 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
+        klas.new(lcl_ask, :expand).project
+        expect(Contract.count).to eq(1)
+        expect(Offer.assigned.count).to eq(0)
+        expect(Offer.unassigned.count).to eq(0)
+      end
+    end
   end
 end
 
