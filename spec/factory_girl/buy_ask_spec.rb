@@ -11,5 +11,5 @@ RSpec.describe 'BuyAsk Factory' do
     result = FG.create(:buy_ask)
     expect(result.price).to_not be_nil
     expect(result.volume).to_not be_nil
-  end
+  end #
 end

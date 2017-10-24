@@ -23,12 +23,12 @@ module OfferCmd
     private
 
     def klas
-      parent_position.side == :bid ? Offer::Sell::Bid : Offer::Sell::Ask
+      parent_position.side == 'bid' ? Offer::Sell::Bid : Offer::Sell::Ask
     end
 
     def sell_offer_params
       time_base = parent_position&.contract&.maturation || Time.now
-      range     = time_base-1.hour..time_base+1.hour
+      range     = time_base-1.week..time_base+1.week
       {
         status:  "open"                           ,
         volume:  @volume                          ,

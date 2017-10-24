@@ -77,9 +77,7 @@ class Commit
     ctx = base_context
 
     # look up contract
-    ctx.contract  = bundle.offer.obj.position.contract
-
-    binding.pry
+    ctx.contract = bundle.offer.obj.parent_position.contract
 
     # generate amendment & escrow
     gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)
@@ -97,7 +95,7 @@ class Commit
     ctx = base_context
 
     # look up contract
-    ctx.contract = bundle.offer.obj.position.contract
+    ctx.contract = bundle.offer.obj.parent_position.contract
 
     # generate amendment, escrow, price
     gen_connectors(ctx, Amendment::Reduce, Escrow::Reduce)

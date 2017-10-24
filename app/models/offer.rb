@@ -151,6 +151,11 @@ class Offer < ApplicationRecord
     ! is_open?
   end
 
+  def is_sell_bid?() self.type == "Offer::Sell::Bid"   end
+  def is_sell_ask?() self.type == "Offer::Sell::Ask"   end
+  def is_buy_bid?()  self.type == "Offer::Buy::Bid"    end
+  def is_buy_ask?()  self.type == "Offer::Buy::Ask"    end
+
   private
 
   def default_values

@@ -1,24 +1,31 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Cross::Transfer do
+RSpec.describe ContractCmd::Cross::Reduce do
 
   include_context 'Integration Environment'
 
-  let(:sell) { FG.create(:sell_bid, user_id: usr1.id).offer               }
-  let(:buy)  { FG.create(:buy_bid , user_id: usr2.id, price: 0.4).offer   }
-  let(:user) { FG.create(:user).user                                      }
-  let(:klas) { described_class                                            }
-  subject    { klas.new(sell, :transfer)                                  }
+  def build_sell
+    attrs = sell_bid.match_attrs
+    offer = FG.create(:sell_ask, price: 0.6).offer
+    offer.update_attributes(attrs)
+    offer
+  end
+
+  let(:sell_bid) { FG.create(:sell_bid).offer                     }
+  let(:sell_ask) { build_sell                                     }
+  let(:user)     { FG.create(:user).user                          }
+  let(:klas)     { described_class                                }
+  subject        { klas.new(sell_bid, :reduce)                    }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :offer         }
-    it { should respond_to :counters      }
+    it { should respond_to :counters      } #
     it { should respond_to :type          }
   end
 
   describe "Object Existence", USE_VCR do
-    it { should be_a klas       }
-    it { should be_valid        }
+    it { should be_a klas           }
+    it { should_not be_valid        }
   end
 
   describe "Subobjects", USE_VCR do
@@ -31,7 +38,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
   describe "Delegated Object", USE_VCR do
     it 'has a present Offer' do
       expect(subject.offer).to be_present
-    end
+    end #
 
     it 'has a Offer with the right class' do
       expect(subject.offer).to be_a(Offer)
@@ -39,33 +46,33 @@ RSpec.describe ContractCmd::Cross::Transfer do
   end
 
   describe "#project - invalid subject", USE_VCR do
-    before(:each) { hydrate(buy) }
+    before(:each) { hydrate(sell_ask) }
 
     it 'detects an invalid object' do
       subject.project
       expect(subject).to be_valid
     end
 
-    it 'gets the right object count' do
-      expect(Contract.count).to eq(0)
-      subject.project
-      expect(Contract.count).to eq(1)
-    end
+    # it 'gets the right object count' do
+    #   expect(Contract.count).to eq(0) .
+    #   subject.project
+    #   expect(Contract.count).to eq(1)
+    # end
   end
 
   describe "#project - valid subject", USE_VCR do
     before(:each) { hydrate(buy) }
 
-    it 'detects a valid object' do
-      subject.project
-      expect(subject).to be_valid
-    end
+    # it 'detects a valid object' do
+    #   subject.project
+    #   expect(subject).to be_valid
+    # end
 
-    it 'gets the right object count' do
-      expect(Contract.count).to eq(0)
-      subject.project
-      expect(Contract.count).to eq(1)
-    end
+    # it 'gets the right object count' do
+    #   expect(Contract.count).to eq(0)
+    #   subject.project
+    #   expect(Contract.count).to eq(1)
+    # end
 
     # it 'sets the contract status' do
     #   subject.project
@@ -85,25 +92,25 @@ RSpec.describe ContractCmd::Cross::Transfer do
   end
 
   describe "#event_data", USE_VCR do
-    it 'returns a hash' do
-      expect(subject.event_data).to be_a(Hash)
-    end
+    # it 'returns a hash' do
+    #   expect(subject.event_data).to be_a(Hash)
+    # end
   end
 
   describe "#event_save", USE_VCR do
-    it 'creates an event' do
-      expect(EventLine.count).to eq(0)
-      subject.save_event
-      expect(EventLine.count).to eq(8)
-    end
-
-    it 'chains with #project' do
-      expect(EventLine.count).to eq(0)
-      expect(Contract.count).to eq(0)
-      subject.save_event.project
-      expect(EventLine.count).to eq(8)   # TODO: retest
-      expect(Contract.count).to eq(1)
-    end
+    # it 'creates an event' do
+    #   expect(EventLine.count).to eq(0)
+    #   subject.save_event
+    #   expect(EventLine.count).to eq(8)
+    # end
+    #
+    # it 'chains with #project' do
+    #   expect(EventLine.count).to eq(0)
+    #   expect(Contract.count).to eq(0)
+    #   subject.save_event.project
+    #   expect(EventLine.count).to eq(8)   # TODO: retest
+    #   expect(Contract.count).to eq(1)
+    # end
   end
 
   describe "crossing", USE_VCR do
@@ -112,28 +119,28 @@ RSpec.describe ContractCmd::Cross::Transfer do
     context "with single bid" do
       # it 'matches higher values' do
       #   FG.create(:buy_bid)
-      #   klas.new(lcl_ask, :transfer).project
+      #   klas.new(lcl_ask, :reduce).project
       #   expect(Contract.count).to eq(0)
       #   expect(Position.count).to eq(0)
       # end
 
       # it 'generates position ownership' do
       #   FG.create(:buy_bid)
-      #   klas.new(lcl_ask, :transfer).project
+      #   klas.new(lcl_ask, :reduce).project
       #   expect(Position.first.user_id).to_not be_nil
       #   expect(Position.last.user_id).to_not be_nil
       # end
 
     #   it 'matches equal values' do
     #     FG.create(:buy_bid)
-    #     klas.new(lcl_ask, :transfer).project
+    #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #   end
     #
     #   it 'fails to match lower values' do
     #     FG.create(:buy_bid, price: 0.1, volume: 1)
     #     expect(Contract.count).to eq(0)
-    #     klas.new(lcl_ask, :transfer).project
+    #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(0)
     #   end
     # end
@@ -142,21 +149,21 @@ RSpec.describe ContractCmd::Cross::Transfer do
     #   it 'matches higher value' do
     #     _bid1 = FG.create(:buy_bid, price: 0.5, volume: 10).offer
     #     _bid2 = FG.create(:buy_bid, price: 0.5, volume: 10).offer
-    #     klas.new(lcl_ask, :transfer).project
+    #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(0)
     #   end
     #
     #   it 'matches equal value' do
     #     _bid1 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
     #     _bid2 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
-    #     klas.new(lcl_ask, :transfer).project
+    #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #   end
     #
     #   it 'fails to match lower value' do
     #     _bid1 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
     #     _bid2 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
-    #     klas.new(lcl_ask, :transfer).project
+    #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #   end
     # end
@@ -166,7 +173,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
     #     _bid1 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
     #     _bid2 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
     #     _bid3 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
-    #     klas.new(lcl_ask, :transfer).project
+    #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #     expect(Offer.assigned.count).to eq(0)
     #     expect(Offer.unassigned.count).to eq(0)

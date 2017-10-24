@@ -343,24 +343,27 @@ Next Actions:
 
 # Oct 24
 
-- [ ] write Commit#transfer
-- [ ] write Commit#reduce
-- [ ] write Commit#resolve
+- [x] write Commit#transfer
+- [x] write Commit#reduce
 
 - [ ] /offers        - cross | retract | take
 - [ ] /offers/:id    - cross | retract | take 
-- [ ] /contacts      - resolve
-- [ ] /contracts/:id - resolve
-- [ ] /users/:id     - resolve | sell
 
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers
 
+# Oct 25
+
+- [ ] write Commit#resolve
+- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+
+- [ ] /contacts      - resolve
+- [ ] /contracts/:id - resolve
+- [ ] /users/:id     - resolve | sell
+
 # TBD
 
 - [ ] cross: generate contract-graph
-
-- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve

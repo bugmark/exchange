@@ -2,11 +2,13 @@ class Position < ApplicationRecord
 
   has_paper_trail
 
+  before_validation :default_values
+
   def xtag
     "pos"
   end
 
-  belongs_to :offer       , optional:   true#   , class_name: "Offer"   , optional: true, :foreign_key => :buy_offer_id
+  belongs_to :offer       , optional:   true
   has_many   :sell_offers , class_name: "Offer"                   , :foreign_key => :parent_position_id
   belongs_to :user                                   , optional: true
   belongs_to :escrow                                 , optional: true
@@ -21,6 +23,11 @@ class Position < ApplicationRecord
 
   # ----- INSTANCE METHODS -----
 
+  private
+
+  def default_values
+    self.side ||= offer&.side
+  end
 end
 
 # == Schema Information

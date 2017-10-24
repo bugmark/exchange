@@ -9,8 +9,8 @@ class Offer::Buy::Bid < Offer::Buy
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type
-      when :expand  then base.is_buy_ask.align_complement(self)
-      when :realloc then base.is_sell_bid.align_equal(self)
+      when :expand   then base.is_buy_ask.align_complement(self)
+      when :transfer then base.is_sell_bid.align_equal(self)
       else Offer.none
     end
   end

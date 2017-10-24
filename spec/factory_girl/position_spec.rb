@@ -6,5 +6,10 @@ RSpec.describe 'Position Factory', USE_VCR do
     FG.create(:position)
     expect(Position.count).to eq(1)
   end
+
+  it "gets the right side" do
+    obj = FG.create(:position)
+    expect(obj.side).to eq("bid")
+  end
 end
 
