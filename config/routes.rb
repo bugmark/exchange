@@ -16,16 +16,19 @@ Rails.application.routes.draw do
     resources :bids
     resources :asks
     resources :offers do
-      get 'cross'  , :on => :member
       get 'retract', :on => :member
+      get 'cross'  , :on => :member
       get 'take'   , :on => :member
+      get 'sell'   , :on => :member
     end
     resources :full_offers
+    resources :sell_offers
 
     resources :contracts do
       get 'resolve', :on => :member
       get 'graph'  , :on => :member
     end
+
 
     resources :users
   end

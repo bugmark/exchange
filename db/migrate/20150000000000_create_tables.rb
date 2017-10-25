@@ -103,7 +103,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :stm_jfields  , :using => :gin
     end
 
-    create_table :positions do |t|
+    create_table :sell_offers do |t|
       t.integer  :offer_id
       t.integer  :user_id
       t.integer  :amendment_id
@@ -116,14 +116,14 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
-    add_index :positions, :offer_id
-    add_index :positions, :user_id
-    add_index :positions, :amendment_id
-    add_index :positions, :escrow_id
-    add_index :positions, :parent_id
-    add_index :positions, :exref
-    add_index :positions, :uuref
-    add_index :positions, :side
+    add_index :sell_offers, :offer_id
+    add_index :sell_offers, :user_id
+    add_index :sell_offers, :amendment_id
+    add_index :sell_offers, :escrow_id
+    add_index :sell_offers, :parent_id
+    add_index :sell_offers, :exref
+    add_index :sell_offers, :uuref
+    add_index :sell_offers, :side
 
     create_table :escrows do |t|
       t.string   :type

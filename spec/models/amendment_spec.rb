@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Amendment, type: :model do
   def valid_params(opt = {})
-    {
-    }.merge(opt)
+    {}.merge(opt)
   end
 
   def gen_amendment(opts = {}) klas.create(valid_params(opts)) end

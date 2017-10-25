@@ -348,19 +348,22 @@ Next Actions:
 - [x] /offers        - cross | retract | take
 - [x] /offers/:id    - cross | retract | take 
 
+# Oct 25
+
+- [ ] /sell_offers/new&position_id=N
+
+- [ ] /users/:id/positions - sell
+
+- [ ] /users/:id           - resolve
+
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers
 
 - [ ] feature specs for take and cross actions
-
-# Oct 25
-
 - [ ] write Commit#resolve
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
-
 - [ ] /contacts      - resolve
 - [ ] /contracts/:id - resolve
-- [ ] /users/:id     - resolve | sell
 
 # TBD
 

@@ -33,6 +33,10 @@ module Core
       redirect_to "/core/contracts/#{cross.contract.id}"
     end
 
+    def sell
+      redirect_to "/core/contacts"
+    end
+
     private
 
     def set_filter(params)

@@ -9,7 +9,7 @@ module CoreOffersHelper
   end
 
   def core_offer_id_link(offer)
-    raw "<a href='/core/#{offer.side}s/#{offer.id}'>#{offer.xid}</a>"
+    raw "<a href='/core/offers/#{offer.id}'>#{offer.xid}</a>"
   end
 
   def core_offer_user_link(offer)
@@ -46,7 +46,7 @@ module CoreOffersHelper
   end
 
   def core_offer_retract_link(offer)
-    if current_user.present? && offer.user.id == current_user.id
+    if offer.status == "open" && current_user.present? && offer.user.id == current_user.id
       raw "<a href='/core/offers/#{offer.id}/retract' data-confirm='Are you sure?'>retract</a>"
     else
       nil

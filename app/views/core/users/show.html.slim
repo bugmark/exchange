@@ -3,44 +3,11 @@ table.table
     td
       h3 Trading Activity
     td align='right' #{@user.xid} / #{@user.email}
+
 div style='background: lightgrey;'
   b Account Balance: #{@user.balance} Tokens (Available: #{@user.token_available} / Reserve: #{@user.token_reserve})
-div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
-  b Bids (#{@user.bids.count}):
-  table.table
-    - if @user.bids.count > 0
-      tr
-        th ID
-        th Tokens
-        th Matures
-        th Status
-        th Action
-    - @user.bids.each do |bid|
-      tr
-        td = bid_id_link(bid)
-        td = bid.price
-        td = bid.maturation_str
-        td = bid.status
-        td TBD (cancel)
-div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
-  b Asks (#{@user.asks.count}):
-  table.table
-    - if @user.asks.count > 0
-      tr
-        th ID
-        th Tokens
-        th Matures
-        th Status
-        th Action
-    - @user.asks.each do |ask|
-      tr
-        td = ask_id_link(ask)
-        td = ask.price
-        td = ask.maturation_str
-        td = ask.status
-        td TBD (cancel)
 
-div style='background: lightyellow'
+div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
   b Positions (#{@user.positions.count}):
   table.table
     - if @user.positions.count > 0
@@ -55,3 +22,39 @@ div style='background: lightyellow'
         td = position.contract.maturation_str
         td = position.contract.status
         td TBD
+
+div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
+  b Bids (#{@user.bids.count}):
+  table.table
+    - if @user.bids.count > 0
+      tr
+        th ID
+        th Tokens
+        th Matures
+        th Status
+        th Action
+    - @user.bids.each do |bid|
+      tr
+        td = core_offer_id_link(bid)
+        td = bid.price
+        td = bid.maturation_str
+        td = bid.status
+        td = core_offer_actions(bid)
+
+div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
+  b Asks (#{@user.asks.count}):
+  table.table
+    - if @user.asks.count > 0
+      tr
+        th ID
+        th Tokens
+        th Matures
+        th Status
+        th Action
+    - @user.asks.each do |ask|
+      tr
+        td = core_offer_id_link(ask)
+        td = ask.price
+        td = ask.maturation_str
+        td = ask.status
+        td = core_offer_actions(ask)
