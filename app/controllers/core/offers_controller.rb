@@ -11,18 +11,22 @@ module Core
     end
 
     def cross
-      ask_id = params["id"]
-      result = ContractCmd::Cross.new(ask_id).save_event.project
-      if result
-        redirect_to "/rewards/#{result.id}"
-      else
-        redirect_to "/rewards"
-      end
+      offer    = Offer.find(params["id"])
+      _result1 = ContractCmd::Cross.new(offer, :expand).save_event.project
+      _result2 = ContractCmd::Cross.new(offer, :transfer).save_event.project
+      redirect_to "/core/offers/#{offer.id}"
     end
 
     def retract
       OfferCmd::Retract.new(params["id"]).save_event.project
       redirect_to "/core/offers"
+    end
+
+    def take
+      offer   = Offer.find(params["id"])
+      counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user)).offer
+      cross   = ContractCmd::Cross.new(counter, offer.cross_operation)
+      redirect_to "/core/contracts/#{cross.contract.id}"
     end
 
     private

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :offers do
       get 'cross'  , :on => :member
       get 'retract', :on => :member
+      get 'take'   , :on => :member
     end
     resources :full_offers
 

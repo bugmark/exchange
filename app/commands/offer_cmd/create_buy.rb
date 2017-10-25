@@ -23,7 +23,11 @@ module OfferCmd
     private
 
     def klas
-      typ == :bid ? Offer::Buy::Bid : Offer::Buy::Ask
+      case typ.to_s
+        when "bid" then Offer::Buy::Bid
+        when "ask" then Offer::Buy::Ask
+        else raise "unknown type (#{typ.to_s})"
+      end
     end
 
     def default_values

@@ -4,7 +4,7 @@ RSpec.describe OfferCmd::CreateBuy do
 
   def valid_params(args = {})
     {
-      user_id: user.id
+      user_id: user.id #
     }.merge(args)
   end
 

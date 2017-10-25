@@ -328,7 +328,7 @@ Next Actions:
 
 - [x] write Amendment::Expand
 - [x] add amendment_id to offer, position, escrow
-- [x] add escrow types 
+- [x] add escrow types
 - [x] write Commit#expand
 - [x] test Bundle
 - [x] test Commit
@@ -351,6 +351,8 @@ Next Actions:
 
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers
+
+- [ ] feature specs for take and cross actions
 
 # Oct 25
 

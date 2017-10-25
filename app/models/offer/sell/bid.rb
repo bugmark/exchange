@@ -14,6 +14,21 @@ class Offer::Sell::Bid < Offer::Buy
   end
   alias_method :counters, :qualified_counteroffers
 
+  # ----- for building counteroffers
+  #
+  # counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user))
+  # cross   = ContractCmd::Cross.new(counter, offer.cross_operation)
+
+  def counter_type()    :bid      end
+  def cross_operation() :transfer end
+  def counter_args(user = self.user)
+    args = {
+      user_id:          user.id                ,
+      maturation_range: self.maturation_range  ,
+    }
+    self.match_attrs.merge(args)
+  end
+
 end
 
 # == Schema Information

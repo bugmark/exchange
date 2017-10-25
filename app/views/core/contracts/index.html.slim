@@ -24,11 +24,11 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
   tbody
     - @contracts.each do |contract|
       tr
-        td = contract_id_link(contract)
-        td = contract_bid_link(contract)
-        td = contract_ask_link(contract)
+        td = core_contract_id_link(contract)
+        td = core_contract_bid_link(contract)
+        td = core_contract_ask_link(contract)
         td B#{contract.bid_tokens} / A#{contract.ask_tokens}
-        td = contract_mature_date(contract)
-        td = contract_status(contract)
+        td = core_contract_mature_date(contract)
+        td = core_contract_status(contract)
         td = contract.awardee
-        td = contract_actions(contract)
+        td = core_contract_actions(contract)
