@@ -361,6 +361,8 @@ Next Actions:
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers
 
+- [ ] add repo sync
+
 - [ ] feature specs for take and cross actions
 - [ ] write Commit#resolve
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page

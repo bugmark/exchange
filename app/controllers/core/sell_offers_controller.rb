@@ -13,8 +13,8 @@ module Core
     def new
       @position_id = params["position_id"]
       @position    = Position.find(@position_id)
-      attrs = {volume: @position.volume, price: @volume.price}
-      @bid = OfferCmd::CreateSell.new(@position, attrs)
+      attrs = {volume: @position.volume, price: @position.price}
+      @offer = OfferCmd::CreateSell.new(@position, attrs)
     end
   end
 end

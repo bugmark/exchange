@@ -1,15 +1,15 @@
 .row
   .col-md-6
-    h2 New Bid
+    h2 New Sell Offer
   .col-md-6
     small
       | Bids are an offer to <b>buy</b> fixes or information.
           For a fix: Bid => unfixed/false.
           For information: Bid => unfound/false.
 hr
-- if @bid.errors.any?
+- if @offer.errors.any?
   .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@bid, url: '/core/bids') do |f|
+= bootstrap_form_for(@offer, url: '/core/sell_offers') do |f|
   = f.hidden_field :type
   = f.hidden_field :user_id
   .row
