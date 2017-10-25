@@ -345,9 +345,8 @@ Next Actions:
 
 - [x] write Commit#transfer
 - [x] write Commit#reduce
-
-- [ ] /offers        - cross | retract | take
-- [ ] /offers/:id    - cross | retract | take 
+- [x] /offers        - cross | retract | take
+- [x] /offers/:id    - cross | retract | take 
 
 - [ ] cross: handle release of reserves
 - [ ] cross: suspend invalid offers

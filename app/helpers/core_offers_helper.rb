@@ -12,8 +12,10 @@ module CoreOffersHelper
     raw "<a href='/core/#{offer.side}s/#{offer.id}'>#{offer.xid}</a>"
   end
 
-  def core_offer_user_link(usr)
-    return "NA" if usr.nil?
+  def core_offer_user_link(offer)
+    return "NA" unless offer.respond_to?(:user)
+    usr = offer.user
+    return "NA" if offer.nil? || usr.nil?
     raw "<a href='/core/users/#{usr.id}'>#{usr.xid}</a>"
   end
 
@@ -28,7 +30,7 @@ module CoreOffersHelper
   def core_offer_take_link(offer)
     if offer.status == "open" && current_user.present?
       path = "/core/offers/#{offer.id}/take"
-      raw "<a href='#{path}'>Take</a>"
+      raw "<a href='#{path}'>take</a>"
     else
       nil
     end
@@ -37,7 +39,7 @@ module CoreOffersHelper
   def core_offer_cross_link(offer)
     if offer.status == "open"
       path = "/core/offers/#{offer.id}/cross"
-      raw "<a href='#{path}'>Cross</a>"
+      raw "<a href='#{path}'>cross</a>"
     else
       nil
     end
@@ -45,7 +47,7 @@ module CoreOffersHelper
 
   def core_offer_retract_link(offer)
     if current_user.present? && offer.user.id == current_user.id
-      raw "<a href='/core/offers/#{offer.id}/retract' data-confirm='Are you sure?'>Retract</a>"
+      raw "<a href='/core/offers/#{offer.id}/retract' data-confirm='Are you sure?'>retract</a>"
     else
       nil
     end

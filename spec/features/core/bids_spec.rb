@@ -10,11 +10,6 @@ describe "Bids" do
     expect(page).to_not be_nil
   end
 
-  it "renders show", USE_VCR do
-    visit "/core/bids/#{bid.id}"
-    expect(page).to_not be_nil
-  end
-
   it "renders /new" do
     login_as user, :scope => :user
 

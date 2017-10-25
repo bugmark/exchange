@@ -5,7 +5,6 @@ module Core
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
-    # bug_id (optional)
     def index
       @bug = @repo = nil
       @timestamp = Time.now.strftime("%H:%M:%S")
@@ -21,38 +20,18 @@ module Core
       end
     end
 
-    def show
-      @ask = Offer::Buy::Ask.find(params["id"])
-    end
-
-    # bug_id or repo_id, type(forecast | reward)
     def new
       @ask = OfferCmd::CreateBuy.new(:ask, new_opts(params))
-    end
-
-    # id (contract ID)
-    def edit
-      # @ask = AskCmd::Take.find(params[:id], with_counterparty: current_user)
     end
 
     def create
       opts = params["offer_cmd_create_buy"]
       @ask = OfferCmd::CreateBuy.new(:ask, valid_params(opts))
       if @ask.save_event.project
-        redirect_to("/core/asks/#{@ask.id}")
+        redirect_to("/core/offers/#{@ask.id}")
       else
         render 'core/asks/new'
       end
-    end
-
-    def update
-      # opts = params["contract_cmd_take"]
-      # @ask = AskCmd::Take.find(opts["id"], with_counterparty: current_user)
-      # if @ask.save_event.project
-      #   redirect_to("/asks/#{@ask.id}")
-      # else
-      #   render 'asks/new'
-      # end
     end
 
     private

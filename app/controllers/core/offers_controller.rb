@@ -10,6 +10,10 @@ module Core
       @offers = @filter ? @filter.obj.offers.open : Offer.open
     end
 
+    def show
+      @offer = Offer.find(params["id"])
+    end
+
     def cross
       offer    = Offer.find(params["id"])
       _result1 = ContractCmd::Cross.new(offer, :expand).save_event.project

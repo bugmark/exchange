@@ -1,1 +1,45 @@
-| Show Hello World
+h2 OFFER [#{@offer.xid}]
+.row
+  .col-md-6
+    b Details
+    table.table
+      tr
+        td Status
+        td = @offer.stm_status
+      tr
+        td User
+        td = core_offer_user_link(@offer)
+      tr
+        td Volume
+        td = @offer.volume
+      tr
+        td Price
+        td = @offer.price
+  .col-md-6
+    b Actions
+    table.table
+      tr
+        td Attached To
+        td = core_offer_attach_link(@offer)
+      tr
+        td Action
+        td = core_offer_actions(@offer)
+hr
+b Matching Bugs (#{@offer.match_bugs.count})
+table.table
+  - if @offer.match_bugs.count > 0
+    tr
+      th ID
+      th Type
+      th Title
+      th Contracts
+      th Create
+  - @offer.match_bugs.each do |bid|
+    tr
+      td = core_bug_id_link(bid)
+      td = bid.type
+      td = core_bug_title_link(bid)
+      td = core_bug_contract_link(bid)
+      td
+        nobr
+          = core_bug_contract_link(bid)
