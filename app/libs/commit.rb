@@ -1,5 +1,6 @@
 #-integration_test: commands/contract_cmd/cross/expand
 # integration_test: commands/contract_cmd/cross/transfer
+# integration_test: commands/contract_cmd/cross/reduce
 
 require 'ostruct'
 
@@ -37,8 +38,8 @@ class Commit
       volume:     offer.volume      ,
       price:      price             ,
       amendment:  ctx.amendment     ,
-      offer:      ctx.offer         ,
       escrow:     ctx.escrow        ,
+      offer:      offer.obj         ,
       user:       offer.obj.user    ,
     }
     Position.create(posargs)

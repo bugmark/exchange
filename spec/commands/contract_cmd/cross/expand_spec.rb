@@ -101,7 +101,7 @@ RSpec.describe ContractCmd::Cross::Expand do
       expect(EventLine.count).to eq(0)
       expect(Contract.count).to eq(0)
       subject.save_event.project
-      expect(EventLine.count).to eq(4)   # TODO: retest
+      expect(EventLine.count).to eq(4)   # TODO: retest ..
       expect(Contract.count).to eq(0)
     end
   end
@@ -112,7 +112,6 @@ RSpec.describe ContractCmd::Cross::Expand do
     context "with single bid" do
       it 'matches higher values' do
         FG.create(:buy_bid)
-        DINGDING = 1
         klas.new(lcl_ask, :expand).project
         expect(Contract.count).to eq(1)
         expect(Position.count).to eq(2)
@@ -123,6 +122,13 @@ RSpec.describe ContractCmd::Cross::Expand do
         klas.new(lcl_ask, :expand).project
         expect(Position.first.user_id).to_not be_nil
         expect(Position.last.user_id).to_not be_nil
+      end
+
+      it 'attaches offer to position' do
+        FG.create(:buy_bid)
+        klas.new(lcl_ask, :expand).project
+        expect(Position.first.offer_id).to_not be_nil #
+        expect(Position.last.offer_id).to_not be_nil
       end
 
       it 'matches equal values' do
@@ -169,8 +175,8 @@ RSpec.describe ContractCmd::Cross::Expand do
         _bid3 = FG.create(:buy_bid, price: 0.6, volume: 10).offer
         klas.new(lcl_ask, :expand).project
         expect(Contract.count).to eq(1)
-        expect(Offer.assigned.count).to eq(0)
-        expect(Offer.unassigned.count).to eq(0)
+        expect(Offer.assigned.count).to eq(2)
+        expect(Offer.unassigned.count).to eq(2)
       end
     end
   end

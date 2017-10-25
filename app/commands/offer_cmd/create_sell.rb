@@ -29,7 +29,6 @@ module OfferCmd
     def sell_offer_params
       time_base = parent_position&.contract&.maturation || Time.now
       range     = time_base-1.week..time_base+1.week
-      binding.pry
       {
         status:  "open"                           ,
         volume:  @volume                          ,
