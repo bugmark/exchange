@@ -3,7 +3,7 @@ module OfferCmd
 
     attr_subobjects      :offer
     attr_reader          :parent_position
-    attr_delegate_fields :sell_offer, class_name: "Offer::Sell"
+    attr_delegate_fields :offer, class_name: "Offer::Sell"
 
     def initialize(position, attr)
       @parent_position = position
@@ -23,7 +23,11 @@ module OfferCmd
     private
 
     def klas
-      parent_position.side == 'bid' ? Offer::Sell::Bid : Offer::Sell::Ask
+      case parent_position.side
+        when "bid" then Offer::Sell::Bid
+        when "ask" then Offer::Sell::Ask
+        else raise "unknown position side (#{parent_position.side})"
+      end
     end
 
     def sell_offer_params
