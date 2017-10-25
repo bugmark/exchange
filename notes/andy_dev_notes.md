@@ -350,7 +350,9 @@ Next Actions:
 
 # Oct 25
 
-- [ ] /sell_offers/new&position_id=N
+- [x] create /sell_offers/new?position_id=N
+
+- [ ] finalize /sell_offers/new and /sell_offers/controller
 
 - [ ] /users/:id/positions - sell
 

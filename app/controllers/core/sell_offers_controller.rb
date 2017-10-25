@@ -3,19 +3,18 @@ module Core
 
     layout 'core'
 
+    before_action :authenticate_user!, :except => [:index, :show]
+
     def index
       @bids = Bid.unassigned
       @asks = Ask.unassigned
     end
 
-    # def cross
-    #   ask_id = params["id"]
-    #   result = ContractCmd::Cross.new(ask_id).save_event.project
-    #   if result
-    #     redirect_to "/rewards/#{result.id}"
-    #   else
-    #     redirect_to "/rewards"
-    #   end
-    # end
+    def new
+      @position_id = params["position_id"]
+      @position    = Position.find(@position_id)
+      attrs = {volume: @position.volume, price: @volume.price}
+      @bid = OfferCmd::CreateSell.new(@position, attrs)
+    end
   end
 end

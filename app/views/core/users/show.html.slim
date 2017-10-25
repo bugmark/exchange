@@ -18,10 +18,11 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
         th Action
     - @user.positions.each do |position|
       tr
-        td = position.xid
+        td
+          | #{position.xid} [#{core_contract_id_link(position.contract)}]
         td = position.contract.maturation_str
         td = position.contract.status
-        td TBD
+        td = core_sell_offer_new_link(position.id)
 
 div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
   b Bids (#{@user.bids.count}):
