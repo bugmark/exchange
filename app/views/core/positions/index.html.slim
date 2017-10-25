@@ -1,0 +1,25 @@
+table width='100%'
+  tr
+    td
+      h2 POSITIONS
+    td align='right'
+      | All Positions
+
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
+  thead
+    tr
+      th ID
+      th User
+      th Volume
+      th Price
+      th Action
+  tbody
+    - @positions.each do |position|
+      tr
+        td = core_position_link(position)
+        td = core_user_link(position.user)
+        td = position.volume
+        td = position.price
+        td
+          nobr
+            = core_position_actions(position)

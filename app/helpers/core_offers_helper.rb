@@ -25,10 +25,6 @@ module CoreOffersHelper
     raw "<a href='/core/#{type}/#{obj.id}'>#{obj.xid}</a>"
   end
 
-  def core_sell_offer_new_link(position_id)
-    raw "<a href='/core/sell_offers/new?position_id=#{position_id}'>sell</a>"
-  end
-
   # ----- actions -----
 
   def core_offer_take_link(offer)

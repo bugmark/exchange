@@ -1,4 +1,11 @@
-h2 CONTRACT [#{@contract.xid}]
+table width='100%'
+  tr
+    td
+      h2 CONTRACT [#{@contract.xid}]
+    td align='right'
+      = link_to("All Contracts", "/core/contracts")
+
+
 .row
   .col-md-6
     b Details
@@ -6,12 +13,6 @@ h2 CONTRACT [#{@contract.xid}]
       tr
         td Status
         td = @contract.status
-      tr
-        td Bids
-        td = core_contract_bid_link(@contract)
-      tr
-        td Asks
-        td = core_contract_ask_link(@contract)
       tr
         td Contract Price Range
         td TBD
@@ -21,6 +22,20 @@ h2 CONTRACT [#{@contract.xid}]
       tr
         td Action
         td # contract_take_link(@contract)
+hr
+b Amendments (#{@contract.amendments.count})
+table.table
+  tr
+    th ID
+    th Type
+    th Bid Positions
+    th Ask Positions
+  - @contract.amendments.each do |amend|
+    tr
+      td = amend.sequence
+      td = amend.type
+      td = amend.positions.count
+      td TBD
 hr
 b Matching Bugs (#{@contract.match_bugs.count})
 table.table

@@ -1,4 +1,10 @@
-h2 OFFER [#{@offer.xid}]
+table width='100%'
+  tr
+    td
+      h2 OFFER [#{@offer.xid}]
+    td align='right'
+      = link_to("All Offers", "/core/offers")
+
 .row
   .col-md-6
     b Details

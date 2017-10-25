@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       get 'graph'  , :on => :member
     end
 
+    resources :positions
 
     resources :users
   end

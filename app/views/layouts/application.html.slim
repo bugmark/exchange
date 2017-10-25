@@ -18,8 +18,10 @@ html[lang="en-US"]
       .collapse.navbar-collapse
         - if ! content_for?(:navbar)
           ul.navbar-nav.mr-auto
-            = nav_link("Core"        , "/core/home"   )
-            = nav_link("Docfix"      , "/docfix/home" )
+            = nav_link("Repos"       , "/core/repos"       )
+            = nav_link("Bugs"        , "/core/bugs"        )
+            = nav_link("Offers"      , "/core/offers"      )
+            = nav_link("Contracts"   , "/core/contracts"   )
         - else
           = content_for(:navbar)
         = render "layouts/devise"

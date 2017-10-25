@@ -1,0 +1,33 @@
+table width='100%'
+  tr
+    td
+      h2 POSITION [#{@position.xid}]
+    td align='right'
+      = link_to("All Positions", "/core/positions")
+
+.row
+  .col-md-6
+    table.table
+      tr
+        td Contract
+        td = core_contract_id_link(@position.contract)
+      tr
+        td Owner
+        td = core_user_link(@position.user)
+      tr
+        td Offer
+        td = core_offer_id_link(@position.offer)
+  .col-md-6
+    table.table
+      tr
+        td Side - Intent
+        td #{@position.side} - #{@position.offer.intent}
+      tr
+        td Volume
+        td = @position.volume
+      tr
+        td Price
+        td = @position.price
+      tr
+        td Actions
+        td = core_position_actions(@position)
