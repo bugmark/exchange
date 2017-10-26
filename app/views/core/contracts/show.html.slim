@@ -12,6 +12,8 @@ table width='100%'
       tr
         td Status
         td = @contract.status
+      tr
+        td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@contract)}
   .col-md-6
     b Details
     table.table

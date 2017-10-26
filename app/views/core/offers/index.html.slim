@@ -16,8 +16,8 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
   tbody
     - @offers.each do |offer|
       tr
-        td = core_offer_id_link(offer)
-        td = core_offer_user_link(offer.user)
+        td #{core_offer_id_link(offer)}
+        td = core_user_link(offer.user)
         td = offer.status
         td = offer.volume
         td = offer.price

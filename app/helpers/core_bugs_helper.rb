@@ -19,7 +19,7 @@ module CoreBugsHelper
   end
 
   def core_bug_offer_link(bug)
-    count = bug.offers.count
+    count = bug.offers.open.count
     if count > 0
       raw "<a class='offerlink' href='/core/offers?stm_bug_id=#{bug.id}'>#{count}</a>"
     else

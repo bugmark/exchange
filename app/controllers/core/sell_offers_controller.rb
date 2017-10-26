@@ -21,6 +21,7 @@ module Core
       options  = params["offer_cmd_create_sell"]
       position = Position.find(options["parent_position_id"])
       @offer   = OfferCmd::CreateSell.new(position, lcl_opts(options, position))
+      binding.pry
       if @offer.save_event.project
         redirect_to("/core/offers/#{@offer.id}")
       else

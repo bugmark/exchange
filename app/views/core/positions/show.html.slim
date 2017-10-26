@@ -9,25 +9,22 @@ table width='100%'
   .col-md-6
     table.table
       tr
-        td Contract
+        td <b>Contract</b>
         td = core_contract_id_link(@position.contract)
       tr
-        td Owner
+        td <b>Owner</b>
         td = core_user_link(@position.user)
       tr
-        td Offer
+        td <b>Offer</b>
         td = core_offer_id_link(@position.offer)
   .col-md-6
     table.table
       tr
-        td Side - Intent
-        td #{@position.side} - #{@position.offer.intent}
-      tr
-        td Volume
+        td <b>Volume</b>
         td = @position.volume
       tr
-        td Price
+        td <b>Price</b>
         td = @position.price
       tr
-        td Actions
+        td <b>Actions</b>
         td = core_position_actions(@position)

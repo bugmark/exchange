@@ -3,22 +3,24 @@ h2 BUG [#{@bug.xid}]
   .col-md-6
     table.table
       tr
-        td Type
+        td <b>Type</b>
         td = @bug.xtype
       tr
-        td Title
+        td <b>Title</b>
         td = @bug.stm_title
       tr
-        td URL
+        td <b>URL</b>
         td = core_bug_http_link(@bug)
+      tr
+        td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@bug)}
   .col-md-6
     table.table
       tr
-        td Offers
+        td <b>Offers</b>
         td = core_bug_offer_link(@bug)
       tr
-        td Contracts
+        td <b>Contracts</b>
         td = core_bug_contract_link(@bug)
       tr
-        td Create
+        td <b>Create</b>
         td = core_bug_actions(@bug)

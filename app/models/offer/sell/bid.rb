@@ -1,4 +1,4 @@
-class Offer::Sell::Bid < Offer::Buy
+class Offer::Sell::Bid < Offer::Sell
 
   def side() "bid" end
   alias_method :xtag, :side

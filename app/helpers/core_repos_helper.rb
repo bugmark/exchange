@@ -27,7 +27,7 @@ module CoreReposHelper
   end
 
   def core_repo_offer_link(repo)
-    count = repo.offers.count
+    count = repo.offers.open.count
     if count > 0
       raw "<a class='offerlink' href='/core/offers?stm_repo_id=#{repo.id}'>#{count}</a>"
     else

@@ -21,6 +21,12 @@ class Offer < ApplicationRecord
 
   before_validation :default_values
 
+  # -----
+
+  def xid
+    "#{xtag}-#{self.intent}.#{self&.id || 0}"
+  end
+
   # ----- BASIC SCOPES -----
   class << self
     def poolable()             where(poolable: true)      end
