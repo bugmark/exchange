@@ -7,5 +7,6 @@ User.destroy_all
 Offer.destroy_all
 Escrow.destroy_all
 Position.destroy_all
+Amendments.destroy_all
 Contract.destroy_all
 EventLine.destroy_all
