@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class Contract < ApplicationRecord
 
   include MatchUtils
@@ -120,6 +122,18 @@ class Contract < ApplicationRecord
 
   def xtag
     "con"
+  end
+
+  def total_value
+    escrows.pluck(:bid_value).sum + escrows.pluck(:ask_value).sum
+  end
+
+  def value
+    opts = {
+      bid: escrows.pluck(:bid_value).sum    ,
+      ask: escrows.pluck(:ask_value).sum
+    }
+    OpenStruct.new(opts)
   end
 
   def maturation_str

@@ -356,17 +356,21 @@ Next Actions:
 - [x] finalize /sell_offers/new and /sell_offers/controller
 - [x] fix sell offer generation
 
+- [ ] fix escrow value
+
 - [ ] commit: implement refund release
 - [ ] commit: implement reoffer generation
 - [ ] commit: implement escrow capture
 - [ ] commit: suspend invalid offers
 
-- [ ] /users/:id           - resolve
+- [ ] /users/:id   resolve
 - [ ] write Commit#resolve
 
 - [ ] cross: handle release of reserves
 
 - [ ] add repo sync
+
+- [ ] remove unused statement fields
 
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
@@ -374,6 +378,8 @@ Next Actions:
 - [ ] /contracts/:id - resolve
 
 # TBD
+
+- [ ] implement all-or-none
 
 - [ ] feature specs for sell, take and cross actions
 - [ ] cross: generate contract-graph

@@ -14,9 +14,8 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
   thead
     tr
       th ID
-      th Bid
-      th Ask
-      th Tokens
+      th Amendments
+      th Value
       th Matures
       th Status
       th Awardee
@@ -25,9 +24,8 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
     - @contracts.each do |contract|
       tr
         td = core_contract_id_link(contract)
-        td = core_contract_bid_link(contract)
-        td = core_contract_ask_link(contract)
-        td B#{contract.bid_tokens} / A#{contract.ask_tokens}
+        td = contract.amendments.count
+        td = contract.total_value
         td = core_contract_mature_date(contract)
         td = core_contract_status(contract)
         td = contract.awardee

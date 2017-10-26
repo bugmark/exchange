@@ -32,10 +32,12 @@ module ApplicationHelper
   end
 
   def ttip_content(user)
+    ask_count = user.asks.open.count
+    bid_count = user.bids.open.count
     """
     <em>#{user.email}</em></br>
-    #{user.asks.count} asks</br>
-    #{user.bids.count} bids</br>
+    #{ask_count} open #{"ask".pluralize(ask_count)}</br>
+    #{bid_count} open #{"bid".pluralize(bid_count)}</br>
     #{user.contracts.count} contracts</br>
     #{user.balance} tokens
     """

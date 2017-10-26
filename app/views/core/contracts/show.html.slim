@@ -7,19 +7,20 @@ table width='100%'
 
 .row
   .col-md-6
-    b Details
     table.table
       tr
-        td Status
+        td <b>Status</b>
         td = @contract.status
       tr
         td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@contract)}
   .col-md-6
-    b Details
     table.table
       tr
-        td Contract Maturation
+        td <b>Contract Maturation</b>
         td = @contract.maturation_str
+      tr
+        td <b>Total Value</b>
+        td = @contract.total_value
 hr
 b Amendments (#{@contract.amendments.count})
 table.table

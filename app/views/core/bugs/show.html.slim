@@ -1,4 +1,9 @@
-h2 BUG [#{@bug.xid}]
+table width='100%'
+  tr
+    td
+      h2 BUG [#{@bug.xid}]
+    td align='right'
+      = link_to("All Bugs", "/core/bugs")
 .row
   .col-md-6
     table.table

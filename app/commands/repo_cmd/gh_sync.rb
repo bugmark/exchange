@@ -39,7 +39,7 @@ module RepoCmd
           type:        "Bug::GitHub"   ,
           exref:       el["id"]        ,
           stm_title:   el["title"]     ,
-          stm_labels:  el["labels"]    ,
+          stm_labels:  ""              ,
           stm_status:  el["state"]     ,
           html_url:    el["html_url"]  ,
           synced_at:   Time.now
