@@ -36,7 +36,7 @@ class Offer::Buy::Bid < Offer::Buy
 
   def default_values
     self.type              ||= 'Bid::GitHub'
-    self.stm_status        ||= 'open'
+    self.stm_status        ||= 'closed'
     self.price             ||= 0.10
     self.maturation_range  ||= Time.now+1.minute..Time.now+1.week
   end
