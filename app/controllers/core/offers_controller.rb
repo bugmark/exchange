@@ -7,17 +7,34 @@ module Core
 
     def index
       @filter = set_filter(params)
-      @offers = @filter ? @filter.obj.offers : Offer.all
+      @offers = @filter ? @filter.obj.offers.open : Offer.open
+    end
+
+    def show
+      @offer = Offer.find(params["id"])
     end
 
     def cross
-      ask_id = params["id"]
-      result = ContractCmd::Cross.new(ask_id).save_event.project
-      if result
-        redirect_to "/rewards/#{result.id}"
+      offer    = Offer.find(params["id"])
+      result1 = ContractCmd::Cross.new(offer, :expand).save_event.project
+      result2 = ContractCmd::Cross.new(offer, :transfer).save_event.project
+      if result1 || result2
+        redirect_to "/core/contracts/#{offer.position.contract.id}"
       else
-        redirect_to "/rewards"
+        redirect_to "/core/offers/#{offer.id}"
       end
+    end
+
+    def retract
+      OfferCmd::Retract.new(params["id"]).save_event.project
+      redirect_to "/core/users/#{current_user.id}"
+    end
+
+    def take
+      offer   = Offer.find(params["id"])
+      counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user)).project.save_event.offer
+      cross   = ContractCmd::Cross.new(counter, offer.cross_operation).project.save_event
+      redirect_to "/core/contracts/#{cross.commit.contract.id}"
     end
 
     private

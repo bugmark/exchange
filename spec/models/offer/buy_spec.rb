@@ -57,8 +57,8 @@ RSpec.describe Offer::Buy, type: :model do
       expect(Offer.count).to eq(1)
       expect(tstbid1).to be_valid
       tstbid2 = genbid(price: 0.5, volume: 175)
-      expect(tstbid2).to_not be_valid
-      expect(Offer.count).to eq(1)
+      expect(tstbid2).to be_valid
+      expect(Offer.count).to eq(2)
     end
   end
 end
@@ -67,29 +67,31 @@ end
 #
 # Table name: offers
 #
-#  id               :integer          not null, primary key
-#  type             :string
-#  repo_type        :string
-#  user_id          :integer
-#  parent_id        :integer
-#  position_id      :integer
-#  counter_id       :integer
-#  volume           :integer          default(1)
-#  price            :float            default(0.5)
-#  poolable         :boolean          default(TRUE)
-#  aon              :boolean          default(FALSE)
-#  status           :string
-#  expiration       :datetime
-#  maturation       :datetime
-#  maturation_range :tsrange
-#  jfields          :jsonb            not null
-#  exref            :string
-#  uuref            :string
-#  stm_bug_id       :integer
-#  stm_repo_id      :integer
-#  stm_title        :string
-#  stm_status       :string
-#  stm_labels       :string
-#  stm_xfields      :hstore           not null
-#  stm_jfields      :jsonb            not null
+#  id                 :integer          not null, primary key
+#  type               :string
+#  repo_type          :string
+#  user_id            :integer
+#  amendment_id       :integer
+#  reoffer_parent_id  :integer
+#  parent_position_id :integer
+#  volume             :integer          default(1)
+#  price              :float            default(0.5)
+#  poolable           :boolean          default(TRUE)
+#  aon                :boolean          default(FALSE)
+#  status             :string
+#  expiration         :datetime
+#  maturation_range   :tsrange
+#  xfields            :hstore           not null
+#  jfields            :jsonb            not null
+#  exref              :string
+#  uuref              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  stm_bug_id         :integer
+#  stm_repo_id        :integer
+#  stm_title          :string
+#  stm_status         :string
+#  stm_labels         :string
+#  stm_xfields        :hstore           not null
+#  stm_jfields        :jsonb            not null
 #

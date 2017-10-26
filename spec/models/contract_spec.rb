@@ -16,6 +16,7 @@ RSpec.describe Contract, type: :model do
 
   describe "Associations" do
     it { should respond_to(:escrows)            }
+    it { should respond_to(:amendments)         }
   end
 
   describe "Attributes" do
@@ -61,6 +62,7 @@ end
 #  status      :string
 #  awarded_to  :string
 #  maturation  :datetime
+#  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  exref       :string
 #  uuref       :string

@@ -11,6 +11,7 @@ module MatchUtils
     }
   end
 
+  def match()                 Offer.match(match_attrs)            end
   def match_bugs()            Bug.match(match_attrs)              end
   def match_contracts()       Contract.match(match_attrs)         end
   def match_offers()          Offer.match(match_attrs)            end
@@ -32,6 +33,10 @@ module MatchUtils
 
     def by_id(id)
       where(id: id)
+    end
+
+    def by_bugid(id)
+      where(stm_bug_id: id)
     end
 
     def by_repoid(id)
@@ -67,8 +72,8 @@ module MatchUtils
 
     def scope_for(base, key, val)
       case key
-        when :id then
-          base.by_id(val)
+        when :stm_bug_id then
+          base.by_bugid(val)
         when :stm_repo_id then
           base.by_repoid(val)
         when :stm_title then

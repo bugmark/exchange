@@ -289,44 +289,113 @@ Next Actions:
 - [x] /contracts - ...
 - [x] /users/:id - show AVAILABLE_BALANCE
 - [x] navbar     - show AVAILABLE_BALANCE
+- [x] deploy to production
 
-- [ ] deploy to production
+# Oct 19
 
-- [ ] sale: add offer_sell_cmd/create
-- [ ] sale: add offer_sell_cmd/cancel
+- [x] test associations: positions, user, offer, sell offer
+- [x] add transfer object
+- [x] build sell-offer spec
+- [x] make a transfer model & spec
+- [x] test associations: transfer, selloffer, buyoffer, positions...
+- [x] sale: add offer_sell_cmd/create
+- [x] sale: add offer_sell_cmd/cancel
+- [x] cross: add contract_cmd/cross_from_sell_ask
+- [x] put 'my positions' on /users/:id
 
-- [ ] cross: add contract_cmd/cross_from_sell_ask
-- [ ] cross: make cross match buy and sell
+# Oct 20
 
-- [ ] add UI support for crosses
+- [x] specify cross methods
 
-- [ ] bid_buy/ask_buy: add a cancel command
-- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+# Oct 21
 
-- [ ] fix resolve
+- [x] add offer#qualified_counteroffer methods
+- [x] clean up specs
+- [x] create Bundle
+- [x] write new cross
+
+# Oct 22
+
+- [x] define Amendment::Expand
+- [x] define Amendment::Transfer
+- [x] define Amendment::Reduce
+- [x] define Amendment::Resolve
+- [x] write Amendment spec
+- [x] update contract spec
+- [x] add timestamps to all models
+
+# Oct 23
+
+- [x] write Amendment::Expand
+- [x] add amendment_id to offer, position, escrow
+- [x] add escrow types
+- [x] write Commit#expand
+- [x] test Bundle
+- [x] test Commit
+- [x] test ContractCmd::Cross
+- [x] cross: enable partial volume match
+- [x] cross: enable poolable offers
+- [x] cross: generate re-offers
+- [x] cross: add sell/bid=>sell/ask cross
+- [x] cross: add buy/bid=>buy/ask cross
+- [x] cross: make cross match buy and sell
+- [x] get volume cancellation working
+
+# Oct 24
+
+- [x] write Commit#transfer
+- [x] write Commit#reduce
+- [x] /offers        - cross | retract | take
+- [x] /offers/:id    - cross | retract | take 
+
+# Oct 25
+
+- [x] create /sell_offers/new?position_id=N
+- [x] fix position volume bug
+- [x] /users/:id/positions - sell
+- [x] finalize /sell_offers/new and /sell_offers/controller
+- [x] fix sell offer generation
+
+# Oct 26
+
+- [x] turn off pooling
+- [x] turn off re-offers
+- [x] turn off label search
+- [x] fix escrow value
+- [x] commit: implement refund release
+- [x] commit: implement reoffer generation
+- [x] commit: implement escrow capture
+- [x] commit: suspend invalid offers
+- [x] cross: handle release of reserves
+- [x] fix price generation problem
+- [x] remove unused statement fields
+- [x] /users/:id   resolve
+- [x] /contacts      - resolve
+- [x] /contracts/:id - resolve
+
+- [ ] laptop dev env
+
+- [ ] reset the data from the UI
+- [ ] reset the contract maturation date
+- [ ] add repo sync
+
 
 # TBD
 
-- [ ] cross: enable partial volume match
-- [ ] cross: enable poolable offers
-- [ ] cross: generate re-offers
-- [ ] cross: handle release of reserves
-- [ ] cross: suspend invalid offers
+- [ ] get sell/cross working
+
+- [ ] implement all-or-none
+
+- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+- [ ] feature specs for sell, take and cross actions
 - [ ] cross: generate contract-graph
 
-- [ ] add bid/cancel link on offers#index
-- [ ] add ask/cancel link on offers#index
-- [ ] add bid/cancel link on offers#show
-- [ ] add ask/cancel link on offers#show
-
-- [ ] create a bid/take link on offers#index
-- [ ] create an ask/take link on offers#index
-- [ ] create a bid/take link on offers#show
-- [ ] create an ask/take link on offers#show
+- [ ] write Commit#resolve
 
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve
 - [ ] enable event replay
 
-- [ ] add API
-- [ ] use swagger for api docco
+- [ ] add Restful API
+- [ ] add GraphQL API
+- [ ] use swagger for resultful api docco

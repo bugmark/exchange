@@ -32,7 +32,7 @@ describe "Bugs" do
     expect(Bug.count).to eq(1)
 
     visit "/core/bugs"
-    click_on "Ask"
+    click_on "ask"
     click_on "Create Ask"
 
     expect(Offer::Buy::Ask.count).to eq(1)
@@ -45,7 +45,7 @@ describe "Bugs" do
     expect(Bug.count).to eq(1)
 
     visit "/core/bugs"
-    click_on "Bid"
+    click_on "bid"
     click_on "Create Bid"
 
     expect(Offer::Buy::Bid.count).to eq(1)

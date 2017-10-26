@@ -1,3 +1,5 @@
+require 'ostruct'
+
 class Contract < ApplicationRecord
 
   include MatchUtils
@@ -12,7 +14,8 @@ class Contract < ApplicationRecord
   # has_many :bid_users, :through => :bids, :source => "user"
   # has_many :ask_users, :through => :asks, :source => "user"
 
-  has_many :escrows, -> {order(:sequence => :asc)}
+  has_many :escrows   , -> {order(:sequence => :asc)}
+  has_many :amendments, -> {order(:sequence => :asc)}
 
   has_many :positions, :through => :escrows
 
@@ -50,7 +53,7 @@ class Contract < ApplicationRecord
 
   # ----- OVERLAP UTILS -----
   class << self
-    def by_overlap_maturation_range(beg, fin)
+    def overlap(beg, fin)
       where('maturation > ?::timestamp', beg).
         where('maturation < ?::timestamp', fin)
     end
@@ -121,6 +124,18 @@ class Contract < ApplicationRecord
     "con"
   end
 
+  def total_value
+    (escrows.pluck(:bid_value).sum + escrows.pluck(:ask_value).sum).round(2)
+  end
+
+  def value
+    opts = {
+      bid: escrows.pluck(:bid_value).sum    ,
+      ask: escrows.pluck(:ask_value).sum
+    }
+    OpenStruct.new(opts)
+  end
+
   def maturation_str
     self.maturation.strftime("%b-%d %H:%M:%S")
   end
@@ -159,6 +174,7 @@ end
 #  status      :string
 #  awarded_to  :string
 #  maturation  :datetime
+#  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  exref       :string
 #  uuref       :string

@@ -1,27 +1,32 @@
-h2 REPO [#{@repo.xid}]
+table width='100%'
+  tr
+    td
+      h2 REPO [#{@repo.xid}]
+    td align='right'
+      = link_to("All Repos", "/core/repos")
 .row
   .col-md-6
     table.table
       tr
-        td Type
+        td <b>Type</b>
         td = @repo.xtype
       tr
-        td Name
+        td <b>Name</b>
         td = @repo.name
       tr
-        td URL
+        td <b>URL</b>
         td = core_repo_http_link(@repo)
   .col-md-6
     table.table
       tr
-        td Bugs
+        td <b>Bugs</b>
         td = core_repo_bug_link(@repo)
       tr
-        td Offers
+        td <b>Offers</b>
         td = core_repo_offer_link(@repo)
       tr
-        td Contracts
+        td <b>Contracts</b>
         td = core_repo_contract_link(@repo)
       tr
-        td Actions
+        td <b>Actions</b>
         td = repo_actions(@repo)

@@ -23,7 +23,7 @@ module BidsHelper
 
   def bid_take_link(bid)
     status = bid.status
-    if bid.unmatured? && status == "open"
+    if bid.is_unmatured? && status == "open"
       path = "/core/bids/#{bid.id}/edit"
       raw "<a href='#{path}'>Take</a>"
     else
@@ -63,7 +63,7 @@ module BidsHelper
 
   def bid_resolve_link(bid)
     return nil if bid.resolved?
-    return nil unless bid.matured?
+    return nil unless bid.is_matured?
     link_to "Resolve", {:action => :resolve, :id => bid.id}
   end
 

@@ -19,7 +19,7 @@ module CoreBugsHelper
   end
 
   def core_bug_offer_link(bug)
-    count = bug.offers.count
+    count = bug.offers.open.count
     if count > 0
       raw "<a class='offerlink' href='/core/offers?stm_bug_id=#{bug.id}'>#{count}</a>"
     else
@@ -53,12 +53,12 @@ module CoreBugsHelper
 
   def core_bug_ask_new_link(bug)
     path = "/core/asks/new?type=git_hub&stm_bug_id=#{bug.id}"
-    raw "<a href='#{path}'>Ask</a>"
+    raw "<a href='#{path}'>ask</a>"
   end
 
   def core_bug_bid_new_link(bug)
     path = "/core/bids/new?type=git_hub&stm_bug_id=#{bug.id}"
-    raw "<a href='#{path}'>Bid</a>"
+    raw "<a href='#{path}'>bid</a>"
   end
 
   def core_bug_actions(bug)

@@ -4,16 +4,29 @@ class Offer < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user
-  belongs_to :bug,      optional: true  , foreign_key: "stm_bug_id"
-  belongs_to :repo,     optional: true  , foreign_key: "stm_repo_id"
-  belongs_to :position, optional: true
+  belongs_to :user            , optional: true
+  belongs_to :bug             , optional: true , foreign_key: "stm_bug_id"
+  belongs_to :repo            , optional: true , foreign_key: "stm_repo_id"
+  has_one    :position                         , foreign_key: "offer_id"
+  belongs_to :parent_position , optional: true , foreign_key: "parent_position_id" , class_name: "Position"
+  has_one    :reoffer_parent                   , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
+  belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
+  belongs_to :transfer        , optional: true
 
-  validates :status, inclusion: {in: %w(open suspended crossed expired cancelled)}
+  VALID_STATUS = %w(open suspended crossed expired retracted)
+  validates :status, inclusion:    {in: VALID_STATUS }
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
+  belongs_to :amendment, optional: true
+
   before_validation :default_values
+
+  # -----
+
+  def xid
+    "#{xtag}-#{self.intent}.#{self&.id || 0}"
+  end
 
   # ----- BASIC SCOPES -----
   class << self
@@ -22,8 +35,10 @@ class Offer < ApplicationRecord
     def with_status(status)    where(status: status)      end
     def without_status(status) where.not(status: status)  end
 
-    def open()     with_status('open')    end
-    def not_open() without_status('open') end
+    VALID_STATUS.each do |status|
+      define_method(status.to_sym)          { with_status(status)    }
+      define_method("not_#{status}".to_sym) { without_status(status) }
+    end
 
     def assigned
       where("id IN (SELECT offer_id FROM positions)")
@@ -37,10 +52,15 @@ class Offer < ApplicationRecord
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
 
-    def is_buy_ask()  where(type: "Offer::Buy::Ask") end
-    def is_buy_bid()  where(type: "Offer::Buy::Bid") end
+    def is_buy_ask()  where(type: "Offer::Buy::Ask")  end
+    def is_buy_bid()  where(type: "Offer::Buy::Bid")  end
     def is_sell_ask() where(type: "Offer::Sell::Ask") end
     def is_sell_bid() where(type: "Offer::Sell::Bid") end
+
+    def is_bid()  where('type like ?', "%Bid") end
+    def is_ask()  where('type like ?', "%Ask") end
+    def is_buy()  where('type like ?', "Offer::Buy%") end
+    def is_sell() where('type like ?', "Offer::Sell%") end
   end
 
   # ----- OVERLAP UTILS -----
@@ -70,23 +90,18 @@ class Offer < ApplicationRecord
 
   # ----- CROSS UTILS -----
   class << self
-    def with_price(price)
-      where(price: price)
-    end
-
     def with_volume(volume)
       where(volume: volume)
     end
 
-    def complements(offer)
+    def align_complement(offer)
       complement = 1.0 - offer.price
-      base = with_price(complement)
+      base = where('price >= ?', complement)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
 
-    def crosses(offer)
-      complement = 1.0 - offer.price
-      base = where('price >= ?', complement)
+    def align_equal(offer)
+      base = where('price >= ?', offer.price)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
   end
@@ -124,16 +139,31 @@ class Offer < ApplicationRecord
   end
 
   def maturation
-    maturation_range.end
+    self.maturation_range.end
   end
 
-  def matured?
+  # ----- predicates -----
+
+  def is_matured?
     self.maturation < Time.now
   end
 
-  def unmatured?
-    ! matured?
+  def is_unmatured?
+    ! is_matured?
   end
+
+  def is_open?
+    self.status == 'open'
+  end
+
+  def is_not_open?
+    ! is_open?
+  end
+
+  def is_sell_bid?() self.type == "Offer::Sell::Bid"   end
+  def is_sell_ask?() self.type == "Offer::Sell::Ask"   end
+  def is_buy_bid?()  self.type == "Offer::Buy::Bid"    end
+  def is_buy_ask?()  self.type == "Offer::Buy::Ask"    end
 
   private
 
@@ -147,29 +177,31 @@ end
 #
 # Table name: offers
 #
-#  id               :integer          not null, primary key
-#  type             :string
-#  repo_type        :string
-#  user_id          :integer
-#  parent_id        :integer
-#  position_id      :integer
-#  counter_id       :integer
-#  volume           :integer          default(1)
-#  price            :float            default(0.5)
-#  poolable         :boolean          default(TRUE)
-#  aon              :boolean          default(FALSE)
-#  status           :string
-#  expiration       :datetime
-#  maturation       :datetime
-#  maturation_range :tsrange
-#  jfields          :jsonb            not null
-#  exref            :string
-#  uuref            :string
-#  stm_bug_id       :integer
-#  stm_repo_id      :integer
-#  stm_title        :string
-#  stm_status       :string
-#  stm_labels       :string
-#  stm_xfields      :hstore           not null
-#  stm_jfields      :jsonb            not null
+#  id                 :integer          not null, primary key
+#  type               :string
+#  repo_type          :string
+#  user_id            :integer
+#  amendment_id       :integer
+#  reoffer_parent_id  :integer
+#  parent_position_id :integer
+#  volume             :integer          default(1)
+#  price              :float            default(0.5)
+#  poolable           :boolean          default(TRUE)
+#  aon                :boolean          default(FALSE)
+#  status             :string
+#  expiration         :datetime
+#  maturation_range   :tsrange
+#  xfields            :hstore           not null
+#  jfields            :jsonb            not null
+#  exref              :string
+#  uuref              :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  stm_bug_id         :integer
+#  stm_repo_id        :integer
+#  stm_title          :string
+#  stm_status         :string
+#  stm_labels         :string
+#  stm_xfields        :hstore           not null
+#  stm_jfields        :jsonb            not null
 #

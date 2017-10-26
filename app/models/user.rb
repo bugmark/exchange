@@ -15,26 +15,29 @@ class User < ApplicationRecord
   has_many :asks       , class_name: "Offer::Buy::Ask"
   has_many :sell_offers, class_name: "Offer::Sell"
 
+  has_many :positions
+
+
+
   def xtag
     "usr"
   end
 
   def contracts
-    # (bid_contracts + ask_contracts).uniq
-    []
+    positions.map(&:contract).flatten.uniq.sort_by {|c| c.id}
   end
 
   # ----- ASSOCIATIONS -----
 
-  def published_contracts
+  # def published_contracts
     # Contract.where(user_id: self.id)
-    []
-  end
+    # []
+  # end
 
-  def taken_contracts
+  # def taken_contracts
     # Contract.where(user_id: self.id)
-    []
-  end
+    # []
+  # end
 
   # ----- ACCOUNT BALANCES AND RESERVES-----
 
@@ -51,7 +54,7 @@ class User < ApplicationRecord
   end
 
   def token_available
-    balance - token_reserve
+    (balance - token_reserve).round(2)
   end
 
   # ----- SCOPES -----

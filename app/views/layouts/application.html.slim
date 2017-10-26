@@ -8,7 +8,7 @@ html[lang="en-US"]
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
     = stylesheet_link_tag 'application.css'
-    link[rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous"]
+    link[rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous"]
     link[rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css" crossorigin="anonymous"]
   body
     nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
@@ -18,8 +18,10 @@ html[lang="en-US"]
       .collapse.navbar-collapse
         - if ! content_for?(:navbar)
           ul.navbar-nav.mr-auto
-            = nav_link("Core"        , "/core/home"   )
-            = nav_link("Docfix"      , "/docfix/home" )
+            = nav_link("Repos"       , "/core/repos"       )
+            = nav_link("Bugs"        , "/core/bugs"        )
+            = nav_link("Offers"      , "/core/offers"      )
+            = nav_link("Contracts"   , "/core/contracts"   )
         - else
           = content_for(:navbar)
         = render "layouts/devise"
@@ -39,7 +41,7 @@ html[lang="en-US"]
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"]
     script[src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.5/umd/popper.min.js" crossorigin="anonymous"]
     script[src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" crossorigin="anonymous"]
-    script[src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" crossorigin="anonymous"]
+    script[src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"]
     coffee:
       $(-> $('.ttip').tooltip())
     = yield :page_js

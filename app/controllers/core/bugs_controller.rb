@@ -17,10 +17,5 @@ module Core
     def show
       @bug = Bug.find(params["id"])
     end
-
-    private
-
-
-
   end
 end

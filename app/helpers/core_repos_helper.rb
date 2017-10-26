@@ -9,12 +9,12 @@ module CoreReposHelper
 
   def core_repo_bid_new_link(repo)
     path = "/core/bids/new?type=git_hub&stm_repo_id=#{repo.id}"
-    raw "<a href='#{path}'>Bid</a>"
+    raw "<a href='#{path}'>bid</a>"
   end
 
   def core_repo_ask_new_link(repo)
     path = "/core/asks/new?type=git_hub&stm_repo_id=#{repo.id}"
-    raw "<a href='#{path}'>Ask</a>"
+    raw "<a href='#{path}'>ask</a>"
   end
 
   def core_repo_bug_link(repo)
@@ -27,7 +27,7 @@ module CoreReposHelper
   end
 
   def core_repo_offer_link(repo)
-    count = repo.offers.count
+    count = repo.offers.open.count
     if count > 0
       raw "<a class='offerlink' href='/core/offers?stm_repo_id=#{repo.id}'>#{count}</a>"
     else
@@ -43,8 +43,6 @@ module CoreReposHelper
       count
     end
   end
-
-
 
   def core_repo_destroy_link(repo)
     return nil if repo.has_contracts?

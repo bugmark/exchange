@@ -1,7 +1,15 @@
 module ApplicationHelper
 
+  def timestamp
+    Time.now.strftime("%H:%M:%S")
+  end
+
   def debug_text
     "<b>#{params["controller"]}##{params["action"]}</b>"
+  end
+
+  def nav_text(text)
+    raw "<span class='navbar-text'>#{text}</span>"
   end
 
   def nav_link(label, path, opts = {})
@@ -24,18 +32,22 @@ module ApplicationHelper
   end
 
   def ttip_content(user)
+    ask_count = user.asks.open.count
+    bid_count = user.bids.open.count
     """
-    <em>#{user.xid}</em></br>
-    #{user.asks.count} asks</br>
-    #{user.bids.count} bids</br>
-    #{user.contracts.count} contracts</br>
-    #{user.balance} tokens
+    <em>#{user.email}</em></br>
+    #{ask_count} open #{"ask".pluralize(ask_count)}</br>
+    #{bid_count} open #{"bid".pluralize(bid_count)}</br>
+    #{user.positions.count} positions</br>
+    #{user.balance} balance</br>
+    #{user.token_reserve} reserve</br>
+    #{user.token_available} available
     """
   end
 
   def trading_summary(user)
     balance  = user.token_available
-    raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.email} / #{balance} tokens</span>"
+    raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.xid} / #{balance} tokens</span>"
   end
 
 end

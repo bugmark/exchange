@@ -10,7 +10,7 @@ RSpec.describe Escrow, type: :model do
 
   def gen_escrow(opts = {}) klas.create(valid_params(opts)) end
 
-  let(:contract) { FG.create(:base_contract)  }
+  let(:contract) { FG.create(:contract)       }
   let(:klas)     { described_class            }
   subject        { klas.new(valid_params)     }
 
@@ -19,6 +19,7 @@ RSpec.describe Escrow, type: :model do
     it { should respond_to(:positions)            }
     it { should respond_to(:bid_positions)        }
     it { should respond_to(:ask_positions)        }
+    it { should respond_to(:amendment)            }
   end
 
   describe "Object Creation" do
@@ -60,13 +61,15 @@ end
 #
 # Table name: escrows
 #
-#  id          :integer          not null, primary key
-#  sequence    :integer
-#  contract_id :integer
-#  bid_value   :float            default(0.0)
-#  ask_value   :float            default(0.0)
-#  exref       :string
-#  uuref       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  type         :string
+#  sequence     :integer
+#  contract_id  :integer
+#  amendment_id :integer
+#  bid_value    :float            default(0.0)
+#  ask_value    :float            default(0.0)
+#  exref        :string
+#  uuref        :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
