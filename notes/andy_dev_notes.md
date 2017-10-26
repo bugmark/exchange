@@ -351,21 +351,27 @@ Next Actions:
 # Oct 25
 
 - [x] create /sell_offers/new?position_id=N
+- [x] fix position volume bug
+- [x] /users/:id/positions - sell
+- [x] finalize /sell_offers/new and /sell_offers/controller
 
-- [ ] finalize /sell_offers/new and /sell_offers/controller
+- [ ] fix sell offer generation
 
-- [ ] /users/:id/positions - sell
+- [ ] commit: implement refund release
+- [ ] commit: implement reoffer generation
+- [ ] commit: implement escrow capture
+- [ ] commit: suspend invalid offers
 
 - [ ] /users/:id           - resolve
+- [ ] write Commit#resolve
 
 - [ ] cross: handle release of reserves
-- [ ] cross: suspend invalid offers
 
 - [ ] add repo sync
 
-- [ ] feature specs for take and cross actions
-- [ ] write Commit#resolve
+- [ ] feature specs for sell, take and cross actions
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
+
 - [ ] /contacts      - resolve
 - [ ] /contracts/:id - resolve
 

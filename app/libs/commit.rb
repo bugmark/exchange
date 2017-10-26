@@ -35,7 +35,7 @@ class Commit
 
   def expand_position(offer, ctx, price)
     posargs = {
-      volume:     offer.volume      ,
+      volume:     offer.vol         ,
       price:      price             ,
       amendment:  ctx.amendment     ,
       escrow:     ctx.escrow        ,
@@ -47,7 +47,7 @@ class Commit
     # refund release
     # generate reoffer
     # capture escrow - update user balance
-    offer.obj.update_attribute(:status, 'crossed') #
+    offer.obj.update_attribute(:status, 'crossed')
   end
 
   def expand

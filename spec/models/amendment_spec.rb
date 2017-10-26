@@ -15,7 +15,7 @@ RSpec.describe Amendment, type: :model do
     it { should respond_to(:contract)             }
     it { should respond_to(:positions)            }
     it { should respond_to(:offers)               }
-    it { should respond_to(:escrows)              }
+    it { should respond_to(:escrow)               }
   end
 
   describe "Object Creation" do

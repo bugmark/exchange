@@ -3,6 +3,30 @@ module CoreContractsHelper
     raw "<a href='/core/contracts/#{contract.id}'>#{contract.xid}</a>"
   end
 
+  def core_amend_positions_link(amend)
+    raw amend.positions.map {|pos| core_position_link(pos)}.join(" | ")
+  end
+
+  def core_amend_bid_positions_link(amend)
+    raw amend.bid_positions.map {|pos| core_position_link(pos)}.join(" | ")
+  end
+
+  def core_amend_ask_positions_link(amend)
+    raw amend.ask_positions.map {|pos| core_position_link(pos)}.join(" | ")
+  end
+
+  def core_amend_bid_positions_stats(amend)
+    raw amend.bid_positions.map {|pos| "<i>#{pos.volume}@#{pos.price}</i>"}.join(" | ")
+  end
+
+  def core_amend_ask_positions_stats(amend)
+    raw amend.ask_positions.map {|pos| "<i>#{pos.volume}@#{pos.price}</i>"}.join(" | ")
+  end
+
+  def core_amend_escrow_stats(amend)
+    raw "<i>#{amend.escrow.bid_value}</i>/<i>#{amend.escrow.ask_value}</i>"
+  end
+
   def core_contract_bid_link(contract)
     # raw contract.bids.map {|b| bid_id_link(b)}.join(" | ")
     ""

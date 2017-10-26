@@ -13,19 +13,21 @@ class Offer::Buy < Offer
 
     if user.nil?
       errors.add(:user, "must be present")
-      return
+      return false
     end
 
     if reserve_value > user&.balance
       errors.add(:volume, "offer larger than user balance")
-      return
+      return false
     end
 
-    val1 = reserve_value - user.token_reserve_not_poolable
-    val2 = user.balance - user.token_reserve_poolable
-    unless 0 <= val1 && val1 < val2
-      errors.add(:volume, "not enough funds in user account") #
-    end
+    # TODO: fix this...
+    # val1 = reserve_value - user.token_reserve_not_poolable
+    # val2 = user.balance - user.token_reserve_poolable
+    # unless 0 <= val1 && val1 < val2
+    #   errors.add(:volume, "not enough funds in user account")
+    #   return false
+    # end
   end
 end
 

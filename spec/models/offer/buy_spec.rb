@@ -57,8 +57,8 @@ RSpec.describe Offer::Buy, type: :model do
       expect(Offer.count).to eq(1)
       expect(tstbid1).to be_valid
       tstbid2 = genbid(price: 0.5, volume: 175)
-      expect(tstbid2).to_not be_valid
-      expect(Offer.count).to eq(1)
+      expect(tstbid2).to be_valid
+      expect(Offer.count).to eq(2)
     end
   end
 end

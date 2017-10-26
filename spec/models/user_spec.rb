@@ -125,8 +125,8 @@ RSpec.describe User, type: :model do
     it "has a value with a bid and an ask" do
       genbid(poolable: false); genask(poolable: false)
       expect(Offer::Buy::Bid.count).to eq(1)
-      expect(Offer::Buy::Ask.count).to eq(0)
-      expect(usr.token_reserve_not_poolable).to eq(6.0)
+      expect(Offer::Buy::Ask.count).to eq(1)
+      expect(usr.token_reserve_not_poolable).to eq(10.0)
     end
   end
 

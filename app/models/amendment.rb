@@ -7,8 +7,19 @@ class Amendment < ApplicationRecord
 
   has_many :positions
   has_many :offers
-  has_many :escrows
+  has_one  :escrow
 
+  def bid_positions
+    positions.where(side: 'bid')
+  end
+
+  def ask_positions
+    positions.where(side: 'ask')
+  end
+
+  def short_type
+    type.split("::").last.downcase
+  end
 end
 
 # == Schema Information

@@ -5,7 +5,6 @@ table width='100%'
     td align='right'
       = link_to("All Contracts", "/core/contracts")
 
-
 .row
   .col-md-6
     b Details
@@ -13,15 +12,12 @@ table width='100%'
       tr
         td Status
         td = @contract.status
-      tr
-        td Contract Price Range
-        td TBD
   .col-md-6
-    b Actions
+    b Details
     table.table
       tr
-        td Action
-        td # contract_take_link(@contract)
+        td Contract Maturation
+        td = @contract.maturation_str
 hr
 b Amendments (#{@contract.amendments.count})
 table.table
@@ -29,13 +25,15 @@ table.table
     th ID
     th Type
     th Bid Positions
+    th Escrow Value
     th Ask Positions
   - @contract.amendments.each do |amend|
     tr
       td = amend.sequence
-      td = amend.type
-      td = amend.positions.count
-      td TBD
+      td = amend.short_type
+      td #{core_amend_bid_positions_link(amend)}<br/>#{core_amend_bid_positions_stats(amend)}
+      td = core_amend_escrow_stats(amend)
+      td #{core_amend_ask_positions_link(amend)}<br/>#{core_amend_ask_positions_stats(amend)}
 hr
 b Matching Bugs (#{@contract.match_bugs.count})
 table.table

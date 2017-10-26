@@ -16,5 +16,23 @@ module Core
       attrs = {volume: @position.volume, price: @position.price}
       @offer = OfferCmd::CreateSell.new(@position, attrs)
     end
+
+    def create
+      options  = params["offer_cmd_create_sell"]
+      position = Position.find(options["parent_position_id"])
+      @offer   = OfferCmd::CreateSell.new(position, lcl_opts(options, position))
+      if @offer.save_event.project
+        redirect_to("/core/offers/#{@offer.id}")
+      else
+        render "/core/sell_offers/new"
+      end
+    end
+
+    private
+
+    def lcl_opts(params, position)
+      opts = params.merge(position.offer.match_attrs)
+      params.permit(opts.keys)
+    end
   end
 end

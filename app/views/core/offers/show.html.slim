@@ -22,8 +22,11 @@ table width='100%'
         td Price
         td = @offer.price
   .col-md-6
-    b Actions
+    b Details
     table.table
+      tr
+        td Offer Type
+        td #{@offer.side} - #{@offer.intent}
       tr
         td Attached To
         td = core_offer_attach_link(@offer)
