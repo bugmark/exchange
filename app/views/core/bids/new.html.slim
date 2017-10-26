@@ -13,8 +13,8 @@ hr
   = f.hidden_field :type
   = f.hidden_field :user_id
   .row
-    .col-md-4 = f.number_field    :volume         , label: "Units"
-    .col-md-4 = f.number_field    :price          , label: "Price"
+    .col-md-4 = f.number_field    :volume         , label: "Units", min: 1, step: 1
+    .col-md-4 = f.number_field    :price          , label: "Price", min: 0.01, max: 0.99, step: 0.01
     .col-md-4 = f.datetime_field  :maturation     , label: "Maturation Date"
   .row
     .col-md-12
