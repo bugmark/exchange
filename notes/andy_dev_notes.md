@@ -356,17 +356,22 @@ Next Actions:
 - [x] finalize /sell_offers/new and /sell_offers/controller
 - [x] fix sell offer generation
 
-- [ ] fix escrow value
+# Oct 26
 
-- [ ] commit: implement refund release
-- [ ] commit: implement reoffer generation
-- [ ] commit: implement escrow capture
-- [ ] commit: suspend invalid offers
+- [x] turn off pooling
+- [x] turn off re-offers
+- [x] turn off label search
+- [x] fix escrow value
+- [x] commit: implement refund release
+- [x] commit: implement reoffer generation
+- [x] commit: implement escrow capture
+- [x] commit: suspend invalid offers
+- [x] cross: handle release of reserves
 
 - [ ] /users/:id   resolve
 - [ ] write Commit#resolve
 
-- [ ] cross: handle release of reserves
+- [ ] fix price generation problem
 
 - [ ] add repo sync
 

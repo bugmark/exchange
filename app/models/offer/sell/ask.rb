@@ -1,3 +1,5 @@
+require 'ext/hash'
+
 class Offer::Sell::Ask < Offer::Sell
 
   def side() "ask" end
@@ -26,7 +28,7 @@ class Offer::Sell::Ask < Offer::Sell
       user_id:          user.id                ,
       maturation_range: self.maturation_range  ,
     }
-    self.match_attrs.merge(args)
+    self.match_attrs.merge(args).without_blanks
   end
 
 end

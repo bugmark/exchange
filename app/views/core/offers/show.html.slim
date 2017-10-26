@@ -17,6 +17,12 @@ table width='100%'
       tr
         td <b>Volume</b>
         td = @offer.volume
+      tr
+        td <b>Position</b>
+        td = core_position_link(@offer.position)
+      tr
+        td <b>Resell Position</b>
+        td = core_position_link(@offer.parent_position)
   .col-md-6
     table.table
       tr
@@ -28,6 +34,9 @@ table width='100%'
       tr
         td <b>Price</b>
         td = @offer.price
+      tr
+        td <b>Value</b>
+        td = @offer.value
       tr
         td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@offer)}
 

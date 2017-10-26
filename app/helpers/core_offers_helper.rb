@@ -5,7 +5,7 @@ module CoreOffersHelper
       "RepoID" => obj.stm_repo_id   ,
       "Title"  => obj.stm_title     ,
       "Status" => obj.stm_status    ,
-      "Labels" => obj.stm_labels    ,
+      # "Labels" => obj.stm_labels    ,
     }.map {|x,y| "<u>#{x}</u>[#{y}]"}.join(" ")
     raw string
   end

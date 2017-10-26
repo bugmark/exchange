@@ -38,8 +38,10 @@ module ApplicationHelper
     <em>#{user.email}</em></br>
     #{ask_count} open #{"ask".pluralize(ask_count)}</br>
     #{bid_count} open #{"bid".pluralize(bid_count)}</br>
-    #{user.contracts.count} contracts</br>
-    #{user.balance} tokens
+    #{user.positions.count} positions</br>
+    #{user.balance} balance</br>
+    #{user.token_reserve} reserve</br>
+    #{user.token_available} available
     """
   end
 

@@ -21,7 +21,7 @@ class Position < ApplicationRecord
   end
 
   def value
-    self.price + self.volume
+    self.price * self.volume
   end
 
   private

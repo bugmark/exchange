@@ -41,5 +41,10 @@ opts = [
 ]
 
 opts.each do |opt|
-  FG.create(:buy_ask, opt)
+  base = {
+    poolable:   false          ,
+    aon:        false          ,
+    stm_status: 'closed'
+  }
+  FG.create(:buy_ask, opt.merge(base))
 end

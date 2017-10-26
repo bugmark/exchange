@@ -12,6 +12,7 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
       th Status
       th Volume
       th Price
+      th Attach
       th Action
   tbody
     - @offers.each do |offer|
@@ -21,6 +22,7 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
         td = offer.status
         td = offer.volume
         td = offer.price
+        td = core_offer_attach_link(offer)
         td
           nobr
             = core_offer_actions(offer)

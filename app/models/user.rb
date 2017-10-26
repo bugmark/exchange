@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def token_available
-    balance - token_reserve
+    (balance - token_reserve).round(2)
   end
 
   # ----- SCOPES -----

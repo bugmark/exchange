@@ -6,8 +6,8 @@ table.table style='margin-bottom: 0; padding-bottom: 0'
       | #{@user.xid} / #{@user.email}<br/>
       small #{link_to "Settings", edit_user_registration_path} | #{link_to "Log Out", destroy_user_session_path}
 
-div style='background: lightgrey;'
-  b Account Balance: #{@user.balance} Tokens (Available: #{@user.token_available} / Reserve: #{@user.token_reserve})
+div.text-center style='background: lightgrey;'
+  b Account Balance: #{@user.balance} Tokens (Reserve: #{@user.token_reserve} => Available: #{@user.token_available})
 
 div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
   b Positions (#{@user.positions.count}):
@@ -15,12 +15,14 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
     - if @user.positions.count > 0
       tr
         th ID
+        th Value
         th Matures
         th Status
         th Action
     - @user.positions.each do |position|
       tr
         td = core_position_link(position)
+        td = position.value
         td = position.contract.maturation_str
         td = position.contract.status
         td = core_position_actions(position)
@@ -31,14 +33,14 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
     - if @user.bids.count > 0
       tr
         th ID
-        th Tokens
+        th Value
         th Matures
         th Status
         th Action
     - @user.bids.each do |bid|
       tr
         td = core_offer_id_link(bid)
-        td = bid.price
+        td = bid.value
         td = bid.maturation_str
         td = bid.status
         td = core_offer_actions(bid)
@@ -49,14 +51,14 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
     - if @user.asks.count > 0
       tr
         th ID
-        th Tokens
+        th Value
         th Matures
         th Status
         th Action
     - @user.asks.each do |ask|
       tr
         td = core_offer_id_link(ask)
-        td = ask.price
+        td = ask.value
         td = ask.maturation_str
         td = ask.status
         td = core_offer_actions(ask)

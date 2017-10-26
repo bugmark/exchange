@@ -1,3 +1,5 @@
+require 'ext/hash'
+
 class Offer::Buy::Ask < Offer::Buy
 
   before_validation :default_values
@@ -33,7 +35,7 @@ class Offer::Buy::Ask < Offer::Buy
       maturation_range: self.maturation_range  ,
       price:            1.0 - self.price
     }
-    self.match_attrs.merge(args)
+    self.match_attrs.merge(args).without_blanks
   end
 
   private

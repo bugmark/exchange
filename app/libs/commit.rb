@@ -42,11 +42,13 @@ class Commit
       offer:      offer.obj         ,
       user:       offer.obj.user    ,
     }
-    Position.create(posargs)
+    lcl_pos = Position.create(posargs)
     # TODO
-    # refund release
-    # generate reoffer
-    # capture escrow - update user balance
+    # [x]refund release - happens when offer status is changed
+    # [x]generate reoffer - not going to do that now
+    # [x]capture escrow - update user balance
+    new_balance = offer.obj.user.balance - lcl_pos.value
+    offer.obj.user.update_attribute(:balance, new_balance)
     offer.obj.update_attribute(:status, 'crossed')
   end
 
@@ -56,6 +58,7 @@ class Commit
     # find or generate contract
     ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
     ctx.selected  = ctx.matching.sort_by {|c| c.escrows.count}.first
+    # binding.pry
     ctx.contract  = @contract = ctx.selected || begin
       date = [ctx.max_start, ctx.min_end].avg_time
       attr = bundle.offer.obj.match_attrs.merge(maturation: date)
@@ -66,7 +69,7 @@ class Commit
     gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
 
     # calculate price for offer and counter
-    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.max
+    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min
     ctx.offer_price   = 1.0 - ctx.counter_price
 
     # generate artifacts
@@ -87,7 +90,7 @@ class Commit
     gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)
 
     # calculate price for offer and counters
-    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.max
+    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min
     ctx.offer_price   = 1.0 - ctx.counter_price
 
     # generate artifacts
@@ -108,7 +111,7 @@ class Commit
     gen_connectors(ctx, Amendment::Reduce, Escrow::Reduce)
 
     # calculate price for offer and counter
-    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.max
+    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min
     ctx.offer_price   = 1.0 - ctx.counter_price
 
     # generate artifacts

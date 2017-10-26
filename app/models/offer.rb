@@ -4,14 +4,14 @@ class Offer < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user    , optional: true
-  belongs_to :bug     , optional: true  , foreign_key: "stm_bug_id"
-  belongs_to :repo    , optional: true  , foreign_key: "stm_repo_id"
-  belongs_to :position, optional: true  , foreign_key: "buy_offer_id"
-  belongs_to :parent_position, optional: true, class_name: "Position", :foreign_key => :parent_position_id
-  has_one    :reoffer_parent                 , class_name: "Offer"   , :foreign_key => :reoffer_parent_id
-  belongs_to :reoffer_child  , optional: true, class_name: "Offer"   , :foreign_key => :reoffer_parent_id
-  belongs_to :transfer       , optional: true
+  belongs_to :user            , optional: true
+  belongs_to :bug             , optional: true , foreign_key: "stm_bug_id"
+  belongs_to :repo            , optional: true , foreign_key: "stm_repo_id"
+  has_one    :position                         , foreign_key: "offer_id"
+  belongs_to :parent_position , optional: true , foreign_key: "parent_position_id" , class_name: "Position"
+  has_one    :reoffer_parent                   , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
+  belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
+  belongs_to :transfer        , optional: true
 
   VALID_STATUS = %w(open suspended crossed expired retracted)
   validates :status, inclusion:    {in: VALID_STATUS }

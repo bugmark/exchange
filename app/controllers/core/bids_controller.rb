@@ -26,7 +26,7 @@ module Core
 
     def create
       opts = params["offer_cmd_create_buy"]
-      @bid = OfferCmd::CreateBuy.new(:bid, valid_params(opts))
+      @bid = OfferCmd::CreateBuy.new(:bid, new_opts.merge(valid_params(opts)))
       if @bid.save_event.project
         redirect_to("/core/offers/#{@bid.id}")
       else
@@ -41,16 +41,16 @@ module Core
       params.permit(fields)
     end
 
-    def new_opts(params)
+    def new_opts(params = {})
       opts = {
         price:       0.50                     ,
         poolable:    false                    ,
         aon:         false                    ,
-        volume:      5                        ,
+        volume:      10                       ,
         user_id:     current_user.id          ,
         status:      "open"                   ,
         stm_status:  "closed"                 ,
-        maturation: Time.now + 3.minutes ,
+        maturation: Time.now + 3.minutes      ,
       }
       key = "stm_bug_id" if params["stm_bug_id"]
       key = "stm_repo_id" if params["stm_repo_id"]
