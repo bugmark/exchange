@@ -21,6 +21,9 @@ table width='100%'
       tr
         td <b>Total Value</b>
         td = @contract.total_value
+      tr
+        td <b>Action</b>
+        td = core_contract_actions(@contract)
 hr
 b Amendments (#{@contract.amendments.count})
 table.table

@@ -58,7 +58,7 @@ module Core
     def resolve
       contract_id = params["id"]
       ContractCmd::Resolve.new(contract_id).save_event.project
-      redirect_to "/rewards"
+      redirect_to "/core/contracts"
     end
 
     def graph

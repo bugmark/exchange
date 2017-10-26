@@ -19,12 +19,11 @@ RSpec.describe User, type: :model do
   subject { klas.new(valid_params) }
 
   describe "Associations" do
-    it { should respond_to(:buy_offers) }
-    it { should respond_to(:bids) }
-    it { should respond_to(:asks) }
+    it { should respond_to(:buy_offers)  }
+    it { should respond_to(:bids)        }
+    it { should respond_to(:asks)        }
     it { should respond_to(:sell_offers) }
-    it { should respond_to(:published_contracts) }
-    it { should respond_to(:taken_contracts) }
+    it { should respond_to(:contracts)   }
   end
 
   describe "Object Creation" do

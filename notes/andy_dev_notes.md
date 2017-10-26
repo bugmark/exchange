@@ -367,27 +367,30 @@ Next Actions:
 - [x] commit: implement escrow capture
 - [x] commit: suspend invalid offers
 - [x] cross: handle release of reserves
+- [x] fix price generation problem
+- [x] remove unused statement fields
+- [x] /users/:id   resolve
+- [x] /contacts      - resolve
+- [x] /contracts/:id - resolve
 
-- [ ] /users/:id   resolve
-- [ ] write Commit#resolve
+- [ ] laptop dev env
 
-- [ ] fix price generation problem
-
+- [ ] reset the data from the UI
+- [ ] reset the contract maturation date
 - [ ] add repo sync
 
-- [ ] remove unused statement fields
-
-- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
-
-- [ ] /contacts      - resolve
-- [ ] /contracts/:id - resolve
 
 # TBD
 
+- [ ] get sell/cross working
+
 - [ ] implement all-or-none
 
+- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 - [ ] feature specs for sell, take and cross actions
 - [ ] cross: generate contract-graph
+
+- [ ] write Commit#resolve
 
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve

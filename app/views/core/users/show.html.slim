@@ -10,6 +10,28 @@ div.text-center style='background: lightgrey;'
   b Account Balance: #{@user.balance} Tokens (Reserve: #{@user.token_reserve} => Available: #{@user.token_available})
 
 div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
+  b Contracts (#{@user.contracts.count}):
+  table.table
+    - if @user.contracts.count > 0
+      tr
+        th ID
+        th Amendments
+        th Value
+        th Matures
+        th Status
+        th Awardee
+        th Action
+    - @user.contracts.each do |contract|
+      tr
+        td = core_contract_id_link(contract)
+        td = contract.amendments.count
+        td = contract.total_value
+        td = core_contract_mature_date(contract)
+        td = core_contract_status(contract)
+        td = contract.awardee
+        td = core_contract_actions(contract)
+
+div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
   b Positions (#{@user.positions.count}):
   table.table
     - if @user.positions.count > 0
@@ -27,7 +49,7 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
         td = position.contract.status
         td = core_position_actions(position)
 
-div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
+div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
   b Bids (#{@user.bids.count}):
   table.table
     - if @user.bids.count > 0
@@ -45,7 +67,7 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
         td = bid.status
         td = core_offer_actions(bid)
 
-div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
+div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
   b Asks (#{@user.asks.count}):
   table.table
     - if @user.asks.count > 0

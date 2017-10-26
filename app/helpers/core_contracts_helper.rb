@@ -51,22 +51,10 @@ module CoreContractsHelper
   def core_contract_status(contract)
     case contract.status
       when "open"     then raw "<i class='fa fa-unlock'></i> open"
-      when "matured"  then raw "<i class='fa fa-lock'></i> taken"
-      when "resolved" then raw "<i class='fa fa-check'></i> awarded"
+      when "matured"  then raw "<i class='fa fa-lock'></i> matured"
+      when "resolved" then raw "<i class='fa fa-check'></i> resolved"
         else "UNKNOWN_CONTRACT_STATE"
     end
-  end
-
-  def core_contract_resolve_link(contract)
-    return nil if contract.resolved?
-    return nil unless contract.matured?
-    link_to "resolve", {:action => :resolve, :id => contract.id}
-  end
-
-  def core_contract_actions(contract)
-    resv  = core_contract_resolve_link(contract)
-    return "NA" unless [resv].any?
-    raw [resv].select(&:present?).join(" | ")
   end
 
   def core_contract_awardee(contract)
@@ -79,4 +67,19 @@ module CoreContractsHelper
     end
     raw "<i class='fa fa-#{icon}'></i> #{lbl}"
   end
+
+  # ----- ACTIONS -----
+
+  def core_contract_resolve_link(contract)
+    return nil if contract.resolved?
+    return nil unless contract.matured?
+    link_to "resolve", "/core/contracts/#{contract.id}/resolve"
+  end
+
+  def core_contract_actions(contract)
+    resv  = core_contract_resolve_link(contract)
+    return "NA" unless [resv].any?
+    raw [resv].select(&:present?).join(" | ")
+  end
+
 end
