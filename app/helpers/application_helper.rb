@@ -1,7 +1,15 @@
 module ApplicationHelper
 
+  def timestamp
+    Time.now.strftime("%H:%M:%S")
+  end
+
   def debug_text
     "<b>#{params["controller"]}##{params["action"]}</b>"
+  end
+
+  def nav_text(text)
+    raw "<span class='navbar-text'>#{text}</span>"
   end
 
   def nav_link(label, path, opts = {})
@@ -25,7 +33,7 @@ module ApplicationHelper
 
   def ttip_content(user)
     """
-    <em>#{user.xid}</em></br>
+    <em>#{user.email}</em></br>
     #{user.asks.count} asks</br>
     #{user.bids.count} bids</br>
     #{user.contracts.count} contracts</br>
@@ -35,7 +43,7 @@ module ApplicationHelper
 
   def trading_summary(user)
     balance  = user.token_available
-    raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.email} / #{balance} tokens</span>"
+    raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.xid} / #{balance} tokens</span>"
   end
 
 end

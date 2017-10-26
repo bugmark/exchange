@@ -17,7 +17,7 @@ module OfferCmd
     end
 
     def transact_before_project
-      offer.status = "open"
+      offer.status = 'open'
     end
 
     private
@@ -32,7 +32,7 @@ module OfferCmd
 
     def default_values
       {
-        status: "open"
+        status: 'open'
       }
     end
   end

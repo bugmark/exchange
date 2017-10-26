@@ -45,7 +45,7 @@ module Core
       opts = {
         price:      0.50                      ,
         volume:     5                         ,
-        status:     "open"                    ,
+        status:     'open'                  ,
         stm_status: "closed"                  ,
         maturation: Time.now + 3.minutes ,
         user_id: current_user.id

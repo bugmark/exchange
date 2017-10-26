@@ -13,7 +13,8 @@ class Offer < ApplicationRecord
   belongs_to :reoffer_child  , optional: true, class_name: "Offer"   , :foreign_key => :reoffer_parent_id
   belongs_to :transfer       , optional: true
 
-  validates :status, inclusion:    {in: %w(open suspended crossed expired retracted)}
+  VALID_STATUS = %w(open suspended crossed expired retracted)
+  validates :status, inclusion:    {in: VALID_STATUS }
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
@@ -34,8 +35,10 @@ class Offer < ApplicationRecord
     def with_status(status)    where(status: status)      end
     def without_status(status) where.not(status: status)  end
 
-    def open()     with_status('open')    end
-    def not_open() without_status('open') end
+    VALID_STATUS.each do |status|
+      define_method(status.to_sym)          { with_status(status)    }
+      define_method("not_#{status}".to_sym) { without_status(status) }
+    end
 
     def assigned
       where("id IN (SELECT offer_id FROM positions)")

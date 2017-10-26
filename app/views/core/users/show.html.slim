@@ -1,8 +1,10 @@
-table.table
+table.table style='margin-bottom: 0; padding-bottom: 0'
   tr
     td
       h3 Trading Activity
-    td align='right' #{@user.xid} / #{@user.email}
+    td align='right'
+      | #{@user.xid} / #{@user.email}<br/>
+      small #{link_to "Settings", edit_user_registration_path} | #{link_to "Log Out", destroy_user_session_path}
 
 div style='background: lightgrey;'
   b Account Balance: #{@user.balance} Tokens (Available: #{@user.token_available} / Reserve: #{@user.token_reserve})

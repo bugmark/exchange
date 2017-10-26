@@ -58,12 +58,12 @@ RSpec.describe OfferCmd::Retract do
     it 'gets the right object count' do
       hydrate(bid)
       expect(Offer.count).to eq(1)
-      expect(Offer.with_status('open').count).to eq(1)
-      expect(Offer.with_status('retracted').count).to eq(0)
+      expect(Offer.open.count).to eq(1)
+      expect(Offer.retracted.count).to eq(0)
       subject.project
       expect(Offer.count).to eq(1)
-      expect(Offer.with_status('open').count).to eq(0)
-      expect(Offer.with_status('retracted').count).to eq(1)
+      expect(Offer.open.count).to eq(0)
+      expect(Offer.retracted.count).to eq(1)
     end
   end
 

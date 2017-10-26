@@ -8,7 +8,6 @@ module Core
     # stm_bug_id (optional)
     def index
       @bug = @repo = nil
-      @timestamp = Time.now.strftime("%H:%M:%S")
       base_scope = Contract.all
       case
         when stm_bug_id = params["stm_bug_id"]&.to_i

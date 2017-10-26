@@ -354,8 +354,7 @@ Next Actions:
 - [x] fix position volume bug
 - [x] /users/:id/positions - sell
 - [x] finalize /sell_offers/new and /sell_offers/controller
-
-- [ ] fix sell offer generation
+- [x] fix sell offer generation
 
 - [ ] commit: implement refund release
 - [ ] commit: implement reoffer generation
@@ -369,7 +368,6 @@ Next Actions:
 
 - [ ] add repo sync
 
-- [ ] feature specs for sell, take and cross actions
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 
 - [ ] /contacts      - resolve
@@ -377,6 +375,7 @@ Next Actions:
 
 # TBD
 
+- [ ] feature specs for sell, take and cross actions
 - [ ] cross: generate contract-graph
 
 - [ ] add cron process for contract cross

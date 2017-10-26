@@ -5,7 +5,7 @@ RSpec.describe Offer::Buy::Bid, type: :model do
     {
       user_id: user.id                                      ,
       maturation_range: Time.now-1.week..Time.now+1.week    ,
-      status:  'open'                                       ,
+      status:  'open'                                     ,
     }.merge(extras)
   end
 
