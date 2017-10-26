@@ -72,6 +72,9 @@ class Commit
     # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
+
+    # update escrow value
+    ctx.escrow.update_attributes(bid_value: ctx.escrow.bid_values, ask_value: ctx.escrow.ask_values)
   end
 
   def transfer
@@ -90,6 +93,9 @@ class Commit
     # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
+
+    # update escrow value
+    ctx.escrow.update_attributes(bid_value: ctx.escrow.bid_values, ask_value: ctx.escrow.ask_values)
   end
 
   def reduce
@@ -108,5 +114,8 @@ class Commit
     # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
+
+    # update escrow value
+    ctx.escrow.update_attributes(bid_value: ctx.escrow.bid_values, ask_value: ctx.escrow.ask_values)
   end
 end

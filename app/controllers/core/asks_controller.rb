@@ -44,8 +44,10 @@ module Core
     def new_opts(params)
       opts = {
         price:      0.50                      ,
+        poolable:   false                     ,
+        aon:        false                     ,
         volume:     5                         ,
-        status:     'open'                  ,
+        status:     'open'                    ,
         stm_status: "closed"                  ,
         maturation: Time.now + 3.minutes ,
         user_id: current_user.id

@@ -10,6 +10,15 @@ class Escrow < ApplicationRecord
   has_many   :bid_positions , -> { where(side: 'bid') }, class_name: "Position"
   has_many   :ask_positions , -> { where(side: 'ask') }, class_name: "Position"
 
+  # ----- INSTANCE METHODS -----
+
+  def bid_values
+    bid_positions.map(&:value).sum
+  end
+
+  def ask_values
+    ask_positions.map(&:value).sum
+  end
 end
 
 # == Schema Information

@@ -5,17 +5,12 @@ class Amendment < ApplicationRecord
 
   belongs_to :contract, :optional => true
 
-  has_many :positions
   has_many :offers
   has_one  :escrow
 
-  def bid_positions
-    positions.where(side: 'bid')
-  end
-
-  def ask_positions
-    positions.where(side: 'ask')
-  end
+  has_many :positions
+  has_many :bid_positions , -> { where(side: 'bid')}, class_name: "Position"
+  has_many :ask_positions , -> { where(side: 'ask')}, class_name: "Position"
 
   def short_type
     type.split("::").last.downcase

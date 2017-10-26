@@ -125,7 +125,7 @@ class Contract < ApplicationRecord
   end
 
   def total_value
-    escrows.pluck(:bid_value).sum + escrows.pluck(:ask_value).sum
+    (escrows.pluck(:bid_value).sum + escrows.pluck(:ask_value).sum).round(2)
   end
 
   def value

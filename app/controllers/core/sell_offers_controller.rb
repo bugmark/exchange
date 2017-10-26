@@ -32,7 +32,11 @@ module Core
     private
 
     def lcl_opts(params, position)
-      opts = params.merge(position.offer.match_attrs)
+      defaults = {
+        poolable: false ,
+        aon:      false
+      }
+      opts = params.merge(position.offer.match_attrs).merge(defaults)
       params.permit(opts.keys)
     end
   end

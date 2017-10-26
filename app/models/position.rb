@@ -4,24 +4,25 @@ class Position < ApplicationRecord
 
   before_validation :default_values
 
-  def xtag
-    "pos"
-  end
-
   belongs_to :offer       , optional:   true
-  has_many   :sell_offers , class_name: "Offer"                   , :foreign_key => :parent_position_id
-  belongs_to :user                                   , optional: true
-  belongs_to :escrow                                 , optional: true
+  has_many   :sell_offers , class_name: "Offer"   , :foreign_key => :parent_position_id
+  belongs_to :user                                , optional: true
+  belongs_to :escrow                              , optional: true
   belongs_to :parent      , class_name: "Position", optional: true
   has_many   :children    , class_name: "Position"
   has_one    :contract    , :through => :escrow
 
   belongs_to :amendment, optional: true
 
-  # belongs_to :child_transfer , class_name: "Transfer"
-  # belongs_to :parent_transfer, class_name: "Transfer"
-
   # ----- INSTANCE METHODS -----
+
+  def xtag
+    "pos"
+  end
+
+  def value
+    self.price + self.volume
+  end
 
   private
 
