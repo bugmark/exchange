@@ -372,13 +372,11 @@ Next Actions:
 - [x] /users/:id   resolve
 - [x] /contacts      - resolve
 - [x] /contracts/:id - resolve
-
-- [ ] laptop dev env
+- [x] laptop dev env
 
 - [ ] reset the data from the UI
 - [ ] reset the contract maturation date
 - [ ] add repo sync
-
 
 # TBD
 
