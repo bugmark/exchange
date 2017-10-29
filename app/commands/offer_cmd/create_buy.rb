@@ -7,7 +7,7 @@ module OfferCmd
     attr_vdelegate       :maturation, :offer
 
     def initialize(typ, offer_args)
-      @typ   = typ
+      @typ   = typ                          # bid or ask
       @offer = klas.new(default_values.merge(offer_args))
       @user  = User.find(offer.user_id)
     end

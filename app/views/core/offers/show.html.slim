@@ -23,6 +23,12 @@ table width='100%'
       tr
         td <b>Resell Position</b>
         td = core_position_link(@offer.parent_position)
+      tr
+        td <b>Expiration</b>
+        td = @offer.expiration&.strftime("%Y-%m-%d %H:%M")
+      tr
+        td <b>Maturation</b>
+        td = @offer.maturation_range
   .col-md-6
     table.table
       tr

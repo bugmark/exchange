@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'static/home'
   get 'static/help'
   get 'static/test'
+  get 'static/chart'
+  get 'static/data'
 
   namespace :core do
 
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
     resources :contracts do
       get 'resolve', :on => :member
       get 'graph'  , :on => :member
+      get 'chart'  , :on => :member
     end
 
     resources :positions

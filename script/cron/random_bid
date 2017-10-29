@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require './config/environment'
+
+users               = [User.first, User.second, User.third]
+user1, user2, user3 = users
+
+users.each {|user| user.update_attribute(:balance, 500) if user.balance < 100}
+
+bug_ids = Bug.all.pluck(:id)[0..2]
+prices  = (40..60).to_a.map {|price| price / 100.0}
+volumes = (1..10).to_a
+opts    = %w(bid ask)
+
+5.times do
+
+offers = users.map do |user|
+  opt    = opts.shuffle.first
+  price  = prices.shuffle.first
+  volume = volumes.shuffle.first
+  bug_id = bug_ids.shuffle.first
+
+  offer = OfferCmd::CreateBuy.new(opt, {user_id: user.id, price: price, volume: volume, stm_bug_id: bug_id}).save_event.project
+  offer.offer
+end
+
+# offers.each do |offer|
+#   ContractCmd::Cross.new(offer, :expand)
+# end
+
+end

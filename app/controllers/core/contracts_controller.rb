@@ -3,7 +3,7 @@ module Core
 
   layout 'core'
 
-    before_action :authenticate_user!, :except => [:index, :show, :resolve]
+    before_action :authenticate_user!, :except => [:index, :show, :resolve, :chart]
 
     # stm_bug_id (optional)
     def index
@@ -78,6 +78,23 @@ module Core
           send_data(File.read("/tmp/contract#{@contract_id}.png"), disposition: 'inline', type: 'image/png', filename: 'img.png')
         end
       end
+    end
+
+    def chart
+      @contract_id = params["id"]
+      @contract = Contract.find @contract_id
+      time = Time.now
+      list = ["Date,Open,High,Low,Close,Volume"] + @contract.escrows.map do |escrow|
+        time = time + 10.minutes
+        [ time.strftime("%Y-%m-%dT%H:%M"),
+          0,
+          1,
+          0,
+          escrow.ask_positions.first.price,
+          0
+        ].join(",")
+      end
+      render plain: list.join("\n")
     end
 
     private
