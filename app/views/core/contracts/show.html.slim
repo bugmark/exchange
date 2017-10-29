@@ -42,7 +42,7 @@ table.table
       td #{core_amend_ask_positions_link(amend)}<br/>#{core_amend_ask_positions_stats(amend)}
 hr
 b Prices
-= render :partial => 'chart', :locals => {:cid => @contract.id}
+img src="/img/testgraph.png"
 hr
 b Matching Bugs (#{@contract.match_bugs.count})
 table.table

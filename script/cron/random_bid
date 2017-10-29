@@ -7,8 +7,9 @@ user1, user2, user3 = users
 
 users.each {|user| user.update_attribute(:balance, 500) if user.balance < 100}
 
-bug_ids = Bug.all.pluck(:id)[0..2]
-prices  = (40..60).to_a.map {|price| price / 100.0}
+bug_ids = Bug.all.pluck(:id)[0..1]
+# prices  = (40..60).to_a.map {|price| price / 100.0}
+prices  = [0.40, 0.45, 0.50, 0.55, 0.60]
 volumes = (1..10).to_a
 opts    = %w(bid ask)
 
