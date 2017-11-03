@@ -1,5 +1,11 @@
 - content_for :navbar do
-  ul.navbar-nav.mr-auto
+  - if Rails.env.production?
+    ul.navbar-nav.mr-auto
+      = nav_link("Demo"        , "/core/home"        )
+      = nav_link("Repos"       , "/core/repos"       )
+      = nav_link("Bugs"        , "/core/bugs"        )
+      = nav_link("Offers"      , "/core/offers"      )
+      = nav_link("Contracts"   , "/core/contracts"   )
 
 - content_for :devise do
   | []

@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   get  'static/home'
-  get  'static/home2'
   get  'static/help'
   get  'static/test'
   get  'static/chart'
