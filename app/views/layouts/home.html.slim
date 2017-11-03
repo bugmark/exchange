@@ -1,0 +1,10 @@
+- content_for :navbar do
+  ul.navbar-nav.mr-auto
+
+- content_for :devise do
+  | []
+
+- content_for :body do
+  = yield
+
+= render template: "layouts/application"

@@ -5,7 +5,8 @@ html[lang="en-US"]
     = csrf_meta_tags
     link[href="/img/bugfav.ico" rel="icon" type="image/x-icon"]
     meta[name="google-site-verification" content="UUWuW0CZrLjsEb0HUaB_7IMJqyqNyKLhaSWvQX_Sq6U"]
-    meta[http-equiv="refresh" content="15"]
+    - if Rails.env.production?
+      meta[http-equiv="refresh" content="15"]
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
     = stylesheet_link_tag 'application.css'
@@ -19,13 +20,17 @@ html[lang="en-US"]
       .collapse.navbar-collapse
         - if ! content_for?(:navbar)
           ul.navbar-nav.mr-auto
+            = nav_link("Demo"        , "/core/home"        )
             = nav_link("Repos"       , "/core/repos"       )
             = nav_link("Bugs"        , "/core/bugs"        )
             = nav_link("Offers"      , "/core/offers"      )
             = nav_link("Contracts"   , "/core/contracts"   )
         - else
           = content_for(:navbar)
-        = render "layouts/devise"
+        - if ! content_for?(:devise)
+          = render "layouts/devise"
+        - else
+          = content_for(:devise)
     .container-fluid[style="margin-top: 65px;"]
       = content_for?(:body) ? content_for(:body) : yield
       hr

@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'static/home'
-  get 'static/help'
-  get 'static/test'
-  get 'static/chart'
-  get 'static/data'
+  get  'static/home'
+  get  'static/home2'
+  get  'static/help'
+  get  'static/test'
+  get  'static/chart'
+  get  'static/data'
+  get  'static/mailthanks'
+  post 'static/mailpost'
+
+  get 'core', to: redirect("/core/home")
+  get 'demo', to: redirect("/core/home")
 
   namespace :core do
 
@@ -32,7 +38,6 @@ Rails.application.routes.draw do
     end
 
     resources :positions
-
     resources :users
   end
 

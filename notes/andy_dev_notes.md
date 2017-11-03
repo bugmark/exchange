@@ -374,6 +374,8 @@ Next Actions:
 - [x] /contracts/:id - resolve
 - [x] laptop dev env
 
+- [ ] add a signups page
+
 - [ ] reset the data from the UI
 - [ ] reset the contract maturation date
 - [ ] add repo sync
