@@ -1,18 +1,18 @@
 require 'ext/hash'
 
-class Offer::Buy::Bid < Offer::Buy
+class Offer::Buy::Unfixed < Offer::Buy
 
   before_validation :default_values
 
-  def side() "bid" end
+  def side() "unfixed" end
   alias_method :xtag, :side
 
   def qualified_counteroffers(cross_type)
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type
-      when :expand   then base.is_buy_ask.align_complement(self)
-      when :transfer then base.is_sell_bid.align_equal(self)
+      when :expand   then base.is_buy_fixed.align_complement(self)
+      when :transfer then base.is_sell_unfixed.align_equal(self)
       else Offer.none
     end
   end

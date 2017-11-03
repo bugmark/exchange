@@ -9,12 +9,12 @@ RSpec.describe Offer::Buy, type: :model do
     }
   end
 
-  def genbid(args = {})
-    FG.create(:buy_bid, valid_params.merge(args)).offer
+  def gen_unfixed(args = {})
+    FG.create(:buy_unfixed, valid_params.merge(args)).offer
   end
 
-  def genask(args = {})
-    FG.create(:buy_ask, valid_params.merge(args)).offer
+  def gen_fixed(args = {})
+    FG.create(:buy_fixed, valid_params.merge(args)).offer
   end
 
   let(:usr)    { FG.create(:user, balance: 100.0).user }
@@ -33,12 +33,12 @@ RSpec.describe Offer::Buy, type: :model do
 
   describe "Excess Volume", USE_VCR do
     it 'handles the base case' do
-      tstbid = genbid
+      tstbid = gen_unfixed
       expect(tstbid).to be_valid
     end
 
     it 'detects an invalid balance' do
-      tstbid = genbid(volume: 10000)
+      tstbid = gen_unfixed(volume: 10000)
       expect(tstbid).to_not be_valid
       msgs = tstbid.errors.messages
       expect(msgs.keys).to include(:volume)
@@ -48,15 +48,15 @@ RSpec.describe Offer::Buy, type: :model do
   describe "Invalid Reserve", USE_VCR do
     it "handles the base case" do
       expect(Offer.count).to eq(0)
-      tstbid1 = genbid(price: 0.5, volume: 175)
+      tstbid1 = gen_unfixed(price: 0.5, volume: 175)
       expect(tstbid1).to be_valid
     end
 
     it "handles the overflow case" do
-      tstbid1 = genbid(price: 0.5, volume: 175)
+      tstbid1 = gen_unfixed(price: 0.5, volume: 175)
       expect(Offer.count).to eq(1)
       expect(tstbid1).to be_valid
-      tstbid2 = genbid(price: 0.5, volume: 175)
+      tstbid2 = gen_unfixed(price: 0.5, volume: 175)
       expect(tstbid2).to be_valid
       expect(Offer.count).to eq(2)
     end

@@ -2,4 +2,4 @@
 
 require "./config/environment"
 
-Bid.destroy_all
+Offer::Buy::Fixed.destroy_all

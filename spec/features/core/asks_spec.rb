@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Asks" do
 
   let(:user)     { FG.create(:user).user              }
-  let(:ask)      { FG.create(:buy_ask).offer          }
+  let(:ask)      { FG.create(:buy_fixed).offer          }
 
   it "renders index" do
     visit "/core/asks"

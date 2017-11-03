@@ -14,11 +14,11 @@ script/data/user_load
 echo Load GH data
 script/data/gh_load
 
-echo Load Bids
-bundle exec script/data/bid_load
+echo Load Offers to BuyUnfixed
+bundle exec script/data/unfixed_load
 
-echo Load Asks
-bundle exec script/data/ask_load
+echo Load Offers to BuyFixed
+bundle exec script/data/fixed_load
 
 echo Load Contracts
 bundle exec script/data/contract_load

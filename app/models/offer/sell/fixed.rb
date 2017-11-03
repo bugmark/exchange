@@ -1,16 +1,16 @@
 require 'ext/hash'
 
-class Offer::Sell::Bid < Offer::Sell
+class Offer::Sell::Fixed < Offer::Sell
 
-  def side() "bid" end
+  def side() "fixed" end
   alias_method :xtag, :side
 
   def qualified_counteroffers(cross_type)
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type
-      when :transfer then base.is_buy_bid.align_equal(self)
-      when :reduce   then base.is_sell_ask.align_complement(self)
+      when :transfer then base.is_buy_fixed.align_equal(self)
+      when :reduce   then base.is_sell_unfixed.align_complement(self)
       else Offer.none
     end
   end
@@ -21,7 +21,7 @@ class Offer::Sell::Bid < Offer::Sell
   # counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user))
   # cross   = ContractCmd::Cross.new(counter, offer.cross_operation)
 
-  def counter_type()    :bid      end
+  def counter_type()    :unfixed  end
   def cross_operation() :transfer end
   def counter_args(user = self.user)
     args = {

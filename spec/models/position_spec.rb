@@ -12,7 +12,7 @@ RSpec.describe Position, type: :model do
   subject       { klas.new(valid_params)                       }
 
   let(:user)    { FG.create(:user).user                        }
-  let(:boff)    { FG.create(:buy_bid, user_id: user.id).offer  }
+  let(:boff)    { FG.create(:buy_unfixed, user_id: user.id).offer  }
   let(:pos1)    { klas.new(valid_params)                       }
 
   describe "Associations", USE_VCR do

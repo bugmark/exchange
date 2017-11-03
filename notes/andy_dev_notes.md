@@ -377,11 +377,13 @@ Next Actions:
 
 # Nov 03
 
+- [ ] renaming: 
 - [ ] get sell/cross working
+- [ ] write Commit#resolve
+
 - [ ] implement all-or-none
 - [ ] reset the data from the UI
 - [ ] reset the contract maturation date
-- [ ] write Commit#resolve
 
 # TBD
 

@@ -9,7 +9,7 @@ RSpec.describe Offer, type: :model do
     }.merge(extras)
   end
 
-  def offer3(extras) Offer::Buy::Bid.new(valid_params(extras)) end
+  def offer3(extras) Offer::Buy::Unfixed.new(valid_params(extras)) end
   let(:offer2) { klas.new(valid_params)  }
   let(:user)   { FG.create(:user)        }
   let(:klas)   { described_class         }
@@ -108,10 +108,10 @@ RSpec.describe Offer, type: :model do
 
   describe ".is_bid" do
     before(:each) do
-      Offer::Buy::Bid.create(valid_params)
-      Offer::Buy::Ask.create(valid_params)
-      Offer::Sell::Bid.create(valid_params)
-      Offer::Sell::Ask.create(valid_params)
+      Offer::Buy::Unfixed.create(valid_params)
+      Offer::Buy::Fixed.create(valid_params)
+      Offer::Sell::Unfixed.create(valid_params)
+      Offer::Sell::Fixed.create(valid_params)
     end
     
     it "baselines" do
@@ -119,11 +119,11 @@ RSpec.describe Offer, type: :model do
     end
 
     it "returns bid_side" do
-      expect(Offer.is_bid.count).to eq(2) #
+      expect(Offer.is_unfixed.count).to eq(2) #
     end
     
     it "returns ask_side" do
-      expect(Offer.is_ask.count).to eq(2)
+      expect(Offer.is_fixed.count).to eq(2)
     end
      
     it "returns buy_intent" do
