@@ -4,8 +4,6 @@ module Core
     layout 'core'
 
     def show
-
     end
   end
 end
-
