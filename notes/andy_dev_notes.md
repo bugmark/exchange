@@ -373,24 +373,22 @@ Next Actions:
 - [x] /contacts      - resolve
 - [x] /contracts/:id - resolve
 - [x] laptop dev env
+- [x] add a signups page
 
-- [ ] add a signups page
+# Nov 03
 
+- [ ] get sell/cross working
+- [ ] implement all-or-none
 - [ ] reset the data from the UI
 - [ ] reset the contract maturation date
-- [ ] add repo sync
+- [ ] write Commit#resolve
 
 # TBD
 
-- [ ] get sell/cross working
-
-- [ ] implement all-or-none
-
+- [ ] add repo sync
 - [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
 - [ ] feature specs for sell, take and cross actions
 - [ ] cross: generate contract-graph
-
-- [ ] write Commit#resolve
 
 - [ ] add cron process for contract cross
 - [ ] add cron process for contract resolve
