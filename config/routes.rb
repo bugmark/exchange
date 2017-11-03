@@ -42,6 +42,15 @@ Rails.application.routes.draw do
 
   namespace :docfix do
     resource :home
+
+    resources :projects
+    resources :issues
+    resources :offers
+    resources :contracts
+
+    resource :about
+
+    resources :users
   end
 
   root "static#home"

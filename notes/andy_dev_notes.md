@@ -377,25 +377,29 @@ Next Actions:
 
 # Nov 03
 
-- [ ] renaming: 
-- [ ] get sell/cross working
-- [ ] write Commit#resolve
+- [x] rename offer classes
 
-- [ ] implement all-or-none
-- [ ] reset the data from the UI
-- [ ] reset the contract maturation date
+- [ ] core: implement a trading bot
+- [ ] core: 
+
+- [ ] core: get sell/cross working
+- [ ] core: write Commit#resolve
+- [ ] core: implement all-or-none
+- [ ] core: reset the data from the UI
+- [ ] core: write a trading bot
+- [ ] core: reset the contract maturation date
 
 # TBD
 
-- [ ] add repo sync
-- [ ] bid_buy/ask_buy: add suspended offers to the user-detail page
-- [ ] feature specs for sell, take and cross actions
-- [ ] cross: generate contract-graph
-
-- [ ] add cron process for contract cross
-- [ ] add cron process for contract resolve
-- [ ] enable event replay
-
-- [ ] add Restful API
-- [ ] add GraphQL API
-- [ ] use swagger for resultful api docco
+- [ ] core: get grafana working with postgres
+- [ ] core: add repo sync
+- [ ] core: bid_buy/ask_buy: add suspended offers to the user-detail page
+- [ ] core: feature specs for sell, take and cross actions
+- [ ] core: generate contract-graph
+- [ ] core: add cron process for contract cross
+- [ ] core: add cron process for contract resolve
+- [ ] core: enable event replay
+- [ ] core: add Restful API
+- [ ] core: add GraphQL API
+- [ ] core: use swagger for resultful api docco
+- [ ] core: add a CLI
