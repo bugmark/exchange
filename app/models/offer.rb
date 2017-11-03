@@ -25,7 +25,7 @@ class Offer < ApplicationRecord
   # -----
 
   def xid
-    "#{xtag}-#{self.intent}.#{self&.id || 0}"
+    "#{self.intent}-#{xtag}.#{self&.id || 0}"
   end
 
   # ----- BASIC SCOPES -----
