@@ -19,15 +19,7 @@ html[lang="en-US"]
         img[src="/img/icon2.ico" style='position: relative; top: -1px; margin-right: 3px; background:grey']
         | BugMark
       .collapse.navbar-collapse
-        - if ! content_for?(:navbar)
-          ul.navbar-nav.mr-auto
-            = nav_link("Demo"        , "/core/home"        )
-            = nav_link("Repos"       , "/core/repos"       )
-            = nav_link("Bugs"        , "/core/bugs"        )
-            = nav_link("Offers"      , "/core/offers"      )
-            = nav_link("Contracts"   , "/core/contracts"   )
-        - else
-          = content_for(:navbar)
+        = content_for(:navbar)
         - if ! content_for?(:devise)
           = render "layouts/devise"
         - else
