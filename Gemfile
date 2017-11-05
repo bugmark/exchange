@@ -34,6 +34,7 @@ gem 'slim-rails'                  # slim templates
 gem 'tzinfo-data'                 # timezone support
 gem 'paper_trail'                 # model versioning
 gem 'acts_as_list'                # sortable lists by position
+gem 'bootstrap'                   # twitter bootstrap
 
 gem 'factory_girl_rails'          # for data loading in production
 

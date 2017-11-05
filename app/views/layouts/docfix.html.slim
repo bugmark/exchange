@@ -10,4 +10,7 @@
 - content_for :body do
   = yield
 
+- content_for :devise do
+  = render 'layouts/docfix_devise'
+
 = render template: "layouts/application"
