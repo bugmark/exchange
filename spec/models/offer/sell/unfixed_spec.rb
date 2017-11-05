@@ -1,53 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Offer::Buy::Bid, type: :model do
-  def valid_params(extras = {})
-    {
-      user_id: user.id                                      ,
-      maturation_range: Time.now-1.week..Time.now+1.week    ,
-      status:  'open'                                     ,
-    }.merge(extras)
+RSpec.describe Offer::Sell::Fixed, type: :model do
+  def valid_params
+    {}
   end
 
-  def offer3(extras) Offer::Buy::Bid.new(valid_params(extras)) end
-
-  let(:user)   { FG.create(:user)        }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
-  describe ".qualified_counteroffers" do
-    before(:each) do
-      Offer::Buy::Bid.create(valid_params)
-      Offer::Buy::Ask.create(valid_params)
-      Offer::Sell::Bid.create(valid_params)
-      Offer::Sell::Ask.create(valid_params)
-    end
-
-    describe "#counters" do
-      before(:each) { subject.save }
-
-      it "returns none" do
-        result = subject.counters(:expand)
-        expect(result.count).to eq(0)
-      end
-
-      it "returns one with high price" do
-        obj = offer3(price: 0.9)
-        result = obj.counters(:expand)
-        expect(result.count).to eq(1)
-      end
-
-      it "returns zero with low price" do
-        obj = offer3(price: 0.1)
-        result = obj.counters(:expand)
-        expect(result.count).to eq(0)
-      end
-    end
-
-
-
-
-  end
 end
 
 # == Schema Information

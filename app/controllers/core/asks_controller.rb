@@ -11,12 +11,12 @@ module Core
       case
         when bug_id = params["bug_id"]&.to_i
           @bug = Bug.find(bug_id)
-          @asks = Offer::Buy::Ask.where(bug_id: bug_id)
+          @asks = Offer::Buy::Fixed.where(bug_id: bug_id)
         when stm_repo_id = params["stm_repo_id"]&.to_i
           @repo = Repo.find(stm_repo_id)
-          @asks = Offer::Buy::Ask.where(stm_repo_id: stm_repo_id)
+          @asks = Offer::Buy::Fixed.where(stm_repo_id: stm_repo_id)
         else
-          @asks = Offer::Buy::Ask.all
+          @asks = Offer::Buy::Fixed.all
       end
     end
 
@@ -37,7 +37,7 @@ module Core
     private
 
     def valid_params(params)
-      fields = Offer::Buy::Ask.attribute_names.map(&:to_sym)
+      fields = Offer::Buy::Fixed.attribute_names.map(&:to_sym)
       params.permit(fields)
     end
 

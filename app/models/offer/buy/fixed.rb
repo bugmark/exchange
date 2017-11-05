@@ -1,10 +1,10 @@
 require 'ext/hash'
 
-class Offer::Buy::Ask < Offer::Buy
+class Offer::Buy::Fixed < Offer::Buy
 
   before_validation :default_values
 
-  def side() "ask" end
+  def side() "fixed" end
   alias_method :xtag, :side
 
   def matching_bid_reserve
@@ -15,8 +15,8 @@ class Offer::Buy::Ask < Offer::Buy
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type
-      when :expand   then base.is_buy_bid.align_complement(self)
-      when :transfer then base.is_sell_ask.align_equal(self)
+      when :expand   then base.is_buy_unfixed.align_complement(self)
+      when :transfer then base.is_sell_fixed.align_equal(self)
       else Offer.none
     end
   end

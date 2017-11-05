@@ -9,16 +9,16 @@ RSpec.describe 'Position Factory', USE_VCR do
 
   it "gets the default side" do
     obj = FG.create(:position)
-    expect(obj.side).to eq("bid")
+    expect(obj.side).to eq("unfixed")
   end
 
-  it "creates a bid position" do
-    obj = FG.create(:bid_position)
-    expect(obj.side).to eq("bid")
+  it "creates a unfixed position" do
+    obj = FG.create(:unfixed_position)
+    expect(obj.side).to eq("unfixed")
   end
 
-  it "creates an ask position" do
-    obj = FG.create(:ask_position)
-    expect(obj.side).to eq("ask")
+  it "creates an fixed position" do
+    obj = FG.create(:fixed_position)
+    expect(obj.side).to eq("fixed")
   end
 end

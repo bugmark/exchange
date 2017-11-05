@@ -1,5 +1,8 @@
 - content_for :navbar do
-  ul.navbar-nav.mr-auto
+  - unless Rails.env.production?
+    ul.navbar-nav.mr-auto
+      = nav_link("Core"        , "/core/home"        )
+      = nav_link("Docfix"      , "/docfix/home"       )
 
 - content_for :devise do
   | []

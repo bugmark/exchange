@@ -1,8 +1,16 @@
 - content_for :navbar do
   ul.navbar-nav.mr-auto
-    = nav_link("Docfix"      , "/core/docfix"      )
+    = nav_link("Docfix"   , "/docfix/home"      )
+    = nav_link("Projects" , "/docfix/projects"  )
+    = nav_link("Issues"   , "/docfix/issues"    )
+    = nav_link("Offers"   , "/docfix/offers"    )
+    = nav_link("Contracts", "/docfix/contracts" )
+    = nav_link("About"    , "/docfix/about"     )
 
 - content_for :body do
   = yield
+
+- content_for :devise do
+  = render 'layouts/docfix_devise'
 
 = render template: "layouts/application"

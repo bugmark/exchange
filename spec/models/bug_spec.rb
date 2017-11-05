@@ -19,8 +19,8 @@ RSpec.describe Bug, type: :model do
 
   describe "Associations" do
     it { should respond_to(:repo)         }
-    it { should respond_to(:bids)         }
-    it { should respond_to(:asks)         }
+    # it { should respond_to(:bids)         }
+    # it { should respond_to(:asks)         }
   end
 
   describe "Object Creation" do

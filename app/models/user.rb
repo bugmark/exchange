@@ -11,13 +11,11 @@ class User < ApplicationRecord
 
   has_many :offers     , class_name: "Offer"
   has_many :buy_offers , class_name: "Offer::Buy"
-  has_many :bids       , class_name: "Offer::Buy::Bid"
-  has_many :asks       , class_name: "Offer::Buy::Ask"
+  has_many :bids       , class_name: "Offer::Buy::Unfixed"
+  has_many :asks       , class_name: "Offer::Buy::Fixed"
   has_many :sell_offers, class_name: "Offer::Sell"
 
   has_many :positions
-
-
 
   def xtag
     "usr"

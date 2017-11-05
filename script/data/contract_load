@@ -2,6 +2,6 @@
 
 require "./config/environment"
 
-Offer::Buy::Ask.unassigned.each do |ask|
+Offer::Buy::Fixed.unassigned.each do |ask|
   ContractCmd::Cross.new(ask, :expand).save_event.project
 end

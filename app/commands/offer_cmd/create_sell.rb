@@ -24,8 +24,8 @@ module OfferCmd
 
     def klas
       case parent_position.side
-        when "bid" then Offer::Sell::Bid
-        when "ask" then Offer::Sell::Ask
+        when "unfixed" then Offer::Sell::Unfixed
+        when "fixed"   then Offer::Sell::Fixed
         else raise "unknown position side (#{parent_position.side})"
       end
     end

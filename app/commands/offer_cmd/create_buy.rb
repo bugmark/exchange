@@ -24,8 +24,8 @@ module OfferCmd
 
     def klas
       case typ.to_s
-        when "bid" then Offer::Buy::Bid
-        when "ask" then Offer::Buy::Ask
+        when "bid" then Offer::Buy::Unfixed
+        when "ask" then Offer::Buy::Fixed
         else raise "unknown type (#{typ.to_s})"
       end
     end

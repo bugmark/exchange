@@ -25,7 +25,7 @@ class Offer < ApplicationRecord
   # -----
 
   def xid
-    "#{xtag}-#{self.intent}.#{self&.id || 0}"
+    "#{self.intent}-#{xtag}.#{self&.id || 0}"
   end
 
   # ----- BASIC SCOPES -----
@@ -52,15 +52,15 @@ class Offer < ApplicationRecord
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
 
-    def is_buy_ask()  where(type: "Offer::Buy::Ask")  end
-    def is_buy_bid()  where(type: "Offer::Buy::Bid")  end
-    def is_sell_ask() where(type: "Offer::Sell::Ask") end
-    def is_sell_bid() where(type: "Offer::Sell::Bid") end
+    def is_buy_fixed()    where(type: "Offer::Buy::Fixed")    end
+    def is_buy_unfixed()  where(type: "Offer::Buy::Unfixed")  end
+    def is_sell_fixed()   where(type: "Offer::Sell::Fixed")   end
+    def is_sell_unfixed() where(type: "Offer::Sell::Unfixed") end
 
-    def is_bid()  where('type like ?', "%Bid") end
-    def is_ask()  where('type like ?', "%Ask") end
-    def is_buy()  where('type like ?', "Offer::Buy%") end
-    def is_sell() where('type like ?', "Offer::Sell%") end
+    def is_buy()     where('type like ?', "Offer::Buy%")  end
+    def is_sell()    where('type like ?', "Offer::Sell%") end
+    def is_unfixed() where('type like ?', "%Unfixed")     end
+    def is_fixed()   where('type like ?', "%Fixed")       end
   end
 
   # ----- OVERLAP UTILS -----
@@ -160,10 +160,10 @@ class Offer < ApplicationRecord
     ! is_open?
   end
 
-  def is_sell_bid?() self.type == "Offer::Sell::Bid"   end
-  def is_sell_ask?() self.type == "Offer::Sell::Ask"   end
+  def is_sell_bid?() self.type == "Offer::Sell::Unfixed"   end
+  def is_sell_ask?() self.type == "Offer::Sell::Fixed"   end
   def is_buy_bid?()  self.type == "Offer::Buy::Bid"    end
-  def is_buy_ask?()  self.type == "Offer::Buy::Ask"    end
+  def is_buy_ask?()  self.type == "Offer::Buy::Fixed"    end
 
   private
 

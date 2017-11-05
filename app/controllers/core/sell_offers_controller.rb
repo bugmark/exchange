@@ -6,8 +6,8 @@ module Core
     before_action :authenticate_user!, :except => [:index, :show]
 
     def index
-      @bids = Bid.unassigned
-      @asks = Ask.unassigned
+      @bids = Unfixed.unassigned
+      @asks = Fixed.unassigned
     end
 
     def new
