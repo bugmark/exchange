@@ -4,7 +4,15 @@ module Docfix
     layout 'docfix'
 
     def show
-      @kong = "asdf"
+    end
+
+    def contact
+    end
+
+    def terms
+    end
+
+    def about
     end
   end
 end

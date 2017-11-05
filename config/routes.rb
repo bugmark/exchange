@@ -5,15 +5,12 @@ Rails.application.routes.draw do
   get  'static/test'
   get  'static/chart'
   get  'static/data'
-  get  'static/mailthanks'
   post 'static/mailpost'
 
+  # ----- CORE APPLICATION -----
   get 'core'  , to: redirect("/core/home")
   get 'demo'  , to: redirect("/core/home")
-  get 'docfix', to: redirect("/docfix/home")
-
   namespace :core do
-
     resource :home
 
     resources :repos do
@@ -41,16 +38,19 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  # ----- DOCFIX APPLICATION -----
+  get 'docfix', to: redirect("/docfix/home")
   namespace :docfix do
-    resource :home
+    resource :home do
+      get 'contact'
+      get 'terms'
+      get 'about'
+    end
 
     resources :projects
     resources :issues
     resources :offers
     resources :contracts
-
-    resource :about
-
     resources :users
   end
 

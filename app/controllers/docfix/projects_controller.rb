@@ -8,6 +8,9 @@ module Docfix
 
     def show
     end
+
+    def new
+    end
   end
 end
 

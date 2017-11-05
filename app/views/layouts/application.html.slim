@@ -31,6 +31,7 @@ html[lang="en-US"]
       = content_for?(:body) ? content_for(:body) : yield
       hr
       footer
+        = content_for(:footerbar)
         div[style="text-align: center"]
           small
             - if Rails.env.development?
