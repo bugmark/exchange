@@ -19,7 +19,10 @@ html[lang="en-US"]
         img[src="/img/icon2.ico" style='position: relative; top: -1px; margin-right: 3px; background:grey']
         | BugMark
       .collapse.navbar-collapse
-        = content_for(:navbar)
+        - unless content_for(:navbar)
+          ul.navbar-nav.mr-auto
+        - else
+          = content_for(:navbar)
         - if ! content_for?(:devise)
           = render "layouts/devise"
         - else

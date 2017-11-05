@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   get  'static/mailthanks'
   post 'static/mailpost'
 
-  get 'core', to: redirect("/core/home")
-  get 'demo', to: redirect("/core/home")
+  get 'core'  , to: redirect("/core/home")
+  get 'demo'  , to: redirect("/core/home")
+  get 'docfix', to: redirect("/docfix/home")
 
   namespace :core do
 
