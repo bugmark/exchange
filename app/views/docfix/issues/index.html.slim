@@ -1,1 +1,29 @@
-| DOCFIX ISSUES INDEX
+nav aria-label="breadcrumb" role="navigation"
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/docfix/home" BugMark
+    li.breadcrumb-item.active aria-current="page"
+      | Issues
+
+h2 Find issues
+
+b Get involved in BugMark by finding issues that you want
+  to get involved in by either contributing to a fix
+  (don't forget to buy the fixed side before) or investing
+  in a fix by investing in or creating offers for the unfixed
+  side.  Easy peasy lemon squeezy!
+
+.row[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px;']
+  .col-md-4
+    b Free-text search
+  .col-md-4
+    b Project languages
+  .col-md-4
+    b Offers and contracts
+
+- @bugs.each do |bug|
+  .row
+    .col-md-8
+      = bug.xid
+    .col-md-4
+      = bug.xid

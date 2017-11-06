@@ -4,6 +4,7 @@ module Docfix
     layout 'docfix'
 
     def index
+      @bugs = Bug.all
     end
 
     def show
