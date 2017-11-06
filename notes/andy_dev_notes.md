@@ -379,9 +379,30 @@ Next Actions:
 
 - [x] rename offer classes
 
-- [ ] core: implement a trading bot
-- [ ] core: 
+# Nov 04
 
+- [x] docfix: add docfix menus
+
+# Nov 05
+
+- [x] docfix: break out home-page text for editors
+- [x] docfix: add responsive classes for phone rendering
+
+- [x] docfix: get issue pagination working
+
+- [ ] docfix: get labels working
+- [ ] docfix: style issue pagination links 
+- [ ] docfix: get full-text issue search working
+- [ ] docfix: get GitHub signup working
+- [ ] docfix: get notification emails working
+- [ ] docfix: design wallet structure
+- [ ] docfix: get stripe integration working
+- [ ] docfix: get blockchain reporting working
+- [ ] docfix: BitCoin integration
+- [ ] docfix: Eth integration
+
+- [ ] core: implement a trading bot
+- [ ] core: implement a graph
 - [ ] core: get sell/cross working
 - [ ] core: write Commit#resolve
 - [ ] core: implement all-or-none

@@ -1,1 +1,44 @@
-| DOCFIX ISSUES INDEX
+= breadcrumb [%w(BugMark /docfix/home), 'Issues']
+
+h2 Find issues
+
+b Get involved in BugMark by finding issues that you want
+  to get involved in by either contributing to a fix
+  (don't forget to buy the fixed side before) or investing
+  in a fix by investing in or creating offers for the unfixed
+  side.  Easy peasy lemon squeezy!
+
+.row[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px;']
+  .col-md-4
+    b Free-text search
+  .col-md-4
+    b Project languages
+  .col-md-4
+    b Offers and contracts
+
+- @bugs.each do |bug|
+  hr
+  .row
+    .col-md-8
+      h4
+        a[href="/docfix/issues/#{bug.id}"] #{bug.stm_title}
+      table.table-sm
+        tr
+          th Issue Details
+          th Issue Labels
+          th Project languages
+          th Offers & Contracts
+        tr
+          td TBD
+          td TBD
+          td TBD
+          td TBD
+    .col-md-4
+      b
+        ' Get involved
+      i.fa.fa-question-circle
+      |  Why would I do this?
+      button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @bugs, container: false
