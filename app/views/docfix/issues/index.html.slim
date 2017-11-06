@@ -1,9 +1,4 @@
-nav aria-label="breadcrumb" role="navigation"
-  ol.breadcrumb
-    li.breadcrumb-item
-      a href="/docfix/home" BugMark
-    li.breadcrumb-item.active aria-current="page"
-      | Issues
+= breadcrumb [%w(BugMark /docfix/home), 'Issues']
 
 h2 Find issues
 
@@ -22,8 +17,28 @@ b Get involved in BugMark by finding issues that you want
     b Offers and contracts
 
 - @bugs.each do |bug|
+  hr
   .row
     .col-md-8
-      = bug.xid
+      h4
+        a[href="/docfix/issues/#{bug.id}"] #{bug.stm_title}
+      table.table-sm
+        tr
+          th Issue Details
+          th Issue Labels
+          th Project languages
+          th Offers & Contracts
+        tr
+          td TBD
+          td TBD
+          td TBD
+          td TBD
     .col-md-4
-      = bug.xid
+      b
+        ' Get involved
+      i.fa.fa-question-circle
+      |  Why would I do this?
+      button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @bugs, container: false

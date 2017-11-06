@@ -1,5 +1,15 @@
 module ApplicationHelper
 
+  def breadcrumb(list)
+    head = list[0..-2].map do |elem|
+      lbl, lnk = elem
+      "<li class='breadcrumb-item'><a href='#{lnk}'>#{lbl}</a></li>"
+    end.join
+    lbl = Array(list[-1]).first
+    tail = "<li class='breadcrumb-item active' area-current='page'>#{lbl}</li>"
+    raw "<ol class='breadcrumb'>#{head}#{tail}</ol>"
+  end
+
   def timestamp
     Time.now.strftime("%H:%M:%S")
   end

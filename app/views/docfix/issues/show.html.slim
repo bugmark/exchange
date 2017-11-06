@@ -1,1 +1,14 @@
-| DOCFIX ISSUES SHOW
+= breadcrumb [%w(BugMark /docfix/home), %w(Issues /docfix/issues), "Issue ##{@bug.id}"]
+
+small
+ a href="/docfix/issues" return to overview
+
+.row
+  .col-md-8
+    h2 = @bug.stm_title
+    small
+      span[style='display: inline-block; width: 100px;'] Issue ##{@bug.id}
+      b Created:
+      '
+      = @bug.created_at.strftime("%m-%d, %Y, %H:%M")
+  .col-md-4
