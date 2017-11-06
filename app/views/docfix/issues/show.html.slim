@@ -5,10 +5,111 @@ small
 
 .row
   .col-md-8
-    h2 = @bug.stm_title
+    h2
+      = @bug.stm_title
     small
       span[style='display: inline-block; width: 100px;'] Issue ##{@bug.id}
       b Created:
       '
       = @bug.created_at.strftime("%m-%d, %Y, %H:%M")
+    h4 Offers and contracts
+    table.table-sm
+      tr
+        td colspan=2
+          h4 Offers and contracts
+      tr
+        td
+          b Currently no open offers or contracts for this issue.
+        td
+          button.btn.btn-secondary[data-toggle='modal' data-target='#buyModal' type='button']
+            | BE THE FIRST TO INVEST<br/>on fixed or unfixed side
+      tr colspan=2
+        h4 Issue details
+      tr
+        td Lorem ipsum
+        td
+          p
+            b Organization
+            br
+            i href='#' Mountain View Smart Contracts
+          p
+            b Project/Repository
+            br
+            i href='#' BugMark
+          p
+            b Issue labels
+            br
+            | label01 label02 label03
+          p
+            b Project languages
+            br
+            | Developer JavaScript
+          p
+            | VIEW ISSUE ON REPOSITORY
   .col-md-4
+    p
+      b KNOW ANYONE FOLLOWING SKILLS, WHO WOULD LIKE TO HELP?
+    p
+      small
+        b> Project languages
+        | development JavaScript
+
+.row
+  .col-md-12
+    h4 Related Issues(4)
+    hr
+    table.table-sm.table-striped[style='width: 100%']
+      tr
+        td
+          a href='#' GitHub Issue-Level Comment Badges
+        td
+          b[style='color: grey;'] UNFIXED
+      tr
+        td
+          a href='#' GitHub Issue-Level Comment Badges
+        td
+          b[style='color: grey;'] FIXED
+      tr
+        td
+          a href='#' GitHub Issue-Level Comment Badges
+        td
+          b[style='color: grey;'] UNFIXED
+      tr
+        td
+          a href='#' GitHub Issue-Level Comment Badges
+        td
+          b[style='color: grey;'] PULL REQUEST
+.row
+  .col-md-12.text-center
+    p[style='margin-top: 10px;']
+      button.btn.btn-secondary.btn-outline FIND MORE RELATED ISSUES
+    p
+      i.fa.fa-question-circle
+      '  Why would I do this?
+
+button.btn.btn-primary[data-toggle='modal' data-target='#buyModal' type='button']
+  Launch demo modal
+
+.modal#buyModal[tabindex="-1" role="dialog"]
+  .modal-dialog.modal-lg[role="document"]
+    .modal-content
+      .modal-header
+        .modal-title
+          h5 Match
+          | Offer #1 GitHub Issue #{@bug.stm_title} (Issue ##{@bug.id})
+        button.close[type='button' data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"] &times;
+      .modal-body.text-center
+        | I will invest [ ] tokens(=n units) that this issue $selectedside on
+        br
+        small Saturday Noon | Saturday end-of-show | Sunday Noon | Sunday End-Of-Show
+        br
+        | and will earn 1 token in the event this will happen.
+        p
+          small This would place the new marketprice at $TOKENS
+          br
+          small and the possibility of fix at 85% (unfixed) | 15% (fixed).
+
+      .modal-footer
+        button.btn.btn-primary[type='button'] MATCH OFFER
+        button.btn.btn-secondary[type='button' data-dismiss='modal']Close

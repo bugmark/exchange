@@ -1,1 +1,48 @@
-| DOCFIX OFFERS INDEX
+= breadcrumb [%w(BugMark /docfix/home), 'Offers']
+
+h2 Offers (#{@offers.count})
+
+b Browse and sort offers to find the most lucrative.  Lorem ipsum humina humina.
+
+div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
+  .row
+    .col-md-3
+      b All statuses
+    .col-md-3
+      b Market price
+    .col-md-3
+      b Expected fix probability
+    .col-md-3
+      b Last trade
+
+  .row
+    .col-md-3
+      input[style='margin-top: 4px;']
+    .col-md-3
+      input[style='margin-top: 4px;']
+    .col-md-3
+      input[style='margin-top: 4px;']
+    .col-md-3
+      button.btn.btn-outline-secondary SEARCH
+
+- @offers.each do |offer|
+  .row
+    .col-md-8
+      hr
+      a[href="/docfix/offers/#{offer.id}"] #{offer.xid}
+      table.table-sm
+        tr
+          td Created on...
+          td Current marketprice
+          td Expected fix probability
+          td Last trade
+    .col-md-4
+      b
+        ' Get involved
+        i.fa.fa-question-circle
+        |  Why would I do this?
+        button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+  hr
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @offers, container: false

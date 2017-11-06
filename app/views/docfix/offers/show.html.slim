@@ -1,1 +1,32 @@
-| DOCFIX OFFERS SHOW
+= breadcrumb [%w(BugMark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
+
+small
+  a href="/docfix/offers" return to overview
+
+.row
+  .col-md-7
+    h2
+      = @offer.xid
+    p Text that explains any possible outcome fo the contract for all sides.  Lorem ipsum blah.
+    p Created for [Issue link here]
+  .col-md-5
+    h4 Get involved
+    button.btn.btn-secondary>[data-toggle='modal' data-target='#buyModal' type='button']
+      | CONTRIBUTE TO FIX<br/><small>buy fixed side</small>
+    button.btn.btn-secondary[]
+      | INVEST IN FIX<br/><small>buy unfixed side</small>
+
+.row
+  .col-md-4
+    h4 Offer dates
+    hr
+    | blah blah
+  .col-md-4
+    h4 Invest development
+    hr
+    | blahblah
+  .col-md-4
+    h4 Current volume
+    hr
+    .text-center
+      | 200 tokens

@@ -1,6 +1,6 @@
 = breadcrumb [%w(BugMark /docfix/home), 'Issues']
 
-h2 Find issues
+h2 Find issues (#{@bugs.count})
 
 b Get involved in BugMark by finding issues that you want
   to get involved in by either contributing to a fix
@@ -8,16 +8,27 @@ b Get involved in BugMark by finding issues that you want
   in a fix by investing in or creating offers for the unfixed
   side.  Easy peasy lemon squeezy!
 
-.row[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px;']
-  .col-md-4
-    b Free-text search
-  .col-md-4
-    b Project languages
-  .col-md-4
-    b Offers and contracts
+div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
+  .row
+    .col-md-3
+      b Free-text search
+    .col-md-3
+      b Project languages
+    .col-md-3
+      b Offers and contracts
+    .col-md-3
+
+  .row
+    .col-md-3
+      input[style='margin-top: 4px;']
+    .col-md-3
+      input[style='margin-top: 4px;']
+    .col-md-3
+      input[style='margin-top: 4px;']
+    .col-md-3
+      button.btn.btn-outline-secondary SEARCH
 
 - @bugs.each do |bug|
-  hr
   .row
     .col-md-8
       h4
@@ -39,6 +50,7 @@ b Get involved in BugMark by finding issues that you want
       i.fa.fa-question-circle
       |  Why would I do this?
       button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+  hr
 
 .text-center[style='margin-top: 30px;']
   = will_paginate @bugs, container: false
