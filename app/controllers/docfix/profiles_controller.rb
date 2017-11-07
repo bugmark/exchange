@@ -3,6 +3,8 @@ module Docfix
 
     layout 'docfix'
 
+    before_action :authenticate_user!
+
     def show
     end
 
@@ -16,6 +18,9 @@ module Docfix
     end
 
     def saved_searches
+    end
+
+    def my_wallet
     end
 
     def my_watchlist

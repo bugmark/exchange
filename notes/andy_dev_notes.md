@@ -391,7 +391,7 @@ Next Actions:
 - [x] docfix: get issue pagination working
 
 - [ ] docfix: get labels working
-- [ ] docfix: style issue pagination links 
+- [ ] docfix: style pagination links (issue, offer) 
 - [ ] docfix: get full-text issue search working
 - [ ] docfix: get GitHub signup working
 - [ ] docfix: get notification emails working

@@ -51,13 +51,14 @@ Rails.application.routes.draw do
     resources :issues
     resources :offers
     resources :contracts
-    resources :profiles do
-      get 'my_issues'      , :on => :member
-      get 'my_offers'      , :on => :member
-      get 'my_contracts'   , :on => :member
-      get 'saved_searches' , :on => :member
-      get 'my_watchlist'   , :on => :member
-      get 'settings'       , :on => :member
+    resource  :profile do
+      get 'my_issues'
+      get 'my_offers'
+      get 'my_contracts'
+      get 'saved_searches'
+      get 'my_watchlist'
+      get 'my_wallet'
+      get 'settings'
     end
   end
 
