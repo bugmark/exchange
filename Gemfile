@@ -41,7 +41,7 @@ gem 'will_paginate'
 # gem 'grape-swagger'
 # gem 'grape-swagger-rails'
 
-# gem 'rack-cors', require: 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 
 gem 'factory_girl_rails'          # for data loading in production
 
