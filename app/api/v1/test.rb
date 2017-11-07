@@ -1,10 +1,10 @@
 module V1
   class Test < Grape::API
 
-    resource :issues do
-      desc "Return all issues"
-      get "", :root => :issues do
-        Issues.all
+    resource :bugs do
+      desc "Return all bugs"
+      get "", :root => :bugs do
+        Bug.all
       end
     end
   end

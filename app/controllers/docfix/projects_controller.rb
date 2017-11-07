@@ -4,6 +4,7 @@ module Docfix
     layout 'docfix'
 
     def index
+      @projects = Repo.all
     end
 
     def show

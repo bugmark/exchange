@@ -1,2 +1,3 @@
-GrapeSwaggerRails.options.url     = "/swagger_doc.json"
-GrapeSwaggerRails.options.app_url = "http://swagger.wordnik.com"
+GrapeSwaggerRails.options.url      = "/api/v1/docs"
+GrapeSwaggerRails.options.app_url  = ""
+GrapeSwaggerRails.options.app_name = "BugMark"

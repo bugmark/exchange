@@ -1,5 +1,6 @@
 module V1
   class Sessions < Grape::API
+
     include V1Base
     include AuthenticateRequest
 
@@ -42,7 +43,7 @@ module V1
       ]
       delete do
         authenticate!
-        
+
         auth_token = headers['Authorization']
         user_token = UserToken.where(token: auth_token).first
 

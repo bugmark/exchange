@@ -5,11 +5,13 @@ module V1
     # mount V1::Sessions
     mount V1::Test
 
-    # add_swagger_documentation(
-    #     api_version: "v1",
-    #     hide_documentation_path: true,
-    #     mount_path: "/api/v1/api_doc",
-    #     hide_format: true
-    #   )
+    add_swagger_documentation(
+        api_version: "v1",
+        mount_path: "/docs",
+        info: {
+          title:         "BugMark API"                ,
+          description:   "A restful API for BugMark"  ,
+        }
+      )
   end
 end
