@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   # ----- RESTFUL API -----
   mount ApplicationApi, at: "/api"
 
-  # mount GrapeSwaggerRails::Engine, at: "/apidocs"
+  mount GrapeSwaggerRails::Engine, at: "/apidocs"
 
   root "static#home"
 

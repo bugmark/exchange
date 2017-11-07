@@ -39,7 +39,7 @@ gem 'will_paginate'
 
 gem 'grape'
 gem 'grape-swagger'
-# gem 'grape-swagger-rails'
+gem 'grape-swagger-rails'
 
 gem 'rack-cors', require: 'rack/cors'
 

@@ -148,6 +148,8 @@ GEM
       virtus (>= 1.0.0)
     grape-swagger (0.27.3)
       grape (>= 0.16.2)
+    grape-swagger-rails (0.3.0)
+      railties (>= 3.2.12)
     graphviz (0.4.0)
     guard (2.14.1)
       formatador (>= 0.2.4)
@@ -409,6 +411,7 @@ DEPENDENCIES
   font-awesome-sass
   grape
   grape-swagger
+  grape-swagger-rails
   graphviz
   guard
   guard-rspec_min!
