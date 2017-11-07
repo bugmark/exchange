@@ -1,1 +1,43 @@
-| DOCFIX PROJECTS INDEX
+= breadcrumb [%w(BugMark /docfix/home), "Projects"]
+
+h2 Find Projects (#{@projects.count})
+
+b Find projects, organizations, topics and repositories you are interested in
+  and might want to contribute to in the future.  You can contribute by
+  fixing issues and earn tokens by investing in their fixed side.  Are you
+  an avid user of a software listed here?  Contribute by investing in the
+  unfixed side of a project or repository issues and incentivize
+  developers to fix the issue.
+
+div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
+  .row
+    .col-md-4
+      b Free-text search
+    .col-md-4
+      b Project languages
+    .col-md-4
+
+  .row
+    .col-md-4
+      input[style='margin-top: 4px;']
+    .col-md-4
+      input[style='margin-top: 4px;']
+    .col-md-4
+      button.btn.btn-outline-secondary SEARCH
+
+- @projects.each do |project|
+  h4
+    a[href="/docfix/projects/#{project.id}"] #{project.name}
+  .row
+    .col-md-3
+      | lorem ipsum project description here
+    .col-md-3
+      | lorem ipsum project details here
+    .col-md-3
+      | lorem ipsum offer details here
+    .col-md-3
+      | view details, put on watchlist
+  hr
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @projects, container: false
