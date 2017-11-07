@@ -9,9 +9,9 @@ Nov 7
 - [x] responsive page example
 
 ### Today
-- [ ] project page buildout
-- [ ] user registration buildout
-- [ ] working email notifications
+- [ ] docfix: project page buildout
+- [ ] docfix: post offers
+- [ ] docfix: contract cross and resolve
 
 ### Blockers
 - [ ] designer availability?

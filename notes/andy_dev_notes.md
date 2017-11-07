@@ -387,14 +387,27 @@ Next Actions:
 
 - [x] docfix: break out home-page text for editors
 - [x] docfix: add responsive classes for phone rendering
-
 - [x] docfix: get issue pagination working
 
+# Nov 06
+
+- [x] core: add restful API with Grape
+- [x] core: use swagger for restful api docco
+
+# Nov 07
+
+- [ ] docfix: add project page
+- [ ] docfix: post offers
+- [ ] docfix: contract cross and resolve
+
+# TBD
+
+- [ ] docfix: get notification emails working
+- [ ] docfix: add designer registration page
 - [ ] docfix: get labels working
 - [ ] docfix: style pagination links (issue, offer) 
 - [ ] docfix: get full-text issue search working
 - [ ] docfix: get GitHub signup working
-- [ ] docfix: get notification emails working
 - [ ] docfix: design wallet structure
 - [ ] docfix: get stripe integration working
 - [ ] docfix: get blockchain reporting working
@@ -410,8 +423,6 @@ Next Actions:
 - [ ] core: write a trading bot
 - [ ] core: reset the contract maturation date
 
-# TBD
-
 - [ ] core: get grafana working with postgres
 - [ ] core: add repo sync
 - [ ] core: bid_buy/ask_buy: add suspended offers to the user-detail page
@@ -420,7 +431,7 @@ Next Actions:
 - [ ] core: add cron process for contract cross
 - [ ] core: add cron process for contract resolve
 - [ ] core: enable event replay
-- [ ] core: add Restful API
+- [ ] core: Restful API
+- [ ] core: Restful API ruby bindings with rest-client
+- [ ] core: Restful API CLI and Ruby Gem
 - [ ] core: add GraphQL API
-- [ ] core: use swagger for resultful api docco
-- [ ] core: add a CLI
