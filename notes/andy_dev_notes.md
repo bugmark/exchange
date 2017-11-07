@@ -391,8 +391,9 @@ Next Actions:
 
 # Nov 06
 
-- [x] core: add restful API with Grape
-- [x] core: use swagger for restful api docco
+- [x] docfix: first implementation of profile and offer pages
+- [x] core: add restful API with Grape (/api/v1/docs, /api/v1/bugs.json)
+- [x] core: use swagger for restful api docco (/apidocs)
 
 # Nov 07
 

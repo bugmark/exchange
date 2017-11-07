@@ -26,25 +26,18 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
       button.btn.btn-outline-secondary SEARCH
 
 - @projects.each do |project|
+  h4
+    a[href="/docfix/projects/#{project.id}"] #{project.name}
   .row
-    .col-md-8
-      h4
-        a[href="/docfix/projects/#{project.id}"] #{project.name}
-      table.table-sm
-        tr
-          th Issue Details
-          th Issue Labels
-          th Project languages
-          th Offers & Contracts
-        tr
-          td TBD
-          td TBD
-          td TBD
-          td TBD
-    .col-md-4
-      b
-        ' Get involved
-      i.fa.fa-question-circle
-      |  Why would I do this?
-      button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+    .col-md-3
+      | lorem ipsum project description here
+    .col-md-3
+      | lorem ipsum project details here
+    .col-md-3
+      | lorem ipsum offer details here
+    .col-md-3
+      | view details, put on watchlist
   hr
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @projects, container: false

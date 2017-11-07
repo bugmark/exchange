@@ -9,9 +9,11 @@ Nov 7
 - [x] responsive page example
 
 ### Today
-- [ ] docfix: project page buildout
+- [ ] docfix: project & contracts - rough-out
 - [ ] docfix: post offers
-- [ ] docfix: contract cross and resolve
+- [ ] docfix: contract cross
+- [ ] docfix: contract resolve (stretch)
 
 ### Blockers
 - [ ] designer availability?
+- [ ] for discussion: today's ethereum hack
