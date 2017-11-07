@@ -1,18 +1,33 @@
 # Andy Daily Standup
 
-Nov 7
+Nov 6
 ----------------------------------------------
-Yesterday
+
+Outcomes
 - [x] initial framework buildout
 - [x] text extraction example
 - [x] responsive page example
 
-Today
-- [ ] docfix: project & contracts - rough-out
-- [ ] docfix: post offers
-- [ ] docfix: contract cross
-- [ ] docfix: contract resolve (stretch)
+Nov 7
+----------------------------------------------
 
-Blockers
+Outcomes
+- [x] project & contracts - rough-out
+- [ ] post offers
+- [ ] contract cross
+- [ ] contract resolve (stretch)
+
+Discussion
 - designer availability?
-- for discussion: today's ethereum hack
+- today's ethereum hack
+
+Nov 8
+----------------------------------------------
+
+Outcomes
+- [ ] working notification emails
+- [ ] user registration per designer workflows
+- [ ] design GitHub SSO
+
+Discussion
+- http://bugmark.net/api/docs - working / pre-alpha

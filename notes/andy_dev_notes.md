@@ -397,7 +397,9 @@ Next Actions:
 
 # Nov 07
 
-- [ ] docfix: add project page
+- [x] docfix: add project page
+- [x] docfix: add contract page
+- [ ] docfix: grab project languages
 - [ ] docfix: post offers
 - [ ] docfix: contract cross and resolve
 
@@ -432,6 +434,8 @@ Next Actions:
 - [ ] core: add cron process for contract cross
 - [ ] core: add cron process for contract resolve
 - [ ] core: enable event replay
+- [ ] core: Restful API - generate user key
+- [ ] core: Restful API - add rate limiting
 - [ ] core: Restful API
 - [ ] core: Restful API ruby bindings with rest-client
 - [ ] core: Restful API CLI and Ruby Gem
