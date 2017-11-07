@@ -16,9 +16,12 @@ module Bugmark
 
     config.time_zone = "Pacific Time (US & Canada)"
 
+    config.paths.add File.join('app', 'api'), glob: File.join("**", "*.rb")
+
     base = "#{config.root}/app"
     config.autoload_paths += %W(#{base}/commands)
     config.autoload_paths += %W(#{base}/libs)
+    config.autoload_paths += %W(#{base}/api)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
