@@ -37,8 +37,8 @@ gem 'acts_as_list'                # sortable lists by position
 gem 'bootstrap'                   # twitter bootstrap
 gem 'will_paginate'
 
-# gem 'grape'
-# gem 'grape-swagger'
+gem 'grape'
+gem 'grape-swagger'
 # gem 'grape-swagger-rails'
 
 gem 'rack-cors', require: 'rack/cors'
