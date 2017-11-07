@@ -2,7 +2,7 @@ require "grape-swagger"
 
 module V1
   class Base < Grape::API
-    mount V1::Test
+    mount V1::Collections
 
     add_swagger_documentation(
         api_version:   "v1"       ,
