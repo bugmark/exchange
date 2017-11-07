@@ -51,7 +51,14 @@ Rails.application.routes.draw do
     resources :issues
     resources :offers
     resources :contracts
-    resources :users
+    resources :profiles do
+      get 'my_issues'      , :on => :member
+      get 'my_offers'      , :on => :member
+      get 'my_contracts'   , :on => :member
+      get 'saved_searches' , :on => :member
+      get 'my_watchlist'   , :on => :member
+      get 'settings'       , :on => :member
+    end
   end
 
   root "static#home"
