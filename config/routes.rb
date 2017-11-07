@@ -63,9 +63,9 @@ Rails.application.routes.draw do
   end
 
   # ----- RESTFUL API -----
-  mount Twitter::API => "/api"
+  mount ApplicationApi, at: "/api"
 
-  mount GrapeSwaggerRails::Engine => "/swagger"
+  # mount GrapeSwaggerRails::Engine, at: "/swagger"
 
   root "static#home"
 

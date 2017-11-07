@@ -38,6 +38,7 @@ gem 'bootstrap'                   # twitter bootstrap
 gem 'will_paginate'
 
 gem 'grape'
+gem 'grape-swagger'
 gem 'grape-swagger-rails'
 
 gem 'factory_girl_rails'          # for data loading in production
