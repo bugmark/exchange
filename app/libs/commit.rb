@@ -58,7 +58,6 @@ class Commit
     # find or generate contract
     ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
     ctx.selected  = ctx.matching.sort_by {|c| c.escrows.count}.first
-    # binding.pry
     ctx.contract  = @contract = ctx.selected || begin
       date = [ctx.max_start, ctx.min_end].avg_time
       attr = bundle.offer.obj.match_attrs.merge(maturation: date)

@@ -7,10 +7,10 @@ class Bug < ApplicationRecord
   after_save :update_stm_ids
 
   belongs_to :repo     , :foreign_key => :stm_repo_id
-  has_many   :offers   , :foreign_key => :stm_bug_id,  :dependent => :destroy
-  has_many   :contracts, :foreign_key => :stm_bug_id,  :dependent => :destroy
-  has_many   :unfixeds
-  has_many   :fixeds
+  has_many   :offers   , :foreign_key => :stm_bug_id, :dependent  => :destroy
+  has_many   :offers_bf, :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Fixed"
+  has_many   :offers_bu, :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Unfixed"
+  has_many   :contracts, :foreign_key => :stm_bug_id, :dependent  => :destroy
 
   hstore_accessor :xfields  , :html_url  => :string    # add field to hstore
 
@@ -21,6 +21,9 @@ class Bug < ApplicationRecord
   def xtype
     self.type.gsub("Bug::","")
   end
+
+  def has_offers?()    offers.count > 0    end
+  def has_contracts?() contracts.count > 0 end
 
   private
 

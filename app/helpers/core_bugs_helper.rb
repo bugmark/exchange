@@ -46,24 +46,19 @@ module CoreBugsHelper
     ""
   end
 
-  # def bug_contract_new_link(bug)
-  #   path = "/contracts/new?type=git_hub&bug_id=#{bug.id}"
-  #   raw "<a href='#{path}'>Contract</a>"
-  # end
-
-  def core_bug_ask_new_link(bug)
-    path = "/core/asks/new?type=git_hub&stm_bug_id=#{bug.id}"
-    raw "<a href='#{path}'>ask</a>"
+  def core_bug_fixed_new_link(bug)
+    path = "/core/offers_bf/new?type=git_hub&stm_bug_id=#{bug.id}"
+    raw "<a href='#{path}'>fixed</a>"
   end
 
-  def core_bug_bid_new_link(bug)
-    path = "/core/bids/new?type=git_hub&stm_bug_id=#{bug.id}"
-    raw "<a href='#{path}'>bid</a>"
+  def core_bug_unfixed_new_link(bug)
+    path = "/core/offers_bu/new?type=git_hub&stm_bug_id=#{bug.id}"
+    raw "<a href='#{path}'>unfixed</a>"
   end
 
   def core_bug_actions(bug)
-    cbid = core_bug_bid_new_link(bug)
-    cask = core_bug_ask_new_link(bug)
+    cbid = core_bug_unfixed_new_link(bug)
+    cask = core_bug_fixed_new_link(bug)
     raw [cbid,cask].select(&:present?).join(" | ")
   end
 

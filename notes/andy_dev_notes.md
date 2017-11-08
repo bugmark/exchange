@@ -399,9 +399,25 @@ Next Actions:
 
 - [x] docfix: add project page
 - [x] docfix: add contract page
-- [ ] docfix: grab project languages
-- [ ] docfix: post offers
-- [ ] docfix: contract cross and resolve
+- [x] docfix: grab project languages
+- [x] docfix: grab issue labels
+- [x] core:   refactor offer associations (bid/ask > BF/BU)
+- [x] docfix: post offers
+
+# Nov 08
+
+- [ ] docfix: contract cross
+- [ ] docfix: contract resolve
+- [ ] core:   contract resolve
+
+- [ ] all: add success flash messages after creating offer and contract
+
+- [ ] docfix: write a bot for testing and for demos
+
+- [ ] add :offer_bu to create_buy_spec
+- [ ] docfix: add Jquery to dynamically update prices
+- [ ] docfix: cleanup offer pages
+- [ ] docfix: move offer pages to modals
 
 # TBD
 

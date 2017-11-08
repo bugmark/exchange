@@ -1,36 +1,36 @@
 module Core
-  class AsksController < ApplicationController
+  class OffersBfController < ApplicationController
 
     layout 'core'
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
     def index
-      @bug = @repo = nil
-      @timestamp = Time.now.strftime("%H:%M:%S")
-      case
-        when bug_id = params["bug_id"]&.to_i
-          @bug = Bug.find(bug_id)
-          @asks = Offer::Buy::Fixed.where(bug_id: bug_id)
-        when stm_repo_id = params["stm_repo_id"]&.to_i
-          @repo = Repo.find(stm_repo_id)
-          @asks = Offer::Buy::Fixed.where(stm_repo_id: stm_repo_id)
-        else
-          @asks = Offer::Buy::Fixed.all
-      end
+    #   @bug = @repo = nil
+    #   @timestamp = Time.now.strftime("%H:%M:%S")
+    #   case
+    #     when bug_id = params["bug_id"]&.to_i
+    #       @bug = Bug.find(bug_id)
+    #       @offer_bfs = Offer::Buy::Fixed.where(bug_id: bug_id)
+    #     when stm_repo_id = params["stm_repo_id"]&.to_i
+    #       @repo = Repo.find(stm_repo_id)
+    #       @offer_bfs = Offer::Buy::Fixed.where(stm_repo_id: stm_repo_id)
+    #     else
+    #       @offer_bfs = Offer::Buy::Fixed.all
+    #   end
     end
 
     def new
-      @ask = OfferCmd::CreateBuy.new(:ask, new_opts(params))
+      @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, new_opts(params))
     end
 
     def create
       opts = params["offer_cmd_create_buy"]
-      @ask = OfferCmd::CreateBuy.new(:ask, new_opts.merge(valid_params(opts)))
-      if @ask.save_event.project
-        redirect_to("/core/offers/#{@ask.id}")
+      @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, new_opts.merge(valid_params(opts)))
+      if @offer_bf.save_event.project
+        redirect_to("/core/offers/#{@offer_bf.id}")
       else
-        render 'core/asks/new'
+        render 'core/offers_bf/new'
       end
     end
 

@@ -7,14 +7,14 @@ module CoreReposHelper
     truncate(repo.name)
   end
 
-  def core_repo_bid_new_link(repo)
-    path = "/core/bids/new?type=git_hub&stm_repo_id=#{repo.id}"
-    raw "<a href='#{path}'>bid</a>"
+  def core_repo_offer_bu_new_link(repo)
+    path = "/core/offers_bu/new?type=git_hub&stm_repo_id=#{repo.id}"
+    raw "<a href='#{path}'>unfixed</a>"
   end
 
-  def core_repo_ask_new_link(repo)
-    path = "/core/asks/new?type=git_hub&stm_repo_id=#{repo.id}"
-    raw "<a href='#{path}'>ask</a>"
+  def core_repo_offer_bf_new_link(repo)
+    path = "/core/offers_bf/new?type=git_hub&stm_repo_id=#{repo.id}"
+    raw "<a href='#{path}'>fixed</a>"
   end
 
   def core_repo_bug_link(repo)
@@ -50,8 +50,8 @@ module CoreReposHelper
   end
 
   def repo_actions(repo)
-    cbid  = core_repo_bid_new_link(repo)
-    cask  = core_repo_ask_new_link(repo)
+    cbid  = core_repo_offer_bu_new_link(repo)
+    cask  = core_repo_offer_bf_new_link(repo)
     csync = link_to "Sync", {:action => :sync, :id => repo.id}
     cdest = core_repo_destroy_link(repo)
     # TODO: add sync and destroy

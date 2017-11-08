@@ -50,37 +50,37 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
         td = core_position_actions(position)
 
 div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
-  b Bids (#{@user.bids.count}):
+  b Offers to Buy (#{@user.offers_buy.count}):
   table.table
-    - if @user.bids.count > 0
+    - if @user.offers_buy.count > 0
       tr
         th ID
         th Value
         th Matures
         th Status
         th Action
-    - @user.bids.each do |bid|
+    - @user.offers_buy.each do |offer|
       tr
-        td = core_offer_id_link(bid)
-        td = bid.value
-        td = bid.maturation_str
-        td = bid.status
-        td = core_offer_actions(bid)
+        td = core_offer_id_link(offer)
+        td = offer.value
+        td = offer.maturation_str
+        td = offer.status
+        td = core_offer_actions(offer)
 
 div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
-  b Asks (#{@user.asks.count}):
+  b Offers to Sell (#{@user.offers_sell.count}):
   table.table
-    - if @user.asks.count > 0
+    - if @user.offers_sell.count > 0
       tr
         th ID
         th Value
         th Matures
         th Status
         th Action
-    - @user.asks.each do |ask|
+    - @user.offers_sell.each do |offer|
       tr
-        td = core_offer_id_link(ask)
-        td = ask.value
-        td = ask.maturation_str
-        td = ask.status
-        td = core_offer_actions(ask)
+        td = core_offer_id_link(offer)
+        td = offer.value
+        td = offer.maturation_str
+        td = offer.status
+        td = core_offer_actions(offer)

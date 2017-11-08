@@ -30,26 +30,41 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
 
 - @bugs.each do |bug|
   .row
-    .col-md-8
+    .col-md-4
       h4
-        a[href="/docfix/issues/#{bug.id}"] #{bug.stm_title}
-      table.table-sm
-        tr
-          th Issue Details
-          th Issue Labels
-          th Project languages
-          th Offers & Contracts
-        tr
-          td TBD
-          td TBD
-          td TBD
-          td TBD
+        a>[href="/docfix/issues/#{bug.id}"] #{bug.stm_title}
+        = docfix_issue_status_badge(bug)
+    .col-md-4
+      b Offers & Contracts
     .col-md-4
       b
         ' Get involved
-      i.fa.fa-question-circle
-      |  Why would I do this?
-      button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+      = docfix_issue_why_would_i(bug)
+  .row
+    .col-md-4
+      small
+        table.table-sm
+          tr
+            td
+              b Issue
+            td = bug.id
+          tr
+            td
+              b Created
+            td = bug.created_at.strftime("%y-%m-%d %H:%M:%S")
+          tr
+            td
+              b Issue labels
+            td = bug.stm_labels
+          tr
+            td
+              b Project languages
+            td = bug.repo.languages
+    .col-md-4
+      = docfix_issue_contracts(bug)
+      = docfix_issue_offers(bug)
+    .col-md-4
+      = docfix_issue_action_btns(bug)
   hr
 
 .text-center[style='margin-top: 30px;']

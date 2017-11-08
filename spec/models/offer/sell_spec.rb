@@ -17,7 +17,7 @@ RSpec.describe Offer::Sell, type: :model do
 
   let(:user)   { FG.create(:user).user                        }
   let(:pos1)   { Position.create(position_params)             }
-  let(:boff)   { FG.create(:buy_unfixed, user_id: user.id).offer  }
+  let(:boff)   { FG.create(:offer_bu, user_id: user.id).offer  }
   let(:soff)   { Offer::Sell::Unfixed.create(soff_params)         }
 
   let(:klas)   { described_class                              }

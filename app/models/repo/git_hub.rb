@@ -4,13 +4,23 @@ class Repo::GitHub < Repo
   validates :name, format: { with:    /\A[\_\-\.a-zA-Z0-9]+\/[\.\_\-a-zA-Z0-9]+\z/,
                              message: "needs GitHub repo '<user>/<repo>'" }
 
+  hstore_accessor :xfields  , :languages  => :string    # add field to hstore
+
   validate :repo_presence
+
+  after_create :set_languages
 
   def html_url
     "https://github.com/#{self.name}"
   end
 
   private
+
+  def set_languages
+    return if Rails.env.test?
+    languages = Octokit.languages(self.name)
+    update_attribute :languages, languages.to_hash.keys.map(&:to_s).join(", ")
+  end
 
   def repo_presence
     repo = Octokit.repo(self.name)

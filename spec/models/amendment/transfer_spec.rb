@@ -32,7 +32,7 @@ RSpec.describe Amendment::Transfer, type: :model do
   let(:ppos)   { Position.create(position_params)             }
   let(:spos)   { Position.create(position_params)             }
   let(:bpos)   { Position.create(position_params)             }
-  let(:boff)   { FG.create(:buy_unfixed, user_id: user.id).offer  }
+  let(:boff)   { FG.create(:offer_bu, user_id: user.id).offer  }
   let(:soff)   { Offer::Sell::Unfixed.create(soff_params)         }
   let(:tran)   { megatran                                     }
 

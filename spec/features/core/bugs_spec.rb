@@ -25,28 +25,28 @@ describe "Bugs" do
     expect(page).to_not be_nil
   end
 
-  it "creates an ask", USE_VCR do
+  it "creates an OBF", USE_VCR do
     login_as(user, :scope => :user)
     hydrate(bug)
     expect(Offer::Buy::Fixed.count).to eq(0)
     expect(Bug.count).to eq(1)
 
     visit "/core/bugs"
-    click_on "ask"
-    click_on "Create Ask"
+    click_on "fixed"
+    click_on "Create"
 
     expect(Offer::Buy::Fixed.count).to eq(1)
   end
 
-  it "creates a bid", USE_VCR do
+  it "creates a OBU", USE_VCR do
     login_as(user, :scope => :user)
     hydrate(bug)
     expect(Offer::Buy::Unfixed.count).to eq(0)
     expect(Bug.count).to eq(1)
 
     visit "/core/bugs"
-    click_on "bid"
-    click_on "Create Bid"
+    click_on "unfixed"
+    click_on "Create"
 
     expect(Offer::Buy::Unfixed.count).to eq(1)
   end

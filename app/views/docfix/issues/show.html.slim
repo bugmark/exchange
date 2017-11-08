@@ -13,18 +13,16 @@ small
       '
       = @bug.created_at.strftime("%m-%d, %Y, %H:%M")
     h4 Offers and contracts
-    table.table-sm
+    table.table-sm[style='width: 100%'; valign: top;]
+      tr
+        td
+          = docfix_issue_contracts(@bug)
+          = docfix_issue_offers(@bug)
+        td
+          = docfix_issue_action_btns(@bug)
       tr
         td colspan=2
-          h4 Offers and contracts
-      tr
-        td
-          b Currently no open offers or contracts for this issue.
-        td
-          button.btn.btn-secondary[data-toggle='modal' data-target='#buyModal' type='button']
-            | BE THE FIRST TO INVEST<br/>on fixed or unfixed side
-      tr colspan=2
-        h4 Issue details
+          h4 Issue details
       tr
         td Lorem ipsum
         td
@@ -39,13 +37,15 @@ small
           p
             b Issue labels
             br
-            | label01 label02 label03
+            = @bug.stm_labels || "NA"
           p
             b Project languages
             br
-            | Developer JavaScript
+            = @bug.repo.languages
           p
-            | VIEW ISSUE ON REPOSITORY
+            b VIEW ISSUE ON REPOSITORY
+            br
+            = core_bug_http_link(@bug)
   .col-md-4
     p
       b KNOW ANYONE FOLLOWING SKILLS, WHO WOULD LIKE TO HELP?
