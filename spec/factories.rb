@@ -33,7 +33,7 @@ FactoryGirl.define do
 
   factory :offer_bu, class: OfferCmd::CreateBuy do
     to_create {|instance| instance.save_event.project}
-    initialize_with { new(:bid, attributes) }
+    initialize_with { new(:offer_bu, attributes) }
 
     price               0.60
     volume              10
@@ -49,7 +49,7 @@ FactoryGirl.define do
 
   factory :offer_bf, class: OfferCmd::CreateBuy do
     to_create {|instance| instance.save_event.project}
-    initialize_with { new(:ask, attributes) }
+    initialize_with { new(:offer_bf, attributes) }
 
     price               0.40
     volume              10

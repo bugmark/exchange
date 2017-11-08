@@ -12,7 +12,7 @@ RSpec.describe OfferCmd::CreateBuy do
 
   let(:user)   { FG.create(:user).user                                  }
   let(:klas)   { described_class                                        }
-  subject      { klas.new(:bid, valid_params)                           }
+  subject      { klas.new(:offer_bu, valid_params)                      }
 
   describe "Attributes" do
     it { should respond_to :user                   }

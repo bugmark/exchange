@@ -7,9 +7,9 @@
           For a fix: Ask => fixed/true.
           For information: Bid => found/true.
 hr
-- if @ask.errors.any?
+- if @offer_bf.errors.any?
   .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@ask, url: '/core/offers_bf') do |f|
+= bootstrap_form_for(@offer_bf, url: '/core/offers_bf') do |f|
   = f.hidden_field :type
   = f.hidden_field :user_id
   .row

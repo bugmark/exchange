@@ -21,12 +21,12 @@ module Core
     # end
 
     def new
-      @offer_bu = OfferCmd::CreateBuy.new(:bid, new_opts(params))
+      @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, new_opts(params))
     end
 
     def create
       opts = params["offer_cmd_create_buy"]
-      @offer_bu = OfferCmd::CreateBuy.new(:bid, new_opts.merge(valid_params(opts)))
+      @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, new_opts.merge(valid_params(opts)))
       if @offer_bu.save_event.project
         redirect_to("/core/offers/#{@offer_bu.id}")
       else

@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   end
 
   def gen_unfixed(args = {}) #
-    FG.create(:offer_bu, {user_id: usr.id}.merge(args))
+    FG.create(:offer_bu, {user_id: usr.id}.merge(args)) #
   end
 
   def gen_fixed(args = {})
@@ -44,13 +44,13 @@ RSpec.describe User, type: :model do
 
     it 'returns a offer if one exists' do
       gen_unfixed
-      expect(usr.offers.count).to eq(1)
+      expect(usr.offers.count).to     eq(1)
       expect(usr.offers_buy.count).to eq(1)
-      expect(usr.offers_bu.count).to eq(1)
-      expect(usr.offers_bf.count).to eq(0)
+      expect(usr.offers_bu.count).to  eq(1)
+      expect(usr.offers_bf.count).to  eq(0)
     end
 
-    it 'handles offers_bf and offers_bu' do
+    it 'handles offers_bf and offers_bu' do #
       gen_unfixed; gen_fixed
       expect(usr.offers.count).to eq(2)
       expect(usr.offers_buy.count).to eq(2)
