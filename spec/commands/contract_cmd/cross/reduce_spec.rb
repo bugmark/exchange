@@ -5,7 +5,7 @@ RSpec.describe ContractCmd::Cross::Reduce do
   include_context 'Integration Environment'
 
   def build_sell
-    attrs = sell_unfixed.match_attrs
+    attrs = offer_su.match_attrs
     offer = FG.create(:offer_sf, price: 0.6).offer
     offer.update_attributes(attrs)
     offer
@@ -15,67 +15,68 @@ RSpec.describe ContractCmd::Cross::Reduce do
   let(:offer_sf) { build_sell                                     }
   let(:user)     { FG.create(:user).user                          }
   let(:klas)     { described_class                                }
-  subject        { klas.new(sell_unfixed, :reduce)                }
+  subject        { klas.new(offer_su, :reduce)                    }
 
-  # describe "Attributes", USE_VCR do
-  #   it { should respond_to :offer         }
-  #   it { should respond_to :counters      }
-  #   it { should respond_to :type          }
-  # end
+  describe "Attributes", USE_VCR do
+    it { should respond_to :offer         }
+    it { should respond_to :counters      }
+    it { should respond_to :type          }
+  end
 
-  # describe "Object Existence", USE_VCR do
-  #   it { should be_a klas           }
-  #   it { should_not be_valid        }
-  # end
+  describe "Object Existence", USE_VCR do
+    it { should be_a klas           }
+    it { should_not be_valid        }
+  end
 
-  # describe "Subobjects", USE_VCR do
-  #   it { should respond_to :subobject_symbols }
-  #   it 'returns an array' do
-  #     expect(subject.subobject_symbols).to be_an(Array)
-  #   end
-  # end
+  describe "Subobjects", USE_VCR do
+    it { should respond_to :subobject_symbols }
+    it 'returns an array' do
+      expect(subject.subobject_symbols).to be_an(Array)
+    end
+  end
 
-  # describe "Delegated Object", USE_VCR do
-  #   it 'has a present Offer' do
-  #     expect(subject.offer).to be_present
-  #   end #
-  #
-  #   it 'has a Offer with the right class' do
-  #     expect(subject.offer).to be_a(Offer)
-  #   end
-  # end
+  describe "Delegated Object", USE_VCR do
+    it 'has a present Offer' do
+      expect(subject.offer).to be_present
+    end #
+
+    it 'has a Offer with the right class' do
+      expect(subject.offer).to be_a(Offer)
+    end
+  end
 
   describe "#project - invalid subject", USE_VCR do
-    before(:each) { hydrate(sell_fixed) }
+    before(:each) { hydrate(offer_sf) }
 
-    # it 'detects an invalid object' do
-    #   subject.project
-    #   expect(subject).to be_valid
-    # end
+    it 'detects an invalid object' do
+      subject.project
+      expect(subject).to be_valid
+    end
 
-    # it 'gets the right object count' do
-    #   expect(Contract.count).to eq(0) .
-    #   subject.project
-    #   expect(Contract.count).to eq(1)
-    # end
+    it 'gets the right object count' do
+      expect(Contract.count).to eq(2)
+      subject.project
+      expect(Contract.count).to eq(2)
+    end
   end
 
   describe "#project - valid subject", USE_VCR do
-    before(:each) { hydrate(buy) }
+    before(:each) { hydrate(offer_sf) }
 
-    # it 'detects a valid object' do
-    #   subject.project
-    #   expect(subject).to be_valid
-    # end
+    it 'detects a valid object' do
+      subject.project
+      expect(subject).to be_valid
+    end
 
-    # it 'gets the right object count' do
-    #   expect(Contract.count).to eq(0)
-    #   subject.project
-    #   expect(Contract.count).to eq(1)
-    # end
+    it 'gets the right object count' do
+      expect(Contract.count).to eq(2)
+      subject.project
+      expect(Contract.count).to eq(2)
+    end
 
     # it 'sets the contract status' do
     #   subject.project
+    #   binding.pry
     #   expect(subject.commit.contract.status).to eq("open")
     # end
 
