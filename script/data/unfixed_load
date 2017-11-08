@@ -60,5 +60,5 @@ opts.each do |opt|
     aon:        false         ,
     stm_status: 'closed'
   }
-  FG.create(:buy_unfixed, opt.merge(base))
+  FG.create(:offer_bu, opt.merge(base))
 end

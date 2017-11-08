@@ -12,7 +12,7 @@ RSpec.describe Repo, :type => :model do
 
   describe "Associations" do
     it { should respond_to(:bugs)         }
-    # it { should respond_to(:contracts)    }
+    # it { should respond_to(:contracts)    }   #
   end
 
   describe "Object Creation" do

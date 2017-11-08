@@ -1,28 +1,30 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do #
+RSpec.describe User, type: :model do
   def valid_params
     {email: "asdf@qwer.net", password: "gggggg"}
   end
 
-  def gen_unfixed(args = {})
-    FG.create(:buy_unfixed, {user_id: usr.id}.merge(args))
+  def gen_unfixed(args = {}) #
+    FG.create(:offer_bu, {user_id: usr.id}.merge(args))
   end
 
   def gen_fixed(args = {})
-    FG.create(:buy_fixed, {user_id: usr.id}.merge(args))
+    FG.create(:offer_bf, {user_id: usr.id}.merge(args))
   end
 
   let(:usr) { FG.create(:user, balance: 100.0).user         }
-  let(:ask) { FG.create(:buy_fixed, user_id: user.id)       }
+  let(:ask) { FG.create(:offer_bf, user_id: user.id)       }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 
   describe "Associations" do
-    it { should respond_to(:buy_offers)  }
-    it { should respond_to(:bids)        }
-    it { should respond_to(:asks)        }
-    it { should respond_to(:sell_offers) }
+    it { should respond_to(:offers_buy)  }
+    it { should respond_to(:offers_bu)   }
+    it { should respond_to(:offers_bf)   }
+    it { should respond_to(:offers_sell) }
+    it { should respond_to(:offers_sf)   }
+    it { should respond_to(:offers_su)   }
     it { should respond_to(:contracts)   }
   end
 
@@ -37,23 +39,23 @@ RSpec.describe User, type: :model do #
 
   describe "Offer Associations", USE_VCR do
     it 'starts with no bids' do
-      expect(usr.bids).to eq([])
+      expect(usr.offers).to eq([])
     end
 
-    it 'returns a bid if one exists' do
+    it 'returns a offer if one exists' do
       gen_unfixed
       expect(usr.offers.count).to eq(1)
-      expect(usr.buy_offers.count).to eq(1)
-      expect(usr.bids.count).to eq(1)
-      expect(usr.asks.count).to eq(0)
+      expect(usr.offers_buy.count).to eq(1)
+      expect(usr.offers_bu.count).to eq(1)
+      expect(usr.offers_bf.count).to eq(0)
     end
 
-    it 'handles bids and asks' do
+    it 'handles offers_bf and offers_bu' do
       gen_unfixed; gen_fixed
       expect(usr.offers.count).to eq(2)
-      expect(usr.buy_offers.count).to eq(2)
-      expect(usr.bids.count).to eq(1)
-      expect(usr.asks.count).to eq(1)
+      expect(usr.offers_buy.count).to eq(2)
+      expect(usr.offers_bf.count).to eq(1)
+      expect(usr.offers_bu.count).to eq(1)
     end
   end
 

@@ -18,8 +18,8 @@ Rails.application.routes.draw do
     end
     resources :repo_git_hubs, path: "/core/repos"
     resources :bugs
-    resources :bids
-    resources :asks
+    resources :offers_bu
+    resources :offers_bf
     resources :offers do
       get 'retract', :on => :member
       get 'cross'  , :on => :member
@@ -65,7 +65,7 @@ Rails.application.routes.draw do
   # ----- RESTFUL API -----
   mount ApplicationApi, at: "/api"
 
-  mount GrapeSwaggerRails::Engine, at: "/apidocs"
+  # mount GrapeSwaggerRails::Engine, at: "/apidocs"
 
   root "static#home"
 

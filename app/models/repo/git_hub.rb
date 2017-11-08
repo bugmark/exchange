@@ -17,6 +17,7 @@ class Repo::GitHub < Repo
   private
 
   def set_languages
+    return if Rails.env.test?
     languages = Octokit.languages(self.name)
     update_attribute :languages, languages.to_hash.keys.map(&:to_s).join(", ")
   end

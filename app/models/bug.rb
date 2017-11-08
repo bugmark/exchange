@@ -9,8 +9,8 @@ class Bug < ApplicationRecord
   belongs_to :repo     , :foreign_key => :stm_repo_id
   has_many   :offers   , :foreign_key => :stm_bug_id,  :dependent => :destroy
   has_many   :contracts, :foreign_key => :stm_bug_id,  :dependent => :destroy
-  has_many   :unfixeds
-  has_many   :fixeds
+  has_many   :offers_bf
+  has_many   :offers_bu
 
   hstore_accessor :xfields  , :html_url  => :string    # add field to hstore
 

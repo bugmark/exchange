@@ -4,8 +4,8 @@ RSpec.describe ContractCmd::Cross do
 
   include_context 'Integration Environment'
 
-  let(:ask)    { FG.create(:buy_fixed, user_id: usr1.id).offer         }
-  let(:bid)    { FG.create(:buy_unfixed, user_id: usr2.id).offer         }
+  let(:ask)    { FG.create(:offer_bf, user_id: usr1.id).offer         }
+  let(:bid)    { FG.create(:offer_bu, user_id: usr2.id).offer         }
   let(:user)   { FG.create(:user).user                               }
   let(:klas)   { described_class                                     }
   subject      { klas.new(ask, :expand)                              }

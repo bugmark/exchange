@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "User", USE_VCR do
 
-  let(:ask)  { FG.create(:buy_fixed, user_id: user.id).offer }
-  let(:bid)  { FG.create(:buy_unfixed, user_id: user.id).offer }
+  let(:ask)  { FG.create(:offer_bf, user_id: user.id).offer }
+  let(:bid)  { FG.create(:offer_bu, user_id: user.id).offer }
   let(:user) { FG.create(:user).user }
 
   # it "renders home" do

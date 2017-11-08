@@ -10,10 +10,12 @@ class User < ApplicationRecord
   before_save :default_values
 
   has_many :offers     , class_name: "Offer"
-  has_many :buy_offers , class_name: "Offer::Buy"
-  has_many :bids       , class_name: "Offer::Buy::Unfixed"
-  has_many :asks       , class_name: "Offer::Buy::Fixed"
-  has_many :sell_offers, class_name: "Offer::Sell"
+  has_many :offers_buy , class_name: "Offer::Buy"
+  has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"
+  has_many :offers_bf  , class_name: "Offer::Buy::Fixed"
+  has_many :offers_sell, class_name: "Offer::Sell"
+  has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
+  has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
 
   has_many :positions
 
@@ -40,11 +42,11 @@ class User < ApplicationRecord
   # ----- ACCOUNT BALANCES AND RESERVES-----
 
   def token_reserve_poolable
-    buy_offers.with_status("open").poolable.map(&:reserve_value).max || 0.0
+    offers_buy.with_status("open").poolable.map(&:reserve_value).max || 0.0
   end
 
   def token_reserve_not_poolable
-    buy_offers.with_status("open").not_poolable.map(&:reserve_value).sum || 0.0
+    offers_buy.with_status("open").not_poolable.map(&:reserve_value).sum || 0.0
   end
 
   def token_reserve

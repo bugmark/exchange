@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe "Bids" do
+describe "OffersBu" do
 
   let(:user)     { FG.create(:user).user                    }
-  let(:bid)      { FG.create(:buy_unfixed).offer                }
+  let(:bid)      { FG.create(:offer_bu).offer                }
 
   it "renders index" do
-    visit "/core/bids"
+    visit "/core/offers_bu"
     expect(page).to_not be_nil
   end
 end

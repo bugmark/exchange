@@ -4,8 +4,8 @@ RSpec.describe ContractCmd::Cross::Transfer do
 
   include_context 'Integration Environment'
 
-  let(:sell) { FG.create(:sell_unfixed, user_id: usr1.id).offer               }
-  let(:buy)  { FG.create(:buy_unfixed , user_id: usr2.id, price: 0.4).offer   }
+  let(:sell) { FG.create(:offer_su, user_id: usr1.id).offer               }
+  let(:buy)  { FG.create(:offer_bu , user_id: usr2.id, price: 0.4).offer   }
   let(:user) { FG.create(:user).user                                      }
   let(:klas) { described_class                                            }
   subject    { klas.new(sell, :transfer)                                  }
@@ -107,31 +107,31 @@ RSpec.describe ContractCmd::Cross::Transfer do
   end
 
   describe "crossing", USE_VCR do
-    let(:lcl_ask) { FG.create(:buy_fixed).offer }
+    let(:lcl_ask) { FG.create(:offer_bf).offer }
 
     context "with single bid" do
       # it 'matches higher values' do
-      #   FG.create(:buy_unfixed)
+      #   FG.create(:offer_bu)
       #   klas.new(lcl_ask, :transfer).project
       #   expect(Contract.count).to eq(0)
       #   expect(Position.count).to eq(0)
       # end
 
       # it 'generates position ownership' do
-      #   FG.create(:buy_unfixed)
+      #   FG.create(:offer_bu)
       #   klas.new(lcl_ask, :transfer).project
       #   expect(Position.first.user_id).to_not be_nil
       #   expect(Position.last.user_id).to_not be_nil
       # end
 
     #   it 'matches equal values' do
-    #     FG.create(:buy_unfixed)
+    #     FG.create(:offer_bu)
     #     klas.new(lcl_ask, :transfer).project
     #     expect(Contract.count).to eq(1)
     #   end
     #
     #   it 'fails to match lower values' do
-    #     FG.create(:buy_unfixed, price: 0.1, volume: 1)
+    #     FG.create(:offer_bu, price: 0.1, volume: 1)
     #     expect(Contract.count).to eq(0)
     #     klas.new(lcl_ask, :transfer).project
     #     expect(Contract.count).to eq(0)
@@ -140,22 +140,22 @@ RSpec.describe ContractCmd::Cross::Transfer do
 
     # context "with multiple bids" do
     #   it 'matches higher value' do
-    #     _bid1 = FG.create(:buy_unfixed, price: 0.5, volume: 10).offer
-    #     _bid2 = FG.create(:buy_unfixed, price: 0.5, volume: 10).offer
+    #     _bid1 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
+    #     _bid2 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
     #     klas.new(lcl_ask, :transfer).project
     #     expect(Contract.count).to eq(0)
     #   end
     #
     #   it 'matches equal value' do
-    #     _bid1 = FG.create(:buy_unfixed, price: 0.6, volume: 10).offer
-    #     _bid2 = FG.create(:buy_unfixed, price: 0.6, volume: 10).offer
+    #     _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
     #     klas.new(lcl_ask, :transfer).project
     #     expect(Contract.count).to eq(1)
     #   end
     #
     #   it 'fails to match lower value' do
-    #     _bid1 = FG.create(:buy_unfixed, price: 0.6, volume: 10).offer
-    #     _bid2 = FG.create(:buy_unfixed, price: 0.6, volume: 10).offer
+    #     _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
     #     klas.new(lcl_ask, :transfer).project
     #     expect(Contract.count).to eq(1)
     #   end
@@ -163,9 +163,9 @@ RSpec.describe ContractCmd::Cross::Transfer do
 
     # context "with extra bids" do
     #   it 'does minimal matching' do
-    #     _bid1 = FG.create(:buy_unfixed, price: 0.6, volume: 10).offer
-    #     _bid2 = FG.create(:buy_unfixed, price: 0.6, volume: 10).offer
-    #     _bid3 = FG.create(:buy_unfixed, price: 0.6, volume: 10).offer
+    #     _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid3 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
     #     klas.new(lcl_ask, :transfer).project
     #     expect(Contract.count).to eq(1)
     #     expect(Offer.assigned.count).to eq(0)

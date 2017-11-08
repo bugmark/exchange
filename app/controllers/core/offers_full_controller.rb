@@ -1,5 +1,5 @@
 module Core
-  class FullOffersController < ApplicationController
+  class OffersFullController < ApplicationController
 
     layout 'core'
 

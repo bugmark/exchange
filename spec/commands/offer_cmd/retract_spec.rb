@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe OfferCmd::Retract do
 
-  let(:ask)    { FG.create(:buy_fixed).offer                              }
-  let(:bid)    { FG.create(:buy_unfixed).offer                              }
+  let(:ask)    { FG.create(:offer_bf).offer                              }
+  let(:bid)    { FG.create(:offer_bu).offer                              }
   let(:user)   { FG.create(:user).user                                  }
   let(:klas)   { described_class                                        }
   subject      { klas.new(bid)                                          }

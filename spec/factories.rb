@@ -31,7 +31,7 @@ FactoryGirl.define do
     stm_repo_id { FG.create(:repo).id }
   end
 
-  factory :buy_unfixed, class: OfferCmd::CreateBuy do
+  factory :offer_bu, class: OfferCmd::CreateBuy do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(:bid, attributes) }
 
@@ -47,7 +47,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :buy_fixed, class: OfferCmd::CreateBuy do
+  factory :offer_bf, class: OfferCmd::CreateBuy do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(:ask, attributes) }
 
@@ -62,7 +62,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :sell_unfixed, class: OfferCmd::CreateSell do
+  factory :offer_su, class: OfferCmd::CreateSell do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(FG.create(:unfixed_position), attributes) }
 
@@ -70,7 +70,7 @@ FactoryGirl.define do
     volume              10
   end
 
-  factory :sell_fixed, class: OfferCmd::CreateSell do
+  factory :offer_sf, class: OfferCmd::CreateSell do
     to_create {|instance| instance.save_event.project}
     initialize_with { new(FG.create(:fixed_position), attributes) }
 
@@ -79,16 +79,16 @@ FactoryGirl.define do
   end
 
   factory :position do
-    offer    { FG.create(:buy_unfixed).offer   }
+    offer    { FG.create(:offer_bu).offer   }
     contract { FG.create(:contract)            }
     user     { FG.create(:user).user           }
 
     factory :unfixed_position do
-      offer { FG.create(:buy_unfixed).offer }
+      offer { FG.create(:offer_bu).offer }
     end
 
     factory :fixed_position do
-      offer { FG.create(:buy_fixed).offer }
+      offer { FG.create(:offer_bf).offer }
     end
   end
 

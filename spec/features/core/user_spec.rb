@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "User", USE_VCR do
 
-  let(:ask)  { FG.create(:buy_fixed, user_id: user.id).offer }
-  let(:bid)  { FG.create(:buy_unfixed, user_id: user.id).offer }
-  let(:user) { FG.create(:user).user }
+  let(:offer_bf) { FG.create(:offer_bf, user_id: user.id).offer }
+  let(:offer_bu) { FG.create(:offer_bu, user_id: user.id).offer }
+  let(:user)     { FG.create(:user).user }
 
   it "renders home" do
     login_as user, :scope => :user
@@ -21,10 +21,11 @@ describe "User", USE_VCR do
   end
 
   it "renders /core/users/:id with offers" do
-    hydrate(bid, ask)
+    hydrate(offer_bf, offer_bu)
     login_as user, :scope => :user
 
     visit "/core/users/#{user.id}"
     expect(page).to_not be_nil
   end
 end
+#

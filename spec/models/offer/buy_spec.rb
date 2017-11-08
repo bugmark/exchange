@@ -10,11 +10,11 @@ RSpec.describe Offer::Buy, type: :model do
   end
 
   def gen_unfixed(args = {})
-    FG.create(:buy_unfixed, valid_params.merge(args)).offer
+    FG.create(:offer_bu, valid_params.merge(args)).offer
   end
 
   def gen_fixed(args = {})
-    FG.create(:buy_fixed, valid_params.merge(args)).offer
+    FG.create(:offer_bf, valid_params.merge(args)).offer
   end
 
   let(:usr)    { FG.create(:user, balance: 100.0).user }

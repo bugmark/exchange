@@ -1,5 +1,5 @@
 module Core
-  class SellOffersController < ApplicationController
+  class OffersSellController < ApplicationController
 
     layout 'core'
 

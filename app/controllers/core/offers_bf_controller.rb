@@ -1,23 +1,23 @@
 module Core
-  class AsksController < ApplicationController
+  class OffersBfController < ApplicationController
 
     layout 'core'
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
     def index
-      @bug = @repo = nil
-      @timestamp = Time.now.strftime("%H:%M:%S")
-      case
-        when bug_id = params["bug_id"]&.to_i
-          @bug = Bug.find(bug_id)
-          @asks = Offer::Buy::Fixed.where(bug_id: bug_id)
-        when stm_repo_id = params["stm_repo_id"]&.to_i
-          @repo = Repo.find(stm_repo_id)
-          @asks = Offer::Buy::Fixed.where(stm_repo_id: stm_repo_id)
-        else
-          @asks = Offer::Buy::Fixed.all
-      end
+    #   @bug = @repo = nil
+    #   @timestamp = Time.now.strftime("%H:%M:%S")
+    #   case
+    #     when bug_id = params["bug_id"]&.to_i
+    #       @bug = Bug.find(bug_id)
+    #       @asks = Offer::Buy::Fixed.where(bug_id: bug_id)
+    #     when stm_repo_id = params["stm_repo_id"]&.to_i
+    #       @repo = Repo.find(stm_repo_id)
+    #       @asks = Offer::Buy::Fixed.where(stm_repo_id: stm_repo_id)
+    #     else
+    #       @asks = Offer::Buy::Fixed.all
+    #   end
     end
 
     def new
@@ -30,7 +30,7 @@ module Core
       if @ask.save_event.project
         redirect_to("/core/offers/#{@ask.id}")
       else
-        render 'core/asks/new'
+        render 'core/offers_bf/new'
       end
     end
 

@@ -5,7 +5,7 @@ class Position < ApplicationRecord
   before_validation :default_values
 
   belongs_to :offer       , optional:   true
-  has_many   :sell_offers , class_name: "Offer"   , :foreign_key => :parent_position_id
+  has_many   :offers_sell , class_name: "Offer"   , :foreign_key => :parent_position_id
   belongs_to :user                                , optional: true
   belongs_to :escrow                              , optional: true
   belongs_to :parent      , class_name: "Position", optional: true
