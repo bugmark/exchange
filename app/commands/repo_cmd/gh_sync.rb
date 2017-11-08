@@ -35,11 +35,11 @@ module RepoCmd
       issues = Octokit.issues(repo.name) # uses ETAG to make conditional request
       issues.each do |el|
         attrs = {
-          stm_repo_id:   self.id       ,
+          stm_repo_id: self.id         ,
           type:        "Bug::GitHub"   ,
           exref:       el["id"]        ,
           stm_title:   el["title"]     ,
-          stm_labels:  ""              ,
+          stm_labels:  labels_for(el)  ,
           stm_status:  el["state"]     ,
           html_url:    el["html_url"]  ,
           synced_at:   Time.now
@@ -47,6 +47,10 @@ module RepoCmd
         bug = BugCmd::Sync.new(attrs)
         bug.save_event.project
       end
+    end
+
+    def labels_for(el)
+      el["labels"].map {|x| x[:name]}.join(", ")
     end
   end
 end
