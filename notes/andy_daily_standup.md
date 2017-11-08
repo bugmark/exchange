@@ -15,7 +15,6 @@ Outcomes
 - [x] project & contracts - rough-out
 - [ ] post offers
 - [ ] contract cross
-- [ ] contract resolve (stretch)
 
 Discussion
 - designer availability?
@@ -25,9 +24,11 @@ Nov 8
 ----------------------------------------------
 
 Outcomes
+- [ ] contract cross
+- [ ] contract resolve
 - [ ] working notification emails
-- [ ] user registration per designer workflows
-- [ ] design GitHub SSO
 
 Discussion
 - http://bugmark.net/api/docs - working / pre-alpha
+- Q: what is the gray 'unfixed' badge on /issues?
+- Q: what is the semantics of the green circle by Transfer

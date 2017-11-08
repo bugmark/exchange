@@ -44,12 +44,15 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
   .row
     .col-md-4
       small
-        b> Issue
-        = bug.id
-        br
-        b>  Created
-        = bug.created_at
         table.table-sm
+          tr
+            td
+              b Issue
+            td = bug.id
+          tr
+            td
+              b Created
+            td = bug.created_at.strftime("%y-%m-%d %H:%M:%S")
           tr
             td
               b Issue labels
@@ -59,7 +62,8 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
               b Project languages
             td = bug.repo.languages
     .col-md-4
-      | TBD
+      = docfix_issue_contracts(bug)
+      = docfix_issue_offers(bug)
     .col-md-4
       button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
   hr

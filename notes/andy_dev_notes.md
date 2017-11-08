@@ -399,12 +399,14 @@ Next Actions:
 
 - [x] docfix: add project page
 - [x] docfix: add contract page
-- [ ] docfix: grab project languages
+- [x] docfix: grab project languages
+- [x] docfix: grab issue labels
+- [x] core:   refactor offer associations (bid/ask > BF/BU)
 - [ ] docfix: post offers
-- [ ] docfix: contract cross and resolve
 
 # TBD
 
+- [ ] docfix: contract cross and resolve
 - [ ] docfix: get notification emails working
 - [ ] docfix: add designer registration page
 - [ ] docfix: get labels working
