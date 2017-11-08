@@ -33,14 +33,13 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
     .col-md-4
       h4
         a>[href="/docfix/issues/#{bug.id}"] #{bug.stm_title}
-        span.badge.badge-default UNFIXED
+        = docfix_issue_status_badge(bug)
     .col-md-4
       b Offers & Contracts
     .col-md-4
       b
         ' Get involved
-      i.fa.fa-question-circle
-        |  Why would I do this?
+      = docfix_issue_why_would_i(bug)
   .row
     .col-md-4
       small
@@ -65,7 +64,7 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
       = docfix_issue_contracts(bug)
       = docfix_issue_offers(bug)
     .col-md-4
-      button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+      = docfix_issue_action_btns(bug)
   hr
 
 .text-center[style='margin-top: 30px;']

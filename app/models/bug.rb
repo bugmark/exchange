@@ -22,6 +22,9 @@ class Bug < ApplicationRecord
     self.type.gsub("Bug::","")
   end
 
+  def has_offers?()    offers.count > 0    end
+  def has_contracts?() contracts.count > 0 end
+
   private
 
   def update_stm_ids

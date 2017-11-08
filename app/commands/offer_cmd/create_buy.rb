@@ -7,7 +7,7 @@ module OfferCmd
     attr_vdelegate       :maturation, :offer
 
     def initialize(typ, offer_args)
-      @typ   = typ                          # bid or ask
+      @typ   = typ                          # offer_bf or offer_bu
       @offer = klas.new(default_values.merge(offer_args))
       @user  = User.find(offer.user_id)
     end
@@ -24,8 +24,8 @@ module OfferCmd
 
     def klas
       case typ.to_s
-        when "bid" then Offer::Buy::Unfixed
-        when "ask" then Offer::Buy::Fixed
+        when "offer_bu" then Offer::Buy::Unfixed
+        when "offer_bf" then Offer::Buy::Fixed
         else raise "unknown type (#{typ.to_s})"
       end
     end

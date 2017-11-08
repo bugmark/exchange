@@ -48,8 +48,14 @@ Rails.application.routes.draw do
     end
 
     resources :projects
-    resources :issues
+    resources :issues do
+      get 'offer_bf' , :on => :member
+      get 'offer_bu' , :on => :member
+      get 'offer_buy', :on => :member
+    end
     resources :offers
+    resources :offers_bu
+    resources :offers_bf
     resources :contracts
     resource  :profile do
       get 'my_issues'

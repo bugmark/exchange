@@ -7,9 +7,9 @@
           For a fix: Bid => unfixed/false.
           For information: Bid => unfound/false.
 hr
-- if @bid.errors.any?
+- if @offer_bu.errors.any?
   .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@bid, url: '/core/offers_bu') do |f|
+= bootstrap_form_for(@offer_bu, url: '/core/offers_bu') do |f|
   = f.hidden_field :type
   = f.hidden_field :user_id
   .row
@@ -20,9 +20,9 @@ hr
     .col-md-12
       small
         | Bids and Asks are defined in Standard Units.
-           BugMark trades standard units that payoff either 1 token or 0 tokens.
-           The price for a unit varies between 0.00 and 1.00 tokens.
-           For all contracts, the Bid Price and the Ask Price always total 1.00.
+          BugMark trades standard units that payoff either 1 token or 0 tokens.
+          The price for a unit varies between 0.00 and 1.00 tokens.
+          For all contracts, the Bid Price and the Ask Price always total 1.00.
   div style='background: lightgrey; padding: 4px; margin-top: 10px;'
     | Match Params (blank for "don't care")
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
