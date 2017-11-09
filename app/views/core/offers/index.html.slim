@@ -21,7 +21,7 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
         td = core_user_link(offer.user)
         td = offer.status
         td = offer.volume
-        td = offer.price
+        td = offer.price.round(2)
         td = core_offer_attach_link(offer)
         td
           nobr

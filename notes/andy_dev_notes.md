@@ -404,7 +404,10 @@ Next Actions:
 - [x] core:   refactor offer associations (bid/ask > BF/BU)
 - [x] docfix: post offers
 
-# Nov 08
+# Nov 09
+
+- [ ] docfix: cleanup offer_bu, offer_bf
+- [ ] docfix: create take_bu, take_bf
 
 - [ ] docfix: contract cross
 - [ ] docfix: contract resolve

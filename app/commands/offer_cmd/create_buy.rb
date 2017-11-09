@@ -6,10 +6,13 @@ module OfferCmd
     attr_delegate_fields :offer     , class_name: "Offer::Buy"
     attr_vdelegate       :maturation, :offer
 
+    attr_accessor :tgt_escrow
+
     def initialize(typ, offer_args)
-      @typ   = typ                          # offer_bf or offer_bu
-      @offer = klas.new(default_values.merge(offer_args))
-      @user  = User.find(offer.user_id)
+      @typ        = typ                          # offer_bf or offer_bu
+      @tgt_escrow = offer_args.delete("tgt_escrow") || 0
+      @offer      = klas.new(default_values.merge(offer_args))
+      @user       = User.find(offer.user_id)
     end
 
     def event_data
@@ -18,6 +21,9 @@ module OfferCmd
 
     def transact_before_project
       offer.status = 'open'
+      if tgt_escrow != 0
+        self.price = volume.to_f / tgt_escrow.to_i
+      end
     end
 
     private
@@ -33,7 +39,7 @@ module OfferCmd
     def default_values
       {
         status: 'open'
-      }
+      }.stringify_keys
     end
   end
 end
