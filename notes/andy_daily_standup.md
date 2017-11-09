@@ -51,7 +51,7 @@ Nov 9
 ----------------------------------------------
 
 Discussion
-- http://bugmark.net/api/docs - working / pre-alpha
+- http://bugmark.net/apidocs - working / pre-alpha
 
 Target Outcomes
 - [ ] working contract resolve
