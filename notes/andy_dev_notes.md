@@ -406,14 +406,13 @@ Next Actions:
 
 # Nov 09
 
-- [ ] docfix: cleanup offer_bu, offer_bf
+- [x] docfix: working offer_bu, offer_bf
+- [x] docfix: contract cross
 - [ ] docfix: create take_bu, take_bf
 
-- [ ] docfix: contract cross
-- [ ] docfix: contract resolve
-- [ ] core:   contract resolve
-
 - [ ] all: add success flash messages after creating offer and contract
+
+- [ ] all: contract resolve
 
 - [ ] docfix: write a bot for testing and for demos
 
