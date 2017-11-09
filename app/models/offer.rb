@@ -80,7 +80,7 @@ class Offer < ApplicationRecord
   end
 
   def overlap_offers
-    self.class.overlaps(self)
+    match_offers.overlaps(self)
   end
 
   def overlap_contracts
@@ -104,11 +104,16 @@ class Offer < ApplicationRecord
       base = where('price >= ?', offer.price)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
+
+    def crosses()
+
+    end
   end
 
-  def cross_offers
-    self.class.crosses(self)
+  def has_qualified_counteroffers?(cross_type)
+    qualified_counteroffers(cross_type).length > 0
   end
+  alias_method :has_counters?, :has_qualified_counteroffers?
 
   # ----- INSTANCE METHODS -----
 

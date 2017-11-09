@@ -39,11 +39,11 @@ module CoreAsksHelper
   end
 
   # TODO: fixme
-  def ask_cross_link(ask)
-    return nil
-    return nil if ask.matching_bid_reserve < ask.price
-    raw "<a href='/core/offers/#{ask.id}/cross'>cross</a>"
-  end
+  # def ask_cross_link(ask)
+  #   return nil
+  #   return nil if ask.matching_bid_reserve < ask.price
+  #   raw "<a href='/core/offers/#{ask.id}/cross'>cross</a>"
+  # end
 
   def ask_actions(ask)
     canc  = ask_cancel_link(ask)

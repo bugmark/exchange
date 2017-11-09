@@ -48,12 +48,10 @@ module CoreOffersHelper
   end
 
   def core_offer_cross_link(offer)
-    if offer.status == "open"
-      path = "/core/offers/#{offer.id}/cross"
-      raw "<a href='#{path}'>cross</a>"
-    else
-      nil
-    end
+    return nil unless offer.status == "open"
+    return nil unless offer.has_counters?(:expand)
+    path = "/core/offers/#{offer.id}/cross"
+    raw "<a href='#{path}'>cross</a>"
   end
 
   def core_offer_retract_link(offer)

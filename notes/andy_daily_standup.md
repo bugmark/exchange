@@ -3,7 +3,7 @@
 Nov 6
 ----------------------------------------------
 
-Outcomes
+Target Outcomes
 - [x] initial framework buildout
 - [x] text extraction example
 - [x] responsive page example
@@ -15,7 +15,7 @@ Discussion
 - designer availability?
 - today's ethereum hack
 
-Outcomes
+Target Outcomes
 - [x] project & contracts - rough-out
 - [x] post offers (backend working - frontend style needs attention...)
 - [ ] contract cross
@@ -24,7 +24,6 @@ Nov 8
 ----------------------------------------------
 
 Discussion
-- http://bugmark.net/api/docs - working / pre-alpha
 - Q: what is the gray 'unfixed' badge on /issues?
 - Q: what is the semantics of the green circle by Transfer?
 - Q: how to calculate prices?
@@ -43,9 +42,18 @@ Discussion
     - invest 8 => BF 0.2  / BU 0.8
     NOTE: CAN'T INVEST MORE THAN 10!  (0 and 10 are allowed...)
 
-Outcomes
-- [ ] cleanup offer/new pages
-- [ ] contract cross
+Target Outcomes
+- [x] refactor offer/new pages
+- [x] contract cross
 - [ ] contract resolve
 
-    
+Nov 9
+----------------------------------------------
+
+Discussion
+- http://bugmark.net/api/docs - working / pre-alpha
+
+Target Outcomes
+- [ ] working contract resolve
+- [ ] code cleanup & refactoring
+- [ ] add integration tests

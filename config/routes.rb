@@ -53,7 +53,9 @@ Rails.application.routes.draw do
       get 'offer_bu' , :on => :member
       get 'offer_buy', :on => :member
     end
-    resources :offers
+    resources :offers do
+      get 'cross'   , :on => :member
+    end
     resources :offers_bu
     resources :offers_bf
     resources :contracts

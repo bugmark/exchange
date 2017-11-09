@@ -15,13 +15,13 @@ module Docfix
 
     def offer_bf
       @bug      = Bug.find(params["id"])
-      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, tgt_escrow: 50})
+      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, volume: 10, tgt_escrow: 50})
       @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, opts)
     end
 
     def offer_bu
       @bug      = Bug.find(params["id"])
-      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, tgt_escrow: 50})
+      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, volume: 40, tgt_escrow: 50})
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, opts)
     end
 

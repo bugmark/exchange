@@ -30,3 +30,8 @@ small
     hr
     .text-center
       | 200 tokens
+
+- if @offer.has_counters?(:expand)
+  hr
+  p.text-center
+    a[href="/docfix/offers/#{@offer.id}/cross"] CROSS
