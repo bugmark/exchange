@@ -19,7 +19,7 @@ module Docfix
     private
 
     def perm(params)
-      fields = Offer::Buy::Unfixed.attribute_names.map(&:to_sym)
+      fields = Offer::Buy::Unfixed.attribute_names.map(&:to_sym) + [:tgt_escrow]
       params.permit(fields)
     end
 

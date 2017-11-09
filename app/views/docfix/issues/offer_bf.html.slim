@@ -5,7 +5,7 @@ small
 
 hr
 
-h4 Match Offer
+h4 Create Offer
 
 b> Issue
 => @bug.stm_title
@@ -16,11 +16,16 @@ p
   = f.hidden_field :user_id
   = f.hidden_field :stm_bug_id
   = f.hidden_field :stm_status
-  p I will invest #{f.number_field :volume, min: 1, step: 1, label: false, inline: true}
-    tokens that this issue FIXED on $DATE and will earn 10 tokens in the
-    event that this will happen
+  .row
+    .col-md-4
+      = f.number_field :volume, min: 1, step: 1, label: "I will invest X tokens"
+    .col-md-4
+      = f.number_field :tgt_escrow, min: 1, step: 1, label: "To earn Y tokens"
+    .col-md-4
+      = f.datetime_field :maturation, label: "if issue #{@bug.id} is FIXED on Z date"
   p
-    = f.submit "Match Offer"
+    = f.submit "Create Offer to Buy Fixed"
+    a.btn.btn-secondary[style='margin-left: 5px;' href='/docfix/issues/#{@bug.id}'] Cancel
 
 p This would place the marketprice of $TOKENS & the possibility of
   fixed at %n (unfixed) and %n (fixed).
