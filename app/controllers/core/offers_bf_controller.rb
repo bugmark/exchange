@@ -28,6 +28,7 @@ module Core
       opts = params["offer_cmd_create_buy"]
       @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, new_opts.merge(valid_params(opts)))
       if @offer_bf.save_event.project
+        flash[:notice] = "Offer created! (BF)"
         redirect_to("/core/offers/#{@offer_bf.id}")
       else
         render 'core/offers_bf/new'

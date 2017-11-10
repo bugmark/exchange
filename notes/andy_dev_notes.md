@@ -408,9 +408,16 @@ Next Actions:
 
 - [x] docfix: working offer_bu, offer_bf
 - [x] docfix: contract cross
-- [ ] docfix: create take_bu, take_bf
+- [x] all: add success flash messages after creating offer and contract
 
-- [ ] all: add success flash messages after creating offer and contract
+- [ ] feature spec: docfix projects
+- [ ] feature spec: docfix issues
+- [ ] feature spec: docfix offers
+- [ ] feature spec: docfix 
+
+- [ ] spec: BuyOfferCreate with target payout
+
+- [ ] docfix: create take_bu, take_bf
 
 - [ ] all: contract resolve
 

@@ -2,5 +2,7 @@
 
 BugMark - A Blockchain Market for Software Issues
 
-See https://bugmark.net for more info.
+Referencese
+- [live website](https://bugmark.net)
+- [dev-env configuration](notes/devenv.md)
 
