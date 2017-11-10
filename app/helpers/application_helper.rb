@@ -1,5 +1,16 @@
 module ApplicationHelper
 
+  def flash_alert(flash)
+    alt = flash.to_hash.stringify_keys
+    alt["success"] ||= alt.delete("notice")
+    alt["danger"]  ||= alt.delete("alert")
+    keys = %w(primary secondary success danger warning info light dark)
+    return "" unless key = keys.find {|k| alt[k]}
+    raw """
+    <div class='alert alert-#{key}' role='alert'>#{alt[key]}</div>
+    """
+  end
+
   def breadcrumb(list)
     head = list[0..-2].map do |elem|
       lbl, lnk = elem

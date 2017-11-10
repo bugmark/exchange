@@ -28,6 +28,7 @@ html[lang="en-US"]
         - else
           = content_for(:devise)
     .container-fluid[style="margin-top: 65px;"]
+      = flash_alert(flash)
       = content_for?(:body) ? content_for(:body) : yield
       hr
       footer

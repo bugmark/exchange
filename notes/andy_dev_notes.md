@@ -408,9 +408,19 @@ Next Actions:
 
 - [x] docfix: working offer_bu, offer_bf
 - [x] docfix: contract cross
-- [ ] docfix: create take_bu, take_bf
+- [x] all: add success flash messages after creating offer and contract
+- [x] all: add devenv page
 
-- [ ] all: add success flash messages after creating offer and contract
+# Nov 10
+
+- [ ] feature spec: docfix projects
+- [ ] feature spec: docfix issues
+- [ ] feature spec: docfix offers
+- [ ] feature spec: docfix 
+
+- [ ] spec: BuyOfferCreate with target payout
+
+- [ ] docfix: create take_bu, take_bf
 
 - [ ] all: contract resolve
 
@@ -419,10 +429,15 @@ Next Actions:
 - [ ] add :offer_bu to create_buy_spec
 - [ ] docfix: add Jquery to dynamically update prices
 - [ ] docfix: cleanup offer pages
-- [ ] docfix: move offer pages to modals
+
+- [ ] docfix: cleanup event generation
+- [ ] docfix: test event replay
+- [ ] docfix: get blockchain reporting working
+- [ ] docfix: write events to testnet
 
 # TBD
 
+- [ ] docfix: move offer pages to modals
 - [ ] docfix: get notification emails working
 - [ ] docfix: add designer registration page
 - [ ] docfix: get labels working
@@ -431,7 +446,6 @@ Next Actions:
 - [ ] docfix: get GitHub signup working
 - [ ] docfix: design wallet structure
 - [ ] docfix: get stripe integration working
-- [ ] docfix: get blockchain reporting working
 - [ ] docfix: BitCoin integration
 - [ ] docfix: Eth integration
 
