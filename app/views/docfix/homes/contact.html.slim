@@ -1,1 +1,12 @@
-| DOCFIX HOME CONTACT
+= render partial: "docfix/homes/docfix_contact"
+
+nav aria-label="breadcrumb" role="navigation"
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/docfix/home" BugMark
+    li.breadcrumb-item.active aria-current="page"
+      | Contact
+
+.row
+  .col-md-12
+    = content_for(:contact_body)
