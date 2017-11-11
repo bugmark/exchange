@@ -57,7 +57,7 @@ Follow these steps to bootstrap the app in your development environment.
 
 2. Install NPM components: `yarn install`
 
-3. Get seed data from a partner:
+3. Get seed data from a partner: (you might get by without this...)
 
 | PARTNER COMMAND         | YOUR COMMAND          |
 |-------------------------|-----------------------|

@@ -413,16 +413,36 @@ Next Actions:
 
 # Nov 10
 
-- [ ] feature spec: docfix projects
-- [ ] feature spec: docfix issues
-- [ ] feature spec: docfix offers
-- [ ] feature spec: docfix 
+- [x] feature spec: docfix projects
+- [x] feature spec: docfix issues
+- [x] feature spec: docfix offers
+- [x] feature spec: docfix 
+- [x] OfferCmd::CreateBuy with stake
+- [x] OfferCmd::CreateBuy - validation of stake (spec)
 
-- [ ] spec: BuyOfferCreate with target payout
+# Nov 11
+
+- [x] OfferCmd::CreateBuy - BF - validation of stake (UI / error message)
+- [x] OfferCmd::CreateBuy - BU - validation of stake (UI / error message)
+
+- [ ] Flash.now not working...
+- [ ] OfferCmd::CreateBuy - BF/BU - Add header error-message
+- [ ] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error
+
+- [ ] OfferCmd::CreateBuy - BF - feature spec
+- [ ] OfferCmd::CreateBuy - BU - feature spec
+
+- [ ] design "Be the first to invest"
+
+- [ ] generate re-offers
+- [ ] contract resolve
+- [ ] create sale offers
+- [ ] cancel sale offers
+- [ ] cross sale offers (reduction)
+- [ ] cross goes beyond limit and triggers suspension
+- [ ] test for 0/100 and 100/0 pricing
 
 - [ ] docfix: create take_bu, take_bf
-
-- [ ] all: contract resolve
 
 - [ ] docfix: write a bot for testing and for demos
 
@@ -434,6 +454,8 @@ Next Actions:
 - [ ] docfix: test event replay
 - [ ] docfix: get blockchain reporting working
 - [ ] docfix: write events to testnet
+
+- [ ] move GH API Key to .env
 
 # TBD
 

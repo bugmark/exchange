@@ -13,8 +13,10 @@ class Offer < ApplicationRecord
   belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
   belongs_to :transfer        , optional: true
 
-  VALID_STATUS = %w(open suspended crossed expired retracted)
-  validates :status, inclusion:    {in: VALID_STATUS }
+  VALID_STATUS     = %w(open suspended crossed expired retracted)
+  VALID_STM_STATUS = %w(open closed) + ["", nil]
+  validates :status    , inclusion:    {in: VALID_STATUS     }
+  validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 

@@ -14,6 +14,9 @@ class Bug < ApplicationRecord
 
   hstore_accessor :xfields  , :html_url  => :string    # add field to hstore
 
+  VALID_STM_STATUS = %w(open closed) + ["", nil]
+  validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
+
   def xtag
     "bug"
   end

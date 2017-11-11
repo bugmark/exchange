@@ -17,6 +17,9 @@ RSpec.describe OfferCmd::CreateBuy do
   describe "Attributes" do
     it { should respond_to :user                   }
     it { should respond_to :offer                  }
+    it { should respond_to :stake                  }
+    it { should respond_to :volume                 }
+    it { should respond_to :price                  }
   end
 
   describe "Object Existence" do
@@ -82,6 +85,24 @@ RSpec.describe OfferCmd::CreateBuy do
       subject.save_event.project
       expect(EventLine.count).to eq(2)
       expect(Offer.count).to eq(1)
+    end
+  end
+
+  describe "creation with a stake" do
+    it "generates valid object" do
+      obj = klas.new(:offer_bu, valid_params(stake: 2, volume: 20))
+      expect(obj).to be_valid
+    end
+
+    it "generates price" do
+      obj = klas.new(:offer_bu, valid_params(stake: 2, volume: 20))
+      expect(obj).to be_valid
+      expect(obj.project.price).to eq(0.1)
+    end
+
+    it "validates stake" do
+      obj = klas.new(:offer_bu, valid_params(stake: 40, volume: 20))
+      expect(obj).to_not be_valid
     end
   end
 end
