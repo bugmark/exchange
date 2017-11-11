@@ -18,9 +18,9 @@ p
   = f.hidden_field :stm_status
   .row
     .col-md-4
-      = f.number_field   :volume    , min: 1, step: 1, label: "I will invest X tokens"
+      = f.number_field   :stake , min: 1, step: 1, label: "I will stake X tokens"
     .col-md-4
-      = f.number_field   :tgt_escrow, min: 1, step: 1, label: "To earn Y tokens"
+      = f.number_field   :volume, min: 1, step: 1, label: "To earn Y tokens"
     .col-md-4
       = f.datetime_field :maturation, label: "if issue #{@bug.id} is UNFIXED on Z date"
   p

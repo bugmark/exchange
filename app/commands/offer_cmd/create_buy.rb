@@ -6,13 +6,17 @@ module OfferCmd
     attr_delegate_fields :offer     , class_name: "Offer::Buy"
     attr_vdelegate       :maturation, :offer
 
-    attr_accessor :tgt_escrow
+    attr_accessor :stake
 
+    validate :stake_amount
+
+    # NOTE: the offer_args must contain either a price or a stake
     def initialize(typ, offer_args)
-      @typ        = typ                          # offer_bf or offer_bu
-      @tgt_escrow = offer_args.delete("tgt_escrow") || 0
-      @offer      = klas.new(default_values.merge(offer_args))
-      @user       = User.find(offer.user_id)
+      @typ   = typ                         # offer_bf or offer_bu
+      starg  = offer_args.stringify_keys
+      @stake = starg.delete("stake") || 0
+      @offer = klas.new(default_values.merge(starg))
+      @user  = User.find(offer.user_id)
     end
 
     def event_data
@@ -21,12 +25,21 @@ module OfferCmd
 
     def transact_before_project
       offer.status = 'open'
-      if tgt_escrow != 0
-        self.price = volume.to_f / tgt_escrow.to_i
+      if stake != 0
+        self.price = stake.to_i / volume.to_f
       end
     end
 
     private
+
+    def stake_amount
+      return if stake.to_i == 0
+
+      if stake.to_i > volume
+        errors.add :stake, "must be less than volume"
+        return false
+      end
+    end
 
     def klas
       case typ.to_s

@@ -12,14 +12,16 @@ module Docfix
       if @offer_bf.save_event.project
         redirect_to("/docfix/offers/#{@offer_bf.id}")
       else
-        render 'docfix/offers_bf/new'
+        @bug = @offer_bf.offer.bug
+        flash.now["error"] = "Error!"
+        render "docfix/issues/offer_bf"
       end
     end
 
     private
 
     def perm(params)
-      fields = Offer::Buy::Fixed.attribute_names.map(&:to_sym)
+      fields = Offer::Buy::Fixed.attribute_names.map(&:to_sym) + [:stake]
       params.permit(fields)
     end
   end

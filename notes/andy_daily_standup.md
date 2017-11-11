@@ -62,7 +62,6 @@ Nov 10
 ----------------------------------------------
 
 Discussion
-
 - got sidetracked yesterday :-|
 - content pages on https://github.com/mvscorg/bugmark
 
@@ -78,3 +77,9 @@ Discussion
  - [ ] working contract resolve
  - [ ] code cleanup & refactoring
  - [ ] add integration tests
+ 
+Nov 13
+----------------------------------------------
+
+Discussion
+- changed the word 'invest' to 'stake' for internal consistency (new BF/BU)

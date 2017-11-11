@@ -27,18 +27,6 @@ class User < ApplicationRecord
     positions.map(&:contract).flatten.uniq.sort_by {|c| c.id}
   end
 
-  # ----- ASSOCIATIONS -----
-
-  # def published_contracts
-    # Contract.where(user_id: self.id)
-    # []
-  # end
-
-  # def taken_contracts
-    # Contract.where(user_id: self.id)
-    # []
-  # end
-
   # ----- ACCOUNT BALANCES AND RESERVES-----
 
   def token_reserve_poolable
