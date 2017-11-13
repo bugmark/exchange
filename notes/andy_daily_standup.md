@@ -81,15 +81,15 @@ Discussion
 Mon Nov 13
 ----------------------------------------------
 
-Discussion
-- changed the word 'invest' to 'stake' for internal consistency (new BF/BU)
-- at the API level, when making an offer you can specify a price or a stake
+Discussion - changes to support Docfix design...
+- at the API level, when making an offer you can specify a price OR a stake
 - internally, we calculate & store a price
 - validation rule: 0 <= stake <= volume
+- changed the word 'invest' to 'stake' for internal consistency (new BF/BU)
 
 Goals for the Week
-- all trading paths working
-- logging to ethereum-testnet
+- [ ] all trading paths working
+- [ ] logging to ethereum-testnet
 
 Target Outcomes Nov 13
 - [ ] finish code cleanup / refactoring
