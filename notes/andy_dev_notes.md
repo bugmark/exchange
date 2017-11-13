@@ -425,6 +425,8 @@ Next Actions:
 - [x] OfferCmd::CreateBuy - BF - validation of stake (UI / error message)
 - [x] OfferCmd::CreateBuy - BU - validation of stake (UI / error message)
 
+# Nov 13
+
 - [ ] Flash.now not working...
 - [ ] OfferCmd::CreateBuy - BF/BU - Add header error-message
 - [ ] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error

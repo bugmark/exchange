@@ -1,6 +1,6 @@
 # Andy Daily Standup
 
-Nov 6
+Mon Nov 6
 ----------------------------------------------
 
 Target Outcomes for Nov 6
@@ -8,7 +8,7 @@ Target Outcomes for Nov 6
 - [x] text extraction example
 - [x] responsive page example
 
-Nov 7
+Tue Nov 7
 ----------------------------------------------
 
 Discussion
@@ -20,7 +20,7 @@ Target Outcomes for Nov 7
 - [x] post offers (backend working - frontend style needs attention...)
 - [ ] contract cross
 
-Nov 8
+Wed Nov 8
 ----------------------------------------------
 
 Discussion
@@ -47,7 +47,7 @@ Target Outcomes for Nov 8
 - [x] contract cross
 - [ ] contract resolve
 
-Nov 9
+Thu Nov 9
 ----------------------------------------------
 
 Discussion
@@ -58,7 +58,7 @@ Target Outcomes for Nov 9
 - [ ] code cleanup & refactoring
 - [ ] add integration tests
 
-Nov 10
+Fri Nov 10
 ----------------------------------------------
 
 Discussion
@@ -74,12 +74,24 @@ Discussion
  - devenv page - see https://github.com/mvscorg/bugmark/README.md
  
  Target Outcomes for Nov 10
- - [ ] working contract resolve
- - [ ] code cleanup & refactoring
- - [ ] add integration tests
+ - [x] working contract resolve
+ - [x] add integration tests
+ - [ ] code cleanup & refactoring (partial)
  
-Nov 13
+Mon Nov 13
 ----------------------------------------------
 
 Discussion
 - changed the word 'invest' to 'stake' for internal consistency (new BF/BU)
+- at the API level, when making an offer you can specify a price or a stake
+- internally, we calculate & store a price
+- validation rule: 0 <= stake <= volume
+
+Goals for the Week
+- all trading paths working
+- logging to ethereum-testnet
+
+Target Outcomes Nov 13
+- [ ] finish code cleanup / refactoring
+- [ ] implement "Be the first to invest"
+- [ ] test re-offers, sale offers, cancel sales, suspensions, 0/100 pricing, ...
