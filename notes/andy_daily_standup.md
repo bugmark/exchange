@@ -90,6 +90,7 @@ Discussion - changes to support Docfix design...
 Goals for the Week
 - [ ] all trading paths working
 - [ ] logging to ethereum-testnet
+- [ ] trading sessions in our standups
 
 Target Outcomes Nov 13
 - [ ] finish code cleanup / refactoring
