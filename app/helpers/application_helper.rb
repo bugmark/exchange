@@ -4,6 +4,7 @@ module ApplicationHelper
     alt = flash.to_hash.stringify_keys
     alt["success"] ||= alt.delete("notice")
     alt["danger"]  ||= alt.delete("alert")
+    alt["danger"]  ||= alt.delete("error")
     keys = %w(primary secondary success danger warning info light dark)
     return "" unless key = keys.find {|k| alt[k]}
     raw """

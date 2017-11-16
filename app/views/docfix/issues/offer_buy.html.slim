@@ -3,4 +3,7 @@
 small
   a href="/docfix/issues/#{@bug.id}" return to issue #{@bug.id}
 
-p CONTENT HERE
+p.text-center[style='margin: 80px']
+  a<>[href='/docfix/issues/#{@bug.id}/offer_bu'] Buy Unfixed
+  | |
+  a<>[href='/docfix/issues/#{@bug.id}/offer_bf'] Buy Fixed

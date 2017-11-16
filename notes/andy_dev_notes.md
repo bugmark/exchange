@@ -425,16 +425,17 @@ Next Actions:
 - [x] OfferCmd::CreateBuy - BF - validation of stake (UI / error message)
 - [x] OfferCmd::CreateBuy - BU - validation of stake (UI / error message)
 
-# Nov 13
+# Nov 15
 
-- [ ] Flash.now not working...
-- [ ] OfferCmd::CreateBuy - BF/BU - Add header error-message
-- [ ] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error
+- [x] Flash.now not working...
+- [x] OfferCmd::CreateBuy - BF/BU - Add header error-message
+- [x] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error
 
 - [ ] OfferCmd::CreateBuy - BF - feature spec
 - [ ] OfferCmd::CreateBuy - BU - feature spec
 
-- [ ] design "Be the first to invest"
+- [x] design "Be the first to invest"
+- [x] implement "Be the first to invest"
 
 - [ ] generate re-offers
 - [ ] contract resolve

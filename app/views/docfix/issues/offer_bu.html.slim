@@ -11,6 +11,8 @@ b> Issue
 => @bug.stm_title
 | (Issue ##{@bug.id})
 p
+- if @offer_bu.errors.any?
+  .alert.alert-danger Please fix the errors below.
 = bootstrap_form_for(@offer_bu, url: '/docfix/offers_bu') do |f|
   = f.hidden_field :type
   = f.hidden_field :user_id
