@@ -93,6 +93,6 @@ Goals for the Week
 - [ ] trading sessions in our standups
 
 Target Outcomes Nov 13
-- [ ] finish code cleanup / refactoring
-- [ ] implement "Be the first to invest"
+- [x] finish code cleanup / refactoring
+- [x] implement "Be the first to invest"
 - [ ] test re-offers, sale offers, cancel sales, suspensions, 0/100 pricing, ...

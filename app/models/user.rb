@@ -38,7 +38,8 @@ class User < ApplicationRecord
   end
 
   def token_reserve
-    token_reserve_poolable + token_reserve_not_poolable
+    result = token_reserve_poolable + token_reserve_not_poolable
+    result.round(2)
   end
 
   def token_available

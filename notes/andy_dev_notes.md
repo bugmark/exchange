@@ -425,24 +425,44 @@ Next Actions:
 - [x] OfferCmd::CreateBuy - BF - validation of stake (UI / error message)
 - [x] OfferCmd::CreateBuy - BU - validation of stake (UI / error message)
 
-# Nov 15
+# Nov 12
 
 - [x] Flash.now not working...
 - [x] OfferCmd::CreateBuy - BF/BU - Add header error-message
 - [x] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error
+
+# Nov 13
+
 - [x] design "Be the first to invest"
 - [x] implement "Be the first to invest"
 
-- [ ] OfferCmd::CreateBuy - BF - feature spec
-- [ ] OfferCmd::CreateBuy - BU - feature spec
+# Nov 14
 
-- [ ] generate re-offers
-- [ ] contract resolve
-- [ ] create sale offers
-- [ ] cancel sale offers
-- [ ] cross sale offers (reduction)
-- [ ] cross goes beyond limit and triggers suspension
+- [x] OfferCmd::CreateBuy - BF - feature spec
+- [x] OfferCmd::CreateBuy - BU - feature spec
+
+# Nov 15
+
+- [x] add contract_cmd#create/clone/delete
+
+- [ ] test generate re-offers
+- [ ] test aon
+- [ ] test poolable offers
+- [ ] test cancel buy offers
+
+- [ ] test contract cross
+- [ ] test price limits
+- [ ] test cross goes beyond limit and triggers suspension
+
+- [ ] test contract resolve
+- [ ] test create sale offers
+- [ ] test auto-cancel sale offers
+- [ ] test cancel sale offers
+- [ ] test cross sale offers (reduction)
+
 - [ ] test for 0/100 and 100/0 pricing
+
+- [ ] test contract_cmd#create/clone/delete
 
 - [ ] docfix: create take_bu, take_bf
 
