@@ -430,12 +430,11 @@ Next Actions:
 - [x] Flash.now not working...
 - [x] OfferCmd::CreateBuy - BF/BU - Add header error-message
 - [x] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error
+- [x] design "Be the first to invest"
+- [x] implement "Be the first to invest"
 
 - [ ] OfferCmd::CreateBuy - BF - feature spec
 - [ ] OfferCmd::CreateBuy - BU - feature spec
-
-- [x] design "Be the first to invest"
-- [x] implement "Be the first to invest"
 
 - [ ] generate re-offers
 - [ ] contract resolve
