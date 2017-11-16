@@ -15,11 +15,11 @@ RSpec.describe Escrow, type: :model do
   subject        { klas.new(valid_params)     }
 
   describe "Associations" do
-    it { should respond_to(:contract)             }
-    it { should respond_to(:positions)            }
-    it { should respond_to(:bid_positions)        }
-    it { should respond_to(:ask_positions)        }
-    it { should respond_to(:amendment)            }
+    it { should respond_to(:contract)               }
+    it { should respond_to(:positions)              }
+    it { should respond_to(:fixed_positions)        }
+    it { should respond_to(:unfixed_positions)      }
+    it { should respond_to(:amendment)              }
   end
 
   describe "Object Creation" do

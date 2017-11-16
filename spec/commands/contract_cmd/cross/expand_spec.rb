@@ -191,24 +191,64 @@ RSpec.describe ContractCmd::Cross::Expand do
         expect(Amendment.count).to eq(1)
       end
 
-      it "has compatible volumes on both sides of the escrow", focus: true do
+      it "has compatible volumes on both sides of the escrow" do
         _offer_bu1 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu3 = FG.create(:offer_bu, price: 0.6, volume: 4).offer
         klas.new(lcl_offer_bf, :expand).project
-        binding.pry
-        expect(1).to eq(1)
+        expect(Escrow.count).to eq(1)
+        expect(Escrow.first.fixed_value).to eq(4.0)
+        expect(Escrow.first.unfixed_value).to eq(6.0)
+        expect(Escrow.first.total_value).to eq(10.0)
       end
-      # it "generates a single price"
-      # it "generates a single maturation date"
     end
 
-    context "with overlapping prices" do
-    #   it "generates a median price"
+    context "overlapping pricing" do
+      it "generates correct prices" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.6, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.4)
+        expect(Position.unfixed.pluck(:price)).to eq([0.6, 0.6, 0.6])
+      end
+
+      it "generates a calculated price" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.7, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.7, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.7, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.35)
+        expect(Position.unfixed.pluck(:price)).to eq([0.65, 0.65, 0.65])
+      end
+
+      it "generates a leveled price" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.7, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.8, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.4)
+        expect(Position.unfixed.pluck(:price)).to eq([0.6, 0.6, 0.6])
+      end
+
+      it "generates a floored price" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.70, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.80, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.75, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.35)
+        expect(Position.unfixed.pluck(:price)).to eq([0.65, 0.65, 0.65])
+      end
     end
 
-    context "with non-overlapping prices" do
-      # it "fails to generate a cross"
+    context "with non-overlapping prices", focus: true do
+      it "fails to generate a cross" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.50, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.50, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.50, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Escrow.count).to eq(0)
+      end
     end
 
     context "with overlapping maturity dates" do

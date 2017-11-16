@@ -48,7 +48,7 @@ RSpec.describe ContractCmd::Cross::Reduce do
   describe "#project - invalid subject", USE_VCR do
     before(:each) { hydrate(offer_sf) }
 
-    it 'detects an invalid object' do
+    it 'detects an invalid object' do #
       subject.project
       expect(subject).to be_valid
     end
