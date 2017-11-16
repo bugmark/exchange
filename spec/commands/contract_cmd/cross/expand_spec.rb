@@ -180,7 +180,7 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
 
     context "with multiple positions" do
-      it "generates multiple positions", focus: true do
+      it "generates multiple positions" do
         _offer_bu1 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu3 = FG.create(:offer_bu, price: 0.6, volume: 4).offer
@@ -188,10 +188,17 @@ RSpec.describe ContractCmd::Cross::Expand do
         expect(Contract.count).to eq(1)
         expect(Position.fixed.count).to eq(1)
         expect(Position.unfixed.count).to eq(3)
+        expect(Amendment.count).to eq(1)
       end
 
-      # it "generates a single amendment" #.....
-      # it "has compatible volumes on both sides of the escrow"
+      it "has compatible volumes on both sides of the escrow", focus: true do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.6, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        binding.pry
+        expect(1).to eq(1)
+      end
       # it "generates a single price"
       # it "generates a single maturation date"
     end
