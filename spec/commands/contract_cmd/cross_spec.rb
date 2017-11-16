@@ -6,14 +6,14 @@ RSpec.describe ContractCmd::Cross do
 
   let(:ask)    { FG.create(:offer_bf, user_id: usr1.id).offer         }
   let(:bid)    { FG.create(:offer_bu, user_id: usr2.id).offer         }
-  let(:user)   { FG.create(:user).user                               }
-  let(:klas)   { described_class                                     }
-  subject      { klas.new(ask, :expand)                              }
+  let(:user)   { FG.create(:user).user                                }
+  let(:klas)   { described_class                                      }
+  subject      { klas.new(ask, :expand)                               }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :offer           }
-    it { should respond_to :counters      }
-    it { should respond_to :type        }
+    it { should respond_to :counters        }
+    it { should respond_to :type            }
   end
 
   describe "Object Existence", USE_VCR do

@@ -96,3 +96,14 @@ Target Outcomes Nov 13
 - [x] finish code cleanup / refactoring
 - [x] implement "Be the first to invest"
 - [ ] test re-offers, sale offers, cancel sales, suspensions, 0/100 pricing, ...
+
+Thu Nov 16
+----------------------------------------------
+
+Discussion
+- Next Mon: trading sessions looking good
+- Ethereum logging the following week
+- Talked with Malvika & Georg re: features for research
+
+Target Outcomes Nov 16
+- [ ] finish testing re-offers, sale offers, etc. etc.

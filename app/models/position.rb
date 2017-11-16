@@ -14,6 +14,22 @@ class Position < ApplicationRecord
 
   belongs_to :amendment, optional: true
 
+  # ----- VALIDATIONS -----
+
+  validates :side, inclusion:    {in: %w(fixed unfixed) }
+
+  # ----- SCOPES -----
+
+  class << self
+    def fixed
+      where(side: 'fixed')
+    end
+
+    def unfixed
+      where(side: 'unfixed')
+    end
+  end
+
   # ----- INSTANCE METHODS -----
 
   def xtag

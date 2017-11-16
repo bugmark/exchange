@@ -82,6 +82,19 @@ RSpec.describe OfferCmd::Retract do
       expect(Offer.count).to eq(1)
     end
   end
+
+  describe "base operation" do
+    it "preserves the number of contracts"
+    it "reduces the number of open contracts"
+  end
+
+  context "with poolable offers" do
+    it "adjusts the user reserve"
+  end
+
+  context "with non-poolable offers" do
+    it "adjusts the user reserve"
+  end
 end
 
 

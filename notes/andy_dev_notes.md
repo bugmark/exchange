@@ -445,16 +445,31 @@ Next Actions:
 
 - [x] add contract_cmd#create/clone/delete
 
-- [ ] test generate re-offers
-- [ ] test aon
-- [ ] test poolable offers
-- [ ] test cancel buy offers
+# Nov 16
 
-- [ ] test contract cross
-- [ ] test price limits
-- [ ] test cross goes beyond limit and triggers suspension
+- [ ] test (cross-expand) generate re-offers
+- [ ] test (cross-expand) aon
+- [ ] test (cross-expand) suspending over-reserve offers after crossing
+- [ ] test (offer-genbuy) poolable offers
+- [ ] test (offer-genbuy) cancel buy offers
+- [ ] test (offer-genbuy) user balance & reserves
 
-- [ ] test contract resolve
+- [ ] add an offer-reinstate command with tests
+- [ ] add an offer-suspend command with tests
+
+- [ ] test (cross-expand) price limits
+- [ ] test (cross-expand) going beyond limit and trigger suspension
+- [ ] test user balance adjustments on cross
+
+- [ ] test (cross-reduce) ...
+- [ ] test (cross-reduce) user balance adjustments
+
+- [ ] test (cross-transfer) ...
+- [ ] test (cross-transfer) user blanace adjustments
+
+- [ ] test (contract-resolve) ...
+- [ ] test (contract-resolve) user balance adjustments
+
 - [ ] test create sale offers
 - [ ] test auto-cancel sale offers
 - [ ] test cancel sale offers
@@ -463,6 +478,9 @@ Next Actions:
 - [ ] test for 0/100 and 100/0 pricing
 
 - [ ] test contract_cmd#create/clone/delete
+
+- [ ] core: expose AON
+- [ ] core: expose poolable
 
 - [ ] docfix: create take_bu, take_bf
 
