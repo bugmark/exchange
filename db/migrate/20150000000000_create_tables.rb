@@ -71,7 +71,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
-      t.string   :awarded_to          # bidder, asker
+      t.string   :awarded_to          # fixed, unfixed
       t.datetime :maturation
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
@@ -111,7 +111,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :parent_id
       t.integer  :volume
       t.float    :price
-      t.string   :side            # 'bid' or 'ask'
+      t.string   :side            # 'fixed' or 'unfixed'
       t.string   :exref
       t.string   :uuref
       t.timestamps
@@ -130,8 +130,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
       t.integer  :amendment_id
-      t.float    :bid_value,     default: 0.0
-      t.float    :ask_value,     default: 0.0
+      t.float    :fixed_value  ,     default: 0.0
+      t.float    :unfixed_value,     default: 0.0
       t.string   :exref
       t.string   :uuref
       t.timestamps
