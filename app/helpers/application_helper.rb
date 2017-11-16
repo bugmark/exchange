@@ -4,6 +4,7 @@ module ApplicationHelper
     alt = flash.to_hash.stringify_keys
     alt["success"] ||= alt.delete("notice")
     alt["danger"]  ||= alt.delete("alert")
+    alt["danger"]  ||= alt.delete("error")
     keys = %w(primary secondary success danger warning info light dark)
     return "" unless key = keys.find {|k| alt[k]}
     raw """
@@ -53,12 +54,10 @@ module ApplicationHelper
   end
 
   def ttip_content(user)
-    obf_count = user.offers_bf.open.count
-    obu_count = user.offers_bu.open.count
+    offer_count = user.offers.open.count
     """
     <em>#{user.email}</em></br>
-    #{obf_count} open #{"ask".pluralize(obf_count)}</br>
-    #{obu_count} open #{"bid".pluralize(obu_count)}</br>
+    #{offer_count} open #{"offer".pluralize(offer_count)}</br>
     #{user.positions.count} positions</br>
     #{user.balance} balance</br>
     #{user.token_reserve} reserve</br>

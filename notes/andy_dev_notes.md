@@ -425,24 +425,62 @@ Next Actions:
 - [x] OfferCmd::CreateBuy - BF - validation of stake (UI / error message)
 - [x] OfferCmd::CreateBuy - BU - validation of stake (UI / error message)
 
+# Nov 12
+
+- [x] Flash.now not working...
+- [x] OfferCmd::CreateBuy - BF/BU - Add header error-message
+- [x] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error
+
 # Nov 13
 
-- [ ] Flash.now not working...
-- [ ] OfferCmd::CreateBuy - BF/BU - Add header error-message
-- [ ] OfferCmd::CreateBuy - BF/BU - Handle user low-balance error
+- [x] design "Be the first to invest"
+- [x] implement "Be the first to invest"
 
-- [ ] OfferCmd::CreateBuy - BF - feature spec
-- [ ] OfferCmd::CreateBuy - BU - feature spec
+# Nov 14
 
-- [ ] design "Be the first to invest"
+- [x] OfferCmd::CreateBuy - BF - feature spec
+- [x] OfferCmd::CreateBuy - BU - feature spec
 
-- [ ] generate re-offers
-- [ ] contract resolve
-- [ ] create sale offers
-- [ ] cancel sale offers
-- [ ] cross sale offers (reduction)
-- [ ] cross goes beyond limit and triggers suspension
+# Nov 15
+
+- [x] add contract_cmd#create/clone/delete
+
+# Nov 16
+
+- [ ] test (cross-expand) generate re-offers
+- [ ] test (cross-expand) aon
+- [ ] test (cross-expand) suspending over-reserve offers after crossing
+- [ ] test (offer-genbuy) poolable offers
+- [ ] test (offer-genbuy) cancel buy offers
+- [ ] test (offer-genbuy) user balance & reserves
+
+- [ ] add an offer-reinstate command with tests
+- [ ] add an offer-suspend command with tests
+
+- [ ] test (cross-expand) price limits
+- [ ] test (cross-expand) going beyond limit and trigger suspension
+- [ ] test user balance adjustments on cross
+
+- [ ] test (cross-reduce) ...
+- [ ] test (cross-reduce) user balance adjustments
+
+- [ ] test (cross-transfer) ...
+- [ ] test (cross-transfer) user blanace adjustments
+
+- [ ] test (contract-resolve) ...
+- [ ] test (contract-resolve) user balance adjustments
+
+- [ ] test create sale offers
+- [ ] test auto-cancel sale offers
+- [ ] test cancel sale offers
+- [ ] test cross sale offers (reduction)
+
 - [ ] test for 0/100 and 100/0 pricing
+
+- [ ] test contract_cmd#create/clone/delete
+
+- [ ] core: expose AON
+- [ ] core: expose poolable
 
 - [ ] docfix: create take_bu, take_bf
 

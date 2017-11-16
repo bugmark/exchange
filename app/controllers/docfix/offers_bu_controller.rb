@@ -13,7 +13,6 @@ module Docfix
         redirect_to("/docfix/offers/#{@offer_bu.id}")
       else
         @bug = @offer_bu.offer.bug
-        flash.now["error"] = "Error!"
         render "docfix/issues/offer_bu"
       end
     end

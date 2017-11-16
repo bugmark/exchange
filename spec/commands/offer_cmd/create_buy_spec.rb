@@ -105,6 +105,16 @@ RSpec.describe OfferCmd::CreateBuy do
       expect(obj).to_not be_valid
     end
   end
+
+  describe "poolable buy offers" do
+    it "preserves user balances"
+    it "adjusts user reserves"
+  end
+
+  describe "non-poolable buy offers" do
+    it "preserves user balances"
+    it "adjusts user reserves"
+  end
 end
 
 
