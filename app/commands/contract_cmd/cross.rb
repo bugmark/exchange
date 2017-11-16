@@ -21,8 +21,6 @@ module ContractCmd
     def transact_before_project
       @bundle = Bundle.new(type, offer, counters).generate
       @commit = Commit.new(bundle).generate
-      binding.pry
-      x = 1
     end
 
     private
