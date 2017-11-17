@@ -13,7 +13,10 @@ class Offer < ApplicationRecord
   belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
   belongs_to :transfer        , optional: true
 
-  VALID_STATUS     = %w(open suspended crossed expired retracted)
+  has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Offer'
+  has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Offer'
+
+  VALID_STATUS     = %w(open suspended crossed expired canceled)
   VALID_STM_STATUS = %w(open closed) + ["", nil]
   validates :status    , inclusion:    {in: VALID_STATUS     }
   validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
@@ -53,6 +56,7 @@ class Offer < ApplicationRecord
     def by_maturation_range(range)
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
+    alias_method :by_range, :by_maturation_range
 
     def is_buy_fixed()    where(type: "Offer::Buy::Fixed")    end
     def is_buy_unfixed()  where(type: "Offer::Buy::Unfixed")  end
@@ -188,6 +192,7 @@ end
 #  type               :string
 #  repo_type          :string
 #  user_id            :integer
+#  prototype_id       :integer
 #  amendment_id       :integer
 #  reoffer_parent_id  :integer
 #  parent_position_id :integer

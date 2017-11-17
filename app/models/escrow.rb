@@ -7,17 +7,21 @@ class Escrow < ApplicationRecord
   belongs_to :amendment, optional: true
 
   has_many   :positions
-  has_many   :bid_positions , -> { where(side: 'bid') }, class_name: "Position"
-  has_many   :ask_positions , -> { where(side: 'ask') }, class_name: "Position"
+  has_many   :fixed_positions   , -> { where(side: 'fixed')   }, class_name: "Position"
+  has_many   :unfixed_positions , -> { where(side: 'unfixed') }, class_name: "Position"
 
   # ----- INSTANCE METHODS -----
 
-  def bid_values
-    bid_positions.map(&:value).sum
+  def total_value
+    fixed_value + unfixed_value
   end
 
-  def ask_values
-    ask_positions.map(&:value).sum
+  def fixed_values
+    fixed_positions.map(&:value).sum
+  end
+
+  def unfixed_values
+    unfixed_positions.map(&:value).sum
   end
 end
 
@@ -25,15 +29,15 @@ end
 #
 # Table name: escrows
 #
-#  id           :integer          not null, primary key
-#  type         :string
-#  sequence     :integer
-#  contract_id  :integer
-#  amendment_id :integer
-#  bid_value    :float            default(0.0)
-#  ask_value    :float            default(0.0)
-#  exref        :string
-#  uuref        :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id            :integer          not null, primary key
+#  type          :string
+#  sequence      :integer
+#  contract_id   :integer
+#  amendment_id  :integer
+#  fixed_value   :float            default(0.0)
+#  unfixed_value :float            default(0.0)
+#  exref         :string
+#  uuref         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #

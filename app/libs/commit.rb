@@ -1,4 +1,4 @@
-#-integration_test: commands/contract_cmd/cross/expand
+# integration_test: commands/contract_cmd/cross/expand
 # integration_test: commands/contract_cmd/cross/transfer
 # integration_test: commands/contract_cmd/cross/reduce
 
@@ -43,8 +43,9 @@ class Commit
       user:       offer.obj.user    ,
     }
     lcl_pos = Position.create(posargs)
-    # TODO
-    # [x]refund release - happens when offer status is changed
+    # >>>>>>>>>> TODO
+    # [x]reserve release - happens when offer status is changed
+    # [x]suspend offers if necessary
     # [x]generate reoffer - not going to do that now
     # [x]capture escrow - update user balance
     new_balance = offer.obj.user.balance - lcl_pos.value
@@ -55,7 +56,7 @@ class Commit
   def expand
     ctx = base_context
 
-    # find or generate contract
+    # find or generate contract with maturation date
     ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
     ctx.selected  = ctx.matching.sort_by {|c| c.escrows.count}.first
     ctx.contract  = @contract = ctx.selected || begin
@@ -67,8 +68,10 @@ class Commit
     # generate amendment and escrow
     gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
 
-    # calculate price for offer and counter
-    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min
+    # calculate price for offer and counter - half-way between the two
+    ctx.counter_min   = bundle.counters.map {|el| el.obj.price}.min
+    ctx.price_delta   = ((bundle.offer.obj.price - (1.0 - ctx.counter_min)) / 2.0).round(2)
+    ctx.counter_price = ctx.counter_min - ctx.price_delta
     ctx.offer_price   = 1.0 - ctx.counter_price
 
     # generate artifacts
@@ -76,7 +79,7 @@ class Commit
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
 
     # update escrow value
-    ctx.escrow.update_attributes(bid_value: ctx.escrow.bid_values, ask_value: ctx.escrow.ask_values)
+    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
   end
 
   def transfer
@@ -97,7 +100,7 @@ class Commit
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
 
     # update escrow value
-    ctx.escrow.update_attributes(bid_value: ctx.escrow.bid_values, ask_value: ctx.escrow.ask_values)
+    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
   end
 
   def reduce
@@ -118,6 +121,6 @@ class Commit
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
 
     # update escrow value
-    ctx.escrow.update_attributes(bid_value: ctx.escrow.bid_values, ask_value: ctx.escrow.ask_values)
+    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
   end
 end

@@ -39,6 +39,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string   :repo_type                 # BugZilla, GitHub, CVE
       t.integer  :user_id                   # the party who made the offer
+      t.integer  :prototype_id              # optional offer prototype
       t.integer  :amendment_id              # the generating amendment
       t.integer  :reoffer_parent_id         # for ReOffers - an Offer
       t.integer  :parent_position_id        # for SaleOffers - a Position
@@ -57,6 +58,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :offers, :type
     add_index :offers, :user_id
+    add_index :offers, :prototype_id
     add_index :offers, :amendment_id
     add_index :offers, :reoffer_parent_id
     add_index :offers, :parent_position_id
@@ -68,10 +70,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :jfields         , using: :gin
 
     create_table :contracts do |t|
+      t.integer  :prototype_id        # optional contract prototype
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
-      t.string   :awarded_to          # bidder, asker
+      t.string   :awarded_to          # fixed, unfixed
       t.datetime :maturation
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: '{}'
@@ -79,6 +82,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
+    add_index :contracts, :prototype_id
     add_index :contracts, :exref
     add_index :contracts, :uuref
     add_index :contracts, :xfields, using: :gin
@@ -111,7 +115,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :parent_id
       t.integer  :volume
       t.float    :price
-      t.string   :side            # 'bid' or 'ask'
+      t.string   :side            # 'fixed' or 'unfixed'
       t.string   :exref
       t.string   :uuref
       t.timestamps
@@ -130,8 +134,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
       t.integer  :amendment_id
-      t.float    :bid_value,     default: 0.0
-      t.float    :ask_value,     default: 0.0
+      t.float    :fixed_value  ,     default: 0.0
+      t.float    :unfixed_value,     default: 0.0
       t.string   :exref
       t.string   :uuref
       t.timestamps

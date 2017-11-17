@@ -15,11 +15,11 @@ RSpec.describe Escrow, type: :model do
   subject        { klas.new(valid_params)     }
 
   describe "Associations" do
-    it { should respond_to(:contract)             }
-    it { should respond_to(:positions)            }
-    it { should respond_to(:bid_positions)        }
-    it { should respond_to(:ask_positions)        }
-    it { should respond_to(:amendment)            }
+    it { should respond_to(:contract)               }
+    it { should respond_to(:positions)              }
+    it { should respond_to(:fixed_positions)        }
+    it { should respond_to(:unfixed_positions)      }
+    it { should respond_to(:amendment)              }
   end
 
   describe "Object Creation" do
@@ -61,15 +61,15 @@ end
 #
 # Table name: escrows
 #
-#  id           :integer          not null, primary key
-#  type         :string
-#  sequence     :integer
-#  contract_id  :integer
-#  amendment_id :integer
-#  bid_value    :float            default(0.0)
-#  ask_value    :float            default(0.0)
-#  exref        :string
-#  uuref        :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id            :integer          not null, primary key
+#  type          :string
+#  sequence      :integer
+#  contract_id   :integer
+#  amendment_id  :integer
+#  fixed_value   :float            default(0.0)
+#  unfixed_value :float            default(0.0)
+#  exref         :string
+#  uuref         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #

@@ -180,7 +180,7 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
 
     context "with multiple positions" do
-      it "generates multiple positions", focus: true do
+      it "generates multiple positions" do
         _offer_bu1 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu3 = FG.create(:offer_bu, price: 0.6, volume: 4).offer
@@ -188,36 +188,104 @@ RSpec.describe ContractCmd::Cross::Expand do
         expect(Contract.count).to eq(1)
         expect(Position.fixed.count).to eq(1)
         expect(Position.unfixed.count).to eq(3)
+        expect(Amendment.count).to eq(1)
       end
 
-      # it "generates a single amendment" #.....
-      # it "has compatible volumes on both sides of the escrow"
-      # it "generates a single price"
-      # it "generates a single maturation date"
+      it "has compatible volumes on both sides of the escrow" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.6, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Escrow.count).to eq(1)
+        expect(Escrow.first.fixed_value).to eq(4.0)
+        expect(Escrow.first.unfixed_value).to eq(6.0)
+        expect(Escrow.first.total_value).to eq(10.0)
+      end
     end
 
-    context "with overlapping prices" do
-    #   it "generates a median price"
+    context "overlapping pricing" do
+      it "generates correct prices" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.6, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.4)
+        expect(Position.unfixed.pluck(:price)).to eq([0.6, 0.6, 0.6])
+      end
+
+      it "generates a calculated price" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.7, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.7, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.7, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.35)
+        expect(Position.unfixed.pluck(:price)).to eq([0.65, 0.65, 0.65])
+      end
+
+      it "generates a leveled price" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.7, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.6, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.8, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.4)
+        expect(Position.unfixed.pluck(:price)).to eq([0.6, 0.6, 0.6])
+      end
+
+      it "generates a floored price" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.70, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.80, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.75, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Position.fixed.first.price).to eq(0.35)
+        expect(Position.unfixed.pluck(:price)).to eq([0.65, 0.65, 0.65])
+      end
     end
 
     context "with non-overlapping prices" do
-      # it "fails to generate a cross"
+      it "fails to generate a cross" do
+        _offer_bu1 = FG.create(:offer_bu, price: 0.50, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, price: 0.50, volume: 3).offer
+        _offer_bu3 = FG.create(:offer_bu, price: 0.50, volume: 4).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Escrow.count).to eq(0)
+      end
     end
 
     context "with overlapping maturity dates" do
-      # it "generates a median date"
-    end
-
-    context "with non-overlapping maturity dates" do
-      # it "fails to generate a cross"
+      it "generates a median contract date" do
+        _offer_bu1 = FG.create(:offer_bu, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, volume: 3).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Contract.first.maturation).to_not be_nil
+      end
     end
 
     context "with pre-existing contract" do
-      # it "amends the contract"
+      it "amends the contract" do
+        cdate = Time.now + 1.hour
+        _offer_bu1 = FG.create(:offer_bu, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, volume: 3).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Contract.count).to eq(1)
+        Contract.first.update_attribute(:maturation, cdate)
+        _offer_bu3 = FG.create(:offer_bu, volume: 3).offer
+        offer_bf   = FG.create(:offer_bf, volume: 3).offer
+        klas.new(offer_bf, :expand).project
+        expect(Contract.count).to eq(1)
+        expect(Escrow.count).to eq(2)
+      end
     end
 
-    context "with no pre-existing contract" do
-      # it "generates a contract"
+    context "with non-overlapping maturity dates" do
+      it "fails to generate a cross" do
+        beg = Time.now - 2.months
+        fin = Time.now - 1.month
+        _offer_bu1 = FG.create(:offer_bu, maturation_range: beg..fin)
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Contract.count).to eq(0)
+        expect(Escrow.count).to eq(0)
+        expect(Position.count).to eq(0)
+      end
     end
 
     context "with extra volume on the fixed side" do

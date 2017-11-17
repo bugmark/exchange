@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :offers_bu
     resources :offers_bf
     resources :offers do
-      get 'retract', :on => :member
+      get 'cancel' , :on => :member
       get 'cross'  , :on => :member
       get 'take'   , :on => :member
     end
