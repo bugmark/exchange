@@ -452,7 +452,7 @@ Next Actions:
 
 # Nov 17
 
-- [ ] add 'prototype_id' to Offers and Contracts
+- [x] add 'prototype_id' to Offers and Contracts
 - [ ] change 'revoke' to 'cancel'
 - [ ] add OfferCmd::Clone
 

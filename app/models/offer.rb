@@ -13,7 +13,10 @@ class Offer < ApplicationRecord
   belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
   belongs_to :transfer        , optional: true
 
-  VALID_STATUS     = %w(open suspended crossed expired retracted)
+  has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Offer'
+  has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Offer'
+
+  VALID_STATUS     = %w(open suspended crossed expired canceled)
   VALID_STM_STATUS = %w(open closed) + ["", nil]
   validates :status    , inclusion:    {in: VALID_STATUS     }
   validates :stm_status, inclusion:    {in: VALID_STM_STATUS }

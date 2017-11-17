@@ -54,9 +54,9 @@ module CoreOffersHelper
     raw "<a href='#{path}'>cross</a>"
   end
 
-  def core_offer_retract_link(offer)
+  def core_offer_cancel_link(offer)
     if offer.status == "open" && current_user.present? && offer.user.id == current_user.id
-      raw "<a href='/core/offers/#{offer.id}/retract' data-confirm='Are you sure?'>retract</a>"
+      raw "<a href='/core/offers/#{offer.id}/cancel' data-confirm='Are you sure?'>cancel</a>"
     else
       nil
     end
@@ -64,7 +64,7 @@ module CoreOffersHelper
 
   def core_offer_actions(offer)
     cros  = core_offer_cross_link(offer)
-    canc  = core_offer_retract_link(offer)
+    canc  = core_offer_cancel_link(offer)
     take  = core_offer_take_link(offer)
     return "NA" unless [cros, take, canc].any?
     raw [take, cros, canc].select(&:present?).join(" | ")

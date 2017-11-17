@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe OfferCmd::Retract do
+RSpec.describe OfferCmd::Cancel do
 
   let(:ask)    { FG.create(:offer_bf).offer                              }
   let(:bid)    { FG.create(:offer_bu).offer                              }
-  let(:user)   { FG.create(:user).user                                  }
-  let(:klas)   { described_class                                        }
-  subject      { klas.new(bid)                                          }
+  let(:user)   { FG.create(:user).user                                   }
+  let(:klas)   { described_class                                         }
+  subject      { klas.new(bid)                                           }
 
   describe "Attributes", USE_VCR do
-    it { should respond_to :offer                  } #
+    it { should respond_to :offer                  }
   end
 
   describe "Object Existence", USE_VCR do
@@ -20,7 +20,7 @@ RSpec.describe OfferCmd::Retract do
   describe "Subobjects", USE_VCR do
     it { should respond_to :subobject_symbols }
     it 'returns an array' do
-      expect(subject.subobject_symbols).to be_an(Array) #
+      expect(subject.subobject_symbols).to be_an(Array)
     end
   end
 
@@ -59,11 +59,11 @@ RSpec.describe OfferCmd::Retract do
       hydrate(bid)
       expect(Offer.count).to eq(1)
       expect(Offer.open.count).to eq(1)
-      expect(Offer.retracted.count).to eq(0)
+      expect(Offer.canceled.count).to eq(0)
       subject.project
       expect(Offer.count).to eq(1)
       expect(Offer.open.count).to eq(0)
-      expect(Offer.retracted.count).to eq(1)
+      expect(Offer.canceled.count).to eq(1)
     end
   end
 

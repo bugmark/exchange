@@ -25,8 +25,8 @@ module Core
       end
     end
 
-    def retract
-      OfferCmd::Retract.new(params["id"]).save_event.project
+    def Cancel
+      OfferCmd::Cancel.new(params["id"]).save_event.project
       redirect_to "/core/users/#{current_user.id}"
     end
 

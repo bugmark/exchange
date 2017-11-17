@@ -6,13 +6,8 @@ class Contract < ApplicationRecord
 
   has_paper_trail
 
-  # belongs_to :bug , optional: true
-  # belongs_to :repo, optional: true
-
-  # has_many :bids #
-  # has_many :asks
-  # has_many :bid_users, :through => :bids, :source => "user"
-  # has_many :ask_users, :through => :asks, :source => "user"
+  has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Contract'
+  has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Contract'
 
   has_many :escrows   , -> {order(:sequence => :asc)}
   has_many :amendments, -> {order(:sequence => :asc)}
