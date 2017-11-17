@@ -450,15 +450,23 @@ Next Actions:
 - [x] test (cross-expand) price limits
 - [x] test (cross-expand) maturity dates and ranges
 
-- [ ] test (cross-expand) generate re-offers
-- [ ] test (cross-expand) aon
-- [ ] test (cross-expand) reserve release
+# Nov 17
+
+- [ ] add 'prototype_id' to Offers and Contracts
+- [ ] change 'revoke' to 'cancel'
+- [ ] add OfferCmd::Clone
+
+- [ ] test (offer-genbuy) cancel buy offers
+- [ ] test (offer-genbuy) user balance & reserves
 
 - [ ] test (offer-genbuy) poolable offers and user limits
 - [ ] test (cross-expand) suspending over-reserve offers after crossing
 
-- [ ] test (offer-genbuy) cancel buy offers
-- [ ] test (offer-genbuy) user balance & reserves
+- [ ] add OfferCmd::Clone
+
+- [ ] test (cross-expand) generate re-offers
+- [ ] test (cross-expand) aon
+- [ ] test (cross-expand) reserve release
 
 - [ ] add an offer-reinstate command with tests
 - [ ] add an offer-suspend command with tests

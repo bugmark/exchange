@@ -45,6 +45,7 @@ class Commit
     lcl_pos = Position.create(posargs)
     # >>>>>>>>>> TODO
     # [x]reserve release - happens when offer status is changed
+    # [x]suspend offers if necessary
     # [x]generate reoffer - not going to do that now
     # [x]capture escrow - update user balance
     new_balance = offer.obj.user.balance - lcl_pos.value
