@@ -39,6 +39,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string   :repo_type                 # BugZilla, GitHub, CVE
       t.integer  :user_id                   # the party who made the offer
+      t.integer  :prototype_id              # optional offer prototype
       t.integer  :amendment_id              # the generating amendment
       t.integer  :reoffer_parent_id         # for ReOffers - an Offer
       t.integer  :parent_position_id        # for SaleOffers - a Position
@@ -57,6 +58,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :offers, :type
     add_index :offers, :user_id
+    add_index :offers, :prototype_id
     add_index :offers, :amendment_id
     add_index :offers, :reoffer_parent_id
     add_index :offers, :parent_position_id
@@ -68,6 +70,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :jfields         , using: :gin
 
     create_table :contracts do |t|
+      t.integer  :prototype_id        # optional contract prototype
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
@@ -79,6 +82,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuref
       t.timestamps
     end
+    add_index :contracts, :prototype_id
     add_index :contracts, :exref
     add_index :contracts, :uuref
     add_index :contracts, :xfields, using: :gin
