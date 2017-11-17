@@ -43,8 +43,8 @@ class Commit
       user:       offer.obj.user    ,
     }
     lcl_pos = Position.create(posargs)
-    # TODO
-    # [x]refund release - happens when offer status is changed
+    # >>>>>>>>>> TODO
+    # [x]reserve release - happens when offer status is changed
     # [x]generate reoffer - not going to do that now
     # [x]capture escrow - update user balance
     new_balance = offer.obj.user.balance - lcl_pos.value
@@ -55,7 +55,7 @@ class Commit
   def expand
     ctx = base_context
 
-    # find or generate contract
+    # find or generate contract with maturation date
     ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
     ctx.selected  = ctx.matching.sort_by {|c| c.escrows.count}.first
     ctx.contract  = @contract = ctx.selected || begin

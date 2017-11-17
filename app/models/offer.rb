@@ -53,6 +53,7 @@ class Offer < ApplicationRecord
     def by_maturation_range(range)
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
+    alias_method :by_range, :by_maturation_range
 
     def is_buy_fixed()    where(type: "Offer::Buy::Fixed")    end
     def is_buy_unfixed()  where(type: "Offer::Buy::Unfixed")  end

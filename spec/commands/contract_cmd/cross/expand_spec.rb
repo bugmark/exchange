@@ -241,7 +241,7 @@ RSpec.describe ContractCmd::Cross::Expand do
       end
     end
 
-    context "with non-overlapping prices", focus: true do
+    context "with non-overlapping prices" do
       it "fails to generate a cross" do
         _offer_bu1 = FG.create(:offer_bu, price: 0.50, volume: 3).offer
         _offer_bu2 = FG.create(:offer_bu, price: 0.50, volume: 3).offer
@@ -252,19 +252,40 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
 
     context "with overlapping maturity dates" do
-      # it "generates a median date"
-    end
-
-    context "with non-overlapping maturity dates" do
-      # it "fails to generate a cross"
+      it "generates a median contract date" do
+        _offer_bu1 = FG.create(:offer_bu, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, volume: 3).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Contract.first.maturation).to_not be_nil
+      end
     end
 
     context "with pre-existing contract" do
-      # it "amends the contract"
+      it "amends the contract" do
+        cdate = Time.now + 1.hour
+        _offer_bu1 = FG.create(:offer_bu, volume: 3).offer
+        _offer_bu2 = FG.create(:offer_bu, volume: 3).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Contract.count).to eq(1)
+        Contract.first.update_attribute(:maturation, cdate)
+        _offer_bu3 = FG.create(:offer_bu, volume: 3).offer
+        offer_bf   = FG.create(:offer_bf, volume: 3).offer
+        klas.new(offer_bf, :expand).project
+        expect(Contract.count).to eq(1)
+        expect(Escrow.count).to eq(2)
+      end
     end
 
-    context "with no pre-existing contract" do
-      # it "generates a contract"
+    context "with non-overlapping maturity dates" do
+      it "fails to generate a cross" do
+        beg = Time.now - 2.months
+        fin = Time.now - 1.month
+        _offer_bu1 = FG.create(:offer_bu, maturation_range: beg..fin)
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Contract.count).to eq(0)
+        expect(Escrow.count).to eq(0)
+        expect(Position.count).to eq(0)
+      end
     end
 
     context "with extra volume on the fixed side" do

@@ -125,13 +125,13 @@ class Contract < ApplicationRecord
   end
 
   def total_value
-    (escrows.pluck(:bid_value).sum + escrows.pluck(:ask_value).sum).round(2)
+    (escrows.pluck(:fixed_value).sum + escrows.pluck(:unfixed_value).sum).round(2)
   end
 
   def value
     opts = {
-      bid: escrows.pluck(:bid_value).sum    ,
-      ask: escrows.pluck(:ask_value).sum
+      fixed: escrows.pluck(:fixed_value).sum    ,
+      unfixed: escrows.pluck(:unfixed_value).sum
     }
     OpenStruct.new(opts)
   end

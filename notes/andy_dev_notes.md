@@ -447,17 +447,22 @@ Next Actions:
 
 # Nov 16
 
+- [x] test (cross-expand) price limits
+- [x] test (cross-expand) maturity dates and ranges
+
 - [ ] test (cross-expand) generate re-offers
 - [ ] test (cross-expand) aon
+- [ ] test (cross-expand) reserve release
+
+- [ ] test (offer-genbuy) poolable offers and user limits
 - [ ] test (cross-expand) suspending over-reserve offers after crossing
-- [ ] test (offer-genbuy) poolable offers
+
 - [ ] test (offer-genbuy) cancel buy offers
 - [ ] test (offer-genbuy) user balance & reserves
 
 - [ ] add an offer-reinstate command with tests
 - [ ] add an offer-suspend command with tests
 
-- [ ] test (cross-expand) price limits
 - [ ] test (cross-expand) going beyond limit and trigger suspension
 - [ ] test user balance adjustments on cross
 
@@ -465,7 +470,7 @@ Next Actions:
 - [ ] test (cross-reduce) user balance adjustments
 
 - [ ] test (cross-transfer) ...
-- [ ] test (cross-transfer) user blanace adjustments
+- [ ] test (cross-transfer) user balance adjustments
 
 - [ ] test (contract-resolve) ...
 - [ ] test (contract-resolve) user balance adjustments

@@ -11,8 +11,9 @@ class Bundle
   end
 
   def generate
-    counter_aon  = counters.where(aon: true)
-    counter_alt  = counters.where(aon: false)
+    max_counters = longest_overlap_union(counters)
+    counter_aon  = max_counters.where(aon: true)
+    counter_alt  = max_counters.where(aon: false)
     pool_offers = []
     pool_volume  = 0
 
@@ -37,5 +38,15 @@ class Bundle
       offer:    OpenStruct.new(vol: pool_volume, obj: offer) ,
       counters: pool_offers
     })
+  end
+
+  private
+
+  def longest_overlap_union(counters)
+    return counters if counters.length == 1
+    counters.pluck(:maturation_range).reduce([]) do |acc, range|
+      list = counters.by_range(range)
+      list.length > acc.length ? list : acc
+    end
   end
 end
