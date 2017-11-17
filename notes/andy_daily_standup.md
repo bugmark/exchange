@@ -107,3 +107,18 @@ Discussion
 
 Target Outcomes Nov 16
 - [ ] finish testing re-offers, sale offers, etc. etc.
+
+
+Fri Nov 17
+----------------------------------------------
+
+Discussion
+- Testing taking longer than expected 
+- But making steady progress
+- See 'andy_dev_notes.md' for outline of test paths
+- Refactoring as I go - code is getting simpler
+- I'll work on UI over the wkend
+- Next Mon: trading sessions still looking good
+
+Target Outcomes Nov 17
+- [ ] finish testing re-offers, sale offers, etc. etc.

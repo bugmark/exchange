@@ -453,11 +453,12 @@ Next Actions:
 # Nov 17
 
 - [x] add 'prototype_id' to Offers and Contracts
-- [ ] change 'revoke' to 'cancel'
-- [ ] add OfferCmd::Clone
+- [x] change 'revoke' to 'cancel'
 
 - [ ] test (offer-genbuy) cancel buy offers
 - [ ] test (offer-genbuy) user balance & reserves
+
+- [ ] add OfferCmd::Clone
 
 - [ ] test (offer-genbuy) poolable offers and user limits
 - [ ] test (cross-expand) suspending over-reserve offers after crossing
