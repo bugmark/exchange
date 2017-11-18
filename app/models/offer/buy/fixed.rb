@@ -4,7 +4,8 @@ class Offer::Buy::Fixed < Offer::Buy
 
   before_validation :default_values
 
-  def side() "fixed" end
+  def side()     "fixed"   end
+  def cmd_type() :offer_bf end
   alias_method :xtag, :side
 
   def matching_bid_reserve

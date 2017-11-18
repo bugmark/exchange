@@ -2,7 +2,8 @@ require 'ext/hash'
 
 class Offer::Sell::Fixed < Offer::Sell
 
-  def side() "fixed" end
+  def side()     "fixed"   end
+  def cmd_type() :offer_sf end
   alias_method :xtag, :side
 
   def qualified_counteroffers(cross_type)

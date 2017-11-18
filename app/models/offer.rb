@@ -171,10 +171,14 @@ class Offer < ApplicationRecord
     ! is_open?
   end
 
-  def is_sell_bid?() self.type == "Offer::Sell::Unfixed"   end
-  def is_sell_ask?() self.type == "Offer::Sell::Fixed"   end
-  def is_buy_bid?()  self.type == "Offer::Buy::Bid"    end
-  def is_buy_ask?()  self.type == "Offer::Buy::Fixed"    end
+  def is_buy?()          self.intent == "buy"                    end
+  def is_sell?()         self.intent == "buy"                    end
+  def is_unfixed?()      self.side   == "unfixed"                end
+  def is_fixed?()        self.side   == "fixed"                  end
+  def is_sell_unfixed?() self.type   == "Offer::Sell::Unfixed"   end
+  def is_sell_fixed?()   self.type   == "Offer::Sell::Fixed"     end
+  def is_buy_unfixed?()  self.type   == "Offer::Buy::Unfixed"    end
+  def is_buy_fixed?()    self.type   == "Offer::Buy::Fixed"      end
 
   private
 

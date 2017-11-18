@@ -4,7 +4,8 @@ class Offer::Buy::Unfixed < Offer::Buy
 
   before_validation :default_values
 
-  def side() "unfixed" end
+  def side()     "unfixed" end
+  def cmd_type() :offer_bu end
   alias_method :xtag, :side
 
   def qualified_counteroffers(cross_type)

@@ -30,11 +30,11 @@ class User < ApplicationRecord
   # ----- ACCOUNT BALANCES AND RESERVES-----
 
   def token_reserve_poolable
-    offers_buy.with_status("open").poolable.map(&:reserve_value).max || 0.0
+    offers.is_buy.open.poolable.map(&:reserve_value).max || 0.0
   end
 
   def token_reserve_not_poolable
-    offers_buy.with_status("open").not_poolable.map(&:reserve_value).sum || 0.0
+    offers.is_buy.open.not_poolable.map(&:reserve_value).sum || 0.0
   end
 
   def token_reserve

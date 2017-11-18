@@ -9,6 +9,7 @@ module OfferCmd
     attr_accessor :stake
 
     validate :stake_amount
+    validate :user_balance
 
     # NOTE: the offer_args must contain either a price or a stake
     def initialize(typ, offer_args)
@@ -32,8 +33,15 @@ module OfferCmd
 
     private
 
+    def user_balance
+      return true if offer.persisted?
+      return true unless offer.value > user.token_available
+      errors.add :volume, "offer exceeds user balance"
+      return false
+    end
+
     def stake_amount
-      return if stake.to_i == 0
+      return true if stake.to_i == 0
 
       if stake.to_i > volume
         errors.add :stake, "must be less than volume"

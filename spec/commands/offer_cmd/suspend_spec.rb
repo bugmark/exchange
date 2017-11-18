@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OfferCmd::Cancel do
+RSpec.describe OfferCmd::Suspend do
 
   def gen_obf(opts = {})
     FG.create(:offer_bf, {user: user}.merge(opts)).offer
@@ -79,11 +79,11 @@ RSpec.describe OfferCmd::Cancel do
       hydrate(offer_bu)
       expect(Offer.count).to eq(1)
       expect(Offer.open.count).to eq(1)
-      expect(Offer.canceled.count).to eq(0)
+      expect(Offer.suspended.count).to eq(0)
       subject.project
       expect(Offer.count).to eq(1)
       expect(Offer.open.count).to eq(0)
-      expect(Offer.canceled.count).to eq(1)
+      expect(Offer.suspended.count).to eq(1)
     end
   end
 end
