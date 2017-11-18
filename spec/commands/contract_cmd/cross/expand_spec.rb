@@ -288,6 +288,47 @@ RSpec.describe ContractCmd::Cross::Expand do
       end
     end
 
+    context "when poolable reserve-limits are exceeded", focus: true do
+      # it "handles the base case" do
+      #   xusr = FG.create(:user, balance: 8.0).user
+      #   _offer_bu1 = FG.create(:offer_bu, volume: 10, user: xusr).offer
+      #   expect(xusr.balance).to eq(8.0)
+      #   expect(xusr.token_available).to eq(2.0)
+      #   # _offer_bu2 = FG.create(:offer_bu, volume: 10, user: xusr)
+      #   # expect(xusr.token_available).to eq(8.0)
+      #   klas.new(lcl_offer_bf, :expand).project
+      #   xusr.reload
+      #   expect(Offer.count).to eq(2)
+      #   expect(xusr.balance).to eq(2.0)
+      #   expect(xusr.token_available).to eq(2.0)
+      # end
+
+      it "suspends over-limit orders" do
+        hydrate(lcl_offer_bf)
+        xusr = FG.create(:user, balance: 8.0).user
+        _offer_bu1 = FG.create(:offer_bu, volume: 10, user: xusr).offer
+        expect(xusr.balance).to eq(8.0)
+        expect(xusr.token_available).to eq(2.0)
+        _offer_bu2 = FG.create(:offer_bu, volume: 10, user: xusr)
+        expect(xusr.token_available).to eq(2.0)
+        expect(Offer.count).to eq(3)
+        klas.new(lcl_offer_bf, :expand).project
+        xusr.reload
+        expect(Offer.count).to eq(3)
+        expect(Offer.open.count).to eq(1)
+        expect(Offer.crossed.count).to eq(2)
+        expect(xusr.balance).to eq(2.0)
+        # expect(xusr.token_available).to eq(2.0)
+      end
+    end
+
+    context "when non-poolable reserve-limits are exceeded" do
+      it "has nothing to suspend" do
+
+
+      end
+    end
+
     context "with extra volume on the fixed side" do
       # it "generates a re-offer"
       # it "makes re-offer with parent reference"

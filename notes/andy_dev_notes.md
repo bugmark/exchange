@@ -463,15 +463,14 @@ Next Actions:
 # Nov 18
 
 - [x] add OfferCmd::CloneBuy with tests
+- [x] test (cross-expand) user balance adjustments on cross
 
 - [ ] test (cross-expand) suspending over-reserve offers after crossing
+- [ ] test (cross-expand) going beyond limit and trigger suspension
 
 - [ ] test (cross-expand) generate re-offers
 - [ ] test (cross-expand) aon
 - [ ] test (cross-expand) reserve release
-
-- [ ] test (cross-expand) going beyond limit and trigger suspension
-- [ ] test (cross-expand) user balance adjustments on cross
 
 - [ ] test (cross-reduce) ...
 - [ ] test (cross-reduce) user balance adjustments
@@ -493,8 +492,6 @@ Next Actions:
 
 - [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing
-
-- [ ] test contract_cmd#create/clone/delete
 
 - [ ] core: expose AON
 - [ ] core: expose poolable

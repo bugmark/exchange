@@ -35,8 +35,21 @@ module OfferCmd
 
     def user_balance
       return true if offer.persisted?
+      offer.poolable ? user_poolable_balance : user_not_poolable_balance
+    end
+
+    def user_poolable_balance
+      if (user.balance - offer.value - user.token_reserve_not_poolable) > 0
+        return true
+      else
+        errors.add :volume, "poolable offer exceeds user balance"
+        return false
+      end
+    end
+
+    def user_not_poolable_balance
       return true unless offer.value > user.token_available
-      errors.add :volume, "offer exceeds user balance"
+      errors.add :volume, "non-poolable offer exceeds user balance"
       return false
     end
 

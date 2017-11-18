@@ -8,9 +8,9 @@ class Offer::Buy::Fixed < Offer::Buy
   def cmd_type() :offer_bf end
   alias_method :xtag, :side
 
-  def matching_bid_reserve
-    @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve_value}
-  end
+  # def matching_bid_reserve
+  #   @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve_value}
+  # end
 
   def qualified_counteroffers(cross_type)
     return Offer.none unless self.is_open?

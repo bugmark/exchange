@@ -43,14 +43,26 @@ class Commit
       user:       offer.obj.user    ,
     }
     lcl_pos = Position.create(posargs)
-    # >>>>>>>>>> TODO
-    # [x]reserve release - happens when offer status is changed
-    # [x]suspend offers if necessary
-    # [x]generate reoffer - not going to do that now
-    # [x]capture escrow - update user balance
     new_balance = offer.obj.user.balance - lcl_pos.value
     offer.obj.user.update_attribute(:balance, new_balance)
     offer.obj.update_attribute(:status, 'crossed')
+  end
+
+  def suspend_overlimit_offers(bundle)
+    list = [bundle.offer] + bundle.counters
+    binding.pry
+    list.each do |offer|
+      usr       = offer.user
+      threshold = usr.balance - usr.tokens_not_poolable
+      uoffers   = usr.offers.poolable.where('value < ?', threshold)
+      uoffers.each do |uoffer|
+        OfferCmd::Suspend.new(uoffer).project.save_event
+      end
+    end
+  end
+
+  def generate_reoffers(bundle, ctx)
+
   end
 
   def expand
@@ -77,6 +89,8 @@ class Commit
     # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
+    suspend_overlimit_offers(bundle)
+    generate_reoffers(bundle, ctx)
 
     # update escrow value
     ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
