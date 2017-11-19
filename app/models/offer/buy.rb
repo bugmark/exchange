@@ -16,13 +16,13 @@ class Offer::Buy < Offer
       return false
     end
 
-    if reserve_value > user&.balance
+    if value > user&.balance
       errors.add(:volume, "offer larger than user balance")
       return false
     end
 
     # TODO: fix this...
-    # val1 = reserve_value - user.token_reserve_not_poolable
+    # val1 = value - user.token_reserve_not_poolable
     # val2 = user.balance - user.token_reserve_poolable
     # unless 0 <= val1 && val1 < val2
     #   errors.add(:volume, "not enough funds in user account")
@@ -45,6 +45,7 @@ end
 #  parent_position_id :integer
 #  volume             :integer          default(1)
 #  price              :float            default(0.5)
+#  value              :float
 #  poolable           :boolean          default(TRUE)
 #  aon                :boolean          default(FALSE)
 #  status             :string

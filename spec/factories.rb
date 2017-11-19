@@ -39,6 +39,8 @@ FactoryGirl.define do
     volume              10
     status              "open"
     maturation Time.now + 1.day
+    poolable            false
+    aon                 false
     stm_bug_id          { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
 
@@ -56,13 +58,14 @@ FactoryGirl.define do
     maturation Time.now + 1.day
     stm_bug_id          { FG.create(:bug).id  }
     user_id             { FG.create(:user).id }
+    poolable            false
 
     factory :matured_ask do
       maturation Time.now - 1.day
     end
   end
 
-  factory :offer_su, class: OfferCmd::CreateSell do
+  factory :offer_su, class: OfferCmd::CreateSell do #
     to_create {|instance| instance.save_event.project}
     initialize_with { new(FG.create(:unfixed_position), attributes) }
 

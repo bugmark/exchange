@@ -2,7 +2,8 @@ class Position < ApplicationRecord
 
   has_paper_trail
 
-  before_validation :default_values
+  before_validation :default_attributes
+  before_validation :update_value
 
   belongs_to :offer       , optional:   true
   has_many   :offers_sell , class_name: "Offer"   , :foreign_key => :parent_position_id
@@ -36,14 +37,15 @@ class Position < ApplicationRecord
     "pos"
   end
 
-  def value
-    self.price * self.volume
-  end
-
   private
 
-  def default_values
+  def default_attributes
     self.side ||= offer&.side
+  end
+
+  def update_value
+    return unless self.volume && self.price
+    self.value = self.volume * self.price
   end
 end
 
@@ -59,6 +61,7 @@ end
 #  parent_id    :integer
 #  volume       :integer
 #  price        :float
+#  value        :float
 #  side         :string
 #  exref        :string
 #  uuref        :string

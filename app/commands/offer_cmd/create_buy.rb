@@ -39,7 +39,8 @@ module OfferCmd
     end
 
     def user_poolable_balance
-      if (user.balance - offer.value - user.token_reserve_not_poolable) > 0
+      offer_value = offer.value || offer.volume * offer.price
+      if (user.balance - offer_value - user.token_reserve_not_poolable) > 0
         return true
       else
         errors.add :volume, "poolable offer exceeds user balance"
@@ -48,7 +49,8 @@ module OfferCmd
     end
 
     def user_not_poolable_balance
-      return true unless offer.value > user.token_available
+      offer_value = offer.value || offer.volume * offer.price
+      return true unless offer_value > user.token_available
       errors.add :volume, "non-poolable offer exceeds user balance"
       return false
     end

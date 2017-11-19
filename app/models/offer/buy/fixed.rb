@@ -9,7 +9,7 @@ class Offer::Buy::Fixed < Offer::Buy
   alias_method :xtag, :side
 
   # def matching_bid_reserve
-  #   @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.reserve_value}
+  #   @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.value}
   # end
 
   def qualified_counteroffers(cross_type)
@@ -64,6 +64,7 @@ end
 #  parent_position_id :integer
 #  volume             :integer          default(1)
 #  price              :float            default(0.5)
+#  value              :float
 #  poolable           :boolean          default(TRUE)
 #  aon                :boolean          default(FALSE)
 #  status             :string

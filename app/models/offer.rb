@@ -25,7 +25,8 @@ class Offer < ApplicationRecord
 
   belongs_to :amendment, optional: true
 
-  before_validation :default_values
+  before_validation :default_attributes
+  before_validation :update_value
 
   # -----
 
@@ -123,11 +124,6 @@ class Offer < ApplicationRecord
 
   # ----- INSTANCE METHODS -----
 
-  def reserve_value
-    self.volume * self.price
-  end
-  alias_method :value, :reserve_value
-
   def attach_type
     self.stm_bug_id ? "bugs" : "repos"
   end
@@ -136,8 +132,8 @@ class Offer < ApplicationRecord
     bug || repo
   end
 
-  def complementary_reserve_value
-    self.volume - reserve_value
+  def complementary_value
+    self.volume - self.value
   end
 
   def maturation_str
@@ -182,9 +178,13 @@ class Offer < ApplicationRecord
 
   private
 
-  def default_values
+  def default_attributes
     self.status   ||= 'open'
-    self.poolable = false
+    self.poolable ||= false
+  end
+
+  def update_value
+    self.value = self.volume * self.price
   end
 end
 
@@ -202,6 +202,7 @@ end
 #  parent_position_id :integer
 #  volume             :integer          default(1)
 #  price              :float            default(0.5)
+#  value              :float
 #  poolable           :boolean          default(TRUE)
 #  aon                :boolean          default(FALSE)
 #  status             :string

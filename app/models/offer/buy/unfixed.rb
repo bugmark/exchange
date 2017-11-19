@@ -59,6 +59,7 @@ end
 #  parent_position_id :integer
 #  volume             :integer          default(1)
 #  price              :float            default(0.5)
+#  value              :float
 #  poolable           :boolean          default(TRUE)
 #  aon                :boolean          default(FALSE)
 #  status             :string

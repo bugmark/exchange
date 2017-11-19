@@ -112,7 +112,7 @@ RSpec.describe OfferCmd::CreateBuy do
   end
 
   describe "balances and reserves", USE_VCR do
-    context "with poolable offers", focus: true do
+    context "with poolable offers" do
       it "adjusts the user reserve for one offer" do
         expect(user.balance).to eq(100.0)
         expect(user.token_available).to eq(100.0)
@@ -130,7 +130,7 @@ RSpec.describe OfferCmd::CreateBuy do
       end
     end
 
-    context "with non-poolable offers", focus: true do
+    context "with non-poolable offers" do
       it "adjusts the user reserve for one offer" do
         expect(user.balance).to eq(100.0)
         expect(user.token_available).to eq(100.0)
@@ -148,7 +148,7 @@ RSpec.describe OfferCmd::CreateBuy do
       end
     end
 
-    context "mixed poolable and non-poolable", focus: true do
+    context "mixed poolable and non-poolable" do
       it "calculates the right reserve" do
         expect(user.balance).to eq(100.0)
         expect(user.token_available).to eq(100.0)
@@ -160,7 +160,7 @@ RSpec.describe OfferCmd::CreateBuy do
   end
 
   describe "balances and limits", USE_VCR do
-    context "with poolable offers", focus: true do
+    context "with poolable offers" do
       it "stays below balance limit" do
         offer1 = gen_obf(volume: 100)
         expect(offer1).to be_valid
@@ -171,8 +171,8 @@ RSpec.describe OfferCmd::CreateBuy do
       end
     end
 
-    context "with non-poolable offers", focus: true do
-      it "exceeds balance", focus: true do
+    context "with non-poolable offers" do
+      it "exceeds balance" do
         offer1 = gen_obf(volume: 100, poolable: false)
         expect(offer1).to be_truthy
         offer2 = gen_obf(volume: 100, poolable: false)

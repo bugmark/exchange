@@ -464,27 +464,22 @@ Next Actions:
 
 - [x] add OfferCmd::CloneBuy with tests
 - [x] test (cross-expand) user balance adjustments on cross
+- [x] test (cross-expand) suspending over-reserve offers after crossing
+- [x] test (cross-expand) generate re-offers
+- [x] test (cross-expand) aon
+- [x] test (cross-expand) reserve release
 
-- [ ] test (cross-expand) suspending over-reserve offers after crossing
-- [ ] test (cross-expand) going beyond limit and trigger suspension
+- [ ] test create sale offers
+- [ ] test cancel sale offers
 
-- [ ] test (cross-expand) generate re-offers
-- [ ] test (cross-expand) aon
-- [ ] test (cross-expand) reserve release
-
-- [ ] test (cross-reduce) ...
 - [ ] test (cross-reduce) user balance adjustments
+- [ ] test (cross-reduce) auto-suspend sale-offers
 
 - [ ] test (cross-transfer) ...
 - [ ] test (cross-transfer) user balance adjustments
 
 - [ ] test (contract-resolve) ...
 - [ ] test (contract-resolve) user balance adjustments
-
-- [ ] test create sale offers
-- [ ] test auto-cancel sale offers
-- [ ] test cancel sale offers
-- [ ] test cross sale offers (reduction)
 
 - [ ] add ContractCmd::Create with tests
 - [ ] add ContractCmd::Clone with tests

@@ -31,6 +31,7 @@ class Commit
   def gen_connectors(ctx, amendment_klas, escrow_klas)
     ctx.amendment = amendment_klas.create(contract: ctx.contract)
     ctx.escrow    = escrow_klas.create(contract: ctx.contract, amendment: ctx.amendment)
+    ctx
   end
 
   def expand_position(offer, ctx, price)
@@ -50,19 +51,25 @@ class Commit
 
   def suspend_overlimit_offers(bundle)
     list = [bundle.offer] + bundle.counters
-    binding.pry
     list.each do |offer|
-      usr       = offer.user
-      threshold = usr.balance - usr.tokens_not_poolable
-      uoffers   = usr.offers.poolable.where('value < ?', threshold)
+      usr       = offer.obj.user
+      threshold = usr.balance - usr.token_reserve_not_poolable
+      uoffers   = usr.offers.open.poolable.where('value > ?', threshold)
       uoffers.each do |uoffer|
         OfferCmd::Suspend.new(uoffer).project.save_event
       end
     end
   end
 
-  def generate_reoffers(bundle, ctx)
-
+  def generate_reoffers(ctx)
+    ctx.escrow.positions.each do |position|
+      if position.volume < position.offer.volume
+        new_vol = position.offer.volume - position.volume
+        args    = {volume: new_vol, reoffer_parent_id: position.offer.id, amendment_id: ctx.amendment.id}
+        result  = OfferCmd::CloneBuy.new(position.offer, args)
+        result.project.save_event
+      end
+    end
   end
 
   def expand
@@ -78,7 +85,7 @@ class Commit
     end
 
     # generate amendment and escrow
-    gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
+    ctx = gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
 
     # calculate price for offer and counter - half-way between the two
     ctx.counter_min   = bundle.counters.map {|el| el.obj.price}.min
@@ -90,7 +97,7 @@ class Commit
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
     suspend_overlimit_offers(bundle)
-    generate_reoffers(bundle, ctx)
+    generate_reoffers(ctx)
 
     # update escrow value
     ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)

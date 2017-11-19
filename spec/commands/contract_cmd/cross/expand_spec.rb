@@ -288,67 +288,119 @@ RSpec.describe ContractCmd::Cross::Expand do
       end
     end
 
-    context "when poolable reserve-limits are exceeded", focus: true do
-      # it "handles the base case" do
-      #   xusr = FG.create(:user, balance: 8.0).user
-      #   _offer_bu1 = FG.create(:offer_bu, volume: 10, user: xusr).offer
-      #   expect(xusr.balance).to eq(8.0)
-      #   expect(xusr.token_available).to eq(2.0)
-      #   # _offer_bu2 = FG.create(:offer_bu, volume: 10, user: xusr)
-      #   # expect(xusr.token_available).to eq(8.0)
-      #   klas.new(lcl_offer_bf, :expand).project
-      #   xusr.reload
-      #   expect(Offer.count).to eq(2)
-      #   expect(xusr.balance).to eq(2.0)
-      #   expect(xusr.token_available).to eq(2.0)
-      # end
-
-      it "suspends over-limit orders" do
-        hydrate(lcl_offer_bf)
+    context "when poolable reserve-limits are exceeded" do
+      it "handles the base case" do
         xusr = FG.create(:user, balance: 8.0).user
         _offer_bu1 = FG.create(:offer_bu, volume: 10, user: xusr).offer
         expect(xusr.balance).to eq(8.0)
         expect(xusr.token_available).to eq(2.0)
         _offer_bu2 = FG.create(:offer_bu, volume: 10, user: xusr)
         expect(xusr.token_available).to eq(2.0)
+        klas.new(lcl_offer_bf, :expand).project
+        xusr.reload
+        expect(Offer.count).to eq(2)
+        expect(xusr.balance).to eq(2.0)
+        expect(xusr.token_available).to eq(2.0)
+      end
+
+      it "suspends over-limit orders" do
+        hydrate(lcl_offer_bf)
+        xusr = FG.create(:user, balance: 8.0).user
+        offer_bu1 = FG.create(:offer_bu, volume: 10, user: xusr, poolable: true)
+        expect(offer_bu1).to be_valid
+        expect(xusr.balance).to eq(8.0)
+        expect(xusr.token_available).to eq(2.0)
+        offer_bu2 = FG.create(:offer_bu, volume: 10, user: xusr, poolable: true)
+        expect(offer_bu2).to be_valid
+        expect(xusr.token_available).to eq(2.0)
         expect(Offer.count).to eq(3)
         klas.new(lcl_offer_bf, :expand).project
         xusr.reload
         expect(Offer.count).to eq(3)
-        expect(Offer.open.count).to eq(1)
+        expect(Offer.suspended.count).to eq(1)
         expect(Offer.crossed.count).to eq(2)
         expect(xusr.balance).to eq(2.0)
-        # expect(xusr.token_available).to eq(2.0)
+        expect(xusr.token_available).to eq(2.0)
       end
     end
 
     context "when non-poolable reserve-limits are exceeded" do
       it "has nothing to suspend" do
-
-
+        # TODO: fill this out...
       end
     end
 
-    context "with extra volume on the fixed side" do
-      # it "generates a re-offer"
-      # it "makes re-offer with parent reference"
-      # it "makes re-offer with amendment reference"
-      # it "preserves the re-offer attributes"
-      # it "adjusts the user balance and reserves"
-    end
+    context "with extra volume" do
+      it "generates a re-offer" do
+        _offer_bu1 = FG.create(:offer_bu, volume: 100).offer
+        klas.new(lcl_offer_bf, :expand).project
+        expect(Offer.count).to eq(3)
+        expect(Contract.count).to eq(1)
+      end
 
-    context "with extra volume on the unfixed side" do
-      # it "generates a re-offer"
-      # it "makes re-offer with parent reference"
-      # it "makes re-offer with amendment reference"
-      # it "preserves the re-offer attributes"
-      # it "adjusts the user balance and reserves"
+      it "makes re-offer with parent reference" do
+        _offer_bu1 = FG.create(:offer_bu, volume: 100).offer
+        klas.new(lcl_offer_bf, :expand).project
+        reoffer = Offer.where('volume > 50').first
+        expect(reoffer.reoffer_parent).to_not be_nil
+      end
+
+      it "makes re-offer with prototype reference" do
+        _offer_bu1 = FG.create(:offer_bu, volume: 100).offer
+        klas.new(lcl_offer_bf, :expand).project
+        reoffer = Offer.where('volume > 50').first
+        expect(reoffer.prototype).to_not be_nil
+      end
+
+      it "makes re-offer with amendment reference" do
+        _offer_bu1 = FG.create(:offer_bu, volume: 100).offer
+        klas.new(lcl_offer_bf, :expand).project
+        reoffer = Offer.where(volume: 90).first
+        expect(reoffer.amendment).to_not be_nil
+      end
+
+      it "adjusts the user balance and reserves" do
+        offer_bu1 = FG.create(:offer_bu, volume: 100).offer
+        usr = offer_bu1.user
+        expect(usr.balance).to eq(100)
+        expect(usr.token_available).to eq(40)
+        klas.new(lcl_offer_bf, :expand).project
+        usr.reload
+        expect(usr.balance).to eq(94.0)
+        expect(usr.token_available).to eq(40)
+      end
     end
 
     context "with AON" do
-      # it "doesn't match when two AON volume differ"
-      # it "adjusts the BF offer"
-      # it "adjusts the BU offer"
+      it "combines matching targets" do
+        offer_bf = FG.create(:offer_bf, aon: true).offer
+        offer_bu = FG.create(:offer_bu, aon: true).offer
+        klas.new(offer_bf, :expand).project
+        expect(Contract.count).to eq(1)
+      end
+
+      it "doesn't match when AON volume differ" do
+        offer_bf = FG.create(:offer_bf, aon: true, volume: 11).offer
+        offer_bu = FG.create(:offer_bu, aon: true).offer
+        klas.new(offer_bf, :expand).project
+        expect(Contract.count).to eq(0)
+      end
+
+      it "adjusts the BF offer" do
+        offer_bf = FG.create(:offer_bf, volume: 11).offer
+        offer_bu = FG.create(:offer_bu, aon: true).offer
+        klas.new(offer_bf, :expand).project
+        expect(Contract.count).to eq(1)
+        expect(Offer.open.count).to eq(1)  # the re-offer!
+      end
+
+      it "does not adjust the BU offer" do
+        offer_bf = FG.create(:offer_bf).offer
+        offer_bu = FG.create(:offer_bu, volume: 11).offer
+        klas.new(offer_bu, :expand).project
+        expect(Contract.count).to eq(0)
+        # TODO: make these operations symmetric
+      end
     end
   end
 end
