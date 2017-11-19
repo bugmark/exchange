@@ -18,8 +18,8 @@ RSpec.describe OfferCmd::CreateSell do
   subject      { klas.new(pos1, volume: 10, price: 0.4)                     }
 
   describe "Attributes", USE_VCR do
-    it { should respond_to :parent_position                   }
-    it { should respond_to :offer                             }
+    it { should respond_to :salable_position                   }
+    it { should respond_to :offer                              }
   end
 
   # describe "Object Existence", USE_VCR do

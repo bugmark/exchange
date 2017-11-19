@@ -469,16 +469,17 @@ Next Actions:
 - [x] test (cross-expand) aon
 - [x] test (cross-expand) reserve release
 
+# Nov 19
+
 - [ ] test create sale offers
 - [ ] test cancel sale offers
+
+- [ ] test (cross-transfer) user balance adjustments
+- [ ] test (cross-transfer) auto-suspended sale-offers
 
 - [ ] test (cross-reduce) user balance adjustments
 - [ ] test (cross-reduce) auto-suspend sale-offers
 
-- [ ] test (cross-transfer) ...
-- [ ] test (cross-transfer) user balance adjustments
-
-- [ ] test (contract-resolve) ...
 - [ ] test (contract-resolve) user balance adjustments
 
 - [ ] add ContractCmd::Create with tests

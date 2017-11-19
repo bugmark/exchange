@@ -6,8 +6,8 @@ RSpec.describe Amendment::Transfer, type: :model do
 
   def soff_params
     {
-      parent_position: ppos    ,
-      user:            user
+      salable_position: sapos    ,
+      user:             user
     }
   end
 
@@ -22,18 +22,18 @@ RSpec.describe Amendment::Transfer, type: :model do
     klas.create({
       offer:             boff     ,
       sell_offer:        soff     ,
-      parent_position:   ppos     ,
-      seller_position:   spos     ,
+      salable_position:  sapos     ,
+      seller_position:   sepos     ,
       buyer_position:    bpos     ,
     })
   end
 
   let(:user)   { FG.create(:user).user                        }
-  let(:ppos)   { Position.create(position_params)             }
-  let(:spos)   { Position.create(position_params)             }
+  let(:sapos)  { Position.create(position_params)             }
+  let(:sepos)  { Position.create(position_params)             }
   let(:bpos)   { Position.create(position_params)             }
-  let(:boff)   { FG.create(:offer_bu, user_id: user.id).offer  }
-  let(:soff)   { Offer::Sell::Unfixed.create(soff_params)         }
+  let(:boff)   { FG.create(:offer_bu, user_id: user.id).offer }
+  let(:soff)   { Offer::Sell::Unfixed.create(soff_params)     }
   let(:tran)   { megatran                                     }
 
   let(:klas)   { described_class                              }
@@ -42,7 +42,7 @@ RSpec.describe Amendment::Transfer, type: :model do
   # describe "Associations", USE_VCR do
   #   it { should respond_to(:sell_offer)            }
   #   it { should respond_to(:buy_offer)             }
-  #   it { should respond_to(:parent_position)       }
+  #   it { should respond_to(:salable_position)       }
   #   it { should respond_to(:seller_position)       }
   #   it { should respond_to(:buyer_position)        }
   # end
@@ -67,8 +67,8 @@ RSpec.describe Amendment::Transfer, type: :model do
   #     expect(tran.buy_offer).to eq(boff)
   #   end
   #
-  #   it "finds the parent_position" do
-  #     expect(tran.parent_position).to eq(ppos)
+  #   it "finds the salable_position" do
+  #     expect(tran.salable_position).to eq(sapos)
   #   end
   #
   #   it "finds the buyer_position" do
@@ -76,7 +76,7 @@ RSpec.describe Amendment::Transfer, type: :model do
   #   end
   #
   #   it "finds the seller_position" do
-  #     expect(tran.seller_position).to eq(spos)
+  #     expect(tran.seller_position).to eq(sepos)
   #   end
   # end
 end

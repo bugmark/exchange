@@ -7,9 +7,9 @@
 hr
 .text-center
   | Your Current Position |
-    #{core_position_link(@offer.parent_position)} |
-    Purchase Units: #{@offer.parent_position.volume} |
-    Purchase Price: #{@offer.parent_position.price}
+    #{core_position_link(@offer.salable_position)} |
+    Purchase Units: #{@offer.salable_position.volume} |
+    Purchase Price: #{@offer.salable_position.price}
 hr
 
 
@@ -18,8 +18,8 @@ hr
 = bootstrap_form_for(@offer, url: '/core/sell_offers') do |f|
   = f.hidden_field :type
   = f.hidden_field :user_id
-  = f.hidden_field :parent_position_id
+  = f.hidden_field :salable_position_id
   = f.hidden_field :volume
   .row
     .col-md-6 = f.number_field :price , label: "Resale Offer Price", min: 0.01, max: 0.99, step: 0.01
-    .col-md-6 style="padding-top: 32px;" #{f.submit "Create Offer to Resell #{@offer.parent_position.xid}"}
+    .col-md-6 style="padding-top: 32px;" #{f.submit "Create Offer to Resell #{@offer.salable_position.xid}"}
