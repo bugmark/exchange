@@ -8,13 +8,18 @@ class Offer < ApplicationRecord
   belongs_to :bug             , optional: true , foreign_key: "stm_bug_id"
   belongs_to :repo            , optional: true , foreign_key: "stm_repo_id"
   has_one    :position                         , foreign_key: "offer_id"
-  belongs_to :parent_position , optional: true , foreign_key: "parent_position_id" , class_name: "Position"
-  has_one    :reoffer_parent                   , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
-  belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"  , class_name: "Offer"
+  belongs_to :salable_position, optional: true , foreign_key: "salable_position_id" , class_name: "Position"
+  has_one    :reoffer_parent                   , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
+  belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
   belongs_to :transfer        , optional: true
 
   has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Offer'
   has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Offer'
+
+  belongs_to :amendment, optional: true
+  def escrow() position&.escrow end
+
+  # ----- VALIDATIONS -----
 
   VALID_STATUS     = %w(open suspended crossed expired canceled)
   VALID_STM_STATUS = %w(open closed) + ["", nil]
@@ -23,15 +28,8 @@ class Offer < ApplicationRecord
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
-  belongs_to :amendment, optional: true
-
-  before_validation :default_values
-
-  # -----
-
-  def xid
-    "#{self.intent}-#{xtag}.#{self&.id || 0}"
-  end
+  before_validation :default_attributes
+  before_validation :update_value
 
   # ----- BASIC SCOPES -----
   class << self
@@ -67,6 +65,11 @@ class Offer < ApplicationRecord
     def is_sell()    where('type like ?', "Offer::Sell%") end
     def is_unfixed() where('type like ?', "%Unfixed")     end
     def is_fixed()   where('type like ?', "%Fixed")       end
+
+    def select_subset
+      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status stm_status))
+    end
+    alias_method :ss, :select_subset
   end
 
   # ----- OVERLAP UTILS -----
@@ -121,12 +124,15 @@ class Offer < ApplicationRecord
   end
   alias_method :has_counters?, :has_qualified_counteroffers?
 
+  def crossed_counteroffer
+    return nil unless self.status == "crossed"
+  end
+
   # ----- INSTANCE METHODS -----
 
-  def reserve_value
-    self.volume * self.price
+  def xid
+    "#{self.intent}-#{xtag}.#{self&.id || 0}"
   end
-  alias_method :value, :reserve_value
 
   def attach_type
     self.stm_bug_id ? "bugs" : "repos"
@@ -136,8 +142,8 @@ class Offer < ApplicationRecord
     bug || repo
   end
 
-  def complementary_reserve_value
-    self.volume - reserve_value
+  def complementary_value
+    self.volume - self.value
   end
 
   def maturation_str
@@ -171,16 +177,28 @@ class Offer < ApplicationRecord
     ! is_open?
   end
 
-  def is_sell_bid?() self.type == "Offer::Sell::Unfixed"   end
-  def is_sell_ask?() self.type == "Offer::Sell::Fixed"   end
-  def is_buy_bid?()  self.type == "Offer::Buy::Bid"    end
-  def is_buy_ask?()  self.type == "Offer::Buy::Fixed"    end
+  def is_buy?()          self.intent == "buy"                    end
+  def is_sell?()         self.intent == "buy"                    end
+  def is_unfixed?()      self.side   == "unfixed"                end
+  def is_fixed?()        self.side   == "fixed"                  end
+  def is_sell_unfixed?() self.type   == "Offer::Sell::Unfixed"   end
+  def is_sell_fixed?()   self.type   == "Offer::Sell::Fixed"     end
+  def is_buy_unfixed?()  self.type   == "Offer::Buy::Unfixed"    end
+  def is_buy_fixed?()    self.type   == "Offer::Buy::Fixed"      end
 
   private
 
-  def default_values
+  def default_attributes
     self.status   ||= 'open'
-    self.poolable = false
+    self.poolable ||= false
+  end
+
+  def update_value
+    if self.price && self.volume
+      self.value = self.volume * self.price
+    else
+      self.value = 0
+    end
   end
 end
 
@@ -188,32 +206,33 @@ end
 #
 # Table name: offers
 #
-#  id                 :integer          not null, primary key
-#  type               :string
-#  repo_type          :string
-#  user_id            :integer
-#  prototype_id       :integer
-#  amendment_id       :integer
-#  reoffer_parent_id  :integer
-#  parent_position_id :integer
-#  volume             :integer          default(1)
-#  price              :float            default(0.5)
-#  poolable           :boolean          default(TRUE)
-#  aon                :boolean          default(FALSE)
-#  status             :string
-#  expiration         :datetime
-#  maturation_range   :tsrange
-#  xfields            :hstore           not null
-#  jfields            :jsonb            not null
-#  exref              :string
-#  uuref              :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  stm_bug_id         :integer
-#  stm_repo_id        :integer
-#  stm_title          :string
-#  stm_status         :string
-#  stm_labels         :string
-#  stm_xfields        :hstore           not null
-#  stm_jfields        :jsonb            not null
+#  id                  :integer          not null, primary key
+#  type                :string
+#  repo_type           :string
+#  user_id             :integer
+#  prototype_id        :integer
+#  amendment_id        :integer
+#  reoffer_parent_id   :integer
+#  salable_position_id :integer
+#  volume              :integer          default(1)
+#  price               :float            default(0.5)
+#  value               :float
+#  poolable            :boolean          default(TRUE)
+#  aon                 :boolean          default(FALSE)
+#  status              :string
+#  expiration          :datetime
+#  maturation_range    :tsrange
+#  xfields             :hstore           not null
+#  jfields             :jsonb            not null
+#  exref               :string
+#  uuref               :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  stm_bug_id          :integer
+#  stm_repo_id         :integer
+#  stm_title           :string
+#  stm_status          :string
+#  stm_labels          :string
+#  stm_xfields         :hstore           not null
+#  stm_jfields         :jsonb            not null
 #

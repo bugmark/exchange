@@ -9,6 +9,7 @@ module OfferCmd
     attr_accessor :stake
 
     validate :stake_amount
+    validate :user_balance
 
     # NOTE: the offer_args must contain either a price or a stake
     def initialize(typ, offer_args)
@@ -24,7 +25,7 @@ module OfferCmd
     end
 
     def transact_before_project
-      offer.status = 'open'
+      offer.status ||= 'open'
       if stake != 0
         self.price = stake.to_i / volume.to_f
       end
@@ -32,8 +33,30 @@ module OfferCmd
 
     private
 
+    def user_balance
+      return true if offer.persisted?
+      offer.poolable ? user_poolable_balance : user_not_poolable_balance
+    end
+
+    def user_poolable_balance
+      offer_value = offer.value || offer.volume * offer.price
+      if (user.balance - offer_value - user.token_reserve_not_poolable) > 0
+        return true
+      else
+        errors.add :volume, "poolable offer exceeds user balance"
+        return false
+      end
+    end
+
+    def user_not_poolable_balance
+      offer_value = offer.value || offer.volume * offer.price
+      return true unless offer_value > user.token_available
+      errors.add :volume, "non-poolable offer exceeds user balance"
+      return false
+    end
+
     def stake_amount
-      return if stake.to_i == 0
+      return true if stake.to_i == 0
 
       if stake.to_i > volume
         errors.add :stake, "must be less than volume"

@@ -7,7 +7,7 @@ module CorePositionsHelper
 
   def core_resell_position_link(offer)
     return "NA" if offer.nil?
-    parent = offer.parent_position
+    parent = offer.salable_position
     return "NA" if parent.nil?
     raw "<a href='/core/positions/#{parent.id}'>#{parent.xid}</a>"
   end

@@ -108,7 +108,6 @@ Discussion
 Target Outcomes Nov 16
 - [ ] finish testing re-offers, sale offers, etc. etc.
 
-
 Fri Nov 17
 ----------------------------------------------
 
@@ -121,4 +120,27 @@ Discussion
 - Next Mon: trading sessions still looking good
 
 Target Outcomes Nov 17
-- [ ] finish testing re-offers, sale offers, etc. etc.
+- [ ] finish testing re-offers, sale offers, etc.
+
+Mon Nov 20
+----------------------------------------------
+
+Discussion
+- Tests taking WAY more time than expected
+- No trading today
+- But making steady progress
+- See 'andy_dev_notes.md' for outline of test paths
+
+Testing Status
+- buy<->buy (volume expansion) complete
+- sell<->buy (volume transfer) in progress
+- sell<->sell (volume reduction) not started
+
+Choices - For Discussion
+- complete transfer tests
+- put reduction tests on hold
+- then build UI
+- then build ethereum integration 
+
+Target Outcomes Nov 20
+- [ ] TBD depending on feedback

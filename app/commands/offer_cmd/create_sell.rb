@@ -2,14 +2,14 @@ module OfferCmd
   class CreateSell < ApplicationCommand
 
     attr_subobjects      :offer
-    attr_reader          :parent_position
+    attr_reader          :salable_position
     attr_delegate_fields :offer, class_name: "Offer::Sell"
 
     def initialize(position, attr)
-      @parent_position = position
-      @volume          = attr[:volume]
-      @price           = attr[:price]
-      @offer           = klas.new(sell_offer_params)
+      @salable_position = position
+      @volume           = attr[:volume] || salable_position.volume
+      @price            = attr[:price]  || salable_position.price
+      @offer            = klas.new(sell_offer_params)
     end
 
     def event_data
@@ -23,24 +23,24 @@ module OfferCmd
     private
 
     def klas
-      case parent_position.side
+      case salable_position.side
         when "unfixed" then Offer::Sell::Unfixed
         when "fixed"   then Offer::Sell::Fixed
-        else raise "unknown position side (#{parent_position.side})"
+        else raise "unknown position side (#{salable_position.side})"
       end
     end
 
     def sell_offer_params
-      time_base = parent_position&.contract&.maturation || Time.now
+      time_base = salable_position&.contract&.maturation || Time.now
       range     = time_base-1.week..time_base+1.week
       {
-        status:  "open"                           ,
-        volume:  @volume                          ,
-        price:   @price                           ,
-        user:    parent_position.user             ,
-        parent_position: parent_position          ,
-        maturation_range: range                   ,
-      }.merge(parent_position.offer.match_attrs)
+        status:  "open"                            ,
+        volume:  @volume                           ,
+        price:   @price                            ,
+        user:    salable_position.user             ,
+        salable_position: salable_position         ,
+        maturation_range: range                    ,
+      }.merge(salable_position.offer.match_attrs)
     end
   end
 end

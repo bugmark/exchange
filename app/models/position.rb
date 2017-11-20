@@ -2,10 +2,11 @@ class Position < ApplicationRecord
 
   has_paper_trail
 
-  before_validation :default_values
+  before_validation :default_attributes
+  before_validation :update_value
 
   belongs_to :offer       , optional:   true
-  has_many   :offers_sell , class_name: "Offer"   , :foreign_key => :parent_position_id
+  has_many   :offers_sell , class_name: "Offer"   , :foreign_key => :salable_position_id
   belongs_to :user                                , optional: true
   belongs_to :escrow                              , optional: true
   belongs_to :parent      , class_name: "Position", optional: true
@@ -28,22 +29,37 @@ class Position < ApplicationRecord
     def unfixed
       where(side: 'unfixed')
     end
+
+    def select_subset
+      select(%i(id offer_id user_id amendment_id escrow_id parent_id volume price value side))
+    end
+    alias_method :ss, :select_subset
   end
 
   # ----- INSTANCE METHODS -----
 
   def xtag
-    "pos"
+    "pos" #
   end
 
-  def value
-    self.price * self.volume
+  def dumptree
+    dt_hdr
+    dump
+    offer.dumptree
+    user.dumptree
+    dt_ftr("position #{self.id}")
   end
+  alias_method :dt, :dumptree
 
   private
 
-  def default_values
+  def default_attributes
     self.side ||= offer&.side
+  end
+
+  def update_value
+    return unless self.volume && self.price
+    self.value = self.volume * self.price
   end
 end
 
@@ -59,6 +75,7 @@ end
 #  parent_id    :integer
 #  volume       :integer
 #  price        :float
+#  value        :float
 #  side         :string
 #  exref        :string
 #  uuref        :string

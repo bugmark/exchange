@@ -59,6 +59,7 @@ end
 #  parent_id    :integer
 #  volume       :integer
 #  price        :float
+#  value        :float
 #  side         :string
 #  exref        :string
 #  uuref        :string

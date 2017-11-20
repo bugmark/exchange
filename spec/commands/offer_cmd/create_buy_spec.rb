@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe OfferCmd::CreateBuy do
 
+  def gen_obf(opts = {})
+    lcl_opts = {volume: 10, price: 0.40, user: user}
+    klas.new(:offer_bf, lcl_opts.merge(opts)).project
+  end
+
   def valid_params(args = {})
     {
       user_id: user.id #
@@ -106,15 +111,75 @@ RSpec.describe OfferCmd::CreateBuy do
     end
   end
 
-  describe "poolable buy offers" do
-    it "preserves user balances"
-    it "adjusts user reserves"
+  describe "balances and reserves", USE_VCR do
+    context "with poolable offers" do
+      it "adjusts the user reserve for one offer" do
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(100.0)
+        gen_obf
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(96.0)
+      end
+
+      it "adjusts the user reserve for many offers" do
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(100.0)
+        gen_obf ; gen_obf ; gen_obf
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(96.0)
+      end
+    end
+
+    context "with non-poolable offers" do
+      it "adjusts the user reserve for one offer" do
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(100.0)
+        gen_obf(poolable: false)
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(96.0)
+      end
+
+      it "adjusts the user reserve for many offers" do
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(100.0)
+        gen_obf(poolable: false) ; gen_obf(poolable: false) ; gen_obf(poolable: false)
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(88.0)
+      end
+    end
+
+    context "mixed poolable and non-poolable" do
+      it "calculates the right reserve" do
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(100.0)
+        gen_obf(poolable: false) ; gen_obf ; gen_obf
+        expect(user.balance).to eq(100.0)
+        expect(user.token_available).to eq(92.0)
+      end
+    end
   end
 
-  describe "non-poolable buy offers" do
-    it "preserves user balances"
-    it "adjusts user reserves"
+  describe "balances and limits", USE_VCR do
+    context "with poolable offers" do
+      it "stays below balance limit" do
+        offer1 = gen_obf(volume: 100)
+        expect(offer1).to be_valid
+        offer2 = gen_obf(volume: 100)
+        expect(offer2).to be_valid
+        offer3 = gen_obf(volume: 100)
+        expect(offer3).to be_valid
+      end
+    end
+
+    context "with non-poolable offers" do
+      it "exceeds balance" do
+        offer1 = gen_obf(volume: 100, poolable: false)
+        expect(offer1).to be_truthy
+        offer2 = gen_obf(volume: 100, poolable: false)
+        expect(offer2).to be_truthy
+        offer3 = gen_obf(volume: 100, poolable: false)
+        expect(offer3).to be_falsey
+      end
+    end
   end
 end
-
-

@@ -11,13 +11,15 @@ RSpec.shared_context 'Integration Environment' do
   let(:repo2) { FG.create(:repo)                                          }
   let(:bug1)  { FG.create(:bug , stm_repo_id: repo1.id)                   }
   let(:bug2)  { FG.create(:bug , stm_repo_id: repo1.id)                   }
-  let(:bid1)  { FG.create(:bid , stm_repo_id: repo1.id, user_id: usr1.id, price: 0.60) }
-  let(:bid2)  { FG.create(:bid , stm_repo_id: repo2.id)                   }
-  let(:bid3)  { FG.create(:bid , stm_bug_id:  bug1.id)                    }
-  let(:ask1)  { FG.create(:sell, stm_repo_id: repo1.id, user_id: usr2.id) }
-  let(:ask2)  { FG.create(:sell, stm_repo_id: repo2.id)                   }
-  let(:ask3)  { FG.create(:sell, stm_bug_id:  bug1.id)                    }
-  # let(:con1)   { FG.create(:contract, ask_id: usr1.id)                }
+
+  let(:offer_bu1)  { FG.create(:offer_bu , stm_repo_id: repo1.id, user_id: usr1.id) }
+  let(:offer_bu2)  { FG.create(:offer_bu , stm_repo_id: repo2.id)                   }
+  let(:offer_bu3)  { FG.create(:offer_bu , stm_bug_id:  bug1.id)                    }
+  let(:offer_bf1)  { FG.create(:offer_bf , stm_repo_id: repo1.id, user_id: usr2.id) }
+  let(:offer_bf2)  { FG.create(:offer_bf , stm_repo_id: repo2.id)                   }
+  let(:offer_bf3)  { FG.create(:offer_bf , stm_bug_id:  bug1.id)                    }
+
+  # let(:con1)   { FG.create(:contract, offer_bf_id: usr1.id)                }
   # let(:con2)   { FG.create(:contract, user_id: usr2.id)               }
 end
 

@@ -31,6 +31,7 @@ class Commit
   def gen_connectors(ctx, amendment_klas, escrow_klas)
     ctx.amendment = amendment_klas.create(contract: ctx.contract)
     ctx.escrow    = escrow_klas.create(contract: ctx.contract, amendment: ctx.amendment)
+    ctx
   end
 
   def expand_position(offer, ctx, price)
@@ -43,14 +44,32 @@ class Commit
       user:       offer.obj.user    ,
     }
     lcl_pos = Position.create(posargs)
-    # >>>>>>>>>> TODO
-    # [x]reserve release - happens when offer status is changed
-    # [x]suspend offers if necessary
-    # [x]generate reoffer - not going to do that now
-    # [x]capture escrow - update user balance
     new_balance = offer.obj.user.balance - lcl_pos.value
     offer.obj.user.update_attribute(:balance, new_balance)
     offer.obj.update_attribute(:status, 'crossed')
+  end
+
+  def suspend_overlimit_offers(bundle)
+    list = [bundle.offer] + bundle.counters
+    list.each do |offer|
+      usr       = offer.obj.user
+      threshold = usr.balance - usr.token_reserve_not_poolable
+      uoffers   = usr.offers.open.poolable.where('value > ?', threshold)
+      uoffers.each do |uoffer|
+        OfferCmd::Suspend.new(uoffer).project.save_event
+      end
+    end
+  end
+
+  def generate_reoffers(ctx)
+    ctx.escrow.positions.each do |position|
+      if position.volume < position.offer.volume
+        new_vol = position.offer.volume - position.volume
+        args    = {volume: new_vol, reoffer_parent_id: position.offer.id, amendment_id: ctx.amendment.id}
+        result  = OfferCmd::CloneBuy.new(position.offer, args)
+        result.project.save_event
+      end
+    end
   end
 
   def expand
@@ -66,7 +85,7 @@ class Commit
     end
 
     # generate amendment and escrow
-    gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
+    ctx = gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
 
     # calculate price for offer and counter - half-way between the two
     ctx.counter_min   = bundle.counters.map {|el| el.obj.price}.min
@@ -77,6 +96,8 @@ class Commit
     # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
+    suspend_overlimit_offers(bundle)
+    generate_reoffers(ctx)
 
     # update escrow value
     ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
@@ -86,7 +107,7 @@ class Commit
     ctx = base_context
 
     # look up contract
-    ctx.contract = bundle.offer.obj.parent_position.contract
+    # ctx.contract = bundle.offer.obj.salable_position.contract
 
     # generate amendment & escrow
     gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)
@@ -107,7 +128,7 @@ class Commit
     ctx = base_context
 
     # look up contract
-    ctx.contract = bundle.offer.obj.parent_position.contract
+    ctx.contract = bundle.offer.obj.salable_position.contract
 
     # generate amendment, escrow, price
     gen_connectors(ctx, Amendment::Reduce, Escrow::Reduce)

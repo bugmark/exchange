@@ -17,10 +17,10 @@ class Bundle
     pool_offers = []
     pool_volume  = 0
 
-    counter_aon.each do |offer|
-      if offer.volume <= source.volume = pool_volume
-        pool_offers << [offer, offer.volume]
-        pool_volume += offer.volume
+    counter_aon.each do |counter_offer|
+      if (offer.volume - pool_volume) >= counter_offer.volume
+        pool_offers << OpenStruct.new(obj: counter_offer, vol: counter_offer.volume)
+        pool_volume += counter_offer.volume
       end
     end
 

@@ -5,8 +5,8 @@ RSpec.describe User, type: :model do
     {email: "asdf@qwer.net", password: "gggggg"}
   end
 
-  def gen_unfixed(args = {}) #
-    FG.create(:offer_bu, {user_id: usr.id}.merge(args)) #
+  def gen_unfixed(args = {})
+    FG.create(:offer_bu, {user_id: usr.id}.merge(args))
   end
 
   def gen_fixed(args = {})
@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
       expect(usr.offers_bf.count).to  eq(0)
     end
 
-    it 'handles offers_bf and offers_bu' do #
+    it 'handles offers_bf and offers_bu' do
       gen_unfixed; gen_fixed
       expect(usr.offers.count).to eq(2)
       expect(usr.offers_buy.count).to eq(2)
@@ -71,29 +71,29 @@ RSpec.describe User, type: :model do
 
   describe "#token_reserve_poolable", USE_VCR do
     it "has a value with one bid" do
-      gen_unfixed
+      gen_unfixed(poolable: true)
       expect(usr.token_reserve_poolable).to eq(6.0)
     end
 
     it "has a value with two bids" do
-      gen_unfixed; gen_unfixed
+      gen_unfixed(poolable: true); gen_unfixed(poolable: true)
       expect(Offer.count).to eq(2)
       expect(usr.token_reserve_poolable).to eq(6.0)
     end
 
     it "has a value with one ask" do
-      gen_fixed
+      gen_fixed(poolable: true)
       expect(usr.token_reserve_poolable).to eq(4.0)
     end
 
     it "has a value with two asks" do
-      gen_fixed; gen_fixed
+      gen_fixed(poolable: true); gen_fixed(poolable: true)
       expect(Offer.count).to eq(2)
       expect(usr.token_reserve_poolable).to eq(4.0)
     end
 
     it "has a value with a bid and an ask" do
-      gen_unfixed; gen_fixed
+      gen_unfixed(poolable: true); gen_fixed(poolable: true)
       expect(Offer::Buy::Unfixed.count).to eq(1)
       expect(Offer::Buy::Fixed.count).to eq(1)
       expect(usr.token_reserve_poolable).to eq(6.0)

@@ -42,9 +42,10 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :prototype_id              # optional offer prototype
       t.integer  :amendment_id              # the generating amendment
       t.integer  :reoffer_parent_id         # for ReOffers - an Offer
-      t.integer  :parent_position_id        # for SaleOffers - a Position
+      t.integer  :salable_position_id       # for SaleOffers - a Position
       t.integer  :volume, default: 1        # Greater than zero
       t.float    :price , default: 0.50     # between 0.00 and 1.00
+      t.float    :value
       t.boolean  :poolable, default: true   # for reserve pooling
       t.boolean  :aon     , default: false  # All Or None
       t.string   :status                    # open, suspended, cancelled, ...
@@ -61,8 +62,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :prototype_id
     add_index :offers, :amendment_id
     add_index :offers, :reoffer_parent_id
-    add_index :offers, :parent_position_id
+    add_index :offers, :salable_position_id
     add_index :offers, :poolable
+    add_index :offers, :volume
+    add_index :offers, :price
+    add_index :offers, :value
     add_index :offers, :exref
     add_index :offers, :uuref
     add_index :offers, :maturation_range, using: :gist
@@ -115,6 +119,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :parent_id
       t.integer  :volume
       t.float    :price
+      t.float    :value
       t.string   :side            # 'fixed' or 'unfixed'
       t.string   :exref
       t.string   :uuref
@@ -125,6 +130,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :positions, :amendment_id
     add_index :positions, :escrow_id
     add_index :positions, :parent_id
+    add_index :positions, :volume
+    add_index :positions, :price
+    add_index :positions, :value
     add_index :positions, :exref
     add_index :positions, :uuref
     add_index :positions, :side

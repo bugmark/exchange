@@ -10,6 +10,20 @@ class Escrow < ApplicationRecord
   has_many   :fixed_positions   , -> { where(side: 'fixed')   }, class_name: "Position"
   has_many   :unfixed_positions , -> { where(side: 'unfixed') }, class_name: "Position"
 
+  # ----- VALIDATIONS -----
+
+  validates :amendment_id, presence: true
+  validates :type        , presence: true
+
+  # ----- SCOPES -----
+
+  class << self
+    def select_subset
+      select(%i(id type sequence contract_id amendment_id fixed_value unfixed_value))
+    end
+    alias_method :ss, :select_subset
+  end
+
   # ----- INSTANCE METHODS -----
 
   def total_value
@@ -23,6 +37,17 @@ class Escrow < ApplicationRecord
   def unfixed_values
     unfixed_positions.map(&:value).sum
   end
+
+  def dumptree
+    dt_hdr
+    dump
+    puts ">>>>> FIXED POSITIONS"
+    fixed_positions.each { |pos| pos.dumptree}
+    puts ">>>>> UNFIXED POSITIONS"
+    unfixed_positions.each { |pos| pos.dumptree}
+    dt_ftr("escrow #{self.id}")
+  end
+  alias_method :dt, :dumptree
 end
 
 # == Schema Information

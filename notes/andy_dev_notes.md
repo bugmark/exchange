@@ -454,44 +454,56 @@ Next Actions:
 
 - [x] add 'prototype_id' to Offers and Contracts
 - [x] change 'revoke' to 'cancel'
+- [x] test (offer-genbuy) cancel buy offers
+- [x] test (offer-createbuy) user balance & reserves
+- [x] test (offer-cancelbuy) user balance & reserves
+- [x] test (offer-createbuy) user limits
+- [x] add OfferCmd::Suspend command with tests
 
-- [ ] test (offer-genbuy) cancel buy offers
-- [ ] test (offer-genbuy) user balance & reserves
+# Nov 18
 
-- [ ] add OfferCmd::Clone
+- [x] add OfferCmd::CloneBuy with tests
+- [x] test (cross-expand) user balance adjustments on cross
+- [x] test (cross-expand) suspending over-reserve offers after crossing
+- [x] test (cross-expand) generate re-offers
+- [x] test (cross-expand) aon
+- [x] test (cross-expand) reserve release
 
-- [ ] test (offer-genbuy) poolable offers and user limits
-- [ ] test (cross-expand) suspending over-reserve offers after crossing
+# Nov 19
 
-- [ ] add OfferCmd::Clone
+- [x] test create sale offers
+- [x] test cancel sale offers
+- [x] test offer_sf and offer_su factories
+- [x] write .select_summary (Offer, User, Position, Escrow, )
+- [x] write #dump (escrow, amendment, user, offer, position, contract)
+- [x] write #dumptree (escrow, position, amendment)
+- [x] write #dt_escrow, #dt_amendment (contract)
+- [x] every escrow must be attached to an amendment
+- [x] every escrow must have a type
+- [x] refactor sell-offer factories
 
-- [ ] test (cross-expand) generate re-offers
-- [ ] test (cross-expand) aon
-- [ ] test (cross-expand) reserve release
+# Nov 20
 
-- [ ] add an offer-reinstate command with tests
-- [ ] add an offer-suspend command with tests
+- [x] every cross must generate an amendment
+- [x] every cross must generate 2 or more positions
+- [x] test (cross-transfer) user balance adjustments
 
-- [ ] test (cross-expand) going beyond limit and trigger suspension
-- [ ] test user balance adjustments on cross
+- [ ] test (cross-transfer) price limits
+- [ ] test (cross-transfer) auto-suspended sale-offers
+- [ ] test (cross-transfer) offer to sell partial positions
+- [ ] test (cross-transfer) re-offers
 
-- [ ] test (cross-reduce) ...
 - [ ] test (cross-reduce) user balance adjustments
+- [ ] test (cross-reduce) auto-suspend sale-offers
 
-- [ ] test (cross-transfer) ...
-- [ ] test (cross-transfer) user balance adjustments
-
-- [ ] test (contract-resolve) ...
 - [ ] test (contract-resolve) user balance adjustments
 
-- [ ] test create sale offers
-- [ ] test auto-cancel sale offers
-- [ ] test cancel sale offers
-- [ ] test cross sale offers (reduction)
+- [ ] add ContractCmd::Create with tests
+- [ ] add ContractCmd::Clone with tests
+- [ ] add ContractCmd::Delete with tests
 
+- [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing
-
-- [ ] test contract_cmd#create/clone/delete
 
 - [ ] core: expose AON
 - [ ] core: expose poolable

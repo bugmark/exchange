@@ -4,7 +4,7 @@ RSpec.describe ContractCmd::Resolve, type: :model do
 
   include_context 'Integration Environment'
 
-  let(:sell)      { ask1.ask                                               }
+  let(:sell)     { ask1.ask                                               }
   let(:contract) { ContractCmd::Cross.new(ask).project.contract           }
   let(:klas)     { described_class                                        }
   subject        { klas.new(contract)                                     }
@@ -57,5 +57,9 @@ RSpec.describe ContractCmd::Resolve, type: :model do
   #     user.reload
   #     expect(user.balance).to eq(100)
   #   end
+  # end
+
+  # describe "side effects" do
+  #   it "closes all open sell offers"
   # end
 end

@@ -2,11 +2,15 @@ require 'rails_helper'
 
 RSpec.describe OfferCmd::Cancel do
 
-  let(:ask)    { FG.create(:offer_bf).offer                              }
-  let(:bid)    { FG.create(:offer_bu).offer                              }
-  let(:user)   { FG.create(:user).user                                   }
-  let(:klas)   { described_class                                         }
-  subject      { klas.new(bid)                                           }
+  def gen_obf(opts = {})
+    FG.create(:offer_bf, {user: user}.merge(opts)).offer
+  end
+
+  let(:offer_bf) { gen_obf                                                 }
+  let(:offer_bu) { FG.create(:offer_bu, user: user).offer                  }
+  let(:user)     { FG.create(:user).user                                   }
+  let(:klas)     { described_class                                         }
+  subject        { klas.new(offer_bu)                                      }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :offer                  }
@@ -49,24 +53,6 @@ RSpec.describe OfferCmd::Cancel do
     end
   end
 
-  describe "#project", USE_VCR do
-    it 'saves the object to the database' do
-      subject.project
-      expect(subject).to be_valid
-    end
-
-    it 'gets the right object count' do
-      hydrate(bid)
-      expect(Offer.count).to eq(1)
-      expect(Offer.open.count).to eq(1)
-      expect(Offer.canceled.count).to eq(0)
-      subject.project
-      expect(Offer.count).to eq(1)
-      expect(Offer.open.count).to eq(0)
-      expect(Offer.canceled.count).to eq(1)
-    end
-  end
-
   describe "#event_save", USE_VCR do
     it 'creates an event' do
       expect(EventLine.count).to eq(0)
@@ -83,17 +69,22 @@ RSpec.describe OfferCmd::Cancel do
     end
   end
 
-  describe "base operation" do
-    it "preserves the number of contracts"
-    it "reduces the number of open contracts"
-  end
+  describe "#project", USE_VCR do
+    it 'saves the object to the database' do
+      subject.project
+      expect(subject).to be_valid
+    end
 
-  context "with poolable offers" do
-    it "adjusts the user reserve"
-  end
-
-  context "with non-poolable offers" do
-    it "adjusts the user reserve"
+    it 'gets the right object count' do
+      hydrate(offer_bu)
+      expect(Offer.count).to eq(1)
+      expect(Offer.open.count).to eq(1)
+      expect(Offer.canceled.count).to eq(0)
+      subject.project
+      expect(Offer.count).to eq(1)
+      expect(Offer.open.count).to eq(0)
+      expect(Offer.canceled.count).to eq(1)
+    end
   end
 end
 
