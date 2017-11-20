@@ -42,8 +42,9 @@ FactoryGirl.define do
     volume 10
     status "open"
     maturation Time.now + 1.day
-    stm_bug_id { FG.create(:bug).id      }
     user       { FG.create(:user).user   }
+    stm_bug_id { FG.create(:bug).id      }
+    stm_status "closed"
     poolable   false
     aon        false
 
@@ -60,8 +61,9 @@ FactoryGirl.define do
     volume     10
     status     "open"
     maturation Time.now + 1.day
-    stm_bug_id { FG.create(:bug).id       }
     user       { FG.create(:user).user    }
+    stm_bug_id { FG.create(:bug).id       }
+    stm_status "closed"
     poolable   false
     aon        false
 
@@ -72,12 +74,24 @@ FactoryGirl.define do
 
   factory :offer_su, class: OfferCmd::CreateSell do
     to_create { |instance| instance.save_event.project }
-    initialize_with { new(FG.create(:unfixed_position), attributes || {}) }
+    initialize_with do
+      offer_bf = FG.create(:offer_bf).offer
+      offer_bu = FG.create(:offer_bu).offer
+      _cross   = ContractCmd::Cross.new(offer_bf, :expand)
+      _result  = _cross.project
+      new(offer_bu.position, attributes || {})
+    end
   end
 
   factory :offer_sf, class: OfferCmd::CreateSell do
     to_create { |instance| instance.save_event.project }
-    initialize_with { new(FG.create(:fixed_position), attributes || {}) }
+    initialize_with do
+      offer_bu = FG.create(:offer_bu).offer
+      offer_bf = FG.create(:offer_bf).offer
+      _cross   = ContractCmd::Cross.new(offer_bu, :expand)
+      _result  = _cross.project
+      new(offer_bf.position, attributes || {})
+    end
   end
 
   factory :position do

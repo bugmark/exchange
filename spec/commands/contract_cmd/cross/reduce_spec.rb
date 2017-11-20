@@ -54,9 +54,9 @@ RSpec.describe ContractCmd::Cross::Reduce do
     end
 
     it 'gets the right object count' do
-      expect(Contract.count).to eq(2)
+      expect(Contract.count).to eq(1)
       subject.project
-      expect(Contract.count).to eq(2)
+      expect(Contract.count).to eq(1)
     end
   end
 
@@ -69,9 +69,9 @@ RSpec.describe ContractCmd::Cross::Reduce do
     end
 
     it 'gets the right object count' do
-      expect(Contract.count).to eq(2)
+      expect(Contract.count).to eq(1)
       subject.project
-      expect(Contract.count).to eq(2)
+      expect(Contract.count).to eq(1)
     end
 
     # it 'sets the contract status' do

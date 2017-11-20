@@ -67,7 +67,7 @@ class Offer < ApplicationRecord
     def is_fixed()   where('type like ?', "%Fixed")       end
 
     def select_subset
-      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status))
+      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status stm_status))
     end
     alias_method :ss, :select_subset
   end

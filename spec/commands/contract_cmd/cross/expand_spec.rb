@@ -398,7 +398,7 @@ RSpec.describe ContractCmd::Cross::Expand do
         offer_bf = FG.create(:offer_bf).offer
         offer_bu = FG.create(:offer_bu, volume: 11).offer
         klas.new(offer_bu, :expand).project
-        expect(Contract.count).to eq(0)
+        expect(Contract.count).to eq(1)
       end
     end
   end

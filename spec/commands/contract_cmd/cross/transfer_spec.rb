@@ -4,8 +4,9 @@ RSpec.describe ContractCmd::Cross::Transfer do
 
   include_context 'Integration Environment'
 
-  let(:offer_su) { FG.create(:offer_su, price: 0.4).offer }
+  let(:offer_su) { FG.create(:offer_su, price: 0.4).offer                   }
   let(:offer_bu) { FG.create(:offer_bu, user_id: usr1.id, price: 0.4).offer }
+  let(:transfer) { klas.new(offer_su, :transfer)                            }
   let(:user) { FG.create(:user).user }
   let(:klas) { described_class }
   subject { klas.new(offer_su, :transfer) }
@@ -16,10 +17,13 @@ RSpec.describe ContractCmd::Cross::Transfer do
     it { should respond_to :type }
   end
 
-  # describe "Object Existence", USE_VCR do
-  #   it { should be_a klas }
-  #   it { should be_valid }
-  # end
+  describe "Object Existence", USE_VCR do
+    it { should be_a klas }
+    it "should be valid" do
+      hydrate(offer_bu, transfer)
+      expect(transfer).to be_valid
+    end
+  end
 
   describe "Subobjects", USE_VCR do
     it { should respond_to :subobject_symbols }
@@ -76,52 +80,51 @@ RSpec.describe ContractCmd::Cross::Transfer do
       expect(usr1.token_available).to eq(96.0)
     end
 
-    # it 'generates positions', focus: true do
-    #   hydrate(offer_bu, offer_su)
-    #   subject.project
-    #   binding.pry
-    #   expect(1).to eq(1)
-    # end
-    #
-    # it 'generates an escrow' do
-    #   hydrate(offer_bu, offer_su)
-    #   subject.project
-    #   binding.pry
-    #   expect(Escrow.count).to eq(2)
-    # end
+    it 'generates positions' do
+      hydrate(offer_bu, offer_su)
+      subject.project
+      expect(Position.count).to eq(4)
+    end
 
-    it 'generates an amendment'
+    it 'generates an escrow', :focus do
+      hydrate(offer_bu, offer_su)
+      subject.project
+      expect(Escrow.count).to eq(2)
+    end
+
+    it 'generates an amendment' do
+      hydrate(offer_bu, offer_su)
+      subject.project
+      expect(Amendment.count).to eq(2)
+    end
   end
 
   describe "crossing", USE_VCR do
     let(:lcl_osf) { FG.create(:offer_sf).offer }
 
     context "with single bid" do
-      # it 'matches higher values' do
-      #   hydrate(lcl_osf)
-      #   FG.create(:offer_bf)
-      #   expect(Position.count).to eq(1)
-      #   expect(Escrow.count).to eq(1)
-      #   binding.pry
-      #   klas.new(lcl_osf, :transfer).project
-      #   expect(Offer.crossed.count).to eq(3)
-      #   binding.pry
-      #   expect(Position.count).to eq(2)
-      # end
-      #
-      # it 'generates position ownership' do
-      #   hydrate(lcl_osf)
-      #   FG.create(:offer_bf)
-      #   klas.new(lcl_osf, :transfer).project
-      #   expect(Position.first.user_id).to_not be_nil
-      #   expect(Position.last.user_id).to_not be_nil
-      # end
+      it 'matches higher values', :focus do
+        hydrate(lcl_osf)
+        FG.create(:offer_bf)
+        expect(Position.count).to eq(2)
+        klas.new(lcl_osf, :transfer).project
+        expect(Offer.crossed.count).to eq(4)
+        expect(Position.count).to eq(4)
+      end
 
-      # it 'matches equal values' do
-      #   FG.create(:offer_bu)
-      #   klas.new(lcl_osf, :transfer).project
-      #   expect(Position.count).to eq(1)
-      # end
+      it 'generates position ownership', :focus do
+        hydrate(lcl_osf)
+        FG.create(:offer_bf)
+        klas.new(lcl_osf, :transfer).project
+        expect(Position.first.user_id).to_not be_nil
+        expect(Position.last.user_id).to_not be_nil
+      end
+
+      it 'matches equal values' do
+        FG.create(:offer_bu)
+        klas.new(lcl_osf, :transfer).project
+        expect(Position.count).to eq(2)
+      end
 
       # it 'fails to match lower values' do
       #   FG.create(:offer_bu, price: 0.1, volume: 1)

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe 'OfferSF Factory', USE_VCR do
-  it "runs without params" do
+  it "runs without params", :focus do
     expect(Offer.count).to eq(0)
     FG.create(:offer_sf)
-    expect(Offer.count).to eq(2)
+    expect(Offer.count).to eq(3)
   end
 
   it "generates the right class" do
