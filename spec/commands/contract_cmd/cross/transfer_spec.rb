@@ -103,7 +103,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
     let(:lcl_osf) { FG.create(:offer_sf).offer }
 
     context "with single bid" do
-      it 'matches higher values', :focus do
+      it 'matches higher values' do
         hydrate(lcl_osf)
         FG.create(:offer_bf)
         expect(Position.count).to eq(2)
@@ -112,7 +112,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
         expect(Position.count).to eq(4)
       end
 
-      it 'generates position ownership', :focus do
+      it 'generates position ownership' do
         hydrate(lcl_osf)
         FG.create(:offer_bf)
         klas.new(lcl_osf, :transfer).project
@@ -123,53 +123,52 @@ RSpec.describe ContractCmd::Cross::Transfer do
       it 'matches equal values' do
         FG.create(:offer_bu)
         klas.new(lcl_osf, :transfer).project
-        expect(Position.count).to eq(2)
+        expect(Position.count).to eq(2) #
       end
 
-      # it 'fails to match lower values' do
-      #   FG.create(:offer_bu, price: 0.1, volume: 1)
-      #   expect(Position.count).to eq(0)
-      #   klas.new(lcl_obf, :transfer).project
-      #   expect(Position.count).to eq(0)
-      # end
+      it 'fails to match lower values' do
+        FG.create(:offer_bu, price: 0.1, volume: 1)
+        expect(Position.count).to eq(0)
+        klas.new(lcl_osf, :transfer).project
+        expect(Position.count).to eq(2)
+      end
     end
 
     context "with multiple bids" do
-      # it 'matches higher value' do
-      #   _bid1 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
-      #   _bid2 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
-      #   klas.new(lcl_obf, :transfer).project
-      #   expect(Contract.count).to eq(0)
-      # end
+      it 'matches higher value' do
+        _bid1 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
+        _bid2 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
+        klas.new(lcl_osf, :transfer).project
+        expect(Contract.count).to eq(1)
+      end
 
-      # it 'matches equal value' do
-      #   hydrate(lcl_obf)
-      #   _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-      #   _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-      #   binding.pry
-      #   klas.new(lcl_obf, :transfer).project
-      #   expect(Contract.count).to eq(1)
-      # end
+      it 'matches equal value' do
+        hydrate(lcl_osf)
+        _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+        _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+        klas.new(lcl_osf, :transfer).project
+        expect(Contract.count).to eq(1)
+      end
 
-      # it 'fails to match lower value' do
-      #   _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-      #   _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-      #   klas.new(lcl_obf, :transfer).project
-      #   expect(Contract.count).to eq(1)
-      # end
+      it 'fails to match lower value' do
+        _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+        _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+        klas.new(lcl_osf, :transfer).project
+        expect(Contract.count).to eq(1)
+      end
     end
 
-    # context "with extra bids" do
-    #   it 'does minimal matching' do
-    #     _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid3 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     klas.new(lcl_obf, :transfer).project
-    #     expect(Contract.count).to eq(1)
-    #     expect(Offer.assigned.count).to eq(0)
-    #     expect(Offer.unassigned.count).to eq(0)
-    #   end
-    # end
+    context "with extra bids" do
+      it 'does minimal matching', :focus do
+        _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+        _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+        _bid3 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+        klas.new(lcl_osf, :transfer).project
+        expect(Contract.count).to eq(1)
+        expect(Offer.assigned.count).to eq(2)
+        expect(Offer.unassigned.count).to eq(4)
+      end
+    end
   end
 end
 

@@ -4,15 +4,15 @@ RSpec.describe ContractCmd::Cross::Reduce do
 
   include_context 'Integration Environment'
 
-  def build_sell
-    attrs = offer_su.match_attrs
-    offer = FG.create(:offer_sf, price: 0.6).offer
-    offer.update_attributes(attrs)
-    offer
-  end
+  # def build_sell
+  #   attrs = offer_su.match_attrs
+  #   offer = FG.create(:offer_sf, price: 0.6).offer
+  #   offer.update_attributes(attrs)
+  #   offer
+  # end
 
   let(:offer_su) { FG.create(:offer_su).offer                     }
-  let(:offer_sf) { build_sell                                     }
+  let(:offer_sf) { FG.create(:offer_sf).offer                     }
   let(:user)     { FG.create(:user).user                          }
   let(:klas)     { described_class                                }
   subject        { klas.new(offer_su, :reduce)                    }
@@ -61,34 +61,28 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   describe "#project - valid subject", USE_VCR do
-    before(:each) { hydrate(offer_sf) }
-
     it 'detects a valid object' do
+      hydrate(offer_sf)
       subject.project
       expect(subject).to be_valid
     end
 
     it 'gets the right object count' do
+      hydrate(offer_sf)
       expect(Contract.count).to eq(1)
       subject.project
       expect(Contract.count).to eq(1)
     end
 
-    # it 'sets the contract status' do
-    #   subject.project
+    # it 'adjusts the user balance', :focus do
+    #   hydrate(offer_sf)
     #   binding.pry
-    #   expect(subject.commit.contract.status).to eq("open")
-    # end
-
-    # it 'adjusts the user balance' do
-    # TODO
-    #   expect(usr1.balance).to eq(100.0)
-    #   expect(usr2.balance).to eq(100.0)
     #   subject.project
     #   usr1.reload
     #   usr2.reload
-    #   expect(usr1.balance).to eq(94.0)
-    #   expect(usr2.balance).to eq(94.0)
+    #   binding.pry
+    #   expect(usr1.balance).to eq(91.0)
+    #   expect(usr2.balance).to eq(90.0)
     # end
   end
 

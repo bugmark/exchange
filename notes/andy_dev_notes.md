@@ -482,14 +482,16 @@ Next Actions:
 - [x] every escrow must have a type
 - [x] refactor sell-offer factories
 
-- [ ] test (cross-transfer) user balance adjustments
+# Nov 20
+
+- [x] every cross must generate an amendment
+- [x] every cross must generate 2 or more positions
+- [x] test (cross-transfer) user balance adjustments
+
 - [ ] test (cross-transfer) price limits
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) offer to sell partial positions
 - [ ] test (cross-transfer) re-offers
-
-- [ ] every cross must generate an amendment
-- [ ] every cross must generate 2 or more positions
 
 - [ ] test (cross-reduce) user balance adjustments
 - [ ] test (cross-reduce) auto-suspend sale-offers
