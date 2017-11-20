@@ -13,6 +13,7 @@ class Escrow < ApplicationRecord
   # ----- VALIDATIONS -----
 
   validates :amendment_id, presence: true
+  validates :type        , presence: true
 
   # ----- SCOPES -----
 

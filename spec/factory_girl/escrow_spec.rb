@@ -7,4 +7,3 @@ RSpec.describe 'Escrow Factory' do
     expect(Escrow.count).to eq(1)
   end
 end
-

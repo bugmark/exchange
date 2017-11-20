@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Escrow, type: :model do
   def valid_params(opt = {})
     {
-      amendment_id: 1
+      amendment_id: 1,
+      type:         "Escrow::Expand"
     }.merge(opt)
   end
 

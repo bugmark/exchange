@@ -97,6 +97,7 @@ FactoryGirl.define do
   end
 
   factory :escrow do
+    type      "Escrow::Expand"
     contract  { FG.create(:contract)   }
     amendment { FG.create(:amendment)  }
   end
