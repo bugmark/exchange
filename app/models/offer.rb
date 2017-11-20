@@ -16,6 +16,11 @@ class Offer < ApplicationRecord
   has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Offer'
   has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Offer'
 
+  belongs_to :amendment, optional: true
+  def escrow() position&.escrow end
+
+  # ----- VALIDATIONS -----
+
   VALID_STATUS     = %w(open suspended crossed expired canceled)
   VALID_STM_STATUS = %w(open closed) + ["", nil]
   validates :status    , inclusion:    {in: VALID_STATUS     }
@@ -23,16 +28,8 @@ class Offer < ApplicationRecord
   validates :volume, numericality: {only_integer: true, greater_than: 0}
   validates :price,  numericality: {greater_than_or_equal_to: 0.00, less_than_or_equal_to: 1.00}
 
-  belongs_to :amendment, optional: true
-
   before_validation :default_attributes
   before_validation :update_value
-
-  # -----
-
-  def xid
-    "#{self.intent}-#{xtag}.#{self&.id || 0}"
-  end
 
   # ----- BASIC SCOPES -----
   class << self
@@ -68,6 +65,11 @@ class Offer < ApplicationRecord
     def is_sell()    where('type like ?', "Offer::Sell%") end
     def is_unfixed() where('type like ?', "%Unfixed")     end
     def is_fixed()   where('type like ?', "%Fixed")       end
+
+    def select_subset
+      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status))
+    end
+    alias_method :ss, :select_subset
   end
 
   # ----- OVERLAP UTILS -----
@@ -122,7 +124,15 @@ class Offer < ApplicationRecord
   end
   alias_method :has_counters?, :has_qualified_counteroffers?
 
+  def crossed_counteroffer
+    return nil unless self.status == "crossed"
+  end
+
   # ----- INSTANCE METHODS -----
+
+  def xid
+    "#{self.intent}-#{xtag}.#{self&.id || 0}"
+  end
 
   def attach_type
     self.stm_bug_id ? "bugs" : "repos"
@@ -184,7 +194,11 @@ class Offer < ApplicationRecord
   end
 
   def update_value
-    self.value = self.volume * self.price
+    if self.price && self.volume
+      self.value = self.volume * self.price
+    else
+      self.value = 0
+    end
   end
 end
 

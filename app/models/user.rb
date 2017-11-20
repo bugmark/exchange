@@ -52,6 +52,11 @@ class User < ApplicationRecord
     def low_balance
       where('balance < 100')
     end
+
+    def select_subset
+      select(%i(id email balance))
+    end
+    alias_method :ss, :select_subset
   end
 
   # ----- INSTANCE METHODS -----

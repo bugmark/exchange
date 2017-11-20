@@ -107,7 +107,7 @@ class Commit
     ctx = base_context
 
     # look up contract
-    ctx.contract = bundle.offer.obj.salable_position.contract
+    # ctx.contract = bundle.offer.obj.salable_position.contract
 
     # generate amendment & escrow
     gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)

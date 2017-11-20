@@ -399,7 +399,6 @@ RSpec.describe ContractCmd::Cross::Expand do
         offer_bu = FG.create(:offer_bu, volume: 11).offer
         klas.new(offer_bu, :expand).project
         expect(Contract.count).to eq(0)
-        # TODO: make these operations symmetric
       end
     end
   end

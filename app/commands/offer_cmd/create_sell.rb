@@ -7,8 +7,8 @@ module OfferCmd
 
     def initialize(position, attr)
       @salable_position = position
-      @volume           = attr[:volume]
-      @price            = attr[:price]
+      @volume           = attr[:volume] || salable_position.volume
+      @price            = attr[:price]  || salable_position.price
       @offer            = klas.new(sell_offer_params)
     end
 
@@ -34,12 +34,12 @@ module OfferCmd
       time_base = salable_position&.contract&.maturation || Time.now
       range     = time_base-1.week..time_base+1.week
       {
-        status:  "open"                           ,
-        volume:  @volume                          ,
-        price:   @price                           ,
-        user:    salable_position.user            ,
-        salable_position: salable_position        ,
-        maturation_range: range                   ,
+        status:  "open"                            ,
+        volume:  @volume                           ,
+        price:   @price                            ,
+        user:    salable_position.user             ,
+        salable_position: salable_position         ,
+        maturation_range: range                    ,
       }.merge(salable_position.offer.match_attrs)
     end
   end

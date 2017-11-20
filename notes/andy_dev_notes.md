@@ -471,11 +471,25 @@ Next Actions:
 
 # Nov 19
 
-- [ ] test create sale offers
-- [ ] test cancel sale offers
+- [x] test create sale offers
+- [x] test cancel sale offers
+- [x] test offer_sf and offer_su factories
+- [x] test (cross-transfer) user balance adjustments
+- [x] write .select_summary (Offer, User, Position, Escrow, )
+- [x] write #dump (escrow, amendment, user, offer, position, contract)
+- [x] write #dumptree (escrow, position, amendment)
+- [x] write #dt_escrow, #dt_amendment (contract)
+- [x] every escrow should be attached to an amendment
 
-- [ ] test (cross-transfer) user balance adjustments
+- [ ] every escrow should have a type
+- [ ] every amendment should have two positions
+- [ ] every cross should generate an amendment
+- [ ] every cross should generate positions
+
+- [ ] test (cross-transfer) price limits
 - [ ] test (cross-transfer) auto-suspended sale-offers
+- [ ] test (cross-transfer) offer to sell partial positions
+- [ ] test (cross-transfer) re-offers
 
 - [ ] test (cross-reduce) user balance adjustments
 - [ ] test (cross-reduce) auto-suspend sale-offers

@@ -44,6 +44,11 @@ class Contract < ApplicationRecord
     def unresolved
       where("stm_status != ?", "resolved")
     end
+
+    def select_subset
+      select(%i(id type prototype_id mode status awarded_to))
+    end
+    alias_method :ss, :select_subset
   end
 
   # ----- OVERLAP UTILS -----
@@ -150,6 +155,14 @@ class Contract < ApplicationRecord
   def unresolved?
     ! resolved?
   end
+
+  def dumptree
+    dt_hdr
+    dump
+    escrows.each {|esc| esc.dumptree}
+    dt_ftr("contract #{self.id}")
+  end
+  alias_method :dt, :dumptree
 
   private
 

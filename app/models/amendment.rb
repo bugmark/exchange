@@ -12,6 +12,28 @@ class Amendment < ApplicationRecord
   def short_type
     type.split("::").last.downcase
   end
+
+  # ----- SCOPES -----
+
+  class << self
+    def select_subset
+      select(%i(id type sequence contract_id))
+    end
+    alias_method :ss, :select_subset
+  end
+
+  # ----- INSTANCE METHODS -----
+  def dumptree
+    dt_hdr
+    dump
+    escrow.dump
+    puts ">>>>> OFFERS"
+    offers.each { |pos| pos.dumptree}
+    puts ">>>>> POSITIONS"
+    unfixed_positions.each { |pos| pos.dumptree}
+    dt_ftr("amendment #{self.id}")
+  end
+  alias_method :dt, :dumptree
 end
 
 # == Schema Information

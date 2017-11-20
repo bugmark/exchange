@@ -29,13 +29,27 @@ class Position < ApplicationRecord
     def unfixed
       where(side: 'unfixed')
     end
+
+    def select_subset
+      select(%i(id offer_id user_id amendment_id escrow_id parent_id volume price value side))
+    end
+    alias_method :ss, :select_subset
   end
 
   # ----- INSTANCE METHODS -----
 
   def xtag
-    "pos"
+    "pos" #
   end
+
+  def dumptree
+    dt_hdr
+    dump
+    offer.dumptree
+    user.dumptree
+    dt_ftr("position #{self.id}")
+  end
+  alias_method :dt, :dumptree
 
   private
 

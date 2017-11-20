@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe Escrow, type: :model do
   def valid_params(opt = {})
     {
-      # email:    "asdf@qwer.net"   ,
-      # password: "gggggg"
+      amendment_id: 1
     }.merge(opt)
   end
 

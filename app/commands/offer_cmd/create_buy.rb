@@ -25,7 +25,7 @@ module OfferCmd
     end
 
     def transact_before_project
-      offer.status = 'open'
+      offer.status ||= 'open'
       if stake != 0
         self.price = stake.to_i / volume.to_f
       end
