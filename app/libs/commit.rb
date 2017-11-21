@@ -113,8 +113,11 @@ class Commit
     gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)
 
     # calculate price for offer and counters
-    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min
-    ctx.offer_price   = 1.0 - ctx.counter_price
+    clist             = bundle.counters.map {|el| el.obj.price}
+    cprice            = bundle.offer.obj.is_sell? ? clist.max : clist.min
+    oprice            = bundle.offer.obj.price
+    ctx.counter_price = [oprice, cprice].avg.round(2)
+    ctx.offer_price   = ctx.counter_price
 
     # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)

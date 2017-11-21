@@ -109,8 +109,18 @@ class Offer < ApplicationRecord
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
 
-    def align_equal(offer)
+    # def align_equal(offer)
+    #   base = where('price >= ?', offer.price)
+    #   offer.id.nil? ? base : base.where.not(id: offer.id)
+    # end
+
+    def align_gte(offer)
       base = where('price >= ?', offer.price)
+      offer.id.nil? ? base : base.where.not(id: offer.id)
+    end
+
+    def align_lte(offer)
+      base = where('price <= ?', offer.price)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
 
@@ -178,7 +188,7 @@ class Offer < ApplicationRecord
   end
 
   def is_buy?()          self.intent == "buy"                    end
-  def is_sell?()         self.intent == "buy"                    end
+  def is_sell?()         self.intent == "sell"                   end
   def is_unfixed?()      self.side   == "unfixed"                end
   def is_fixed?()        self.side   == "fixed"                  end
   def is_sell_unfixed?() self.type   == "Offer::Sell::Unfixed"   end
