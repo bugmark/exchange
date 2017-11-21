@@ -492,12 +492,16 @@ Next Actions:
 
 - [x] test (cross-transfer) price limits
 
-- [ ] start JJ implementation
+- [ ] JJ Add pg_search
+- [ ] JJ Issue Search
+- [ ] JJ Profile Pages
+- [ ] JJ Trading Bot
+- [ ] JJ Sparkline
 
 # TBD
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
-- [ ] test (cross-transfer) sell-offers re-offers
+- [ ] test (cross-transfer) sell-offer re-offers
 
 - [ ] test (cross-reduce) user balance adjustments
 - [ ] test (cross-reduce) auto-suspend sale-offers

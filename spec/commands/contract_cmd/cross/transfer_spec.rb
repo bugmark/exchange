@@ -171,7 +171,10 @@ RSpec.describe ContractCmd::Cross::Transfer do
     end
   end
 
-  describe "crossing price limits", USE_VCR do
+  # for transfers:
+  # - sell offer prices specify a lower limit
+  # - buy offer prices specify an upper limit
+  describe "transfer price limits", USE_VCR do
     it "meets in the middle with sell offer" do
       hydrate(offer_su)   # 0.40
       _offer_buy = FG.create(:offer_bu, price: 0.5, volume: 10).offer
