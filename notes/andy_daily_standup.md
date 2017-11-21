@@ -143,4 +143,15 @@ Choices - For Discussion
 - then build ethereum integration 
 
 Target Outcomes Nov 20
-- [ ] TBD depending on feedback
+- [x] TBD depending on feedback
+
+Mon Nov 21
+----------------------------------------------
+
+Decision from yesterday
+- Priority One: JJ Demo Script (Demoware)
+- Priority Two: Ethereum logging
+- After that, resume back-end development and general build-out
+
+Target Outcomes Nov 20
+- [ ] JJ Demo Progress

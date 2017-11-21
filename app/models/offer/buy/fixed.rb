@@ -17,7 +17,7 @@ class Offer::Buy::Fixed < Offer::Buy
     base = match.open.overlaps(self)
     case cross_type
       when :expand   then base.is_buy_unfixed.align_complement(self)
-      when :transfer then base.is_sell_fixed.align_equal(self)
+      when :transfer then base.is_sell_fixed.align_lte(self)
       else Offer.none
     end
   end

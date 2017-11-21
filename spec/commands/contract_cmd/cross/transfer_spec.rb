@@ -170,5 +170,40 @@ RSpec.describe ContractCmd::Cross::Transfer do
       end
     end
   end
+
+  describe "crossing price limits", USE_VCR do
+    it "meets in the middle with sell offer" do
+      hydrate(offer_su)   # 0.40
+      _offer_buy = FG.create(:offer_bu, price: 0.5, volume: 10).offer
+      klas.new(offer_su, :transfer).project
+      escrow = Escrow.where(type: "Escrow::Transfer").first
+      expect(Escrow.count).to eq(2)
+      expect(escrow.unfixed_positions.first.price).to eq(0.45)
+    end
+
+    it "meets in middle with buy offer" do
+      hydrate(offer_su)   # 0.40
+      offer_buy = FG.create(:offer_bu, price: 0.5, volume: 10).offer
+      _list = offer_buy.qualified_counteroffers(:transfer)
+      klas.new(offer_buy, :transfer).project
+      escrow = Escrow.where(type: "Escrow::Transfer").first
+      expect(Escrow.count).to eq(2)
+      expect(escrow.unfixed_positions.first.price).to eq(0.45)
+    end
+
+    it "generates nothing if no sell price match" do
+      hydrate(offer_su)   # 0.40
+      _offer_buy = FG.create(:offer_bu, price: 0.3, volume: 10).offer
+      klas.new(offer_su, :transfer).project
+      expect(Escrow.count).to eq(1)
+    end
+
+    it "generates nothing if no buy price match" do
+      hydrate(offer_su)   # 0.40
+      offer_buy = FG.create(:offer_bu, price: 0.3, volume: 10).offer
+      klas.new(offer_buy, :transfer).project
+      expect(Escrow.count).to eq(1)
+    end
+  end
 end
 

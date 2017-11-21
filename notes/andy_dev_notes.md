@@ -488,10 +488,16 @@ Next Actions:
 - [x] every cross must generate 2 or more positions
 - [x] test (cross-transfer) user balance adjustments
 
-- [ ] test (cross-transfer) price limits
+# Nov 21
+
+- [x] test (cross-transfer) price limits
+
+- [ ] start JJ implementation
+
+# TBD
+- [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
-- [ ] test (cross-transfer) offer to sell partial positions
-- [ ] test (cross-transfer) re-offers
+- [ ] test (cross-transfer) sell-offers re-offers
 
 - [ ] test (cross-reduce) user balance adjustments
 - [ ] test (cross-reduce) auto-suspend sale-offers
@@ -522,8 +528,6 @@ Next Actions:
 - [ ] docfix: write events to testnet
 
 - [ ] move GH API Key to .env
-
-# TBD
 
 - [ ] docfix: move offer pages to modals
 - [ ] docfix: get notification emails working
