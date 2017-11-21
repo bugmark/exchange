@@ -205,6 +205,5 @@ RSpec.describe ContractCmd::Cross::Transfer do
       expect(Escrow.count).to eq(1)
     end
   end
-
 end
 

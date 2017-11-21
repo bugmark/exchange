@@ -494,8 +494,7 @@ Next Actions:
 
 - [ ] start JJ implementation
 
-
-
+# TBD
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offers re-offers
@@ -529,8 +528,6 @@ Next Actions:
 - [ ] docfix: write events to testnet
 
 - [ ] move GH API Key to .env
-
-# TBD
 
 - [ ] docfix: move offer pages to modals
 - [ ] docfix: get notification emails working
