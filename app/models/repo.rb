@@ -26,6 +26,17 @@ class Repo < ApplicationRecord
   # ----- PGSEARCH SCOPES
   pg_search_scope :search_by_name, :against => :name
 
+  class << self
+    def lang_search(query)
+      rank = <<-RANK
+        ts_rank(to_tsvector('english', xfields -> 'languages'), plainto_tsquery('#{query}'))
+      RANK
+      field = "to_tsvector('english', xfields -> 'languages')"
+      where("#{field} @@ plainto_tsquery('english', '#{query}')").
+        order("#{rank} desc")
+    end
+  end
+
   # ----- SCOPES -----
 
   class << self
