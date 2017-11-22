@@ -1,5 +1,7 @@
 class Repo < ApplicationRecord
 
+  include PgSearch
+
   has_paper_trail
 
   has_many :bugs     , :dependent => :destroy, :foreign_key => :stm_repo_id
@@ -20,6 +22,9 @@ class Repo < ApplicationRecord
     return false
     contracts.count != 0 || bug_contracts.count != 0
   end
+
+  # ----- PGSEARCH SCOPES
+  pg_search_scope :search_by_name, :against => :name
 
   # ----- SCOPES -----
 

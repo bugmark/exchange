@@ -491,13 +491,27 @@ Next Actions:
 # Nov 21
 
 - [x] test (cross-transfer) price limits
+- [x] JJ Add pg_search
 
-- [ ] start JJ implementation
+- [x] upgrade development to PostGres 10
+- [x] upgrade production to PostGres10
+
+- [ ] test tsvector on jsonb fields
+- [ ] convert all hstore fields to jsonb
+
+- [ ] JJ Issue Search
+- [ ] JJ Repo Search
+- [ ] JJ Offer search
+- [ ] JJ Contract search
+
+- [ ] JJ Profile Pages
+- [ ] JJ Trading Bot
+- [ ] JJ Sparkline
 
 # TBD
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
-- [ ] test (cross-transfer) sell-offers re-offers
+- [ ] test (cross-transfer) sell-offer re-offers
 
 - [ ] test (cross-reduce) user balance adjustments
 - [ ] test (cross-reduce) auto-suspend sale-offers

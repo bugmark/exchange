@@ -35,7 +35,9 @@ gem 'tzinfo-data'                 # timezone support
 gem 'paper_trail'                 # model versioning
 gem 'acts_as_list'                # sortable lists by position
 gem 'bootstrap'                   # twitter bootstrap
-gem 'will_paginate'
+
+gem 'will_paginate'               # pagination
+gem 'pg_search'                   # full-text search
 
 gem 'grape'
 gem 'grape-swagger'
