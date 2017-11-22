@@ -1,6 +1,7 @@
 class Bug < ApplicationRecord
 
   include MatchUtils
+  include PgSearch
 
   has_paper_trail
 
@@ -16,6 +17,11 @@ class Bug < ApplicationRecord
 
   VALID_STM_STATUS = %w(open closed) + ["", nil]
   validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
+
+  # ----- PGSEARCH SCOPES -----
+  pg_search_scope :search_by_title, :against => :stm_title
+
+  # ----- INSTANCE METHODS ----- #
 
   def xtag
     "bug"

@@ -491,9 +491,16 @@ Next Actions:
 # Nov 21
 
 - [x] test (cross-transfer) price limits
+- [x] JJ Add pg_search
 
-- [ ] JJ Add pg_search
+- [ ] upgrade to PostGres 10
+- [ ] test tsvector on jsonb fields
+
 - [ ] JJ Issue Search
+- [ ] JJ Repo Search
+- [ ] JJ Offer search
+- [ ] JJ Contract search
+
 - [ ] JJ Profile Pages
 - [ ] JJ Trading Bot
 - [ ] JJ Sparkline

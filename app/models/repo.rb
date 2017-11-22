@@ -1,4 +1,20 @@
+class PgSearch
+  class Configuration
+    class Column
+      def column_name
+        if @column_name.include?('"')
+          @column_name
+        else
+          @connection.quote_column_name(@column_name)
+        end
+      end
+    end
+  end
+end
+
 class Repo < ApplicationRecord
+
+  include PgSearch
 
   has_paper_trail
 
@@ -20,6 +36,10 @@ class Repo < ApplicationRecord
     return false
     contracts.count != 0 || bug_contracts.count != 0
   end
+
+  # ----- PGSEARCH SCOPES
+  pg_search_scope :search_by_name, :against => :name
+  # pg_search_scope :search_by_lang, :against => PgSearch::Configuration::HstoreColumn.new('languages', 'en')
 
   # ----- SCOPES -----
 
