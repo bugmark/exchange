@@ -492,7 +492,6 @@ Next Actions:
 
 - [x] test (cross-transfer) price limits
 - [x] JJ Add pg_search
-
 - [x] upgrade development to PostGres 10
 - [x] upgrade production to PostGres10
 
