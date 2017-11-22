@@ -494,12 +494,19 @@ Next Actions:
 - [x] JJ Add pg_search
 - [x] upgrade development to PostGres 10
 - [x] upgrade production to PostGres10
+- [x] test tsvector on hstore fields
+- [x] test tsvector on jsonb fields
 
-- [ ] test tsvector on jsonb fields
-- [ ] convert all hstore fields to jsonb
+# Nov 22
 
-- [ ] JJ Issue Search
+- [ ] attach README to repo
+- [ ] make README searchable
+- [ ] create profile query
 - [ ] JJ Repo Search
+
+- [ ] attach issue description
+- [ ] JJ Issue Search
+
 - [ ] JJ Offer search
 - [ ] JJ Contract search
 

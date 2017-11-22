@@ -19,9 +19,10 @@ class Bug < ApplicationRecord
   validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
 
   # ----- PGSEARCH SCOPES -----
+
   pg_search_scope :search_by_title, :against => :stm_title
 
-  # ----- INSTANCE METHODS ----- #
+  # ----- INSTANCE METHODS -----
 
   def xtag
     "bug"

@@ -4,9 +4,9 @@ class Repo < ApplicationRecord
 
   has_paper_trail
 
-  has_many :bugs     , :dependent => :destroy, :foreign_key => :stm_repo_id
-  has_many :offers   , :dependent => :destroy, :foreign_key => :stm_repo_id
-  has_many :contracts, :dependent => :destroy, :foreign_key => :stm_repo_id
+  has_many :bugs      , :dependent => :destroy, :foreign_key => :stm_repo_id
+  has_many :offers    , :dependent => :destroy, :foreign_key => :stm_repo_id
+  has_many :contracts , :dependent => :destroy, :foreign_key => :stm_repo_id
 
   validates :name     , uniqueness: true, presence: true
 
@@ -24,6 +24,7 @@ class Repo < ApplicationRecord
   end
 
   # ----- PGSEARCH SCOPES
+
   pg_search_scope :search_by_name, :against => :name
 
   class << self
