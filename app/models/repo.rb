@@ -1,17 +1,3 @@
-class PgSearch
-  class Configuration
-    class Column
-      def column_name
-        if @column_name.include?('"')
-          @column_name
-        else
-          @connection.quote_column_name(@column_name)
-        end
-      end
-    end
-  end
-end
-
 class Repo < ApplicationRecord
 
   include PgSearch
@@ -39,7 +25,6 @@ class Repo < ApplicationRecord
 
   # ----- PGSEARCH SCOPES
   pg_search_scope :search_by_name, :against => :name
-  # pg_search_scope :search_by_lang, :against => PgSearch::Configuration::HstoreColumn.new('languages', 'en')
 
   # ----- SCOPES -----
 

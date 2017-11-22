@@ -493,8 +493,11 @@ Next Actions:
 - [x] test (cross-transfer) price limits
 - [x] JJ Add pg_search
 
-- [ ] upgrade to PostGres 10
+- [x] upgrade development to PostGres 10
+- [x] upgrade production to PostGres10
+
 - [ ] test tsvector on jsonb fields
+- [ ] convert all hstore fields to jsonb
 
 - [ ] JJ Issue Search
 - [ ] JJ Repo Search
