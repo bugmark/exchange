@@ -5,7 +5,7 @@ require './config/environment'
 def sync(name)
   opts = {
     name: name               ,
-    type: "Repo::GitHub"         
+    type: "Repo::GitHub"
   }
 
   repo_cmd = RepoCmd::GhCreate.new(opts)

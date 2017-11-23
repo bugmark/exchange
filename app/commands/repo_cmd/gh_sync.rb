@@ -32,7 +32,7 @@ module RepoCmd
     private
 
     def sync_bugs
-      issues = Octokit.issues(repo.name) # uses ETAG to make conditional request
+      issues = Octokit.issues(repo.name)
       issues.each do |el|
         attrs = {
           stm_repo_id: self.id         ,
@@ -42,6 +42,7 @@ module RepoCmd
           stm_labels:  labels_for(el)  ,
           stm_status:  el["state"]     ,
           html_url:    el["html_url"]  ,
+          comments:    comments_for(el),
           synced_at:   Time.now
         }
         bug = BugCmd::Sync.new(attrs)
@@ -51,6 +52,12 @@ module RepoCmd
 
     def labels_for(el)
       el["labels"].map {|x| x[:name]}.join(", ")
+    end
+
+    def comments_for(el)
+      list = Octokit.issue_comments(repo.name, el["number"])
+      return "" if list == []
+      list.map {|el| el["body"]}.join(" | ")
     end
   end
 end

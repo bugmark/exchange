@@ -13,10 +13,19 @@ class Bug < ApplicationRecord
   has_many   :offers_bu, :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Unfixed"
   has_many   :contracts, :foreign_key => :stm_bug_id, :dependent  => :destroy
 
-  hstore_accessor :xfields  , :html_url  => :string    # add field to hstore
+  hstore_accessor :stm_xfields, :html_url  => :string
+  jsonb_accessor  :stm_jfields, :comments  => :string
 
   VALID_STM_STATUS = %w(open closed) + ["", nil]
   validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
+
+  # ----- SCOPES -----
+  class << self
+    def select_subset
+      select(%i(id type stm_repo_id stm_bug_id stm_title stm_status stm_labels))
+    end
+    alias_method :ss, :select_subset
+  end
 
   # ----- PGSEARCH SCOPES -----
 

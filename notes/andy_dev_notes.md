@@ -512,6 +512,8 @@ Next Actions:
 - [ ] JJ Offer search
 - [ ] JJ Contract search
 
+- [ ] JJ README overview on /projects
+
 - [ ] JJ Profile Pages
 - [ ] JJ Trading Bot
 - [ ] JJ Sparkline
