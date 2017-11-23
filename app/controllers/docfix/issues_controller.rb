@@ -6,7 +6,8 @@ module Docfix
     before_action :authenticate_user!, :except => [:index, :show]
 
     def index
-      @bugs = Bug.paginate(page: params[:page], per_page: 5)
+      @query = IssueQuery.new
+      @bugs  = Bug.paginate(page: params[:page], per_page: 5)
     end
 
     def show

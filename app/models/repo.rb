@@ -28,13 +28,31 @@ class Repo < ApplicationRecord
   pg_search_scope :search_by_name, :against => :name
 
   class << self
-    def lang_search(query)
+    def combined_search(query)
+      rank = <<-RANK
+        ts_rank(to_tsvector('english', xfields->'languages'),  plainto_tsquery('#{query}')) +
+        ts_rank(to_tsvector('english', jfields->'readme_txt'), plainto_tsquery('#{query}'))
+      RANK
+      field1 = "to_tsvector('english', xfields->'languages' )"
+      field2 = "to_tsvector('english', jfields->'readme_txt')"
+      qry    = "plainto_tsquery('english', '#{query}')"
+      where("#{field1} @@ #{qry} or #{field2} @@ #{qry}").order("#{rank} desc")
+    end
+
+    def language_search(query)
       rank = <<-RANK
         ts_rank(to_tsvector('english', xfields -> 'languages'), plainto_tsquery('#{query}'))
       RANK
       field = "to_tsvector('english', xfields -> 'languages')"
-      where("#{field} @@ plainto_tsquery('english', '#{query}')").
-        order("#{rank} desc")
+      where("#{field} @@ plainto_tsquery('english', '#{query}')").order("#{rank} desc")
+    end
+
+    def readme_search(query)
+      rank = <<-RANK
+        ts_rank(to_tsvector('english', jfields -> 'readme_txt'), plainto_tsquery('#{query}'))
+      RANK
+      field = "to_tsvector('english', jfields -> 'readme_txt')"
+      where("#{field} @@ plainto_tsquery('english', '#{query}')").order("#{rank} desc")
     end
   end
 

@@ -4,7 +4,8 @@ module Docfix
     layout 'docfix'
 
     def index
-      @projects = Repo.paginate(page: params[:page], per_page: 5)
+      @query    = ProjectQuery.new(permitted(params["project_query"]))
+      @projects = @query.search.paginate(page: params[:page], per_page: 5)
     end
 
     def show
@@ -13,6 +14,12 @@ module Docfix
 
     def new
     end
+
+    private
+
+    def permitted(params)
+      return nil if params.nil?
+      params.permit(:readme_qry, :language_qry)
+    end
   end
 end
-

@@ -4,6 +4,7 @@ module Docfix
     layout 'docfix'
 
     def index
+      @query  = OfferQuery.new
       @offers = Offer.paginate(page: params[:page], per_page: 5)
     end
 
@@ -12,7 +13,7 @@ module Docfix
     end
 
     def cross
-      offer    = Offer.find(params["id"])
+      offer   = Offer.find(params["id"])
       result1 = ContractCmd::Cross.new(offer, :expand).save_event.project
       result2 = ContractCmd::Cross.new(offer, :transfer).save_event.project
       if result1 || result2

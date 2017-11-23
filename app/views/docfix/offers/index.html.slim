@@ -5,25 +5,19 @@ h2 Offers (#{@offers.count})
 b Browse and sort offers to find the most lucrative.  Lorem ipsum humina humina.
 
 div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
-  .row
-    .col-md-3
-      b All statuses
-    .col-md-3
-      b Market price
-    .col-md-3
-      b Expected fix probability
-    .col-md-3
-      b Last trade
-
-  .row
-    .col-md-3
-      input[style='margin-top: 4px;']
-    .col-md-3
-      input[style='margin-top: 4px;']
-    .col-md-3
-      input[style='margin-top: 4px;']
-    .col-md-3
-      button.btn.btn-outline-secondary SEARCH
+  = bootstrap_form_for(@query, url: '/docfix/offers', method: 'get') do |f|
+    .row
+      .col-md-2
+        = f.text_field :status_qry      , label: raw("<b>All statuses</b>")
+      .col-md-3
+        = f.text_field :price_qry       , label: raw("<b>Market price</b>")
+      .col-md-3
+        = f.text_field :probability_qry , label: raw("<b>Expected fix probability</b>")
+      .col-md-2
+        = f.text_field :trade_qry       , label: raw("<b>Last trade</b>")
+      .col-md-2
+        p[style='margin-top: 30px;']
+          = f.submit "SEARCH"
 
 - @offers.each do |offer|
   .row

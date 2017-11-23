@@ -23,7 +23,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :bugs do |t|
       t.string   :type             # BugZilla, GitHub, Cve
       t.hstore   :xfields,  null: false, default: {}
-      t.jsonb    :jfields,  null: false, default: '{}'
+      t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
       t.string   :exref
       t.string   :uuref
@@ -52,7 +52,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.datetime :expiration
       t.tsrange  :maturation_range
       t.hstore   :xfields,  null: false, default: {}
-      t.jsonb    :jfields,  null: false, default: '{}'
+      t.jsonb    :jfields,  null: false, default: {}
       t.string   :exref
       t.string   :uuref
       t.timestamps
@@ -81,7 +81,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :awarded_to          # fixed, unfixed
       t.datetime :maturation
       t.hstore   :xfields,  null: false, default: {}
-      t.jsonb    :jfields,  null: false, default: '{}'
+      t.jsonb    :jfields,  null: false, default: {}
       t.string   :exref
       t.string   :uuref
       t.timestamps
@@ -100,7 +100,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_column table, :stm_status  , :string
       add_column table, :stm_labels  , :string
       add_column table, :stm_xfields , :hstore , null: false, default: {}
-      add_column table, :stm_jfields , :jsonb  , null: false, default: '{}'
+      add_column table, :stm_jfields , :jsonb  , null: false, default: {}
 
       add_index table, :stm_repo_id
       add_index table, :stm_bug_id
@@ -160,7 +160,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :sequence           # SORTABLE POSITION USING ACTS_AS_LIST
       t.integer  :contract_id
       t.hstore   :xfields,  null: false, default: {}
-      t.jsonb    :jfields,  null: false, default: '{}'
+      t.jsonb    :jfields,  null: false, default: {}
       t.string   :exref
       t.string   :uuref
       t.timestamps
@@ -188,7 +188,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string     :uuref
       t.string     :local_hash
       t.string     :chain_hash
-      t.jsonb      :data,  null: false, default: '{}'
+      t.jsonb      :data,  null: false, default: {}
       t.timestamps
     end
     add_index :event_lines, :klas

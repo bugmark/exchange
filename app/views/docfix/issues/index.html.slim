@@ -9,24 +9,17 @@ b Get involved in BugMark by finding issues that you want
   side.  Easy peasy lemon squeezy!
 
 div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
-  .row
-    .col-md-3
-      b Free-text search
-    .col-md-3
-      b Project languages
-    .col-md-3
-      b Offers and contracts
-    .col-md-3
-
-  .row
-    .col-md-3
-      input[style='margin-top: 4px;']
-    .col-md-3
-      input[style='margin-top: 4px;']
-    .col-md-3
-      input[style='margin-top: 4px;']
-    .col-md-3
-      button.btn.btn-outline-secondary SEARCH
+  = bootstrap_form_for(@query, url: '/docfix/issues', method: 'get') do |f|
+    .row
+      .col-md-3
+        = f.text_field :comment_qry  , label: raw("<b>Free-text search</b>")
+      .col-md-3
+        = f.text_field :language_qry , label: raw("<b>Project languages</b>")
+      .col-md-3
+        = f.text_field :offer_qry    , label: raw("<b>Offers and contracts</b>")
+      .col-md-3
+        p[style='margin-top: 30px;']
+          = f.submit "SEARCH"
 
 - @bugs.each do |bug|
   .row

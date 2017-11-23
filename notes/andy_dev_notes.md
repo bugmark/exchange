@@ -499,10 +499,12 @@ Next Actions:
 
 # Nov 22
 
-- [ ] attach README to repo
-- [ ] make README searchable
-- [ ] create profile query
-- [ ] JJ Repo Search
+- [x] attach README to repo
+- [x] make README searchable
+- [x] Repo text-index (later)
+- [x] create project search action 
+- [x] create project query
+- [x] JJ Project Search
 
 - [ ] attach issue description
 - [ ] JJ Issue Search

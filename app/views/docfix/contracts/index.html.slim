@@ -2,26 +2,21 @@
 
 h2 Contracts (#{@contracts.count})
 
-b Check ou tthe running contracts to get an impression of the trading volume
+b Check out the running contracts to get an impression of the trading volume
   going on on BugMark.  filter this view by your preferences, add contracts
   to your watchlist in case they influence an issue you want to invest in
   or make new investments.  You can also resell your own contracts.
 
 div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
-  .row
-    .col-md-4
-      b Free-text search
-    .col-md-4
-      b Project languages
-    .col-md-4
-
-  .row
-    .col-md-4
-      input[style='margin-top: 4px;']
-    .col-md-4
-      input[style='margin-top: 4px;']
-    .col-md-4
-      button.btn.btn-outline-secondary SEARCH
+  = bootstrap_form_for(@query, url: '/docfix/contracts', method: 'get') do |f|
+    .row
+      .col-md-4
+        = f.text_field :readme_qry  , label: raw("<b>Free-text search</b>")
+      .col-md-4
+        = f.text_field :language_qry , label: raw("<b>Project languages</b>")
+      .col-md-4
+        p[style='margin-top: 30px;']
+          = f.submit "SEARCH"
 
 - @contracts.each do |contract|
   .row

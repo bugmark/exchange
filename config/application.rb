@@ -22,6 +22,7 @@ module Bugmark
     config.autoload_paths += %W(#{base}/commands)
     config.autoload_paths += %W(#{base}/libs)
     config.autoload_paths += %W(#{base}/api)
+    config.autoload_paths += %W(#{base}/queries)
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do

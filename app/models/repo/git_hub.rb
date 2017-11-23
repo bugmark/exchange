@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Repo::GitHub < Repo
 
   validates :name, uniqueness: true, presence: true
@@ -14,8 +16,22 @@ class Repo::GitHub < Repo
   after_create :set_languages
   after_create :set_readme
 
+  # ----- INSTANCE METHODS
+
   def html_url
     "https://github.com/#{self.name}"
+  end
+
+  def readme_type
+    case readme_url.split(".").last
+      when "md"       then "markdown"
+      when "markdown" then "markdown"
+      else "text"
+    end
+  end
+
+  def readme_html
+    self.readme_txt
   end
 
   private
@@ -28,8 +44,10 @@ class Repo::GitHub < Repo
 
   def set_readme
     return if Rails.env.test?
-    update_attribute :readme_url, "ASDF"
-    update_attribute :readme_txt, "QWER"
+    readme_url = Octokit.readme(Repo.first.name)[:download_url]
+    update_attribute :readme_url, readme_url
+    readme_txt = open(readme_url) { |io| io.read }
+    update_attribute :readme_txt, readme_txt
   end
 
   def repo_presence
