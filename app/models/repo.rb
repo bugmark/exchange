@@ -23,39 +23,6 @@ class Repo < ApplicationRecord
     contracts.count != 0 || bug_contracts.count != 0
   end
 
-  # ----- PGSEARCH SCOPES
-
-  pg_search_scope :search_by_name, :against => :name
-
-  class << self
-    def combined_search(query)
-      rank = <<-RANK
-        ts_rank(to_tsvector('english', languages),             plainto_tsquery('#{query}')) +
-        ts_rank(to_tsvector('english', jfields->'readme_txt'), plainto_tsquery('#{query}'))
-      RANK
-      field1 = "to_tsvector('english', languages            )"
-      field2 = "to_tsvector('english', jfields->'readme_txt')"
-      qry    = "plainto_tsquery('english', '#{query}')"
-      where("#{field1} @@ #{qry} or #{field2} @@ #{qry}").order("#{rank} desc")
-    end
-
-    def language_search(query)
-      rank = <<-RANK
-        ts_rank(to_tsvector('english', languages), plainto_tsquery('#{query}'))
-      RANK
-      field = "to_tsvector('english', languages)"
-      where("#{field} @@ plainto_tsquery('english', '#{query}')").order("#{rank} desc")
-    end
-
-    def readme_search(query)
-      rank = <<-RANK
-        ts_rank(to_tsvector('english', jfields -> 'readme_txt'), plainto_tsquery('#{query}'))
-      RANK
-      field = "to_tsvector('english', jfields -> 'readme_txt')"
-      where("#{field} @@ plainto_tsquery('english', '#{query}')").order("#{rank} desc")
-    end
-  end
-
   # ----- SCOPES -----
 
   class << self

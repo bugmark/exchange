@@ -4,15 +4,24 @@ class ProjectQuery
   attr_accessor :readme_qry, :language_qry
 
   def search
-    case
-      when readme_qry.blank? && language_qry.blank?
-        Repo.all
-      when readme_qry.present? && language_qry.blank?
-        Repo.readme_search(readme_qry)
-      when readme_qry.blank? && language_qry.present?
-        Repo.language_search(language_qry)
-      else
-        Repo.combined_search(language_qry + " " + readme_qry)
+    if readme_qry.blank? && language_qry.blank?
+      Repo.all
+    else
+      Repo.qscore(readme_qry, language_qry)
     end
+  end
+
+  private
+
+  def qscore(rdme_qry, lang_qry)
+    qs = []
+    qs << rank_str("jfields->'readme_txt'", rdme_qry  ) if rdme_qry
+    qs << rank_str("xfields->'languages'" , lang_qry  ) if lang_qry
+    rank = qs.join(" + ")
+    Repo.where("#{rank} > 0").order("#{rank} desc")
+  end
+
+  def rank_str(field, qry)
+    "ts_rank(to_tsvector('english', #{field}),  plainto_tsquery('english', '#{qry}'))"
   end
 end
