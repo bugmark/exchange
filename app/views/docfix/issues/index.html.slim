@@ -16,7 +16,8 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
       .col-md-3
         = f.text_field :language_qry , label: raw("<b>Project languages</b>")
       .col-md-3
-        = f.text_field :offer_qry    , label: raw("<b>Offers and contracts</b>")
+        fieldset[disabled]
+          = f.text_field :offer_qry    , label: raw("<b>Offers and contracts</b>")
       .col-md-3
         p[style='margin-top: 30px;']
           = f.submit "SEARCH"

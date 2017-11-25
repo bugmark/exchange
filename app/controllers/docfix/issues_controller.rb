@@ -6,8 +6,8 @@ module Docfix
     before_action :authenticate_user!, :except => [:index, :show]
 
     def index
-      @query = IssueQuery.new
-      @bugs  = Bug.paginate(page: params[:page], per_page: 5)
+      @query = IssueQuery.new(permitted(params["issue_query"]))
+      @bugs  = @query.search.paginate(page: params[:page], per_page: 5)
     end
 
     def show
@@ -39,6 +39,10 @@ module Docfix
       params.permit(fields)
     end
 
+    def permitted(params)
+      return nil if params.nil?
+      params.permit(:comment_qry, :language_qry, :offer_qry)
+    end
   end
 end
 

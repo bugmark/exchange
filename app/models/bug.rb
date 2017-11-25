@@ -31,6 +31,20 @@ class Bug < ApplicationRecord
 
   pg_search_scope :search_by_title, :against => :stm_title
 
+  class << self
+    def combined_search(_query)
+      all
+    end
+
+    def language_search(_query)
+      all
+    end
+
+    def comment_search(_query)
+      all
+    end
+  end
+
   # ----- INSTANCE METHODS -----
 
   def xtag

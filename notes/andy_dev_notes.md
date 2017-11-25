@@ -506,6 +506,12 @@ Next Actions:
 - [x] create project query
 - [x] JJ Project Search
 
+# Nov 24
+
+- [ ] move issue languages to jfields
+- [ ] rebuild project search
+- [ ] feature spec for project search
+
 - [ ] attach issue description
 - [ ] JJ Issue Search
 

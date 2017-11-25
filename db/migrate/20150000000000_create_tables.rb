@@ -6,6 +6,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :repos do |t|
       t.string   :type            # Repo::BugZilla, Repo::GitHub, Repo::Cvrf
       t.string   :name            # mvscorg/xdmarket
+      t.string   :languages
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
