@@ -509,8 +509,9 @@ Next Actions:
 # Nov 24
 
 - [x] move issue languages to jfields
+- [x] rebuild project search
+
 - [ ] display repo fields
-- [ ] rebuild project search
 
 - [ ] feature spec for project search
 
