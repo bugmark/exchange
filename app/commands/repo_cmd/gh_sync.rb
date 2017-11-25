@@ -46,6 +46,7 @@ module RepoCmd
           synced_at:   Time.now
         }
         bug = BugCmd::Sync.new(attrs)
+        binding.pry unless attrs[:comments] == ""
         bug.save_event.project
       end
     end

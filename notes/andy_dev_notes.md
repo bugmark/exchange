@@ -511,11 +511,14 @@ Next Actions:
 - [x] move issue languages to jfields
 - [x] rebuild project search
 
-- [ ] display repo fields
+# Nov 25
 
-- [ ] feature spec for project search
+- [x] display repo fields
+- [x] feature spec for project search
+- [x] update project contracts/offers
 
 - [ ] attach issue description
+
 - [ ] JJ Issue Search
 
 - [ ] JJ Offer search

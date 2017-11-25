@@ -25,11 +25,33 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
     a[href="/docfix/projects/#{project.id}"] #{project.name}
   .row
     .col-md-4
-      small = docfix_readme_text(project)
+      small = docfix_project_readme_text(project)
     .col-md-3
-      | lorem ipsum project details here
+      small
+        table.table-sm
+          tr
+            td
+              b RepoType
+            td = project.xtype
+          tr
+            td
+              b Updated
+            td = project.synced_at.strftime("%m-%d %H:%M")
+          tr
+            td
+              b Organization
+            td = project.org
+          tr
+            td
+              b Issue
+            td = project.id
+          tr
+            td
+              b Languages
+            td = project.languages
     .col-md-3
-      | lorem ipsum offer details here
+      p = docfix_project_contracts(project)
+      p = docfix_project_offers(project)
     .col-md-2
       a.btn.btn-primary[href="/docfix/projects/#{project.id}"] View Project<br/>Details
   hr

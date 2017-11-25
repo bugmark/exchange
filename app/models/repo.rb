@@ -18,6 +18,10 @@ class Repo < ApplicationRecord
     self.type.gsub("Repo::","")
   end
 
+  def org
+    "TBD"
+  end
+
   def has_contracts?
     return false
     contracts.count != 0 || bug_contracts.count != 0

@@ -33,6 +33,10 @@ class Repo::GitHub < Repo
     self.readme_txt
   end
 
+  def org
+    self.name.split("/").first
+  end
+
   private
 
   def set_languages
