@@ -64,7 +64,7 @@ class Repo < ApplicationRecord
     end
 
     def select_subset
-      select(:id, :name, "xfields->'languages' as lang", "substring(jfields->>'readme_txt' for 100) as readme")
+      select(:id, :name, "xfields->'languages' as lang", "jfields->'readme_url' as readme_url", "substring(jfields->>'readme_txt' for 50) as readme_txt")
     end
     alias_method :ss, :select_subset
   end

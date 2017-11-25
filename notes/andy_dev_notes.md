@@ -508,10 +508,10 @@ Next Actions:
 
 # Nov 24
 
-- [ ] move issue languages to jfields
+- [x] move issue languages to jfields
+- [ ] display repo fields
 - [ ] rebuild project search
 
-- [ ] display repo contents
 - [ ] feature spec for project search
 
 - [ ] attach issue description

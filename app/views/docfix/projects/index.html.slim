@@ -24,13 +24,13 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
   h4
     a[href="/docfix/projects/#{project.id}"] #{project.name}
   .row
-    .col-md-3
-      | lorem ipsum project description here
+    .col-md-4
+      small = docfix_readme_text(project)
     .col-md-3
       | lorem ipsum project details here
     .col-md-3
       | lorem ipsum offer details here
-    .col-md-3
+    .col-md-2
       | view details, put on watchlist
   hr
 
