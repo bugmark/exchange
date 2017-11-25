@@ -62,6 +62,11 @@ class Repo < ApplicationRecord
     def github
       where(type: "Repo::GitHub")
     end
+
+    def select_subset
+      select(:id, :name, "xfields->'languages' as lang", "substring(jfields->>'readme_txt' for 100) as readme")
+    end
+    alias_method :ss, :select_subset
   end
 end
 
