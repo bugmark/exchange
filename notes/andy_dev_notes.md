@@ -510,6 +510,8 @@ Next Actions:
 
 - [ ] move issue languages to jfields
 - [ ] rebuild project search
+
+- [ ] display repo contents
 - [ ] feature spec for project search
 
 - [ ] attach issue description

@@ -6,8 +6,9 @@ class Repo::GitHub < Repo
   validates :name, format: { with:    /\A[\_\-\.a-zA-Z0-9]+\/[\.\_\-a-zA-Z0-9]+\z/,
                              message: "needs GitHub repo '<user>/<repo>'" }
 
-  jsonb_accessor  :jfields , :readme_url => :string
-  jsonb_accessor  :jfields , :readme_txt => :string
+  hstore_accessor  :xfields , :languages  => :string
+  jsonb_accessor   :jfields , :readme_url => :string
+  jsonb_accessor   :jfields , :readme_txt => :string
 
   validate :repo_presence
 
