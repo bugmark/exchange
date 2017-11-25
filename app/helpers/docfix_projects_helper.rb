@@ -1,6 +1,8 @@
 module DocfixProjectsHelper
 
   def docfix_readme_text(project)
-    raw project.readme_txt.gsub("\n", "<br/>")
+    text = project.readme_txt.gsub("\n", "<br/>")
+    text.length < 400 ? raw(text) : raw(text[0..400] + "...")
+
   end
 end
