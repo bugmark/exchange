@@ -7,7 +7,7 @@ class ProjectQuery
     if readme_qry.blank? && language_qry.blank?
       Repo.all
     else
-      Repo.qscore(readme_qry, language_qry)
+      qscore(readme_qry, language_qry)
     end
   end
 
@@ -15,8 +15,10 @@ class ProjectQuery
 
   def qscore(rdme_qry, lang_qry)
     qs = []
-    qs << rank_str("jfields->'readme_txt'", rdme_qry  ) if rdme_qry
-    qs << rank_str("xfields->'languages'" , lang_qry  ) if lang_qry
+    qs << rank_str("'id'||id"                , rdme_qry) if rdme_qry
+    qs << rank_str("replace(name, '/', ' ')" , rdme_qry) if rdme_qry
+    qs << rank_str("jfields->'readme_txt'"   , rdme_qry) if rdme_qry
+    qs << rank_str("xfields->'languages'"    , lang_qry) if lang_qry
     rank = qs.join(" + ")
     Repo.where("#{rank} > 0").order("#{rank} desc")
   end

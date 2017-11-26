@@ -35,18 +35,17 @@ module RepoCmd
       issues = Octokit.issues(repo.name)
       issues.each do |el|
         attrs = {
-          stm_repo_id: self.id         ,
-          type:        "Bug::GitHub"   ,
-          exref:       el["id"]        ,
-          stm_title:   el["title"]     ,
-          stm_labels:  labels_for(el)  ,
-          stm_status:  el["state"]     ,
-          html_url:    el["html_url"]  ,
-          comments:    comments_for(el),
+          stm_repo_id: self.id           ,
+          type:        "Bug::GitHub"     ,
+          exref:       el["id"]          ,
+          stm_title:   el["title"]       ,
+          stm_labels:  labels_for(el)    ,
+          stm_status:  el["state"]       ,
+          stm_jfields: comments_for(el)  ,
+          html_url:    el["html_url"]    ,
           synced_at:   Time.now
         }
         bug = BugCmd::Sync.new(attrs)
-        binding.pry unless attrs[:comments] == ""
         bug.save_event.project
       end
     end
@@ -57,8 +56,8 @@ module RepoCmd
 
     def comments_for(el)
       list = Octokit.issue_comments(repo.name, el["number"])
-      return "" if list == []
-      list.map {|el| el["body"]}.join(" | ")
+      return {} if list == []
+      {comments: list.map {|el| el["body"]}.join(" | ")}
     end
   end
 end

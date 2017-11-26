@@ -41,7 +41,7 @@ module Docfix
 
     def permitted(params)
       return nil if params.nil?
-      params.permit(:comment_qry, :language_qry, :offer_qry)
+      params.permit(:free_qry, :lang_qry, :offer_qry)
     end
   end
 end

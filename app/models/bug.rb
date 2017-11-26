@@ -7,11 +7,11 @@ class Bug < ApplicationRecord
 
   after_save :update_stm_ids
 
-  belongs_to :repo     , :foreign_key => :stm_repo_id
-  has_many   :offers   , :foreign_key => :stm_bug_id, :dependent  => :destroy
-  has_many   :offers_bf, :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Fixed"
-  has_many   :offers_bu, :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Unfixed"
-  has_many   :contracts, :foreign_key => :stm_bug_id, :dependent  => :destroy
+  belongs_to :repo      , :foreign_key => :stm_repo_id
+  has_many   :offers    , :foreign_key => :stm_bug_id, :dependent  => :destroy
+  has_many   :offers_bf , :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Fixed"
+  has_many   :offers_bu , :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Unfixed"
+  has_many   :contracts , :foreign_key => :stm_bug_id, :dependent  => :destroy
 
   hstore_accessor :stm_xfields, :html_url  => :string
   jsonb_accessor  :stm_jfields, :comments  => :string
@@ -22,7 +22,10 @@ class Bug < ApplicationRecord
   # ----- SCOPES -----
   class << self
     def select_subset
-      select(%i(id type stm_repo_id stm_bug_id stm_title stm_status stm_labels))
+      alt = []
+      alt << "substring(stm_jfields->>'comments' for 20) as comments"
+      alt << "substring(stm_title for 20) as title"
+      select(%i(id type stm_repo_id stm_bug_id stm_status stm_labels) + alt)
     end
     alias_method :ss, :select_subset
   end
@@ -30,20 +33,6 @@ class Bug < ApplicationRecord
   # ----- PGSEARCH SCOPES -----
 
   pg_search_scope :search_by_title, :against => :stm_title
-
-  class << self
-    def combined_search(_query)
-      all
-    end
-
-    def language_search(_query)
-      all
-    end
-
-    def comment_search(_query)
-      all
-    end
-  end
 
   # ----- INSTANCE METHODS -----
 

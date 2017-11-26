@@ -14,6 +14,12 @@ module DocfixIssuesHelper
     raw "<span class='badge badge-default'>#{lbl}</span>"
   end
 
+  def docfix_issue_comments(bug)
+    return "" if bug.comments.blank? || bug.comments.nil?
+    text = bug.comments.gsub("\n", "<br/>")
+    text.length < 400 ? raw(text) : raw(text[0..400] + "...")
+  end
+
   def docfix_issue_contracts(bug)
     lbl = case (count = bug.contracts.count)
       when 0 then "No Contracts"
