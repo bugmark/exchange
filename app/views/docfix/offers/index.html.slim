@@ -22,14 +22,26 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
 - @offers.each do |offer|
   .row
     .col-md-8
-      hr
-      a[href="/docfix/offers/#{offer.id}"] #{offer.xid}
-      table.table-sm
-        tr
-          td Created on...
-          td Current marketprice
-          td Expected fix probability
-          td Last trade
+      table.table-sm[style='width: 100%;']
+        tr[style='vertical-align: bottom;']
+          td = docfix_offer_hdr(offer)
+          td: b Market price
+          td: b Expected fix probability
+          td: b Last trade
+        tr[style='vertical-align: top;']
+          td
+            small
+            p
+              b Created on<br/>
+              = offer.created_at.strftime("%m-%d %H:%M")
+            p
+              b = docfix_offer_label(offer)
+              br
+              = docfix_assoc_link(offer)
+
+          td: b #{offer.value} tokens
+          td TBD
+          td TBD
     .col-md-4
       b
         ' Get involved
