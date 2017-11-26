@@ -15,10 +15,10 @@ class ProjectQuery
 
   def qscore(rdme_qry, lang_qry)
     qs = []
-    qs << rank_str("'id'||id"                , rdme_qry) if rdme_qry
-    qs << rank_str("replace(name, '/', ' ')" , rdme_qry) if rdme_qry
-    qs << rank_str("jfields->'readme_txt'"   , rdme_qry) if rdme_qry
-    qs << rank_str("xfields->'languages'"    , lang_qry) if lang_qry
+    qs << rank_str("'id'||id"                , rdme_qry) if rdme_qry.present?
+    qs << rank_str("replace(name, '/', ' ')" , rdme_qry) if rdme_qry.present?
+    qs << rank_str("jfields->'readme_txt'"   , rdme_qry) if rdme_qry.present?
+    qs << rank_str("xfields->'languages'"    , lang_qry) if lang_qry.present?
     rank = qs.join(" + ")
     Repo.where("#{rank} > 0").order("#{rank} desc")
   end

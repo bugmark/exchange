@@ -13,21 +13,18 @@ class IssueQuery
 
   private
 
-  def qscore(free_qry, lang_qry)
+  def qscore(freq, lanq)
     qs = []
-    # qs << rank_str("'id'||id"             , free_qry  ) if free_qry
-    # qs << rank_str("'repo'||stm_repo_id"  , free_qry  ) if free_qry
-    qs << rank_str("stm_title"            , free_qry  ) if free_qry
-    qs << rank_str("stm_labels"           , free_qry  ) if free_qry
-    # qs << rank_str("stm_jfields->'comments'"  , free_qry  ) if free_qry
-    # qs << rank_str("xfields->'languages'" , lang_qry  ) if lang_qry
+    qs << rank_str("'id'||bugs.id"             , freq) if freq.present?
+    qs << rank_str("'repo'||stm_repo_id"       , freq) if freq.present?
+    qs << rank_str("stm_title"                 , freq) if freq.present?
+    qs << rank_str("stm_labels"                , freq) if freq.present?
+    qs << rank_str("stm_jfields->'comments'"   , freq) if freq.present?
+    qs << rank_str("repos.xfields->'languages'", lanq) if lanq.present?
     rank = qs.join(" + ")
+    # slst = ["repos.xfields->'languages' as lang", "bugs.*"]
+    # Bug.joins(:repo).select(*slst).where("#{rank} > 0").order("#{rank} desc")
     Bug.joins(:repo).where("#{rank} > 0").order("#{rank} desc")
-    Bug.joins(:repo)
-  end
-
-  def join_str(field, qry)
-  "ts_rank(to_tsvector('english', #{field}),  plainto_tsquery('english', '#{qry}'))"
   end
 
   def rank_str(field, qry)

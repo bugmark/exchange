@@ -516,10 +516,12 @@ Next Actions:
 - [x] display repo fields
 - [x] feature spec for project search
 - [x] update project contracts/offers
+- [x] attach issue description
 
-- [ ] attach issue description
+# Nov 26
 
-- [ ] JJ Issue Search
+- [x] Join project languages to issue search
+- [x] JJ Issue Search
 
 - [ ] JJ Offer search
 - [ ] JJ Contract search
