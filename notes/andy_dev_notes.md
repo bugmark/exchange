@@ -523,6 +523,12 @@ Next Actions:
 - [x] Join project languages to issue search
 - [x] JJ Issue Search
 
+- [ ] JJ build out /offers#index
+- [ ] JJ build out /offers#show
+
+- [ ] JJ build out contracts#index
+- [ ] JJ build out contracts#show 
+
 - [ ] JJ Offer search
 - [ ] JJ Contract search
 
