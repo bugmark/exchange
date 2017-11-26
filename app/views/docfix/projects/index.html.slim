@@ -36,7 +36,7 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
           tr
             td
               b Updated
-            td = project.synced_at.strftime("%m-%d %H:%M")
+            td = project.synced_at&.strftime("%m-%d %H:%M")
           tr
             td
               b Organization
