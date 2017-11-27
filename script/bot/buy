@@ -4,22 +4,23 @@ PROCNAME = "bot_buy"
 Process.setproctitle(PROCNAME)
 
 puts "----- BUGMARK OFFER BOT -------------------------------------------"
-puts "START #{Time.now}"
+puts "START #{Time.now} | C-c to exit"
 puts "Process Name: #{PROCNAME}"
 puts "Loading Rails Environment..."
 STDOUT.flush
 require "./config/environment"
 
-
 ISSUE_IDS = Bug.all[0..3].pluck(:id)
-USER_IDS  = User.all.pluck(:id)
-count  = 0
+USER_IDS  = User.where("email ilike 'test%'").pluck(:id)
+count     = 0
 
+# for C-c
 trap "SIGINT" do
   puts "\nExiting"
   exit 130
 end
 
+# for "pkill -f bot_buy"
 trap "SIGTERM" do
   puts "TERMINATED #{Time.now}"
   STDOUT.flush
@@ -40,16 +41,20 @@ end
 def cross
   print "Crossing"
   Offer.open.is_buy.each do |offer|
-    print " #{offer.id}"
+    print "."
     ContractCmd::Cross.new(offer, :expand).save_event.project
   end
   puts "."
 end
 
+def pa(el)
+  el.to_s.rjust(2, "0")
+end
+
 while true do
   count += 1
   time  = Time.now.strftime("%H:%M:%S")
-  puts "Cycle: #{count} | #{time} | #{Offer.open.count} open offers | #{Contract.count} contracts | #{Escrow.count} escrows | C-c to exit"
+  puts "Cycle: #{pa count} | #{time} | #{pa Offer.open.count} open offers | #{pa Contract.count} contracts | #{pa Escrow.count} escrows"
   STDOUT.flush
   sleep 20
   buy

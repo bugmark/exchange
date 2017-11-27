@@ -170,3 +170,10 @@ Discussion:
 Target Outcomes Nov 17:
 - [ ] JJ Demo - offer page cleanup
 - [ ] JJ Demo - contract page cleanup
+
+Tue Nov 28
+----------------------------------------------
+
+Discussion:
+- we now generate user: <joe|jane>@bugmark.net pass: bugmark
+- still have user: test<1|2|3>@bugmark.net pass: bugmark

@@ -3,3 +3,6 @@
 require "./config/environment"
 
 3.times { FG.create :user }
+
+FG.create :user, email: "joe@bugmark.net"
+FG.create :user, email: "jane@bugmark.net"
