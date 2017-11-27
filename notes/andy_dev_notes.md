@@ -522,9 +522,15 @@ Next Actions:
 
 - [x] Join project languages to issue search
 - [x] JJ Issue Search
+- [x] JJ add offers#index buttons
+- [x] JJ add offers#index probability label
+- [x] JJ add offers#index last-trade label
+- [x] JJ build out /offers#show
+- [x] JJ Trading Bot
 
-- [ ] JJ build out /offers#index
-- [ ] JJ build out /offers#show
+# Nov 27
+
+- [ ] Bot Dashboard
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
@@ -535,7 +541,6 @@ Next Actions:
 - [ ] JJ README overview on /projects
 
 - [ ] JJ Profile Pages
-- [ ] JJ Trading Bot
 - [ ] JJ Sparkline
 
 # TBD
