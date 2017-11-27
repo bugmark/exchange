@@ -1,10 +1,15 @@
 #!/usr/bin/env ruby
 
-puts "BUGMARK OFFER BOT"
+PROCNAME = "bot_buy"
+Process.setproctitle(PROCNAME)
+
+puts "----- BUGMARK OFFER BOT -------------------------------------------"
+puts "START #{Time.now}"
+puts "Process Name: #{PROCNAME}"
 puts "Loading Rails Environment..."
+STDOUT.flush
 require "./config/environment"
 
-Process.setproctitle("buybot")
 
 ISSUE_IDS = Bug.all[0..3].pluck(:id)
 USER_IDS  = User.all.pluck(:id)
@@ -12,6 +17,12 @@ count  = 0
 
 trap "SIGINT" do
   puts "\nExiting"
+  exit 130
+end
+
+trap "SIGTERM" do
+  puts "TERMINATED #{Time.now}"
+  STDOUT.flush
   exit 130
 end
 
@@ -39,7 +50,7 @@ while true do
   count += 1
   time  = Time.now.strftime("%H:%M:%S")
   puts "Cycle: #{count} | #{time} | #{Offer.open.count} open offers | #{Contract.count} contracts | #{Escrow.count} escrows | C-c to exit"
-
+  STDOUT.flush
   sleep 20
   buy
   cross if count % 2 == 0

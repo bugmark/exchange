@@ -3,6 +3,9 @@
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
 
+echo "----- BUGMARK TOTAL REBUILD ---------------------"
+echo "START `date`"
+
 echo RAILS ENV $RAILS_ENV
 
 echo Clear Old Data
@@ -26,4 +29,4 @@ bundle exec script/data/contract_load
 echo Counts
 bundle exec script/data/all_count
 
-echo Done.
+echo "DONE `date`"

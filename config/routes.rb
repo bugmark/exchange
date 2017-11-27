@@ -7,6 +7,16 @@ Rails.application.routes.draw do
   get  'static/data'
   post 'static/mailpost'
 
+  # ----- BOT ROUTES -----
+  get 'bot/home'
+  get 'bot/build'
+  get 'bot/build_msg'
+  get 'bot/build_log'
+  get 'bot/start'
+  get 'bot/stop'
+  get 'bot/log_show'
+  get 'bot/log_reset'
+
   # ----- CORE APPLICATION -----
   get 'core'  , to: redirect("/core/home")
   get 'demo'  , to: redirect("/core/home")
