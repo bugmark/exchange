@@ -1,27 +1,38 @@
-h1 BugMark Data Scripts
-
 h2 Trading Bot
-ul
-  li
-    a[href='/bot/start'] Start the Trading Bot
-  li
-    a[href='/bot/stop'] Stop the Trading Bot
-  li
-    a[href='/bot/log_show'] Show the Bot Log
-  li
-    a[href='/bot/log_reset'] Reset the Bot Log
+p
+  | Overview:
+  ul
+    li Generates one buy offer every 30 seconds
+    li Tries to cross every open offer every minute
+p
+  | Buy Offers:
+  ul
+    li only trades on the first three issues
+    li randomly on fixed and unfixed sid
+    li Users selected randomly from test<1|2|3>@bugmark.net
+    li Price selected randomly between 0.0 and 1.0
+    li Volume selected randomly between 2 and 10 units
+p
+  | Actions:
+  ul
+    li: a[href='/bot/start'] Start the Trading Bot
+    li: a[href='/bot/stop'] Stop the Trading Bot
+    li: a[href='/bot/log_show'] Show the Bot Log
+    li: a[href='/bot/log_reset'] Reset the Bot Log
 
 h2 Total Rebuild
-ul
-  li
-    a[href='/bot/build_log'] View the last Rebuild Log
-  li
-    span>[style='color: red;']
-      i.fa.fa-asterisk
-      | CAREFUL!
-      i.fa.fa-asterisk
-    a>[href='/bot/build'] Destroy all Data and Rebuild from Scratch
-    span>[style='color: red;']
-      i.fa.fa-asterisk
-      | CAREFUL!
-      i.fa.fa-asterisk
+p
+  | Delete all data and rebuild from scratch
+  ul
+    li
+      a[href='/bot/build_log'] View the last Rebuild Log
+    li
+      span>[style='color: red;']
+        i.fa.fa-asterisk
+        | CAREFUL!
+        i.fa.fa-asterisk
+      a>[href='/bot/build'] Destroy all Data and Rebuild from Scratch
+      span>[style='color: red;']
+        i.fa.fa-asterisk
+        | CAREFUL!
+        i.fa.fa-asterisk

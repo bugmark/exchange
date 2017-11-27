@@ -12,7 +12,8 @@ class BotController < ApplicationController
   end
   
   def build
-    system "(sleep 5 ; script/data/all_reload) > #{BUILD_LOG} 2>&1 &"
+    system "pkill -f #{PROC_NAME}"
+    system "(sleep 2 ; script/data/all_reload) > #{BUILD_LOG} 2>&1 &"
     flash[:notice] = "BUILD HAS STARTED"
     redirect_to "/bot/build_msg"
   end

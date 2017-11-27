@@ -8,5 +8,7 @@ css:
 H1 Trading Bot Log
 small
   a>[href='/bot/home'] Bot Home
+  - if Rails.env.production?
+    ' | page auto-refresh every 15 seconds...
 p.logstyle
   = raw @logtext
