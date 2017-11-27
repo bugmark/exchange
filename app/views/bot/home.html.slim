@@ -1,38 +1,41 @@
-h2 Trading Bot
-p
-  | Overview:
-  ul
-    li Generates one buy offer every 30 seconds
-    li Tries to cross every open offer every minute
-p
-  | Buy Offers:
-  ul
-    li only trades on the first three issues
-    li randomly on fixed and unfixed sid
-    li Users selected randomly from test<1|2|3>@bugmark.net
-    li Price selected randomly between 0.0 and 1.0
-    li Volume selected randomly between 2 and 10 units
-p
-  | Actions:
-  ul
-    li: a[href='/bot/start'] Start the Trading Bot
-    li: a[href='/bot/stop'] Stop the Trading Bot
-    li: a[href='/bot/log_show'] Show the Bot Log
-    li: a[href='/bot/log_reset'] Reset the Bot Log
 
-h2 Total Rebuild
-p
-  | Delete all data and rebuild from scratch
-  ul
-    li
-      a[href='/bot/build_log'] View the last Rebuild Log
-    li
-      span>[style='color: red;']
-        i.fa.fa-asterisk
-        | CAREFUL!
-        i.fa.fa-asterisk
-      a>[href='/bot/build'] Destroy all Data and Rebuild from Scratch
-      span>[style='color: red;']
-        i.fa.fa-asterisk
-        | CAREFUL!
-        i.fa.fa-asterisk
+table.table.table-small
+  tr
+    td[colspan=2]
+      h2 Trading Bot
+  tr
+    td
+      b Actions:
+      ul
+        li: a[href='/bot/start'] Start the Trading Bot
+        li: a[href='/bot/stop'] Stop the Trading Bot
+        li: a[href='/bot/log_show'] Show the Bot Log
+        li: a[href='/bot/log_reset'] Reset the Bot Log
+    td[width='66%']
+      b Overview:
+      ul
+        li Generates one buy offer every 30 seconds
+        li Tries to cross every open offer once per minute
+      b Buy Offers:
+      ul
+        li only trades on the first three issues
+        li randomly on fixed and unfixed sid
+        li Users selected randomly from test<1|2|3>@bugmark.net
+        li Price selected randomly between 0.0 and 1.0
+        li Volume selected randomly between 2 and 10 units
+  tr
+    td[colspan=2]
+      h2 Total Rebuild
+  tr
+    td
+      b Actions:
+      ul
+        li
+          span>[style='color: red;'] CAREFUL!
+          a>[href='/bot/build'] Delete all Data and Rebuild from Scratch
+        li
+          a[href='/bot/build_log'] Show the Rebuild Log
+    td
+      b Overview:
+      p Delete all data and rebuild from scratch
+
