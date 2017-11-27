@@ -35,9 +35,9 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
     .col-md-4
       | TBD
     .col-md-2
-      | TBD
+      = contract.maturation.strftime("%m-%d %H:%M")
     .col-md-2
-      | TBD
+      | #{contract.total_value.to_i} tokens
     .col-md-2
       | TBD
     .col-md-2

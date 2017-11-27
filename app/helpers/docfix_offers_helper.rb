@@ -24,6 +24,26 @@ module DocfixOffersHelper
 
   # -----
 
+  def docfix_offer_price(offer)
+    op = (offer.price * 100).to_i
+    cp = 100 - op
+    fp, up = offer.is_fixed? ? [op, cp] : [cp, op]
+    raw <<-HTML.strip_heredoc
+      <table>
+        <tr>
+          <td style='text-align: center; border-right: 1px solid black;'>
+            #{fp}%<br/><small>on fixed side</small>
+          </td>
+          <td style='text-align: center;'>
+            #{up}%<br/><small>on unfixed side</small>
+          </td>
+        </tr>
+      </table>
+    HTML
+  end
+
+  # -----
+
   def docfix_assoc_link(offer)
     case
       when offer.stm_bug_id
@@ -59,5 +79,13 @@ module DocfixOffersHelper
         #{offer.repo.name}
       </a>
     END
+  end
+
+  # ----- issue buttons -----
+
+  def docfix_offer_buy_btns(offer)
+    bug = offer.bug
+    return "" unless bug.present?
+    docfix_issue_bu_btn(bug) + docfix_issue_bf_btn(bug)
   end
 end

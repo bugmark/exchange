@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+puts "BUGMARK OFFER BOT"
+puts "Loading Rails Environment..."
+require "./config/environment"
+
+Process.setproctitle("buybot")
+
+ISSUE_IDS = Bug.all[0..3].pluck(:id)
+USER_IDS  = User.all.pluck(:id)
+count  = 0
+
+trap "SIGINT" do
+  puts "\nExiting"
+  exit 130
+end
+
+def buy
+  typ  = %i(offer_bf offer_bu).sample
+  opts = {
+    user_id: USER_IDS.sample     ,
+    volume:  rand(8) + 2         ,
+    price:   rand.round(2)       ,
+    stm_bug_id: ISSUE_IDS.sample
+  }
+  FG.create(typ, opts).save_event.project
+end
+
+def cross
+  print "Crossing"
+  Offer.open.is_buy.each do |offer|
+    print " #{offer.id}"
+    ContractCmd::Cross.new(offer, :expand).save_event.project
+  end
+  puts "."
+end
+
+while true do
+  count += 1
+  time  = Time.now.strftime("%H:%M:%S")
+  puts "Cycle: #{count} | #{time} | #{Offer.open.count} open offers | #{Contract.count} contracts | #{Escrow.count} escrows | C-c to exit"
+
+  sleep 20
+  buy
+  cross if count % 2 == 0
+end

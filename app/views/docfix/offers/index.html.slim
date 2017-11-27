@@ -40,14 +40,14 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
               = docfix_assoc_link(offer)
 
           td: b #{offer.value} tokens
-          td TBD
+          td = docfix_offer_price(offer)
           td TBD
     .col-md-4
       b
         ' Get involved
         i.fa.fa-question-circle
         |  Why would I do this?
-        button.btn[style='width: 100%'] BE THE FIRST TO INVEST<br/><small>on the fixed or unfixed side</small>
+        = docfix_offer_buy_btns(offer)
   hr
 
 .text-center[style='margin-top: 30px;']
