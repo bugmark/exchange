@@ -154,4 +154,19 @@ Decision from yesterday
 - After that, resume back-end development and general build-out
 
 Target Outcomes Nov 20
-- [ ] JJ Demo Progress
+- [x] JJ Demo Progress
+
+Mon Nov 27
+----------------------------------------------
+
+Target Outcomes from last week:
+- [x] implement full-text search (repos, issues)
+- [x] cleanup JJ demo pages
+- [x] implement BOT and BOT dashboard
+
+Discussion:
+- other work opportunities / priorities
+
+Target Outcomes Nov 17:
+- [ ] JJ Demo - offer page cleanup
+- [ ] JJ Demo - contract page cleanup

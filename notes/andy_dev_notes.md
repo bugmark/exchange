@@ -530,7 +530,8 @@ Next Actions:
 
 # Nov 27
 
-- [ ] Bot Dashboard
+- [x] docfix: write a bot for testing and for demos
+- [x] Bot Dashboard (/bot/home)
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
@@ -565,8 +566,6 @@ Next Actions:
 
 - [ ] docfix: create take_bu, take_bf
 
-- [ ] docfix: write a bot for testing and for demos
-
 - [ ] add :offer_bu to create_buy_spec
 - [ ] docfix: add Jquery to dynamically update prices
 - [ ] docfix: cleanup offer pages
@@ -590,13 +589,11 @@ Next Actions:
 - [ ] docfix: BitCoin integration
 - [ ] docfix: Eth integration
 
-- [ ] core: implement a trading bot
 - [ ] core: implement a graph
 - [ ] core: get sell/cross working
 - [ ] core: write Commit#resolve
 - [ ] core: implement all-or-none
 - [ ] core: reset the data from the UI
-- [ ] core: write a trading bot
 - [ ] core: reset the contract maturation date
 
 - [ ] core: get grafana working with postgres
