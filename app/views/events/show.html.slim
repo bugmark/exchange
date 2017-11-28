@@ -1,0 +1,24 @@
+H1 Event #{@event.id}
+
+table.table.table-sm
+  tr
+    td: b ID
+    td = @event.id
+  tr
+    td: b COMMAND
+    td = @event.klas
+  tr
+    td: b UUREF
+    td = @event.uuref
+  tr
+    td: b LOCAL_HASH
+    td = @event.local_hash
+  tr
+    td: b CHAIN_HASH
+    td = @event.chain_hash
+  tr
+    td: b DATA
+    td = @event.data
+  tr
+    td: b CREATED
+    td = @event.created_at

@@ -1,0 +1,20 @@
+H1 Events
+
+table.table.table-sm
+  tr
+    th ID
+    th Command
+    th Data
+    th Created
+  - @events.each do |event|
+    tr
+      td
+        a[href="/events/#{event.id}"] #{event.id}
+      td = event.klas
+      td = event.data.to_s[0..40] + " ..."
+      td = event.created_at
+
+hr
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @offers, container: false
