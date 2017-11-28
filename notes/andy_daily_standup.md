@@ -167,7 +167,7 @@ Target Outcomes from last week:
 Discussion:
 - other work opportunities / priorities
 
-Target Outcomes Nov 17:
+Target Outcomes Nov 27:
 - [ ] JJ Demo - offer page cleanup
 - [ ] JJ Demo - contract page cleanup
 
@@ -175,5 +175,11 @@ Tue Nov 28
 ----------------------------------------------
 
 Discussion:
-- we now generate user: <joe|jane>@bugmark.net pass: bugmark
-- still have user: test<1|2|3>@bugmark.net pass: bugmark
+- We now generate user: <joe|jane>@bugmark.net pass: bugmark
+- Still have user: test<1|2|3>@bugmark.net pass: bugmark
+- Event log is now visible at https://bugmark.net/events
+- Rich starts work today on TestNet logging
+
+Target Outcomes Nov 28:
+- [ ] finish offer and contract page
+- [ ] prep for JJ walkthru on the Weds the 29th

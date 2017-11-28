@@ -532,13 +532,15 @@ Next Actions:
 
 - [x] docfix: write a bot for testing and for demos
 - [x] Bot Dashboard (/bot/home)
-- [x] Add event logb
+- [x] Add event log
+
+# Nov 28
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
 
-- [ ] JJ Offer search
-- [ ] JJ Contract search
+- [ ] JJ Offer search / sorting
+- [ ] JJ Contract search / sorting
 
 - [ ] JJ README overview on /projects
 
@@ -546,6 +548,7 @@ Next Actions:
 - [ ] JJ Sparkline
 
 # TBD
+
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
