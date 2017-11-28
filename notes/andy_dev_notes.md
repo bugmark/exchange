@@ -532,6 +532,7 @@ Next Actions:
 
 - [x] docfix: write a bot for testing and for demos
 - [x] Bot Dashboard (/bot/home)
+- [x] Add event logb
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
