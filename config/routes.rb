@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get  'static/data'
   post 'static/mailpost'
 
+  # ----- EVENT ROUTES -----
+  resources :events
+
   # ----- BOT ROUTES -----
   get 'bot/home'
   get 'bot/build'
