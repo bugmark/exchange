@@ -5,8 +5,7 @@ html[lang="en-US"]
     = csrf_meta_tags
     link[href="/img/bugfav.ico" rel="icon" type="image/x-icon"]
     meta[name="google-site-verification" content="UUWuW0CZrLjsEb0HUaB_7IMJqyqNyKLhaSWvQX_Sq6U"]
-    - if Rails.env.production?
-      meta[http-equiv="refresh" content="15"]
+    = refresh_tag
     meta[charset="utf-8"]
     meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
     = stylesheet_link_tag 'application.css'
