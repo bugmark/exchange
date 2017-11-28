@@ -1,5 +1,12 @@
 module ApplicationHelper
 
+  def refresh_tag
+    # dev_log "CONTROLLER #{controller_name}"
+    return "" unless Rails.env.production?
+    return "" if %w(homes users sessions static).include?(controller_name)
+    raw "<meta http-equiv='refresh' content='15' />"
+  end
+
   def flash_alert(flash)
     alt = flash.to_hash.stringify_keys
     alt["success"] ||= alt.delete("notice")
