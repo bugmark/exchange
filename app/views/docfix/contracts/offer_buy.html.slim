@@ -1,0 +1,9 @@
+= breadcrumb [%w(BugMark /docfix/home), %w(Contracts /docfix/contracts), ["Contract ##{@contract.id}", "/docfix/issues/#{@bug.id}"], "Offer to Buy"]
+
+small
+  a href="/docfix/contracts/#{@contract.id}" return to contract #{@contract.id}
+
+p.text-center[style='margin: 80px']
+  a<>[href='/docfix/issues/#{@bug.id}/offer_bu'] Buy Unfixed
+  | |
+  a<>[href='/docfix/issues/#{@bug.id}/offer_bf'] Buy Fixed

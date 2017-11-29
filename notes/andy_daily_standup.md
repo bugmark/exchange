@@ -181,8 +181,8 @@ Discussion:
 - Rich starts work today on TestNet logging
 
 Target Outcomes Nov 28:
-- [ ] finish offer and contract page
-- [ ] prep for JJ walkthru on the Weds the 29th
+- [x] build out offer page
+- [ ] build out contract page
 
 Wed Nov 29
 ----------------------------------------------
@@ -203,4 +203,8 @@ Examples:
 - https://getbootstrapadmin.com/remark/base/charts/sparkline.html
 - https://wrapbootstrap.com/themes/admin
 
-
+Target Outcomes Nov 29:
+- [ ] finish contract page
+- [ ] working offer sort
+- [ ] working contract sort
+- [ ] end-to-end flow: eliminate need to type URLs

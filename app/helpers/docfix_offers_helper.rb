@@ -1,5 +1,5 @@
 module DocfixOffersHelper
-  def docfix_offer_link(offer)
+  def docfix_offer_show_link(offer)
     raw <<-ERB.strip_heredoc
       <b>
       <a href="/docfix/offers/#{offer.id}">#{docfix_offer_title(offer)}</a>
