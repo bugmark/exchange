@@ -183,3 +183,11 @@ Discussion:
 Target Outcomes Nov 28:
 - [ ] finish offer and contract page
 - [ ] prep for JJ walkthru on the Weds the 29th
+
+Wed Nov 29
+----------------------------------------------
+
+Discussion:
+- We have an api call to grab the event log (/event?after=<id>)
+- Rich is writing a script to poll for events and log to Ethereum TestNet
+

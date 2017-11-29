@@ -536,6 +536,8 @@ Next Actions:
 
 # Nov 28
 
+- [x] add /events&after=<id> route to API
+
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
 
