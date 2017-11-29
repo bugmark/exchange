@@ -536,6 +536,10 @@ Next Actions:
 
 # Nov 28
 
+- [x] add /events&after=<id> route to API
+- [x] GRAPHING InfluxDB Provisioning & Configuration
+- [x] GRAHPING Grafana  Provisioning
+
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
 
@@ -549,9 +553,8 @@ Next Actions:
 
 # TBD
 
-- [ ] GRAPHING InfluxDB Provisioning & Configuration
 - [ ] GRAPHING InfluxDB Data Reload
-- [ ] GRAHPING Grafana  Provisioning & Configuration
+- [ ] GRAPHING Grafana  Configuration
 - [ ] GRAPHING Grafana  Chart Development
 - [ ] GRAPHING InfluxDB Data Export
 - [ ] GRAPHING Grafana  Chart Import

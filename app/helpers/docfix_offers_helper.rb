@@ -1,5 +1,5 @@
 module DocfixOffersHelper
-  def docfix_offer_link(offer)
+  def docfix_offer_show_link(offer)
     raw <<-ERB.strip_heredoc
       <b>
       <a href="/docfix/offers/#{offer.id}">#{docfix_offer_title(offer)}</a>
@@ -42,10 +42,10 @@ module DocfixOffersHelper
     raw <<-HTML.strip_heredoc
       <table>
         <tr>
-          <td style='text-align: center; border-right: 1px solid black;'>
+          <td style='padding: 10px; text-align: center; border-right: 1px solid black;'>
             #{fp}%<br/><small>on fixed side</small>
           </td>
-          <td style='text-align: center;'>
+          <td style='padding: 10px; text-align: center;'>
             #{up}%<br/><small>on unfixed side</small>
           </td>
         </tr>
@@ -55,7 +55,7 @@ module DocfixOffersHelper
 
   # -----
 
-  def docfix_assoc_link(offer)
+  def docfix_offer_assoc_link(offer)
     case
       when offer.stm_bug_id
         docfix_offer_issue_link(offer)
@@ -66,7 +66,7 @@ module DocfixOffersHelper
     end
   end
 
-  def docfix_offer_label(offer)
+  def docfix_offer_assoc_label(offer)
     case
       when offer.stm_bug_id
         "Issue"
@@ -79,7 +79,7 @@ module DocfixOffersHelper
   def docfix_offer_issue_link(offer)
     raw <<-END.strip_heredoc
       <a href="/docfix/issues/#{offer.stm_bug_id}">
-        #{offer.bug.stm_title}
+        #{offer.bug.stm_title} (Issue ##{offer.stm_bug_id})
       </a>
     END
   end
@@ -87,7 +87,7 @@ module DocfixOffersHelper
   def docfix_offer_project_link(offer)
     raw <<-END.strip_heredoc
       <a href="/docfix/projects/#{offer.stm_repo_id}">
-        #{offer.repo.name}
+        #{offer.repo.name} (Project ##{offer.stm_repo_id})
       </a>
     END
   end

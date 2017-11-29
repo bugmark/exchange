@@ -21,8 +21,7 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
 - @contracts.each do |contract|
   .row
     .col-md-4
-      h4
-        a[href="/docfix/contracts/#{contract.id}"] Contract #{contract.id}
+       = docfix_contract_show_link(contract)
     .col-md-2
       b Maturation date
     .col-md-2
@@ -33,15 +32,23 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
       b Actions
   .row
     .col-md-4
-      | TBD
+      small
+        p
+          b =docfix_contract_assoc_label(contract)
+          br
+          = docfix_contract_assoc_link(contract)
+        p
+          b Created on<br/>
+          = contract.created_at
     .col-md-2
       = contract.maturation.strftime("%m-%d %H:%M")
     .col-md-2
       | #{contract.total_value.to_i} tokens
     .col-md-2
-      | TBD
+      = docfix_contract_price(contract)
     .col-md-2
-      | TBD
+      | BUTTON TBD
+      /= docfix_contract_action_btns(contract)
   hr
 
 .text-center[style='margin-top: 30px;']

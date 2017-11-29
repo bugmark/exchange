@@ -1,5 +1,13 @@
-= breadcrumb [%w(BugMark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
+css:
+  .holder {
+    margin-top: 50px;
+    padding:    50px;
+    background: lightgrey;
+    width: 80%;
+  }
 
+
+= breadcrumb [%w(BugMark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
 small
   a href="/docfix/offers" return to overview
 
@@ -13,28 +21,47 @@ small
             will go to the holder(s) of the fixed side.  You will earn
             #{@offer.value} tokens if this contract is successfully matched but
             the issue is unfixed by #{@offer.maturation_str}.
-    p Created for [Issue link here]
-  .col-md-5
-    h4 Get involved
-    button.btn.btn-secondary>[data-toggle='modal' data-target='#buyModal' type='button']
-      | CONTRIBUTE TO FIX<br/><small>buy fixed side</small>
-    button.btn.btn-secondary[]
-      | INVEST IN FIX<br/><small>buy unfixed side</small>
+    small
+      table.table.table-sm
+        tr
+          td: b = docfix_offer_assoc_label(@offer)
+          td = docfix_offer_assoc_link(@offer)
+        tr
+          td: b Created on
+          td = @offer.created_at
+        tr
+          td: b Maturation Date
+          td = @offer.maturation_str
 
-.row
-  .col-md-4
-    h4 Offer dates
-    hr
-    | blah blah
-  .col-md-4
-    h4 Invest development
-    hr
-    | blahblah
-  .col-md-4
-    h4 Current volume
-    hr
-    .text-center
-      | 200 tokens
+    table.table.table-sm
+      tr
+        td: b Current volume
+        td
+          | #{@offer.value} tokens
+          br
+          small volume total
+      tr
+        td
+          b Invest more of buy new positions
+          br
+          small
+            i.fa.fa-question-circle
+            ' Why would I do this?
+        td = docfix_offer_buy_btns(@offer)
+
+  .col-md-5
+    small
+      i.fa.fa-eye>
+      b PUT ON WATCHLIST
+    h4[style='margin-top: 20px;'] TRADING OVERVIEW
+    div[style='margin-top: 50px;']
+      b Expected fix probability
+      = docfix_offer_price(@offer)
+    div.holder: b SPARKLINE HERE
+    div.holder: b CANDLESTICK HERE
+
+
+
 
 - if @offer.has_counters?(:expand)
   hr

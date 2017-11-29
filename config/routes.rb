@@ -71,7 +71,11 @@ Rails.application.routes.draw do
     end
     resources :offers_bu
     resources :offers_bf
-    resources :contracts
+    resources :contracts do
+      get 'offer_bf' , :on => :member
+      get 'offer_bu' , :on => :member
+      get 'offer_buy', :on => :member
+    end
     resource  :profile do
       get 'my_issues'
       get 'my_offers'

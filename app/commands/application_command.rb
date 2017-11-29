@@ -93,6 +93,13 @@ class ApplicationCommand
       data = {data: self.event_data}
       EventLine.new(data.merge(base)).save
     end
+    # if valid? && ! Rails.env.test?
+    #   dev_log "INFLUXDB_EVENT"
+    #   exl = %i(maturation_range type exref uuref jfields xfields repo_type created_at updated_at stm_xfields stm_jfields )
+    #   InfluxDB::Rails.client.write_point "bugm_events",
+    #     tags:   {klas: self.class.name},
+    #     values: self.event_data.without_blanks.except(*exl)
+    # end
     self
   end
 

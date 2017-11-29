@@ -6,6 +6,8 @@ class Contract < ApplicationRecord
 
   has_paper_trail
 
+  belongs_to :repo            , foreign_key: "stm_repo_id" , optional: true
+  belongs_to :bug             , foreign_key: "stm_bug_id"  , optional: true
   has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Contract'
   has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Contract'
 

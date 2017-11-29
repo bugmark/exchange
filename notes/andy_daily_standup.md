@@ -181,5 +181,30 @@ Discussion:
 - Rich starts work today on TestNet logging
 
 Target Outcomes Nov 28:
-- [ ] finish offer and contract page
-- [ ] prep for JJ walkthru on the Weds the 29th
+- [x] build out offer page
+- [ ] build out contract page
+
+Wed Nov 29
+----------------------------------------------
+
+Discussion:
+- We have an api call to grab the event log
+- docco at https://bugmark.net/apidocs
+- https://bugmark.net/api/v1/events?after=10
+- Rich is writing a script to poll for events and log to Ethereum TestNet
+- InfluxDB and Grafana provisioning is done
+- We've started writing data points to InfluxDB
+
+I am exploring off-the-shelf Bootstrap templates:
+- consistent UI with coherent styles
+- pre-built widgets for sparklines, candlesticks, charts, etc.
+
+Examples:
+- https://getbootstrapadmin.com/remark/base/charts/sparkline.html
+- https://wrapbootstrap.com/themes/admin
+
+Target Outcomes Nov 29:
+- [ ] finish contract page
+- [ ] working offer sort
+- [ ] working contract sort
+- [ ] end-to-end flow: eliminate need to type URLs

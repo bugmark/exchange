@@ -1,4 +1,16 @@
 module DocfixContractsHelper
+  def docfix_contract_show_link(contract)
+    raw <<-ERB.strip_heredoc
+      <b>
+      <a href="/docfix/contracts/#{contract.id}">#{docfix_contract_title(contract)}</a>
+      </b>
+    ERB
+  end
+
+  def docfix_contract_title(contract)
+    "Contract ##{contract.id} for #{docfix_contract_assoc(contract)}"
+  end
+
   def docfix_contract_hdr(contract)
     link_txt = "contract ##{contract.id} for #{docfix_contract_assoc(contract)}"
     labl_txt = "unmatched on #{contract.side}".upcase
@@ -25,9 +37,9 @@ module DocfixContractsHelper
   # -----
 
   def docfix_contract_price(contract)
-    op = (contract.price * 100).to_i
-    cp = 100 - op
-    fp, up = contract.is_fixed? ? [op, cp] : [cp, op]
+    esc = contract.escrows.last
+    fp = esc.fixed_positions.first.price
+    up = esc.unfixed_positions.first.price
     raw <<-HTML.strip_heredoc
       <table>
         <tr>
@@ -44,7 +56,7 @@ module DocfixContractsHelper
 
   # -----
 
-  def docfix_assoc_link(contract)
+  def docfix_contract_assoc_link(contract)
     case
       when contract.stm_bug_id
         docfix_contract_issue_link(contract)
@@ -55,7 +67,7 @@ module DocfixContractsHelper
     end
   end
 
-  def docfix_contract_label(contract)
+  def docfix_contract_assoc_label(contract)
     case
       when contract.stm_bug_id
         "Issue"
@@ -87,5 +99,15 @@ module DocfixContractsHelper
     bug = contract.bug
     return "" unless bug.present?
     docfix_issue_bu_btn(bug) + docfix_issue_bf_btn(bug)
+  end
+
+  # ----- issue buttons -----
+
+  def docfix_contract_action_btns(contract)
+    raw <<-HTML.strip_heredoc
+    <a class='btn btn-secondary' style='width: 100%; margin: 5px;' href='/docfix/contracts/#{contract.id}/offer_buy'>
+      <b>MAKE A NEW INVEST</b><br/><small>on the fixed or unfixed side</small>
+    </a>
+    HTML
   end
 end
