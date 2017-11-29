@@ -549,6 +549,13 @@ Next Actions:
 
 # TBD
 
+- [ ] GRAPHING InfluxDB Provisioning & Configuration
+- [ ] GRAPHING InfluxDB Data Reload
+- [ ] GRAHPING Grafana  Provisioning & Configuration
+- [ ] GRAPHING Grafana  Chart Development
+- [ ] GRAPHING InfluxDB Data Export
+- [ ] GRAPHING Grafana  Chart Import
+
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers

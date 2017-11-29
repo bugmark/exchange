@@ -1,6 +1,5 @@
 module V1
   class Collections < Grape::API
-
     resource :repos do
       desc "Return all repos"
       get "", :root => :repos do
@@ -40,6 +39,20 @@ module V1
       desc "Return all amendments"
       get "", :root => :amendments do
         Amendment.all
+      end
+    end
+
+    resource :events do
+      desc "Return events"
+      params do
+        optional :after, type: Integer, desc: "<cursor> an event-ID", documentation: { example: 10 }
+      end
+      get "", :root => :events do
+        if params[:after]
+          EventLine.where('id > ?', params[:after])
+        else
+          EventLine.all
+        end
       end
     end
   end
