@@ -35,9 +35,9 @@ div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding
               b Created on<br/>
               = offer.created_at.strftime("%m-%d %H:%M")
             p
-              b = docfix_offer_label(offer)
+              b = docfix_offer_assoc_label(offer)
               br
-              = docfix_assoc_link(offer)
+              = docfix_offer_assoc_link(offer)
 
           td: b #{offer.value} tokens
           td = docfix_offer_price(offer)

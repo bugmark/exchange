@@ -188,6 +188,19 @@ Wed Nov 29
 ----------------------------------------------
 
 Discussion:
-- We have an api call to grab the event log (/event?after=<id>)
+- We have an api call to grab the event log
+- docco at https://bugmark.net/apidocs
+- https://bugmark.net/api/v1/events?after=10
 - Rich is writing a script to poll for events and log to Ethereum TestNet
+- InfluxDB and Grafana provisioning is done
+- We've started writing data points to InfluxDB
+
+I am exploring off-the-shelf Bootstrap templates:
+- consistent UI with coherent styles
+- pre-built widgets for sparklines, candlesticks, charts, etc.
+
+Examples:
+- https://getbootstrapadmin.com/remark/base/charts/sparkline.html
+- https://wrapbootstrap.com/themes/admin
+
 
