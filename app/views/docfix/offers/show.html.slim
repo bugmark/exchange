@@ -5,9 +5,14 @@ small
 
 .row
   .col-md-7
-    h2
-      = @offer.xid
-    p Text that explains any possible outcome fo the contract for all sides.  Lorem ipsum blah.
+    h3 = docfix_offer_header(@offer)
+    p = raw docfix_offer_pill(@offer)
+    p
+      small If this contract is successfully matched and this issue is fixed by
+            #{@offer.maturation_str} your investment of #{@offer.value} tokens
+            will go to the holder(s) of the fixed side.  You will earn
+            #{@offer.value} tokens if this contract is successfully matched but
+            the issue is unfixed by #{@offer.maturation_str}.
     p Created for [Issue link here]
   .col-md-5
     h4 Get involved
