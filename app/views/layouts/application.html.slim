@@ -34,10 +34,10 @@ html[lang="en-US"]
         = content_for(:footerbar)
         div[style="text-align: center"]
           small
+            | Powered by BugMark
             - if Rails.env.development?
-              = raw debug_text
-            - else
-              | Powered by BugMark
+              '  | #{raw debug_text}
+            '  | See our #{link_to_unless_current("Experiments", "/static/experiments"})...
 
     = javascript_include_tag :application
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"]

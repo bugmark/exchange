@@ -5,6 +5,9 @@ class StaticController < ApplicationController
   def home
   end
 
+  def experiments
+  end
+
   def help
   end
 
