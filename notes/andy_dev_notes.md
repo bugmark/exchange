@@ -556,8 +556,9 @@ Next Actions:
 # Nov 30
 
 - [x] FEEDBACK: write a draft demo script
-- [ ] FEEDBACK: add a link from /experiments to the demo script
-- [ ] FEEDBACK: record screencast demo with Kazam
+- [x] FEEDBACK: add a link from /experiments to the demo script
+- [x] FEEDBACK: record screencast demo with Kazam
+- [x] FEEDBACK: post screencast demo Vimeo(uid=bugmvid@protonmail.com)
 
 - [ ] FEEDBACK: update mad-libs interface
 
@@ -578,7 +579,6 @@ Next Actions:
 - [ ] JJ Sparkline
 
 - [ ] FEEDBACK: make a feature spec that follows the demo
-- [ ] FEEDBACK: post screencast demo to production demo page (host on YouTube?)
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: the offer should be constructed in MadLibs style - not like a form
