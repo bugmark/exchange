@@ -220,5 +220,7 @@ Discussion:
 - Found screencasting software
 
 Target Outcomes Nov 30:
+- [ ] publish first draft demo scripe
+- [ ] deliver mad-libs interface
 - [ ] fix login redirect
 - [ ] add sparkline to offer pages

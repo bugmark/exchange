@@ -546,8 +546,20 @@ Next Actions:
 - [x] FEEDBACK: establish a demo page w/links to demos (CORE, BOT, DOCFIX, API)
 - [x] FEEDBACK: link from home page to demo page
 - [x] install jquery sparkline https://omnipotent.net/jquery.sparkline
+- [x] install screencast software - kazam
+- [x] GRAPHING InfluxDB Data Reload
+- [x] GRAPHING Grafana  Configuration
+- [x] GRAPHING Grafana  Chart Development
+- [x] GRAPHING InfluxDB Data Export
+- [x] GRAPHING Grafana  Chart Import
 
 # Nov 30
+
+- [x] FEEDBACK: write a draft demo script
+- [ ] FEEDBACK: add a link from /experiments to the demo script
+- [ ] FEEDBACK: record screencast demo with Kazam
+
+- [ ] FEEDBACK: update mad-libs interface
 
 - [ ] FEEDBACK: separate logins for CORE, BOT and DOCFIX
 - [ ] FEEDBACK: redirect successful login to referring page
@@ -565,10 +577,7 @@ Next Actions:
 - [ ] JJ Profile Pages
 - [ ] JJ Sparkline
 
-- [ ] FEEDBACK: write a demo script
-- [ ] FEEDBACK: add a link from /experiments to the demo script
 - [ ] FEEDBACK: make a feature spec that follows the demo
-- [ ] FEEDBACK: record screencast demo with Kazam
 - [ ] FEEDBACK: post screencast demo to production demo page (host on YouTube?)
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
@@ -577,12 +586,6 @@ Next Actions:
 - [ ] FEEDBACK: add a date-picker for offer-generation form
 
 # TBD
-
-- [ ] GRAPHING InfluxDB Data Reload
-- [ ] GRAPHING Grafana  Configuration
-- [ ] GRAPHING Grafana  Chart Development
-- [ ] GRAPHING InfluxDB Data Export
-- [ ] GRAPHING Grafana  Chart Import
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
@@ -648,4 +651,3 @@ Next Actions:
 - [ ] core: Restful API
 - [ ] core: Restful API ruby bindings with rest-client
 - [ ] core: Restful API CLI and Ruby Gem
-- [ ] core: add GraphQL API

@@ -1,3 +1,6 @@
+- @df_script = "https://docs.google.com/document/d/19ZnHdJEjzJ-cOKq9RrZ3xU1DhTol_qWnvyif_gQjwi4/edit"
+- @df_cast   = "https://vimeo.com/245232429"
+
 - content_for :page_js do
   coffee:
     $(document).ready ->
@@ -8,7 +11,12 @@ h4 BugMark Experiments
 table.table.table-striped
   tr
     td: a[href="/docfix"] Docfix
-    td An experimental UI optimized for documentation fixes
+    td
+      ' An experimental UI optimized for documentation fixes.  See our
+      a>[href="#{@df_script}" target="_blank"] Demo Script
+      ' or
+      a>[href="#{@df_cast}" target="_blank"] Screencast
+      | .
   tr
     td: a[href="/core"] Core
     td An experimental UI to test trading mechanisms
