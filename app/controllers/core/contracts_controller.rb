@@ -38,7 +38,7 @@ module Core
     def create
       opts = params["contract_cmd_publish"]
       @contract = ContractCmd::Publish.new(valid_params(opts))
-      if @contract.save_event.project
+      if @contract.project
         redirect_to("/rewards/#{@contract.id}")
       else
         render 'contracts/new'
@@ -48,7 +48,7 @@ module Core
     def update
       opts = params["contract_cmd_take"]
       @contract = ContractCmd::Take.find(opts["id"], with_counterparty: current_user)
-      if @contract.save_event.project
+      if @contract.project
         redirect_to("/rewards/#{@contract.id}")
       else
         render 'contracts/new'
@@ -57,7 +57,7 @@ module Core
 
     def resolve
       contract_id = params["id"]
-      ContractCmd::Resolve.new(contract_id).save_event.project
+      ContractCmd::Resolve.new(contract_id).project
       redirect_to "/core/contracts"
     end
 

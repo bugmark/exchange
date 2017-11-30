@@ -80,14 +80,14 @@ RSpec.describe OfferCmd::CreateBuy do
   describe "#event_save" do
     it 'creates an event' do
       expect(EventLine.count).to eq(0)
-      subject.save_event
+      subject.project
       expect(EventLine.count).to eq(2)
     end
 
     it 'chains with #project' do
       expect(EventLine.count).to eq(0)
       expect(User.count).to eq(0)
-      subject.save_event.project
+      subject.project
       expect(EventLine.count).to eq(2)
       expect(Offer.count).to eq(1)
     end

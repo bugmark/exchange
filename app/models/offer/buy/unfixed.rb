@@ -24,8 +24,8 @@ class Offer::Buy::Unfixed < Offer::Buy
   # counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user))
   # cross   = ContractCmd::Cross.new(counter, offer.cross_operation)
 
-  def counter_type()    :ask    end
-  def cross_operation() :expand end
+  def counter_type()    :offer_bf  end
+  def cross_operation() :expand    end
   def counter_args(user = self.user)
     args = {
       user_id:          user.id                ,

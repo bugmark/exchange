@@ -6,7 +6,7 @@ FG ||= FactoryGirl
 FactoryGirl.define do
 
   factory :user, class: UserCmd::Create do
-    to_create { |instance| instance.save_event.project }
+    to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     sequence :email do |n|
@@ -17,7 +17,7 @@ FactoryGirl.define do
   end
 
   factory :repo, class: RepoCmd::GhCreate do
-    to_create { |instance| instance.save_event.project }
+    to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     type "Repo::GitHub"
@@ -25,7 +25,7 @@ FactoryGirl.define do
   end
 
   factory :bug, class: BugCmd::Sync do
-    to_create { |instance| instance.save_event.project }
+    to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     sequence :stm_title do |n|
@@ -35,7 +35,7 @@ FactoryGirl.define do
   end
 
   factory :offer_bu, class: OfferCmd::CreateBuy do
-    to_create { |instance| instance.save_event.project }
+    to_create { |instance| instance.project }
     initialize_with { new(:offer_bu, attributes) }
 
     price  0.60
@@ -54,7 +54,7 @@ FactoryGirl.define do
   end
 
   factory :offer_bf, class: OfferCmd::CreateBuy do
-    to_create { |instance| instance.save_event.project }
+    to_create { |instance| instance.project }
     initialize_with { new(:offer_bf, attributes) }
 
     price      0.40
@@ -73,7 +73,7 @@ FactoryGirl.define do
   end
 
   factory :offer_su, class: OfferCmd::CreateSell do
-    to_create { |instance| instance.save_event.project }
+    to_create { |instance| instance.project }
     initialize_with do
       offer_bf = FG.create(:offer_bf).offer
       offer_bu = FG.create(:offer_bu).offer
@@ -84,7 +84,7 @@ FactoryGirl.define do
   end
 
   factory :offer_sf, class: OfferCmd::CreateSell do
-    to_create { |instance| instance.save_event.project }
+    to_create { |instance| instance.project }
     initialize_with do
       offer_bu = FG.create(:offer_bu).offer
       offer_bf = FG.create(:offer_bf).offer

@@ -5,11 +5,25 @@ module OfferCmd
 
     attr_reader :offer, :command
 
-    delegate :project, :save_event, :valid?, :errors, :to => :command
+    delegate :project, :valid?, :errors, :to => :command
 
     def initialize(offer, new_attrs)
       @offer   = Offer.find(offer.to_i)
       @command = cmd_obj(valid_attrs(new_attrs))
+    end
+
+    def influx_tags
+      {
+        side: offer.side
+      }
+    end
+
+    def influx_fields
+      {
+        id:     offer.id     ,
+        volume: offer.volume ,
+        price:  offer.price
+      }
     end
 
     private
@@ -20,7 +34,6 @@ module OfferCmd
       else
         opts = {
           project:    false,
-          save_event: false,
           valid?:     false,
           errors:     {
             messages: ["must be a buy offer"]

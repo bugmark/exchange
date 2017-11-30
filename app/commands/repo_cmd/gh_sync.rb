@@ -46,7 +46,7 @@ module RepoCmd
           synced_at:   Time.now
         }
         bug = BugCmd::Sync.new(attrs)
-        bug.save_event.project
+        bug.project
       end
     end
 

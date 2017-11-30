@@ -15,5 +15,19 @@ module OfferCmd
     def transact_before_project
       offer.status = "suspended"
     end
+
+    def influx_tags
+      {
+        side: offer.side
+      }
+    end
+
+    def influx_fields
+      {
+        id:     offer.id     ,
+        volume: offer.volume ,
+        price:  offer.price
+      }
+    end
   end
 end

@@ -30,7 +30,7 @@ class ApplicationCommand
   #   - events can be replayed
 
   # - using commands from controllers
-  #    `Command.new(params).save_event.project`
+  #    `Command.new(params).project`
   # - using commands to replay events
   #    `Command.from_event(event).project`
 
@@ -75,6 +75,14 @@ class ApplicationCommand
     {}
   end
 
+  def influx_tags
+    {}
+  end
+
+  def influx_fields
+    {}
+  end
+
   def transact_before_project
     # override in subclass
   end
@@ -82,25 +90,7 @@ class ApplicationCommand
   # ----- persistence methods
 
   def save
-    raise "NOT ALLOWED - USE #save_event and/or #project"
-  end
-
-  def save_event
-    valid?
-    # puts errors.inspect unless valid?
-    if valid?
-      base = {klas: self.class.name}
-      data = {data: self.event_data}
-      EventLine.new(data.merge(base)).save
-    end
-    # if valid? && ! Rails.env.test?
-    #   dev_log "INFLUXDB_EVENT"
-    #   exl = %i(maturation_range type exref uuref jfields xfields repo_type created_at updated_at stm_xfields stm_jfields )
-    #   InfluxDB::Rails.client.write_point "bugm_events",
-    #     tags:   {klas: self.class.name},
-    #     values: self.event_data.without_blanks.except(*exl)
-    # end
-    self
+    raise "NOT ALLOWED - USE #project"
   end
 
   # pro*jekt* - create a projection - an aggregate data view
@@ -110,6 +100,7 @@ class ApplicationCommand
     if valid?
       transact_before_project # perform a transaction, if any
       subs.each(&:save)       # save all subobjects
+      save_event
       self
     else
       false
@@ -142,6 +133,20 @@ class ApplicationCommand
   end
 
   private
+
+  def save_event
+    base = {klas: self.class.name}
+    data = {data: self.event_data}
+    EventLine.new(data.merge(base)).save
+
+    if ! Rails.env.test? && File.exist?("/etc/influxdb/influxdb.conf")
+      mname = "cmd." + self.class.name.gsub("::", "_")
+      InfluxDB::Rails.client.write_point mname,
+                                         tags:   influx_tags,
+                                         values: influx_fields
+    end
+    self
+  end
 
   def subobjects
     subobject_symbols.map { |el| self.send(el) }

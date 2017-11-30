@@ -92,22 +92,6 @@ RSpec.describe ContractCmd::Cross::Reduce do
     # end
   end
 
-  describe "#event_save", USE_VCR do
-    # it 'creates an event' do
-    #   expect(EventLine.count).to eq(0)
-    #   subject.save_event
-    #   expect(EventLine.count).to eq(8)
-    # end
-    #
-    # it 'chains with #project' do
-    #   expect(EventLine.count).to eq(0)
-    #   expect(Contract.count).to eq(0)
-    #   subject.save_event.project
-    #   expect(EventLine.count).to eq(8)   # TODO: retest
-    #   expect(Contract.count).to eq(1)
-    # end
-  end
-
   describe "crossing", USE_VCR do
     let(:lcl_ask) { FG.create(:offer_bf).offer }
 
