@@ -17,5 +17,11 @@ module UserCmd
     def event_data
       user.attributes
     end
+
+    def influx_tags
+      {
+        user_id: user.id
+      }
+    end
   end
 end

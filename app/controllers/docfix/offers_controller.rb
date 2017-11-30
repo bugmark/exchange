@@ -14,8 +14,8 @@ module Docfix
 
     def cross
       offer   = Offer.find(params["id"])
-      result1 = ContractCmd::Cross.new(offer, :expand).save_event.project
-      result2 = ContractCmd::Cross.new(offer, :transfer).save_event.project
+      result1 = ContractCmd::Cross.new(offer, :expand).project
+      result2 = ContractCmd::Cross.new(offer, :transfer).project
       if result1 || result2
         redirect_to "/docfix/contracts/#{offer.position.contract.id}"
       else

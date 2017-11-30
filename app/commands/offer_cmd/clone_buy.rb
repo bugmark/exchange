@@ -5,7 +5,7 @@ module OfferCmd
 
     attr_reader :offer, :command
 
-    delegate :project, :save_event, :valid?, :errors, :to => :command
+    delegate :project, :valid?, :errors, :to => :command
 
     def initialize(offer, new_attrs)
       @offer   = Offer.find(offer.to_i)
@@ -20,7 +20,6 @@ module OfferCmd
       else
         opts = {
           project:    false,
-          save_event: false,
           valid?:     false,
           errors:     {
             messages: ["must be a buy offer"]

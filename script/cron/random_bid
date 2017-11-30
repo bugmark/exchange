@@ -21,7 +21,7 @@ offers = users.map do |user|
   volume = volumes.shuffle.first
   bug_id = bug_ids.shuffle.first
 
-  offer = OfferCmd::CreateBuy.new(opt, {user_id: user.id, price: price, volume: volume, stm_bug_id: bug_id}).save_event.project
+  offer = OfferCmd::CreateBuy.new(opt, {user_id: user.id, price: price, volume: volume, stm_bug_id: bug_id}).project
   offer.offer
 end
 

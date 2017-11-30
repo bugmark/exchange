@@ -16,8 +16,8 @@ module Core
 
     def cross
       offer    = Offer.find(params["id"])
-      result1 = ContractCmd::Cross.new(offer, :expand).save_event.project
-      result2 = ContractCmd::Cross.new(offer, :transfer).save_event.project
+      result1 = ContractCmd::Cross.new(offer, :expand).project
+      result2 = ContractCmd::Cross.new(offer, :transfer).project
       if result1 || result2
         redirect_to "/core/contracts/#{offer.position.contract.id}"
       else
@@ -26,14 +26,14 @@ module Core
     end
 
     def Cancel
-      OfferCmd::Cancel.new(params["id"]).save_event.project
+      OfferCmd::Cancel.new(params["id"]).project
       redirect_to "/core/users/#{current_user.id}"
     end
 
     def take
       offer   = Offer.find(params["id"])
-      counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user)).project.save_event.offer
-      cross   = ContractCmd::Cross.new(counter, offer.cross_operation).project.save_event
+      counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user)).project.offer
+      cross   = ContractCmd::Cross.new(counter, offer.cross_operation).project
       redirect_to "/core/contracts/#{cross.commit.contract.id}"
     end
 

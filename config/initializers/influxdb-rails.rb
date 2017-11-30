@@ -1,5 +1,5 @@
 InfluxDB::Rails.configure do |config|
-  config.influxdb_database = "bugm_access"
+  config.influxdb_database = "bugm_log"
   config.influxdb_username = "admin"
   config.influxdb_password = "admin"
   config.influxdb_hosts    = ["localhost"]

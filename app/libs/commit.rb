@@ -56,7 +56,7 @@ class Commit
       threshold = usr.balance - usr.token_reserve_not_poolable
       uoffers   = usr.offers.open.poolable.where('value > ?', threshold)
       uoffers.each do |uoffer|
-        OfferCmd::Suspend.new(uoffer).project.save_event
+        OfferCmd::Suspend.new(uoffer).project
       end
     end
   end
@@ -67,7 +67,7 @@ class Commit
         new_vol = position.offer.volume - position.volume
         args    = {volume: new_vol, reoffer_parent_id: position.offer.id, amendment_id: ctx.amendment.id}
         result  = OfferCmd::CloneBuy.new(position.offer, args)
-        result.project.save_event
+        result.project
       end
     end
   end

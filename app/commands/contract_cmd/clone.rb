@@ -3,7 +3,7 @@ module ContractCmd
 
     attr_reader :contract, :command
 
-    delegate :project, :save_event, :valid?, :errors, :to => :command
+    delegate :project, :valid?, :errors, :to => :command
 
     def initialize(contract, new_attrs)
       @contract = Contract.find(contract.to_i)

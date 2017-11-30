@@ -10,7 +10,7 @@ module Core
 
     # def cross
     #   ask_id = params["id"]
-    #   result = ContractCmd::Cross.new(ask_id).save_event.project
+    #   result = ContractCmd::Cross.new(ask_id).project
     #   if result
     #     redirect_to "/rewards/#{result.id}"
     #   else
