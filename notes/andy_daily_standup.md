@@ -217,6 +217,7 @@ Discussion:
 - Installed jquery sparklines
 - Generating time-series data
 - First Grafana graphs are live
+- Found screencasting software
 
 Target Outcomes Nov 30:
 - [ ] fix login redirect
