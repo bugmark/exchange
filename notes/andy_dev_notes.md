@@ -547,6 +547,8 @@ Next Actions:
 - [x] FEEDBACK: link from home page to demo page
 - [x] install jquery sparkline https://omnipotent.net/jquery.sparkline
 
+# Nov 30
+
 - [ ] FEEDBACK: separate logins for CORE, BOT and DOCFIX
 - [ ] FEEDBACK: redirect successful login to referring page
 

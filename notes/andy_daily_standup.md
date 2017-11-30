@@ -208,3 +208,16 @@ Target Outcomes Nov 29:
 - [ ] working offer sort
 - [ ] working contract sort
 - [ ] end-to-end flow: eliminate need to type URLs
+
+Thu Nov 30
+----------------------------------------------
+
+Discussion:
+- Streamlined nav with 'experiments' page
+- Installed jquery sparklines
+- Generating time-series data
+- First Grafana graphs are live
+
+Target Outcomes Nov 30:
+- [ ] fix login redirect
+- [ ] add sparkline to offer pages
