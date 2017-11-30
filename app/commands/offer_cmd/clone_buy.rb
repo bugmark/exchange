@@ -12,6 +12,20 @@ module OfferCmd
       @command = cmd_obj(valid_attrs(new_attrs))
     end
 
+    def influx_tags
+      {
+        side: offer.side
+      }
+    end
+
+    def influx_fields
+      {
+        id:     offer.id     ,
+        volume: offer.volume ,
+        price:  offer.price
+      }
+    end
+
     private
 
     def cmd_obj(attrs)

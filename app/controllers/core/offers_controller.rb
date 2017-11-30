@@ -25,13 +25,14 @@ module Core
       end
     end
 
-    def Cancel
+    def cancel
       OfferCmd::Cancel.new(params["id"]).project
       redirect_to "/core/users/#{current_user.id}"
     end
 
     def take
       offer   = Offer.find(params["id"])
+      binding.pry
       counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user)).project.offer
       cross   = ContractCmd::Cross.new(counter, offer.cross_operation).project
       redirect_to "/core/contracts/#{cross.commit.contract.id}"

@@ -18,7 +18,7 @@ module UserCmd
       user.attributes
     end
 
-    def influx_tags
+    def influx_fields
       {
         user_id: user.id
       }

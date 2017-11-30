@@ -11,9 +11,6 @@ module ContractCmd
       @contract = Contract.find(contract.to_i)
     end
 
-    def transact_before_project
-    end
-
     private
 
     def existing_contract

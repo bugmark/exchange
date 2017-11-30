@@ -17,5 +17,17 @@ module RepoCmd
     def event_data
       repo.attributes
     end
+
+    def influx_tags
+      {
+        type: repo.type
+      }
+    end
+
+    def influx_fields
+      {
+        id: repo.id
+      }
+    end
   end
 end

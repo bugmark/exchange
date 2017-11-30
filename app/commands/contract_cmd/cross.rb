@@ -16,8 +16,6 @@ module ContractCmd
       @type        = commit_type
       @offer       = Offer.find(offer.to_i)
       @counters    = @offer.qualified_counteroffers(commit_type)
-      # binding.pry
-      # x = 1
     end
 
     def transact_before_project

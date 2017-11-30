@@ -76,11 +76,11 @@ class ApplicationCommand
   end
 
   def influx_tags
-    {klas: self.class.name}
+    {}
   end
 
-  def influx_values
-    {size: 10, weight: 20}
+  def influx_fields
+    {}
   end
 
   def transact_before_project
@@ -140,12 +140,10 @@ class ApplicationCommand
     EventLine.new(data.merge(base)).save
 
     if ! Rails.env.test? && File.exist?("/etc/influxdb/influxdb.conf")
-      dev_log "INFLUXDB_EVENT_BEG"
       mname = "cmd." + self.class.name.gsub("::", "_")
       InfluxDB::Rails.client.write_point mname,
                                          tags:   influx_tags,
-                                         values: influx_values
-      dev_log "INFLUXDB_EVENT_END"
+                                         values: influx_fields
     end
     self
   end
