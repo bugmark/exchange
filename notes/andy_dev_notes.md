@@ -551,6 +551,20 @@ Next Actions:
 - [ ] JJ Profile Pages
 - [ ] JJ Sparkline
 
+- [ ] FEEDBACK: separate logins for CORE, BOT and DOCFIX
+- [ ] FEEDBACK: redirect successful login to referring page
+- [ ] FEEDBACK: establish a demo page w/links to demos (CORE, BOT, DOCFIX, API)
+- [ ] FEEDBACK: link from home page to demo page
+- [ ] FEEDBACK: write a demo script
+- [ ] FEEDBACK: make a feature script that follows the demo
+- [ ] FEEDBACK: record screencast demo with Kazam
+- [ ] FEEDBACK: post screencast demo to production demo page (host on YouTube?)
+- [ ] FEEDBACK: make a new offer attempt to cross immediately
+- [ ] FEEDBACK: the offer amounts seem wrong
+- [ ] FEEDBACK: the offer should be constructed in MadLibs style - not like a form
+- [ ] FEEDBACK: cleanup timestamps for offer-generation form
+- [ ] FEEDBACK: add a date-picker for offer-generation form
+
 # TBD
 
 - [ ] GRAPHING InfluxDB Data Reload
