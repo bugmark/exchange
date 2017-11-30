@@ -1,3 +1,8 @@
+- content_for :page_js do
+  coffee:
+    $(document).ready ->
+      $('.spark').sparkline()
+
 h4 BugMark Experiments
 
 table.table.table-striped
@@ -18,4 +23,8 @@ table.table.table-striped
     td Documentation for the BugMark Restful API
   tr
     td: a[href="http://bugmark.net:3030" target="_blank"] Visualization
-    td Grafana-based experiments with charting and visualization
+    td
+      ' Grafana-based experiments with charting and visualization
+      span.spark 1,4,4,5,6,7,3,4,5,6,5,4,6,7,8,6,5,4,9,2,3
+
+

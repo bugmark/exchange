@@ -540,8 +540,20 @@ Next Actions:
 - [x] GRAPHING InfluxDB Provisioning & Configuration
 - [x] GRAHPING Grafana  Provisioning
 
+# Nov 29
+
+- [x] Configure Influx/Grafana
+- [x] FEEDBACK: establish a demo page w/links to demos (CORE, BOT, DOCFIX, API)
+- [x] FEEDBACK: link from home page to demo page
+- [x] install jquery sparkline https://omnipotent.net/jquery.sparkline
+
+- [ ] FEEDBACK: separate logins for CORE, BOT and DOCFIX
+- [ ] FEEDBACK: redirect successful login to referring page
+
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
+
+- [ ] core: fix take link and add feature spec
 
 - [ ] JJ Offer search / sorting
 - [ ] JJ Contract search / sorting
@@ -551,12 +563,9 @@ Next Actions:
 - [ ] JJ Profile Pages
 - [ ] JJ Sparkline
 
-- [ ] FEEDBACK: separate logins for CORE, BOT and DOCFIX
-- [ ] FEEDBACK: redirect successful login to referring page
-- [ ] FEEDBACK: establish a demo page w/links to demos (CORE, BOT, DOCFIX, API)
-- [ ] FEEDBACK: link from home page to demo page
 - [ ] FEEDBACK: write a demo script
-- [ ] FEEDBACK: make a feature script that follows the demo
+- [ ] FEEDBACK: add a link from /experiments to the demo script
+- [ ] FEEDBACK: make a feature spec that follows the demo
 - [ ] FEEDBACK: record screencast demo with Kazam
 - [ ] FEEDBACK: post screencast demo to production demo page (host on YouTube?)
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
