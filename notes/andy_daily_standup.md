@@ -204,10 +204,10 @@ Examples:
 - https://wrapbootstrap.com/themes/admin
 
 Target Outcomes Nov 29:
+- [x] end-to-end flow: eliminate need to type URLs
 - [ ] finish contract page
 - [ ] working offer sort
 - [ ] working contract sort
-- [ ] end-to-end flow: eliminate need to type URLs
 
 Thu Nov 30
 ----------------------------------------------
@@ -234,4 +234,6 @@ Discussion:
 Target Outcomes Dec 01:
 - [ ] finish mad-libs interface
 - [ ] add sparkline to offer pages
-- [ ] get sell offers working
+- [ ] working offer-sort and contract-sort
+- [ ] finish contract pages
+
