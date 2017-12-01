@@ -564,20 +564,22 @@ Next Actions:
 
 # Dec 01
 
-- [ ] FEEDBACK: separate NAV/login links for CORE, BOT and DOCFIX
-- [ ] FEEDBACK: every app has a authenticated welcome page
-- [ ] FEEDBACK: fix format for the sign-in page
-- [ ] FEEDBACK: add demo account information tot he sign-in page
-- [ ] FEEDBACK: add nav links to bot log page
-- [ ] FEEDBACK: add nav links to rebuild log page
+- [x] FEEDBACK: separate NAV/login links for CORE, BOT and DOCFIX
+- [x] FEEDBACK: every app has a authenticated welcome page
+- [x] FEEDBACK: fix format for the sign-in page
+- [x] FEEDBACK: add nav links to bot log page
+- [x] FEEDBACK: add nav links to rebuild log page (decided not...)
+- [x] FEEDBACK: add demo account information the sign-in page
 
 - [ ] FEEDBACK: update mad-libs interface
+
+- [ ] JJ build out contracts#index
+- [ ] JJ build out contracts#show 
 
 - [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
 - [ ] OfferSF Test: Finish it off
 
-- [ ] JJ build out contracts#index
-- [ ] JJ build out contracts#show 
+- [ ] FEEDBACK: reformat the registration page (add account wipe-out note)
 
 - [ ] core: fix take link and add feature spec
 

@@ -2,8 +2,6 @@ class User < ApplicationRecord
 
   has_paper_trail
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -53,6 +51,11 @@ class User < ApplicationRecord
   # ----- SCOPES -----
 
   class << self
+    def demo_accounts
+      qry = %w(joe jane test).map {|x| "email ilike '#{x}%'"}.join(" OR ")
+      where(qry).order('email asc')
+    end
+
     def low_balance
       where('balance < 100')
     end

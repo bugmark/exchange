@@ -221,8 +221,8 @@ Discussion:
 
 Target Outcomes Nov 30:
 - [x] publish first draft demo script
-- [ ] fix login redirect
-- [ ] deliver mad-libs interface
+- [x] refactor login redirect
+- [ ] build mad-libs interface
 - [ ] add sparkline to offer pages
 
 Fri Dec 01
@@ -230,3 +230,8 @@ Fri Dec 01
 
 Discussion:
 - What is best way to select Offer Date?
+
+Target Outcomes Dec 01:
+- [ ] finish mad-libs interface
+- [ ] add sparkline to offer pages
+- [ ] get sell offers working

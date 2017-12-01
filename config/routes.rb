@@ -66,8 +66,9 @@ Rails.application.routes.draw do
 
   # ----- DOCFIX APPLICATION -----
   get 'docfix', to: redirect("/docfix/home")
-  get 'core/new_login'
-  get 'core/new_signup'
+  get 'docfix/new_login'
+  get 'docfix/new_signup'
+
   namespace :docfix do
     resource :home do
       get 'contact'
