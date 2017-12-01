@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  # ----- INFO ROUTES -----
+  get  'info', to: redirect("/info/home")
   get  'info/home'
   get  'info/experiments'
   get  'info/help'
@@ -13,11 +15,12 @@ Rails.application.routes.draw do
 
   # ----- EVENT ROUTES -----
   resources :events
-  get       'events/welcome'
+  get       'events/new_login'
+  get       'events/new_signup'
 
   # ----- BOT ROUTES -----
+  get 'bot', to: redirect("/bot/home")
   get 'bot/home'
-  get 'bot/welcome'
   get 'bot/build'
   get 'bot/build_msg'
   get 'bot/build_log'
@@ -25,10 +28,14 @@ Rails.application.routes.draw do
   get 'bot/stop'
   get 'bot/log_show'
   get 'bot/log_reset'
+  get 'bot/new_login'
+  get 'bog/new_signup'
 
   # ----- CORE APPLICATION -----
-  get 'core'  , to: redirect("/core/home")
-  get 'demo'  , to: redirect("/core/home")
+  get 'core', to: redirect("/core/home")
+  get 'core/new_login'
+  get 'core/new_signup'
+
   namespace :core do
     resource :home
 
@@ -59,6 +66,8 @@ Rails.application.routes.draw do
 
   # ----- DOCFIX APPLICATION -----
   get 'docfix', to: redirect("/docfix/home")
+  get 'core/new_login'
+  get 'core/new_signup'
   namespace :docfix do
     resource :home do
       get 'contact'

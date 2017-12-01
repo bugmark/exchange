@@ -11,7 +11,10 @@ class BotController < ApplicationController
   def home
   end
 
-  def welcome
+  def new_login
+  end
+
+  def new_signup
   end
   
   def build
