@@ -33,7 +33,8 @@ module OfferCmd
 
     def influx_tags
       {
-        side: offer.side
+        side:    offer.side   ,
+        user_id: offer.user_id
       }
     end
 
