@@ -10,24 +10,63 @@ h4 Create Offer
 b> Issue
 => @bug.stm_title
 | (Issue ##{@bug.id})
-p
-- if @offer_bu.errors.any?
-  .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@offer_bu, url: '/docfix/offers_bu') do |f|
-  = f.hidden_field :type
-  = f.hidden_field :user_id
-  = f.hidden_field :stm_bug_id
-  = f.hidden_field :stm_status
-  .row
-    .col-md-4
-      = f.number_field   :stake , min: 1, step: 1, label: "I will stake X tokens"
-    .col-md-4
-      = f.number_field   :volume, min: 1, step: 1, label: "To earn Y tokens"
-    .col-md-4
-      = f.datetime_field :maturation, label: "if issue #{@bug.id} is UNFIXED on Z date"
-  p
-    = f.submit "Create Offer to Buy Unfixed"
-    a.btn.btn-secondary[style='margin-left: 5px;' href='/docfix/issues/#{@bug.id}'] Cancel
+/hr
+/- if @offer_bu.errors.any?
+/  .alert.alert-danger Please fix the errors below.
+/= bootstrap_form_for(@offer_bu, url: '/docfix/offers_bu') do |f|
+/  = f.hidden_field :type
+/  = f.hidden_field :user_id
+/  = f.hidden_field :stm_bug_id
+/  = f.hidden_field :stm_status
+/  .row
+/    .col-md-4
+/      = f.number_field   :stake , min: 1, step: 1, label: "I will stake X tokens"
+/    .col-md-4
+/      = f.number_field   :volume, min: 1, step: 1, label: "To earn Y tokens"
+/    .col-md-4
+/      = f.datetime_field :maturation, label: "if issue #{@bug.id} is UNFIXED on Z date"
+/  p
+/    = f.submit "Create Offer to Buy Unfixed"
+/    a.btn.btn-secondary[style='margin-left: 5px;' href='/docfix/issues/#{@bug.id}'] Cancel
+hr
+h1 UNDER CONSTRUCTIONkj
+/- if @offer_bu.errors.any?
+/  .alert.alert-danger Please fix the errors below.
+/= bootstrap_form_for(@offer_bu, url: '/docfix/offers_bu', html: {class: 'form-inline'}) do |f|
+/  = f.hidden_field :type
+/  = f.hidden_field :user_id
+/  = f.hidden_field :stm_bug_id
+/  = f.hidden_field :stm_status
+/  ' I will stake
+/  = f.number_field :stake, min: 1, step: 1, inline: true, hide_label: true
+/  '  tokens that this issue $selectedside on
+/  p
+/  = f.datetime_field :maturation, hide_label: true
+/  p
+/  | and will earn
+/  = f.number_field :volume, min: 1, step: 1, inline: true, hide_label: true
+/
+/
+/form
+/  ' I will stake
+/  input.form-control.mb-1[type='text']
+/  '  tokens that issue #side on
+/  br
+/    input.form-control.mb-3[type='text']
+/  br
+/    ' and will earn
+/    input.form-control.mb-2[type='text']
+/    '  tokens in the event this will happen
+  /.row
+  /  .col-md-4
+  /    = f.number_field   :stake , min: 1, step: 1, label: "I will stake X tokens"
+  /  .col-md-4
+  /    = f.number_field   :volume, min: 1, step: 1, label: "To earn Y tokens"
+  /  .col-md-4
+  /    = f.datetime_field :maturation, label: "if issue #{@bug.id} is UNFIXED on Z date"
+  /p
+  /  = f.submit "Create Offer to Buy Unfixed"
+  /  a.btn.btn-secondary[style='margin-left: 5px;' href='/docfix/issues/#{@bug.id}'] Cancel
 
 p This would place the marketprice of $TOKENS & the possibility of
   fixed at %n (unfixed) and %n (fixed).

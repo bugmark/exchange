@@ -1,8 +1,7 @@
 ul class="nav navbar-nav navbar-right"
   - if current_user
     = nav_link trading_summary(current_user) , core_user_path(current_user)
-    = nav_text "[#{timestamp}]"
+    = nav_link "Logout", "/users/sign_out"
   - else
-    = nav_link "Login", new_user_session_path
-    = nav_link "Register", new_user_registration_path
-    = nav_text "[#{timestamp}]"
+    = nav_link "Login"  , bugm_new_login_path
+    = nav_link "Signup" , bugm_new_signup_path

@@ -1,7 +1,0 @@
-ul class="nav navbar-nav navbar-right"
-  - if current_user
-    = nav_link trading_summary(current_user) , core_user_path(current_user)
-    = nav_text "[#{timestamp}]"
-  - else
-    = nav_link "Log In", new_user_session_path
-    = nav_link "Sign Up", new_user_registration_path

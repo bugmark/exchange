@@ -1,6 +1,8 @@
-class StaticController < ApplicationController
+class InfoController < ApplicationController
 
-  layout 'home'
+  layout 'info'
+
+  before_action :authenticate_user!, only: [:new_login, :new_signup]
 
   def home
   end
@@ -17,6 +19,12 @@ class StaticController < ApplicationController
   def chart
   end
 
+  def new_login
+  end
+
+  def new_signup
+  end
+
   def data
     render plain: File.read("#{File.dirname(__FILE__)}/data.text")
   end
@@ -24,7 +32,7 @@ class StaticController < ApplicationController
   def mailpost
     @address = save_address(params["mail_addr"])
     flash[:notice] = " Thanks for joining the BugMark mailing list! (#{@address})"
-    redirect_to "/static/home"
+    redirect_to "/info/home"
   end
 
   private

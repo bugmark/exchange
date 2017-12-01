@@ -1,7 +1,19 @@
 module ApplicationHelper
 
+  def bugm_new_login_path
+    "/#{current_layout}/new_login"
+  end
+
+  def bugm_new_signup_path
+  "/#{current_layout}/new_signup"
+  end
+
+  def current_layout
+    controller.send :_layout, ["no_op_argument"]
+  end
+
   def refresh_tag
-    # dev_log "CONTROLLER #{controller_name}"
+    dev_log "CONTROLLER #{controller_name}"
     return "" unless Rails.env.production?
     return "" if %w(homes users sessions static).include?(controller_name)
     raw "<meta http-equiv='refresh' content='15' />"
@@ -74,7 +86,7 @@ module ApplicationHelper
 
   def trading_summary(user)
     balance  = user.token_available
-    raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.xid} / #{balance} tokens</span>"
+    raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.sname}</span>"
   end
 
 end

@@ -1,0 +1,42 @@
+H2 Login
+
+.row
+  .col-md-3
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .field
+        = f.label :email
+        br
+        = f.email_field :email, autofocus: true
+      .field
+        = f.label :password
+        br
+        = f.password_field :password, autocomplete: "off"
+      - if devise_mapping.rememberable?
+        .field
+          = f.check_box :remember_me
+          = f.label :remember_me
+      .actions
+        = f.submit "Log in"
+
+    p[style='margin-top: 50px;']
+      a[href="/users/sign_up"] Signup
+
+  .col-md-9
+    p In this experimental software, you can use a demo account, or
+      you can <a href="/users/sign_up">Signup</a> with your own account.
+
+    small
+      table.table.table-sm.table-condensed
+        tr
+          th Demo Email
+          th Password
+          th Available Balance
+          th # Open Offers
+          th # Contracts
+        - User.demo_accounts.each do |user|
+          tr
+            td = user.email
+            td bugmark
+            td = user.balance
+            td = user.offers.open.count
+            td = user.contracts.count

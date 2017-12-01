@@ -1,17 +1,25 @@
 Rails.application.routes.draw do
   devise_for :users
-  get  'static/home'
-  get  'static/experiments'
-  get  'static/help'
-  get  'static/test'
-  get  'static/chart'
-  get  'static/data'
-  post 'static/mailpost'
+
+  # ----- INFO ROUTES -----
+  get  'info', to: redirect("/info/home")
+  get  'info/home'
+  get  'info/experiments'
+  get  'info/help'
+  get  'info/test'
+  get  'info/chart'
+  get  'info/data'
+  post 'info/mailpost'
+  get  'info/new_login'
+  get  'info/new_signup'
 
   # ----- EVENT ROUTES -----
   resources :events
+  get       'events/new_login'
+  get       'events/new_signup'
 
   # ----- BOT ROUTES -----
+  get 'bot', to: redirect("/bot/home")
   get 'bot/home'
   get 'bot/build'
   get 'bot/build_msg'
@@ -20,10 +28,14 @@ Rails.application.routes.draw do
   get 'bot/stop'
   get 'bot/log_show'
   get 'bot/log_reset'
+  get 'bot/new_login'
+  get 'bog/new_signup'
 
   # ----- CORE APPLICATION -----
-  get 'core'  , to: redirect("/core/home")
-  get 'demo'  , to: redirect("/core/home")
+  get 'core', to: redirect("/core/home")
+  get 'core/new_login'
+  get 'core/new_signup'
+
   namespace :core do
     resource :home
 
@@ -54,6 +66,9 @@ Rails.application.routes.draw do
 
   # ----- DOCFIX APPLICATION -----
   get 'docfix', to: redirect("/docfix/home")
+  get 'docfix/new_login'
+  get 'docfix/new_signup'
+
   namespace :docfix do
     resource :home do
       get 'contact'
@@ -93,6 +108,6 @@ Rails.application.routes.draw do
 
   mount GrapeSwaggerRails::Engine, at: "/apidocs"
 
-  root "static#home"
+  root "info#home"
 
 end
