@@ -1,6 +1,6 @@
 class BotController < ApplicationController
 
-  layout 'home'
+  layout 'bot'
 
   before_action :authenticate_user!, except: [:build_log, :log_show]
   
@@ -9,6 +9,9 @@ class BotController < ApplicationController
   PROC_NAME = "bot_buy"
 
   def home
+  end
+
+  def welcome
   end
   
   def build

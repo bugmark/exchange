@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  layout 'home'
+  layout 'events'
 
   def index
     @events = EventLine.paginate(page: params[:page], per_page: 20)

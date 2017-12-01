@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
   devise_for :users
-  get  'static/home'
-  get  'static/experiments'
-  get  'static/help'
-  get  'static/test'
-  get  'static/chart'
-  get  'static/data'
-  post 'static/mailpost'
+
+  get  'info/home'
+  get  'info/experiments'
+  get  'info/help'
+  get  'info/test'
+  get  'info/chart'
+  get  'info/data'
+  post 'info/mailpost'
+  get  'info/new_login'
+  get  'info/new_signup'
 
   # ----- EVENT ROUTES -----
   resources :events
+  get       'events/welcome'
 
   # ----- BOT ROUTES -----
   get 'bot/home'
+  get 'bot/welcome'
   get 'bot/build'
   get 'bot/build_msg'
   get 'bot/build_log'
@@ -93,6 +98,6 @@ Rails.application.routes.draw do
 
   mount GrapeSwaggerRails::Engine, at: "/apidocs"
 
-  root "static#home"
+  root "info#home"
 
 end

@@ -37,7 +37,7 @@ html[lang="en-US"]
             | Powered by BugMark
             - if Rails.env.development?
               '  | #{raw debug_text}
-            '  | See our #{link_to_unless_current("Experiments", "/static/experiments")}...
+            '  | See our #{link_to_unless_current("Experiments", "/info/experiments")}...
 
     = javascript_include_tag :application
     script[type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"]

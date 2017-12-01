@@ -1,7 +1,7 @@
 module Docfix
   class OffersBuController < ApplicationController
 
-    layout 'core'
+    layout 'docfix'
 
     before_action :authenticate_user!, :except => [:index, :show]
 

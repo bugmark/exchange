@@ -23,6 +23,10 @@ class User < ApplicationRecord
     "usr"
   end
 
+  def sname
+    self.email.split("@").first.capitalize
+  end
+
   def contracts
     positions.map(&:contract).flatten.uniq.sort_by {|c| c.id}
   end

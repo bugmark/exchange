@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe StaticController, type: :controller do
+RSpec.describe InfoController, type: :controller do
 
   describe "GET #home" do
     it "returns http success" do

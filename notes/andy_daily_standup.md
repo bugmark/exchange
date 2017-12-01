@@ -220,7 +220,13 @@ Discussion:
 - Found screencasting software
 
 Target Outcomes Nov 30:
-- [ ] publish first draft demo scripe
-- [ ] deliver mad-libs interface
+- [x] publish first draft demo script
 - [ ] fix login redirect
+- [ ] deliver mad-libs interface
 - [ ] add sparkline to offer pages
+
+Fri Dec 01
+----------------------------------------------
+
+Discussion:
+- What is best way to select Offer Date?

@@ -61,7 +61,7 @@
 
     // d3.csv("data.csv", function(error, data) {
     // d3.csv("http://localhost:3000/core/contracts/<%= cid %>/chart", function(error, data) {
-    d3.csv("/static/data", function(error, data) {
+    d3.csv("/info/data", function(error, data) {
         var accessor = close.accessor();
 
         data = data.slice(0, 200).map(function(d) {

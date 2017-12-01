@@ -1,4 +1,4 @@
-- render partial: "static/home_content"
+- render partial: "info/home_content"
 
 .jumbotron
   .row
@@ -10,7 +10,7 @@
       p
         i> BugMark is under construction!
       p Join our Email list to get launch announcements.
-      form action="/static/mailpost" method="post"
+      form action="/info/mailpost" method="post"
         = hidden_field_tag :authenticity_token, form_authenticity_token
         .form-group
           input.form-control name="mail_addr" placeholder="your_email@example.com" type="email" /

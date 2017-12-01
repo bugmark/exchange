@@ -560,8 +560,9 @@ Next Actions:
 - [x] FEEDBACK: record screencast demo with Kazam
 - [x] FEEDBACK: post screencast demo Vimeo(uid=bugmvid@protonmail.com)
 - [x] FEEDBACK: redirect successful login to referring page
+- [x] FEEDBACK: update username for navbar
 
-- [ ] FEEDBACK: update username for navbar
+# Dec 01
 
 - [ ] FEEDBACK: separate NAV/login links for CORE, BOT and DOCFIX
 - [ ] FEEDBACK: every app has a authenticated welcome page
@@ -571,6 +572,9 @@ Next Actions:
 - [ ] FEEDBACK: add nav links to rebuild log page
 
 - [ ] FEEDBACK: update mad-libs interface
+
+- [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
+- [ ] OfferSF Test: Finish it off
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
