@@ -559,12 +559,18 @@ Next Actions:
 - [x] FEEDBACK: add a link from /experiments to the demo script
 - [x] FEEDBACK: record screencast demo with Kazam
 - [x] FEEDBACK: post screencast demo Vimeo(uid=bugmvid@protonmail.com)
+- [x] FEEDBACK: redirect successful login to referring page
+
+- [ ] FEEDBACK: update username for navbar
+
+- [ ] FEEDBACK: separate NAV/login links for CORE, BOT and DOCFIX
+- [ ] FEEDBACK: every app has a authenticated welcome page
+- [ ] FEEDBACK: fix format for the sign-in page
+- [ ] FEEDBACK: add demo account information tot he sign-in page
+- [ ] FEEDBACK: add nav links to bot log page
+- [ ] FEEDBACK: add nav links to rebuild log page
 
 - [ ] FEEDBACK: update mad-libs interface
-
-- [ ] FEEDBACK: separate logins for CORE, BOT and DOCFIX
-- [ ] FEEDBACK: 
-- [ ] FEEDBACK: redirect successful login to referring page
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
