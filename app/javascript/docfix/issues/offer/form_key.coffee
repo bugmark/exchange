@@ -8,9 +8,9 @@ setVal = ()->
   [f_price, u_price] = switch side
     when "fixed" then [base_price, twoDec(1.0 - base_price)]
     else              [twoDec(1.0 - base_price), base_price]
-  $('#dVol').html(in_vol)
-  $('#dF').html(f_price)
-  $('#dU').html(u_price)
+  $('.dVol').html(in_vol)
+  $('.dF').html(f_price)
+  $('.dU').html(u_price)
 
 validate = (stake, volume)->
   console.log "STAKE <#{stake}> VOLUME <#{volume}>"

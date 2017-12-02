@@ -244,7 +244,7 @@ Discussion:
 - Added webpacker-based javascript build
 
 Target Outcomes Dec 02:
-- [ ] finish mad-libs interface
+- [x] finish mad-libs interface
 - [ ] finish contract pages
 - [ ] working offer-sort and contract-sort
 - [ ] add sparklines to offer pages
