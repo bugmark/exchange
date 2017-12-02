@@ -12,10 +12,13 @@ module ApplicationHelper
     controller.send :_layout, ["no_op_argument"]
   end
 
+  def refreshable?
+    %w(bot#log_show bot#build_log).include?(debug_lbl)
+  end
+
   def refresh_tag
-    dev_log "CONTROLLER #{controller_name}"
-    return "" unless Rails.env.production?
-    return "" if %w(homes users sessions static).include?(controller_name)
+    dev_log "PAGE #{debug_lbl}"
+    return "" unless refreshable?
     raw "<meta http-equiv='refresh' content='15' />"
   end
 
@@ -45,8 +48,12 @@ module ApplicationHelper
     Time.now.strftime("%H:%M:%S")
   end
 
+  def debug_lbl
+    "#{params["controller"]}##{params["action"]}"
+  end
+
   def debug_text
-    "<b>#{params["controller"]}##{params["action"]}</b>"
+    "<b>#{debug_lbl}</b>"
   end
 
   def nav_text(text)
