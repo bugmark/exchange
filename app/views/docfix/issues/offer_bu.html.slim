@@ -1,61 +1,18 @@
 - content_for :page_js do
-  = javascript_pack_tag "docfix/issues/offer_bu"
+  = javascript_pack_tag "docfix/issues/offer"
 
-css:
-  .token-field {
-    width:        50px;
-    margin-left:  10px;
-    margin-right: 10px;
-  }
-
-  .madline {
-    margin-top:    10px;
-    margin-bottom: 10px;
-    display:       block;
-  }
-
-  .disabled {
-    text-decoration: line-through;
-  }
-
-= breadcrumb [%w(bugmark /docfix/home), %w(issues /docfix/issues), ["issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "offer to buy unfixed"]
+= breadcrumb [%w(BugMark /docfix/home), %w(Issues /docfix/issues), ["Issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "Offer to Buy Unfixed"]
 
 small
   a href="/docfix/issues/#{@bug.id}" return to issue #{@bug.id}
 
 hr
 
-h4 create offer
+h4 Create Offer
 
-b> issue
+b> Issue
 => @bug.stm_title
-| (issue ##{@bug.id})
+| (Issue ##{@bug.id})
 hr
-.row
-  .col-md-12.text-center
-    form[action="/docfix/offers_bu" method="post"]
-      input#hVal[type='hidden' name="authenticity_token" value="#{form_authenticity_token}"]
-      input#hTyp[type='hidden' name="offer_cmd_create_buy[type]"       value="#{@offer_bu.type}"]
-      input#hUsr[type='hidden' name="offer_cmd_create_buy[user_id]"    value="#{@offer_bu.user_id}"]
-      input#hBug[type='hidden' name="offer_cmd_create_buy[stm_bug_id]" value="#{@offer_bu.stm_bug_id}"]
-      input#hSta[type='hidden' name="offer_cmd_create_buy[stm_status]" value="#{@offer_bu.stm_status}"]
-      input#hMat[type='hidden' name="offer_cmd_create_buy[maturation]" value="2012-12-02"]
-      .form-inline.madline
-        ' I will stake
-        input.form-control.token-field#inStake[type='text' size='2' name='offer_cmd_create_buy[stake]' value=1]
-        ' token<span id='sLbl'></span> that issue is <span id='oSide'>#{@offer_bu.offer.side}</span> on
-      .btn-group[role='group']
-        button.btn.btn-secondary.bc#btn1[data-md="2017-12-02"] Dec 2
-        button.btn.btn-secondary.bc#btn2[data-md="2017-12-03"] Dec 3
-        button.btn.btn-secondary.bc#btn3[data-md="2017-12-05"] Dec 4
-        button.btn.btn-secondary.bc#btn4[data-md="2017-12-06"] Dec 5
-      .form-inline.madline
-        ' and will earn
-        input.form-control.token-field#inVol[type='text' size='2' name='offer_cmd_create_buy[volume]' value=10]
-        '  token<span id="vLbl"></span> in the event this will happen
-      p this would place the marketprice of <span id='dVol'></span> & the possibility of
-        fixed at <span id="dU"></span> (unfixed) and <span id="dF"></span> (fixed).
-      button.btn.btn-primary#sBtn[type='submit'] match offer
-      p[style="margin-top: 10px;"]
-        span#errMsg[style='color: red;']
 
+= render "docfix/issues/madlib", lcl_offer: @offer_bu, lcl_action: "offers_bu"

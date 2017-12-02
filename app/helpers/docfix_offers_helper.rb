@@ -1,4 +1,20 @@
 module DocfixOffersHelper
+  def docfix_offer_madlib_dates
+    eow = Time.now.end_of_week
+    all = [eow, eow + 1.week, eow + 2.weeks, eow + 3.weeks]
+    lst = all.map.with_index do |date, idx|
+      data = date.strftime("%y-%m-%d")
+      labl = date.strftime("%b %e")
+      <<-ERB.strip_heredoc
+        <button id='btn#{idx + 1}' class='btn btn-secondary bc' data-md="#{data}">
+          #{labl}        
+        </button>
+      ERB
+    end
+    raw lst.join
+  end
+
+  # -----
   def docfix_offer_show_link(offer)
     raw <<-ERB.strip_heredoc
       <b>

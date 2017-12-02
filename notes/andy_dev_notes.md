@@ -576,10 +576,13 @@ Next Actions:
 
 - [x] FEEDBACK: fix mad-libs render issues
 - [x] FEEDBACK: turnoff refresh on most pages
+- [x] FEEDBACK: date-select on mad-libs interface
+- [x] FEEDBACK: use mad-libs interface for all offers
 
-- [ ] FEEDBACK: date-select on mad-libs interface
-- [ ] FEEDBACK: use mad-libs interface for all offers
 - [ ] FEEDBACK: build feature specs to drive mad-libs interfaces
+
+- [ ] METRICS: add Georg command-data capture
+- [ ] METRICS: add stats capture with cron process
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
@@ -599,6 +602,7 @@ Next Actions:
 - [ ] JJ Profile Pages
 - [ ] JJ Sparkline
 
+- [ ] FEEDBACK: add content for the sign-in pages
 - [ ] FEEDBACK: make a feature spec that follows the demo
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
