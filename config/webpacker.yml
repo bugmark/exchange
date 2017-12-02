@@ -1,9 +1,9 @@
 # Note: You must restart bin/webpack-dev-server for changes to take effect
 
 default: &default
-  source_path: app/javascript
-  source_entry_path: packs
-  public_output_path: packs
+  source_path:        app/javascript
+  source_entry_path:  all_packs
+  public_output_path: all_packs
 
   extensions:
     - .coffee
@@ -26,7 +26,7 @@ development:
 
   dev_server:
     host: 0.0.0.0
-    port: 8090
+    port: 9090
     https: false
 
 test:

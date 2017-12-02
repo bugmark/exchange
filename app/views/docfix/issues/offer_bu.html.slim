@@ -1,3 +1,8 @@
+- content_for :page_js do
+  coffee:
+    console.log "hello world from PAGE"
+  = javascript_pack_tag "offer_bu/offer_bu"
+
 css:
   .token-field {
     width:        50px;
@@ -11,45 +16,44 @@ css:
     display:       block;
   }
 
-= breadcrumb [%w(BugMark /docfix/home), %w(Issues /docfix/issues), ["Issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "Offer to Buy Unfixed"]
+= breadcrumb [%w(bugmark /docfix/home), %w(issues /docfix/issues), ["issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "offer to buy unfixed"]
 
 small
   a href="/docfix/issues/#{@bug.id}" return to issue #{@bug.id}
 
 hr
 
-h4 Create Offer
+h4 create offer
 
-b> Issue
+b> issue
 => @bug.stm_title
-| (Issue ##{@bug.id})
+| (issue ##{@bug.id})
+hr
+| the yellow block is under construction.
+  the green block works.
 hr
 .row[style='background: lightyellow; padding: 10px;']
-  .col-md-4
-    p This yellow block is under construction.
-    p The green block below works.
-  .col-md-4.text-center
+  .col-md-12.text-center
     form
       .form-inline.madline
-        ' I will stake
+        ' i will stake
         input.form-control.token-field[type='text' size='4']
         ' tokens that issue on
       .btn-group[role='group']
-        button.btn.btn-secondary.active Saturday noon
-        button.btn.btn-secondary Saturday end of show
-        button.btn.btn-secondary Sunday noon
-        button.btn.btn-secondary Sunday end of show
+        button.btn.btn-secondary.active saturday noon
+        button.btn.btn-secondary saturday end of show
+        button.btn.btn-secondary sunday noon
+        button.btn.btn-secondary sunday end of show
       .form-inline.madline
         ' and will earn
         input.form-control.token-field[type='text' size='2']
         '  tokens in the event this will happen
-      p This would place the marketprice of $TOKENS & the possibility of
+      p this would place the marketprice of $tokens & the possibility of
         fixed at %n (unfixed) and %n (fixed).
-      button.btn.btn-primary[type='submit'] MATCH OFFER
-  .col-md-4
+      button.btn.btn-primary[type='submit'] match offer
 hr
 - if @offer_bu.errors.any?
-  .alert.alert-danger Please fix the errors below.
+  .alert.alert-danger please fix the errors below.
 div[style='background: lightgreen; padding: 10px;']
   = bootstrap_form_for(@offer_bu, url: '/docfix/offers_bu') do |f|
     = f.hidden_field :type
@@ -58,12 +62,12 @@ div[style='background: lightgreen; padding: 10px;']
     = f.hidden_field :stm_status
     .row
       .col-md-4
-        = f.number_field   :stake , min: 1, step: 1, label: "I will stake X tokens"
+        = f.number_field   :stake , min: 1, step: 1, label: "i will stake x tokens"
       .col-md-4
-        = f.number_field   :volume, min: 1, step: 1, label: "To earn Y tokens"
+        = f.number_field   :volume, min: 1, step: 1, label: "to earn y tokens"
       .col-md-4
-        = f.datetime_field :maturation, label: "if issue #{@bug.id} is UNFIXED on Z date"
+        = f.datetime_field :maturation, label: "if issue #{@bug.id} is unfixed on z date"
     p
-      = f.submit "Create Offer to Buy Unfixed"
-      a.btn.btn-secondary[style='margin-left: 5px;' href='/docfix/issues/#{@bug.id}'] Cancel
+      = f.submit "create offer to buy unfixed"
+      a.btn.btn-secondary[style='margin-left: 5px;' href='/docfix/issues/#{@bug.id}'] cancel
 
