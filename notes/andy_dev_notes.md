@@ -574,41 +574,39 @@ Next Actions:
 
 # Dec 02
 
+- [x] JJ README overview on /projects
 - [x] FEEDBACK: fix mad-libs render issues
 - [x] FEEDBACK: turnoff refresh on most pages
 - [x] FEEDBACK: date-select on mad-libs interface
 - [x] FEEDBACK: use mad-libs interface for all offers
-
-- [ ] FEEDBACK: build feature specs to drive mad-libs interfaces
-
-- [ ] METRICS: add Georg command-data capture
-- [ ] METRICS: add stats capture with cron process
+- [x] FEEDBACK: handle mad-libs errors (eg user over-balance)
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
 
-- [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
-- [ ] OfferSF Test: Finish it off
-
-- [ ] FEEDBACK: reformat the registration page (add account wipe-out note)
-
-- [ ] core: fix take link and add feature spec
-
 - [ ] JJ Offer search / sorting
 - [ ] JJ Contract search / sorting
 
-- [ ] JJ README overview on /projects
-
 - [ ] JJ Profile Pages
 - [ ] JJ Sparkline
+
+- [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
+- [ ] OfferSF Test: Finish it off
+
+- [ ] core: fix take link and add feature spec
+
+- [ ] METRICS: add Georg command-data capture
+- [ ] METRICS: add stats capture with cron process
+
+- [ ] FEEDBACK: reformat the registration page (add account wipe-out note)
+
+- [ ] FEEDBACK: build feature specs to drive mad-libs interfaces
 
 - [ ] FEEDBACK: add content for the sign-in pages
 - [ ] FEEDBACK: make a feature spec that follows the demo
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
-- [ ] FEEDBACK: the offer should be constructed in MadLibs style - not like a form
-- [ ] FEEDBACK: cleanup timestamps for offer-generation form
-- [ ] FEEDBACK: add a date-picker for offer-generation form
+- [ ] FEEDBACK: should fixed-side offers be AON?
 
 # TBD
 

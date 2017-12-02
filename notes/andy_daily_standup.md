@@ -254,4 +254,7 @@ Sun Dec 03
 
 Discussion:
 - turned off refresh on most pages
+- should fixed-side offers be AON?
+- confirm: should new offers attempt to cross ASAP?
+- question: what about contract resolution?
 
