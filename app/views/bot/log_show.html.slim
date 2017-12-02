@@ -14,7 +14,7 @@ small
   a>[href='/bot/stop'] Stop Bot
   ' |
   a>[href='/bot/log_reset'] Reset Log
-  - if Rails.env.production?
+  - if refreshable?
     ' | page auto-refresh every 15 seconds...
 
 p.logstyle

@@ -574,7 +574,12 @@ Next Actions:
 
 # Dec 02
 
-- [ ] FEEDBACK: finish mad-libs interface
+- [x] FEEDBACK: fix mad-libs render issues
+- [x] FEEDBACK: turnoff refresh on most pages
+
+- [ ] FEEDBACK: date-select on mad-libs interface
+- [ ] FEEDBACK: use mad-libs interface for all offers
+- [ ] FEEDBACK: build feature specs to drive mad-libs interfaces
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 

@@ -249,3 +249,9 @@ Target Outcomes Dec 02:
 - [ ] working offer-sort and contract-sort
 - [ ] finish contract pages
 
+Sun Dec 03
+----------------------------------------------
+
+Discussion:
+- turned off refresh on most pages
+
