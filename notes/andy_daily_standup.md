@@ -232,7 +232,7 @@ Discussion:
 - What is best way to select Offer Date?
 
 Target Outcomes Dec 01:
-- [x] finish mad-libs interface
+- [x] working mad-libs interface
 - [ ] add sparkline to offer pages
 - [ ] working offer-sort and contract-sort
 - [ ] finish contract pages
@@ -244,6 +244,7 @@ Discussion:
 - Added webpacker-based javascript build
 
 Target Outcomes Dec 02:
+- [ ] finish mad-libs interface
 - [ ] add sparklines to offer pages
 - [ ] working offer-sort and contract-sort
 - [ ] finish contract pages

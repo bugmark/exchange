@@ -570,8 +570,11 @@ Next Actions:
 - [x] FEEDBACK: add nav links to bot log page
 - [x] FEEDBACK: add nav links to rebuild log page (decided not...)
 - [x] FEEDBACK: add demo account information the sign-in page
+- [x] FEEDBACK: update mad-libs interface
 
-- [ ] FEEDBACK: update mad-libs interface
+# Dec 02
+
+- [ ] FEEDBACK: finish mad-libs interface
 
 - [ ] JJ build out contracts#index
 - [ ] JJ build out contracts#show 
