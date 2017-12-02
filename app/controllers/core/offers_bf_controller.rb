@@ -5,21 +5,6 @@ module Core
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve]
 
-    def index
-    #   @bug = @repo = nil
-    #   @timestamp = Time.now.strftime("%H:%M:%S")
-    #   case
-    #     when bug_id = params["bug_id"]&.to_i
-    #       @bug = Bug.find(bug_id)
-    #       @offer_bfs = Offer::Buy::Fixed.where(bug_id: bug_id)
-    #     when stm_repo_id = params["stm_repo_id"]&.to_i
-    #       @repo = Repo.find(stm_repo_id)
-    #       @offer_bfs = Offer::Buy::Fixed.where(stm_repo_id: stm_repo_id)
-    #     else
-    #       @offer_bfs = Offer::Buy::Fixed.all
-    #   end
-    end
-
     def new
       @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, new_opts(params))
     end
