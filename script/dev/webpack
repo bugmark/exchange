@@ -9,5 +9,4 @@ export APP="BUGMARK"
 
 clear
 echo "script/dev/server"
-# webpack-dev-server --host $SYSNAME --port 9090
 webpack-dev-server --host $SYSNAME --port 9090

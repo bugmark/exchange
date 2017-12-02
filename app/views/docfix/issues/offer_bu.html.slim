@@ -1,7 +1,5 @@
 - content_for :page_js do
-  coffee:
-    console.log "hello world from PAGE"
-  = javascript_pack_tag "offer_bu/offer_bu"
+  = javascript_pack_tag "docfix/issues/offer_bu"
 
 css:
   .token-field {
@@ -36,17 +34,17 @@ hr
   .col-md-12.text-center
     form
       .form-inline.madline
-        ' i will stake
-        input.form-control.token-field[type='text' size='4']
+        ' I will stake
+        input.form-control.token-field#inStake[type='text' size='4']
         ' tokens that issue on
       .btn-group[role='group']
-        button.btn.btn-secondary.active saturday noon
-        button.btn.btn-secondary saturday end of show
-        button.btn.btn-secondary sunday noon
-        button.btn.btn-secondary sunday end of show
+        button.btn.btn-secondary.bc.active#btn1[data="2017-12-02"] Dec 2
+        button.btn.btn-secondary.bc#btn2[data="2017-12-03"] Dec 3
+        button.btn.btn-secondary.bc#btn3[data="2017-12-05"] Dec 4
+        button.btn.btn-secondary.bc#btn4[data="2017-12-06"] Dec 5
       .form-inline.madline
         ' and will earn
-        input.form-control.token-field[type='text' size='2']
+        input.form-control.token-field#inEarn[type='text' size='2']
         '  tokens in the event this will happen
       p this would place the marketprice of $tokens & the possibility of
         fixed at %n (unfixed) and %n (fixed).
