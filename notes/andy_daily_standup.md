@@ -236,4 +236,3 @@ Target Outcomes Dec 01:
 - [ ] add sparkline to offer pages
 - [ ] working offer-sort and contract-sort
 - [ ] finish contract pages
-
