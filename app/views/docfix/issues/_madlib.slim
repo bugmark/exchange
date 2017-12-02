@@ -1,0 +1,24 @@
+.row
+  .col-md-12.text-center
+    form[action="/docfix/#{lcl_action}" method="post"]
+      input#hVal[type='hidden' name="authenticity_token" value="#{form_authenticity_token}"]
+      input#hTyp[type='hidden' name="offer_cmd_create_buy[type]"       value="#{lcl_offer.type}"]
+      input#hUsr[type='hidden' name="offer_cmd_create_buy[user_id]"    value="#{lcl_offer.user_id}"]
+      input#hBug[type='hidden' name="offer_cmd_create_buy[stm_bug_id]" value="#{lcl_offer.stm_bug_id}"]
+      input#hSta[type='hidden' name="offer_cmd_create_buy[stm_status]" value="#{lcl_offer.stm_status}"]
+      input#hMat[type='hidden' name="offer_cmd_create_buy[maturation]" value="2012-12-02"]
+      .form-inline.madline
+        ' I will stake
+        input.form-control.token-field#inStake[type='text' size='2' name='offer_cmd_create_buy[stake]' value=1]
+        ' token<span id='sLbl'></span> that issue is <span id='oSide'>#{lcl_offer.offer.side}</span> on
+      .btn-group[role='group']
+        = docfix_offer_madlib_dates
+      .form-inline.madline
+        ' and will earn
+        input.form-control.token-field#inVol[type='text' size='2' name='offer_cmd_create_buy[volume]' value=10]
+        '  token<span id="vLbl"></span> in the event this will happen
+      p this would place the marketprice of <span id='dVol'></span> & the possibility of
+        fixed at <span id="dU"></span> (unfixed) and <span id="dF"></span> (fixed).
+      button.btn.btn-primary#sBtn[type='submit'] Create Offer
+      p[style="margin-top: 10px;"]
+        span#errMsg[style='color: red;']

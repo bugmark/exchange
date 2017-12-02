@@ -1,3 +1,6 @@
+- content_for :page_js do
+  = javascript_pack_tag "docfix/issues/offer"
+
 = breadcrumb [%w(BugMark /docfix/home), %w(Issues /docfix/issues), ["Issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "Offer to Buy Fixed"]
 
 small
@@ -10,24 +13,5 @@ h4 Create Offer
 b> Issue
 => @bug.stm_title
 | (Issue ##{@bug.id})
-p
-- if @offer_bf.errors.any?
-  .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@offer_bf, url: '/docfix/offers_bf') do |f|
-  = f.hidden_field :type
-  = f.hidden_field :user_id
-  = f.hidden_field :stm_bug_id
-  = f.hidden_field :stm_status
-  .row
-    .col-md-4
-      = f.number_field :stake,  min: 1, step: 1, label: "I will stake X tokens"
-    .col-md-4
-      = f.number_field :volume, min: 1, step: 1, label: "To earn Y tokens"
-    .col-md-4
-      = f.datetime_field :maturation, label: "if issue #{@bug.id} is FIXED on Z date"
-  p
-    = f.submit "Create Offer to Buy Fixed"
-    a.btn.btn-secondary[style='margin-left: 5px;' href='/docfix/issues/#{@bug.id}'] Cancel
-
-p This would place the marketprice of $TOKENS & the possibility of
-  fixed at %n (unfixed) and %n (fixed).
+hr
+= render "docfix/issues/madlib", lcl_offer: @offer_bf, lcl_action: "offers_bf"

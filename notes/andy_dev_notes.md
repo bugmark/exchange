@@ -576,8 +576,8 @@ Next Actions:
 
 - [x] FEEDBACK: fix mad-libs render issues
 - [x] FEEDBACK: turnoff refresh on most pages
+- [x] FEEDBACK: date-select on mad-libs interface
 
-- [ ] FEEDBACK: date-select on mad-libs interface
 - [ ] FEEDBACK: use mad-libs interface for all offers
 - [ ] FEEDBACK: build feature specs to drive mad-libs interfaces
 
@@ -599,6 +599,7 @@ Next Actions:
 - [ ] JJ Profile Pages
 - [ ] JJ Sparkline
 
+- [ ] FEEDBACK: add content for the sign-in pages
 - [ ] FEEDBACK: make a feature spec that follows the demo
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
