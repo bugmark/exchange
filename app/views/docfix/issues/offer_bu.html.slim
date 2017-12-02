@@ -32,22 +32,28 @@ hr
 hr
 .row[style='background: lightyellow; padding: 10px;']
   .col-md-12.text-center
-    form
+    form[action="/docfix/offers_bu" method="post"]
+      input#hVal[type='hidden' name="authenticity_token" value="#{form_authenticity_token}"]
+      input#hTyp[type='hidden' name="offer_cmd_create_buy[type]"       value="#{@offer_bu.type}"]
+      input#hUsr[type='hidden' name="offer_cmd_create_buy[user_id]"    value="#{@offer_bu.user_id}"]
+      input#hBug[type='hidden' name="offer_cmd_create_buy[stm_bug_id]" value="#{@offer_bu.stm_bug_id}"]
+      input#hSta[type='hidden' name="offer_cmd_create_buy[stm_status]" value="#{@offer_bu.stm_status}"]
+      input#hMat[type='hidden' name="offer_cmd_create_buy[maturation]" value="2012-12-02"]
       .form-inline.madline
         ' I will stake
-        input.form-control.token-field#inStake[type='text' size='4']
-        ' tokens that issue on
+        input.form-control.token-field#inStake[type='text' size='4' name='offer_cmd_create_buy[stake]' value=1]
+        ' tokens that issue is <span id='oSide'>#{@offer_bu.offer.side}</span> on
       .btn-group[role='group']
-        button.btn.btn-secondary.bc.active#btn1[data="2017-12-02"] Dec 2
-        button.btn.btn-secondary.bc#btn2[data="2017-12-03"] Dec 3
-        button.btn.btn-secondary.bc#btn3[data="2017-12-05"] Dec 4
-        button.btn.btn-secondary.bc#btn4[data="2017-12-06"] Dec 5
+        button.btn.btn-secondary.bc#btn1[data-md="2017-12-02"] Dec 2
+        button.btn.btn-secondary.bc#btn2[data-md="2017-12-03"] Dec 3
+        button.btn.btn-secondary.bc#btn3[data-md="2017-12-05"] Dec 4
+        button.btn.btn-secondary.bc#btn4[data-md="2017-12-06"] Dec 5
       .form-inline.madline
         ' and will earn
-        input.form-control.token-field#inEarn[type='text' size='2']
+        input.form-control.token-field#inVol[type='text' size='2' name='offer_cmd_create_buy[volume]' value=10]
         '  tokens in the event this will happen
-      p this would place the marketprice of $tokens & the possibility of
-        fixed at %n (unfixed) and %n (fixed).
+      p this would place the marketprice of <span id='dVol'></span> & the possibility of
+        fixed at <span id="dU"></span> (unfixed) and <span id="dF"></span> (fixed).
       button.btn.btn-primary[type='submit'] match offer
 hr
 - if @offer_bu.errors.any?
