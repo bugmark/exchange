@@ -54,7 +54,9 @@ hr
         '  tokens in the event this will happen
       p this would place the marketprice of <span id='dVol'></span> & the possibility of
         fixed at <span id="dU"></span> (unfixed) and <span id="dF"></span> (fixed).
-      button.btn.btn-primary[type='submit'] match offer
+      button.btn.btn-primary#sBtn[type='submit'] match offer
+      p[style="margin-top: 10px;"]
+        span#errMsg[style='color: red;']
 hr
 - if @offer_bu.errors.any?
   .alert.alert-danger please fix the errors below.
