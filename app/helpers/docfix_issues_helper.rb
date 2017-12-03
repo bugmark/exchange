@@ -42,7 +42,7 @@ module DocfixIssuesHelper
 
   def docfix_issue_first_btn(bug)
     raw <<-HTML.strip_heredoc
-    <a class='btn btn-secondary' style='width: 100%; margin: 5px;' href='/docfix/issues/#{bug.id}/offer_buy'>
+    <a class='btn btn-secondary gbtn' style='margin: 5px;' href='/docfix/issues/#{bug.id}/offer_buy'>
       <b>BE THE FIRST TO INVEST</b><br/><small>on the fixed or unfixed side</small>
     </a>
     HTML
@@ -50,7 +50,7 @@ module DocfixIssuesHelper
 
   def docfix_issue_bf_btn(bug)
     raw <<-HTML.strip_heredoc
-    <a class='btn btn-secondary' style='width: 100%; margin: 5px;' href='/docfix/issues/#{bug.id}/offer_bf'>
+    <a class='btn btn-secondary gbtn' style='margin: 5px;' href='/docfix/issues/#{bug.id}/offer_bf'>
       <b>CONTRIBUTE TO FIX</b><br/><small>buy fixed side</small>
     </a>
     HTML
@@ -58,7 +58,7 @@ module DocfixIssuesHelper
 
   def docfix_issue_bu_btn(bug)
     raw <<-HTML.strip_heredoc
-    <a class='btn btn-secondary' style='width: 100%; margin: 5px;' href='/docfix/issues/#{bug.id}/offer_bu'>
+    <a class='btn btn-secondary gbtn' style='margin: 5px;' href='/docfix/issues/#{bug.id}/offer_bu'>
       <b>INVEST IN FIX</b><br/><small>buy unfixed side</small>
     </a>
     HTML

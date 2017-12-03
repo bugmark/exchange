@@ -58,10 +58,10 @@ module DocfixOffersHelper
     raw <<-HTML.strip_heredoc
       <table>
         <tr>
-          <td style='padding: 10px; text-align: center; border-right: 1px solid black;'>
+          <td style='padding: 10px; text-align: center; border-right: 1px solid black; border-top: 0px;'>
             #{fp}%<br/><small>on fixed side</small>
           </td>
-          <td style='padding: 10px; text-align: center;'>
+          <td style='padding: 10px; text-align: center; border-top: 0px;'>
             #{up}%<br/><small>on unfixed side</small>
           </td>
         </tr>
