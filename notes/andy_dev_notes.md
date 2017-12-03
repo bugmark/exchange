@@ -583,6 +583,8 @@ Next Actions:
 - [x] JJ build out contracts#index
 - [x] JJ build out contracts#show 
 
+# Dec 03
+
 - [ ] JJ Offer search / sorting
 - [ ] JJ Contract search / sorting
 
