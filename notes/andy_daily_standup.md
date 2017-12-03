@@ -258,3 +258,12 @@ Discussion:
 - confirm: should new offers attempt to cross ASAP?
 - question: what about contract resolution?
 
+Target Outcomes Dec 03:
+- [ ] working offer-sort and contract-sort
+- [ ] add sparklines to offer pages
+- [ ] finish demo script
+
+Prioritization - alternative next steps:
+- bug fixing & documentation
+- finish resale offers and cross-transfers
+- metrics 

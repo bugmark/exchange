@@ -586,9 +586,10 @@ Next Actions:
 - [ ] JJ Offer search / sorting
 - [ ] JJ Contract search / sorting
 
-- [ ] JJ Profile Pages
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
+
+- [ ] JJ Profile Pages
 
 - [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
 - [ ] OfferSF Test: Finish it off
@@ -596,7 +597,7 @@ Next Actions:
 - [ ] core: fix take link and add feature spec
 
 - [ ] METRICS: add Georg command-data capture
-- [ ] METRICS: add stats capture with cron process
+- [ ] METRICS: add Georg stats capture with cron process
 
 - [ ] FEEDBACK: reformat the registration page (add account wipe-out note)
 
@@ -635,7 +636,6 @@ Next Actions:
 - [ ] docfix: add Jquery to dynamically update prices
 - [ ] docfix: cleanup offer pages
 
-- [ ] docfix: cleanup event generation
 - [ ] docfix: test event replay
 - [ ] docfix: get blockchain reporting working
 - [ ] docfix: write events to testnet
@@ -661,7 +661,6 @@ Next Actions:
 - [ ] core: reset the data from the UI
 - [ ] core: reset the contract maturation date
 
-- [ ] core: get grafana working with postgres
 - [ ] core: add repo sync
 - [ ] core: bid_buy/ask_buy: add suspended offers to the user-detail page
 - [ ] core: feature specs for sell, take and cross actions
