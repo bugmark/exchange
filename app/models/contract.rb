@@ -23,6 +23,11 @@ class Contract < ApplicationRecord
 
   # ----- SCOPES -----
   class << self
+    def inc_volsum
+      volsum = "sum(escrows.fixed_value)+sum(escrows.unfixed_value) as volsum"
+      select("contracts.*", volsum).joins(:escrows).group("id")
+    end
+
     def reward
       where(mode: 'reward')
     end

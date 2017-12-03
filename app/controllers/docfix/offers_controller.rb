@@ -5,8 +5,6 @@ module Docfix
 
     def index
       @sort   = params[:sort] || ""
-      tst_log @sort
-      tst_log params.inspect
       @query  = OfferQuery.new
       @offers = Offer.paginate(page: params[:page], per_page: 5).order(pick_sort(@sort))
     end

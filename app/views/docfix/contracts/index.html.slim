@@ -13,9 +13,20 @@ css:
     margin-top: 10px;
   }
 
+  .tt {
+    margin-right: 10px;
+  }
+
+  .nw {
+    white-space: nowrap;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+
 = breadcrumb [%w(BugMark /docfix/home), "Contracts"]
 
-h2 Contracts (#{@contracts.count})
+h2 Contracts (#{Contract.count})
 
 b Check out the running contracts to get an impression of the trading volume
   going on on BugMark.  filter this view by your preferences, add contracts
@@ -24,11 +35,15 @@ b Check out the running contracts to get an impression of the trading volume
 
 table.table.table-sm.tdog
   tr[style='background: lightgrey;']
-    td : u Name/Title/Issue#
-    td : u Maturation Date
-    td : u Contract Volume
-    td : u Price per unit
-    td
+    td.nw
+    td.nw
+      = docfix_contract_sort("Maturation date", "date"  , @sort)
+    td.nw
+      = docfix_contract_sort("Contract volume", "volsum", @sort)
+    td.nw
+    td.nw
+  tr
+    td[colspan=4 style='height: 5px;']
   - @contracts.each do |contract|
     tr
       td
@@ -46,7 +61,7 @@ table.table.table-sm.tdog
         = contract.maturation.strftime("%m-%d %H:%M")
       td
         .zh Contract volume
-        | #{contract.total_value.to_i} tokens
+        | #{contract.volsum.to_i} tokens
       td
         .zh Price per unit
         = docfix_contract_price(contract)

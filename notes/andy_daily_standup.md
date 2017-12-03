@@ -259,7 +259,7 @@ Discussion:
 - question: what about contract resolution?
 
 Target Outcomes Dec 03:
-- [ ] working offer-sort and contract-sort
+- [x] working offer-sort and contract-sort
 - [ ] add sparklines to offer pages
 - [ ] finish demo script
 

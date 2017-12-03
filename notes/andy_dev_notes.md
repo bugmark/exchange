@@ -585,11 +585,13 @@ Next Actions:
 
 # Dec 03
 
-- [ ] JJ Offer search / sorting
-- [ ] JJ Contract search / sorting
+- [x] JJ Offer sorting
+- [x] JJ Contract sorting
 
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
+
+- [ ] JJ Finish Demo Script
 
 - [ ] JJ Profile Pages
 
