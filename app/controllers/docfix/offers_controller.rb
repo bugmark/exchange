@@ -4,8 +4,11 @@ module Docfix
     layout 'docfix'
 
     def index
+      @sort   = params[:sort] || ""
+      tst_log @sort
+      tst_log params.inspect
       @query  = OfferQuery.new
-      @offers = Offer.paginate(page: params[:page], per_page: 5)
+      @offers = Offer.paginate(page: params[:page], per_page: 5).order(pick_sort(@sort))
     end
 
     def show
@@ -23,6 +26,22 @@ module Docfix
       end
     end
 
+    private
+
+    def pick_sort(item)
+      return "" if item.match(/xx/) || item.blank?
+      case item
+        when "status_up" then "stm_status asc"
+        when "status_dn" then "stm_status desc"
+        when "price_up"  then "value asc"
+        when "price_dn"  then "value desc"
+        when "prob_up"   then "price asc"
+        when "prob_dn"   then "price desc"
+        when "trade_up"  then "price asc"
+        when "trade_dn"  then "price desc"
+        else ""
+      end
+    end
   end
 end
 

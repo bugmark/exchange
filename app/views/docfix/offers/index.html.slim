@@ -13,19 +13,14 @@ css:
     margin-top: 10px;
   }
 
-  .lblk {
-    float: left;
-    width: 50%;
-    margin-right: 5px;
-  }
-
-  .rblk {
-    float: right;
-    width: 40%;
+  .tt {
+    margin-right: 10px;
   }
 
   .nw {
     white-space: nowrap;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
   }
 
 = breadcrumb [%w(BugMark /docfix/home), 'Offers']
@@ -34,18 +29,15 @@ b Browse and sort offers to find the most lucrative.  Lorem ipsum humina humina.
 table.table.table-sm.tdog
   tr[style='background: lightgrey;']
     td.nw
-      .lblk: u> All statuses
-      .rblk: i.fa.fa-sort
+      = docfix_offer_sort("All statuses", "status", @sort)
     td.nw
-      .lblk: u> Market price
-      .rblk: i.fa.fa-sort
+      = docfix_offer_sort("Market price", "price", @sort)
     td.nw
-      .lblk: u> Expected fix probability
-      .rblk: i.fa.fa-sort
+      = docfix_offer_sort("Expected fix probability", "prob", @sort)
     td.nw
-      .lblk: u> Last trade
-      .rblk: i.fa.fa-sort
-    td
+    td.nw
+  tr
+    td[colspan=4 style='height: 5px;']
   - @offers.each do |offer|
     tr
       td

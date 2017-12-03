@@ -15,6 +15,34 @@ module DocfixOffersHelper
   end
 
   # -----
+  def docfix_offer_sort(label, type, csort)
+    ctype = csort.split("_").first || type
+    cdir  = type != ctype ? "xx" : csort.split("_").last
+    tst_log "#{type} / #{ctype} / #{csort} / #{cdir}"
+    raw <<-ERB
+      <a href='/docfix/offers?sort=#{type}_#{next_action_for(cdir)}'>
+        <span class="tt"><b>#{label}</b></span><i class='fa fa-sort#{icon_for(cdir)}'></i>
+      </a>
+    ERB
+  end
+
+  def next_action_for(dir)
+    case dir
+      when "xx" then "up"
+      when "up" then "dn"
+      else "xx"
+    end
+  end
+
+  def icon_for(dir)
+    case dir
+      when "up" then "-asc"
+      when "dn" then "-desc"
+      else ""
+    end
+  end
+
+  # -----
   def docfix_offer_show_link(offer)
     raw <<-ERB.strip_heredoc
       <b>
