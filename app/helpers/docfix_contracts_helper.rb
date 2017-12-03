@@ -1,4 +1,19 @@
 module DocfixContractsHelper
+
+  # ----- issue buttons -----
+
+  def docfix_contract_action_btns(contract)
+    bug = contract.bug
+    return "" unless bug.present?
+    raw <<-HTML.strip_heredoc
+    <a class='btn btn-secondary' style='width: 100%; margin: 5px;' href='/docfix/issues/#{bug.id}/offer_buy'>
+      <b>MAKE NEW<br/>INVEST</b><br/>
+    </a>
+    HTML
+  end
+
+  # -----
+
   def docfix_contract_show_link(contract)
     raw <<-ERB.strip_heredoc
       <b>
@@ -38,15 +53,15 @@ module DocfixContractsHelper
 
   def docfix_contract_price(contract)
     esc = contract.escrows.last
-    fp = esc.fixed_positions.first.price
-    up = esc.unfixed_positions.first.price
+    fp = esc.fixed_positions.first.price.round(2)
+    up = esc.unfixed_positions.first.price.round(2)
     raw <<-HTML.strip_heredoc
       <table>
         <tr>
-          <td style='text-align: center; border-right: 1px solid black;'>
+          <td style='text-align: center; border-right: 1px solid black; padding: 5px;'>
             #{fp}%<br/><small>on fixed side</small>
           </td>
-          <td style='text-align: center;'>
+          <td style='text-align: center; padding: 5px;'>
             #{up}%<br/><small>on unfixed side</small>
           </td>
         </tr>
@@ -91,23 +106,5 @@ module DocfixContractsHelper
         #{contract.repo.name}
       </a>
     END
-  end
-
-  # ----- issue buttons -----
-
-  def docfix_contract_buy_btns(contract)
-    bug = contract.bug
-    return "" unless bug.present?
-    docfix_issue_bu_btn(bug) + docfix_issue_bf_btn(bug)
-  end
-
-  # ----- issue buttons -----
-
-  def docfix_contract_action_btns(contract)
-    raw <<-HTML.strip_heredoc
-    <a class='btn btn-secondary' style='width: 100%; margin: 5px;' href='/docfix/contracts/#{contract.id}/offer_buy'>
-      <b>MAKE A NEW INVEST</b><br/><small>on the fixed or unfixed side</small>
-    </a>
-    HTML
   end
 end

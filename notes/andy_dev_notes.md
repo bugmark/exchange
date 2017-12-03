@@ -580,15 +580,15 @@ Next Actions:
 - [x] FEEDBACK: date-select on mad-libs interface
 - [x] FEEDBACK: use mad-libs interface for all offers
 - [x] FEEDBACK: handle mad-libs errors (eg user over-balance)
-
-- [ ] JJ build out contracts#index
-- [ ] JJ build out contracts#show 
+- [x] JJ build out contracts#index
+- [x] JJ build out contracts#show 
 
 - [ ] JJ Offer search / sorting
 - [ ] JJ Contract search / sorting
 
 - [ ] JJ Profile Pages
-- [ ] JJ Sparkline
+- [ ] JJ Offer Sparkline
+- [ ] JJ Contract Sparkline
 
 - [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
 - [ ] OfferSF Test: Finish it off

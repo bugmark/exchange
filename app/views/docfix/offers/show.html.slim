@@ -6,7 +6,6 @@ css:
     width: 80%;
   }
 
-
 = breadcrumb [%w(BugMark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
 small
   a href="/docfix/offers" return to overview
@@ -57,8 +56,8 @@ small
     div[style='margin-top: 50px;']
       b Expected fix probability
       = docfix_offer_price(@offer)
-    div.holder: b SPARKLINE HERE
-    div.holder: b CANDLESTICK HERE
+    .holder: b SPARKLINE HERE
+    .holder: b CANDLESTICK HERE
 
 
 
