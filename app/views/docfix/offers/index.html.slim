@@ -13,15 +13,38 @@ css:
     margin-top: 10px;
   }
 
+  .lblk {
+    float: left;
+    width: 50%;
+    margin-right: 5px;
+  }
+
+  .rblk {
+    float: right;
+    width: 40%;
+  }
+
+  .nw {
+    white-space: nowrap;
+  }
+
 = breadcrumb [%w(BugMark /docfix/home), 'Offers']
 h2 Offers (#{@offers.count})
 b Browse and sort offers to find the most lucrative.  Lorem ipsum humina humina.
 table.table.table-sm.tdog
   tr[style='background: lightgrey;']
-    td : u All statuses
-    td : u Market price
-    td : u Expected fix probability
-    td : u Last trade
+    td.nw
+      .lblk: u> All statuses
+      .rblk: i.fa.fa-sort
+    td.nw
+      .lblk: u> Market price
+      .rblk: i.fa.fa-sort
+    td.nw
+      .lblk: u> Expected fix probability
+      .rblk: i.fa.fa-sort
+    td.nw
+      .lblk: u> Last trade
+      .rblk: i.fa.fa-sort
     td
   - @offers.each do |offer|
     tr

@@ -263,7 +263,3 @@ Target Outcomes Dec 03:
 - [ ] add sparklines to offer pages
 - [ ] finish demo script
 
-Prioritization - alternative next steps:
-- bug fixing & documentation
-- finish resale offers and cross-transfers
-- metrics 
