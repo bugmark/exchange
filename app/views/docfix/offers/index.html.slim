@@ -1,54 +1,57 @@
+css:
+  .zh {
+    font-weight: bold;
+    height:      60px;
+  }
+
+  .gbtn {
+    width: 200px;
+    display: block;
+  }
+
+  .tdog {
+    margin-top: 10px;
+  }
+
 = breadcrumb [%w(BugMark /docfix/home), 'Offers']
-
 h2 Offers (#{@offers.count})
-
 b Browse and sort offers to find the most lucrative.  Lorem ipsum humina humina.
-
-div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
-  = bootstrap_form_for(@query, url: '/docfix/offers', method: 'get') do |f|
-    .row
-      .col-md-2
-        = f.text_field :status_qry      , label: raw("<b>All statuses</b>")
-      .col-md-3
-        = f.text_field :price_qry       , label: raw("<b>Market price</b>")
-      .col-md-3
-        = f.text_field :probability_qry , label: raw("<b>Expected fix probability</b>")
-      .col-md-2
-        = f.text_field :trade_qry       , label: raw("<b>Last trade</b>")
-      .col-md-2
-        p[style='margin-top: 30px;']
-          = f.submit "SEARCH"
-
-- @offers.each do |offer|
-  .row
-    .col-md-8
-      table.table-sm[style='width: 100%;']
-        tr[style='vertical-align: bottom;']
-          td = docfix_offer_show_link(offer)
-          td: b Market price
-          td: b Expected fix probability
-          td: b Last trade
-        tr[style='vertical-align: top;']
-          td
-            small
-            p
-              b Created on<br/>
-              = offer.created_at.strftime("%m-%d %H:%M")
-            p
-              b = docfix_offer_assoc_label(offer)
-              br
-              = docfix_offer_assoc_link(offer)
-
-          td: b #{offer.value} tokens
-          td = docfix_offer_price(offer)
-          td TBD
-    .col-md-4
-      b
-        ' Get involved
+table.table.table-sm.tdog
+  tr[style='background: lightgrey;']
+    td : u All statuses
+    td : u Market price
+    td : u Expected fix probability
+    td : u Last trade
+    td
+  - @offers.each do |offer|
+    tr
+      td
+        .zh = docfix_offer_show_link(offer)
+        small
+          p
+            b Created on<br/>
+            = offer.created_at.strftime("%m-%d %H:%M")
+          p
+            b = docfix_offer_assoc_label(offer)
+            br
+            = docfix_offer_assoc_link(offer)
+      td
+        .zh Market price
+        b #{offer.value} tokens
+      td
+        .zh Expected fix probability
+        = docfix_offer_price(offer)
+      td
+        .zh Last trade
+        | TBD
+      td
+        b
+          ' Get involved
         i.fa.fa-question-circle
         |  Why would I do this?
         = docfix_offer_buy_btns(offer)
-  hr
+
+hr
 
 .text-center[style='margin-top: 30px;']
   = will_paginate @offers, container: false

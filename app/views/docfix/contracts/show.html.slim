@@ -1,10 +1,36 @@
+css:
+  .holder {
+    margin-top: 50px;
+    padding:    50px;
+    background: lightgrey;
+    width: 80%;
+  }
+
 = breadcrumb [%w(BugMark /docfix/home), %w(Contracts /docfix/contracts), @contract.id]
 
 small
   a href="/docfix/contracts" return to overview
-
 .row
-  .col-md-8
+  .col-md-7
     h2 Contract #{@contract.id}
-  .col-md-4
+    p
+    small
+      table.table-sm
+        tr
+          td
+            b Issue
+          td = @contract.bug.id
+        tr
+          td
+            b Created
+          td = @contract.created_at.strftime("%y-%m-%d %H:%M:%S")
+        tr
+          td
+            b Maturation date
+          td = @contract.maturation_str
+  .col-md-5
     b TRADING OVERVIEW
+    p
+    = docfix_contract_price(@contract)
+    .holder: b SPARKLINE HERE
+    .holder: b CANDLESTICK HERE

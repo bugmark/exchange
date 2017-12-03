@@ -24,11 +24,11 @@ validateBtn = (in_stake, in_vol)->
   if valid
     console.log "VALID"
     $('#errMsg').html("")
-    $('#sBtn').removeClass("disabled")
+    $('#sBtn').removeClass("disabled").removeClass("strikeout")
   else
     console.log "NOT VALID"
     $('#errMsg').html(msg)
-    $('#sBtn').addClass("disabled")
+    $('#sBtn').addClass("disabled").addClass("strikeout")
 
 tLbl = (stake, vol)->
   ss = if stake == 1 then "" else "s"

@@ -580,15 +580,16 @@ Next Actions:
 - [x] FEEDBACK: date-select on mad-libs interface
 - [x] FEEDBACK: use mad-libs interface for all offers
 - [x] FEEDBACK: handle mad-libs errors (eg user over-balance)
-
-- [ ] JJ build out contracts#index
-- [ ] JJ build out contracts#show 
+- [x] JJ build out contracts#index
+- [x] JJ build out contracts#show 
 
 - [ ] JJ Offer search / sorting
 - [ ] JJ Contract search / sorting
 
+- [ ] JJ Offer Sparkline
+- [ ] JJ Contract Sparkline
+
 - [ ] JJ Profile Pages
-- [ ] JJ Sparkline
 
 - [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
 - [ ] OfferSF Test: Finish it off
@@ -596,7 +597,7 @@ Next Actions:
 - [ ] core: fix take link and add feature spec
 
 - [ ] METRICS: add Georg command-data capture
-- [ ] METRICS: add stats capture with cron process
+- [ ] METRICS: add Georg stats capture with cron process
 
 - [ ] FEEDBACK: reformat the registration page (add account wipe-out note)
 
@@ -635,7 +636,6 @@ Next Actions:
 - [ ] docfix: add Jquery to dynamically update prices
 - [ ] docfix: cleanup offer pages
 
-- [ ] docfix: cleanup event generation
 - [ ] docfix: test event replay
 - [ ] docfix: get blockchain reporting working
 - [ ] docfix: write events to testnet
@@ -661,7 +661,6 @@ Next Actions:
 - [ ] core: reset the data from the UI
 - [ ] core: reset the contract maturation date
 
-- [ ] core: get grafana working with postgres
 - [ ] core: add repo sync
 - [ ] core: bid_buy/ask_buy: add suspended offers to the user-detail page
 - [ ] core: feature specs for sell, take and cross actions
