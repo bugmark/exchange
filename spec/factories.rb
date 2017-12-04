@@ -5,6 +5,8 @@ FB ||= FactoryBot
 
 FactoryBot.define do
 
+  # ----- BASE -----
+
   factory :user, class: UserCmd::Create do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
@@ -33,6 +35,8 @@ FactoryBot.define do
     end
     stm_repo_id { FB.create(:repo).id }
   end
+
+  # ----- BUY OFFERS -----
 
   factory :offer_bu, class: OfferCmd::CreateBuy do
     to_create { |instance| instance.project }
@@ -72,25 +76,15 @@ FactoryBot.define do
     end
   end
 
-  factory :offer_su, class: OfferCmd::CreateSell do
-    to_create { |instance| instance.project }
-    initialize_with do
-      offer_bf = FB.create(:offer_bf).offer
-      offer_bu = FB.create(:offer_bu).offer
-      _cross   = ContractCmd::Cross.new(offer_bf, :expand)
-      _result  = _cross.project
-      new(offer_bu.position, attributes || {})
-    end
-  end
+  # ----- CONTRACTS AND ARTIFACTS -----
 
-  factory :offer_sf, class: OfferCmd::CreateSell do
-    to_create { |instance| instance.project }
-    initialize_with do
-      offer_bu = FB.create(:offer_bu).offer
-      offer_bf = FB.create(:offer_bf).offer
-      _cross   = ContractCmd::Cross.new(offer_bu, :expand)
-      _result  = _cross.project
-      new(offer_bf.position, attributes || {})
+  factory :contract do
+    status 'open'
+    type "Contract::GitHub"
+    maturation Time.now + 1.day
+
+    factory :matured_contract do
+      maturation Time.now - 1.day
     end
   end
 
@@ -115,18 +109,49 @@ FactoryBot.define do
     contract  { FB.create(:contract)   }
     amendment { FB.create(:amendment)  }
   end
+end
 
-  factory :amendment do
+module FBX
+
+  def expand_obf(opts = {})
+    _obu, obf = FBX.create_buy_offers(opts)
+    ContractCmd::Cross.new(obf, :expand).project
   end
 
-  factory :contract do
-    status 'open'
-    type "Contract::GitHub"
-    maturation Time.now + 1.day
+  def expand_obu(opts = {})
+    obu, _obf = FBX.create_buy_offers(opts)
+    ContractCmd::Cross.new(obu, :expand).project
+  end
 
-    factory :matured_contract do
-      maturation Time.now - 1.day
-    end
+  def offer_sf(opts = {})
+    obu, _obf = FBX.create_buy_offers(opts)
+    cnt = ContractCmd::Cross.new(obu, :expand).project.contract
+    esc = cnt.escrows.last
+    pos = esc.fixed_positions.first
+    OfferCmd::CreateSell(pos, FBX.opts_for(:osf, opts)).project
+  end
+
+  module_function :expand_obf, :expand_obu
+
+  # ----- private -----
+
+  def FBX.create_buy_offers(opts)
+    obu = FB.create(:offer_bu, FBX.opts_for(:obu, opts)).offer
+    obf = FB.create(:offer_bf, FBX.opts_for(:obf, opts)).offer
+    [obu, obf]
+  end
+
+  def FBX.opts_for(tag, opts)
+    FBX.default_opts.fetch(tag, {}).merge(opts.fetch(tag, {}))
+  end
+
+  def FBX.default_opts
+    {
+      obf: {},
+      obu: {},
+      osf: {},
+      osu: {},
+    }
   end
 end
 
