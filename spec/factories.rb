@@ -148,13 +148,20 @@ module FBX
   end
 
   def offer_sf(opts = {})
-    obu, _obf = FBX.create_buy_offers(opts)
-    cnt = ContractCmd::Cross.new(obu, :expand).project.contract
+    _obu, obf = FBX.create_buy_offers(opts)
+    cnt = ContractCmd::Cross.new(obf, :expand).project.contract
     pos = cnt.escrows.last.fixed_positions.first
     OfferCmd::CreateSell.new(pos, FBX.opts_for(:osf, opts)).project
   end
 
-  module_function :expand_obf, :expand_obu, :offer_sf
+  def offer_su(opts = {})
+    obu, _obf = FBX.create_buy_offers(opts)
+    cnt = ContractCmd::Cross.new(obu, :expand).project.contract
+    pos = cnt.escrows.last.unfixed_positions.first
+    OfferCmd::CreateSell.new(pos, FBX.opts_for(:osu, opts)).project
+  end
+
+  module_function :expand_obf, :expand_obu, :offer_sf, :offer_su
 
   # ----- private -----
 
