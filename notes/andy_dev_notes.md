@@ -588,10 +588,10 @@ Next Actions:
 - [x] JJ Offer sorting
 - [x] JJ Contract sorting
 
-- [ ] JJ Finish Demo Script
-
 - [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
 - [ ] OfferSF Test: Finish it off
+
+- [ ] JJ Finish Demo Script
 
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline

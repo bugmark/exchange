@@ -263,3 +263,13 @@ Target Outcomes Dec 03:
 - [ ] add sparklines to offer pages
 - [ ] finish demo script
 
+Mon Dec 04
+----------------------------------------------
+
+Discussion:
+- let's discuss demo use-cases - what do we want?
+- what should sparklines and candlesticks show for offers?
+- what should sparklines and candlesticks show for contracts? (escrow prices...)
+
+
+
