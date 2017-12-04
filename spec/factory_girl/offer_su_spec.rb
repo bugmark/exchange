@@ -23,6 +23,14 @@ RSpec.describe 'OfferSU Factory', USE_VCR do
     expect(obj.salable_position.offer.status).to eq('crossed')
   end
 
+  it "generates a suite of elements" do
+    FG.create(:offer_sf)
+    expect(Position.count).to eq(2)
+    expect(Escrow.count).to eq(1)
+    expect(Offer.count).to eq(3)
+    expect(Contract.count).to eq(1)
+  end
+
   it "has common ownership between the position and offer" do
     obj = FG.create(:unfixed_position)
     pusr = obj.user
