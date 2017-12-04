@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe OfferCmd::Cancel do
 
   def gen_obf(opts = {})
-    FG.create(:offer_bf, {user: user}.merge(opts)).offer
+    FB.create(:offer_bf, {user: user}.merge(opts)).offer
   end
 
   let(:offer_bf) { gen_obf                                                 }
-  let(:offer_bu) { FG.create(:offer_bu, user: user).offer                  }
-  let(:user)     { FG.create(:user).user                                   }
+  let(:offer_bu) { FB.create(:offer_bu, user: user).offer                  }
+  let(:user)     { FB.create(:user).user                                   }
   let(:klas)     { described_class                                         }
   subject        { klas.new(offer_bu)                                      }
 

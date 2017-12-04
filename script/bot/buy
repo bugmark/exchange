@@ -35,7 +35,7 @@ def buy
     price:   rand.round(2)       ,
     stm_bug_id: ISSUE_IDS.sample
   }
-  FG.create(typ, opts).project
+  FB.create(typ, opts).project
 end
 
 def cross

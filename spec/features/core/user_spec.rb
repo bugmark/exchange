@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "User", USE_VCR do
 
-  let(:offer_bf) { FG.create(:offer_bf, user_id: user.id).offer }
-  let(:offer_bu) { FG.create(:offer_bu, user_id: user.id).offer }
-  let(:user)     { FG.create(:user).user }
+  let(:offer_bf) { FB.create(:offer_bf, user_id: user.id).offer }
+  let(:offer_bu) { FB.create(:offer_bu, user_id: user.id).offer }
+  let(:user)     { FB.create(:user).user }
 
   it "renders home" do
     login_as user, :scope => :user

@@ -15,10 +15,10 @@ module DocfixOffersHelper
   end
 
   # -----
+
   def docfix_contract_sort(label, type, csort)
     ctype = csort.split("_").first || type
     cdir  = type != ctype ? "xx" : csort.split("_").last
-    tst_log "#{type} / #{ctype} / #{csort} / #{cdir}"
     raw <<-ERB
       <a href='/docfix/contracts?sort=#{type}_#{docfix_sort_next_action_for(cdir)}'>
         <span class="tt"><b>#{label}</b></span><i class='fa fa-sort#{docfix_sort_icon_for(cdir)}'></i>
@@ -26,12 +26,9 @@ module DocfixOffersHelper
     ERB
   end
 
-
-
   def docfix_offer_sort(label, type, csort)
     ctype = csort.split("_").first || type
     cdir  = type != ctype ? "xx" : (csort.split("_").last || "xx")
-    tst_log "#{type} / #{ctype} / #{csort} / #{cdir}"
     raw <<-ERB
       <a href='/docfix/offers?sort=#{type}_#{docfix_sort_next_action_for(cdir)}'>
         <span class="tt"><b>#{label}</b></span><i class='fa fa-sort#{docfix_sort_icon_for(cdir)}'></i>

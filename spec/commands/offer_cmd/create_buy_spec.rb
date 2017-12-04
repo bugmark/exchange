@@ -15,7 +15,7 @@ RSpec.describe OfferCmd::CreateBuy do
 
   def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
-  let(:user)   { FG.create(:user).user                                  }
+  let(:user)   { FB.create(:user).user                                  }
   let(:klas)   { described_class                                        }
   subject      { klas.new(:offer_bu, valid_params)                      }
 
@@ -114,47 +114,47 @@ RSpec.describe OfferCmd::CreateBuy do
   describe "balances and reserves", USE_VCR do
     context "with poolable offers" do
       it "adjusts the user reserve for one offer" do
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(100.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(1000.0)
         gen_obf
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(96.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(996.0)
       end
 
       it "adjusts the user reserve for many offers" do
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(100.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(1000.0)
         gen_obf ; gen_obf ; gen_obf
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(96.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(996.0)
       end
     end
 
     context "with non-poolable offers" do
       it "adjusts the user reserve for one offer" do
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(100.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(1000.0)
         gen_obf(poolable: false)
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(96.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(996.0)
       end
 
       it "adjusts the user reserve for many offers" do
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(100.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(1000.0)
         gen_obf(poolable: false) ; gen_obf(poolable: false) ; gen_obf(poolable: false)
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(88.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(988.0)
       end
     end
 
     context "mixed poolable and non-poolable" do
       it "calculates the right reserve" do
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(100.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(1000.0)
         gen_obf(poolable: false) ; gen_obf ; gen_obf
-        expect(user.balance).to eq(100.0)
-        expect(user.token_available).to eq(92.0)
+        expect(user.balance).to eq(1000.0)
+        expect(user.token_available).to eq(992.0)
       end
     end
   end
@@ -162,22 +162,22 @@ RSpec.describe OfferCmd::CreateBuy do
   describe "balances and limits", USE_VCR do
     context "with poolable offers" do
       it "stays below balance limit" do
-        offer1 = gen_obf(volume: 100)
+        offer1 = gen_obf(volume: 1000)
         expect(offer1).to be_valid
-        offer2 = gen_obf(volume: 100)
+        offer2 = gen_obf(volume: 1000)
         expect(offer2).to be_valid
-        offer3 = gen_obf(volume: 100)
+        offer3 = gen_obf(volume: 1000)
         expect(offer3).to be_valid
       end
     end
 
     context "with non-poolable offers" do
       it "exceeds balance" do
-        offer1 = gen_obf(volume: 100, poolable: false)
+        offer1 = gen_obf(volume: 1000, poolable: false)
         expect(offer1).to be_truthy
-        offer2 = gen_obf(volume: 100, poolable: false)
+        offer2 = gen_obf(volume: 1000, poolable: false)
         expect(offer2).to be_truthy
-        offer3 = gen_obf(volume: 100, poolable: false)
+        offer3 = gen_obf(volume: 1000, poolable: false)
         expect(offer3).to be_falsey
       end
     end

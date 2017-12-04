@@ -10,16 +10,16 @@ RSpec.describe Offer::Buy, type: :model do
   end
 
   def gen_unfixed(args = {})
-    FG.create(:offer_bu, valid_params.merge(args))
+    FB.create(:offer_bu, valid_params.merge(args))
   end
 
   def gen_fixed(args = {})
-    FG.create(:offer_bf, valid_params.merge(args))
+    FB.create(:offer_bf, valid_params.merge(args))
   end
 
-  let(:usr)    { FG.create(:user, balance: 100.0).user }
+  let(:usr)    { FB.create(:user, balance: 100.0).user }
   let(:klas)   { described_class                             }
-  let(:user)   { FG.create(:user).user                       }
+  let(:user)   { FB.create(:user).user                       }
   subject      { klas.new(valid_params)                      }
 
   describe "Object Creation", USE_VCR do

@@ -46,5 +46,5 @@ opts.each do |opt|
     aon:        false          ,
     stm_status: 'closed'
   }
-  FG.create(:offer_bf, opt.merge(base))
+  FB.create(:offer_bf, opt.merge(base))
 end

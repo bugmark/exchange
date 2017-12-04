@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "OffersBf" do
 
-  let(:user)     { FG.create(:user).user              }
-  let(:ask)      { FG.create(:offer_bf).offer          }
+  let(:user)     { FB.create(:user).user              }
+  let(:ask)      { FB.create(:offer_bf).offer          }
 
   it "renders index" do
     visit "/core/offers_bf"
