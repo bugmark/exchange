@@ -13,7 +13,7 @@ FactoryGirl.define do
       "test#{n}@bugmark.net"
     end
     password "bugmark"
-    balance 100.0
+    balance 500.0
   end
 
   factory :repo, class: RepoCmd::GhCreate do

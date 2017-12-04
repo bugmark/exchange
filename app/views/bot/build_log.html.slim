@@ -8,7 +8,7 @@ css:
 H1 Build Log
 small
   a>[href='/bot/home'] Bot Home
-  - if Rails.env.production?
+  - if refreshable?
     ' | page auto-refresh every 15 seconds...
 p.logstyle
   = raw @logtext

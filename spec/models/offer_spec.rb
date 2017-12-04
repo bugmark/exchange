@@ -9,7 +9,8 @@ RSpec.describe Offer, type: :model do
     }.merge(extras)
   end
 
-  def offer3(extras) Offer::Buy::Unfixed.new(valid_params(extras)) end
+  # def offer3(extras) Offer::Buy::Unfixed.new(valid_params(extras)) end
+
   let(:offer2) { klas.new(valid_params)  }
   let(:user)   { FG.create(:user)        }
   let(:klas)   { described_class         }

@@ -588,15 +588,17 @@ Next Actions:
 - [x] JJ Offer sorting
 - [x] JJ Contract sorting
 
-- [ ] JJ Offer Sparkline
-- [ ] JJ Contract Sparkline
-
 - [ ] JJ Finish Demo Script
-
-- [ ] JJ Profile Pages
 
 - [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
 - [ ] OfferSF Test: Finish it off
+
+- [ ] JJ Offer Sparkline
+- [ ] JJ Contract Sparkline
+
+- [ ] JJ Profile Pages
+
+- [ ] Write a deployment plan
 
 - [ ] core: fix take link and add feature spec
 
