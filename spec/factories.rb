@@ -109,6 +109,30 @@ FactoryBot.define do
     contract  { FB.create(:contract)   }
     amendment { FB.create(:amendment)  }
   end
+
+  # ----- SELL OFFERS -----
+
+  factory :offer_su, class: OfferCmd::CreateSell do
+    to_create { |instance| instance.project }
+    initialize_with do
+      offer_bf = FB.create(:offer_bf).offer
+      offer_bu = FB.create(:offer_bu).offer
+      _cross   = ContractCmd::Cross.new(offer_bf, :expand)
+      _result  = _cross.project
+      new(offer_bu.position, attributes || {})
+    end
+  end
+
+  factory :offer_sf, class: OfferCmd::CreateSell do
+    to_create { |instance| instance.project }
+    initialize_with do
+      offer_bu = FB.create(:offer_bu).offer
+      offer_bf = FB.create(:offer_bf).offer
+      _cross   = ContractCmd::Cross.new(offer_bu, :expand)
+      _result  = _cross.project
+      new(offer_bf.position, attributes || {})
+    end
+  end
 end
 
 module FBX
@@ -126,12 +150,11 @@ module FBX
   def offer_sf(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
     cnt = ContractCmd::Cross.new(obu, :expand).project.contract
-    esc = cnt.escrows.last
-    pos = esc.fixed_positions.first
-    OfferCmd::CreateSell(pos, FBX.opts_for(:osf, opts)).project
+    pos = cnt.escrows.last.fixed_positions.first
+    OfferCmd::CreateSell.new(pos, FBX.opts_for(:osf, opts)).project
   end
 
-  module_function :expand_obf, :expand_obu
+  module_function :expand_obf, :expand_obu, :offer_sf
 
   # ----- private -----
 
@@ -154,4 +177,3 @@ module FBX
     }
   end
 end
-

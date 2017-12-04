@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Expand', USE_VCR do
+RSpec.describe 'FbxExpand', USE_VCR do
 
   describe "expand_obf" do
     it "runs without params" do
@@ -29,5 +29,4 @@ RSpec.describe 'Expand', USE_VCR do
       expect(Position.count).to eq(2)
     end
   end
-
 end
