@@ -11,8 +11,8 @@ RSpec.describe Position, type: :model do
   let(:klas)    { described_class                              }
   subject       { klas.new(valid_params)                       }
 
-  let(:user)    { FG.create(:user).user                        }
-  let(:boff)    { FG.create(:offer_bu, user_id: user.id).offer  }
+  let(:user)    { FB.create(:user).user                        }
+  let(:boff)    { FB.create(:offer_bu, user_id: user.id).offer  }
   let(:pos1)    { klas.new(valid_params)                       }
 
   describe "Associations", USE_VCR do

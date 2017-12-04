@@ -3,28 +3,40 @@ require 'rails_helper'
 RSpec.describe 'OfferSF Factory', USE_VCR do
   it "runs without params", :focus do
     expect(Offer.count).to eq(0)
-    FG.create(:offer_sf)
+    FB.create(:offer_sf)
     expect(Offer.count).to eq(3)
   end
 
   it "generates the right class" do
-    obj = FG.create(:offer_sf).offer
+    obj = FB.create(:offer_sf).offer
     expect(obj).to be_a(Offer::Sell::Fixed)
   end
 
   it "generates a position" do
-    obj = FG.create(:offer_sf)
+    obj = FB.create(:offer_sf)
     expect(obj.offer).to_not be_nil
   end
 
-  it "generates an buy offer" do
-    obj = FG.create(:offer_sf).offer
+  it "generates a buy offer" do
+    obj = FB.create(:offer_sf).offer
     expect(obj.salable_position.offer).to_not be_nil
     expect(obj.salable_position.offer.status).to eq('crossed')
   end
 
+  it "generates a suite of elements" do
+    FB.create(:offer_sf)
+    expect(Position.count).to eq(2)
+    expect(Escrow.count).to eq(1)
+    expect(Offer.count).to eq(3)
+    expect(Contract.count).to eq(1)
+  end
+
+  it "lets someone specify the buy price" do
+
+  end
+
   it "has common ownership between the position and offer" do
-    obj = FG.create(:fixed_position)
+    obj = FB.create(:fixed_position)
     pusr = obj.user
     ousr = obj.offer.user
     expect(pusr).to eq(ousr)

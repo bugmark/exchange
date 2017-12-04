@@ -18,7 +18,7 @@ RSpec.describe OfferCmd::CloneBuy do
 
   def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
-  let(:user)   { FG.create(:user).user                                  }
+  let(:user)   { FB.create(:user).user                                  }
   let(:klas)   { described_class                                        }
   # noinspection RubyArgCount
   subject      { klas.new(offer_bf, valid_params)                       }
@@ -68,7 +68,7 @@ RSpec.describe OfferCmd::CloneBuy do
 
   describe "cloning a sell offer", USE_VCR do
     it "creates an invalid command" do
-      offer_sf = FG.create(:offer_sf).offer
+      offer_sf = FB.create(:offer_sf).offer
       klone = klas.new(offer_sf, {})
       expect(klone).to_not be_valid
     end

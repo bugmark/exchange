@@ -6,15 +6,15 @@ RSpec.describe User, type: :model do
   end
 
   def gen_unfixed(args = {})
-    FG.create(:offer_bu, {user_id: usr.id}.merge(args))
+    FB.create(:offer_bu, {user_id: usr.id}.merge(args))
   end
 
   def gen_fixed(args = {})
-    FG.create(:offer_bf, {user_id: usr.id}.merge(args))
+    FB.create(:offer_bf, {user_id: usr.id}.merge(args))
   end
 
-  let(:usr) { FG.create(:user, balance: 100.0).user         }
-  let(:ask) { FG.create(:offer_bf, user_id: user.id)       }
+  let(:usr) { FB.create(:user, balance: 100.0).user         }
+  let(:ask) { FB.create(:offer_bf, user_id: user.id)       }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 

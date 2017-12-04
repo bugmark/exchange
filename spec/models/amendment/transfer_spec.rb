@@ -28,11 +28,11 @@ RSpec.describe Amendment::Transfer, type: :model do
     })
   end
 
-  let(:user)   { FG.create(:user).user                        }
+  let(:user)   { FB.create(:user).user                        }
   let(:sapos)  { Position.create(position_params)             }
   let(:sepos)  { Position.create(position_params)             }
   let(:bpos)   { Position.create(position_params)             }
-  let(:boff)   { FG.create(:offer_bu, user_id: user.id).offer }
+  let(:boff)   { FB.create(:offer_bu, user_id: user.id).offer }
   let(:soff)   { Offer::Sell::Unfixed.create(soff_params)     }
   let(:tran)   { megatran                                     }
 

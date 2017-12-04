@@ -10,7 +10,7 @@ RSpec.describe Escrow, type: :model do
 
   def gen_escrow(opts = {}) klas.create(valid_params(opts)) end
 
-  let(:contract) { FG.create(:contract)       }
+  let(:contract) { FB.create(:contract)       }
   let(:klas)     { described_class            }
   subject        { klas.new(valid_params)     }
 

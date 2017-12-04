@@ -588,6 +588,8 @@ Next Actions:
 - [x] JJ Offer sorting
 - [x] JJ Contract sorting
 
+# Dec 04
+
 - [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
 - [ ] OfferSF Test: Finish it off
 

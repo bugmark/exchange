@@ -23,6 +23,10 @@ module ContractCmd
       @commit = Commit.new(bundle).generate
     end
 
+    def contract
+      commit&.contract
+    end
+
     private
 
     def cross_integrity

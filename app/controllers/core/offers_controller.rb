@@ -32,7 +32,6 @@ module Core
 
     def take
       offer   = Offer.find(params["id"])
-      binding.pry
       counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user)).project.offer
       cross   = ContractCmd::Cross.new(counter, offer.cross_operation).project
       redirect_to "/core/contracts/#{cross.commit.contract.id}"

@@ -2,7 +2,7 @@
 
 require "./config/environment"
 
-3.times { FG.create :user }
+3.times { FB.create :user }
 
-FG.create :user, email: "joe@bugmark.net"
-FG.create :user, email: "jane@bugmark.net"
+FB.create :user, email: "joe@bugmark.net"
+FB.create :user, email: "jane@bugmark.net"

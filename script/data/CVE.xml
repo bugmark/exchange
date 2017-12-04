@@ -104,8 +104,8 @@ attackers to execute arbitrary code via a crafted document, aka
 <CVE>CVE-2017-0003</CVE>
 	<References>
 	<Reference>
-		<URL>http://fortiguard.com/advisory/FG-VD-16-079</URL>
-		<Description>MISC:http://fortiguard.com/advisory/FG-VD-16-079</Description>
+		<URL>http://fortiguard.com/advisory/FB-VD-16-079</URL>
+		<Description>MISC:http://fortiguard.com/advisory/FB-VD-16-079</Description>
 	</Reference>
 	<Reference>
 		<URL>http://technet.microsoft.com/security/bulletin/MS17-002</URL>

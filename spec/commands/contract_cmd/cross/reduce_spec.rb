@@ -6,14 +6,14 @@ RSpec.describe ContractCmd::Cross::Reduce do
 
   # def build_sell
   #   attrs = offer_su.match_attrs
-  #   offer = FG.create(:offer_sf, price: 0.6).offer
+  #   offer = FB.create(:offer_sf, price: 0.6).offer
   #   offer.update_attributes(attrs)
   #   offer
   # end
 
-  let(:offer_su) { FG.create(:offer_su).offer                     }
-  let(:offer_sf) { FG.create(:offer_sf).offer                     }
-  let(:user)     { FG.create(:user).user                          }
+  let(:offer_su) { FB.create(:offer_su).offer                     }
+  let(:offer_sf) { FB.create(:offer_sf).offer                     }
+  let(:user)     { FB.create(:user).user                          }
   let(:klas)     { described_class                                }
   subject        { klas.new(offer_su, :reduce)                    }
 
@@ -93,31 +93,31 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   describe "crossing", USE_VCR do
-    let(:lcl_ask) { FG.create(:offer_bf).offer }
+    let(:lcl_ask) { FB.create(:offer_bf).offer }
 
     context "with single bid" do
       # it 'matches higher values' do
-      #   FG.create(:offer_bu)
+      #   FB.create(:offer_bu)
       #   klas.new(lcl_ask, :reduce).project
       #   expect(Contract.count).to eq(0)
       #   expect(Position.count).to eq(0)
       # end
 
       # it 'generates position ownership' do
-      #   FG.create(:offer_bu)
+      #   FB.create(:offer_bu)
       #   klas.new(lcl_ask, :reduce).project
       #   expect(Position.first.user_id).to_not be_nil
       #   expect(Position.last.user_id).to_not be_nil
       # end
 
     #   it 'matches equal values' do
-    #     FG.create(:offer_bu)
+    #     FB.create(:offer_bu)
     #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #   end
     #
     #   it 'fails to match lower values' do
-    #     FG.create(:offer_bu, price: 0.1, volume: 1)
+    #     FB.create(:offer_bu, price: 0.1, volume: 1)
     #     expect(Contract.count).to eq(0)
     #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(0)
@@ -126,22 +126,22 @@ RSpec.describe ContractCmd::Cross::Reduce do
 
     # context "with multiple bids" do
     #   it 'matches higher value' do
-    #     _bid1 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
-    #     _bid2 = FG.create(:offer_bu, price: 0.5, volume: 10).offer
+    #     _bid1 = FB.create(:offer_bu, price: 0.5, volume: 10).offer
+    #     _bid2 = FB.create(:offer_bu, price: 0.5, volume: 10).offer
     #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(0)
     #   end
     #
     #   it 'matches equal value' do
-    #     _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
     #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #   end
     #
     #   it 'fails to match lower value' do
-    #     _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
     #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #   end
@@ -149,9 +149,9 @@ RSpec.describe ContractCmd::Cross::Reduce do
 
     # context "with extra bids" do
     #   it 'does minimal matching' do
-    #     _bid1 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid2 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid3 = FG.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
+    #     _bid3 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
     #     klas.new(lcl_ask, :reduce).project
     #     expect(Contract.count).to eq(1)
     #     expect(Offer.assigned.count).to eq(0)

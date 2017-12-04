@@ -270,6 +270,9 @@ Discussion:
 - let's discuss demo use-cases - what do we want?
 - what should sparklines and candlesticks show for offers?
 - what should sparklines and candlesticks show for contracts? (escrow prices...)
+- I'm going to create a deployment plan
 
-
+Target Outcomes Dec 04:
+- [ ] demo script - per discussion
+- [ ] sparklines  - per discussion
 
