@@ -37,6 +37,17 @@ RSpec.describe 'FbxOfferSf', USE_VCR do
       ousr = obj.user
       pusr = obj.salable_position.user
       expect(pusr).to eq(ousr)
-    end    
+    end
+
+    it "has a default sale price" do
+      obj = FBX.offer_sf.offer
+      expect(obj.price).to eq(0.4)
+    end
+
+    it "can sets the sale price" do
+      opts = {osf: {price: 0.7}}
+      obj = FBX.offer_sf(opts)
+      expect(obj.price).to eq(0.7)
+    end
   end
 end

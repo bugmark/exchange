@@ -51,10 +51,6 @@ FactoryBot.define do
     stm_status "closed"
     poolable   false
     aon        false
-
-    factory :matured_bid do
-      maturation Time.now - 1.day
-    end
   end
 
   factory :offer_bf, class: OfferCmd::CreateBuy do
@@ -70,68 +66,6 @@ FactoryBot.define do
     stm_status "closed"
     poolable   false
     aon        false
-
-    factory :matured_ask do
-      maturation Time.now - 1.day
-    end
-  end
-
-  # ----- CONTRACTS AND ARTIFACTS -----
-
-  factory :contract do
-    status 'open'
-    type "Contract::GitHub"
-    maturation Time.now + 1.day
-
-    factory :matured_contract do
-      maturation Time.now - 1.day
-    end
-  end
-
-  factory :position do
-    contract { FB.create(:contract)  }
-    user     { FB.create(:user).user }
-    offer    { FB.create(:offer_bu, user: user, status: 'crossed').offer }
-    volume   { offer.volume }
-    price    { offer.price  }
-
-    factory :unfixed_position do
-      offer { FB.create(:offer_bu, user: user, status: 'crossed').offer }
-    end
-
-    factory :fixed_position do
-      offer { FB.create(:offer_bf, user: user, status: 'crossed').offer }
-    end
-  end
-
-  factory :escrow do
-    type      "Escrow::Expand"
-    contract  { FB.create(:contract)   }
-    amendment { FB.create(:amendment)  }
-  end
-
-  # ----- SELL OFFERS -----
-
-  factory :offer_su, class: OfferCmd::CreateSell do
-    to_create { |instance| instance.project }
-    initialize_with do
-      offer_bf = FB.create(:offer_bf).offer
-      offer_bu = FB.create(:offer_bu).offer
-      _cross   = ContractCmd::Cross.new(offer_bf, :expand)
-      _result  = _cross.project
-      new(offer_bu.position, attributes || {})
-    end
-  end
-
-  factory :offer_sf, class: OfferCmd::CreateSell do
-    to_create { |instance| instance.project }
-    initialize_with do
-      offer_bu = FB.create(:offer_bu).offer
-      offer_bf = FB.create(:offer_bf).offer
-      _cross   = ContractCmd::Cross.new(offer_bu, :expand)
-      _result  = _cross.project
-      new(offer_bf.position, attributes || {})
-    end
   end
 end
 
@@ -149,16 +83,16 @@ module FBX
 
   def offer_sf(opts = {})
     _obu, obf = FBX.create_buy_offers(opts)
-    cnt = ContractCmd::Cross.new(obf, :expand).project.contract
-    pos = cnt.escrows.last.fixed_positions.first
-    OfferCmd::CreateSell.new(pos, FBX.opts_for(:osf, opts)).project
+    cntr = ContractCmd::Cross.new(obf, :expand).project.contract
+    posn = cntr.escrows.last.fixed_positions.first
+    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osf, opts)).project
   end
 
   def offer_su(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
-    cnt = ContractCmd::Cross.new(obu, :expand).project.contract
-    pos = cnt.escrows.last.unfixed_positions.first
-    OfferCmd::CreateSell.new(pos, FBX.opts_for(:osu, opts)).project
+    cntr = ContractCmd::Cross.new(obu, :expand).project.contract
+    posn = cntr.escrows.last.unfixed_positions.first
+    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).project
   end
 
   module_function :expand_obf, :expand_obu, :offer_sf, :offer_su

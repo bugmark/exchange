@@ -4,18 +4,11 @@ RSpec.describe ContractCmd::Cross::Reduce do
 
   include_context 'Integration Environment'
 
-  # def build_sell
-  #   attrs = offer_su.match_attrs
-  #   offer = FB.create(:offer_sf, price: 0.6).offer
-  #   offer.update_attributes(attrs)
-  #   offer
-  # end
-
-  let(:offer_su) { FB.create(:offer_su).offer                     }
-  let(:offer_sf) { FB.create(:offer_sf).offer                     }
-  let(:user)     { FB.create(:user).user                          }
-  let(:klas)     { described_class                                }
-  subject        { klas.new(offer_su, :reduce)                    }
+  let(:offer_su) { FBX.offer_su.offer                     }
+  let(:offer_sf) { FBX.offer_sf.offer                     }
+  let(:user)     { FB.create(:user).user                  }
+  let(:klas)     { described_class                        }
+  subject        { klas.new(offer_su, :reduce)            }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :offer         }

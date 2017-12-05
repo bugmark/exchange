@@ -273,6 +273,24 @@ Discussion:
 - I'm going to create a deployment plan
 
 Target Outcomes Dec 04:
-- [ ] demo script - per discussion
+- [x] tweak demo script - per discussion
 - [ ] sparklines  - per discussion
 
+Tue Dec 05
+----------------------------------------------
+
+Discussion:
+- API language binding: looking good!
+- OfferSF and TransferCross and ReduceCross specs are now working
+- question: how to demo GH PR and GH issue close?
+- question: should we change 'stake' to 'deposit'?
+
+Planned Software Changes:
+- TimeTravel
+- User Inbox
+- Show OpenOffers on Issues
+
+Target Outcomes Dec 05:
+- [ ] Tweak demo script
+- [ ] Add TimeTravel
+- [ ] tweak sparklines

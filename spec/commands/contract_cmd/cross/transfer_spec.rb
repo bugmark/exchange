@@ -4,7 +4,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
 
   include_context 'Integration Environment'
 
-  let(:offer_su) { FB.create(:offer_su, price: 0.4).offer                   }
+  let(:offer_su) { FBX.offer_su(osu: {price: 0.4}).offer                    }
   let(:offer_bu) { FB.create(:offer_bu, user_id: usr1.id, price: 0.4).offer }
   let(:transfer) { klas.new(offer_su, :transfer)                            }
   let(:user) { FB.create(:user).user }
@@ -100,7 +100,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
   end
 
   describe "crossing", USE_VCR do
-    let(:lcl_osf) { FB.create(:offer_sf).offer }
+    let(:lcl_osf) { FBX.offer_sf.offer }
 
     context "with single bid" do
       it 'matches higher values' do

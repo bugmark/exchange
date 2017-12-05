@@ -590,17 +590,26 @@ Next Actions:
 
 # Dec 04
 
-- [ ] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
-- [ ] OfferSF Test: Finish it off
+- [x] OfferSF Test: Enable specification of buy-offer in offer_sf_spec
+- [x] OfferSF Test: Finish it off
+- [x] API test-generate ruby bindings with Swagger-CodeGen 
+- [x] JJ Update Demo Script
 
-- [ ] JJ Finish Demo Script
+# Dec 05
+
+- [ ] Add time-travel
+- [ ] Add user inbox
+- [ ] Show open-offers on issues
+- [ ] Generate 
 
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
 
-- [ ] JJ Profile Pages
-
 - [ ] Write a deployment plan
+
+- [ ] Eliminate need for grafana password
+
+- [ ] JJ Profile Pages
 
 - [ ] core: fix take link and add feature spec
 
@@ -616,6 +625,8 @@ Next Actions:
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
+
+- [ ] create a staging server
 
 # TBD
 

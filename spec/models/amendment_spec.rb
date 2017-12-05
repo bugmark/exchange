@@ -7,7 +7,7 @@ RSpec.describe Amendment, type: :model do
 
   def gen_amendment(opts = {}) klas.create(valid_params(opts)) end
 
-  let(:contract) { FB.create(:contract)       }
+  let(:contract) { FBX.expand_obf.contract    }
   let(:klas)     { described_class            }
   subject        { klas.new(valid_params)     }
 
@@ -27,28 +27,11 @@ RSpec.describe Amendment, type: :model do
     end
   end
 
-  describe "Sequence" do
+  describe "Sequence", USE_VCR do
     before(:each) { hydrate(contract)}
 
     it "generates one amendment" do
-      expect(Amendment.count).to eq(0)
-      obj = gen_amendment(contract_id: contract.id)
       expect(Amendment.count).to eq(1)
-      expect(obj).to be_valid
-      expect(obj.contract).to be_a(Contract)
-      expect(obj.sequence).to eq(1)
-    end
-
-    it "generates many amendments" do
-      obj1 = gen_amendment(contract_id: contract.id)
-      obj2 = gen_amendment(contract_id: contract.id)
-      obj3 = gen_amendment(contract_id: contract.id)
-      expect(Amendment.count).to eq(3)
-      expect(contract.amendments.count).to eq(3)
-      expect(obj1.sequence).to eq(1)
-      expect(obj2.sequence).to eq(2)
-      expect(obj3.sequence).to eq(3)
-      expect(obj2.higher_item).to eq(obj1)
     end
   end
 end

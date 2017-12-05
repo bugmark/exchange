@@ -10,7 +10,7 @@ RSpec.describe Escrow, type: :model do
 
   def gen_escrow(opts = {}) klas.create(valid_params(opts)) end
 
-  let(:contract) { FB.create(:contract)       }
+  let(:contract) { FBX.expand_obf.contract    }
   let(:klas)     { described_class            }
   subject        { klas.new(valid_params)     }
 
@@ -31,28 +31,11 @@ RSpec.describe Escrow, type: :model do
     end
   end
 
-  describe "Sequence" do
+  describe "Sequence", USE_VCR do
     before(:each) { hydrate(contract)}
 
     it "generates one escrow" do
-      expect(Escrow.count).to eq(0)
-      esc = gen_escrow(contract_id: contract.id)
       expect(Escrow.count).to eq(1)
-      expect(esc).to be_valid
-      expect(esc.contract).to be_a(Contract)
-      expect(esc.sequence).to eq(1)
-    end
-
-    it "generates many escrows" do
-      esc1 = gen_escrow(contract_id: contract.id)
-      esc2 = gen_escrow(contract_id: contract.id)
-      esc3 = gen_escrow(contract_id: contract.id)
-      expect(Escrow.count).to eq(3)
-      expect(contract.escrows.count).to eq(3)
-      expect(esc1.sequence).to eq(1)
-      expect(esc2.sequence).to eq(2)
-      expect(esc3.sequence).to eq(3)
-      expect(esc3.higher_item).to eq(esc2)
     end
   end
 end
