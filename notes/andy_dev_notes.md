@@ -597,10 +597,12 @@ Next Actions:
 
 # Dec 05
 
+- [ ] Tweak madlibs wording
+- [ ] Add a 'take' button to an offer view
+- [ ] Show list of open offers on an issue, grouped by maturation date
+- [ ] Show depth chart on offer page
 - [ ] Add time-travel
 - [ ] Add user inbox
-- [ ] Show open-offers on issues
-- [ ] Generate 
 
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
