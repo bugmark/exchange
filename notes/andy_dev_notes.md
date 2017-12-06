@@ -602,16 +602,16 @@ Next Actions:
 - [x] Add time-travel
 - [x] FEEDBACK: build feature specs to drive mad-libs interfaces
 - [x] add :offer_bu to create_buy_spec
+- [x] Pick up comments
+- [x] Add comments to all issues
 
-- [ ] Pick up comments
-- [ ] Add comments to all issues
+# Dec 06
+
 - [ ] Show list of open offers on an issue, grouped by maturation date
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
 - [ ] Create a demo presentation
 - [ ] Tune up demo script
-
-# Dec 06
 
 - [ ] Show depth chart on offer page
 

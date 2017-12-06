@@ -293,9 +293,13 @@ Planned Software Changes:
 Target Outcomes Dec 05:
 - [x] Tweak demo script
 - [x] Add TimeTravel
-- [ ] tweak sparklines
+- [ ] Tweak sparklines
 
 Wed Dec 06
 ----------------------------------------------
 - Grafana graphs are visible w/o password (http://bugmark.net:3030)
-- Please update issue comments, and also assign LABELS
+
+Target Outcomes Dec 06:
+- [ ] Add ability to close issues in demo
+- [ ] Add contract resolution and payout
+- [ ] Tweak sparklines
