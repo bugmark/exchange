@@ -13,7 +13,7 @@ small
       '
       = @bug.created_at.strftime("%m-%d, %Y, %H:%M")
     h4 Offers and contracts
-    table.table-sm[style='width: 100%'; valign: top;]
+    table.table-sm[style='width: 100%; valign: top;']
       tr
         td
           = docfix_issue_contracts(@bug)
@@ -58,38 +58,19 @@ small
 .row
   .col-md-12
     h4 Open Offers (#{@bug.offers.open.count})
+    - if @bug.offers.open.count > 0
+      table.table.table-condensed.table-striped.table-hover
+        tr
+          th ID
+          th Maturation date
+          th Side
+          th Volume
+          th Action
+        - @bug.offers.open.display_order.each do |ofr|
+          tr
+            td : a[href="/docfix/offers/#{ofr.id}"] #{ofr.id}
+            td = ofr.maturation.strftime("%b-%d")
+            td = ofr.side
+            td = ofr.volume
+            td = docfix_offer_take_btn(ofr)
 
-hr
-
-.row
-  .col-md-12
-    h4 Related Issues(4)
-    hr
-    table.table-sm.table-striped[style='width: 100%']
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] UNFIXED
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] FIXED
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] UNFIXED
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] PULL REQUEST
-.row
-  .col-md-12.text-center
-    p[style='margin-top: 10px;']
-      button.btn.btn-secondary.btn-outline FIND MORE RELATED ISSUES
-    p
-      i.fa.fa-question-circle
-      '  Why would I do this?

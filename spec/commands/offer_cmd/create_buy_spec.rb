@@ -111,6 +111,22 @@ RSpec.describe OfferCmd::CreateBuy do
     end
   end
 
+  describe "creation with a maturation" do
+    it "generates a valid object", :focus do
+      tst_time = Time.now
+      obj = klas.new(:offer_bu, valid_params(maturation: tst_time))
+      expect(obj).to be_valid
+      expect(obj.maturation.strftime("%H%M%S")).to eq(tst_time.strftime("%H%M%S"))
+    end
+
+    it "generates a valid object from a string", :focus do
+      tst_date = "17-10-04"
+      obj = klas.new(:offer_bu, valid_params(maturation: tst_date))
+      expect(obj).to be_valid
+      expect(obj.maturation.strftime("%y-%m-%d")).to eq(tst_date)
+    end
+  end
+
   describe "balances and reserves", USE_VCR do
     context "with poolable offers" do
       it "adjusts the user reserve for one offer" do
