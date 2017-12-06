@@ -11,6 +11,15 @@ class BotController < ApplicationController
   def home
   end
 
+  def time
+  end
+
+  def timeinc
+    BugmTime.increment_day_jump(8)
+    flash[:notice] = "System Days Offset: #{BugmTime.day_offset} days"
+    redirect_to "/bot/time"
+  end
+
   def new_login
   end
 

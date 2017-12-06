@@ -53,7 +53,7 @@ class Contract < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id type prototype_id mode status stm_status awarded_to))
+      select(%i(id type prototype_id mode status stm_status stm_bug_id stm_repo_id awarded_to))
     end
     alias_method :ss, :select_subset
   end
@@ -170,6 +170,11 @@ class Contract < ApplicationRecord
     dt_ftr("contract #{self.id}")
   end
   alias_method :dt, :dumptree
+
+  def dumpstats
+    puts "Escrows:   #{escrows.count}"
+    puts "Positions: #{positions.count}"
+  end
 
   private
 

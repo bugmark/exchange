@@ -599,30 +599,30 @@ Next Actions:
 
 - [x] Eliminate need for grafana password
 - [x] Tweak madlibs wording
+- [x] Add time-travel
+- [x] FEEDBACK: build feature specs to drive mad-libs interfaces
+- [x] add :offer_bu to create_buy_spec
 
-- [ ] Add time-travel
-
-- [ ] Add a 'take' button to an offer view
 - [ ] Show list of open offers on an issue, grouped by maturation date
-- [ ] Show depth chart on offer page
-- [ ] Add user inbox
-
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
+- [ ] Create a demo presentation
+- [ ] Tune up demo script
+
+# Dec 06
+
+- [ ] Show depth chart on offer page
+
+- [ ] Add user inbox
+- [ ] Add a 'take' button to an offer view
 
 - [ ] Write a deployment plan
 
-
 - [ ] JJ Profile Pages
 
-- [ ] core: fix take link and add feature spec
-
-- [ ] METRICS: add Georg command-data capture
-- [ ] METRICS: add Georg stats capture with cron process
+- [ ] core: fix take link 
 
 - [ ] FEEDBACK: reformat the registration page (add account wipe-out note)
-
-- [ ] FEEDBACK: build feature specs to drive mad-libs interfaces
 
 - [ ] FEEDBACK: add content for the sign-in pages
 - [ ] FEEDBACK: make a feature spec that follows the demo
@@ -630,32 +630,33 @@ Next Actions:
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
 
-- [ ] create a staging server
-
 # TBD
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
 
-- [ ] test (cross-reduce) user balance adjustments
-- [ ] test (cross-reduce) auto-suspend sale-offers
+- [ ] METRICS: add Georg command-data capture
+- [ ] METRICS: add Georg stats capture with cron process
 
+- [ ] test (cross-reduce)     user balance adjustments
+- [ ] test (cross-reduce)     auto-suspend sale-offers
 - [ ] test (contract-resolve) user balance adjustments
 
 - [ ] add ContractCmd::Create with tests
 - [ ] add ContractCmd::Clone with tests
 - [ ] add ContractCmd::Delete with tests
 
+- [ ] create a staging server
+
 - [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing
 
-- [ ] core: expose AON
-- [ ] core: expose poolable
+- [ ] core: expose AON in UI
+- [ ] core: expose poolable in UI
 
 - [ ] docfix: create take_bu, take_bf
 
-- [ ] add :offer_bu to create_buy_spec
 - [ ] docfix: add Jquery to dynamically update prices
 - [ ] docfix: cleanup offer pages
 

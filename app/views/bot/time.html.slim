@@ -3,40 +3,22 @@ table.table.table-sm
     td
       h2 Time Jump
     td[align='right']
-      a[href="/events"] Event Log
+      a[href="/bot/home"] Bot Home
   tr
-    td
-      b Actions:
-      ul
-        li: a[href='/bot/start'] Start the Trading Bot
-        li: a[href='/bot/stop'] Stop the Trading Bot
-        li: a[href='/bot/log_show'] Show the Bot Log
-        li: a[href='/bot/log_reset'] Reset the Bot Log
-    td[width='66%']
-      b Overview:
-      ul
-        li Generates one buy offer every 30 seconds
-        li Attempts to cross every open offer once per minute
-      b Buy Offers:
-      ul
-        li Only trades on the first three issues
-        li Randomly on fixed and unfixed side
-        li Users selected randomly from test<1|2|3>@bugmark.net
-        li Price selected randomly between 0.0 and 1.0
-        li Volume selected randomly between 2 and 10 units
+    td: b Current Time
+    td  = Time.now
   tr
-    td[colspan=2]
-      h2 Total Rebuild
+    td: b System Time
+    td  = BugmTime.now
   tr
+    td: b System Days Offset
+    td  = BugmTime.day_offset
+  tr
+    td: b Increment System Day Offset
     td
-      b Actions:
-      ul
-        li
-          span>[style='color: red;'] CAREFUL!
-          a>[href='/bot/build'] Delete all Data and Rebuild from Scratch
-        li
-          a[href='/bot/build_log'] Show the Rebuild Log
-    td
-      b Overview:
-      p Delete all data and rebuild from scratch
+      a[href="/bot/timeinc"] Move the system forward by eight days
+      p
+      | WARNING: the system time can only be moved forward, not back.<br/>
+        To reset the system days offset to zero, you must rebuild the system
+        from scratch.
 

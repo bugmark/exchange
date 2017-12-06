@@ -67,15 +67,19 @@ RSpec.describe ContractCmd::Cross::Reduce do
       expect(Contract.count).to eq(1)
     end
 
-    # it 'adjusts the user balance', :focus do
-    #   hydrate(offer_sf)
+    # it 'adjusts the user balance', :focus do #
+    #   hydrate(offer_sf, offer_su)
     #   binding.pry
+    #   u1 = offer_sf.user
+    #   u2 = offer_su.user
+    #   expect(u1.balance).to eq(996.0)
+    #   expect(u2.balance).to eq(994.0)
     #   subject.project
-    #   usr1.reload
-    #   usr2.reload
+    #   u1.reload
+    #   u2.reload
     #   binding.pry
-    #   expect(usr1.balance).to eq(91.0)
-    #   expect(usr2.balance).to eq(90.0)
+    #   expect(u1.balance).to eq(992.0)   # SHOULD BE 994 .
+    #   expect(u2.balance).to eq(988.0)   # SHOULD BE 996
     # end
   end
 

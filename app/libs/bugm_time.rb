@@ -4,11 +4,11 @@ class BugmTime < Time
 
   class << self
     def now
-      super + day_jump.days
+      super + day_offset.days
     end
 
     def increment_day_jump(number)
-      new_val = day_jump + number
+      new_val = day_offset + number
       File.open(DAY_JUMP_FILE, 'w') {|f| f.puts new_val}
     end
 
@@ -16,12 +16,9 @@ class BugmTime < Time
       system "rm -f #{DAY_JUMP_FILE}"
     end
 
-    private
-
-    def day_jump
+    def day_offset
       return 0 unless File.exist?(DAY_JUMP_FILE)
       File.read(DAY_JUMP_FILE).to_i
     end
   end
-
 end

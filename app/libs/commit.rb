@@ -141,7 +141,7 @@ class Commit
     ctx.offer_price   = 1.0 - ctx.counter_price
 
     # generate artifacts
-    expand_position(bundle.offer, ctx, ctx.offer_price)
+    expand_position(bundle.offer, ctx, ctx.offer_price)  # BUG HERE - NEED TO PAYOUT ...
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
 
     # update escrow value

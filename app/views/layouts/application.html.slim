@@ -35,6 +35,9 @@ html[lang="en-US"]
         div[style="text-align: center"]
           small
             | Powered by BugMark
+            - if BugmTime.day_offset != 0
+              '  |
+              b DemoTime +#{BugmTime.day_offset} days: #{BugmTime.now.strftime("%y-%m-%d %H:%M")}
             - if Rails.env.development?
               '  | #{raw debug_text}
             '  | See our #{link_to_unless_current("Experiments", "/info/experiments")}...
