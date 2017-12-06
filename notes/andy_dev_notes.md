@@ -607,7 +607,13 @@ Next Actions:
 
 # Dec 06
 
+- [ ] Add w/e times to BugmTime
+- [ ] Offer/create script - use w/e times randomly
+- [ ] Create offer w/maturation date - 1 day prior and 1 day following
+- [ ] Bot: use w/e times random
+
 - [ ] Show list of open offers on an issue, grouped by maturation date
+
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
 - [ ] Create a demo presentation

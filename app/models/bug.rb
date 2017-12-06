@@ -36,6 +36,10 @@ class Bug < ApplicationRecord
 
   # ----- INSTANCE METHODS -----
 
+  def offer_overlap_on(date)
+    offers.open.overlaps_date(date).order('value asc')
+  end
+
   def xtag
     "bug"
   end

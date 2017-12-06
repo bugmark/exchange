@@ -20,5 +20,10 @@ class BugmTime < Time
       return 0 unless File.exist?(DAY_JUMP_FILE)
       File.read(DAY_JUMP_FILE).to_i
     end
+
+    def future_week_ends(count = 4)
+      eow = now.end_of_week
+      (0..count-1).map {|idx| eow + idx.weeks}
+    end
   end
 end

@@ -10,6 +10,7 @@ puts "Loading Rails Environment..."
 STDOUT.flush
 require "./config/environment"
 
+WEEK_ENDS = BugmTime.future_week_ends
 ISSUE_IDS = Bug.all[0..3].pluck(:id)
 USER_IDS  = User.where("email ilike 'test%'").pluck(:id)
 count     = 0
@@ -33,7 +34,8 @@ def buy
     user_id: USER_IDS.sample     ,
     volume:  rand(8) + 2         ,
     price:   rand.round(2)       ,
-    stm_bug_id: ISSUE_IDS.sample
+    stm_bug_id: ISSUE_IDS.sample ,
+    maturation: WEEK_ENDS.sample
   }
   FB.create(typ, opts).project
 end

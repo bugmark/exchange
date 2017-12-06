@@ -1,3 +1,5 @@
+require 'ext/array'
+
 class Offer < ApplicationRecord
 
   include MatchUtils
@@ -86,6 +88,10 @@ class Offer < ApplicationRecord
       base = by_overlap_maturation_range(offer.maturation_range)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
+
+    def overlaps_date(date)
+      by_overlap_maturation(date)
+    end
   end
 
   def overlap_offers
@@ -124,9 +130,9 @@ class Offer < ApplicationRecord
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
 
-    def crosses()
-
-    end
+    # def crosses()
+    #
+    # end
   end
 
   def has_qualified_counteroffers?(cross_type)
@@ -162,11 +168,11 @@ class Offer < ApplicationRecord
 
   def maturation=(date)
     tdate = date.to_time
-    self.maturation_range = tdate-2.days..tdate
+    self.maturation_range = tdate-1.day..tdate+1.day
   end
 
   def maturation
-    self.maturation_range.end
+    [self.maturation_range.first, self.maturation_range.last].avg_time
   end
 
   # ----- predicates -----

@@ -1,7 +1,6 @@
 module DocfixOffersHelper
   def docfix_offer_madlib_dates
-    eow = BugmTime.now.end_of_week
-    all = [eow, eow + 1.week, eow + 2.weeks, eow + 3.weeks]
+    all = BugmTime.future_week_ends(4)
     lst = all.map.with_index do |date, idx|
       data = date.strftime("%y-%m-%d")
       labl = date.strftime("%b %e")
