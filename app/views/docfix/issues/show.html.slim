@@ -57,6 +57,12 @@ small
 
 .row
   .col-md-12
+    h4 Open Offers (#{@bug.offers.open.count})
+
+hr
+
+.row
+  .col-md-12
     h4 Related Issues(4)
     hr
     table.table-sm.table-striped[style='width: 100%']
@@ -87,30 +93,3 @@ small
     p
       i.fa.fa-question-circle
       '  Why would I do this?
-
-button.btn.btn-primary[data-toggle='modal' data-target='#buyModal' type='button']
-  Launch demo modal
-
-.modal#buyModal[tabindex="-1" role="dialog"]
-  .modal-dialog.modal-lg[role="document"]
-    .modal-content
-      .modal-header
-        .modal-title
-          h5 Match
-          | Offer #1 GitHub Issue #{@bug.stm_title} (Issue ##{@bug.id})
-        button.close[type='button' data-dismiss="modal" aria-label="Close"]
-          span[aria-hidden="true"] &times;
-      .modal-body.text-center
-        | I will invest [ ] tokens(=n units) that this issue $selectedside on
-        br
-        small Saturday Noon | Saturday end-of-show | Sunday Noon | Sunday End-Of-Show
-        br
-        | and will earn 1 token in the event this will happen.
-        p
-          small This would place the new marketprice at $TOKENS
-          br
-          small and the possibility of fix at 85% (unfixed) | 15% (fixed).
-
-      .modal-footer
-        button.btn.btn-primary[type='button'] MATCH OFFER
-        button.btn.btn-secondary[type='button' data-dismiss='modal']Close

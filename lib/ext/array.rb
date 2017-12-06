@@ -17,4 +17,8 @@ class Array
   def avg_time
     Time.at (self.map(&:to_i).sum / self.length).to_i
   end
+
+  def without_blanks
+    self.select {|el| !(el.nil? || el == "")}
+  end
 end

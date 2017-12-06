@@ -1,3 +1,5 @@
+require 'ext/array'
+
 module RepoCmd
   class GhSync < ApplicationCommand
 
@@ -55,9 +57,12 @@ module RepoCmd
     end
 
     def comments_for(el)
+      body = Octokit.issue(repo.name, el["number"])[:body]
       list = Octokit.issue_comments(repo.name, el["number"])
-      return {} if list == []
-      {comments: list.map {|el| el["body"]}.join(" | ")}
+      lmap = list.blank? ? nil : list.map {|el| el["body"]}.join(" | ")
+      base = [body, lmap].without_blanks.join(" | ")
+      return {} if base.blank? || base.empty?
+      {comments: base}
     end
   end
 end
