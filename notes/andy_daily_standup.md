@@ -298,3 +298,4 @@ Target Outcomes Dec 05:
 Wed Dec 06
 ----------------------------------------------
 - Grafana graphs are visible w/o password (http://bugmark.net:3030)
+- Please update issue comments, and also assign LABELS

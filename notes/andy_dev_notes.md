@@ -603,6 +603,8 @@ Next Actions:
 - [x] FEEDBACK: build feature specs to drive mad-libs interfaces
 - [x] add :offer_bu to create_buy_spec
 
+- [ ] Pick up comments
+- [ ] Add comments to all issues
 - [ ] Show list of open offers on an issue, grouped by maturation date
 - [ ] JJ Offer Sparkline
 - [ ] JJ Contract Sparkline
@@ -629,6 +631,9 @@ Next Actions:
 - [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
+
+- [ ] fix www.bugmark.net SSL cert
+- [ ] auto-renew SSL cert
 
 # TBD
 
