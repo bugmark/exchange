@@ -83,7 +83,7 @@ module Core
     def chart
       @contract_id = params["id"]
       @contract = Contract.find @contract_id
-      time = Time.now
+      time = BugmTime.now
       list = ["Date,Open,High,Low,Close,Volume"] + @contract.escrows.map do |escrow|
         time = time + 10.minutes
         [ time.strftime("%Y-%m-%dT%H:%M"),
@@ -108,7 +108,7 @@ module Core
       opts = {
         type: "Contract::#{params["type"]&.capitalize}",
         price: 0.10,
-        maturation: Time.now + 3.minutes,
+        maturation: BugmTime.now + 3.minutes,
         user_id: current_user.id
       }
       key = "stm_bug_id" if params["stm_bug_id"]

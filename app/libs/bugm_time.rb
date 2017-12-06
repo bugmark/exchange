@@ -1,0 +1,27 @@
+class BugmTime < Time
+
+  DAY_JUMP_FILE = "/tmp/bugm_day_jump"
+
+  class << self
+    def now
+      super + day_jump.days
+    end
+
+    def increment_day_jump(number)
+      new_val = day_jump + number
+      File.open(DAY_JUMP_FILE, 'w') {|f| f.puts new_val}
+    end
+
+    def clear_day_jump
+      system "rm -f #{DAY_JUMP_FILE}"
+    end
+
+    private
+
+    def day_jump
+      return 0 unless File.exist?(DAY_JUMP_FILE)
+      File.read(DAY_JUMP_FILE).to_i
+    end
+  end
+
+end

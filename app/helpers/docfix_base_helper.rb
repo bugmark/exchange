@@ -9,7 +9,7 @@ module DocfixBaseHelper
       user_id:     current_user.id          ,
       status:      "open"                   ,
       stm_status:  "closed"                 ,
-      maturation:  Time.now + 3.minutes     ,
+      maturation:  BugmTime.now + 3.minutes     ,
     }.merge(params).merge(alt_opts).without_blanks.stringify_keys
   end
 end

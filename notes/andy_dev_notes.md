@@ -598,12 +598,13 @@ Next Actions:
 # Dec 05
 
 - [x] Eliminate need for grafana password
+- [x] Tweak madlibs wording
 
-- [ ] Tweak madlibs wording
+- [ ] Add time-travel
+
 - [ ] Add a 'take' button to an offer view
 - [ ] Show list of open offers on an issue, grouped by maturation date
 - [ ] Show depth chart on offer page
-- [ ] Add time-travel
 - [ ] Add user inbox
 
 - [ ] JJ Offer Sparkline

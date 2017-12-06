@@ -36,7 +36,7 @@ module Core
         user_id:     current_user.id          ,
         status:      "open"                   ,
         stm_status:  "closed"                 ,
-        maturation: Time.now + 3.minutes      ,
+        maturation: BugmTime.now + 3.minutes      ,
       }
       key = "stm_bug_id" if params["stm_bug_id"]
       key = "stm_repo_id" if params["stm_repo_id"]

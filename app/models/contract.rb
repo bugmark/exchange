@@ -41,11 +41,11 @@ class Contract < ApplicationRecord
     end
 
     def matured
-      where("maturation < ?", Time.now)
+      where("maturation < ?", BugmTime.now)
     end
 
     def expired
-      where("maturation < ?", Time.now)
+      where("maturation < ?", BugmTime.now)
     end
 
     def unresolved
@@ -148,7 +148,7 @@ class Contract < ApplicationRecord
   end
 
   def matured?
-    self.maturation < Time.now
+    self.maturation < BugmTime.now
   end
 
   def unmatured?
@@ -175,7 +175,7 @@ class Contract < ApplicationRecord
 
   def default_values
     self.status       ||= 'open'
-    self.maturation   ||= Time.now + 1.week
+    self.maturation   ||= BugmTime.now + 1.week
   end
 end
 

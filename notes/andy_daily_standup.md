@@ -291,7 +291,7 @@ Planned Software Changes:
 - Show OpenOffers on Issues
 
 Target Outcomes Dec 05:
-- [ ] Tweak demo script
+- [x] Tweak demo script
 - [ ] Add TimeTravel
 - [ ] tweak sparklines
 

@@ -46,7 +46,7 @@ class Offer::Buy::Fixed < Offer::Buy
     self.status             ||= 'open'
     self.price              ||= 0.10
     self.volume             ||= 1
-    self.maturation_range   ||= Time.now+1.minute..Time.now+1.week
+    self.maturation_range   ||= BugmTime.now+1.minute..BugmTime.now+1.week
   end
 end
 

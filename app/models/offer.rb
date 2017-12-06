@@ -172,7 +172,7 @@ class Offer < ApplicationRecord
   # ----- predicates -----
 
   def is_matured?
-    self.maturation < Time.now
+    self.maturation < BugmTime.now
   end
 
   def is_unmatured?

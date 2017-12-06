@@ -45,7 +45,7 @@ module OfferCmd
     end
 
     def sell_offer_params
-      time_base = salable_position&.contract&.maturation || Time.now
+      time_base = salable_position&.contract&.maturation || BugmTime.now
       range     = time_base-1.week..time_base+1.week
       {
         status:  "open"                            ,

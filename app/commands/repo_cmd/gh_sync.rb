@@ -16,7 +16,7 @@ module RepoCmd
 
     def transact_before_project
       sync_bugs
-      repo.synced_at = Time.now
+      repo.synced_at = BugmTime.now
     end
 
     def self.from_event(event)
@@ -43,7 +43,7 @@ module RepoCmd
           stm_status:  el["state"]       ,
           stm_jfields: comments_for(el)  ,
           html_url:    el["html_url"]    ,
-          synced_at:   Time.now
+          synced_at:   BugmTime.now
         }
         bug = BugCmd::Sync.new(attrs)
         bug.project

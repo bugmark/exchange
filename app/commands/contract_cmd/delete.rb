@@ -14,13 +14,13 @@ module ContractCmd
     private
 
     def existing_contract
-      # if Time.now < contract.maturation
+      # if BugmTime.now < contract.maturation
       #   errors.add(:maturation, "contract has not matured")
       # end
     end
 
     def no_amendments
-      # if Time.now < contract.maturation
+      # if BugmTime.now < contract.maturation
       #   errors.add(:maturation, "contract has not matured")
       # end
     end

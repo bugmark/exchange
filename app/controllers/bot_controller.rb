@@ -50,7 +50,7 @@ class BotController < ApplicationController
   end
 
   def log_reset
-    system "echo 'RESET LOG at #{Time.now}' > #{BOT_LOG}"
+    system "echo 'RESET LOG at #{BugmTime.now}' > #{BOT_LOG}"
     flash[:notice] = "BOT LOG WAS RESET"
     redirect_to "/bot/log_show"
   end

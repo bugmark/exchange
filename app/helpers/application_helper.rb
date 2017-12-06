@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def timestamp
-    Time.now.strftime("%H:%M:%S")
+    BugmTime.now.strftime("%H:%M:%S")
   end
 
   def debug_lbl

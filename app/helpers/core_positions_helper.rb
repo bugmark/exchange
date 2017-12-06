@@ -15,7 +15,7 @@ module CorePositionsHelper
   # ----- actions -----
 
   def core_position_sell_link(position)
-    return nil if     Time.now > position.contract.maturation
+    return nil if     BugmTime.now > position.contract.maturation
     return nil unless current_user.present?
     return nil unless position.user.id == current_user.id
     raw "<a href='/core/sell_offers/new?position_id=#{position.id}'>sell</a>"

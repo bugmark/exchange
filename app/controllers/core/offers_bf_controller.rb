@@ -35,7 +35,7 @@ module Core
         volume:     10                        ,
         status:     'open'                    ,
         stm_status: "closed"                  ,
-        maturation: Time.now + 3.minutes      ,
+        maturation: BugmTime.now + 3.minutes      ,
         user_id: current_user.id
       }
       key = "stm_bug_id" if params["stm_bug_id"]

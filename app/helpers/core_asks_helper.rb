@@ -56,7 +56,7 @@ module CoreAsksHelper
   # -----
 
   def ask_mature_date(ask)
-    color = Time.now > ask.ask_maturation ? "red" : "green"
+    color = BugmTime.now > ask.ask_maturation ? "red" : "green"
     date = ask.ask_maturation_str
     raw "<span style='color: #{color};'>#{date}</span>"
   end

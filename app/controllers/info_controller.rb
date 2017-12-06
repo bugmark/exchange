@@ -39,7 +39,7 @@ class InfoController < ApplicationController
 
   def save_address(addr)
     addr_file = Rails.root.join("log", "mail_#{Rails.env}.txt").to_s
-    tstamp    = Time.now.strftime("%Y-%m-%d_%H:%M:%S")
+    tstamp    = BugmTime.now.strftime("%Y-%m-%d_%H:%M:%S")
     File.open(addr_file, 'a') do |f|
       f.puts "#{tstamp},#{addr}"
     end

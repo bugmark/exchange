@@ -41,7 +41,7 @@ class Offer::Buy::Unfixed < Offer::Buy
     self.type              ||= 'Bid::GitHub'
     self.stm_status        ||= 'closed'
     self.price             ||= 0.10
-    self.maturation_range  ||= Time.now+1.minute..Time.now+1.week
+    self.maturation_range  ||= BugmTime.now+1.minute..BugmTime.now+1.week
   end
 end
 

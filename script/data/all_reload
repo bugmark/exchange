@@ -4,6 +4,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
 
 pkill -f bot_buy
+rm -f /tmp/bugm_day_jump
 
 echo "----- BUGMARK TOTAL REBUILD ---------------------"
 echo "START `date`"

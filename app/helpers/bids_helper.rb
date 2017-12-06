@@ -46,7 +46,7 @@ module BidsHelper
   end
 
   def bid_mature_date(bid)
-    color = Time.now > bid.bid_maturation ? "red" : "green"
+    color = BugmTime.now > bid.bid_maturation ? "red" : "green"
     date = bid.bid_maturation_str
     raw "<span style='color: #{color};'>#{date}</span>"
   end

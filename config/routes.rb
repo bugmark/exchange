@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   # ----- BOT ROUTES -----
   get 'bot', to: redirect("/bot/home")
   get 'bot/home'
+  get 'bot/time'
   get 'bot/build'
   get 'bot/build_msg'
   get 'bot/build_log'
