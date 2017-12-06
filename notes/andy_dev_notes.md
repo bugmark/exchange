@@ -597,6 +597,8 @@ Next Actions:
 
 # Dec 05
 
+- [x] Eliminate need for grafana password
+
 - [ ] Tweak madlibs wording
 - [ ] Add a 'take' button to an offer view
 - [ ] Show list of open offers on an issue, grouped by maturation date
@@ -609,7 +611,6 @@ Next Actions:
 
 - [ ] Write a deployment plan
 
-- [ ] Eliminate need for grafana password
 
 - [ ] JJ Profile Pages
 
@@ -694,3 +695,7 @@ Next Actions:
 - [ ] core: Restful API
 - [ ] core: Restful API ruby bindings with rest-client
 - [ ] core: Restful API CLI and Ruby Gem
+
+- [ ] core: rewrite the exchange in elixir
+- [ ] core: add GraphQL API
+- [ ] core: wrote standalone UI in Sinatra

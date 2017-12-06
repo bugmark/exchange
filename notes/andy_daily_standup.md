@@ -294,3 +294,8 @@ Target Outcomes Dec 05:
 - [ ] Tweak demo script
 - [ ] Add TimeTravel
 - [ ] tweak sparklines
+
+Wed Dec 06
+----------------------------------------------
+- Grafana graphs are visible w/o password (http://bugmark.net:3030)
+- 

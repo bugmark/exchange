@@ -183,6 +183,10 @@ class Offer < ApplicationRecord
     self.status == 'open'
   end
 
+  def stake
+    (self.volume * self.price).to_i
+  end
+
   def is_not_open?
     ! is_open?
   end

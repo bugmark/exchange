@@ -17,24 +17,18 @@
       input#hSta[type='hidden' name="offer_cmd_create_buy[stm_status]" value="#{lcl_offer.stm_status}"]
       input#hMat[type='hidden' name="offer_cmd_create_buy[maturation]" value="2012-12-02"]
       .form-inline.madline
-        ' I will stake
-        input.form-control.token-field#inStake[type='text' size='2' name='offer_cmd_create_buy[stake]' value=1]
-        ' token<span id='sLbl'></span> that issue is <span id='oSide'>#{lcl_offer.offer.side}</span> on
+        ' I will deposit
+        input.form-control.token-field#inDep[type='text' size='2' name='offer_cmd_create_buy[stake]' value='#{lcl_offer.stake}']
+        ' token<span id='sLbl'></span> towards issue ##{@bug.id} being <span id='oSide'>#{lcl_offer.offer.side}</span> on
       .btn-group[role='group']
         = docfix_offer_madlib_dates
       .form-inline.madline
-        ' and will earn
-        input.form-control.token-field#inVol[type='text' size='2' name='offer_cmd_create_buy[volume]' value=10]
-        '  token<span class="vLbl"></span> in the event this will happen
-      p this would place the marketprice of <span class='dVol'></span> & the possibility of
-        fixed at <span class="dU"></span> (unfixed) and <span class="dF"></span> (fixed).
+        ' and will require a total of
+        input.form-control.token-field#inVol[type='text' size='2' name='offer_cmd_create_buy[volume]' value='#{lcl_offer.volume}']
+        '  token<span class="vLbl"></span> if this happens
+      p this would set the unfixed marketprice at <span class='dU'></span> & return a profit of <span class='dPro'></span> token<span id='pLbl'></span>
       button.btn.btn-primary#sBtn[type='submit'] Create Offer
       p[style="margin-top: 10px;"]
         span#errMsg[style='color: red;']
-hr
-.row.text-center
-  .col-md-12.text-center
-    small
-      b alternate wording 1
-      br
-      p this would set the fixed-side marketprice at <span class='dF'></span>
+
+
