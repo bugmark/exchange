@@ -11,6 +11,8 @@ module Docfix
     end
 
     def show
+      @fv  = "[0,0,0,0,2,4,15,16,19]"
+      @uv  = "[19,15,16,4,0,0,0,0,0]"
       @bug = Bug.find(params["id"])
     end
 

@@ -38,6 +38,12 @@ module DocfixIssuesHelper
     raw "<h4>#{lbl}</h4>"
   end
 
+  # -----
+
+  # def docfix_issue_obf_vol(bug)
+  #   offers = bug.offers.buy.
+  # end
+
   # ----- issue buttons -----
 
   def docfix_issue_first_btn(bug)

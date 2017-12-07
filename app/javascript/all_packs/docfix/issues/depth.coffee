@@ -1,23 +1,25 @@
 Chart = require "chart.js"
 
 $(document).ready ->
-  ctx = $('#xChart')
+  ctx = $('#depthChart')
   myChart = new Chart(ctx,
     type: 'bar'
     data:
-      labels: ["10","20","30","40","50","","70","","90",""]
+      labels: ["10","20","30","40","50","60","70","80","90"]
       datasets: [{
-        backgroundColor: "blue"
+        backgroundColor: "red"
         label:           "Unfixed"
-        data: [0,0,0,0,0,2,3,5,12]
+        data: window.Volumes.unfixed
       },
       {
-        backgroundColor: "red"
+        backgroundColor: "blue"
         label:           "Fixed"
-        data: [9,3,9,3,2,0,0,0,0]
+        data: window.Volumes.fixed
       }]
     options:
       responsive: false
+      legend: false
+      tooltips: false
       scales:
         xAxes: [{stacked: true}]
         yAxes: [{stacked: true}]

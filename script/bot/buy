@@ -59,7 +59,7 @@ while true do
   time  = Time.now.strftime("%H:%M:%S")
   puts "Cycle: #{pa count} | #{time} | #{pa Offer.open.count} open offers | #{pa Contract.count} contracts | #{pa Escrow.count} escrows"
   STDOUT.flush
-  sleep 20
+  sleep 5
   buy
   cross if count % 2 == 0
 end

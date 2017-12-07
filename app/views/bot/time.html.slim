@@ -11,14 +11,17 @@ table.table.table-sm
     td: b System Time
     td  = BugmTime.now
   tr
+    td: b # Open Issues
+    td  = Bug.all.open.count
+  tr
     td: b System Days Offset
     td  = BugmTime.day_offset
   tr
     td: b Increment System Day Offset
     td
-      a[href="/bot/timeinc"] Move the system forward by eight days
+      a[href="/bot/timeinc"] Move the system forward by eight days, and close the top three issues
       p
-      | WARNING: the system time can only be moved forward, not back.<br/>
+      | WARNING: the system time can only be moved forward, not back!<br/>
         To reset the system days offset to zero, you must rebuild the system
         from scratch.
 

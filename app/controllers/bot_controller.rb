@@ -15,6 +15,9 @@ class BotController < ApplicationController
   end
 
   def timeinc
+    Bug.open[0..2].each do |bug|
+      bug.update_attribute :stm_status, 'closed'
+    end
     BugmTime.increment_day_jump(8)
     flash[:notice] = "System Days Offset: #{BugmTime.day_offset} days"
     redirect_to "/bot/time"

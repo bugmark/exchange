@@ -612,13 +612,17 @@ Next Actions:
 - [x] Create offer w/maturation date - 1 day prior and 1 day following
 - [x] Bot: use w/e times random
 - [x] Show list of open offers on an issue, grouped by maturation date
+- [x] Add Chart.js
+- [x] JJ Contract Sparkline
 
-- [ ] JJ Offer Sparkline
-- [ ] JJ Contract Sparkline
+- [ ] Create histogram for Offer Depth chart
+
+- [ ] docfix: do cross immediately upon offer creation
+
+- [ ] docfix: add escrows to contract
+
 - [ ] Create a demo presentation
 - [ ] Tune up demo script
-
-- [ ] Show depth chart on offer page
 
 - [ ] Add user inbox
 - [ ] Add a 'take' button to an offer view
