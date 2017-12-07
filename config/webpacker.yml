@@ -26,7 +26,7 @@ development:
 
   dev_server:
     host: 0.0.0.0
-    port: 9090
+    port: 9092
     https: false
 
 test:
