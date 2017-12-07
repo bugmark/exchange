@@ -300,6 +300,18 @@ Wed Dec 06
 - Grafana graphs are visible w/o password (http://bugmark.net:3030)
 
 Target Outcomes Dec 06:
-- [ ] Add ability to close issues in demo
+- [x] Add depth chart
+- [x] Add sparklines
+- [x] Add ability to close issues in demo
 - [ ] Add contract resolution and payout
-- [ ] Tweak sparklines
+
+Thu Dec 07
+----------------------------------------------
+- bot speed increased from 20 seconds to 5 seconds
+- Timewarp @ /bot/time 1) jumps date 2) closes issues 3) resoves contracts (tbd)
+
+Target Outcomes Dec 07:
+- [ ] Generate depth-chart data
+- [ ] Finish demo script
+- [ ] Add contract resolution and payout
+

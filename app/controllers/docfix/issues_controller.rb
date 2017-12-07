@@ -11,18 +11,26 @@ module Docfix
     end
 
     def show
+      @fv  = "[0,0,0,0,2,4,15,16,19]"
+      @uv  = "[19,15,16,4,0,0,0,0,0]"
       @bug = Bug.find(params["id"])
     end
 
     def offer_bf
+      stake = params[:stake]      || 20
+      vol   = params[:volume]     || 100
+      mdate = params[:maturation] || BugmTime.future_week_ends.first.strftime("%y-%m-%d")
       @bug      = Bug.find(params["id"])
-      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, stake: 20, volume: 100})
+      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, stake: stake, volume: vol, maturation: mdate})
       @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, opts)
     end
 
     def offer_bu
+      stake = params[:stake]  || 80
+      vol   = params[:volume] || 100
+      mdate = params[:maturation] || BugmTime.future_week_ends.first.strftime("%y-%m-%d")
       @bug      = Bug.find(params["id"])
-      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, stake: 80, volume: 100})
+      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, stake: stake, volume: vol, maturation: mdate})
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, opts)
     end
 

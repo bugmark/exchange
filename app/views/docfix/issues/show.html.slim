@@ -1,5 +1,10 @@
 = breadcrumb [%w(BugMark /docfix/home), %w(Issues /docfix/issues), "Issue ##{@bug.id}"]
 
+- content_for :page_js do
+  javascript:
+    window.Volumes = {fixed: #{@fv}, unfixed: #{@uv}};
+  = javascript_pack_tag "docfix/issues/depth"
+
 small
  a href="/docfix/issues" return to overview
 
@@ -13,12 +18,12 @@ small
       '
       = @bug.created_at.strftime("%m-%d, %Y, %H:%M")
     h4 Offers and contracts
-    table.table-sm[style='width: 100%'; valign: top;]
+    table.table-sm[style='width: 100%; valign: top;']
       tr
         td
           = docfix_issue_contracts(@bug)
           = docfix_issue_offers(@bug)
-        td
+        td[align='center']
           = docfix_issue_action_btns(@bug)
       tr
         td colspan=2
@@ -28,21 +33,13 @@ small
           small = docfix_issue_comments(@bug)
         td
           p
-            b Organization
+            b Project / Repository
             br
-            i href='#' Mountain View Smart Contracts
-          p
-            b Project/Repository
-            br
-            i href='#' BugMark
+            a[href='/docfix/projects/#{@bug.stm_repo_id}'] = @bug.repo.name
           p
             b Issue labels
             br
             = @bug.stm_labels || "NA"
-          p
-            b Project languages
-            br
-            = @bug.repo.languages
           p
             b VIEW ISSUE ON REPOSITORY
             br
@@ -53,43 +50,26 @@ small
     p
       small
         b> Project languages
-        | development JavaScript
+        = @bug.repo.languages
+    p
+      canvas#depthChart
 
 .row
   .col-md-12
     h4 Open Offers (#{@bug.offers.open.count})
+    - if @bug.offers.open.count > 0
+      table.table.table-condensed.table-striped.table-hover
+        tr
+          th ID
+          th Maturation date
+          th Side
+          th Volume
+          th Action
+        - @bug.offers.open.display_order.each do |ofr|
+          tr
+            td : a[href="/docfix/offers/#{ofr.id}"] #{ofr.id}
+            td = ofr.maturation.strftime("%b-%d")
+            td = ofr.side
+            td = ofr.volume
+            td = docfix_offer_take_btn(ofr)
 
-hr
-
-.row
-  .col-md-12
-    h4 Related Issues(4)
-    hr
-    table.table-sm.table-striped[style='width: 100%']
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] UNFIXED
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] FIXED
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] UNFIXED
-      tr
-        td
-          a href='#' GitHub Issue-Level Comment Badges
-        td
-          b[style='color: grey;'] PULL REQUEST
-.row
-  .col-md-12.text-center
-    p[style='margin-top: 10px;']
-      button.btn.btn-secondary.btn-outline FIND MORE RELATED ISSUES
-    p
-      i.fa.fa-question-circle
-      '  Why would I do this?

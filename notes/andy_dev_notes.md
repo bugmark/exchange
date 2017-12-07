@@ -607,19 +607,25 @@ Next Actions:
 
 # Dec 06
 
-- [ ] Add w/e times to BugmTime
-- [ ] Offer/create script - use w/e times randomly
-- [ ] Create offer w/maturation date - 1 day prior and 1 day following
-- [ ] Bot: use w/e times random
+- [x] Add w/e times to BugmTime
+- [x] Offer/create script - use w/e times randomly
+- [x] Create offer w/maturation date - 1 day prior and 1 day following
+- [x] Bot: use w/e times random
+- [x] Show list of open offers on an issue, grouped by maturation date
+- [x] Add Chart.js
+- [x] JJ Contract Sparkline
+- [x] fix www.bugmark.net SSL cert
 
-- [ ] Show list of open offers on an issue, grouped by maturation date
+# Dec 07
 
-- [ ] JJ Offer Sparkline
-- [ ] JJ Contract Sparkline
+- [ ] Create histogram for Offer Depth chart
+
+- [ ] docfix: do cross immediately upon offer creation
+
+- [ ] docfix: add escrows to contract
+
 - [ ] Create a demo presentation
 - [ ] Tune up demo script
-
-- [ ] Show depth chart on offer page
 
 - [ ] Add user inbox
 - [ ] Add a 'take' button to an offer view
@@ -638,7 +644,6 @@ Next Actions:
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
 
-- [ ] fix www.bugmark.net SSL cert
 - [ ] auto-renew SSL cert
 
 # TBD

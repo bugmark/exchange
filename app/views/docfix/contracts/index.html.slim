@@ -1,3 +1,8 @@
+- content_for :page_js do
+  coffee:
+    $(document).ready ->
+      $('.spark').sparkline('html', {type: 'bar'})
+
 css:
   .zh {
     font-weight: bold;
@@ -62,6 +67,8 @@ table.table.table-sm.tdog
       td
         .zh Contract volume
         | #{contract.volsum.to_i} tokens
+        p[style='margin-top: 10px;']
+          span.spark = contract.escrows.map {|x| x.value }.join(",")
       td
         .zh Price per unit
         = docfix_contract_price(contract)

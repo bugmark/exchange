@@ -29,6 +29,7 @@ class Escrow < ApplicationRecord
   def total_value
     fixed_value + unfixed_value
   end
+  alias_method :value, :total_value
 
   def fixed_values
     fixed_positions.map(&:value).sum

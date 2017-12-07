@@ -1,4 +1,5 @@
 require 'ext/array'
+require 'ext/string'
 
 class Offer < ApplicationRecord
 
@@ -67,6 +68,10 @@ class Offer < ApplicationRecord
     def is_sell()    where('type like ?', "Offer::Sell%") end
     def is_unfixed() where('type like ?', "%Unfixed")     end
     def is_fixed()   where('type like ?', "%Fixed")       end
+
+    def display_order
+      order('maturation_range asc').order('type asc').order('volume asc')
+    end
 
     def select_subset
       select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status stm_status))
@@ -176,6 +181,12 @@ class Offer < ApplicationRecord
   end
 
   # ----- predicates -----
+
+  def opposite_side
+    return "unfixed" if self.side == "fixed"
+    return "fixed"   if self.side == "unfixed"
+    ""
+  end
 
   def is_matured?
     self.maturation < BugmTime.now

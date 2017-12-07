@@ -4,7 +4,7 @@
 - content_for :page_js do
   coffee:
     $(document).ready ->
-      $('.spark').sparkline()
+      $('.spark').sparkline('html', {type: 'bar'})
 
 h4 BugMark Experiments
 
@@ -36,6 +36,6 @@ table.table.table-striped
     td: a[href="http://bugmark.net:3030" target="_blank"] Visualization
     td
       ' Grafana-based experiments with charting and visualization
-      span.spark 1,4,4,5,6,7,3,4,5,6,5,4,6,7,8,6,5,4,9,2,3
+      span.spark 1,4,5,2,3,4,6,4,2,4,5,6,4,2,1,3,5,6
 
 

@@ -1,3 +1,9 @@
+- content_for :page_js do
+  coffee:
+    $(document).ready ->
+      $('.spark').sparkline('html', {type: 'bar'})
+
+
 css:
   .holder {
     margin-top: 50px;
@@ -32,5 +38,6 @@ small
     b TRADING OVERVIEW
     p
     = docfix_contract_price(@contract)
-    .holder: b SPARKLINE HERE
+    .holder
+      span.spark = @contract.escrows.map {|x| x.value }.join(",")
     .holder: b CANDLESTICK HERE

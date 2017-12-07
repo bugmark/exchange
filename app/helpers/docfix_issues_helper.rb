@@ -30,13 +30,19 @@ module DocfixIssuesHelper
   end
 
   def docfix_issue_offers(bug)
-    lbl = case (count = bug.offers.count)
-      when 0 then "No Offers"
-      when 1 then "One Offer"
-      else "#{count} Offers"
+    lbl = case (count = bug.offers.open.count)
+      when 0 then "No Open Offers"
+      when 1 then "One Open Offer"
+      else "#{count} Open Offers"
     end
     raw "<h4>#{lbl}</h4>"
   end
+
+  # -----
+
+  # def docfix_issue_obf_vol(bug)
+  #   offers = bug.offers.buy.
+  # end
 
   # ----- issue buttons -----
 

@@ -23,11 +23,9 @@ validate = (stake, volume)->
 validateBtn = (in_dep, in_vol)->
   [valid, msg] = validate(in_dep, in_vol)
   if valid
-    console.log "VALID"
     $('#errMsg').html("")
     $('#sBtn').removeClass("disabled").removeClass("strikeout")
   else
-    console.log "NOT VALID"
     $('#errMsg').html(msg)
     $('#sBtn').addClass("disabled").addClass("strikeout")
 

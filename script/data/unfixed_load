@@ -2,55 +2,55 @@
 
 require "./config/environment"
 
-week_ends = Bugm.future_week_ends
+week_ends = BugmTime.future_week_ends
 
 opts = [
   {
     stm_bug_id:  Bug.second.id      ,
     price:       0.90               ,
-    volume:      5                  ,
+    volume:      45                 ,
     user_id:     User.second.id     ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.third.id       ,
     price:       0.50               ,
-    volume:      1                  ,
+    volume:      30                 ,
     user_id:     User.first.id      ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.first.id       ,
     price:       0.75               ,
-    volume:      10                 ,
+    volume:      40                 ,
     user_id:     User.third.id      ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.third.id       ,
     price:       0.20               ,
-    volume:      2                  ,
+    volume:      35                 ,
     user_id:     User.first.id      ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.second.id      ,
     price:       0.50               ,
-    volume:      2                  ,
+    volume:      25                 ,
     user_id:     User.third.id      ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.second.id      ,
     price:       0.10               ,
-    volume:      10                 ,
+    volume:      15                 ,
     user_id:     User.first.id      ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.second.id      ,
     price:       0.10               ,
-    volume:      5                  ,
+    volume:      40                 ,
     user_id:     User.third.id      ,
     maturation:  week_ends.first
   }

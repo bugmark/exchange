@@ -6,7 +6,6 @@ setClick = (id)->
   $("#hMat").val(data)
 
 $(document).ready ->
-  setClick("btn1")
   $('.bc').click (ev)->
     ev.preventDefault()
     tgtId = ev.target.id
