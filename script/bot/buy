@@ -13,7 +13,8 @@ require "./config/environment"
 WEEK_ENDS = BugmTime.future_week_ends
 ISSUE_IDS = Bug.all[0..3].pluck(:id)
 USER_IDS  = User.where("email ilike 'test%'").pluck(:id)
-PRICES    = (50..100).step(5).to_a
+VOLUMES   = (50..100).step(5).to_a
+PRICES    = (5..95).step(5).to_a.map {|x| x / 100.0}
 count     = 0
 
 # for C-c
@@ -33,8 +34,8 @@ def buy
   typ  = %i(offer_bf offer_bu).sample
   opts = {
     user_id: USER_IDS.sample     ,
-    volume:  PRICES.sample       ,
-    price:   rand.round(2)       ,
+    volume:  VOLUMES.sample      ,
+    price:   PRICES.sample       ,
     stm_bug_id: ISSUE_IDS.sample ,
     maturation: WEEK_ENDS.sample
   }

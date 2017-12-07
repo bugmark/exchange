@@ -308,6 +308,8 @@ Target Outcomes Dec 06:
 Thu Dec 07
 ----------------------------------------------
 - bot speed increased from 20 seconds to 5 seconds
+- bot offer maturity dates distributed across the four maturation periods
+- bot offer volumes distributed between 50 and 100
 - Timewarp @ /bot/time 1) jumps date 2) closes issues 3) resoves contracts (tbd)
 
 Target Outcomes Dec 07:
