@@ -13,22 +13,26 @@ class Hash
   end
 end
 
-class RangedHash
-  def initialize(hash)
-    @ranges = hash
+class BucketHash
+  attr_reader :hash
+  def initialize(list)
+    keys = list.to_a.map {|x| x.round(2)}.sort.uniq
+    @hash = keys.reduce({}) {|acc, val| acc[val] = 0; acc }
   end
 
-  def [](key)
-
+  def increment(key, val)
+    hash[bucket_for(key)] += val
+    self
   end
 
-  class << self
-
+  def values
+    hash.map {|k, v| v}
   end
 
-  def increment(key, volume)
-    @ranges.each do |range, _val|
-      @ranges[range] += volume if range.include?(key)
-    end
+  private
+
+  def bucket_for(ele)
+    keys = hash.keys.sort
+    keys.find {|x| x > ele} || keys.last
   end
 end

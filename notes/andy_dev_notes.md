@@ -620,7 +620,7 @@ Next Actions:
 
 - [ ] Create histogram for Offer Depth chart
 
-- [ ] docfix: do cross immediately upon offer creation
+- [ ] docfix: do cross immediately upon match offer creation
 
 - [ ] docfix: add escrows to contract
 
