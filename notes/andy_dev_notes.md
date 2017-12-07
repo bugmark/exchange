@@ -614,6 +614,9 @@ Next Actions:
 - [x] Show list of open offers on an issue, grouped by maturation date
 - [x] Add Chart.js
 - [x] JJ Contract Sparkline
+- [x] fix www.bugmark.net SSL cert
+
+# Dec 07
 
 - [ ] Create histogram for Offer Depth chart
 
@@ -641,7 +644,6 @@ Next Actions:
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
 
-- [ ] fix www.bugmark.net SSL cert
 - [ ] auto-renew SSL cert
 
 # TBD

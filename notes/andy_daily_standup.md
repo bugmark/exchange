@@ -308,7 +308,10 @@ Target Outcomes Dec 06:
 Thu Dec 07
 ----------------------------------------------
 - bot speed increased from 20 seconds to 5 seconds
-- Timewarp @ /bot/time 1) jumps date 2) closes issues 3) resoves contracts
+- Timewarp @ /bot/time 1) jumps date 2) closes issues 3) resoves contracts (tbd)
 
 Target Outcomes Dec 07:
+- [ ] Generate depth-chart data
+- [ ] Finish demo script
 - [ ] Add contract resolution and payout
+
