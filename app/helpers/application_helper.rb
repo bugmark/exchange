@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def refreshable?
-    %w(bot#log_show bot#build_log).include?(debug_lbl)
+    %w(bot#log_show bot#build_log bot#build_msg).include?(debug_lbl)
   end
 
   def refresh_tag

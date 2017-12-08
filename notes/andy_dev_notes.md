@@ -625,17 +625,17 @@ Next Actions:
 - [x] docfix: cleanup offer pages
 - [x] OfferBuy: rename 'stake' to 'deposit'
 - [x] OfferBuy: add a 'profit' options
-
-- [ ] add an API action for updating EtherScan url
+- [x] add an API action for updating EtherScan url
 
 # Dec 08
 
+- [ ] Tune up demo script
+
 - [ ] docfix: do cross immediately upon match offer creation
 
-- [ ] docfix: add escrows to contract
+- [ ] Add GitHub PR / Issue Close screenshots
 
-- [ ] Add BugFix demo
-- [ ] Tune up demo script
+- [ ] docfix: add escrows to contract
 
 - [ ] Add user inbox
 - [ ] Add a 'take' button to an offer view

@@ -1,15 +1,24 @@
+css:
+  .logstyle {
+    padding: 20px;
+    border:  1px solid black;
+    font:    12px courier, sans-serif;
+  }
+
 h1 BugMark Total Rebuild
 hr
 p The BugMark database is rebuilding now.
-p All existing users, trades, contracts etc. have been destroyed.
-p Everything is being rebuilt from scratch.
+  All data is being rebuilt from scratch.
+
 p The system will be DOWN until the rebuild process completes.
-p This will take a couple minutes.
+  This will take a couple minutes.
 p
-  ' Retry the system at #{(BugmTime.now + 2.minutes).strftime("%H:%M:%S")} (
-  a>[href="/" target="_blank"] Home Page
-  ' |
-  a>[href="/bot/build_log" target="_blank"] Build Log
-  ' )
+  small
+    a>[href='/bot/home'] Bot Home
+    - if refreshable?
+      ' | page auto-refresh every 15 seconds...
+
+p.logstyle
+  = raw @logtext
 
 p Problems?  Contact Andy 650-823-0836 / andy@r210.com

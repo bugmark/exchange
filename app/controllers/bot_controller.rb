@@ -2,7 +2,7 @@ class BotController < ApplicationController
 
   layout 'bot'
 
-  before_action :authenticate_user!, except: [:build_log, :log_show]
+  before_action :authenticate_user!, except: [:build_msg, :build_log, :log_show]
   
   BOT_LOG   = "/tmp/bot_log.txt"
   BUILD_LOG = "/tmp/build_log.txt"
@@ -37,6 +37,7 @@ class BotController < ApplicationController
   end
 
   def build_msg
+    @logtext = read_file(BUILD_LOG)
   end
   
   def build_log

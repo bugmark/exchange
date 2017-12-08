@@ -5,7 +5,7 @@ chartFor = (df, du, id)->
   myChart = new Chart(ctx,
     type: 'bar'
     data:
-      labels: ["10","20","30","40","50","60","70","80","90"]
+      labels: ["0.10","0.20","0.30","0.40","0.50","0.60","0.70","0.80","0.90"]
       datasets: [{
         backgroundColor: "red"
         label:           "Unfixed"

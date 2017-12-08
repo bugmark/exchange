@@ -326,8 +326,12 @@ Thu Dec 08
 
 Discussion:
 - added API call to post EtherScan url
+- added Link to EtherScan page on /events
 - updated wording on create-offer page
 - changed login redirect to /docfix
 
 Target Outcomes Dec 08:
 - [ ] Add contract resolution and payout
+- [ ] Script cleanup
+- [ ] UI cleanup
+- [ ] Working blockchain integration (rich)

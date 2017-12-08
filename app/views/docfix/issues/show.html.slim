@@ -13,7 +13,6 @@
       f4: [#{docfix_issue_of_vol(@bug, 3)}]    ,
       u4: [#{docfix_issue_ou_vol(@bug, 3)}]    ,
     };
-
   = javascript_pack_tag "docfix/issues/depth"
 
 small
@@ -63,12 +62,26 @@ small
         b> Project languages
         = @bug.repo.languages
     table[style='width: 100%; border: 1px solid black;']
+      tr[style='background: lightgray; text-align: center;']
+        td
+          small
+            b Open Buy Offers for Issue ##{@bug.id}
+            br
+            span.badge.badge-pill>[style='background: red;' ] fixed
+            span.badge.badge-pill>[style='background: blue;'] unfixed
+            span.badge.badge-pill.badge-secondary>
+              | YYY = volume
+            span.badge.badge-pill.badge-secondary>
+              | 0.XX = price
+
       - (0..3).each do |count|
         tr
           td[style='text-align: center;']
             small #{BugmTime.future_week_ends[count].strftime("%a %b-%d")}
             canvas[id="dc#{count}" style="width: 100%; height: 75px;"]
-
+    p[class='text-center' style='margin-top: 10px;']
+      a[href="http://bugmark.net:3030/dashboard/db/bugmcmd?orgId=1" target="_blank"]
+        | Overall Market Activity
 .row
   .col-md-12
     h4 Open Offers (#{@bug.offers.open.count})
