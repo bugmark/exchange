@@ -13,7 +13,7 @@ require "./config/environment"
 WEEK_ENDS = BugmTime.future_week_ends
 ISSUE_IDS = Bug.all[0..3].pluck(:id)
 USER_IDS  = User.where("email ilike 'test%'").pluck(:id)
-VOLUMES   = (50..100).step(5).to_a
+VOLUMES   = (30..50).step(5).to_a
 PRICES    = (5..95).step(5).to_a.map {|x| x / 100.0}
 count     = 0
 
@@ -60,7 +60,12 @@ while true do
   time  = Time.now.strftime("%H:%M:%S")
   puts "Cycle: #{pa count} | #{time} | #{pa Offer.open.count} open offers | #{pa Contract.count} contracts | #{pa Escrow.count} escrows"
   STDOUT.flush
-  sleep 5
+  if count < 50
+    sleep 5
+  else
+    sleep 20
+  end
   buy
   cross if count % 2 == 0
+  abort "Terminating after 100 cycles" if count == 100
 end
