@@ -1,11 +1,11 @@
 class EventsController < ApplicationController
 
-  layout 'events'
+  layout 'event'
 
   before_action :authenticate_user!, only: %i(new_login new_signup)
 
   def index
-    @events = EventLine.paginate(page: params[:page], per_page: 20)
+    @events = EventLine.paginate(page: params[:page], per_page: 10)
   end
 
   def show
