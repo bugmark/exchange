@@ -13,22 +13,3 @@ class Hash
   end
 end
 
-class RangedHash
-  def initialize(hash)
-    @ranges = hash
-  end
-
-  def [](key)
-
-  end
-
-  class << self
-
-  end
-
-  def increment(key, volume)
-    @ranges.each do |range, _val|
-      @ranges[range] += volume if range.include?(key)
-    end
-  end
-end

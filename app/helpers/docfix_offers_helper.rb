@@ -19,8 +19,8 @@ module DocfixOffersHelper
   def docfix_offer_take_btn(offer)
     otyp = "offer_b#{offer.opposite_side[0]}"
     mdat = offer.maturation.strftime("%y-%m-%d")
-    cstk = offer.volume - offer.stake
-    qstr = "volume=#{offer.volume}&stake=#{cstk}&maturation=#{mdat}"
+    cdep = offer.volume - offer.deposit
+    qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}"
     href = "/docfix/issues/#{offer.stm_bug_id}/#{otyp}"
     raw <<-ERB.strip_heredoc
       <a class="btn btn-secondary" href="#{href}?#{qstr}">

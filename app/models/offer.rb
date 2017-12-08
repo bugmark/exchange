@@ -200,8 +200,12 @@ class Offer < ApplicationRecord
     self.status == 'open'
   end
 
-  def stake
+  def deposit
     (self.volume * self.price).to_i
+  end
+
+  def profit
+    (self.volume * (1 - self.price)).to_i
   end
 
   def is_not_open?

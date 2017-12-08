@@ -417,13 +417,13 @@ Next Actions:
 - [x] feature spec: docfix issues
 - [x] feature spec: docfix offers
 - [x] feature spec: docfix 
-- [x] OfferCmd::CreateBuy with stake
-- [x] OfferCmd::CreateBuy - validation of stake (spec)
+- [x] OfferCmd::CreateBuy with deposit
+- [x] OfferCmd::CreateBuy - validation of deposit (spec)
 
 # Nov 11
 
-- [x] OfferCmd::CreateBuy - BF - validation of stake (UI / error message)
-- [x] OfferCmd::CreateBuy - BU - validation of stake (UI / error message)
+- [x] OfferCmd::CreateBuy - BF - validation of deposit (UI / error message)
+- [x] OfferCmd::CreateBuy - BU - validation of deposit (UI / error message)
 
 # Nov 12
 
@@ -618,13 +618,23 @@ Next Actions:
 
 # Dec 07
 
-- [ ] Create histogram for Offer Depth chart
+- [x] Create histogram for Offer Depth chart
+- [x] Streamline the docfix login
+- [x] docfix: create take_bu, take_bf
+- [x] docfix: add Jquery to dynamically update prices
+- [x] docfix: cleanup offer pages
+- [x] OfferBuy: rename 'stake' to 'deposit'
+- [x] OfferBuy: add a 'profit' options
 
-- [ ] docfix: do cross immediately upon offer creation
+- [ ] add an API action for updating EtherScan url
+
+# Dec 08
+
+- [ ] docfix: do cross immediately upon match offer creation
 
 - [ ] docfix: add escrows to contract
 
-- [ ] Create a demo presentation
+- [ ] Add BugFix demo
 - [ ] Tune up demo script
 
 - [ ] Add user inbox
@@ -670,11 +680,6 @@ Next Actions:
 
 - [ ] core: expose AON in UI
 - [ ] core: expose poolable in UI
-
-- [ ] docfix: create take_bu, take_bf
-
-- [ ] docfix: add Jquery to dynamically update prices
-- [ ] docfix: cleanup offer pages
 
 - [ ] docfix: test event replay
 - [ ] docfix: get blockchain reporting working
