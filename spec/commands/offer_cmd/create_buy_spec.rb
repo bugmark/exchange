@@ -22,7 +22,8 @@ RSpec.describe OfferCmd::CreateBuy do
   describe "Attributes" do
     it { should respond_to :user                   }
     it { should respond_to :offer                  }
-    it { should respond_to :stake                  }
+    it { should respond_to :deposit                }
+    it { should respond_to :profit                 }
     it { should respond_to :volume                 }
     it { should respond_to :price                  }
   end
@@ -93,20 +94,38 @@ RSpec.describe OfferCmd::CreateBuy do
     end
   end
 
-  describe "creation with a stake" do
+  describe "creation with a deposit" do
     it "generates valid object" do
-      obj = klas.new(:offer_bu, valid_params(stake: 2, volume: 20))
+      obj = klas.new(:offer_bu, valid_params(deposit: 2, volume: 20))
       expect(obj).to be_valid
     end
 
     it "generates price" do
-      obj = klas.new(:offer_bu, valid_params(stake: 2, volume: 20))
+      obj = klas.new(:offer_bu, valid_params(deposit: 2, volume: 20))
       expect(obj).to be_valid
       expect(obj.project.price).to eq(0.1)
     end
 
-    it "validates stake" do
-      obj = klas.new(:offer_bu, valid_params(stake: 40, volume: 20))
+    it "validates deposit" do
+      obj = klas.new(:offer_bu, valid_params(deposit: 40, volume: 20))
+      expect(obj).to_not be_valid
+    end
+  end
+
+  describe "creation with a profit" do
+    it "generates valid object" do
+      obj = klas.new(:offer_bu, valid_params(profit: 2, volume: 20))
+      expect(obj).to be_valid
+    end
+
+    it "generates price" do
+      obj = klas.new(:offer_bu, valid_params(profit: 2, volume: 20))
+      expect(obj).to be_valid
+      expect(obj.project.price).to eq(0.9)
+    end
+
+    it "validates profit" do
+      obj = klas.new(:offer_bu, valid_params(profit: 40, volume: 20))
       expect(obj).to_not be_valid
     end
   end

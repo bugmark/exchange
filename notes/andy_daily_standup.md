@@ -283,7 +283,7 @@ Discussion:
 - API language binding: looking good!
 - OfferSF and TransferCross and ReduceCross specs are now working
 - question: how to demo GH PR and GH issue close?
-- question: should we change 'stake' to 'deposit'?
+- question: should we change 'stake' to 'deposit'? (YES)
 
 Planned Software Changes:
 - TimeTravel

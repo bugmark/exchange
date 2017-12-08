@@ -6,18 +6,21 @@ module OfferCmd
     attr_delegate_fields :offer     , class_name: "Offer::Buy"
     attr_vdelegate       :maturation, :offer
 
-    attr_accessor :stake
+    attr_accessor :deposit
+    attr_accessor :profit
 
-    validate :stake_amount
+    validate :deposit_amount
+    validate :profit_amount
     validate :user_balance
 
-    # NOTE: the offer_args must contain either a price or a stake
+    # NOTE: the offer_args must contain either a price or a deposit
     def initialize(typ, offer_args)
-      @typ   = typ                         # offer_bf or offer_bu
-      starg  = offer_args.stringify_keys
-      @stake = starg.delete("stake") || 0
-      @offer = klas.new(default_values.merge(starg))
-      @user  = User.find(offer.user_id)
+      @typ     = typ                         # offer_bf or offer_bu
+      starg    = offer_args.stringify_keys
+      @profit  = starg.delete("profit")  || 0
+      @deposit = starg.delete("deposit") || 0
+      @offer   = klas.new(default_values.merge(starg))
+      @user    = User.find(offer.user_id)
     end
 
     def event_data
@@ -26,8 +29,12 @@ module OfferCmd
 
     def transact_before_project
       offer.status ||= 'open'
-      if stake != 0
-        self.price = stake.to_i / volume.to_f
+      if deposit != 0
+        self.price = deposit.to_i / volume.to_f
+      end
+
+      if profit != 0
+        self.price = 1.0 - (profit.to_i / volume.to_f)
       end
     end
 
@@ -70,11 +77,20 @@ module OfferCmd
       return false
     end
 
-    def stake_amount
-      return true if stake.to_i == 0
+    def profit_amount
+      return true if profit.to_i == 0
 
-      if stake.to_i > volume
-        errors.add :stake, "must be less than volume"
+      if profit.to_i > volume
+        errors.add :profit, "must be less than volume"
+        return false
+      end
+    end
+
+    def deposit_amount
+      return true if deposit.to_i == 0
+
+      if deposit.to_i > volume
+        errors.add :deposit, "must be less than volume"
         return false
       end
     end

@@ -1,23 +1,26 @@
+setProfit = ()->
+  inDep = parseInt($('#inDep').val())
+  hiVol = parseInt($('#hiVol').val())
+  inPro = hiVol - inDep
+  $('#inPro').val(inPro)
+  tLbl(inDep, hiVol, inPro)
+
 setVal = ()->
   side       = $('#oSide').html()
-  in_dep     = parseInt($('#inDep').val())
-  in_vol     = parseInt($('#inVol').val())
-  validateBtn(in_dep, in_vol)
-  tLbl(in_dep, in_vol)
-  base_price = twoDec(in_dep / in_vol)
+  inDep     = parseInt($('#inDep').val())
+  in_pro     = parseInt($('#inPro').val())
+  validateBtn(inDep, in_vol)
+  tLbl(inDep, in_vol)
+  base_price = twoDec(inDep / in_vol)
   [f_price, u_price] = switch side
     when "fixed" then [base_price, twoDec(1.0 - base_price)]
     else              [twoDec(1.0 - base_price), base_price]
-  $('.dVol').html(in_vol)
-  $('.dPro').html(in_vol - in_dep)
-  $('.dF').html(f_price)
-  $('.dU').html(u_price)
+  tVal(inDep, in_vol, in_pro)
 
-validate = (stake, volume)->
-#  console.log "STAKE <#{stake}> VOLUME <#{volume}>"
-  return [false, "Volume must be greater than 0" ] unless volume > 0
-  return [false, "Deposit must be greater than 0"  ] unless stake  > 0
-  return [false, "Deposit must be less than volume"] unless stake  <  volume
+validate = (deposit, volume)->
+  return [false, "Profit must be greater than 0"   ] unless volume  > 0
+  return [false, "Deposit must be greater than 0"  ] unless deposit > 0
+  return [false, "Deposit must be less than Profit"] unless deposit < volume
   [true, "ok"]
 
 validateBtn = (in_dep, in_vol)->
@@ -29,18 +32,24 @@ validateBtn = (in_dep, in_vol)->
     $('#errMsg').html(msg)
     $('#sBtn').addClass("disabled").addClass("strikeout")
 
-tLbl = (stake, vol, pro)->
-  ss = if stake == 1 then "" else "s"
-  sv = if vol   == 1 then "" else "s"
-  sp = if vol   == 1 then "" else "s"
+tVal = (dep, vol, pro)->
+  $('.dVol').html(in_vol)
+  $('.dPro').html(in_vol - inDep)
+  $('.dF').html(f_price)
+  $('.dU').html(u_price)
+
+tLbl = (dep, vol, pro)->
+  ss = if dep == 1 then "" else "s"
+  sv = if vol == 1 then "" else "s"
+  sp = if pro == 1 then "" else "s"
   $('#sLbl').html(ss)
   $('#vLbl').html(sv)
-  $('#pLbl').html(sv)
+  $('#pLbl').html(sp)
 
 twoDec = (num)->
   Math.round(num * 100) / 100
 
 $(document).ready ->
-  setVal()
-  $('.token-field').keyup ->
-    setVal()
+  setProfit()
+#  $('.token-field').keyup ->
+#    setVal()

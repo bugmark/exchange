@@ -188,7 +188,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string     :uuref
       t.string     :local_hash
       t.string     :chain_hash
-      t.jsonb      :data,  null: false, default: {}
+      t.jsonb      :data   , null: false, default: {}
+      t.jsonb      :jfields, null: false, default: {}
       t.timestamps
     end
     add_index :event_lines, :klas
@@ -196,6 +197,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :event_lines, :chain_hash
     add_index :event_lines, :uuref
     add_index :event_lines, :data      , using: :gin
+    add_index :event_lines, :jfields   , using: :gin
 
     # holds an event counter for a projection
     create_table :projections do |t|

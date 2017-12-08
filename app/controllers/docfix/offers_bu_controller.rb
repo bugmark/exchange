@@ -20,7 +20,7 @@ module Docfix
     private
 
     def perm(params)
-      fields = Offer::Buy::Unfixed.attribute_names.map(&:to_sym) + [:stake]
+      fields = Offer::Buy::Unfixed.attribute_names.map(&:to_sym) + [:deposit]
       params.permit(fields)
     end
 
