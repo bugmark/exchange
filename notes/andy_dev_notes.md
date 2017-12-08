@@ -623,12 +623,14 @@ Next Actions:
 - [x] docfix: create take_bu, take_bf
 - [x] docfix: add Jquery to dynamically update prices
 - [x] docfix: cleanup offer pages
+- [x] OfferBuy: rename 'stake' to 'deposit'
+- [x] OfferBuy: add a 'profit' options
+
+- [ ] add an API action for updating EtherScan url
 
 # Dec 08
 
 - [ ] docfix: do cross immediately upon match offer creation
-
-- [ ] add an API action
 
 - [ ] docfix: add escrows to contract
 

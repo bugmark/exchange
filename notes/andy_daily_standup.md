@@ -297,6 +297,8 @@ Target Outcomes Dec 05:
 
 Wed Dec 06
 ----------------------------------------------
+
+Discussion:
 - Grafana graphs are visible w/o password (http://bugmark.net:3030)
 
 Target Outcomes Dec 06:
@@ -307,11 +309,23 @@ Target Outcomes Dec 06:
 
 Thu Dec 07
 ----------------------------------------------
+
+Discussion:
 - bot speed increased from 20 seconds to 5 seconds
 - Timewarp @ /bot/time 1) jumps date 2) closes issues 3) resoves contracts (tbd)
 
 Target Outcomes Dec 07:
-- [ ] Generate depth-chart data
-- [ ] Finish demo script
+- [x] Generate depth-chart data
+- [x] Finish demo script
 - [ ] Add contract resolution and payout
 
+Thu Dec 08
+----------------------------------------------
+
+Discussion:
+- added API call to post EtherScan url
+- updated wording on create-offer page
+- changed login redirect to /docfix
+
+Target Outcomes Dec 08:
+- [ ] Add contract resolution and payout
