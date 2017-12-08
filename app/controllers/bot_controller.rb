@@ -45,6 +45,7 @@ class BotController < ApplicationController
   
   def start
     system "pkill -f #{PROC_NAME}"
+    system "echo 'RESET LOG at #{BugmTime.now}' > #{BOT_LOG}"
     system "stdbuf -oL script/bot/buy >> #{BOT_LOG} 2>&1 &"
     sleep 0.5
     flash[:notice] = "BOT HAS STARTED"

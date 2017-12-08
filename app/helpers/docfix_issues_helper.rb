@@ -1,4 +1,4 @@
-require "ext/hash"
+require "ext/bucket_hash"
 
 module DocfixIssuesHelper
 
@@ -42,12 +42,14 @@ module DocfixIssuesHelper
 
   # -----
 
-  def docfix_issue_ou_vol(bug, date)
+  def docfix_issue_ou_vol(bug, period)
+    date   = BugmTime.future_week_ends[period]
     offers = docfix_base_offers(bug, date).is_unfixed
     docfix_issue_values(offers)
   end
 
-  def docfix_issue_of_vol(bug, date)
+  def docfix_issue_of_vol(bug, period)
+    date   = BugmTime.future_week_ends[period]
     offers = docfix_base_offers(bug, date).is_fixed
     docfix_issue_values(offers)
   end
@@ -57,10 +59,10 @@ module DocfixIssuesHelper
   end
 
   def docfix_issue_values(offers)
-    bucket = BucketHash.new (0.1..0.9).step(0.1)
+    bucket = ::BucketHash.new (0.1..0.9).step(0.1)
     offers.reduce(bucket) do |acc, obj|
       acc.increment(obj.price, obj.volume)
-    end.join(",")
+    end.hash.values.join(",")
   end
 
   # ----- issue buttons -----
