@@ -321,7 +321,7 @@ Target Outcomes Dec 07:
 - [x] Finish demo script
 - [ ] Add contract resolution and payout
 
-Thu Dec 08
+Fri Dec 08
 ----------------------------------------------
 
 Discussion:
