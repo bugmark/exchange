@@ -67,5 +67,6 @@ while true do
   end
   buy
   cross if count % 2 == 0
-  abort "Terminating after 100 cycles" if count == 100
+  STDOUT.flush
+  abort "Terminating after 99 cycles #{Time.now}" if count == 99
 end

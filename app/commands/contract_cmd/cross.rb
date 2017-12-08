@@ -27,6 +27,10 @@ module ContractCmd
       commit&.contract
     end
 
+    def event_data
+      contract.attributes
+    end
+
     private
 
     def cross_integrity

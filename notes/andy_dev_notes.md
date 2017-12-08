@@ -629,7 +629,11 @@ Next Actions:
 
 # Dec 08
 
-- [ ] Tune up demo script
+- [x] Tune up demo script
+
+- [ ] docfix: fix resolve/close
+
+- [ ] docfix: add inbox
 
 - [ ] docfix: do cross immediately upon match offer creation
 
