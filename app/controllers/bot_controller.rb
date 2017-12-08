@@ -24,9 +24,11 @@ class BotController < ApplicationController
   end
 
   def new_login
+    redirect_to "/bot/home"
   end
 
   def new_signup
+    redirect_to "/bot/home"
   end
   
   def build

@@ -20,9 +20,11 @@ class InfoController < ApplicationController
   end
 
   def new_login
+    redirect_to "/info/home"
   end
 
   def new_signup
+    redirect_to "/info/home"
   end
 
   def data

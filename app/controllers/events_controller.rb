@@ -13,9 +13,11 @@ class EventsController < ApplicationController
   end
 
   def new_login
+    redirect_to "/events"
   end
 
   def new_signup
+    redirect_to "/events"
   end
 end
 
