@@ -4,6 +4,8 @@ class EventLine < ApplicationRecord
 
   validates :klas, presence: true
 
+  jsonb_accessor   :jfields , :etherscan_url => :string
+
   private
 
   def default_values

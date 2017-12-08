@@ -54,6 +54,14 @@ module V1
           EventLine.all
         end
       end
+      params do
+        requires :id           , type: Integer
+        requires :etherscan_url, type: String
+      end
+      put "", :root => :events do
+        el = EventLine.find(params[:id])
+        el.update_attribute(:etherscan_url, params[:etherscan_url])
+      end
     end
   end
 end
