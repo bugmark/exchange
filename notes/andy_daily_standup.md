@@ -343,7 +343,7 @@ Discussion:
 - during time-warp, should we auto-resolve contracts, or do it manually?
 
 Target Outcomes Dec 09:
-- [ ] Add event notification on signup
+- [x] Add event notification on signup
 - [ ] Add offer-matching page
 - [ ] Add escrows to contract
 - [ ] Finish demo script
