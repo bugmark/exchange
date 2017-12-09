@@ -13,9 +13,7 @@ class DocfixController < ApplicationController
   end
 
   def new_events
-    # @new_events = current_user.new_event_lines
-    binding.pry
-    x = 1
+    @new_events = current_user.new_event_lines
   end
 end
 

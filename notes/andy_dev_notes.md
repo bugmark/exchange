@@ -638,7 +638,10 @@ Next Actions:
 
 # Dec 09
 
-- [ ] login-notify: add a login-notification page
+- [ ] javascript is broke on production!
+- [ ] fix offer language
+
+- [x] login-notify: add a login-notification page
 
 - [ ] match offer: no editing (with cancel)
 - [ ] match offer: immediate crossing

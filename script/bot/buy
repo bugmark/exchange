@@ -6,7 +6,7 @@ Process.setproctitle(PROCNAME)
 puts "----- BUGMARK OFFER BOT -------------------------------------------"
 puts "START #{Time.now} | C-c to exit"
 puts "Process Name: #{PROCNAME}"
-puts "Loading Rails Environment..."
+puts "Loading Environment..."
 STDOUT.flush
 require "./config/environment"
 

@@ -9,7 +9,7 @@ rm -f /tmp/bugm_day_jump
 echo "----- BUGMARK TOTAL REBUILD ---------------------"
 echo "START `date`"
 
-echo RAILS ENV $RAILS_ENV
+echo LOADING ENV $RAILS_ENV
 
 echo Clear Old Data
 script/data/all_clear
