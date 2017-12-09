@@ -343,6 +343,8 @@ Discussion:
 - during time-warp, should we auto-resolve contracts, or make it manual?
 
 Target Outcomes Dec 09:
+- [ ] Add event notification on signup
 - [ ] Add escrows to contract
 - [ ] Working blockchain integration (rich)
 - [ ] Detail checking - amounts/prices/volumes/etc
+- [ ] Finish demo script

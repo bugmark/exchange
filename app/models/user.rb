@@ -19,6 +19,15 @@ class User < ApplicationRecord
     EventLine.for_user(self.id)
   end
 
+  def last_event_at
+    return nil if event_lines.count == 0
+    event_lines.order('id desc').limit(1).first.created_at
+  end
+
+  def new_event_lines
+    event_lines.where('created_at > ?', self.last_seen_at).order('id desc')
+  end
+
   has_many :positions
 
   def xtag

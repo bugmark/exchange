@@ -636,14 +636,14 @@ Next Actions:
 - [x] Contract/Resolve not generating userids
 - [x] login-notify: record timestamp for every page view
 
-- [ ] match offer: no editing (with cancel)
-- [ ] match offer: immediate crossing
+# Dec 09
 
 - [ ] login-notify: add a login-notification page
 
-- [ ] Add GitHub PR / Issue Close screenshots
+- [ ] match offer: no editing (with cancel)
+- [ ] match offer: immediate crossing
 
-# Dec 09
+- [ ] Add GitHub PR / Issue Close screenshots
 
 - [ ] clickable depth charts
 

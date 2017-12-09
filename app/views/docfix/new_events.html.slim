@@ -1,0 +1,14 @@
+h1 New Events
+
+| These new events have happened since your last login...
+
+table.table
+  tr
+    th Event ID
+    th Event Type
+    th Event Date
+  - @new_events.each do |event|
+    tr
+      th = event.id
+      td = event.klas
+      th = event.created_at.strftime("%m-%d %H:%M:%S")
