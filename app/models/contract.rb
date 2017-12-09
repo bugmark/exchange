@@ -119,7 +119,7 @@ class Contract < ApplicationRecord
 
   def awardee
     self.awarded_to || begin
-      match_assertion ? "bidder" : "asker"
+      match_assertion ? "fixed" : "unfixed"
     end
   end
 

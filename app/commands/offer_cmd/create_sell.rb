@@ -26,6 +26,10 @@ module OfferCmd
       }
     end
 
+    def user_ids
+      [offer.user_id]
+    end
+
     def influx_fields
       {
         id:     offer.id     ,

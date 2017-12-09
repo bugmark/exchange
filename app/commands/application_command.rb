@@ -83,6 +83,10 @@ class ApplicationCommand
     {}
   end
 
+  def user_ids
+    []
+  end
+
   def transact_before_project
     # override in subclass
   end
@@ -135,7 +139,7 @@ class ApplicationCommand
   private
 
   def save_event
-    base = {klas: self.class.name}
+    base = {klas: self.class.name, user_ids: user_ids}
     data = {data: self.event_data}
     EventLine.new(data.merge(base)).save
 

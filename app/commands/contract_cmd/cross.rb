@@ -28,7 +28,11 @@ module ContractCmd
     end
 
     def event_data
-      contract.attributes
+      contract&.attributes || {}
+    end
+
+    def user_ids
+      contract&.escrows&.last&.users&.pluck(:id)
     end
 
     private

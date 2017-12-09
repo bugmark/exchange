@@ -6,9 +6,11 @@ class Escrow < ApplicationRecord
   belongs_to :contract , optional: true
   belongs_to :amendment, optional: true
 
-  has_many   :positions
-  has_many   :fixed_positions   , -> { where(side: 'fixed')   }, class_name: "Position"
-  has_many   :unfixed_positions , -> { where(side: 'unfixed') }, class_name: "Position"
+  has_many :positions
+  has_many :fixed_positions   , -> { where(side: 'fixed')   }, class_name: "Position"
+  has_many :unfixed_positions , -> { where(side: 'unfixed') }, class_name: "Position"
+
+  has_many :users, :through => :positions
 
   # ----- VALIDATIONS -----
 

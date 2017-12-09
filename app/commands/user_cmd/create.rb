@@ -18,6 +18,10 @@ module UserCmd
       user.attributes
     end
 
+    def user_ids
+      [user.id]
+    end
+
     def influx_fields
       {
         user_id: user.id

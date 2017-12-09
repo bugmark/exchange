@@ -188,8 +188,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string     :uuref
       t.string     :local_hash
       t.string     :chain_hash
-      t.jsonb      :data   , null: false, default: {}
-      t.jsonb      :jfields, null: false, default: {}
+      t.jsonb      :data    , null: false, default: {}
+      t.jsonb      :jfields , null: false, default: {}
+      t.integer    :user_ids, array: true, default: []
       t.timestamps
     end
     add_index :event_lines, :klas

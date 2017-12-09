@@ -6,6 +6,13 @@ class EventLine < ApplicationRecord
 
   jsonb_accessor   :jfields , :etherscan_url => :string
 
+  class << self
+    def for_user(user)
+      user_id = user.to_i
+      where("? = any(user_ids)", user_id)
+    end
+  end
+
   private
 
   def default_values
@@ -28,6 +35,7 @@ end
 #  chain_hash :string
 #  data       :jsonb            not null
 #  jfields    :jsonb            not null
+#  user_ids   :integer          default([]), is an Array
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

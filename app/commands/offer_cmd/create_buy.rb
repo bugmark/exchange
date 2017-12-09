@@ -27,6 +27,10 @@ module OfferCmd
       offer.attributes
     end
 
+    def user_ids
+      [user.id]
+    end
+
     def transact_before_project
       offer.status ||= 'open'
       if deposit != 0

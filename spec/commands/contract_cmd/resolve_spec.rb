@@ -4,60 +4,52 @@ RSpec.describe ContractCmd::Resolve, type: :model do
 
   include_context 'Integration Environment'
 
-  let(:sell)     { ask1.ask                                               }
-  let(:contract) { ContractCmd::Cross.new(ask).project.contract           }
+  let(:contract) { FBX.expand_obf.contract                                }
   let(:klas)     { described_class                                        }
   subject        { klas.new(contract)                                     }
 
-  # describe "Attributes", USE_VCR do
-  #   before(:each) { hydrate(bid1)                  }
-  #
-  #   it { should respond_to :contract               }
-  #   it { should respond_to :bids                   }
-  #   it { should respond_to :asks                   }
-  # end
+  describe "Attributes", USE_VCR do
 
-  # describe "Delegated Object", USE_VCR do
-  #   before(:each) { hydrate(bid1)                  }
-  #
-  #   it 'has a present Contract' do
-  #     expect(subject.contract).to be_present
-  #   end
-  #
-  #   it 'has a Contract with the right class' do
-  #     expect(subject.contract).to be_a(Contract)
-  #   end
-  #
-  #   it 'should have a valid Contract' do
-  #     expect(subject.contract).to be_valid
-  #   end
-  # end
+    it { should respond_to :contract               }
+  end
 
-  # TODO: fixme
-  # describe "Object Saving" do
-  #   it 'saves the object to the database' do
-  #     subject.maturation = Time.now - 1.day
-  #     subject.project
-  #     expect(subject).to be_valid
-  #   end
-  #
-  #   it 'gets the right object count' do
-  #     expect(kontrakt).to be_present
-  #     expect(Contract.count).to eq(1)
-  #     subject.project
-  #     expect(Contract.count).to eq(1)
-  #   end
-  # end
+  describe "Delegated Object", USE_VCR do
+    it 'has a present Contract' do
+      expect(subject.contract).to be_present
+    end
 
-  # TODO: fixme
-  # describe "Object Transaction" do
-  #   it 'adjusts the user balance' do
-  #     expect(user.balance).to eq(100)
-  #     subject.project
-  #     user.reload
-  #     expect(user.balance).to eq(100)
-  #   end
-  # end
+    it 'has a Contract with the right class' do
+      expect(subject.contract).to be_a(Contract)
+    end
+
+    it 'should have a valid Contract' do
+      expect(subject.contract).to be_valid
+    end
+  end
+
+  describe "Object Saving", USE_VCR do
+    it 'saves the object to the database' do
+      subject.maturation = Time.now - 1.day
+      subject.project
+      expect(subject).to be_valid
+    end
+
+    it 'gets the right object count' do
+      expect(contract).to be_present
+      expect(Contract.count).to eq(1)
+      subject.project
+      expect(Contract.count).to eq(1)
+    end
+  end
+
+  describe "Object Transaction", USE_VCR do
+    it 'adjusts the user balance' do
+      expect(usr4.balance).to eq(1000)
+      subject.project
+      usr4.reload
+      expect(usr4.balance).to eq(1000)
+    end
+  end
 
   # describe "side effects" do
   #   it "closes all open sell offers"

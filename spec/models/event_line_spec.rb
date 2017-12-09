@@ -34,6 +34,7 @@ end
 #  chain_hash :string
 #  data       :jsonb            not null
 #  jfields    :jsonb            not null
+#  user_ids   :integer          default([]), is an Array
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

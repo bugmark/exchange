@@ -1,11 +1,10 @@
 - content_for :navbar do
-  - unless Rails.env.production?
-    ul.navbar-nav.mr-auto
-      = nav_link("Core"   , "/core/home"   )
-      = nav_link("Docfix" , "/docfix/home" )
-      = nav_link("API"    , "/apidocs"     )
-      = nav_link("Bot"    , "/bot/home"    )
-      = nav_link("Events" , "/events"      )
+  ul.navbar-nav.mr-auto
+    = nav_link("Docfix"      , "/docfix/home"      )
+    = nav_link("Core"        , "/core/home"        )
+    = nav_link("API"         , "/apidocs"          )
+    = nav_link("Bot"         , "/bot/home"         )
+    = nav_link("Experiments" , "/info/experiments" )
 
 - content_for :devise do
   |

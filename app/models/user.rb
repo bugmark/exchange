@@ -15,6 +15,10 @@ class User < ApplicationRecord
   has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
   has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
 
+  def event_lines
+    EventLine.for_user(self.id).order(:id)
+  end
+
   has_many :positions
 
   def xtag
