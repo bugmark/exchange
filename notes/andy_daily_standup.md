@@ -340,11 +340,12 @@ Sat Dec 09
 ----------------------------------------------
 
 Discussion:
-- during time-warp, should we auto-resolve contracts, or make it manual?
+- during time-warp, should we auto-resolve contracts, or do it manually?
 
 Target Outcomes Dec 09:
 - [ ] Add event notification on signup
+- [ ] Add offer-matching page
 - [ ] Add escrows to contract
-- [ ] Working blockchain integration (rich)
-- [ ] Detail checking - amounts/prices/volumes/etc
 - [ ] Finish demo script
+- [ ] Detail checking - amounts/prices/volumes/etc
+- [ ] Working blockchain integration (rich)
