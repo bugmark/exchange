@@ -1,3 +1,12 @@
+css:
+  .mbt {
+    margin-bottom: 10px;
+    margin-top:    10px;
+  }
+
+  .bg { background: lightgrey; }
+  .by { background: lightyellow; }
+
 table.table style='margin-bottom: 0; padding-bottom: 0'
   tr
     td
@@ -6,12 +15,26 @@ table.table style='margin-bottom: 0; padding-bottom: 0'
       | #{@user.xid} / #{@user.email}<br/>
       small #{link_to "Settings", edit_user_registration_path} | #{link_to "Log Out", destroy_user_session_path}
 
-div.text-center style='background: lightgrey;'
+div.text-center.bg
   b Account Balance: #{@user.balance} Tokens (Reserve: #{@user.token_reserve} => Available: #{@user.token_available})
 
-div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
-  b Contracts (#{@user.contracts.count}):
-  table.table
+.mbt.by
+  .text-center: b Most Recent Events
+  table.table.table-condensed
+    - if @user.event_lines.count > 0
+      tr
+        th ID
+        th Type
+        th Date
+    - @user.event_lines.order('id desc').limit(5).each do |event|
+      tr
+        td = event.id
+        td = event.klas
+        td = event.created_at.strftime("%m-%d %H:%M:%S")
+
+.mbt.bg
+  .text-center: b Contracts (#{@user.contracts.count})
+  table.table.table-condensed
     - if @user.contracts.count > 0
       tr
         th ID
@@ -31,9 +54,9 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
         td = contract.awardee
         td = core_contract_actions(contract)
 
-div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
-  b Positions (#{@user.positions.count}):
-  table.table
+.mbt.by
+  .text-center: b Positions (#{@user.positions.count})
+  table.table.table-condensed
     - if @user.positions.count > 0
       tr
         th ID
@@ -49,9 +72,9 @@ div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
         td = position.contract.status
         td = core_position_actions(position)
 
-div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
-  b Offers to Buy (#{@user.offers_buy.count}):
-  table.table
+.mbt.bg
+  .text-center: b Offers to Buy (#{@user.offers_buy.count})
+  table.table.table-condensed
     - if @user.offers_buy.count > 0
       tr
         th ID
@@ -67,9 +90,9 @@ div style='background: lightyellow; margin-bottom: 10px; margin-top: 10px;'
         td = offer.status
         td = core_offer_actions(offer)
 
-div style='background: lightgrey; margin-bottom: 10px; margin-top: 10px;'
-  b Offers to Sell (#{@user.offers_sell.count}):
-  table.table
+.mbt.by
+  .text-center: b Offers to Sell (#{@user.offers_sell.count})
+  table.table.table-condensed
     - if @user.offers_sell.count > 0
       tr
         th ID

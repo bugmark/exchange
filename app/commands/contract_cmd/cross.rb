@@ -32,7 +32,7 @@ module ContractCmd
     end
 
     def user_ids
-      contract&.escrows&.last&.users&.pluck(:id)
+      contract&.escrows&.last&.users&.pluck(:id)&.sort&.uniq
     end
 
     private

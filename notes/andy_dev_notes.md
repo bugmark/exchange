@@ -630,8 +630,7 @@ Next Actions:
 # Dec 08
 
 - [x] Tune up demo script
-
-- [ ] docfix: fix resolve/close
+- [x] docfix: fix resolve/close
 
 - [ ] docfix: add inbox
 
