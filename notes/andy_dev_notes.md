@@ -631,16 +631,24 @@ Next Actions:
 
 - [x] Tune up demo script
 - [x] docfix: fix resolve/close
+- [x] docfix: add inbox
+- [x] Contract/Cross   not generating events
+- [x] Contract/Resolve not generating userids
+- [x] login-notify: record timestamp for every page view
 
-- [ ] docfix: add inbox
+- [ ] match offer: no editing (with cancel)
+- [ ] match offer: immediate crossing
 
-- [ ] docfix: do cross immediately upon match offer creation
+- [ ] login-notify: add a login-notification page
 
 - [ ] Add GitHub PR / Issue Close screenshots
 
-- [ ] docfix: add escrows to contract
+# Dec 09
 
-- [ ] Add user inbox
+- [ ] clickable depth charts
+
+- [ ] add escrows to contract
+
 - [ ] Add a 'take' button to an offer view
 
 - [ ] Write a deployment plan

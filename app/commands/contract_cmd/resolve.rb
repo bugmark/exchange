@@ -10,6 +10,10 @@ module ContractCmd
       @contract = Contract.find(contract.to_i)
     end
 
+    def event_data
+      contract&.attributes
+    end
+
     def user_ids
       contract&.escrows&.reduce([]) do |acc, esc|
         acc + esc.users.pluck(:id)

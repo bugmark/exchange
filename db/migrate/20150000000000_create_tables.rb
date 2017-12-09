@@ -177,6 +177,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.float    :balance, default: 0.0
       t.string   :exref
       t.string   :uuref
+      t.datetime :last_seen_at
       t.timestamps
     end
     add_index :users, :exref

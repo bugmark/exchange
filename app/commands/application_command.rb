@@ -140,8 +140,9 @@ class ApplicationCommand
 
   def save_event
     base = {klas: self.class.name, user_ids: user_ids}
-    data = {data: self.event_data}
-    EventLine.new(data.merge(base)).save
+    data = {data: event_data}
+    both = data.merge(base)
+    EventLine.new(both).save
 
     if ! Rails.env.test? && File.exist?("/etc/influxdb/influxdb.conf")
       mname = "cmd." + self.class.name.gsub("::", "_")

@@ -173,6 +173,7 @@ end
 #  balance                :float            default(0.0)
 #  exref                  :string
 #  uuref                  :string
+#  last_seen              :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  email                  :string           default(""), not null

@@ -329,10 +329,20 @@ Discussion:
 - added Link to EtherScan page on /events
 - updated wording on create-offer page
 - changed login redirect to /docfix
-- during time-warp, should we auto-resolve contracts, or make it a manual operation?
 
 Target Outcomes Dec 08:
 - [x] Add contract resolution and payout
 - [x] Cleanup demo script
-- [ ] Add user mailbox / event notifications
+- [x] Add basic user event-notification feature
 - [ ] Working blockchain integration (rich)
+
+Sat Dec 09
+----------------------------------------------
+
+Discussion:
+- during time-warp, should we auto-resolve contracts, or make it manual?
+
+Target Outcomes Dec 09:
+- [ ] Add escrows to contract
+- [ ] Working blockchain integration (rich)
+- [ ] Detail checking - amounts/prices/volumes/etc

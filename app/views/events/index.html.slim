@@ -10,15 +10,17 @@ table.table.table-sm
     th ID
     th Command
     th Data
+    th UserID
     th Created
-    th Alt
+    th Links
   - @events.each do |event|
     tr
       td
         a[href="/events/#{event.id}"] #{event.id}
       td = event.klas
-      td = event.data.to_s[0..40] + " ..."
-      td = event.created_at
+      td = event.data.to_s[0..30] + " ..."
+      td = event.user_ids.join(", ")
+      td = event.created_at.strftime("%m-%d %H:%M:%S")
       td = docfix_event_etherscan(event)
 
 hr

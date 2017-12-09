@@ -57,7 +57,8 @@ module Core
 
     def resolve
       contract_id = params["id"]
-      ContractCmd::Resolve.new(contract_id).project
+      result = ContractCmd::Resolve.new(contract_id)
+      result.project
       redirect_to "/core/contracts"
     end
 
