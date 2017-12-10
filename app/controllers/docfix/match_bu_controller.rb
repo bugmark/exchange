@@ -1,5 +1,5 @@
 module Docfix
-  class MatchBfController < ApplicationController
+  class MatchBuController < ApplicationController
 
     layout 'docfix'
 
@@ -8,21 +8,21 @@ module Docfix
     def create
       core_opts = params["offer_cmd_create_buy"]
       base_opts = helpers.docfix_offer_base_opts(perm(core_opts))
-      @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, base_opts)
-      if @offer_bf.project
-        cross = ContractCmd::Cross.new(@offer_bf.offer, :expand).project
+      @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, base_opts)
+      if @offer_bu.project
+        cross = ContractCmd::Cross.new(@offer_bu.offer, :expand).project
         if cross
           contract = cross.contract
           redirect_to ("/docfix/contracts/#{contract.id}")
         else
-          @bug = @offer_bf.offer.bug
+          @bug = @offer_bu.offer.bug
           flash.now["Error"] = "Error!"
-          render "docfix/issues/match_bf"
+          render "docfix/issues/match_bu"
         end
       else
-        @bug = @offer_bf.offer.bug
+        @bug = @offer_bu.offer.bug
         flash.now["error"] = "Error!"
-        render "docfix/issues/match_bf"
+        render "docfix/issues/match_bu"
       end
     end
 
