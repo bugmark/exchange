@@ -36,7 +36,6 @@
 /public/source_maps/
 /public/qrcodes/
 /public/packs
-/public/all_packs
 /public/packs-test
 /app/assets/stylesheets/.sass-cache/
 yarn-error.log
