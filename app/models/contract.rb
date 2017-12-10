@@ -48,6 +48,11 @@ class Contract < ApplicationRecord
       where("maturation < ?", BugmTime.now)
     end
 
+    def resolved
+      where("stm_status = ?", "resolved")
+    end
+
+
     def unresolved
       where("stm_status != ?", "resolved")
     end
