@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
   has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
 
+  jsonb_accessor :jfields, :last_session_ended_at => :datetime
+
   def event_lines
     EventLine.for_user(self.id)
   end
@@ -25,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def new_event_lines
-    event_lines.where('created_at > ?', self.last_seen_at).order('id desc')
+    event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc')
   end
 
   has_many :positions
@@ -107,6 +109,7 @@ end
 #  balance                :float            default(0.0)
 #  exref                  :string
 #  uuref                  :string
+#  jfields                :jsonb            not null
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null

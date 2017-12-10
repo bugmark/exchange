@@ -83,6 +83,8 @@ Rails.application.routes.draw do
     resources :issues do
       get 'offer_bf' , :on => :member
       get 'offer_bu' , :on => :member
+      get 'match_bf' , :on => :member
+      get 'match_bu' , :on => :member
       get 'offer_buy', :on => :member
     end
     resources :offers do
@@ -90,6 +92,8 @@ Rails.application.routes.draw do
     end
     resources :offers_bu
     resources :offers_bf
+    resources :match_bu
+    resources :match_bf
     resources :contracts do
       get 'offer_bf' , :on => :member
       get 'offer_bu' , :on => :member

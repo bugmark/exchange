@@ -49,9 +49,9 @@ small
           p
             b Issue labels
             br
-            = @bug.stm_labels || "NA"
+            = @bug.stm_labels.blank? ? "NA" : @bug.stm_labels
           p
-            b VIEW ISSUE ON REPOSITORY
+            b View Issue On Repository
             br
             = core_bug_http_link(@bug)
   .col-md-4

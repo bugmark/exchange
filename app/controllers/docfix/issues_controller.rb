@@ -40,6 +40,27 @@ module Docfix
       @offer = OfferCmd::CreateBuy.new(:offer_bf, opts)
     end
 
+    def match_bf
+      deposit   = params[:deposit]    || 20
+      vol       = params[:volume]     || 100
+      mdate     = params[:maturation] || BugmTime.future_week_ends.first.strftime("%y-%m-%d")
+      @offer    = Offer.find(params[:offer_id]) if params[:offer_id]
+      @bug      = Bug.find(params["id"])
+      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, deposit: deposit, volume: vol, maturation: mdate})
+      @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, opts)
+    end
+
+    def match_bu
+      deposit   = params[:deposit]    || 80
+      vol       = params[:volume]     || 100
+      mdate     = params[:maturation] || BugmTime.future_week_ends.first.strftime("%y-%m-%d")
+      @offer    = Offer.find(params[:offer_id]) if params[:offer_id]
+      @bug      = Bug.find(params["id"])
+      opts      = helpers.docfix_offer_base_opts(perm(params), {stm_bug_id: @bug.id, deposit: deposit, volume: vol, maturation: mdate})
+      @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, opts)
+
+    end
+
     private
 
     def perm(params)

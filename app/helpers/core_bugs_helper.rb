@@ -64,10 +64,11 @@ module CoreBugsHelper
 
   def core_bug_http_link(bug)
     url = bug.html_url
+    lbl = url.gsub("https://github.com/", "")
     if url.nil?
       "NA"
     else
-      raw "<a href='#{url}' target='_blank'>#{url}</a>"
+      raw "<a href='#{url}' target='_blank'>#{lbl}</a>"
     end
   end
 end
