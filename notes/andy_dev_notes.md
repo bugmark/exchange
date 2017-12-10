@@ -641,43 +641,43 @@ Next Actions:
 - [x] login-notify: add a login-notification page
 - [x] match offer: no editing (with cancel)
 - [x] match offer: immediate crossing
+- [x] javascript is broke on production!
+- [x] FEEDBACK: add content for the sign-in pages
+- [x] FEEDBACK: make a new offer attempt to cross immediately
+- [x] FEEDBACK: reformat the registration page (add account wipe-out note)
 
-- [ ] javascript is broke on production!
+# Dec 10
 
 - [ ] fix offer language
 
 - [ ] Add GitHub PR / Issue Close screenshots
 
-- [ ] clickable depth charts
-
 - [ ] add escrows to contract
 
 - [ ] Add a 'take' button to an offer view
 
+- [ ] Add links from event-notification page
+
 - [ ] Write a deployment plan
+
+- [ ] clickable depth charts
 
 - [ ] JJ Profile Pages
 
 - [ ] core: fix take link 
 
-- [ ] FEEDBACK: reformat the registration page (add account wipe-out note)
+# TBD
 
-- [ ] FEEDBACK: add content for the sign-in pages
+- [ ] METRICS: add Georg command-data capture
+- [ ] METRICS: add Georg stats capture with cron process
+
 - [ ] FEEDBACK: make a feature spec that follows the demo
-- [ ] FEEDBACK: make a new offer attempt to cross immediately
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
-
-- [ ] auto-renew SSL cert
-
-# TBD
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
-
-- [ ] METRICS: add Georg command-data capture
-- [ ] METRICS: add Georg stats capture with cron process
 
 - [ ] test (cross-reduce)     user balance adjustments
 - [ ] test (cross-reduce)     auto-suspend sale-offers
@@ -700,6 +700,8 @@ Next Actions:
 - [ ] docfix: write events to testnet
 
 - [ ] move GH API Key to .env
+
+- [ ] auto-renew SSL cert
 
 - [ ] docfix: move offer pages to modals
 - [ ] docfix: get notification emails working

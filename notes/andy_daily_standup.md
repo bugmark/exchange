@@ -359,3 +359,5 @@ Discussion:
 Target Outcomes Dec 10:
 - [ ] Detail checking: wording, amounts, etc.
 - [ ] Working blockchain integration (rich)
+- [ ] Record a new demo script
+- [ ] Write a deployment plan
