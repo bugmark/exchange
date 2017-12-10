@@ -344,8 +344,18 @@ Discussion:
 
 Target Outcomes Dec 09:
 - [x] Add event notification on signup
-- [ ] Add offer-matching page
-- [ ] Add escrows to contract
-- [ ] Finish demo script
-- [ ] Detail checking - amounts/prices/volumes/etc
+- [x] Add offer-matching page
+- [x] End-to-end functioning demo script
+- [ ] Working blockchain integration (rich)
+
+Sun Dec 10
+----------------------------------------------
+
+Discussion:
+- all server code is functionally complete
+- today is 100% cleanup - bugfixing, wording, checking amounts, etc.
+- we should do a final rehersal this eve or tomorrow am
+
+Target Outcomes Dec 10:
+- [ ] Detail checking: wording, amounts, etc.
 - [ ] Working blockchain integration (rich)
