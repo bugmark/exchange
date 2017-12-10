@@ -17,14 +17,14 @@ module DocfixOffersHelper
   # -----
 
   def docfix_offer_take_btn(offer)
-    otyp = "offer_b#{offer.opposite_side[0]}"
+    otyp = "match_b#{offer.opposite_side[0]}"
     mdat = offer.maturation.strftime("%y-%m-%d")
     cdep = offer.volume - offer.deposit
-    qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}"
+    qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}&offer_id=#{offer.id}"
     href = "/docfix/issues/#{offer.stm_bug_id}/#{otyp}"
     raw <<-ERB.strip_heredoc
-      <a class="btn btn-secondary" href="#{href}?#{qstr}">
-        buy #{offer.opposite_side} side
+      <a class="btn btn-secondary" href="#{href}?#{qstr}" style='width: 225px;'>
+        Match Offer <small>(buy #{offer.opposite_side} side)</small>
       </a>
     ERB
   end
