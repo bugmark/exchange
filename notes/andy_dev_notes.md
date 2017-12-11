@@ -655,6 +655,7 @@ Next Actions:
 - [x] fix offer language
 - [x] add success message to contract cross
 - [x] add escrows to contract
+- [x] Add links from event-notification page
 
 # Dec 11
 
@@ -662,8 +663,6 @@ Next Actions:
 - [ ] fix user profile menus
 
 - [ ] fix rounding errors
-
-- [ ] Add links from event-notification page
 
 - [ ] Write a deployment plan
 

@@ -366,7 +366,6 @@ Mon Dec 11
 ----------------------------------------------
 
 Target Outcomes Dec 11:
-- [ ] Link to contract on event notifications page
 - [ ] Tweak the demo script
 - [ ] Write a deployment plan
 - [ ] Working blockchain integration (rich)
