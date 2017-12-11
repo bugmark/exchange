@@ -1,7 +1,8 @@
 {
-  "application.js": "http://192.168.1.77:9092/all_packs/application.js",
-  "docfix/issues/depth.js": "http://192.168.1.77:9092/all_packs/docfix/issues/depth.js",
-  "docfix/issues/offer.js": "http://192.168.1.77:9092/all_packs/docfix/issues/offer.js",
-  "hello_react.js": "http://192.168.1.77:9092/all_packs/hello_react.js",
-  "info/chart.js": "http://192.168.1.77:9092/all_packs/info/chart.js"
+  "application.js": "/all_packs/application.js",
+  "docfix/issues/depth.js": "/all_packs/docfix/issues/depth.js",
+  "docfix/issues/offer.js": "/all_packs/docfix/issues/offer.js",
+  "docfix/offers/show/depth.js": "/all_packs/docfix/offers/show/depth.js",
+  "hello_react.js": "/all_packs/hello_react.js",
+  "info/chart.js": "/all_packs/info/chart.js"
 }

@@ -18,6 +18,17 @@ module ApplicationHelper
 
   # -----
 
+  def obj_link(event)
+    return event.klas unless event.klas == "ContractCmd::Cross"
+    raw <<-EOF
+      <a href="/docfix/contracts/#{event.data['id']}"}>
+        ContractCmd::Cross
+      </a>
+    EOF
+  end
+
+  # -----
+
   def issue_links
     num_open   = Bug.open.count
     num_closed = Bug.closed.count

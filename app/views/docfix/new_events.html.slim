@@ -10,5 +10,5 @@ table.table
   - @new_events.each do |event|
     tr
       td = event.id
-      td = event.klas
+      td = obj_link(event)
       td = event.created_at.strftime("%m-%d %H:%M:%S")
