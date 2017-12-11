@@ -67,8 +67,10 @@ table.table.table-sm.tdog
       td
         .zh Contract volume
         | #{contract.volsum.to_i} tokens
-        p[style='margin-top: 10px;']
-          span.spark = contract.escrows.map {|x| x.value }.join(",")
+        br
+        | #{pluralize(contract.escrows.count, "escrow")}
+        br
+        span.spark = contract.escrows.map {|x| x.value }.join(",")
       td
         .zh Price per unit
         = docfix_contract_price(contract)

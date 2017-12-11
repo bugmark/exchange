@@ -25,5 +25,9 @@ class BugmTime < Time
       eow = now.end_of_week
       (0..count-1).map {|idx| eow + idx.weeks}
     end
+
+    def future_week_dates(count = 4)
+      future_week_ends(count).map {|x| x.strftime("%y-%m-%d")}
+    end
   end
 end

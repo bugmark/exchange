@@ -19,6 +19,9 @@ class BotController < ApplicationController
       bug.update_attribute :stm_status, 'closed'
     end
     BugmTime.increment_day_jump(8)
+    Contract.matured.unresolved.each do |cnt|
+      ContractCmd::Resolve.new(cnt).project
+    end
     flash[:notice] = "System Days Offset: #{BugmTime.day_offset} days"
     redirect_to "/bot/time"
   end

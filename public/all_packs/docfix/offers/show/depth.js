@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/all_packs/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 263);
+/******/ 	return __webpack_require__(__webpack_require__.s = 265);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -2375,15 +2375,17 @@ eval("var Chart, chartFor;\n\nChart = __webpack_require__(/*! chart.js */ 18);\n
 /* 260 */,
 /* 261 */,
 /* 262 */,
-/* 263 */
+/* 263 */,
+/* 264 */,
+/* 265 */
 /* unknown exports provided */
 /* all exports used */
-/*!*************************************************************!*\
-  !*** ./app/javascript/all_packs/docfix/issues/depth.coffee ***!
-  \*************************************************************/
+/*!******************************************************************!*\
+  !*** ./app/javascript/all_packs/docfix/offers/show/depth.coffee ***!
+  \******************************************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("var Chart, chartFor;\n\nChart = __webpack_require__(/*! chart.js */ 18);\n\nchartFor = __webpack_require__(/*! docfix/chart_for */ 198);\n\n$(document).ready(function() {\n  chartFor(Vals.f1, Vals.u1, \"#dc0\");\n  chartFor(Vals.f2, Vals.u2, \"#dc1\");\n  chartFor(Vals.f3, Vals.u3, \"#dc2\");\n  return chartFor(Vals.f4, Vals.u4, \"#dc3\");\n});\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjYzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vYXBwL2phdmFzY3JpcHQvYWxsX3BhY2tzL2RvY2ZpeC9pc3N1ZXMvZGVwdGguY29mZmVlPzMwYTIiXSwic291cmNlc0NvbnRlbnQiOlsidmFyIENoYXJ0LCBjaGFydEZvcjtcblxuQ2hhcnQgPSByZXF1aXJlKFwiY2hhcnQuanNcIik7XG5cbmNoYXJ0Rm9yID0gcmVxdWlyZShcImRvY2ZpeC9jaGFydF9mb3JcIik7XG5cbiQoZG9jdW1lbnQpLnJlYWR5KGZ1bmN0aW9uKCkge1xuICBjaGFydEZvcihWYWxzLmYxLCBWYWxzLnUxLCBcIiNkYzBcIik7XG4gIGNoYXJ0Rm9yKFZhbHMuZjIsIFZhbHMudTIsIFwiI2RjMVwiKTtcbiAgY2hhcnRGb3IoVmFscy5mMywgVmFscy51MywgXCIjZGMyXCIpO1xuICByZXR1cm4gY2hhcnRGb3IoVmFscy5mNCwgVmFscy51NCwgXCIjZGMzXCIpO1xufSk7XG5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL2FwcC9qYXZhc2NyaXB0L2FsbF9wYWNrcy9kb2NmaXgvaXNzdWVzL2RlcHRoLmNvZmZlZVxuLy8gbW9kdWxlIGlkID0gMjYzXG4vLyBtb2R1bGUgY2h1bmtzID0gMiJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==");
+eval("var Chart, chartFor;\n\nChart = __webpack_require__(/*! chart.js */ 18);\n\nchartFor = __webpack_require__(/*! docfix/chart_for */ 198);\n\n$(document).ready(function() {\n  return chartFor(Vals.f1, Vals.u1, \"#dc0\");\n});\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjY1LmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vYXBwL2phdmFzY3JpcHQvYWxsX3BhY2tzL2RvY2ZpeC9vZmZlcnMvc2hvdy9kZXB0aC5jb2ZmZWU/OGY5NCJdLCJzb3VyY2VzQ29udGVudCI6WyJ2YXIgQ2hhcnQsIGNoYXJ0Rm9yO1xuXG5DaGFydCA9IHJlcXVpcmUoXCJjaGFydC5qc1wiKTtcblxuY2hhcnRGb3IgPSByZXF1aXJlKFwiZG9jZml4L2NoYXJ0X2ZvclwiKTtcblxuJChkb2N1bWVudCkucmVhZHkoZnVuY3Rpb24oKSB7XG4gIHJldHVybiBjaGFydEZvcihWYWxzLmYxLCBWYWxzLnUxLCBcIiNkYzBcIik7XG59KTtcblxuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIC4vYXBwL2phdmFzY3JpcHQvYWxsX3BhY2tzL2RvY2ZpeC9vZmZlcnMvc2hvdy9kZXB0aC5jb2ZmZWVcbi8vIG1vZHVsZSBpZCA9IDI2NVxuLy8gbW9kdWxlIGNodW5rcyA9IDEiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTsiLCJzb3VyY2VSb290IjoiIn0=");
 
 /***/ })
 /******/ ]);

@@ -1,27 +1,52 @@
+css:
+  .imger {
+    display:       inline-block;
+    width:         350px;
+    text-align:    center;
+    margin-bottom: 30px;
+  }
+
 table.table.table-sm
   tr
     td
-      h2 Time Jump
+      h2 Demo Time
     td[align='right']
       a[href="/bot/home"] Bot Home
   tr
-    td: b Current Time
+    td[colspan=2 style='padding-bottom: 20px; padding-top: 20px;']
+      p Two things happen after a contract is formed:<br/>
+      .imger
+        img[src="/img/PR.png" style='height: 150px;']
+        br
+        u Step 1: Developer submits a pull request.
+      .imger
+        img[src="/img/CLOSE.png" style='height: 150px;']
+        br
+        u Step 2: Project maintainer closes the issue.
+      p Then when the maturation date is reached, the contract
+        is resolved by examining issue status (open or closed).
+      | For demonstration purposes, you can move the system time forward, past the maturation date.
+  tr
+    td: b Real Time
     td  = Time.now
   tr
-    td: b System Time
+    td: b Demo Time
     td  = BugmTime.now
   tr
-    td: b # Open Issues
-    td  = Bug.all.open.count
+    td: b # Issues
+    td  = issue_links
+  tr
+    td: b # Contracts
+    td  = contract_links
   tr
     td: b System Days Offset
     td  = BugmTime.day_offset
   tr
     td: b Increment System Day Offset
     td
-      a[href="/bot/timeinc"] Move the system forward by eight days, and close the top three issues
+      a[href="/bot/timeinc"] Move the system forward eight days, close three issues, resolve matured contracts
       p
-      | WARNING: the system time can only be moved forward, not back!<br/>
+      | <span style='color: red;'>WARNING</span>: the system time can only be moved forward, not back!<br/>
         To reset the system days offset to zero, you must rebuild the system
         from scratch.
 

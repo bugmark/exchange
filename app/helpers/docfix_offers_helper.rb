@@ -16,21 +16,6 @@ module DocfixOffersHelper
 
   # -----
 
-  def docfix_offer_take_btn(offer)
-    otyp = "match_b#{offer.opposite_side[0]}"
-    mdat = offer.maturation.strftime("%y-%m-%d")
-    cdep = offer.volume - offer.deposit
-    qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}&offer_id=#{offer.id}"
-    href = "/docfix/issues/#{offer.stm_bug_id}/#{otyp}"
-    raw <<-ERB.strip_heredoc
-      <a class="btn btn-secondary" href="#{href}?#{qstr}" style='width: 225px;'>
-        Match Offer <small>(buy #{offer.opposite_side} side)</small>
-      </a>
-    ERB
-  end
-
-  # -----
-
   def docfix_contract_sort(label, type, csort)
     ctype = csort.split("_").first || type
     cdir  = type != ctype ? "xx" : csort.split("_").last
@@ -170,4 +155,31 @@ module DocfixOffersHelper
     return "" unless bug.present?
     docfix_issue_bu_btn(bug) + docfix_issue_bf_btn(bug)
   end
+
+  # ----- match button -----
+
+  def docfix_offer_match_vert(offer)
+    label = "Match Offer<br/><small>(buy #{offer.opposite_side} side)</small>"
+    docfix_offer_match(offer, label)
+  end
+
+  def docfix_offer_match_horiz(offer)
+    label = "Match Offer<small> (buy #{offer.opposite_side} side)</small>"
+    docfix_offer_match(offer, label)
+  end
+
+  def docfix_offer_match(offer, label)
+    otyp = "match_b#{offer.opposite_side[0]}"
+    mdat = offer.maturation.strftime("%y-%m-%d")
+    cdep = offer.volume - offer.deposit
+    qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}&offer_id=#{offer.id}"
+    href = "/docfix/issues/#{offer.stm_bug_id}/#{otyp}"
+    raw <<-ERB.strip_heredoc
+      <a class="btn btn-secondary" href="#{href}?#{qstr}" style='width: 225px;'>
+        #{label}
+      </a>
+    ERB
+  end
+
+
 end
