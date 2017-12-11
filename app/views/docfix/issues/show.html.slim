@@ -2,7 +2,6 @@
 
 - content_for :page_js do
   javascript:
-    window.Volumes = {fixed: #{@fv}, unfixed: #{@uv}};
     window.Vals    = {
       f1: [#{docfix_issue_of_vol(@bug, 0)}]    ,
       u1: [#{docfix_issue_ou_vol(@bug, 0)}]    ,
@@ -99,5 +98,5 @@ small
             td = ofr.maturation.strftime("%b-%d")
             td = ofr.side
             td = ofr.volume
-            td = docfix_offer_take_btn(ofr)
+            td = docfix_offer_match_horiz(ofr)
 

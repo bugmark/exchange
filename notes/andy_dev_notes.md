@@ -648,6 +648,12 @@ Next Actions:
 
 # Dec 10
 
+- [x] add links from demo/time page to open issues and resolved contracts
+
+- [ ] add ability to lookup contract by ID
+- [ ] fix user profile menus
+
+- [ ] fix rounding errors
 - [ ] fix offer language
 
 - [ ] Add GitHub PR / Issue Close screenshots

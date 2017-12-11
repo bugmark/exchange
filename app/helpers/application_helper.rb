@@ -16,6 +16,24 @@ module ApplicationHelper
     %w(bot#log_show bot#build_log bot#build_msg).include?(debug_lbl)
   end
 
+  # -----
+
+  def issue_links
+    num_open   = Bug.open.count
+    num_closed = Bug.closed.count
+    "Open #{num_open} | Closed #{num_closed}"
+  end
+
+  # -----
+
+  def contract_links
+    num_open     = Contract.open.count
+    num_resolved = Contract.resolved.count
+    "Open #{num_open} | Resolved #{num_resolved}"
+  end
+
+  # -----
+
   def refresh_tag
     dev_log "PAGE #{debug_lbl}"
     return "" unless refreshable?

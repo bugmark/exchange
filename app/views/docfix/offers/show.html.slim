@@ -6,6 +6,13 @@ css:
     width: 80%;
   }
 
+- content_for :page_us do
+  javascript:
+    window.Vals = {
+      f1: [#{docfix_issue_of_vol(@offer.bug, @offer.bugm_time_period)}],
+      u1: [#{docfix_issue_ou_vol(@offer.bug, @offer.bugm_time_period)}],
+    }
+
 = breadcrumb [%w(BugMark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
 small
   a href="/docfix/offers" return to overview
@@ -15,11 +22,11 @@ small
     h3 = docfix_offer_header(@offer)
     p = raw docfix_offer_pill(@offer)
     p
-      small If this contract is successfully matched and this issue is fixed by
-            #{@offer.maturation_str} your investment of #{@offer.value} tokens
-            will go to the holder(s) of the fixed side.  You will earn
-            #{@offer.value} tokens if this contract is successfully matched but
-            the issue is unfixed by #{@offer.maturation_str}.
+      small If this offer is matched and this issue is fixed by
+            #{@offer.maturation_date} your deposit of #{@offer.value} tokens
+            will go to the holder(s) of the fixed side.  If this offer is
+            matched and this issue is unfixed by #{@offer.maturation_date}, your
+            deposit will be returned and you will earn #{@offer.profit} tokens.
     small
       table.table.table-sm
         tr
@@ -27,10 +34,10 @@ small
           td = docfix_offer_assoc_link(@offer)
         tr
           td: b Created on
-          td = @offer.created_at
+          td = @offer.created_at.strftime("%y-%m-%d %H:%M")
         tr
           td: b Maturation Date
-          td = @offer.maturation_str
+          td = @offer.maturation_date
 
     table.table.table-sm
       tr
@@ -41,12 +48,12 @@ small
           small volume total
       tr
         td
-          b Invest more of buy new positions
+          b Match this offer to form a contract
           br
           small
             i.fa.fa-question-circle
             ' Why would I do this?
-        td = docfix_offer_buy_btns(@offer)
+        td = docfix_offer_match_vert(@offer)
 
   .col-md-5
     small
@@ -56,7 +63,22 @@ small
     div[style='margin-top: 50px;']
       b Expected fix probability
       = docfix_offer_price(@offer)
-    .holder: b SPARKLINE HERE
+    table[style='width: 100%; border: 1px solid black; margin-top: 20px;']
+      tr[style='background: lightgray; text-align: center;']
+        td
+          small
+            b Other Open Buy Offers for Issue ##{@offer.bug.id}
+            br
+            span.badge.badge-pill>[style='background: red;' ] fixed
+            span.badge.badge-pill>[style='background: blue;'] unfixed
+            span.badge.badge-pill.badge-secondary>
+              | YYY = volume
+            span.badge.badge-pill.badge-secondary>
+              | 0.XX = price
+      tr
+        td[style='text-align: center;']
+          small Matures
+          canvas[id="dc0" style="width: 100%; height: 75px;"]
 
 - if @offer.has_counters?(:expand)
   hr

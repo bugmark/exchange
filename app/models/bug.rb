@@ -25,6 +25,10 @@ class Bug < ApplicationRecord
       where(stm_status: 'open')
     end
 
+    def closed
+      where(stm_status: 'closed')
+    end
+
     def select_subset
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"

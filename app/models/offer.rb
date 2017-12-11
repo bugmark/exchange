@@ -167,7 +167,11 @@ class Offer < ApplicationRecord
     self.volume - self.value
   end
 
-  def maturation_str
+  def maturation_date
+    self.maturation.strftime("%b-%d")
+  end
+
+  def maturation_time
     self.maturation.strftime("%b-%d %H:%M:%S")
   end
 
@@ -178,6 +182,10 @@ class Offer < ApplicationRecord
 
   def maturation
     [self.maturation_range.first, self.maturation_range.last].avg_time
+  end
+
+  def bugm_time_period
+    BugmTime.future_week_dates.index(self.maturation.strftime("%y-%m-%d"))
   end
 
   # ----- predicates -----

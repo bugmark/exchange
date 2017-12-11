@@ -13,8 +13,8 @@ table.table.table-sm
     td[align='right']
       a[href="/bot/home"] Bot Home
   tr
-    td[colspan=2 style='padding-bottom: 20px;']
-      | Two things happen after a contract is formed:<br/>
+    td[colspan=2 style='padding-bottom: 20px; padding-top: 20px;']
+      p Two things happen after a contract is formed:<br/>
       .imger
         img[src="/img/PR.png" style='height: 150px;']
         br
@@ -24,7 +24,7 @@ table.table.table-sm
         br
         u Step 2: Project maintainer closes the issue.
       p Then when the maturation date is reached, the contract
-        is resolved on the BugMark exchange.
+        is resolved by examining issue status (open or closed).
       | For demonstration purposes, you can move the system time forward, past the maturation date.
   tr
     td: b Real Time
@@ -33,11 +33,11 @@ table.table.table-sm
     td: b Demo Time
     td  = BugmTime.now
   tr
-    td: b # Open Issues
-    td  = Bug.all.open.count
+    td: b # Issues
+    td  = issue_links
   tr
-    td: b # Resolved Contracts
-    td  = Contract.resolved.count
+    td: b # Contracts
+    td  = contract_links
   tr
     td: b System Days Offset
     td  = BugmTime.day_offset

@@ -76,7 +76,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :contracts do |t|
       t.integer  :prototype_id        # optional contract prototype
       t.string   :type                # GitHub, BugZilla, ...
-      t.string   :mode                # reward, forecast
       t.string   :status              # open, matured, resolved
       t.string   :awarded_to          # fixed, unfixed
       t.datetime :maturation

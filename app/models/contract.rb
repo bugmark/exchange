@@ -28,16 +28,12 @@ class Contract < ApplicationRecord
       select("contracts.*", volsum).joins(:escrows).group("id")
     end
 
-    def reward
-      where(mode: 'reward')
-    end
-
-    def forecast
-      where(mode: 'forecast')
-    end
-
     def pending_resolution
       expired.unresolved
+    end
+
+    def open
+      where(status: 'open')
     end
 
     def matured
@@ -49,12 +45,11 @@ class Contract < ApplicationRecord
     end
 
     def resolved
-      where("stm_status = ?", "resolved")
+      where("status = ?", "resolved")
     end
 
-
     def unresolved
-      where("stm_status != ?", "resolved")
+      where("status != ?", "resolved")
     end
 
     def select_subset
