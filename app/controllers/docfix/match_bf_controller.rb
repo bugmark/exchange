@@ -13,6 +13,7 @@ module Docfix
         cross = ContractCmd::Cross.new(@offer_bf.offer, :expand).project
         if cross
           contract = cross.contract
+          flash[:notice] = "New contract is created"
           redirect_to ("/docfix/contracts/#{contract.id}")
         else
           @bug = @offer_bf.offer.bug

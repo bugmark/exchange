@@ -68,7 +68,7 @@ div.text-center.bg
       tr
         td = core_position_link(position)
         td = position.value
-        td = position.contract.maturation_time
+        td = position.contract.maturation
         td = position.contract.status
         td = core_position_actions(position)
 
@@ -86,7 +86,7 @@ div.text-center.bg
       tr
         td = core_offer_id_link(offer)
         td = offer.value
-        td = offer.maturation_time
+        td = offer.maturation
         td = offer.status
         td = core_offer_actions(offer)
 
@@ -104,6 +104,6 @@ div.text-center.bg
       tr
         td = core_offer_id_link(offer)
         td = offer.value
-        td = offer.maturation_time
+        td = offer.maturation
         td = offer.status
         td = core_offer_actions(offer)

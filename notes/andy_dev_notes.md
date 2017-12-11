@@ -651,26 +651,27 @@ Next Actions:
 - [x] add links from demo/time page to open issues and resolved contracts
 - [x] Add GitHub PR / Issue Close screenshots
 - [x] Add a 'take' button to an offer view
+- [x] core: fix take link 
+- [x] fix offer language
+- [x] add success message to contract cross
+- [x] add escrows to contract
 
-- [ ] add escrows to contract
+# Dec 11
 
 - [ ] add ability to lookup contract by ID
 - [ ] fix user profile menus
 
 - [ ] fix rounding errors
-- [ ] fix offer language
 
 - [ ] Add links from event-notification page
 
 - [ ] Write a deployment plan
 
-- [ ] clickable depth charts
-
 - [ ] JJ Profile Pages
 
-- [ ] core: fix take link 
-
 # TBD
+
+- [ ] clickable depth charts
 
 - [ ] METRICS: add Georg command-data capture
 - [ ] METRICS: add Georg stats capture with cron process

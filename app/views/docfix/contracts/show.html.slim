@@ -34,10 +34,20 @@ small
           td
             b Maturation date
           td = @contract.maturation_str
+    h5[style='margin-top: 30px;'] Contract Escrows
+    table.table.table-condensed[style='margin-top: 10px;']
+      tr
+        th ID
+        th Date
+        th Value
+      - @contract.escrows.each do |escrow|
+        tr
+          td = escrow.sequence
+          td = escrow.created_at.strftime("%m-%d %H:%M")
+          td = escrow.total_value.to_i
   .col-md-5
     b TRADING OVERVIEW
     p
     = docfix_contract_price(@contract)
     .holder
       span.spark = @contract.escrows.map {|x| x.value }.join(",")
-    .holder: b CANDLESTICK HERE
