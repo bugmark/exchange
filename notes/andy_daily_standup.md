@@ -357,7 +357,17 @@ Discussion:
 - we should do a final rehersal this eve or tomorrow am
 
 Target Outcomes Dec 10:
-- [ ] Detail checking: wording, amounts, etc.
+- [x] Detail checking: wording, amounts, etc.
+- [x] Record a new demo script
 - [ ] Working blockchain integration (rich)
-- [ ] Record a new demo script
 - [ ] Write a deployment plan
+
+Mon Dec 11
+----------------------------------------------
+
+Target Outcomes Dec 11:
+- [ ] Link to contract on event notifications page
+- [ ] Tweak the demo script
+- [ ] Write a deployment plan
+- [ ] Working blockchain integration (rich)
+
