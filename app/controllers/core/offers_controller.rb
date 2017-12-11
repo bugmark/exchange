@@ -34,7 +34,12 @@ module Core
       offer   = Offer.find(params["id"])
       counter = OfferCmd::CreateBuy.new(offer.counter_type, offer.counter_args(current_user)).project.offer
       cross   = ContractCmd::Cross.new(counter, offer.cross_operation).project
-      redirect_to "/core/contracts/#{cross.commit.contract.id}"
+      if cross
+        redirect_to "/core/contracts/#{cross.contract.id}"
+      else
+        flash[:error] = "TAKE ERROR"
+        redirect_to "/core/offers"
+      end
     end
 
     private

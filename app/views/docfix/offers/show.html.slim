@@ -6,12 +6,13 @@ css:
     width: 80%;
   }
 
-- content_for :page_us do
+- content_for :page_js do
   javascript:
     window.Vals = {
       f1: [#{docfix_issue_of_vol(@offer.bug, @offer.bugm_time_period)}],
       u1: [#{docfix_issue_ou_vol(@offer.bug, @offer.bugm_time_period)}],
-    }
+    };
+  = javascript_pack_tag "docfix/offers/show/depth"
 
 = breadcrumb [%w(BugMark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
 small

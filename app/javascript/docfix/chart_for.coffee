@@ -1,9 +1,6 @@
 Chart = require "chart.js"
 
-console.log "DNB BOND"
-
 chartFor = (df, du, id)->
-  console.log "BING BING"
   ctx = $(id)
   myChart = new Chart(ctx,
     type: 'bar'

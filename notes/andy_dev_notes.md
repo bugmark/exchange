@@ -649,18 +649,16 @@ Next Actions:
 # Dec 10
 
 - [x] add links from demo/time page to open issues and resolved contracts
+- [x] Add GitHub PR / Issue Close screenshots
+- [x] Add a 'take' button to an offer view
+
+- [ ] add escrows to contract
 
 - [ ] add ability to lookup contract by ID
 - [ ] fix user profile menus
 
 - [ ] fix rounding errors
 - [ ] fix offer language
-
-- [ ] Add GitHub PR / Issue Close screenshots
-
-- [ ] add escrows to contract
-
-- [ ] Add a 'take' button to an offer view
 
 - [ ] Add links from event-notification page
 
