@@ -1,0 +1,1 @@
+curl "http://rinkeby.etherscan.io/api?module=account&action=txlist&address=0x12603dc1d2d2277abb6b46ab122d8ca514397e16&startblock=0&endblock=99999999&sort=asc&apikey=F7R5YTQ3KNMDRITY9TTNS5EEMXZ8PH3TDP" > eventstore.txns.json

@@ -1,0 +1,83 @@
+    [{
+      "constant": true,
+      "inputs": [],
+      "name": "creator",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function",
+      "stateMutability": "view"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "blockCreatedOn",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function",
+      "stateMutability": "view"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "id1",
+          "type": "uint256"
+        },
+        {
+          "name": "id2",
+          "type": "uint256"
+        },
+        {
+          "name": "id3",
+          "type": "uint256"
+        }
+      ],
+      "name": "log",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "type": "function",
+      "stateMutability": "nonpayable"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor",
+      "stateMutability": "nonpayable"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "id1",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "id2",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "id3",
+          "type": "uint256"
+        }
+      ],
+      "name": "GenericEvent",
+      "type": "event"
+    }]
