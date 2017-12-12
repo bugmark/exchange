@@ -6,12 +6,14 @@ class BotController < ApplicationController
   
   BOT_LOG   = "/tmp/bot_log.txt"
   BUILD_LOG = "/tmp/build_log.txt"
+  HISTORY   = "/tmp/history.txt"
   PROC_NAME = "bot_buy"
 
   def home
   end
 
   def time
+    @history = get_history
   end
 
   def timeinc
@@ -79,6 +81,12 @@ class BotController < ApplicationController
   def read_file(path)
     data = File.exist?(path) ? File.read(path).gsub("\n", "<br\>") : ""
     data.empty? ? "NO LOG DATA" : data
+  end
+
+  def get_history
+    history = History.new(HISTORY)
+    history.update
+    history
   end
 end
 

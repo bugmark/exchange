@@ -115,14 +115,21 @@ module ApplicationHelper
     #{offer_count} open #{"offer".pluralize(offer_count)}</br>
     #{user.positions.count} positions</br>
     #{user.balance} balance</br>
-    #{user.token_reserve} reserve</br>
     #{user.token_available} available
     """
   end
 
-  def trading_summary(user)
-    balance  = user.token_available
+  def app_trading_summary(user)
     raw "<span class='ttip' data-html='true' data-placement='bottom' title='#{ttip_content(user)}'>#{user.sname}</span>"
   end
 
+  def app_user_path(user)
+    layout = controller.send(:_layout, ["no_op_arg"])
+    # binding.pry
+    case layout.to_s
+      when "docfix" then docfix_user_path(user)
+      when "core"   then core_user_path(user)
+      else docfix_user_path(user)
+    end
+  end
 end

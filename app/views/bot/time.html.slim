@@ -3,7 +3,15 @@ css:
     display:       inline-block;
     width:         350px;
     text-align:    center;
+  }
+  .imger2 {
+    width: 800px;
+  }
+  .mb {
     margin-bottom: 30px;
+  }
+  .mt {
+    margin-top: 30px;
   }
 
 table.table.table-sm
@@ -15,11 +23,11 @@ table.table.table-sm
   tr
     td[colspan=2 style='padding-bottom: 20px; padding-top: 20px;']
       p Two things happen after a contract is formed:<br/>
-      .imger
+      .imger.mb
         img[src="/img/PR.png" style='height: 150px;']
         br
         u Step 1: Developer submits a pull request.
-      .imger
+      .imger.mb
         img[src="/img/CLOSE.png" style='height: 150px;']
         br
         u Step 2: Project maintainer closes the issue.
@@ -27,20 +35,42 @@ table.table.table-sm
         is resolved by examining issue status (open or closed).
       | For demonstration purposes, you can move the system time forward, past the maturation date.
   tr
-    td: b Real Time
-    td  = Time.now
+    td[colspan=2]
+      .imger
+        b> Real Day
+        = Time.now.strftime("%b %d")
+      .imger
+        b> Demo Day
+        | #{BugmTime.now.strftime("%b %d")} (offset #{BugmTime.day_offset} days)
   tr
-    td: b Demo Time
-    td  = BugmTime.now
-  tr
-    td: b # Issues
-    td  = issue_links
-  tr
-    td: b # Contracts
-    td  = contract_links
-  tr
-    td: b System Days Offset
-    td  = BugmTime.day_offset
+    td[colspan=2]
+      .imger2
+        table.table-bordered.table-condensed.table-hover.mb.mt[style='width: 100%;']
+          tr
+            th
+            th Dec 12
+            th Dec 20
+            th Dec 28
+            th Jan 5
+          tr
+            td # Closed Issues
+            td = @history.period(1)["closed_issues"]
+            td = @history.period(2)["closed_issues"]
+            td = @history.period(3)["closed_issues"]
+            td = @history.period(4)["closed_issues"]
+          tr
+            td # Resolved Contracts
+            td = @history.period(1)["closed_contracts"]
+            td = @history.period(2)["closed_contracts"]
+            td = @history.period(3)["closed_contracts"]
+            td = @history.period(4)["closed_contracts"]
+          tr
+            td Account Balance
+            td = @history.period(1)["balance"]
+            td = @history.period(2)["balance"]
+            td = @history.period(3)["balance"]
+            td = @history.period(4)["balance"]
+
   tr
     td: b Increment System Day Offset
     td
