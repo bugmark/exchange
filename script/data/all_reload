@@ -5,6 +5,7 @@ cd $SCRIPTDIR/../..
 
 pkill -f bot_buy
 rm -f /tmp/bugm_day_jump
+rm -f /tmp/history.txt
 
 echo "----- BUGMARK TOTAL REBUILD ---------------------"
 echo "START `date`"

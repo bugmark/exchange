@@ -4,40 +4,42 @@ require "./config/environment"
 
 week_ends = BugmTime.future_week_ends
 
+users = User.where("email ilike 'test%'")
+
 opts = [
   {
     stm_bug_id:  Bug.second.id       ,
     price:       0.10                ,
     volume:      45                  ,
-    user_id:     User.first.id       ,
+    user_id:     users.first.id      ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.third.id        ,
     price:       0.50                ,
     volume:      35                  ,
-    user_id:     User.second.id      ,
+    user_id:     users.second.id     ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.first.id        ,
     price:       0.25                ,
     volume:      20                  ,
-    user_id:     User.last.id        ,
+    user_id:     users.last.id       ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.third.id        ,
     price:       0.80                ,
     volume:      25                  ,
-    user_id:     User.last.id        ,
+    user_id:     users.last.id       ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.first.id        ,
     price:       0.50                ,
     volume:      35                  ,
-    user_id:     User.last.id        ,
+    user_id:     users.last.id       ,
     maturation:  week_ends.first
   }
 ]
