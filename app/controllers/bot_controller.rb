@@ -84,7 +84,7 @@ class BotController < ApplicationController
   end
 
   def get_history
-    history = History.new(HISTORY)
+    history = History.new(HISTORY, current_user)
     history.update
     history
   end
