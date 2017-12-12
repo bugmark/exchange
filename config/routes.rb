@@ -108,6 +108,8 @@ Rails.application.routes.draw do
       get 'my_wallet'
       get 'settings'
     end
+
+    resources :users
   end
 
   # ----- RESTFUL API -----

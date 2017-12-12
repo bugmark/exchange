@@ -659,25 +659,11 @@ Next Actions:
 
 # Dec 11
 
-- [ ] add ability to lookup contract by ID
-- [ ] fix user profile menus
-
-- [ ] fix rounding errors
-
+- [x] fix docfix user profile menus
+- [x] update demo script
 - [ ] Write a deployment plan
 
-- [ ] JJ Profile Pages
-
 # TBD
-
-- [ ] clickable depth charts
-
-- [ ] METRICS: add Georg command-data capture
-- [ ] METRICS: add Georg stats capture with cron process
-
-- [ ] FEEDBACK: make a feature spec that follows the demo
-- [ ] FEEDBACK: the offer amounts seem wrong
-- [ ] FEEDBACK: should fixed-side offers be AON?
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
@@ -691,10 +677,30 @@ Next Actions:
 - [ ] add ContractCmd::Clone with tests
 - [ ] add ContractCmd::Delete with tests
 
-- [ ] create a staging server
+- [ ] refactor events to enable balance generation
 
 - [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing
+
+- [ ] core: Restful API - generate user key
+- [ ] core: Restful API - add rate limiting
+- [ ] core: Restful API
+- [ ] core: Restful API ruby bindings with rest-client
+- [ ] core: Restful API CLI and Ruby Gem
+
+- [ ] move repo to bugmark org
+
+- [ ] docfix: clickable depth charts
+- [ ] docfix: fix rounding errors
+
+- [ ] METRICS: add Georg command-data capture
+- [ ] METRICS: add Georg stats capture with cron process
+
+- [ ] FEEDBACK: make a feature spec that follows the demo
+- [ ] FEEDBACK: the offer amounts seem wrong
+- [ ] FEEDBACK: should fixed-side offers be AON?
+
+- [ ] create a staging server
 
 - [ ] core: expose AON in UI
 - [ ] core: expose poolable in UI
@@ -723,8 +729,6 @@ Next Actions:
 - [ ] core: get sell/cross working
 - [ ] core: write Commit#resolve
 - [ ] core: implement all-or-none
-- [ ] core: reset the data from the UI
-- [ ] core: reset the contract maturation date
 
 - [ ] core: add repo sync
 - [ ] core: bid_buy/ask_buy: add suspended offers to the user-detail page
@@ -733,11 +737,6 @@ Next Actions:
 - [ ] core: add cron process for contract cross
 - [ ] core: add cron process for contract resolve
 - [ ] core: enable event replay
-- [ ] core: Restful API - generate user key
-- [ ] core: Restful API - add rate limiting
-- [ ] core: Restful API
-- [ ] core: Restful API ruby bindings with rest-client
-- [ ] core: Restful API CLI and Ruby Gem
 
 - [ ] core: rewrite the exchange in elixir
 - [ ] core: add GraphQL API

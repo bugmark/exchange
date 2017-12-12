@@ -16,7 +16,7 @@ table.table style='margin-bottom: 0; padding-bottom: 0'
       small #{link_to "Settings", edit_user_registration_path}
 
 div.text-center.bg
-  b Account Balance: #{@user.balance} Tokens (Reserve: #{@user.token_reserve} => Available: #{@user.token_available})
+  b Account Balance: #{@user.balance} Tokens (Available: #{@user.token_available})
 
 .mbt.by
   .text-center: b Most Recent Events
@@ -26,10 +26,10 @@ div.text-center.bg
         th ID
         th Type
         th Date
-    - @user.event_lines.order('id desc').limit(3).each do |event|
+    - @user.event_lines.order('id desc').limit(5).each do |event|
       tr
         td = event.id
-        td = event.klas
+        td = obj_link(event)
         td = event.created_at.strftime("%m-%d %H:%M:%S")
 
 .mbt.bg
@@ -46,33 +46,15 @@ div.text-center.bg
         th Action
     - @user.contracts.each do |contract|
       tr
-        td = core_contract_id_link(contract)
+        td = docfix_contract_id_link(contract)
         td = contract.amendments.count
         td = contract.total_value
-        td = core_contract_mature_date(contract)
-        td = core_contract_status(contract)
+        td = docfix_contract_mature_date(contract)
+        td = docfix_contract_status(contract)
         td = contract.awardee
-        td = core_contract_actions(contract)
+        td = docfix_contract_actions(contract)
 
 .mbt.by
-  .text-center: b Positions (#{@user.positions.count})
-  table.table.table-condensed
-    - if @user.positions.count > 0
-      tr
-        th ID
-        th Value
-        th Matures
-        th Status
-        th Action
-    - @user.positions.each do |position|
-      tr
-        td = core_position_link(position)
-        td = position.value
-        td = position.contract.maturation
-        td = position.contract.status
-        td = core_position_actions(position)
-
-.mbt.bg
   .text-center: b Offers to Buy (#{@user.offers_buy.count})
   table.table.table-condensed
     - if @user.offers_buy.count > 0
@@ -90,7 +72,7 @@ div.text-center.bg
         td = offer.status
         td = core_offer_actions(offer)
 
-.mbt.by
+.mbt.bg
   .text-center: b Offers to Sell (#{@user.offers_sell.count})
   table.table.table-condensed
     - if @user.offers_sell.count > 0
