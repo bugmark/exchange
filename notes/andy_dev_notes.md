@@ -659,8 +659,8 @@ Next Actions:
 
 # Dec 11
 
-- [ ] fix docfix user profile menus
-- [ ] update demo script
+- [x] fix docfix user profile menus
+- [x] update demo script
 - [ ] Write a deployment plan
 
 # TBD

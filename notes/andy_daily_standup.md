@@ -366,8 +366,17 @@ Mon Dec 11
 ----------------------------------------------
 
 Target Outcomes Dec 11:
-- [ ] Tweak the demo script
+- [x] Tweak the demo script
 - [ ] Make a new screencast
 - [ ] Write a deployment plan
 - [ ] Working blockchain integration (rich)
 
+
+Mon Dec 12
+----------------------------------------------
+
+Target Outcomes Dec 11:
+- [x] Finish the demo script
+- [ ] Make a new screencast
+- [ ] Write a deployment plan
+- [ ] Working blockchain integration (rich)
