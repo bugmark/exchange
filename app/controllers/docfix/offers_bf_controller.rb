@@ -22,7 +22,7 @@ module Docfix
 
     def perm(params)
       fields = Offer::Buy::Fixed.attribute_names.map(&:to_sym) + [:deposit, :maturation]
-      params.permit(fields)
+      params.permit(fields).merge({aon: true})
     end
   end
 end

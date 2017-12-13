@@ -661,7 +661,13 @@ Next Actions:
 
 - [x] fix docfix user profile menus
 - [x] update demo script
+
+# Dec 12
+
+- [x] Add a history component
+- [ ] Record a new script
 - [ ] Write a deployment plan
+- [ ] Create feature specs
 
 # TBD
 

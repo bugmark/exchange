@@ -5,7 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  before_save :default_values
+  before_save   :default_values
 
   has_many :offers     , class_name: "Offer"
   has_many :offers_buy , class_name: "Offer::Buy"
@@ -96,7 +96,8 @@ class User < ApplicationRecord
   private
 
   def default_values
-    self.balance ||= 100
+    self.balance = 1000.0 if self.balance.zero?
+    self.balance ||= 1000
   end
 end
 

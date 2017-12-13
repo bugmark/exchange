@@ -74,7 +74,7 @@ class Offer < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status stm_status))
+      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status stm_bug_id stm_status))
     end
     alias_method :ss, :select_subset
   end

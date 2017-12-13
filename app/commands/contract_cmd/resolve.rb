@@ -25,8 +25,11 @@ module ContractCmd
       contract.awarded_to = contract.awardee
       contract.escrows.each do |escrow|
         poslist = contract.awarded_to == "fixed" ? escrow.fixed_positions : escrow.unfixed_positions
+        psum  = poslist.map {|p| p.value}.sum
         poslist.each do |position|
-          new_bal = position.user.balance + position.value
+          prorata = position.value / psum
+          payout  = (position.escrow.total_value - position.value) * prorata
+          new_bal = position.user.balance + payout
           position.user.update_attribute(:balance, new_bal)
         end
       end

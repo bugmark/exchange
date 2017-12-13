@@ -54,22 +54,22 @@ table.table.table-sm
             th Jan 5
           tr
             td # Closed Issues
+            td = @history.period(0)["closed_issues"]
             td = @history.period(1)["closed_issues"]
             td = @history.period(2)["closed_issues"]
             td = @history.period(3)["closed_issues"]
-            td = @history.period(4)["closed_issues"]
           tr
             td # Resolved Contracts
-            td = @history.period(1)["closed_contracts"]
-            td = @history.period(2)["closed_contracts"]
-            td = @history.period(3)["closed_contracts"]
-            td = @history.period(4)["closed_contracts"]
+            td = @history.period(0)["resolved_contracts"]
+            td = @history.period(1)["resolved_contracts"]
+            td = @history.period(2)["resolved_contracts"]
+            td = @history.period(3)["resolved_contracts"]
           tr
             td Account Balance
+            td = @history.period(0)["balance"]
             td = @history.period(1)["balance"]
             td = @history.period(2)["balance"]
             td = @history.period(3)["balance"]
-            td = @history.period(4)["balance"]
 
   tr
     td: b Increment System Day Offset

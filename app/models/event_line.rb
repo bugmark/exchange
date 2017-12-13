@@ -1,3 +1,5 @@
+require 'json'
+
 class EventLine < ApplicationRecord
 
   before_validation :default_values
@@ -19,8 +21,8 @@ class EventLine < ApplicationRecord
     prev = EventLine.last
     self.data       ||= {}
     self.uuref      ||= SecureRandom.uuid
-    self.local_hash   = [self.uuref, data].hash.to_s
-    self.chain_hash   = [prev&.chain_hash, self.local_hash].hash.to_s
+    self.local_hash   = Digest::MD5.hexdigest([self.uuref, data].to_json)
+    self.chain_hash   = Digest::MD5.hexdigest([prev&.chain_hash, self.local_hash].to_json)
   end
 end
 

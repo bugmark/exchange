@@ -32,7 +32,7 @@ class Escrow < ApplicationRecord
     fixed_value + unfixed_value
   end
   alias_method :value, :total_value
-
+p
   def fixed_values
     fixed_positions.map(&:value).sum
   end

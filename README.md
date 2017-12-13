@@ -1,8 +1,7 @@
 # BugMark README
 
-BugMark - A Blockchain Market for Software Issues
+BugMark - A Market for Tradable Software Issues
 
-Referencese
-- [live website](https://bugmark.net)
-- [dev-env configuration](notes/devenv.md)
+Live website at  [bugmark.net](https://bugmark.net)
+
 
