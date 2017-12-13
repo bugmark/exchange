@@ -7,6 +7,14 @@ module V1
       end
     end
 
+    resource :rebuild_date do
+      desc "Return the system rebuild time"
+      get "", :root => :rebuild_date do
+        fn = "/tmp/bugm_build_date.txt"
+        File.exist?(fn) ? File.read(fn) : ""
+      end
+    end
+
     resource :bugs do
       desc "Return all bugs"
       get "", :root => :bugs do
