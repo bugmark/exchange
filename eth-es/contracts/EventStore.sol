@@ -5,7 +5,7 @@ contract EventStore {
     address public creator;
 	uint public blockCreatedOn;
 
-	event GenericEvent(uint256 id1, uint256 id2, uint256 id3);
+	event GenericEvent(uint256 id1, string string1);
 	
 
 	function EventStore() {
@@ -13,8 +13,8 @@ contract EventStore {
         blockCreatedOn = block.number;
 	}
 
-	function log(uint256 id1, uint256 id2, uint256 id3) returns(bool) {
-        GenericEvent(id1,id2,id3);
+	function log(uint256 id1, string string1) returns(bool) {
+        GenericEvent(id1,string1);
 		return true;
 	}
 

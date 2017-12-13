@@ -4,7 +4,7 @@ contract('EventStore', function(accounts) {
 
   var instance = null; // the contract instance
 
-  it("should put make some events.", function() {
+  it("should log some events.", function() {
     return EventStore.deployed().then(function(_instance) {
         // lets do an event!
         instance = _instance;
@@ -16,11 +16,11 @@ contract('EventStore', function(accounts) {
                 console.log(result.args);
             }
         });
-        return instance.log(1, 1, 1);
+        return instance.log(1, 12341234123514523452345);
     }).then(function(tx){
-        return instance.log(1, 1, 2);
+        return instance.log(1, "now is the time for all good men to come to the aid of the party");
     }).then(function(tx){
-        return instance.log(1, 1, 3);
+        return instance.log(1, '0xea906d728c144f2192ea0d8fd14ad6a2be051ca7b2da921903cb157d735a9412');
     });
   });
 });
