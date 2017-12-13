@@ -11,7 +11,7 @@ module V1
       desc "Return the system rebuild time"
       get "", :root => :rebuild_date do
         fn = "/tmp/bugm_build_date.txt"
-        File.exist?(fn) ? File.read(fn) : ""
+        File.exist?(fn) ? File.read(fn).strip : ""
       end
     end
 
