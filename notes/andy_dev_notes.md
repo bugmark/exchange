@@ -665,11 +665,9 @@ Next Actions:
 # Dec 12
 
 - [x] Add a history component
-- [ ] Record a new script
-- [ ] Write a deployment plan
-- [ ] Create feature specs
+- [x] Record a new script
 
-# TBD
+# Dec 13
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
@@ -693,6 +691,8 @@ Next Actions:
 - [ ] core: Restful API
 - [ ] core: Restful API ruby bindings with rest-client
 - [ ] core: Restful API CLI and Ruby Gem
+
+# TBD
 
 - [ ] move repo to bugmark org
 

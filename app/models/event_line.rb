@@ -19,10 +19,11 @@ class EventLine < ApplicationRecord
 
   def default_values
     prev = EventLine.last
-    self.data       ||= {}
-    self.uuref      ||= SecureRandom.uuid
-    self.local_hash   = Digest::MD5.hexdigest([self.uuref, data].to_json)
-    self.chain_hash   = Digest::MD5.hexdigest([prev&.chain_hash, self.local_hash].to_json)
+    self.data        ||= {}
+    self.uuref       ||= SecureRandom.uuid
+    self.local_hash    = Digest::MD5.hexdigest([self.uuref, data].to_json)
+    self.chain_hash    = Digest::MD5.hexdigest([prev&.chain_hash, self.local_hash].to_json)
+    self.etherscan_url = "https://rinkeby.etherscan.io/tx/0xa48b56dedb63a0bef8572925411fc8a8c053d2d7#eventlog"
   end
 end
 
