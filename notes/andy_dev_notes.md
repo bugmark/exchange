@@ -664,7 +664,7 @@ Next Actions:
 
 # Dec 12
 
-- [ ] Add a history component
+- [x] Add a history component
 - [ ] Record a new script
 - [ ] Write a deployment plan
 - [ ] Create feature specs
