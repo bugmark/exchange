@@ -23,7 +23,7 @@ class EventLine < ApplicationRecord
     self.uuref       ||= SecureRandom.uuid
     self.local_hash    = Digest::MD5.hexdigest([self.uuref, data].to_json)
     self.chain_hash    = Digest::MD5.hexdigest([prev&.chain_hash, self.local_hash].to_json)
-    self.etherscan_url = "https://rinkeby.etherscan.io/tx/0xa48b56dedb63a0bef8572925411fc8a8c053d2d7#eventlog"
+    self.etherscan_url = "https://rinkeby.etherscan.io/tx/0x6128df8192058231d10a24b6d0110d69a264a77446336dd726399932308c81de"
   end
 end
 
