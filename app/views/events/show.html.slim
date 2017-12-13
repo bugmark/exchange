@@ -22,3 +22,6 @@ table.table.table-sm
   tr
     td: b CREATED
     td = @event.created_at
+  tr
+    td: b LINKS
+    td = docfix_event_etherscan(@event)

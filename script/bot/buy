@@ -47,8 +47,6 @@ def cross
   Offer.open.is_buy.each do |offer|
     print "."
     ContractCmd::Cross.new(offer, :expand).project
-    # binding.pry
-    # result.project
   end
   puts "."
 end
