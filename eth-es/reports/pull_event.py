@@ -1,7 +1,7 @@
 
 #
 # Logs all event data in all_events.json to the currently deployed contract
-# Posts urls of rinkeby testnet on a blockchain browser to the rails app
+# Posts urls of rinkeby testnet transactions, as shown by a blockchain browser, to the rails app
 #
 
 import os
@@ -11,31 +11,40 @@ from pprint import pprint
 import binascii
 import datetime
 import hashlib
+import re # now we have two problems
 
-ALL_EVENTS='./eventstore.txns.json'
+ALL_EVENTS='./all_events.json'
 
 events = json.loads(open(ALL_EVENTS).read())
 
 for event in events:
 	if 'id' in event:
-		print "found id: " + str(event['id'])
+                pass
+		# print "found id: " + str(event['id'])
 
 # Temporarily only logging last event
 id = str(event['id'])
-print "last event: " + id  
+#print "last event: " + id  
 
 # md5 because that's what the rails app is using for this experiment
 hash = str(hashlib.md5(str(event)).hexdigest())
-print "hash of last event: " + hash
+#print "hash of event: " + hash
 
 log_cmd = "truffle exec ../commands/log_event.js " + id + " " + hash
 log_result = subprocess.check_output(log_cmd, shell=True).strip()
 
-print log_result
+lines = log_result.splitlines()
 
-log_json = json.loads(log_result)
+# The transaction id is in the last line with the occurrence of "address: "
+for line in reversed(lines):
+        if "address" in line:
+                print line
+                for s in line.split("'"):
+                        if "0x" in s:
+                                txid = s
+                break;
 
-txid = str(log_json['transactionHash'])
+print "TXID " + txid
 
 post_curl = "curl -X PUT --header 'Content-Type: application/x-www-form-urlencoded' --header 'Accept: text/html' "
 post_id =  "-d 'id=" + id
@@ -45,6 +54,10 @@ post_cmd = post_curl + post_id + post_url + post_api_url
 
 post_result = subprocess.check_output(post_cmd, shell=True).strip()
 
+print "CMD: "
+print post_cmd
+
+print "RESULT: "
 print post_result
 
 
