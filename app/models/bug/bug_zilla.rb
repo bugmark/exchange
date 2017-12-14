@@ -11,8 +11,8 @@ end
 #  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  synced_at   :datetime
-#  exref       :string
-#  uuref       :string
+#  exid        :string
+#  uuid        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  stm_bug_id  :integer

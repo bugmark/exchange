@@ -9,7 +9,7 @@ RSpec.describe Event::UserCreated, :type => :model do
       cmd_type:           "TESTCMD"                  ,
       cmd_uuid:           SecureRandom.uuid          ,
       email:              "bing@bong.com"            ,
-      uuref:              SecureRandom.uuid          ,
+      uuid:               SecureRandom.uuid          ,
       encrypted_password: User.new(password: PWD).encrypted_password
     }
   end
@@ -45,14 +45,14 @@ end
 #
 #  id           :integer          not null, primary key
 #  type         :string
-#  uuref        :string
+#  uuid         :string
 #  cmd_type     :string
 #  cmd_uuid     :string
 #  local_hash   :string
 #  chain_hash   :string
 #  data         :jsonb            not null
 #  jfields      :jsonb            not null
-#  user_ids     :integer          default([]), is an Array
+#  user_uuids   :string           default([]), is an Array
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

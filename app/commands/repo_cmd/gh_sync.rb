@@ -39,7 +39,7 @@ module RepoCmd
         attrs = {
           stm_repo_id: self.id           ,
           type:        "Bug::GitHub"     ,
-          exref:       el["id"]          ,
+          exid:        el["id"]          ,
           stm_title:   el["title"]       ,
           stm_labels:  labels_for(el)    ,
           stm_status:  el["state"]       ,

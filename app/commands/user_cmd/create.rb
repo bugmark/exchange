@@ -9,9 +9,9 @@ module UserCmd
       @user = User.find_by(xargs) || User.create(args)
     end
 
-    def event_data
-      user.attributes
-    end
+    # def event_data
+    #   user.attributes
+    # end
 
     def user_ids
       [user.id]

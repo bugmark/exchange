@@ -25,8 +25,8 @@ RSpec.describe Offer, type: :model do
   end
 
   describe "Attributes" do
-    it { should respond_to :exref               }
-    it { should respond_to :uuref               }
+    it { should respond_to :exid               }
+    it { should respond_to :uuid               }
   end
 
   describe "Instance Methods" do
@@ -150,15 +150,15 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  describe "#uuref" do
+  describe "#uuid" do
     it 'generates a string' do
       subject.save
-      expect(subject.uuref).to be_a(String)
+      expect(subject.uuid).to be_a(String)
     end
 
     it 'generates a 36-character string' do
       subject.save
-      expect(subject.uuref.length).to eq(36)
+      expect(subject.uuid.length).to eq(36)
     end
   end
 end
@@ -185,8 +185,8 @@ end
 #  maturation_range    :tsrange
 #  xfields             :hstore           not null
 #  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
+#  exid                :string
+#  uuid                :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  stm_bug_id          :integer

@@ -9,12 +9,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.timestamps
     end
-    add_index :repos, :exref
-    add_index :repos, :uuref
+    add_index :repos, :exid
+    add_index :repos, :uuid
     add_index :repos, :type
     add_index :repos, :name
     add_index :repos, :jfields, using: :gin
@@ -25,12 +25,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.timestamps
     end
-    add_index :bugs, :exref
-    add_index :bugs, :uuref
+    add_index :bugs, :exid
+    add_index :bugs, :uuid
     add_index :bugs, :type
     add_index :bugs, :jfields, using: :gin
     add_index :bugs, :xfields, using: :gin
@@ -53,8 +53,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.tsrange  :maturation_range
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.timestamps
     end
     add_index :offers, :type
@@ -67,8 +67,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :volume
     add_index :offers, :price
     add_index :offers, :value
-    add_index :offers, :exref
-    add_index :offers, :uuref
+    add_index :offers, :exid
+    add_index :offers, :uuid
     add_index :offers, :maturation_range, using: :gist
     add_index :offers, :xfields         , using: :gin
     add_index :offers, :jfields         , using: :gin
@@ -81,13 +81,13 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.datetime :maturation
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.timestamps
     end
     add_index :contracts, :prototype_id
-    add_index :contracts, :exref
-    add_index :contracts, :uuref
+    add_index :contracts, :exid
+    add_index :contracts, :uuid
     add_index :contracts, :xfields, using: :gin
     add_index :contracts, :jfields, using: :gin
 
@@ -120,8 +120,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.float    :price
       t.float    :value
       t.string   :side            # 'fixed' or 'unfixed'
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.timestamps
     end
     add_index :positions, :offer_id
@@ -132,8 +132,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :positions, :volume
     add_index :positions, :price
     add_index :positions, :value
-    add_index :positions, :exref
-    add_index :positions, :uuref
+    add_index :positions, :exid
+    add_index :positions, :uuid
     add_index :positions, :side
 
     create_table :escrows do |t|
@@ -143,16 +143,16 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :amendment_id
       t.float    :fixed_value  ,     default: 0.0
       t.float    :unfixed_value,     default: 0.0
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.timestamps
     end
     add_index :escrows, :type
     add_index :escrows, :contract_id
     add_index :escrows, :amendment_id
     add_index :escrows, :sequence
-    add_index :escrows, :exref
-    add_index :escrows, :uuref
+    add_index :escrows, :exid
+    add_index :escrows, :uuid
 
     create_table :amendments do |t|
       t.string   :type               # expand, transfer, reduce, resolve
@@ -160,53 +160,53 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :contract_id
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.timestamps
     end
     add_index :amendments, :sequence
     add_index :amendments, :contract_id
     add_index :amendments, :xfields, using: :gin
     add_index :amendments, :jfields, using: :gin
-    add_index :amendments, :exref
-    add_index :amendments, :uuref
+    add_index :amendments, :exid
+    add_index :amendments, :uuid
 
     create_table :users do |t|
       t.boolean  :admin
       t.float    :balance, default: 0.0
-      t.string   :exref
-      t.string   :uuref
+      t.string   :exid
+      t.string   :uuid
       t.jsonb    :jfields , null: false, default: {}
       t.datetime :last_seen_at
       t.timestamps
     end
-    add_index :users, :exref
-    add_index :users, :uuref
+    add_index :users, :exid
+    add_index :users, :uuid
     add_index :users, :jfields, using: :gin
 
     # the event store...
     create_table :events do |t|
       t.string     :type
-      t.string     :uuref
+      t.string     :uuid
       t.string     :cmd_type
       t.string     :cmd_uuid
       t.string     :local_hash
       t.string     :chain_hash
-      t.jsonb      :data    , null: false, default: {}
-      t.jsonb      :jfields , null: false, default: {}
-      t.integer    :user_ids, array: true, default: []
+      t.jsonb      :data       , null: false, default: {}
+      t.jsonb      :jfields    , null: false, default: {}
+      t.string     :user_uuids , array: true, default: []
       t.datetime   :projected_at
       t.timestamps
     end
     add_index :events, :type
-    add_index :events, :uuref
+    add_index :events, :uuid
     add_index :events, :cmd_type
     add_index :events, :cmd_uuid
     add_index :events, :local_hash
     add_index :events, :chain_hash
-    add_index :events, :data      , using: :gin
-    add_index :events, :jfields   , using: :gin
-    add_index :events, :user_ids  , using: :gin
+    add_index :events, :data       , using: :gin
+    add_index :events, :jfields    , using: :gin
+    add_index :events, :user_uuids, using: :gin
     add_index :events, :projected_at
 
     # holds an event counter for a projection

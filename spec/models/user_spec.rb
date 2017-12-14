@@ -171,8 +171,8 @@ end
 #  id                     :integer          not null, primary key
 #  admin                  :boolean
 #  balance                :float            default(0.0)
-#  exref                  :string
-#  uuref                  :string
+#  exid                   :string
+#  uuid                   :string
 #  jfields                :jsonb            not null
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null

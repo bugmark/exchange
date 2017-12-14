@@ -28,8 +28,8 @@ end
 #  maturation_range    :tsrange
 #  xfields             :hstore           not null
 #  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
+#  exid                :string
+#  uuid                :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  stm_bug_id          :integer
