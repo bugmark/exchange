@@ -672,14 +672,16 @@ Next Actions:
 - [x] rename EventLine to Event
 - [x] refactor events to enable balance generation
 - [x] add state object to all commands (with events field)
+- [x] each event type has a project method
+- [x] each event type has a validation method
+- [x] create event subtypes
 
-- [ ] each event type has a project method
-- [ ] each event type has a validation method
-- [ ] create event subtypes
-- [ ] commands should check validity of all events
 - [ ] commands should generate an array of events
-- [ ] commands should take a project method
+- [ ] commands should check validity of all events
+- [ ] commands should take a common project method
 - [ ] use UUIDS instead of IDS in commands and events
+
+- [ ] add tests for 
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers

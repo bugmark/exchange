@@ -195,6 +195,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.jsonb      :data    , null: false, default: {}
       t.jsonb      :jfields , null: false, default: {}
       t.integer    :user_ids, array: true, default: []
+      t.datetime   :projected_at
       t.timestamps
     end
     add_index :events, :type
@@ -206,6 +207,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :events, :data      , using: :gin
     add_index :events, :jfields   , using: :gin
     add_index :events, :user_ids  , using: :gin
+    add_index :events, :projected_at
 
     # holds an event counter for a projection
     create_table :projections do |t|
