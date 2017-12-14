@@ -189,7 +189,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string     :type
       t.string     :uuref
       t.string     :cmd_type
-      t.string     :cmd_id
+      t.string     :cmd_uuid
       t.string     :local_hash
       t.string     :chain_hash
       t.jsonb      :data    , null: false, default: {}
@@ -201,7 +201,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :events, :type
     add_index :events, :uuref
     add_index :events, :cmd_type
-    add_index :events, :cmd_id
+    add_index :events, :cmd_uuid
     add_index :events, :local_hash
     add_index :events, :chain_hash
     add_index :events, :data      , using: :gin

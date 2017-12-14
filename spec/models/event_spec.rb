@@ -2,25 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Event, type: :model do
 
-  def valid_params
-    {
-      cmd_type:  "TBD"      ,
-      data:      {}
-    }
-  end
-
-  let(:klas)   { described_class         }
-  subject      { klas.new(valid_params)  }    #
-
-  describe "Object Creation" do
-    it { should be_valid } #
-
-    it 'saves the object to the database' do
-      subject.save
-      expect(subject).to be_valid
-    end
-  end
-
 end
 
 # == Schema Information
@@ -31,7 +12,7 @@ end
 #  type         :string
 #  uuref        :string
 #  cmd_type     :string
-#  cmd_id       :string
+#  cmd_uuid     :string
 #  local_hash   :string
 #  chain_hash   :string
 #  data         :jsonb            not null

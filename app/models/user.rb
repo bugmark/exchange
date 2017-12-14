@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_paper_trail
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
 
   before_save   :default_values
 
@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
+
+  validates :password, :presence => true, :on => :create, unless: :has_encrypted_pwd?
 
   def event_lines
     Event.for_user(self.id)
@@ -98,6 +100,10 @@ class User < ApplicationRecord
   def default_values
     self.balance = 1000.0 if self.balance.zero?
     self.balance ||= 1000
+  end
+
+  def has_encrypted_pwd?
+    self.encrypted_password.present?
   end
 end
 

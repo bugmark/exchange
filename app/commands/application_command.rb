@@ -97,6 +97,19 @@ class ApplicationCommand
     raise "NOT ALLOWED - USE #project"
   end
 
+  # synonym for project
+  def cast
+    valid?
+    if valid?
+      state.events.each do |event|
+        event.cast
+      end
+      self
+    else
+      false
+    end
+  end
+
   # pro*jekt* - create a projection - an aggregate data view
   def project
     valid?
@@ -104,7 +117,7 @@ class ApplicationCommand
     if valid?
       transact_before_project # perform a transaction, if any
       subs.each(&:save)       # save all subobjects
-      save_event
+      # save_event
       self
     else
       false

@@ -14,11 +14,11 @@ RSpec.describe User, type: :model do
   end
 
   let(:usr) { FB.create(:user, balance: 100.0).user         }
-  let(:ask) { FB.create(:offer_bf, user_id: user.id)       }
+  let(:ask) { FB.create(:offer_bf, user_id: user.id)        }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 
-  describe "Associations" do # .
+  describe "Associations" do # ..
     it { should respond_to(:offers_buy)  }
     it { should respond_to(:offers_bu)   }
     it { should respond_to(:offers_bf)   }

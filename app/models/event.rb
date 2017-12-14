@@ -5,6 +5,7 @@ class Event < ApplicationRecord
   before_validation :default_values
 
   validates :cmd_type, presence: true
+  validates :cmd_uuid, presence: true
 
   jsonb_accessor   :jfields , :etherscan_url => :string
 
@@ -15,11 +16,21 @@ class Event < ApplicationRecord
     end
   end
 
-  def project
+  def cast_action
     raise "Override in subclass!!"
   end
 
+  def cast
+    cast_transaction
+    self.send(:save)
+    self.update_attribute(:projected_at, BugmTime.now)
+  end
+
   private
+
+  def save(*)
+    super
+  end
 
   def default_values
     prev = Event.last
@@ -39,7 +50,7 @@ end
 #  type         :string
 #  uuref        :string
 #  cmd_type     :string
-#  cmd_id       :string
+#  cmd_uuid     :string
 #  local_hash   :string
 #  chain_hash   :string
 #  data         :jsonb            not null

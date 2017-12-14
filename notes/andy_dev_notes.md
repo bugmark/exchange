@@ -676,12 +676,22 @@ Next Actions:
 - [x] each event type has a validation method
 - [x] create event subtypes
 
+# Dec 14
+
+- [ ] get user_create command working with new structure
+
 - [ ] commands should generate an array of events
+- [ ] use jsonb_accessor to get at event data elements
 - [ ] commands should check validity of all events
 - [ ] commands should take a common project method
 - [ ] use UUIDS instead of IDS in commands and events
 
-- [ ] add tests for 
+- [ ] add tests for event projection & validation
+
+- [ ] redo all buy_offer commands - tests on events
+- [ ] redo all buy_offer commands - tests on projections
+- [ ] redo all cross_expand commands - tests on events
+- [ ] redo all cross_expand commands - tests on projections
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
