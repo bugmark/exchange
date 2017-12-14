@@ -59,7 +59,6 @@ end
 #  id           :integer          not null, primary key
 #  prototype_id :integer
 #  type         :string
-#  mode         :string
 #  status       :string
 #  awarded_to   :string
 #  maturation   :datetime
