@@ -28,6 +28,7 @@ end
 # Table name: events
 #
 #  id         :integer          not null, primary key
+#  type       :string
 #  uuref      :string
 #  cmd_type   :string
 #  cmd_id     :string

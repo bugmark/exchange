@@ -669,6 +669,12 @@ Next Actions:
 
 # Dec 13
 
+- [x] rename EventLine to Event
+- [x] refactor events to enable balance generation
+- [ ] add state object to all commands
+- [ ] let Events take a #project method
+- [ ] create event subtypese
+
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
@@ -680,8 +686,6 @@ Next Actions:
 - [ ] add ContractCmd::Create with tests
 - [ ] add ContractCmd::Clone with tests
 - [ ] add ContractCmd::Delete with tests
-
-- [ ] refactor events to enable balance generation
 
 - [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing

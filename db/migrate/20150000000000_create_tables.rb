@@ -186,6 +186,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     # the event store...
     create_table :events do |t|
+      t.string     :type
       t.string     :uuref
       t.string     :cmd_type
       t.string     :cmd_id
@@ -196,6 +197,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer    :user_ids, array: true, default: []
       t.timestamps
     end
+    add_index :events, :type
     add_index :events, :uuref
     add_index :events, :cmd_type
     add_index :events, :cmd_id
