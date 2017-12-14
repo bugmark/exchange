@@ -91,16 +91,16 @@ RSpec.describe ContractCmd::Cross::Expand do
 
   describe "#event_save", USE_VCR do
     it 'creates an event' do
-      expect(EventLine.count).to eq(0)
+      expect(Event.count).to eq(0)
       subject.project
-      expect(EventLine.count).to eq(4)
+      expect(Event.count).to eq(4)
     end
 
     it 'chains with #project' do
-      expect(EventLine.count).to eq(0)
+      expect(Event.count).to eq(0)
       expect(Contract.count).to eq(0)
       subject.project
-      expect(EventLine.count).to eq(4)   # TODO: retest ..
+      expect(Event.count).to eq(4)   # TODO: retest ..
       expect(Contract.count).to eq(0)
     end
   end

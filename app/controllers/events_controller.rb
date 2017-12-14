@@ -5,11 +5,11 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: %i(new_login new_signup)
 
   def index
-    @events = EventLine.order('id desc').paginate(page: params[:page], per_page: 10)
+    @events = Event.order('id desc').paginate(page: params[:page], per_page: 10)
   end
 
   def show
-    @event = EventLine.find(params["id"])
+    @event = Event.find(params["id"])
   end
 
   def new_login

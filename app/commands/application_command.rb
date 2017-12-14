@@ -138,11 +138,19 @@ class ApplicationCommand
 
   private
 
+  def cmd_id
+    @cmd_id ||= SecureRandom.uuid
+  end
+
+  def cmd_type
+    @cmd_type ||= self.class.name
+  end
+
   def save_event
-    base = {klas: self.class.name, user_ids: user_ids}
+    base = {cmd_type: cmd_type, cmd_id: cmd_id, user_ids: user_ids}
     data = {data: event_data}
     both = data.merge(base)
-    EventLine.new(both).save
+    Event.new(both).save
 
     if ! Rails.env.test? && File.exist?("/etc/influxdb/influxdb.conf")
       mname = "cmd." + self.class.name.gsub("::", "_")

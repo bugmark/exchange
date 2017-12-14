@@ -68,16 +68,16 @@ RSpec.describe UserCmd::Create do
 
   describe "#event_save" do
     it 'creates an event' do
-      expect(EventLine.count).to eq(0)
+      expect(Event.count).to eq(0)
       subject.project
-      expect(EventLine.count).to eq(1)
+      expect(Event.count).to eq(1)
     end
 
     it 'chains with #project' do
-      expect(EventLine.count).to eq(0)
+      expect(Event.count).to eq(0)
       expect(User.count).to eq(0)
       subject.project
-      expect(EventLine.count).to eq(1)
+      expect(Event.count).to eq(1)
       expect(User.count).to eq(1)
     end
   end

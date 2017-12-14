@@ -29,7 +29,7 @@ div.text-center.bg
     - @user.event_lines.order('id desc').limit(3).each do |event|
       tr
         td = event.id
-        td = event.klas
+        td = event.cmd_type
         td = event.created_at.strftime("%m-%d %H:%M:%S")
 
 .mbt.bg

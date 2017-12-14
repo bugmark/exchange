@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'User Factory' do
 
-  it "runs without params" do
+  it "runs without params" do #.
     expect(User.count).to eq(0)
     FB.create(:user)
     expect(User.count).to eq(1)

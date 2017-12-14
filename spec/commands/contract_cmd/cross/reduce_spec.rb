@@ -10,13 +10,13 @@ RSpec.describe ContractCmd::Cross::Reduce do
   let(:klas)     { described_class                        }
   subject        { klas.new(offer_su, :reduce)            }
 
-  describe "Attributes", USE_VCR do
+  describe "Attributes", USE_VCR do #
     it { should respond_to :offer         }
     it { should respond_to :counters      }
     it { should respond_to :type          }
   end
 
-  describe "Object Existence", USE_VCR do
+  describe "Object Existence", USE_VCR do #
     it { should be_a klas           }
     it { should_not be_valid        }
   end
@@ -67,19 +67,18 @@ RSpec.describe ContractCmd::Cross::Reduce do
       expect(Contract.count).to eq(1)
     end
 
-    # it 'adjusts the user balance', :focus do #
-    #   hydrate(offer_sf, offer_su)
-    #   u1 = offer_sf.user
-    #   u2 = offer_su.user
-    #   expect(u1.balance).to eq(996.0)
-    #   expect(u2.balance).to eq(994.0)
-    #   subject.project
-    #   u1.reload
-    #   u2.reload
-    #   binding.pry
-    #   expect(u1.balance).to eq(992.0)   # SHOULD BE 994 .
-    #   expect(u2.balance).to eq(988.0)   # SHOULD BE 996
-    # end
+    it 'adjusts the user balance', :focus do #
+      hydrate(offer_sf, offer_su)
+      u1 = offer_sf.user
+      u2 = offer_su.user
+      expect(u1.balance).to eq(996.0)
+      expect(u2.balance).to eq(994.0)
+      subject.project
+      u1.reload
+      u2.reload
+      expect(u1.balance).to eq(992.0)   # SHOULD BE 994 ...
+      expect(u2.balance).to eq(988.0)   # SHOULD BE 996
+    end
   end
 
   describe "#event_data", USE_VCR do

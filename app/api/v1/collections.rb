@@ -57,9 +57,9 @@ module V1
       end
       get "", :root => :events do
         if params[:after]
-          EventLine.where('id > ?', params[:after])
+          Event.where('id > ?', params[:after])
         else
-          EventLine.all
+          Event.all
         end
       end
       params do
@@ -67,7 +67,7 @@ module V1
         requires :etherscan_url, type: String
       end
       put "", :root => :events do
-        el = EventLine.find(params[:id])
+        el = Event.find(params[:id])
         el.update_attribute(:etherscan_url, params[:etherscan_url])
       end
     end

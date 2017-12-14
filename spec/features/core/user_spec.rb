@@ -28,4 +28,3 @@ describe "User", USE_VCR do
     expect(page).to_not be_nil
   end
 end
-#

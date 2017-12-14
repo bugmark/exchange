@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe EventLine, type: :model do
+RSpec.describe Event, type: :model do
 
   def valid_params
     {
-      klas:  "TBD"      ,
-      data:  {}
+      cmd_type:  "TBD"      ,
+      data:      {}
     }
   end
 
   let(:klas)   { described_class         }
-  subject      { klas.new(valid_params)  }
+  subject      { klas.new(valid_params)  }    #
 
   describe "Object Creation" do
-    it { should be_valid }
+    it { should be_valid } #
 
     it 'saves the object to the database' do
       subject.save

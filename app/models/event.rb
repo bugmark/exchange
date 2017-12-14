@@ -1,10 +1,10 @@
 require 'json'
 
-class EventLine < ApplicationRecord
+class Event < ApplicationRecord
 
   before_validation :default_values
 
-  validates :klas, presence: true
+  validates :cmd_type, presence: true
 
   jsonb_accessor   :jfields , :etherscan_url => :string
 
@@ -18,7 +18,7 @@ class EventLine < ApplicationRecord
   private
 
   def default_values
-    prev = EventLine.last
+    prev = Event.last
     self.data        ||= {}
     self.uuref       ||= SecureRandom.uuid
     self.local_hash    = Digest::MD5.hexdigest([self.uuref, data].to_json)

@@ -55,16 +55,16 @@ RSpec.describe OfferCmd::Suspend do
 
   describe "#event_save", USE_VCR do
     it 'creates an event' do
-      expect(EventLine.count).to eq(0)
+      expect(Event.count).to eq(0)
       subject.project
-      expect(EventLine.count).to eq(5)
+      expect(Event.count).to eq(5)
     end
 
     it 'chains with #project' do
-      expect(EventLine.count).to eq(0)
+      expect(Event.count).to eq(0)
       expect(Offer.count).to eq(0)
       subject.project
-      expect(EventLine.count).to eq(5)
+      expect(Event.count).to eq(5)
       expect(Offer.count).to eq(1)
     end
   end

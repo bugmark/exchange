@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 
-  describe "Associations" do
+  describe "Associations" do # .
     it { should respond_to(:offers_buy)  }
     it { should respond_to(:offers_bu)   }
     it { should respond_to(:offers_bf)   }

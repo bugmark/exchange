@@ -18,7 +18,7 @@ class User < ApplicationRecord
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 
   def event_lines
-    EventLine.for_user(self.id)
+    Event.for_user(self.id)
   end
 
   def last_event_at
