@@ -136,6 +136,16 @@ class ApplicationCommand
     !valid?
   end
 
+  def state
+    @state ||= {}
+    @state[:events] ||= []
+    @state
+  end
+
+  def state=(val)
+    @state = val
+  end
+
   private
 
   def cmd_id

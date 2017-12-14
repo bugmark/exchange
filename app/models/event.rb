@@ -15,6 +15,10 @@ class Event < ApplicationRecord
     end
   end
 
+  def project
+    raise "Override in subclass!!"
+  end
+
   private
 
   def default_values
