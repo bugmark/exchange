@@ -1,0 +1,8 @@
+:output:
+  Event:
+    :ancestor: true
+    :options:
+      :fields:
+        - id
+        - type
+        - data
