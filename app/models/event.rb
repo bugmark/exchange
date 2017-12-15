@@ -22,9 +22,10 @@ class Event < ApplicationRecord
   end
 
   def cast
-    cast_transaction
+    cast_object = cast_transaction
+    self.projected_at = BugmTime.now
     self.send(:save)
-    self.update_attribute(:projected_at, BugmTime.now)
+    cast_object
   end
 
   private

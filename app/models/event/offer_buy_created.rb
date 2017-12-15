@@ -1,8 +1,10 @@
-class Event::UserCreated < Event
+class Event::OfferBuyCreated < Event
 
-  jsonb_accessor :data, "uuid"  => :string
-  jsonb_accessor :data, "email" => :string
-  jsonb_accessor :data, "encrypted_password" => :string
+  jsonb_accessor :data, "user_uuid"  => :string
+  jsonb_accessor :data, "volume"     => :integer
+  jsonb_accessor :data, "price"      => :float
+  jsonb_accessor :data, "aon"        => [:boolean, default: false]
+  jsonb_accessor :data, "poolable"   => [:boolean, default: false]
 
   validates :uuid , presence: true
   validates :email, presence: true
@@ -11,11 +13,16 @@ class Event::UserCreated < Event
   def cast_transaction
     opts = {"uuid" => uuid, "email" => email, "encrypted_password" => encrypted_password}
     User.create(opts)
+    offer_klas.create(opts)
   end
 
   def user_uuids
     [uuid]
   end
+
+
+
+
 end
 
 # == Schema Information

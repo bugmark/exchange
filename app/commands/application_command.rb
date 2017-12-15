@@ -67,25 +67,33 @@ class ApplicationCommand
 
   # ----- template methods - override in subclass
 
+  def add_event(key, event)
+    state[:events][key] = event
+  end
+
+  def events
+    state[:events]
+  end
+
   def self.from_event(_event)
     raise "from_event: override in subclass"
   end
 
-  def event_data
-    {}
-  end
+  # def event_data
+  #   {}
+  # end
+  #
+  # def influx_tags
+  #   {}
+  # end
+  #
+  # def influx_fields
+  #   {}
+  # end
 
-  def influx_tags
-    {}
-  end
-
-  def influx_fields
-    {}
-  end
-
-  def user_ids
-    []
-  end
+  # def user_ids
+  #   []
+  # end
 
   def transact_before_project
     # override in subclass
@@ -101,12 +109,15 @@ class ApplicationCommand
   def cast
     valid?
     if valid?
-      state.events.each do |event|
-        event.cast
+      events.each do |key, event|
+        varname = "@#{key.to_s}"
+        raise "DUPLICATE KEY" if self.instance_variables.map(&:to_s).include?(varname)
+        self.instance_variable_set varname, event.cast
+        self.define_singleton_method(key) { eval varname }
       end
       self
     else
-      false
+      nil
     end
   end
 
@@ -128,16 +139,12 @@ class ApplicationCommand
 
   # validations can live in the Command or the Sub-Object (or both!)
   def valid?
-    if subs.map(&:nil?).any?
-      errors.add(:base, "missing sub-object (#{missing_subobjects.join(', ')})")
-      return false
-    end
-    if super && subs.map(&:valid?).all?
+    if super && events.values.map(&:valid?).all?
       true
     else
-      subs.each do |object|
-        object.valid?                        # populate the subobject errors
-        object.errors.each do |field, error| # transfer the error messages
+      events.values.each do |obj|
+        obj.valid?
+        obj.errors.each do |field, error|
           errors.add(field, error)
         end
       end
@@ -145,13 +152,30 @@ class ApplicationCommand
     end
   end
 
+  # def valid?
+  #   if subs.map(&:nil?).any?
+  #     errors.add(:base, "missing sub-object (#{missing_subobjects.join(', ')})")
+  #     return false
+  #   end
+  #   if super && subs.map(&:valid?).all?
+  #     true
+  #   else
+  #     subs.each do |object|
+  #       object.valid?                        # populate the subobject errors
+  #       object.errors.each do |field, error| # transfer the error messages
+  #         errors.add(field, error)
+  #       end
+  #     end
+  #     false
+  #   end
+
   def invalid?
     !valid?
   end
 
   def state
     @state ||= {}
-    @state[:events] ||= []
+    @state[:events] ||= {}
     @state
   end
 
@@ -161,12 +185,16 @@ class ApplicationCommand
 
   private
 
-  def cmd_id
-    @cmd_id ||= SecureRandom.uuid
+  def cmd_uuid
+    @cmd_uuid ||= SecureRandom.uuid
   end
 
   def cmd_type
     @cmd_type ||= self.class.name
+  end
+
+  def cmd_opts
+    {"cmd_type" => cmd_type, "cmd_uuid" => cmd_uuid}
   end
 
   def save_event

@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 
-  describe "Associations" do # ..
+  describe "Associations" do
     it { should respond_to(:offers_buy)  }
     it { should respond_to(:offers_bu)   }
     it { should respond_to(:offers_bf)   }
@@ -65,11 +65,12 @@ RSpec.describe User, type: :model do
     end
 
     it "has a default value" do
+      hydrate usr
       expect(usr.balance).to eq(100.0)
     end
   end
 
-  describe "#token_reserve_poolable", USE_VCR do
+  describe "#token_reserve_poolable", USE_VCR do #
     it "has a value with one bid" do
       gen_unfixed(poolable: true)
       expect(usr.token_reserve_poolable).to eq(6.0)

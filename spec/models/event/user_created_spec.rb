@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Event::UserCreated, :type => :model do
 
-  PWD = "dingo"
+  PWD = "dingo" #..
 
-  def valid_params
+  def valid_params(alt = {})
     {
       cmd_type:           "TESTCMD"                  ,
       cmd_uuid:           SecureRandom.uuid          ,
       email:              "bing@bong.com"            ,
       uuid:               SecureRandom.uuid          ,
       encrypted_password: User.new(password: PWD).encrypted_password
-    }
+    }.merge(alt)
   end
 
   let(:klas)   { described_class         }
@@ -22,7 +22,7 @@ RSpec.describe Event::UserCreated, :type => :model do
 
     it 'saves the object to the database' do
       subject.cast
-      expect(subject).to be_valid
+      expect(subject).to be_valid #.
     end
 
     it 'prevents calling save' do
@@ -33,8 +33,11 @@ RSpec.describe Event::UserCreated, :type => :model do
   describe "Casting" do
     it "increments the user count" do
       expect(User.count).to eq(0)
-      subject.cast
+      result = subject.cast
+      expect(result).to be_a(User)
+      expect(Event.count).to eq(1)
       expect(User.count).to eq(1)
+      expect(User.first.balance).to eq(0.0)
     end
   end
 end

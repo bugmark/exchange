@@ -678,15 +678,27 @@ Next Actions:
 
 # Dec 14
 
-- [ ] get user_create command working with new structure
+- [x] get user_create command working with new structure
+- [x] commands should generate an array of events
+- [x] use jsonb_accessor to get at event data elements
+- [x] commands should check validity of all events
+- [x] commands should take a common project (cast) method
+- [x] use UUIDS instead of IDS in commands and events
+- [x] make user_create work with an initial balance
 
-- [ ] commands should generate an array of events
-- [ ] use jsonb_accessor to get at event data elements
-- [ ] commands should check validity of all events
-- [ ] commands should take a common project method
-- [ ] use UUIDS instead of IDS in commands and events
+# Dec 15
+
+- [ ] get CreateBuy::OfferCmd working with new structure
+
+- [ ] chain validations: command -> event -> object
+- [ ] test chained validations in web form
+
+- [ ] add a withdrawal event
+- [ ] make a withdrawal event work in a web form (rails form error)
 
 - [ ] add tests for event projection & validation
+- [ ] add transaction sequence to Events
+- [ ] add end-transaction events to events
 
 - [ ] redo all buy_offer commands - tests on events
 - [ ] redo all buy_offer commands - tests on projections

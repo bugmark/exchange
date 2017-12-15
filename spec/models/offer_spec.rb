@@ -5,14 +5,12 @@ RSpec.describe Offer, type: :model do
     {
       user_id: user.id                                     ,
       maturation_range: Time.now-1.week..Time.now+1.week   ,
-      status:  'open'                                    ,
+      status:  'open'                                      ,
     }.merge(extras)
   end
 
-  # def offer3(extras) Offer::Buy::Unfixed.new(valid_params(extras)) end
-
   let(:offer2) { klas.new(valid_params)  }
-  let(:user)   { FB.create(:user)        }
+  let(:user)   { FB.create(:user).user   }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 

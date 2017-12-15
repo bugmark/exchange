@@ -1,17 +1,19 @@
-class Event::UserCreated < Event
+class Event::UserDeposited < Event
 
-  jsonb_accessor :data, "uuid"  => :string
-  jsonb_accessor :data, "email" => :string
-  jsonb_accessor :data, "encrypted_password" => :string
+  jsonb_accessor :data, "uuid"   => :string
+  jsonb_accessor :data, "amount" => :float
 
-  validates :uuid , presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
+  validates :uuid   , presence: true
+  validates :amount , presence: true
 
   def cast_transaction
-    opts = {"uuid" => uuid, "email" => email, "encrypted_password" => encrypted_password}
-    User.create(opts)
+    user = User.find_by_uuid(uuid)
+    user.balance += amount
+    user.save
+    user
   end
+
+  def email() "" end   # TODO: GET RID OF THIS
 
   def user_uuids
     [uuid]

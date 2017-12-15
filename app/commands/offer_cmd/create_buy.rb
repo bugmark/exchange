@@ -15,7 +15,7 @@ module OfferCmd
 
     # NOTE: the offer_args must contain either a price or a deposit
     def initialize(typ, offer_args)
-      @typ     = typ                         # offer_bf or offer_bu
+      @typ     = typ                         # offer_bf or offer_bu .
       starg    = offer_args.stringify_keys
       @profit  = starg.delete("profit")  || 0
       @deposit = starg.delete("deposit") || 0
@@ -27,9 +27,9 @@ module OfferCmd
       offer.attributes
     end
 
-    def user_ids
-      [user.id]
-    end
+    # def user_ids
+    #   [user.id]
+    # end
 
     def transact_before_project
       offer.status ||= 'open'

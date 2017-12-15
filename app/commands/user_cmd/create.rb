@@ -1,26 +1,35 @@
 module UserCmd
   class Create < ApplicationCommand
 
-    attr_subobjects      :user
-    attr_delegate_fields :user
-
-    def initialize(args)
-      xargs = args.except *%i(password)
-      @user = User.find_by(xargs) || User.create(args)
+    def initialize(xargs)
+      args = xargs.stringify_keys
+      args["encrypted_password"] = pwd_digest(args["password"])
+      args["amount"]             = args["balance"] if args["balance"]
+      args["uuid"]               = args["uuid"] || SecureRandom.uuid
+      add_event(:usr1, Event::UserCreated.new(usr_opts(args)))
+      add_event(:usr2, Event::UserDeposited.new(deposit_opts(args))) if has_amount?(args)
     end
 
-    # def event_data
-    #   user.attributes
-    # end
-
-    def user_ids
-      [user.id]
+    def user
+      @usr2 || @usr1
     end
 
-    def influx_fields
-      {
-        user_id: user.id
-      }
+    private
+
+    def pwd_digest(password)
+      User.new("password" => password).encrypted_password
+    end
+
+    def usr_opts(opts)
+      cmd_opts.merge(opts.slice(*%w(uuid email encrypted_password)))
+    end
+
+    def deposit_opts(opts)
+      cmd_opts.merge(opts.slice(*%w(uuid amount)))
+    end
+
+    def has_amount?(args)
+      args["amount"] && args["amount"] > 0
     end
   end
 end

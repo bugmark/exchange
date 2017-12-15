@@ -27,13 +27,13 @@ module ContractCmd
       commit&.contract
     end
 
-    def event_data
-      contract&.attributes || {}
-    end
+    # def event_data
+    #   contract&.attributes || {}
+    # end
 
-    def user_ids
-      contract&.escrows&.last&.users&.pluck(:id)&.sort&.uniq
-    end
+    # def user_ids
+    #   contract&.escrows&.last&.users&.pluck(:id)&.sort&.uniq
+    # end
 
     private
 

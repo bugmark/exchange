@@ -83,27 +83,27 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
   end
 
-  describe "#event_data", USE_VCR do
-    it 'returns a hash' do
-      expect(subject.event_data).to be_a(Hash)
-    end
-  end
-
-  describe "#event_save", USE_VCR do
-    it 'creates an event' do
-      expect(Event.count).to eq(0)
-      subject.project
-      # expect(Event.count).to eq(4)
-    end
-
-    it 'chains with #project' do
-      expect(Event.count).to eq(0)
-      expect(Contract.count).to eq(0)
-      subject.project
-      # expect(Event.count).to eq(4)   # TODO: retest ..
-      expect(Contract.count).to eq(0)
-    end
-  end
+  # describe "#event_data", USE_VCR do
+  #   it 'returns a hash' do
+  #     expect(subject.event_data).to be_a(Hash)
+  #   end
+  # end
+  #
+  # describe "#event_save", USE_VCR do
+  #   it 'creates an event' do
+  #     expect(Event.count).to eq(0)
+  #     subject.project
+  #     # expect(Event.count).to eq(4)
+  #   end
+  #
+  #   it 'chains with #project' do
+  #     expect(Event.count).to eq(0)
+  #     expect(Contract.count).to eq(0)
+  #     subject.project
+  #     # expect(Event.count).to eq(4)   # TODO: retest ..
+  #     expect(Contract.count).to eq(0)
+  #   end
+  # end
 
   describe "crossing", USE_VCR do
     let(:lcl_offer_bf) { FB.create(:offer_bf).offer }

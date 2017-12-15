@@ -98,8 +98,8 @@ class User < ApplicationRecord
   private
 
   def default_values
-    self.balance = 1000.0 if self.balance.zero?
-    self.balance ||= 1000
+    # self.balance = 1000.0 if self.balance.zero?
+    # self.balance ||= 1000
   end
 
   def has_encrypted_pwd?

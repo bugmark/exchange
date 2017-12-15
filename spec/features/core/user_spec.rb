@@ -18,13 +18,13 @@ describe "User", USE_VCR do
 
     visit "/core/users/#{user.id}"
     expect(page).to_not be_nil
-  end #.....
+  end
 
-  # it "renders /core/users/:id with offers" do
-  #   hydrate(offer_bf, offer_bu)
-  #   login_as user, :scope => :user
-  #
-  #   visit "/core/users/#{user.id}"
-  #   expect(page).to_not be_nil
-  # end
+  it "renders /core/users/:id with offers" do
+    hydrate(offer_bf, offer_bu)
+    login_as user, :scope => :user
+
+    visit "/core/users/#{user.id}"
+    expect(page).to_not be_nil
+  end
 end

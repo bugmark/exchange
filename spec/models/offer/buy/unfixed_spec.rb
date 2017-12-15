@@ -11,7 +11,7 @@ RSpec.describe Offer::Buy::Unfixed, type: :model do
 
   def offer3(extras) Offer::Buy::Unfixed.new(valid_params(extras)) end
 
-  let(:user)   { FB.create(:user)        }
+  let(:user)   { FB.create(:user).user   }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
