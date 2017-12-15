@@ -20,7 +20,7 @@ RSpec.describe OfferCmd::CreateBuyNew do
   subject      { klas.new(:offer_bu, valid_params)                      }
 
   describe "Attributes" do
-    it { should respond_to :user                   }
+    # it { should respond_to :user                   }
     # it { should respond_to :offer                  }
     # it { should respond_to :deposit                }
     # it { should respond_to :profit                 }

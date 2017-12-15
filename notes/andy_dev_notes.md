@@ -689,6 +689,7 @@ Next Actions:
 # Dec 15
 
 - [ ] get CreateBuy::OfferCmd working with new structure
+- [ ] fix hirb output
 
 - [ ] chain validations: command -> event -> object
 - [ ] test chained validations in web form
