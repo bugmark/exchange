@@ -11,5 +11,15 @@ class Hash
   def without_blanks
     self.select {|_key, val| !(val.nil? || val == "")}
   end
+
+  def floatify(*keys)
+    keys.each {|key| self[key] = self[key].to_f}
+    self
+  end
+
+  def intify(*keys)
+    keys.each {|key| self[key] = self[key].to_i}
+    self
+  end
 end
 

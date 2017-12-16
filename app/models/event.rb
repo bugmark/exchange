@@ -7,8 +7,6 @@ class Event < ApplicationRecord
   validates :cmd_type, presence: true
   validates :cmd_uuid, presence: true
 
-  jsonb_accessor   :jfields , :etherscan_url => :string
-
   class << self
     def for_user(user)
       # user_id = user.to_i
@@ -17,15 +15,31 @@ class Event < ApplicationRecord
     end
   end
 
-  def cast_action
-    raise "Override in subclass!!"
+  def ev_cast
+    if valid?
+      if cached_cast_object&.save
+        self.projected_at = BugmTime.now
+        self.send(:save!)
+      end
+      cached_cast_object
+    else
+      nil
+    end
   end
 
-  def cast
-    cast_object = cast_transaction
-    self.projected_at = BugmTime.now
-    self.send(:save)
-    cast_object
+  # def valid?(*)
+  #   if super && cached_cast_object.valid?
+  #     true
+  #   else
+  #     cached_cast_object.valid?
+  #     cached_cast_object.errors.each do |field, error|
+  #       errors.add(field, error)
+  #     end
+  #   end
+  # end
+
+  def cast_object
+    raise "ERROR: Call in SubClass"
   end
 
   private
@@ -34,13 +48,16 @@ class Event < ApplicationRecord
     super
   end
 
+  def cached_cast_object
+    @cast_element ||= cast_object
+  end
+
   def default_values
     prev = Event.last
     self.data        ||= {}
     self.uuid        ||= SecureRandom.uuid
     self.local_hash    = Digest::MD5.hexdigest([self.uuid, data].to_json)
     self.chain_hash    = Digest::MD5.hexdigest([prev&.chain_hash, self.local_hash].to_json)
-    self.etherscan_url = "https://rinkeby.etherscan.io/tx/0x6128df8192058231d10a24b6d0110d69a264a77446336dd726399932308c81de"
   end
 end
 

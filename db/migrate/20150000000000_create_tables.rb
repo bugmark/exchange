@@ -39,6 +39,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string   :repo_type                 # BugZilla, GitHub, CVE
       t.integer  :user_id                   # the party who made the offer
+      t.integer  :user_uuid                 # the party who made the offer
       t.integer  :prototype_id              # optional offer prototype
       t.integer  :amendment_id              # the generating amendment
       t.integer  :reoffer_parent_id         # for ReOffers - an Offer
@@ -59,6 +60,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :offers, :type
     add_index :offers, :user_id
+    add_index :offers, :user_uuid
     add_index :offers, :prototype_id
     add_index :offers, :amendment_id
     add_index :offers, :reoffer_parent_id

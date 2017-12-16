@@ -68,6 +68,7 @@ class ApplicationCommand
   # ----- template methods - override in subclass
 
   def add_event(key, event)
+    raise "DUPLICATE KEY" if state[:events][key]
     state[:events][key] = event
   end
 
@@ -106,14 +107,16 @@ class ApplicationCommand
   end
 
   # synonym for project
-  def cast
-    valid?
+  def cmd_cast
     if valid?
-      events.each do |key, event|
-        varname = "@#{key.to_s}"
-        raise "DUPLICATE KEY" if self.instance_variables.map(&:to_s).include?(varname)
-        self.instance_variable_set varname, event.cast
-        self.define_singleton_method(key) { eval varname }
+      ActiveRecord::Base.transaction do
+        events.each do |key, event|
+          varname = "@#{key.to_s}"
+          self.define_singleton_method(key) { eval varname }
+          object = event.ev_cast
+          self.instance_variable_set varname, object
+          raise ActiveRecord::Rollback unless object.valid?
+        end
       end
       self
     else
@@ -128,7 +131,6 @@ class ApplicationCommand
     if valid?
       transact_before_project # perform a transaction, if any
       subs.each(&:save)       # save all subobjects
-      # save_event
       self
     else
       false

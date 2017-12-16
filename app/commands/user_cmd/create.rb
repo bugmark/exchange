@@ -29,7 +29,7 @@ module UserCmd
     end
 
     def has_amount?(args)
-      args["amount"] && args["amount"] > 0
+      args["amount"]
     end
   end
 end

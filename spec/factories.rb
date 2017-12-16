@@ -8,7 +8,7 @@ FactoryBot.define do
   # ----- BASE -----
 
   factory :user, class: UserCmd::Create do
-    to_create { |instance| instance.cast }
+    to_create { |instance| instance.cmd_cast }
     initialize_with { new(attributes) }
 
     sequence :email do |n|

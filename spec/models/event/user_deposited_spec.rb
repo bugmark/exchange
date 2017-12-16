@@ -1,19 +1,17 @@
 require 'rails_helper'
 
-RSpec.describe Event::UserCreated, :type => :model do
-
-  PWD = "dingo"
+RSpec.describe Event::UserDeposited, :type => :model do
 
   def valid_params(alt = {})
     {
-      cmd_type:           "Test::UserCreated"        ,
+      cmd_type:           "Test::UserDeposited"      ,
       cmd_uuid:           SecureRandom.uuid          ,
-      email:              "bing@bong.com"            ,
-      uuid:               SecureRandom.uuid          ,
-      encrypted_password: User.new(password: PWD).encrypted_password
+      uuid:               user.uuid                  ,
+      amount:             100.0                      ,
     }.merge(alt)
   end
 
+  let(:user)   { FB.create(:user).user   }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
@@ -25,24 +23,31 @@ RSpec.describe Event::UserCreated, :type => :model do
       expect(subject).to be_valid
     end
 
-    it 'emits a user object' do
-      obj = subject.ev_cast
-      expect(obj).to be_a(User) #
-    end
-
     it 'prevents calling save' do
       expect {subject.save}.to raise_error(NoMethodError)
     end
   end
 
   describe "Casting" do
-    it "increments the user count", :focus do
-      expect(User.count).to eq(0)
-      result = subject.ev_cast
-      expect(result).to be_a(User)
-      expect(Event.count).to eq(1)
+    it "increments the user balance" do
+      expect(user.balance).to eq(1000.0)
+      expect(Event.count).to eq(2)
+      obj = subject.ev_cast
+      user.reload
+      expect(obj).to be_a(User)
+      expect(Event.count).to eq(3)
       expect(User.count).to  eq(1)
-      expect(User.first.balance).to eq(0.0)
+      expect(user.balance).to eq(1100.0)
+    end
+  end
+
+  describe "Deposit to a non-existant user" do
+    it "blows up", :focus do
+      sub = klas.new(valid_params(uuid: "DUMMY"))
+      obj = sub.ev_cast
+      expect(obj).to be_nil
+      expect(User.first.balance).to eq(1000.0)
+      expect(Event.count).to eq(2)
     end
   end
 end

@@ -6,14 +6,11 @@ class Event::UserDeposited < Event
   validates :uuid   , presence: true
   validates :amount , presence: true
 
-  def cast_transaction
+  def cast_object
     user = User.find_by_uuid(uuid)
-    user.balance += amount
-    user.save
+    user.balance += amount if user
     user
   end
-
-  def email() "" end   # TODO: GET RID OF THIS
 
   def user_uuids
     [uuid]

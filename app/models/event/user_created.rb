@@ -1,3 +1,5 @@
+require 'ext/hash'
+
 class Event::UserCreated < Event
 
   jsonb_accessor :data, "uuid"  => :string
@@ -8,9 +10,8 @@ class Event::UserCreated < Event
   validates :email, presence: true
   validates :encrypted_password, presence: true
 
-  def cast_transaction
-    opts = {"uuid" => uuid, "email" => email, "encrypted_password" => encrypted_password}
-    User.create(opts)
+  def cast_object
+    User.new(data.without_blanks)
   end
 
   def user_uuids

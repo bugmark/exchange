@@ -17,7 +17,11 @@ class User < ApplicationRecord
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 
-  validates :password, :presence => true, :on => :create, unless: :has_encrypted_pwd?
+  validates_uniqueness_of :email
+
+  validates :email    , :presence => true
+  validates :password , :presence => true, :on => :create, unless: :has_encrypted_pwd?
+  validates :balance  , :numericality => { greater_than_or_equal_to: 0.0 }
 
   def event_lines
     Event.for_user(self.id)
@@ -29,7 +33,7 @@ class User < ApplicationRecord
   end
 
   def new_event_lines
-    event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc')
+    event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc') #.
   end
 
   has_many :positions
@@ -78,7 +82,7 @@ class User < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id email balance))
+      select(%i(id uuid email balance))
     end
     alias_method :ss, :select_subset
   end

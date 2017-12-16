@@ -1,15 +1,10 @@
+require 'ext/hash'
+
 module OfferCmd
   class CreateBuyNew < ApplicationCommand
 
     attr_reader     :typ
-    # attr_delegate_fields :offer     , class_name: "Offer::Buy"
-    # attr_vdelegate       :maturation, :offer
 
-    # attr_accessor :deposit
-    # attr_accessor :profit
-
-    # validate :deposit_amount
-    # validate :profit_amount
     validate :user_balance
 
     # NOTE: the offer_args must contain either a price or a deposit
@@ -18,43 +13,32 @@ module OfferCmd
       args['status'] = 'open'
       args           = to_num(args)
       args           = set_price(args)
-      @typ     = typ                         # offer_bf or offer_bu
-      # @profit  = args.delete("profit")  || 0
-      # @deposit = args.delete("deposit") || 0
-      add_event :offer, Event::OfferBuyCreated.new(@typ, offer_opts(args))
-      # @offer   = klas.new(default_values.merge(args))
-      # @user    = User.find(offer.user_id)
+      args           = set_type(args)
+      add_event :offer, Event::OfferBuyCreated.new(args)
     end
 
     def user
       @offer&.user
     end
 
-    # def transact_before_project
-    #   offer.status ||= 'open'
-    #   if deposit != 0
-    #     self.price = deposit.to_i / volume.to_f
-    #   end
-    #
-    #   if profit != 0
-    #     self.price = 1.0 - (profit.to_i / volume.to_f)
-    #   end
-    # end
-
     private
 
-    def offer_opts(args)
-      args
+    def set_type(args)
+      args.merge(type: offer_class)
+    end
+
+    def offer_class
+      case typ
+        when :offer_bf then "Offer::Buy::Fixed"
+        when :offer_bu then "Offer::Buy::Unfixed"
+        else raise "UNKNOWN OFFER TYPE #{typ}"
+      end
     end
 
     # -----
 
     def to_num(args)
-      to_f = ->(key) { args[key] = args[key].to_f if args[key] }
-      to_i = ->(key) { args[key] = args[key].to_i if args[key] }
-      %i(volume deposit profit).each {|key| to_i.call(key)}
-      %i(price).each                 {|key| to_f.call(key)}
-      args
+      args.floatify("price").intify(*%w(volume deposit profit))
     end
 
     def set_price(args)
