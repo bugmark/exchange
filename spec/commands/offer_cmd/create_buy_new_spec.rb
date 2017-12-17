@@ -20,18 +20,13 @@ RSpec.describe OfferCmd::CreateBuyNew do
   subject      { klas.new(:offer_bu, valid_params)              }
 
   describe "Attributes" do
-    # it { should respond_to :user                   }
-    # it { should respond_to :offer                  }
-    # it { should respond_to :deposit                }
-    # it { should respond_to :profit                 }
-    # it { should respond_to :volume                 }
-    # it { should respond_to :price                  }
+    it { should respond_to :user                   }
   end
 
-  # describe "Object Existence" do
-  #   it { should be_a klas   }
-  #   it { should be_valid    }
-  # end
+  describe "Object Existence" do
+    it { should be_a klas   }
+    # it { should be_valid    }
+  end
 
   # describe "Subobjects" do
   #   it { should respond_to :subobject_symbols }

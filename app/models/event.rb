@@ -19,11 +19,11 @@ class Event < ApplicationRecord
 
   def ev_cast
     if valid?
-      if cached_cast_object&.save
+      if new_object&.save
         self.projected_at = BugmTime.now
         self.send(:save!)
       end
-      cached_cast_object
+      new_object
     else
       nil
     end
@@ -44,14 +44,14 @@ class Event < ApplicationRecord
     raise "ERROR: Call in SubClass"
   end
 
+  def new_object
+    @cast_element ||= cast_object
+  end
+
   private
 
   def save(*)
     super
-  end
-
-  def cached_cast_object
-    @cast_element ||= cast_object
   end
 
   def default_values

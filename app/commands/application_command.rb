@@ -70,6 +70,9 @@ class ApplicationCommand
   def add_event(key, event)
     raise "DUPLICATE KEY" if state[:events][key]
     state[:events][key] = event
+    self.define_singleton_method("new_#{key.to_s}".to_sym) do
+      state[:events][key].new_object
+    end
   end
 
   def events
@@ -79,22 +82,6 @@ class ApplicationCommand
   def self.from_event(_event)
     raise "from_event: override in subclass"
   end
-
-  # def event_data
-  #   {}
-  # end
-  #
-  # def influx_tags
-  #   {}
-  # end
-  #
-  # def influx_fields
-  #   {}
-  # end
-
-  # def user_ids
-  #   []
-  # end
 
   def transact_before_project
     # override in subclass

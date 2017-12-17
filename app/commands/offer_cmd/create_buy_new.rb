@@ -3,22 +3,23 @@ require 'ext/hash'
 module OfferCmd
   class CreateBuyNew < ApplicationCommand
 
-    attr_reader     :typ
+    attr_accessor :typ, :args
 
     validate :user_balance
 
     # NOTE: the offer_args must contain either a price or a deposit
     def initialize(typ, offer_args)
-      args           = offer_args.stringify_keys
-      args['status'] = 'open'
-      args           = to_num(args)
-      args           = set_price(args)
-      args           = set_type(args)
+      @typ  = typ
+      @args = {}
+      args  = offer_args.stringify_keys
+      args  = to_num(args)
+      args  = set_price(args)
+      args  = set_type(args)
       add_event :offer, Event::OfferBuyCreated.new(args)
     end
 
     def user
-      @offer&.user
+      new_offer&.user
     end
 
     private
@@ -51,12 +52,12 @@ module OfferCmd
     # -----
 
     def user_balance
-      return true if offer.persisted?
-      offer.poolable ? user_poolable_balance : user_not_poolable_balance
+      return true if new_offer.persisted?
+      new_offer.poolable ? user_poolable_balance : user_not_poolable_balance
     end
 
     def user_poolable_balance
-      offer_value = offer.value || offer.volume * offer.price
+      offer_value = new_offer.value || new_offer.volume * new_offer.price
       if (user.balance - offer_value - user.token_reserve_not_poolable) > 0
         return true
       else
@@ -66,7 +67,7 @@ module OfferCmd
     end
 
     def user_not_poolable_balance
-      offer_value = offer.value || offer.volume * offer.price
+      offer_value = new_offer.value || new_offer.volume * new_offer.price
       return true unless offer_value > user.token_available
       errors.add :volume, "non-poolable offer exceeds user balance"
       return false

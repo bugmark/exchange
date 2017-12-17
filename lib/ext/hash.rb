@@ -13,12 +13,12 @@ class Hash
   end
 
   def floatify(*keys)
-    keys.each {|key| self[key] = self[key].to_f}
+    keys.each {|key| self[key] = self[key].to_f if self[key]}
     self
   end
 
   def intify(*keys)
-    keys.each {|key| self[key] = self[key].to_i}
+    keys.each {|key| self[key] = self[key].to_i if self[key]}
     self
   end
 end
