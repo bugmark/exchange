@@ -10,8 +10,8 @@ hr
 - if @offer_bu.errors.any?
   .alert.alert-danger Please fix the errors below.
 = bootstrap_form_for(@offer_bu, url: '/core/offers_bu') do |f|
-  = f.hidden_field :type
-  = f.hidden_field :user_id
+  = f.hidden_field :typ
+  = f.hidden_field :user_uuid
   .row
     .col-md-4 = f.number_field    :volume         , label: "Units (positive whole number)", min: 1, step: 1
     .col-md-4 = f.number_field    :price          , label: "Price (from 0.01 to 0.99)", min: 0.01, max: 0.99, step: 0.01

@@ -33,8 +33,7 @@ module Core
         poolable:    false                    ,
         aon:         false                    ,
         volume:      10                       ,
-        user:        current_user             ,
-        status:      "open"                   ,
+        user_uuid:   current_user.uuid        ,
         stm_status:  "closed"                 ,
         maturation:  BugmTime.now + 3.minutes ,
       }

@@ -3,18 +3,18 @@ require 'rails_helper'
 RSpec.describe OfferCmd::CloneBuy do
 
   def gen_obf(opts = {})
-    lcl_opts = {volume: 10, price: 0.40, user: user}
-    OfferCmd::CreateBuy.new(:offer_bf, lcl_opts.merge(opts)).project
+    lcl_opts = {volume: 10, price: 0.40, user_uuid: user.uuid}
+    OfferCmd::CreateBuy.new(:offer_bf, lcl_opts.merge(opts)).cmd_cast
   end
 
   def valid_params(args = {})
     {
-      user: user
+      user_uuid: user.uuid #
     }.merge(args)
   end
 
   # noinspection RubyArgCount
-  let(:offer_bf) { gen_obf.project.offer                                }
+  let(:offer_bf) { gen_obf.cmd_cast.offer                               }
 
   def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 

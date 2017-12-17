@@ -4,5 +4,6 @@
     :options:
       :fields:
         - id
-        - type
+        - cmd_type
+        - event_type
         - payload

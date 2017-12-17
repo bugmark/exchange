@@ -4,9 +4,9 @@ RSpec.describe ContractCmd::Cross::Transfer do
 
   include_context 'Integration Environment'
 
-  let(:offer_su) { FBX.offer_su(osu: {price: 0.4}).offer              }
-  let(:offer_bu) { FB.create(:offer_bu, user: usr1, price: 0.4).offer }
-  let(:transfer) { klas.new(offer_su, :transfer)                      }
+  let(:offer_su) { FBX.offer_su(osu: {price: 0.4}).offer                        }
+  let(:offer_bu) { FB.create(:offer_bu, user_uuid: usr1.uuid, price: 0.4).offer }
+  let(:transfer) { klas.new(offer_su, :transfer)                                }
   let(:user) { FB.create(:user).user }
   let(:klas) { described_class }
   subject { klas.new(offer_su, :transfer) }

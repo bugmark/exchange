@@ -15,10 +15,10 @@ RSpec.describe Offer::Sell, type: :model do
     }.merge(opts)
   end
 
-  let(:user)   { FB.create(:user).user                        }
-  let(:pos1)   { Position.create(position_params)             }
-  let(:boff)   { FB.create(:offer_bu, user: user).offer       }
-  let(:soff)   { Offer::Sell::Unfixed.create(soff_params)     }
+  let(:user)   { FB.create(:user).user                            }
+  let(:pos1)   { Position.create(position_params)                 }
+  let(:boff)   { FB.create(:offer_bu, user_uuid: user.uuid).offer }
+  let(:soff)   { Offer::Sell::Unfixed.create(soff_params)         }
 
   let(:klas)   { described_class                              }
   subject      { klas.new(soff_params)                        }

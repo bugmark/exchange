@@ -8,12 +8,12 @@ RSpec.describe Position, type: :model do
     }.merge(opts)
   end
 
-  let(:klas)    { described_class                              }
-  subject       { klas.new(valid_params)                       }
+  let(:klas)    { described_class                                  }
+  subject       { klas.new(valid_params)                           }
 
-  let(:user)    { FB.create(:user).user                        }
-  let(:boff)    { FB.create(:offer_bu, user: user).offer       }
-  let(:pos1)    { klas.new(valid_params)                       }
+  let(:user)    { FB.create(:user).user                            }
+  let(:boff)    { FB.create(:offer_bu, user_uuid: user.uuid).offer }
+  let(:pos1)    { klas.new(valid_params)                           }
 
   describe "Associations", USE_VCR do
     it { should respond_to(:offer)                }

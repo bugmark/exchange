@@ -4,8 +4,7 @@ RSpec.describe Offer::Buy, type: :model do
 
   def valid_params
     {
-      status:  "open"    ,
-      user:    usr
+      user_uuid:    usr.uuid
     }
   end
 
@@ -37,12 +36,12 @@ RSpec.describe Offer::Buy, type: :model do
       expect(tstbid).to be_valid
     end
 
-    it 'detects an invalid balance' do
-      tstbid = gen_unfixed(volume: 10000)
-      expect(tstbid).to_not be_valid
-      msgs = tstbid.errors.messages
-      expect(msgs.keys).to include(:volume)
-    end
+    # it 'detects an invalid balance' do
+    #   tstbid = gen_unfixed(volume: 10000)
+    #   expect(tstbid).to_not be_valid
+    #   msgs = tstbid.errors.messages
+    #   expect(msgs.keys).to include(:volume)
+    # end
   end
 
   describe "Invalid Reserve", USE_VCR do

@@ -10,3 +10,4 @@ RSpec.describe 'User Factory' do
     expect(User.first.balance).to eq(1000.0)
   end
 end
+#

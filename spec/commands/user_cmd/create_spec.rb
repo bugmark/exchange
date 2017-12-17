@@ -17,7 +17,7 @@ RSpec.describe UserCmd::Create do
     it { should be_valid    }
   end
 
-  describe "#cast" do
+  describe "#cmd_cast" do
     it 'saves the object to the database' do
       subject.cmd_cast
       expect(subject).to be_valid
@@ -36,7 +36,7 @@ RSpec.describe UserCmd::Create do
       expect(obj).to be_a(klas)
     end
 
-    it 'returns an instance of klas' do
+    it 'returns an sub-instance of klas' do
       obj = subject.cmd_cast
       expect(obj.user).to be_a(User)
     end

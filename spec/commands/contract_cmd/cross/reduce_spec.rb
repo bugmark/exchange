@@ -22,7 +22,7 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   describe "Subobjects", USE_VCR do
-    it { should respond_to :subobject_symbols }
+    it { should respond_to :subobject_symbols } #
     it 'returns an array' do
       expect(subject.subobject_symbols).to be_an(Array)
     end

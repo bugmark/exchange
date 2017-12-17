@@ -7,7 +7,7 @@ RSpec.describe OfferCmd::Cancel do
   end
 
   let(:offer_bf) { gen_obf                                                 }
-  let(:offer_bu) { FB.create(:offer_bu, user: user).offer                  }
+  let(:offer_bu) { FB.create(:offer_bu, user_uuid: user.uuid).offer        }
   let(:user)     { FB.create(:user).user                                   }
   let(:klas)     { described_class                                         }
   subject        { klas.new(offer_bu)                                      }

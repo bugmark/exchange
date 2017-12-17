@@ -30,7 +30,7 @@ module OfferCmd
 
     def cmd_obj(attrs)
       if offer.is_buy?
-        OfferCmd::CreateBuy.new(offer.cmd_type, attrs)
+        OfferCmd::CreateBuyOld.new(offer.cmd_type, attrs)
       else
         opts = {
           project:    false,

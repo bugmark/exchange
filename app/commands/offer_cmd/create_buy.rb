@@ -1,100 +1,110 @@
+require 'ext/hash'
+
 module OfferCmd
   class CreateBuy < ApplicationCommand
 
-    attr_subobjects :offer, :user
-    attr_reader     :typ
-    attr_delegate_fields :offer     , class_name: "Offer::Buy"
-    attr_vdelegate       :maturation, :offer
+    attr_reader :typ
 
-    attr_accessor :deposit
-    attr_accessor :profit
-
+    validate :user_balance
     validate :deposit_amount
     validate :profit_amount
-    validate :user_balance
 
     # NOTE: the offer_args must contain either a price or a deposit
     def initialize(typ, offer_args)
-      @typ     = typ                         # offer_bf or offer_bu .
-      starg    = offer_args.stringify_keys
-      @profit  = starg.delete("profit")  || 0
-      @deposit = starg.delete("deposit") || 0
-      @offer   = klas.new(default_values.merge(starg))
-      @user    = User.find_by_uuid(offer.user_uuid)
+      @typ  = typ
+      args  = offer_args.stringify_keys
+      args  = to_num(args)
+      args  = set_price(args)
+      args  = set_type(args)
+      args  = set_uuid(args)
+      @args = args
+      add_event :offer, Event::OfferBuyCreated.new(event_opts(args))
     end
 
-    def event_data
-      offer.attributes
-    end
-
-    # def user_ids
-    #   [user.id]
-    # end
-
-    def transact_before_project
-      offer.status ||= 'open'
-      if deposit != 0
-        self.price = deposit.to_i / volume.to_f
-      end
-
-      if profit != 0
-        self.price = 1.0 - (profit.to_i / volume.to_f)
-      end
-    end
-
-    def influx_tags
-      {
-        side:  offer.side   ,
-        user:  offer.user
-      }
-    end
-
-    def influx_fields
-      {
-        id:     offer.id     ,
-        volume: offer.volume ,
-        price:  offer.price
-      }
+    def user
+      offer_new&.user
     end
 
     private
 
+    def event_opts(opts)
+      cmd_opts.merge(opts).without("deposit", "profit")
+    end
+
+    def set_type(args)
+      args.merge(type: offer_class)
+    end
+
+    def set_uuid(args)
+      return args if args[:uuid] || args["uuid"]
+      args.merge(uuid: SecureRandom.uuid)
+    end
+
+    def offer_class
+      case typ
+        when :offer_bf then "Offer::Buy::Fixed"
+        when :offer_bu then "Offer::Buy::Unfixed"
+        else raise "UNKNOWN OFFER TYPE #{typ}"
+      end
+    end
+
+    # -----
+
+    def to_num(args)
+      args.floatify("price").intify(*%w(volume deposit profit))
+    end
+
+    def set_price(args)
+      return args unless args["volume"]
+      args["price"] = args["deposit"].to_f / args["volume"]        if args["deposit"]
+      args["price"] = 1.0 - (args["profit"].to_f / args["volume"]) if args["profit"]
+      args
+    end
+
+    # -----
+
     def user_balance
-      return true if offer.persisted?
-      offer.poolable ? user_poolable_balance : user_not_poolable_balance
+      return true if offer_new.persisted?
+      return false unless offer_new.valid?
+      offer_new.poolable ? user_poolable_balance : user_not_poolable_balance
     end
 
     def user_poolable_balance
-      offer_value = offer.value || offer.volume * offer.price
+      offer_value = offer_new.value || offer_new.volume * offer_new.price
       if (user.balance - offer_value - user.token_reserve_not_poolable) > 0
         return true
       else
-        errors.add :volume, "poolable offer exceeds user balance"
+        errors.add "volume", "poolable offer exceeds user balance"
         return false
       end
     end
 
     def user_not_poolable_balance
-      offer_value = offer.value || offer.volume * offer.price
+      offer_value = offer_new.value || offer_new.volume * offer_new.price
       return true unless offer_value > user.token_available
-      errors.add :volume, "non-poolable offer exceeds user balance"
+      errors.add "volume", "non-poolable offer exceeds user balance"
       return false
     end
 
     def profit_amount
-      return true if profit.to_i == 0
+      profit = @args["profit"] || 0
+      volume = @args["volume"]
 
+      return true if profit.to_i == 0
       if profit.to_i > volume
-        errors.add :profit, "must be less than volume"
+        errors.add "profit", "must be less than volume"
         return false
       end
     end
 
     def deposit_amount
+      deposit = @args["deposit"] || 0
+      volume  = @args["volume"]
+
       return true if deposit.to_i == 0
 
       if deposit.to_i > volume
-        errors.add :deposit, "must be less than volume"
+        errors.add "deposit", "must be less than volume"
         return false
       end
     end

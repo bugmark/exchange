@@ -10,8 +10,8 @@ RSpec.describe OfferCmd::CreateSell do
 
   # def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
-  let(:user)   { FB.create(:user)                           }
-  let(:bof1)   { FB.create(:offer_bu, user: user).offer     }
+  let(:user)   { FB.create(:user)                                  }
+  let(:bof1)   { FB.create(:offer_bu, user_uuid: user.uuid).offer  }
   let(:pos1)   { Position.create(offer: bof1, user: user)   }
   let(:user)   { FB.create(:user).user                      }
   let(:klas)   { described_class                            }

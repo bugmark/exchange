@@ -6,11 +6,11 @@ RSpec.describe User, type: :model do
   end
 
   def gen_unfixed(args = {})
-    FB.create(:offer_bu, {user: usr}.merge(args))
+    FB.create(:offer_bu, {user_uuid: usr.uuid}.merge(args))
   end
 
   def gen_fixed(args = {})
-    FB.create(:offer_bf, {user: usr}.merge(args))
+    FB.create(:offer_bf, {user_uuid: usr.uuid}.merge(args))
   end
 
   let(:usr) { FB.create(:user, balance: 100.0).user         }

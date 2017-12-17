@@ -39,30 +39,28 @@ FactoryBot.define do
   # ----- BUY OFFERS -----
 
   factory :offer_bu, class: OfferCmd::CreateBuy do
-    to_create { |instance| instance.project }
+    to_create { |instance| instance.cmd_cast }
     initialize_with { new(:offer_bu, attributes) }
 
     price  0.60
     volume 10
-    status "open"
     maturation Time.now + 1.day
-    user       { FB.create(:user).user   }
-    stm_bug_id { FB.create(:bug).id      }
+    user_uuid  { FB.create(:user).user.uuid   }
+    stm_bug_id { FB.create(:bug).id           }
     stm_status "closed"
     poolable   false
     aon        false
   end
 
   factory :offer_bf, class: OfferCmd::CreateBuy do
-    to_create { |instance| instance.project }
+    to_create { |instance| instance.cmd_cast }
     initialize_with { new(:offer_bf, attributes) }
 
     price      0.40
     volume     10
-    status     "open"
     maturation Time.now + 1.day
-    user       { FB.create(:user).user    }
-    stm_bug_id { FB.create(:bug).id       }
+    user_uuid  { FB.create(:user).user.uuid   }
+    stm_bug_id { FB.create(:bug).id           }
     stm_status "closed"
     poolable   false
     aon        false

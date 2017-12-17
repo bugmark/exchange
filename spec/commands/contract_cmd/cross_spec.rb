@@ -4,11 +4,11 @@ RSpec.describe ContractCmd::Cross do
 
   include_context 'Integration Environment'
 
-  let(:ask)    { FB.create(:offer_bf, user: usr1).offer    }
-  let(:bid)    { FB.create(:offer_bu, user: usr2).offer    }
-  let(:user)   { FB.create(:user).user                     }
-  let(:klas)   { described_class                           }
-  subject      { klas.new(ask, :expand)                    }
+  let(:ask)    { FB.create(:offer_bf, user_uuid: usr1.uuid).offer }
+  let(:bid)    { FB.create(:offer_bu, user_uuid: usr2.uuid).offer }
+  let(:user)   { FB.create(:user).user                            }
+  let(:klas)   { described_class                                  }
+  subject      { klas.new(ask, :expand)                           }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :offer           }
