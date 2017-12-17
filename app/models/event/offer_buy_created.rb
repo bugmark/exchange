@@ -23,20 +23,21 @@ class Event::OfferBuyCreated < Event
   validates :volume   , presence: true
   validates :price    , presence: true
 
-  def user=(user) @user = user end
-  def user()      @user        end
+  before_validation :set_defaults
+
+  # def user=(user) @user = user end
+  # def user()      @user        end
 
   private
 
   def cast_object
     klas = payload['type'].constantize
-    klas.new(valid_payload)
+    klas.new(payload)
   end
 
-  def valid_payload
-    payload[:user_uuid] ||= user&.uuid
-    payload[:status]      = 'open'
-    payload.without_blanks
+  def set_defaults
+    # payload["user_uuid"] ||= user&.uuid
+    payload["status"]      = 'open'
   end
 
   def user_uuids

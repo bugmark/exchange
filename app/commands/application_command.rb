@@ -70,7 +70,10 @@ class ApplicationCommand
   def add_event(key, event)
     raise "DUPLICATE KEY" if state[:events][key]
     state[:events][key] = event
-    self.define_singleton_method("new_#{key.to_s}".to_sym) do
+    self.define_singleton_method("#{key.to_s}_event".to_sym) do
+      state[:events][key]
+    end
+    self.define_singleton_method("#{key.to_s}_new".to_sym) do
       state[:events][key].new_object
     end
   end

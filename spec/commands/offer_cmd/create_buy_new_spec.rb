@@ -9,7 +9,9 @@ RSpec.describe OfferCmd::CreateBuyNew do
 
   def valid_params(args = {})
     {
-      user: user
+      user_uuid: user.uuid            ,
+      volume:    10                   ,
+      price:     0.3
     }.merge(args)
   end
 
@@ -21,33 +23,14 @@ RSpec.describe OfferCmd::CreateBuyNew do
 
   describe "Attributes" do
     it { should respond_to :user                   }
+    it { should respond_to :offer_new              }
+    it { should respond_to :offer_event            }
   end
 
   describe "Object Existence" do
     it { should be_a klas   }
-    # it { should be_valid    }
+    it { should be_valid    }
   end
-
-  # describe "Subobjects" do
-  #   it { should respond_to :subobject_symbols }
-  #   it 'returns an array' do
-  #     expect(subject.subobject_symbols).to be_an(Array)
-  #   end
-  # end
-
-  # describe "Delegated Object" do
-  #   it 'has a present User' do
-  #     expect(subject.user).to be_present
-  #   end
-  #
-  #   it 'has a User with the right class' do
-  #     expect(subject.user).to be_a(User)
-  #   end
-  #
-  #   it 'should have a valid User' do
-  #     expect(subject.user).to be_valid
-  #   end
-  # end
 
   # describe "#project" do
   #   it 'saves the object to the database' do

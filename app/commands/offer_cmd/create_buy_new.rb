@@ -3,29 +3,43 @@ require 'ext/hash'
 module OfferCmd
   class CreateBuyNew < ApplicationCommand
 
-    attr_accessor :typ, :args
+    attr_accessor :typ
 
     validate :user_balance
 
     # NOTE: the offer_args must contain either a price or a deposit
     def initialize(typ, offer_args)
       @typ  = typ
-      @args = {}
+      # @args = {}
       args  = offer_args.stringify_keys
       args  = to_num(args)
       args  = set_price(args)
       args  = set_type(args)
-      add_event :offer, Event::OfferBuyCreated.new(args)
+      args  = set_uuid(args)
+      add_event :offer, Event::OfferBuyCreated.new(event_opts(args))
     end
 
     def user
-      new_offer&.user
+      offer_new&.user
     end
 
     private
 
+    def event_opts(opts)
+      cmd_opts.merge(opts)
+    end
+
     def set_type(args)
       args.merge(type: offer_class)
+    end
+
+    # def set_user_uuid(args)
+    #
+    # end
+
+    def set_uuid(args)
+      return args if args[:uuid] || args["uuid"]
+      args.merge(uuid: SecureRandom.uuid)
     end
 
     def offer_class
@@ -52,12 +66,13 @@ module OfferCmd
     # -----
 
     def user_balance
-      return true if new_offer.persisted?
-      new_offer.poolable ? user_poolable_balance : user_not_poolable_balance
+      return true if offer_new.persisted?
+      return false unless offer_new.valid?
+      offer_new.poolable ? user_poolable_balance : user_not_poolable_balance
     end
 
     def user_poolable_balance
-      offer_value = new_offer.value || new_offer.volume * new_offer.price
+      offer_value = offer_new.value || offer_new.volume * offer_new.price
       if (user.balance - offer_value - user.token_reserve_not_poolable) > 0
         return true
       else
@@ -67,7 +82,7 @@ module OfferCmd
     end
 
     def user_not_poolable_balance
-      offer_value = new_offer.value || new_offer.volume * new_offer.price
+      offer_value = offer_new.value || offer_new.volume * offer_new.price
       return true unless offer_value > user.token_available
       errors.add :volume, "non-poolable offer exceeds user balance"
       return false
