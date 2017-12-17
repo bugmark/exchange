@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Offer, type: :model do
   def valid_params(extras = {})
     {
-      user_id: user.id                                     ,
+      user: user                                           ,
       maturation_range: Time.now-1.week..Time.now+1.week   ,
       status:  'open'                                      ,
     }.merge(extras)
@@ -105,34 +105,34 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  describe ".is_bid" do
-    before(:each) do
-      Offer::Buy::Unfixed.create(valid_params)
-      Offer::Buy::Fixed.create(valid_params)
-      Offer::Sell::Unfixed.create(valid_params)
-      Offer::Sell::Fixed.create(valid_params)
-    end
-    
-    it "baselines" do
-      expect(Offer.count).to eq(4)
-    end
-
-    it "returns bid_side" do
-      expect(Offer.is_unfixed.count).to eq(2) #
-    end
-    
-    it "returns ask_side" do
-      expect(Offer.is_fixed.count).to eq(2)
-    end
-     
-    it "returns buy_intent" do
-      expect(Offer.is_buy.count).to eq(2)
-    end
-    
-    it "returns sell_intent" do
-      expect(Offer.is_sell.count).to eq(2)
-    end
-  end
+  # describe ".is_bid" do
+  #   before(:each) do
+  #     Offer::Buy::Unfixed.create(valid_params)
+  #     Offer::Buy::Fixed.create(valid_params)
+  #     Offer::Sell::Unfixed.create(valid_params)
+  #     Offer::Sell::Fixed.create(valid_params)
+  #   end
+  #
+  #   it "baselines" do
+  #     expect(Offer.count).to eq(4)
+  #   end
+  #
+  #   it "returns bid_side" do
+  #     expect(Offer.is_unfixed.count).to eq(2) #
+  #   end
+  #
+  #   it "returns ask_side" do
+  #     expect(Offer.is_fixed.count).to eq(2)
+  #   end
+  #
+  #   it "returns buy_intent" do
+  #     expect(Offer.is_buy.count).to eq(2)
+  #   end
+  #
+  #   it "returns sell_intent" do
+  #     expect(Offer.is_sell.count).to eq(2)
+  #   end
+  # end
 
   describe "#overlap_offers" do #
     before(:each) { subject.save }
@@ -169,7 +169,7 @@ end
 #  type                :string
 #  repo_type           :string
 #  user_id             :integer
-#  user_uuid           :integer
+#  user_uuid           :string
 #  prototype_id        :integer
 #  amendment_id        :integer
 #  reoffer_parent_id   :integer

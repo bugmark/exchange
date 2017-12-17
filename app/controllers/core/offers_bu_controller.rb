@@ -33,10 +33,10 @@ module Core
         poolable:    false                    ,
         aon:         false                    ,
         volume:      10                       ,
-        user_id:     current_user.id          ,
+        user:        current_user             ,
         status:      "open"                   ,
         stm_status:  "closed"                 ,
-        maturation: BugmTime.now + 3.minutes      ,
+        maturation:  BugmTime.now + 3.minutes ,
       }
       key = "stm_bug_id" if params["stm_bug_id"]
       key = "stm_repo_id" if params["stm_repo_id"]

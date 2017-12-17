@@ -24,6 +24,4 @@ RSpec.describe 'OfferBU Factory', USE_VCR do
     offer = FB.create(:offer_bu, user: usr).offer
     expect(offer.user).to eq(usr)
   end
-
 end
-#

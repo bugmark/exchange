@@ -18,7 +18,7 @@ end
 #  type                :string
 #  repo_type           :string
 #  user_id             :integer
-#  user_uuid           :integer
+#  user_uuid           :string
 #  prototype_id        :integer
 #  amendment_id        :integer
 #  reoffer_parent_id   :integer

@@ -1,7 +1,7 @@
 class Event::UserDeposited < Event
 
-  jsonb_accessor :data, "uuid"   => :string
-  jsonb_accessor :data, "amount" => :float
+  jsonb_accessor :payload, "uuid"   => :string
+  jsonb_accessor :payload, "amount" => :float
 
   validates :uuid   , presence: true
   validates :amount , presence: true
@@ -22,13 +22,13 @@ end
 # Table name: events
 #
 #  id           :integer          not null, primary key
-#  type         :string
-#  uuid         :string
+#  event_type   :string
+#  event_uuid   :string
 #  cmd_type     :string
 #  cmd_uuid     :string
 #  local_hash   :string
 #  chain_hash   :string
-#  data         :jsonb            not null
+#  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
 #  projected_at :datetime

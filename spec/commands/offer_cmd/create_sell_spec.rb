@@ -4,18 +4,18 @@ RSpec.describe OfferCmd::CreateSell do
 
   def valid_params(args = {})
     {
-      user_id: user.id
+      user: user
     }.merge(args)
   end
 
   # def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
-  let(:user)   { FB.create(:user)                                           }
-  let(:bof1)   { FB.create(:offer_bu, user_id: user.id).offer               }
-  let(:pos1)   { Position.create(offer: bof1, user: user)                   }
-  let(:user)   { FB.create(:user).user                                      }
-  let(:klas)   { described_class                                            }
-  subject      { klas.new(pos1, volume: 10, price: 0.4)                     }
+  let(:user)   { FB.create(:user)                           }
+  let(:bof1)   { FB.create(:offer_bu, user: user).offer     }
+  let(:pos1)   { Position.create(offer: bof1, user: user)   }
+  let(:user)   { FB.create(:user).user                      }
+  let(:klas)   { described_class                            }
+  subject      { klas.new(pos1, volume: 10, price: 0.4)     }
 
   describe "Attributes", USE_VCR do
     it { should respond_to :salable_position                   }

@@ -39,7 +39,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string   :repo_type                 # BugZilla, GitHub, CVE
       t.integer  :user_id                   # the party who made the offer
-      t.integer  :user_uuid                 # the party who made the offer
+      t.string   :user_uuid                 # the party who made the offer
       t.integer  :prototype_id              # optional offer prototype
       t.integer  :amendment_id              # the generating amendment
       t.integer  :reoffer_parent_id         # for ReOffers - an Offer
@@ -188,25 +188,25 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     # the event store...
     create_table :events do |t|
-      t.string     :type
-      t.string     :uuid
-      t.string     :cmd_type
-      t.string     :cmd_uuid
-      t.string     :local_hash
-      t.string     :chain_hash
-      t.jsonb      :data       , null: false, default: {}
+      t.string     :event_type   # inheritance column
+      t.string     :event_uuid   # uuid for the event
+      t.string     :cmd_type     # type of command that created the event
+      t.string     :cmd_uuid     # uuid of command that created the event
+      t.string     :local_hash   # [event_uuid, payload].digest
+      t.string     :chain_hash   # [local_hash, chain_hash].digest
+      t.jsonb      :payload    , null: false, default: {}
       t.jsonb      :jfields    , null: false, default: {}
       t.string     :user_uuids , array: true, default: []
       t.datetime   :projected_at
       t.timestamps
     end
-    add_index :events, :type
-    add_index :events, :uuid
+    add_index :events, :event_type
+    add_index :events, :event_uuid
     add_index :events, :cmd_type
     add_index :events, :cmd_uuid
     add_index :events, :local_hash
     add_index :events, :chain_hash
-    add_index :events, :data       , using: :gin
+    add_index :events, :payload    , using: :gin
     add_index :events, :jfields    , using: :gin
     add_index :events, :user_uuids, using: :gin
     add_index :events, :projected_at

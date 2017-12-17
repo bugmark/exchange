@@ -52,13 +52,13 @@ end
 # Table name: events
 #
 #  id           :integer          not null, primary key
-#  type         :string
-#  uuid         :string
+#  event_type   :string
+#  event_uuid   :string
 #  cmd_type     :string
 #  cmd_uuid     :string
 #  local_hash   :string
 #  chain_hash   :string
-#  data         :jsonb            not null
+#  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
 #  projected_at :datetime

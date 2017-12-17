@@ -28,16 +28,16 @@ RSpec.describe Amendment::Transfer, type: :model do
     })
   end
 
-  let(:user)   { FB.create(:user).user                        }
-  let(:sapos)  { Position.create(position_params)             }
-  let(:sepos)  { Position.create(position_params)             }
-  let(:bpos)   { Position.create(position_params)             }
-  let(:boff)   { FB.create(:offer_bu, user_id: user.id).offer }
-  let(:soff)   { Offer::Sell::Unfixed.create(soff_params)     }
-  let(:tran)   { megatran                                     }
+  let(:user)   { FB.create(:user).user                    }
+  let(:sapos)  { Position.create(position_params)         }
+  let(:sepos)  { Position.create(position_params)         }
+  let(:bpos)   { Position.create(position_params)         }
+  let(:boff)   { FB.create(:offer_bu, user: user).offer   }
+  let(:soff)   { Offer::Sell::Unfixed.create(soff_params) }
+  let(:tran)   { megatran                                 }
 
-  let(:klas)   { described_class                              }
-  subject      { klas.new(valid_params)                       }
+  let(:klas)   { described_class                          }
+  subject      { klas.new(valid_params)                   }
 
   # describe "Associations", USE_VCR do
   #   it { should respond_to(:sell_offer)            }

@@ -5,4 +5,4 @@
       :fields:
         - id
         - type
-        - data
+        - payload

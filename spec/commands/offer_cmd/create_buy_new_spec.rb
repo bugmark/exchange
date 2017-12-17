@@ -9,15 +9,15 @@ RSpec.describe OfferCmd::CreateBuyNew do
 
   def valid_params(args = {})
     {
-      user_id: user.id
+      user: user
     }.merge(args)
   end
 
   def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
-  let(:user)   { FB.create(:user).user                                  }
-  let(:klas)   { described_class                                        }
-  subject      { klas.new(:offer_bu, valid_params)                      }
+  let(:user)   { FB.create(:user).user                          }
+  let(:klas)   { described_class                                }
+  subject      { klas.new(:offer_bu, valid_params)              }
 
   describe "Attributes" do
     # it { should respond_to :user                   }

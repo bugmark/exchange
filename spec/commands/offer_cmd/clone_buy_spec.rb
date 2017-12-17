@@ -9,7 +9,7 @@ RSpec.describe OfferCmd::CloneBuy do
 
   def valid_params(args = {})
     {
-      user_id: user.id
+      user: user
     }.merge(args)
   end
 

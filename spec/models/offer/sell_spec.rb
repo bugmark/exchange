@@ -17,7 +17,7 @@ RSpec.describe Offer::Sell, type: :model do
 
   let(:user)   { FB.create(:user).user                        }
   let(:pos1)   { Position.create(position_params)             }
-  let(:boff)   { FB.create(:offer_bu, user_id: user.id).offer }
+  let(:boff)   { FB.create(:offer_bu, user: user).offer       }
   let(:soff)   { Offer::Sell::Unfixed.create(soff_params)     }
 
   let(:klas)   { described_class                              }
@@ -54,7 +54,7 @@ end
 #  type                :string
 #  repo_type           :string
 #  user_id             :integer
-#  user_uuid           :integer
+#  user_uuid           :string
 #  prototype_id        :integer
 #  amendment_id        :integer
 #  reoffer_parent_id   :integer

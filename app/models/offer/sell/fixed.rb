@@ -26,7 +26,7 @@ class Offer::Sell::Fixed < Offer::Sell
   def cross_operation() :transfer  end
   def counter_args(user = self.user)
     args = {
-      user_id:          user.id                ,
+      user:             user                   ,
       maturation_range: self.maturation_range  ,
     }
     self.match_attrs.merge(args).without_blanks
@@ -42,7 +42,7 @@ end
 #  type                :string
 #  repo_type           :string
 #  user_id             :integer
-#  user_uuid           :integer
+#  user_uuid           :string
 #  prototype_id        :integer
 #  amendment_id        :integer
 #  reoffer_parent_id   :integer

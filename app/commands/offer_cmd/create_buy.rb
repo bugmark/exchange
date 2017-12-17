@@ -20,7 +20,7 @@ module OfferCmd
       @profit  = starg.delete("profit")  || 0
       @deposit = starg.delete("deposit") || 0
       @offer   = klas.new(default_values.merge(starg))
-      @user    = User.find(offer.user_id)
+      @user    = User.find_by_uuid(offer.user_uuid)
     end
 
     def event_data
@@ -44,8 +44,8 @@ module OfferCmd
 
     def influx_tags
       {
-        side:    offer.side   ,
-        user_id: offer.user_id
+        side:  offer.side   ,
+        user:  offer.user
       }
     end
 

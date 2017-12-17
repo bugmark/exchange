@@ -5,15 +5,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable
 
-  before_save   :default_values
+  before_save :default_values
 
-  has_many :offers     , class_name: "Offer"
-  has_many :offers_buy , class_name: "Offer::Buy"
-  has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"
-  has_many :offers_bf  , class_name: "Offer::Buy::Fixed"
-  has_many :offers_sell, class_name: "Offer::Sell"
-  has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
-  has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
+  has_many :offers     , class_name: "Offer"                 , primary_key: "uuid", foreign_key: "user_uuid"
+  has_many :offers_buy , class_name: "Offer::Buy"            , primary_key: "uuid", foreign_key: "user_uuid"
+  has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"   , primary_key: "uuid", foreign_key: "user_uuid"
+  has_many :offers_bf  , class_name: "Offer::Buy::Fixed"     , primary_key: "uuid", foreign_key: "user_uuid"
+  has_many :offers_sell, class_name: "Offer::Sell"           , primary_key: "uuid", foreign_key: "user_uuid"
+  has_many :offers_su  , class_name: "Offer::Sell::Unfixed"  , primary_key: "uuid", foreign_key: "user_uuid"
+  has_many :offers_sf  , class_name: "Offer::Sell::Fixed"    , primary_key: "uuid", foreign_key: "user_uuid"
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 

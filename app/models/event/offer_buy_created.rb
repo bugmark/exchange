@@ -2,21 +2,21 @@ require "ext/hash"
 
 class Event::OfferBuyCreated < Event
 
-  jsonb_accessor :data, "type"           => :string
-  jsonb_accessor :data, "uuid"           => :string
-  jsonb_accessor :data, "user_uuid"      => :string
-  jsonb_accessor :data, "volume"         => :integer
-  jsonb_accessor :data, "price"          => :float
-  jsonb_accessor :data, "aon"            => [:boolean, default: false]
-  jsonb_accessor :data, "poolable"       => [:boolean, default: false]
-  jsonb_accessor :data, "maturation"     => :datetime
-  jsonb_accessor :data, "maturation_min" => :datetime
-  jsonb_accessor :data, "maturation_max" => :datetime
-  jsonb_accessor :data, "stm_bug_id"     => :string
-  jsonb_accessor :data, "stm_repo_id"    => :string
-  jsonb_accessor :data, "stm_title"      => :string
-  jsonb_accessor :data, "stm_status"     => :string
-  jsonb_accessor :data, "stm_labels"     => :string
+  jsonb_accessor :payload, "type"           => :string
+  jsonb_accessor :payload, "uuid"           => :string
+  jsonb_accessor :payload, "user_uuid"      => :string
+  jsonb_accessor :payload, "volume"         => :integer
+  jsonb_accessor :payload, "price"          => :float
+  jsonb_accessor :payload, "aon"            => [:boolean, default: false]
+  jsonb_accessor :payload, "poolable"       => [:boolean, default: false]
+  jsonb_accessor :payload, "maturation"     => :datetime
+  jsonb_accessor :payload, "maturation_min" => :datetime
+  jsonb_accessor :payload, "maturation_max" => :datetime
+  jsonb_accessor :payload, "stm_bug_id"     => :string
+  jsonb_accessor :payload, "stm_repo_id"    => :string
+  jsonb_accessor :payload, "stm_title"      => :string
+  jsonb_accessor :payload, "stm_status"     => :string
+  jsonb_accessor :payload, "stm_labels"     => :string
 
   validates :uuid     , presence: true
   validates :user_uuid, presence: true
@@ -26,8 +26,8 @@ class Event::OfferBuyCreated < Event
   private
 
   def cast_object
-    klas = data['type'].constantize
-    klas.new(data.without_blanks)
+    klas = payload['type'].constantize
+    klas.new(payload.without_blanks)
   end
 
   def user_uuids
@@ -40,13 +40,13 @@ end
 # Table name: events
 #
 #  id           :integer          not null, primary key
-#  type         :string
-#  uuid         :string
+#  event_type   :string
+#  event_uuid   :string
 #  cmd_type     :string
 #  cmd_uuid     :string
 #  local_hash   :string
 #  chain_hash   :string
-#  data         :jsonb            not null
+#  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
 #  projected_at :datetime

@@ -2,6 +2,8 @@ require 'json'
 
 class Event < ApplicationRecord
 
+  self.inheritance_column = :event_type
+
   before_validation :default_values
 
   validates :cmd_type, presence: true
@@ -54,9 +56,9 @@ class Event < ApplicationRecord
 
   def default_values
     prev = Event.last
-    self.data        ||= {}
-    self.uuid        ||= SecureRandom.uuid
-    self.local_hash    = Digest::MD5.hexdigest([self.uuid, data].to_json)
+    self.payload     ||= {}
+    self.event_uuid  ||= SecureRandom.uuid
+    self.local_hash    = Digest::MD5.hexdigest([self.uuid, payload].to_json)
     self.chain_hash    = Digest::MD5.hexdigest([prev&.chain_hash, self.local_hash].to_json)
   end
 end
@@ -66,13 +68,13 @@ end
 # Table name: events
 #
 #  id           :integer          not null, primary key
-#  type         :string
-#  uuid         :string
+#  event_type   :string
+#  event_uuid   :string
 #  cmd_type     :string
 #  cmd_uuid     :string
 #  local_hash   :string
 #  chain_hash   :string
-#  data         :jsonb            not null
+#  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
 #  projected_at :datetime

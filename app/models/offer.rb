@@ -7,7 +7,7 @@ class Offer < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user            , optional: true
+  belongs_to :user            , optional: true , foreign_key: "user_uuid", primary_key: "uuid"
   belongs_to :bug             , optional: true , foreign_key: "stm_bug_id"
   belongs_to :repo            , optional: true , foreign_key: "stm_repo_id"
   has_one    :position                         , foreign_key: "offer_id"
@@ -35,6 +35,7 @@ class Offer < ApplicationRecord
   before_validation :update_value
 
   # ----- BASIC SCOPES -----
+
   class << self
     def poolable()             where(poolable: true)      end
     def not_poolable()         where(poolable: false)     end
@@ -80,6 +81,7 @@ class Offer < ApplicationRecord
   end
 
   # ----- OVERLAP UTILS -----
+
   class << self
     def by_overlap_maturation_range(range)
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
@@ -109,6 +111,7 @@ class Offer < ApplicationRecord
   end
 
   # ----- CROSS UTILS -----
+
   class << self
     def with_volume(volume)
       where(volume: volume)
@@ -188,13 +191,13 @@ class Offer < ApplicationRecord
     BugmTime.future_week_dates.index(self.maturation.strftime("%y-%m-%d"))
   end
 
-  # ----- predicates -----
-
   def opposite_side
     return "unfixed" if self.side == "fixed"
     return "fixed"   if self.side == "unfixed"
     ""
   end
+
+  # ----- PREDICATES -----
 
   def is_matured?
     self.maturation < BugmTime.now
@@ -253,7 +256,7 @@ end
 #  type                :string
 #  repo_type           :string
 #  user_id             :integer
-#  user_uuid           :integer
+#  user_uuid           :string
 #  prototype_id        :integer
 #  amendment_id        :integer
 #  reoffer_parent_id   :integer
