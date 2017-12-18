@@ -689,18 +689,33 @@ Next Actions:
 # Dec 15
 
 - [x] fix hirb output
+- [x] get CreateBuy::OfferCmd working with new structure
 
-- [ ] get CreateBuy::OfferCmd working with new structure
+# Dec 16
 
-- [ ] chain validations: command -> event -> object
-- [ ] test chained validations in web form
+- [x] chain validations: command -> event -> object
+- [x] test chained validations in web form
 
-- [ ] add a withdrawal event
-- [ ] make a withdrawal event work in a web form (rails form error)
+# Dec 17
 
-- [ ] add tests for event projection & validation
-- [ ] add transaction sequence to Events
-- [ ] add end-transaction events to events
+- [x] add tests for event projection & validation
+- [x] add transaction sequence to Events
+- [x] add end-transaction events to events
+
+- [x] user/create
+- [ ] repo/gh_create
+- [ ] repo/gh_sync
+- [ ] bug/sync
+- [ ] offer/cancel
+- [ ] offer/clone
+- [x] offer/create_buy
+- [ ] offer/create_sell
+- [ ] offer/suspend
+- [ ] contract/clone
+- [ ] contract/create
+- [ ] contract/cross
+- [ ] contract/delete
+- [ ] contract/resolve
 
 - [ ] redo all buy_offer commands - tests on events
 - [ ] redo all buy_offer commands - tests on projections

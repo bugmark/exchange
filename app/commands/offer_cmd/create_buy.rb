@@ -5,6 +5,8 @@ module OfferCmd
 
     attr_reader :typ
 
+    attr_delegate_fields :offer_new , class_name: "Offer::Buy"
+
     validate :user_balance
     validate :deposit_amount
     validate :profit_amount
@@ -23,6 +25,10 @@ module OfferCmd
 
     def user
       offer_new&.user
+    end
+
+    def maturation
+      offer_new&.maturation
     end
 
     private

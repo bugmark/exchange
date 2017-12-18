@@ -48,7 +48,7 @@ class ApplicationCommand
     end
   end
 
-  # delegate all fields of a subobject to the subobject
+  # delegate all fields of an object to the subobject
   def self.attr_delegate_fields(sym, opts = {})  #class_name
     klas_name = opts[:class_name] || sym
     klas    = klas_name.to_s.camelize.constantize

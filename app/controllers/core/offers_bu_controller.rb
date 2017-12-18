@@ -12,7 +12,7 @@ module Core
     def create
       opts = params["offer_cmd_create_buy"]
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, new_opts.merge(valid_params(opts)))
-      if @offer_bu.project
+      if @offer_bu.cmd_cast
         flash[:notice] = "Offer created! (BU)"
         redirect_to("/core/offers/#{@offer_bu.id}")
       else
@@ -29,7 +29,7 @@ module Core
 
     def new_opts(params = {})
       opts = {
-        price:       0.50                     ,
+        price:       0.80                     ,
         poolable:    false                    ,
         aon:         false                    ,
         volume:      10                       ,

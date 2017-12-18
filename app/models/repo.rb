@@ -10,6 +10,8 @@ class Repo < ApplicationRecord
 
   validates :name     , uniqueness: true, presence: true
 
+  before_validation :set_defaults
+
   def xtag
     "rep"
   end
@@ -38,6 +40,12 @@ class Repo < ApplicationRecord
       select(:id, :name, "xfields->'languages' as lang", "jfields->'readme_url' as readme_url", "substring(jfields->>'readme_txt' for 50) as readme_txt")
     end
     alias_method :ss, :select_subset
+  end
+
+  private
+
+  def set_defaults
+    self.uuid ||= SecureRandom.uuid
   end
 end
 

@@ -1,33 +1,18 @@
 module RepoCmd
   class GhCreate < ApplicationCommand
 
-    attr_subobjects      :repo
-    attr_delegate_fields :repo
+    # attr_subobjects      :repo
+    # attr_delegate_fields :repo
 
-    def initialize(args)
-      @repo = Repo.find_or_create_by(args)
+    def initialize(xargs)
+      args = xargs.stringify_keys
+      add_event :repo, Event::RepoCreated.new(repo_opts(args))
     end
 
-    def self.from_event(event)
-      instance = allocate
-      instance.repo = Repo.find_or_create_by(event.data)
-      instance
-    end
+    private
 
-    def event_data
-      repo.attributes
-    end
-
-    def influx_tags
-      {
-        type: repo.type
-      }
-    end
-
-    def influx_fields
-      {
-        id: repo.id
-      }
+    def repo_opts(args)
+      cmd_opts.merge(args)
     end
   end
 end
