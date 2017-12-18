@@ -6,15 +6,16 @@ RSpec.describe Event::RepoCreated, :type => :model do
     {
       cmd_type:           "Test::Repo"       ,
       cmd_uuid:           SecureRandom.uuid  ,
-      name:               "ding/dong"        ,
+      name:               "mvscorg/bugmark"  ,
       uuid:               SecureRandom.uuid  ,
+      type:               "Repo::GitHub"
     }.merge(alt)
   end
 
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
-  describe "Object Creation" do
+  describe "Object Creation", USE_VCR do
     it { should be_valid }
 
     it 'saves the object to the database' do
@@ -29,7 +30,7 @@ RSpec.describe Event::RepoCreated, :type => :model do
   end
 
   describe "Casting" do
-    it "increments the repo count" do
+    it "increments the repo count", USE_VCR do
       expect(Repo.count).to eq(0)
       result = subject.ev_cast
       expect(result).to be_a(Repo)

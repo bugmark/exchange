@@ -9,8 +9,5 @@ module BugCmd
       @bug.assign_attributes(args)
     end
 
-    def event_data
-      bug.attributes
-    end
   end
 end     #

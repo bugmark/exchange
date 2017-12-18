@@ -6,7 +6,7 @@ RSpec.describe RepoCmd::GhCreate do
 
   def valid_params
     {
-      name: "mvscorg/test1"     ,
+      name: "mvscorg/bugmark"     ,
       uuid: SecureRandom.uuid
     }
   end
@@ -24,7 +24,7 @@ RSpec.describe RepoCmd::GhCreate do
     it { should be_valid }
   end
 
-  describe "#cmd_cast" do
+  describe "#cmd_cast", USE_VCR do
     it 'saves the object to the database' do
       subject.cmd_cast
       expect(subject).to be_valid

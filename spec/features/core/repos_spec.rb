@@ -22,7 +22,7 @@ describe "Repos", USE_VCR do
     expect(page).to_not be_nil
   end #
 
-  it "click thru to bug index" do #
+  it "click thru to bug index" do #.
     hydrate(bug1)
     visit "/core/repos"
     find('.buglink').click

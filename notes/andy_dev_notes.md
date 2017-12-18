@@ -702,8 +702,10 @@ Next Actions:
 - [x] add transaction sequence to Events
 - [x] add end-transaction events to events
 
+# Dec 18
+
 - [x] user/create
-- [ ] repo/gh_create
+- [x] repo/gh_create
 - [ ] repo/gh_sync
 - [ ] bug/sync
 - [ ] offer/cancel

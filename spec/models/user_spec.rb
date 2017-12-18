@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User, type: :model do #
   def valid_params
     {email: "asdf@qwer.net", password: "gggggg"}
   end
@@ -13,8 +13,8 @@ RSpec.describe User, type: :model do
     FB.create(:offer_bf, {user_uuid: usr.uuid}.merge(args))
   end
 
-  let(:usr) { FB.create(:user, balance: 100.0).user         }
-  let(:ask) { FB.create(:offer_bf, user_id: user.id)        }
+  let(:usr)  { FB.create(:user, balance: 100.0).user       }
+  let(:ask)  { FB.create(:offer_bf, user_id: user.id)      }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 
@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
       expect(usr.offers).to eq([])
     end
 
-    it 'returns a offer if one exists' do
+    it 'returns a offer if one exists', :focus do
       gen_unfixed
       expect(usr.offers.count).to     eq(1)
       expect(usr.offers_buy.count).to eq(1)
@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do
       expect(usr.offers_bf.count).to  eq(0)
     end
 
-    it 'handles offers_bf and offers_bu' do
+    it 'handles offers_bf and offers_bu' do  #...
       gen_unfixed; gen_fixed
       expect(usr.offers.count).to eq(2)
       expect(usr.offers_buy.count).to eq(2)

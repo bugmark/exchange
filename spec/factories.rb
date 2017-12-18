@@ -19,7 +19,7 @@ FactoryBot.define do
   end
 
   factory :repo, class: RepoCmd::GhCreate do
-    to_create { |instance| instance.project }
+    to_create { |instance| instance.cmd_cast }
     initialize_with { new(attributes) }
 
     type "Repo::GitHub"
@@ -33,7 +33,7 @@ FactoryBot.define do
     sequence :stm_title do |n|
       "Bug #{n}"
     end
-    stm_repo_id { FB.create(:repo).id }
+    stm_repo_id { FB.create(:repo).repo.id }
   end
 
   # ----- BUY OFFERS -----

@@ -2,11 +2,14 @@ require 'ext/hash'
 
 class Event::RepoCreated < Event
 
+  jsonb_accessor :payload, "type"  => :string
   jsonb_accessor :payload, "name"  => :string
   jsonb_accessor :payload, "uuid"  => :string
 
-  validates :name , presence: true
-  validates :uuid , presence: true
+  validates :type       , presence: true
+  validates :name       , presence: true
+  validates :event_type , presence: true
+  validates :event_uuid , presence: true
 
   def cast_object
     Repo.new(payload.without_blanks)
