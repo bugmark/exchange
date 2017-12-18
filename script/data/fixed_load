@@ -11,35 +11,35 @@ opts = [
     stm_bug_id:  Bug.second.id       ,
     price:       0.10                ,
     volume:      45                  ,
-    user:        users.first         ,
+    user_uuid:   users.first.uuid    ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.third.id        ,
     price:       0.50                ,
     volume:      35                  ,
-    user:        users.second        ,
+    user_uuid:   users.second.uuid   ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.first.id        ,
     price:       0.25                ,
     volume:      20                  ,
-    user:        users.last          ,
+    user_uuid:   users.last.uuid     ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.third.id        ,
     price:       0.80                ,
     volume:      25                  ,
-    user:        users.last          ,
+    user_uuid:   users.last.uuid     ,
     maturation:  week_ends.first
   },
   {
     stm_bug_id:  Bug.first.id        ,
     price:       0.50                ,
     volume:      35                  ,
-    user:        users.last          ,
+    user_uuid:   users.last.uuid     ,
     maturation:  week_ends.first
   }
 ]
