@@ -117,7 +117,7 @@ Rails.application.routes.draw do
 
   mount GrapeSwaggerRails::Engine, at: "/apidocs"
 
-  # root "info#home"
-  root "docfix/homes#show"
+  root "info#home"
+  # root "docfix/homes#show"
 
 end
