@@ -3,39 +3,25 @@ require 'ext/array'
 module RepoCmd
   class GhSync < ApplicationCommand
 
-    attr_subobjects      :repo
-    attr_delegate_fields :repo
+    attr_reader :repo
 
     def initialize(args)
       @repo = Repo.find_or_create_by(args)
+      sync_bugs
     end
 
     def self.from_repo(repo)
       instance = allocate
       instance.repo = repo
-      instance
-    end
-
-    def transact_before_project
       sync_bugs
-      repo.synced_at = BugmTime.now
-    end
-
-    def self.from_event(event)
-      instance = allocate
-      instance.repo = Repo.find_or_create_by(event.data)
       instance
-    end
-
-    def event_data
-      {id: repo.id}
     end
 
     private
 
     def sync_bugs
       issues = Octokit.issues(repo.name)
-      issues.each do |el|
+      issues.each_with_index do |el, idx|
         attrs = {
           stm_repo_id: self.id           ,
           type:        "Bug::GitHub"     ,
@@ -47,9 +33,9 @@ module RepoCmd
           html_url:    el["html_url"]    ,
           synced_at:   BugmTime.now
         }
-        bug = BugCmd::Sync.new(attrs)
-        bug.project
+        add_event("bug#{idx}".to_sym, Event::BugSynced(attrs))
       end
+      add_event :repo, Event::RepoSynced.new(uuid: repo.uuid)
     end
 
     def labels_for(el)

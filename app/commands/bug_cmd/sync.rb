@@ -10,4 +10,4 @@ module BugCmd
     end
 
   end
-end     #
+end

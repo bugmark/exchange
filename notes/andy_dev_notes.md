@@ -702,12 +702,12 @@ Next Actions:
 - [x] add transaction sequence to Events
 - [x] add end-transaction events to events
 
-# Dec 18
+# Dec 18-19
 
 - [x] user/create
 - [x] repo/gh_create
-- [ ] repo/gh_sync
-- [ ] bug/sync
+- [x] repo/gh_sync
+- [x] bug/sync
 - [ ] offer/cancel
 - [ ] offer/clone
 - [x] offer/create_buy
@@ -718,6 +718,8 @@ Next Actions:
 - [ ] contract/cross
 - [ ] contract/delete
 - [ ] contract/resolve
+
+# Dec 20
 
 - [ ] redo all buy_offer commands - tests on events
 - [ ] redo all buy_offer commands - tests on projections
