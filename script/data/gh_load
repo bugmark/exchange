@@ -10,7 +10,6 @@ def sync(name)
 
   repo_cmd = RepoCmd::GhCreate.new(opts)
   repo_cmd.cmd_cast
-  binding.pry
   item = RepoCmd::GhSync.from_repo(repo_cmd.repo)
   item.cmd_cast
 end

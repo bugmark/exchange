@@ -2,12 +2,11 @@ require 'ext/hash'
 
 class Event::BugSynced < Event
 
-  EXTRAS = {"html_url" => :string, "comments" => :string}
+  EXTRAS = {extras: {"html_url" => :string, "comments" => :string}}
 
   jsonb_fields_for :payload, Bug, EXTRAS
 
   validates :type      , presence: true
-  validates :uuid      , presence: true
   validates :exid      , presence: true
   validates :stm_title , presence: true
 
