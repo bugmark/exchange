@@ -715,9 +715,9 @@ Next Actions:
 - [ ] offer/suspend
 - [ ] contract/clone
 - [ ] contract/create
-- [ ] contract/cross
+- [ ] contract/cross      <---
 - [ ] contract/delete
-- [ ] contract/resolve
+- [ ] contract/resolve    <---
 
 # Dec 20
 

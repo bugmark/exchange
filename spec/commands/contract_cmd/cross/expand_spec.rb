@@ -28,7 +28,7 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
   end
 
-  describe "Delegated Object", USE_VCR do
+  describe "Delegated Object", USE_VCR do #
     it 'has a present Offer' do
       expect(subject.offer).to be_present
     end
@@ -53,7 +53,7 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
   end
 
-  describe "#project - valid subject", USE_VCR do
+  describe "#project - valid subject", USE_VCR do #
     before(:each) { hydrate(offer_bu) }
 
     it 'detects a valid object' do

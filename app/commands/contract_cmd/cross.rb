@@ -20,22 +20,20 @@ module ContractCmd
 
     def transact_before_project
       @bundle = Bundle.new(type, offer, counters).generate
-      @commit = Commit.new(bundle).generate
+      # noinspection RubyArgCount
+      @commit = commit_class.new(bundle).generate  #
     end
 
     def contract
       commit&.contract
     end
 
-    # def event_data
-    #   contract&.attributes || {}
-    # end
-
-    # def user_ids
-    #   contract&.escrows&.last&.users&.pluck(:id)&.sort&.uniq
-    # end
-
     private
+
+    def commit_class
+      require "commit/#{type.to_s}"
+      "Commit::#{type.capitalize}".constantize
+    end
 
     def cross_integrity
       if offer.nil?
