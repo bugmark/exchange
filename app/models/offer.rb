@@ -237,6 +237,7 @@ class Offer < ApplicationRecord
   def default_attributes
     self.status   ||= 'open'
     self.poolable ||= false
+    self.aon      ||= false
   end
 
   def update_value

@@ -44,10 +44,10 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.integer  :amendment_id              # the generating amendment
       t.integer  :reoffer_parent_id         # for ReOffers - an Offer
       t.integer  :salable_position_id       # for SaleOffers - a Position
-      t.integer  :volume, default: 1        # Greater than zero
-      t.float    :price , default: 0.50     # between 0.00 and 1.00
+      t.integer  :volume                    # Greater than zero
+      t.float    :price                     # between 0.00 and 1.00
       t.float    :value
-      t.boolean  :poolable, default: true   # for reserve pooling
+      t.boolean  :poolable, default: false  # for reserve pooling
       t.boolean  :aon     , default: false  # All Or None
       t.string   :status                    # open, suspended, cancelled, ...
       t.datetime :expiration

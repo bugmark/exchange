@@ -2,21 +2,7 @@ require "ext/hash"
 
 class Event::OfferBuyCreated < Event
 
-  jsonb_accessor :payload, "type"           => :string
-  jsonb_accessor :payload, "uuid"           => :string
-  jsonb_accessor :payload, "user_uuid"      => :string
-  jsonb_accessor :payload, "volume"         => :integer
-  jsonb_accessor :payload, "price"          => :float
-  jsonb_accessor :payload, "aon"            => [:boolean, default: false]
-  jsonb_accessor :payload, "poolable"       => [:boolean, default: false]
-  jsonb_accessor :payload, "maturation"     => :datetime
-  jsonb_accessor :payload, "maturation_min" => :datetime
-  jsonb_accessor :payload, "maturation_max" => :datetime
-  jsonb_accessor :payload, "stm_bug_id"     => :string
-  jsonb_accessor :payload, "stm_repo_id"    => :string
-  jsonb_accessor :payload, "stm_title"      => :string
-  jsonb_accessor :payload, "stm_status"     => :string
-  jsonb_accessor :payload, "stm_labels"     => :string
+  jsonb_fields_for :payload, Offer, {extras: {"maturation" => :datetime}}
 
   validates :uuid     , presence: true
   validates :user_uuid, presence: true
@@ -24,9 +10,6 @@ class Event::OfferBuyCreated < Event
   validates :price    , presence: true
 
   before_validation :set_defaults
-
-  # def user=(user) @user = user end
-  # def user()      @user        end
 
   private
 
@@ -36,8 +19,7 @@ class Event::OfferBuyCreated < Event
   end
 
   def set_defaults
-    # payload["user_uuid"] ||= user&.uuid
-    payload["status"]      = 'open'
+    payload["status"] ||= 'open'
   end
 
   def user_uuids

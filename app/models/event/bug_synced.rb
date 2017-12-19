@@ -1,18 +1,21 @@
 require 'ext/hash'
 
-class Event::RepoCreated < Event
+class Event::BugSynced < Event
 
-  jsonb_fields_for :payload, Repo
+  EXTRAS = {"html_url" => :string, "comments" => :string}
 
-  validates :type       , presence: true
-  validates :name       , presence: true
-  validates :event_type , presence: true
-  validates :event_uuid , presence: true
+  jsonb_fields_for :payload, Bug, EXTRAS
+
+  validates :type      , presence: true
+  validates :uuid      , presence: true
+  validates :exid      , presence: true
+  validates :stm_title , presence: true
 
   def cast_object
-    Repo.new(payload.without_blanks)
+    bug = Bug.find_or_initialize_by(exid: payload["exid"])
+    bug.assign_attributes(payload.without_blanks)
+    bug
   end
-
 end
 
 # == Schema Information

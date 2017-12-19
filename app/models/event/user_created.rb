@@ -2,9 +2,7 @@ require 'ext/hash'
 
 class Event::UserCreated < Event
 
-  jsonb_accessor :payload, "uuid"  => :string
-  jsonb_accessor :payload, "email" => :string
-  jsonb_accessor :payload, "encrypted_password" => :string
+  jsonb_fields_for :payload, User
 
   validates :uuid , presence: true
   validates :email, presence: true

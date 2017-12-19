@@ -1,4 +1,5 @@
 require 'json'
+require 'ext/hash'
 
 class Event < ApplicationRecord
 
@@ -8,6 +9,26 @@ class Event < ApplicationRecord
 
   validates :cmd_type, presence: true
   validates :cmd_uuid, presence: true
+
+  # generate jsonb fields for a class
+  def self.jsonb_fields_for(field, klas, opts = {})
+    fields = klas.attribute_names.reduce({}) do |acc, name|
+      sname = name.to_s
+      acc[sname] = klas.columns_hash[sname]&.type
+      acc
+    end
+
+    new_fields = fields
+      .without_blanks
+      .merge(opts.fetch(:extras, {}))
+      .without(*(opts.fetch(:exclude, [])))
+      .delete_if {|k, v| %i(jsonb hstore tsrange).include?(v)}
+      .delete_if {|k, v| %w(created_at updated_at).include?(k)}
+
+    new_fields.each do |key, val|
+      jsonb_accessor field, {key => val}
+    end
+  end
 
   class << self
     def for_user(user)
@@ -28,17 +49,6 @@ class Event < ApplicationRecord
       nil
     end
   end
-
-  # def valid?(*)
-  #   if super && cached_cast_object.valid?
-  #     true
-  #   else
-  #     cached_cast_object.valid?
-  #     cached_cast_object.errors.each do |field, error|
-  #       errors.add(field, error)
-  #     end
-  #   end
-  # end
 
   def cast_object
     raise "ERROR: Call in SubClass"
