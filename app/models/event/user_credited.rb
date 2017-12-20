@@ -1,16 +1,21 @@
-require 'ext/hash'
+class Event::UserCredited < Event
 
-class Event::PositionCreated < Event
-
-  jsonb_fields_for :payload, Position
-
-  validates :uuid       , presence: true
-  validates :user_uuid  , presence: true
+  jsonb_accessor :payload, "uuid"   => :string
+  jsonb_accessor :payload, "amount" => :float
 
   jsonb_accessor :jfields, :transfer_uuid => :string
 
+  validates :uuid   , presence: true
+  validates :amount , presence: true
+
   def cast_object
-    Position.new(payload.without_blanks)
+    user = User.find_by_uuid(uuid)
+    user.balance += amount if user
+    user
+  end
+
+  def user_uuids
+    [uuid]
   end
 end
 

@@ -68,7 +68,9 @@ class ApplicationCommand
   # ----- template methods - override in subclass
 
   def add_event(key, event)
-    raise "DUPLICATE KEY" if state[:events][key]
+    binding.pry if key.nil? || key.blank?
+    raise "EMPTY KEY" if key.nil? || key.blank?
+    raise "DUPLICATE KEY (#{key})" if state[:events][key]
     state[:events][key] = event
     self.define_singleton_method("#{key.to_s}_event".to_sym) do
       state[:events][key]
@@ -90,7 +92,7 @@ class ApplicationCommand
     # override in subclass
   end
 
-  # ----- persistence methods
+  # ----- persistence methods -----
 
   def save
     raise "NOT ALLOWED - USE #project"
@@ -98,6 +100,7 @@ class ApplicationCommand
 
   # synonym for project
   def cmd_cast
+    # binding.pry if events.length > 9
     if valid?
       ActiveRecord::Base.transaction do
         events.each do |key, event|
@@ -105,6 +108,9 @@ class ApplicationCommand
           self.define_singleton_method(key) { eval varname }
           object = event.ev_cast
           self.instance_variable_set varname, object
+          tst_log "ERROR ON #{key}"    unless object.valid?
+          tst_log object.errors.messages.inspect unless object.valid?
+          binding.pry                  unless object.valid?
           raise ActiveRecord::Rollback unless object.valid?
         end
       end

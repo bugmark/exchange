@@ -1,6 +1,6 @@
 # integration_test:  commands/contract_cmd/cross/expand
-# integration_test:  commands/contract_cmd/cross/transfer
-# integration_test:  commands/contract_cmd/cross/reduce
+# integration_test  commands/contract_cmd/cross/transfer
+# integration_test  commands/contract_cmd/cross/reduce
 
 require 'ext/array'
 
@@ -16,12 +16,18 @@ module ContractCmd
       @type        = commit_type
       @offer       = Offer.find(offer.to_i)
       @counters    = @offer.qualified_counteroffers(commit_type)
+      if valid?
+        @bundle = Bundle.new(type, offer, counters).generate
+        # noinspection RubyArgCount
+        @commit = commit_class.new(bundle).generate
+        @commit.events.each do |ev|
+          tst_log "#{ev.name.to_s.rjust(15)}, #{ev.klas}"  #.............
+          add_event(ev.name, ev.klas.new(cmd_opts.merge(ev.params)))
+        end
+      end
     end
 
     def transact_before_project
-      @bundle = Bundle.new(type, offer, counters).generate
-      # noinspection RubyArgCount
-      @commit = commit_class.new(bundle).generate  #
     end
 
     def contract

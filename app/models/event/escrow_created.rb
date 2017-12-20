@@ -1,8 +1,10 @@
 require 'ext/hash'
 
-class EventEscrowCreated < Event
+class Event::EscrowCreated < Event
 
   jsonb_fields_for :payload, Escrow
+
+  jsonb_accessor :jfields, :transfer_uuid => :string
 
   validates :uuid , presence: true
 

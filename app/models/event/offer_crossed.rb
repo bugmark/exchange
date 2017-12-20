@@ -1,16 +1,30 @@
-require 'ext/hash'
+require "ext/hash"
 
-class Event::PositionCreated < Event
+class Event::OfferCrossed < Event
 
-  jsonb_fields_for :payload, Position
+  jsonb_fields_for :payload, Offer
 
-  validates :uuid       , presence: true
-  validates :user_uuid  , presence: true
+  validates :uuid     , presence: true
+  # validates :user_uuid, presence: true
+  # validates :volume   , presence: true
+  # validates :price    , presence: true
 
-  jsonb_accessor :jfields, :transfer_uuid => :string
+  # before_validation :set_defaults
+
+  private
 
   def cast_object
-    Position.new(payload.without_blanks)
+    offer = Offer.find_by_uuid(uuid)
+    offer.status = "crossed"
+    offer
+  end
+
+  def set_defaults
+    payload["status"] ||= 'open'
+  end
+
+  def user_uuids
+    [user_uuid]
   end
 end
 

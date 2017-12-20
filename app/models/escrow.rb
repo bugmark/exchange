@@ -14,8 +14,8 @@ class Escrow < ApplicationRecord
 
   # ----- VALIDATIONS -----
 
-  validates :amendment_id, presence: true
-  validates :type        , presence: true
+  # validates :amendment_uuid, presence: true
+  # validates :type          , presence: true
 
   # ----- SCOPES -----
 
