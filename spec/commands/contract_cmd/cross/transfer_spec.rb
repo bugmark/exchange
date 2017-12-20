@@ -21,7 +21,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
     it { should be_a klas }
     it "should be valid" do
       hydrate(offer_bu, transfer)
-      expect(transfer).to be_valid
+      expect(transfer).to be_valid #.
     end
   end
 

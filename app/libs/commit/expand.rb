@@ -1,21 +1,16 @@
+# integration_test: commands/contract_cmd/cross/expand
+
 require_relative '../commit'
 
 class Commit::Expand < Commit
-
   def generate
     ctx = base_context
 
     # find or generate contract with maturation date
-    ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
-    ctx.selected  = ctx.matching.sort_by {|c| c.escrows.count}.first
-    ctx.contract  = @contract = ctx.selected || begin
-      date = [ctx.max_start, ctx.min_end].avg_time
-      attr = bundle.offer.obj.match_attrs.merge(maturation: date)
-      Contract.create(attr)
-    end
+    ctx = find_or_gen_contract(ctx)
 
     # generate amendment and escrow
-    ctx = gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
+    ctx = gen_escrow_and_amendment(ctx, Amendment::Expand, Escrow::Expand)
 
     # calculate price for offer and counter - half-way between the two
     ctx.counter_min   = bundle.counters.map {|el| el.obj.price}.min
@@ -30,10 +25,9 @@ class Commit::Expand < Commit
     generate_reoffers(ctx)
 
     # update escrow value
-    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
+    ctx = update_escrow_value(ctx)
 
+    # return self
     self
   end
-
-
 end

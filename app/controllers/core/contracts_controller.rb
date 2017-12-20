@@ -69,12 +69,35 @@ module Core
         format.png do
           require 'graphviz'
           @contract_id = params["id"]
+          @contract    = Contract.find(params["id"])
           g = GraphViz.new( :G, :type => :digraph )
-          hello = g.add_nodes("HELLO")
-          world = g.add_nodes("WORLD")
-          contr = g.add_nodes("CONTRACT #{@contract_id}")
-          g.add_edges(hello, world)
-          g.add_edges(world, contr)
+          contr   = g.add_nodes("CONTRACT #{@contract_id}")
+          escrows = @contract.escrows.map do |esc|
+            enode = g.add_nodes("ESCROW #{esc.id}", color: "blue", shape: "box")
+            esc.fixed_positions.each do |pos|
+              pn = g.add_nodes("FP #{pos.id}", color: "red")
+              g.add_edges(enode, pn)
+              oo = g.add_nodes("O #{pos.offer.id}")
+              g.add_edges(pn, oo)
+              uu = g.add_nodes("U #{pos.offer.id}/#{pos.offer.user.id}")
+              g.add_edges(oo, uu)
+            end
+            esc.unfixed_positions.each do |pos|
+              pn = g.add_nodes("UP #{pos.id}", color: "green")
+              g.add_edges(enode, pn)
+              oo = g.add_nodes("O #{pos.offer.id}")
+              g.add_edges(pn, oo)
+              uu = g.add_nodes("U #{pos.offer.id}/#{pos.offer.user.id}")
+              g.add_edges(oo, uu)
+            end
+            enode
+          end
+          g.add_edges(contr, escrows.first)
+          tgt = escrows.first
+          escrows[1..-1].each do |esc|
+            g.add_edges(tgt, esc)
+            tgt = esc
+          end
           g.output(png: "/tmp/contract#{@contract_id}.png")
           send_data(File.read("/tmp/contract#{@contract_id}.png"), disposition: 'inline', type: 'image/png', filename: 'img.png')
         end

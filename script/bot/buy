@@ -39,7 +39,7 @@ def buy
     stm_bug_id: ISSUE_IDS.sample ,
     maturation: WEEK_ENDS.sample
   }
-  FB.create(typ, opts).project
+  FB.create(typ, opts)
 end
 
 def cross

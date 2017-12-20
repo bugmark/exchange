@@ -1,3 +1,5 @@
+# integration_test: commands/contract_cmd/cross/transfer
+
 require_relative '../commit'
 
 class Commit::Transfer < Commit
@@ -6,10 +8,10 @@ class Commit::Transfer < Commit
     ctx = base_context
 
     # look up contract
-    # ctx.contract = bundle.offer.obj.salable_position.contract
+    # ctx.c_contract = bundle.offer.obj.salable_position.c_contract
 
     # generate amendment & escrow
-    gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)
+    gen_escrow_and_amendment(ctx, Amendment::Transfer, Escrow::Transfer)
 
     # calculate price for offer and counters
     clist             = bundle.counters.map {|el| el.obj.price}
@@ -23,8 +25,10 @@ class Commit::Transfer < Commit
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
 
     # update escrow value
-    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
+    ctx = update_escrow_value(ctx)
+    # ctx.e_escrow.update_attributes(fixed_value: ctx.e_escrow.fixed_values, unfixed_value: ctx.e_escrow.unfixed_values)
 
+    # return self
     self
   end
 

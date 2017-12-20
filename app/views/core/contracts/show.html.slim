@@ -10,7 +10,12 @@ table width='100%'
     table.table
       tr
         td <b>Status</b>
-        td = @contract.status
+        td
+          => @contract.status
+          | (
+          a[href="/core/contracts/#{@contract.id}/graph"] graph
+          | )
+
       tr
         td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@contract)}
   .col-md-6
