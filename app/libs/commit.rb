@@ -44,7 +44,7 @@ class Commit
       date = [ctx.o_max_start, ctx.o_min_end].avg_time #
       attr = bundle.offer.obj.match_attrs.merge(maturation: date, uuid: ctx.c_uuid)
       ctx_event(:contract, Event::ContractCreated, attr)
-      Contract.create(attr)
+      # Contract.create(attr) #
     end
     ctx
   end
@@ -52,20 +52,20 @@ class Commit
   def gen_escrow_and_amendment(ctx, amendment_klas, escrow_klas)
     ctx.a_uuid = SecureRandom.uuid
     ctx_event(:amendment, Event::AmendmentCreated, contract_uuid: ctx.c_uuid, uuid: ctx.a_uuid)
-    ctx.a_amendment = amendment_klas.create(contract: ctx.c_contract)
+    # ctx.a_amendment = amendment_klas.create(contract: ctx.c_contract)
     ctx.e_uuid = SecureRandom.uuid
     ctx_event(:escrow, Event::EscrowCreated, contract_uuid: ctx.c_uuid, amendment_uuid: ctx.a_uuid, uuid: ctx.e_uuid)
-    ctx.e_escrow = escrow_klas.create(contract: ctx.c_contract, amendment: ctx.a_amendment)
+    # ctx.e_escrow = escrow_klas.create(contract: ctx.c_contract, amendment: ctx.a_amendment)
     ctx
   end
 
   def update_escrow_value(ctx)
-    attr = {
-      fixed_value: ctx.e_escrow.fixed_values,
-      unfixed_value: ctx.e_escrow.unfixed_values
-    }
-    ctx_event(:escrow_upd, Event::EscrowUpdated, attr.merge({uuid: ctx.e_uuid}))
-    ctx.e_escrow.update_attributes(attr)
+    # attr = {
+    #   fixed_value:   ctx.e_escrow.fixed_values    ,
+    #   unfixed_value: ctx.e_escrow.unfixed_values
+    # }
+    ctx_event(:escrow_upd, Event::EscrowUpdated, {uuid: ctx.e_uuid})
+    # ctx.e_escrow.update_attributes(attr)
     ctx
   end
 
@@ -76,20 +76,21 @@ class Commit
       volume:         offer.vol.to_i         ,
       price:          price.to_f             ,
       side:           offer.obj.side         ,
-      amendment_uuid: ctx.a_amendment.uuid   ,
-      escrow_uuid:    ctx.e_escrow.uuid      ,
+      amendment_uuid: ctx.a_uuid             ,
+      escrow_uuid:    ctx.e_uuid             ,
       offer_uuid:     offer.obj.uuid         ,
       user_uuid:      offer.obj.user.uuid    ,
       transfer_uuid: transfer_uuid
     }
     oid = offer.obj.id
     ctx_event("position#{oid}", Event::PositionCreated, posargs)
-    lcl_pos = Position.create(posargs.without(:transfer_uuid))
-    new_balance = offer.obj.user.balance - lcl_pos.value
-    ctx_event("user#{oid}", Event::UserDebited, {uuid: offer.obj.user_uuid, amount: lcl_pos.value})
-    offer.obj.user.update_attribute(:balance, new_balance)
+    # lcl_pos = Position.create(posargs.without(:transfer_uuid))
+    lcl_val = posargs[:volume] * posargs[:price]
+    # new_balance = offer.obj.user.balance - lcl_pos.value
+    ctx_event("user#{oid}", Event::UserDebited, {uuid: offer.obj.user_uuid, amount: lcl_val})
+    # offer.obj.user.update_attribute(:balance, new_balance)
     ctx_event("offer#{oid}", Event::OfferCrossed, {uuid: offer.obj.uuid})
-    offer.obj.update_attribute(:status, 'crossed') #....
+    # offer.obj.update_attribute(:status, 'crossed') #....
   end
 
   def suspend_overlimit_offers(bundle)

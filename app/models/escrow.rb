@@ -12,6 +12,8 @@ class Escrow < ApplicationRecord
 
   has_many :users, :through => :positions
 
+  before_validation :update_values
+
   # ----- VALIDATIONS -----
 
   # validates :amendment_uuid, presence: true
@@ -32,13 +34,18 @@ class Escrow < ApplicationRecord
     fixed_value + unfixed_value
   end
   alias_method :value, :total_value
-p
+
   def fixed_values
     fixed_positions.map(&:value).sum
   end
 
   def unfixed_values
     unfixed_positions.map(&:value).sum
+  end
+
+  def update_values
+    self.fixed_value   = fixed_values
+    self.unfixed_value = unfixed_values
   end
 
   def dumptree
