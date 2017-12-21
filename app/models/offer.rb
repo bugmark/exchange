@@ -48,11 +48,11 @@ class Offer < ApplicationRecord
     end
 
     def assigned
-      where("id IN (SELECT offer_id FROM positions)")
+      where("uuid IN (SELECT offer_uuid FROM positions)")
     end
 
     def unassigned
-      where("id NOT IN (SELECT offer_id FROM positions)")
+      where("uuid NOT IN (SELECT offer_uuid FROM positions)")
     end
 
     def by_maturation_range(range)

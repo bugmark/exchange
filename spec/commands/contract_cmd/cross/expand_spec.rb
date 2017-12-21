@@ -18,7 +18,7 @@ RSpec.describe ContractCmd::Cross::Expand do
 
   describe "Object Existence", USE_VCR do
     it { should be_a klas       }
-    it { should_not be_valid    }       #
+    it { should_not be_valid    }
   end
 
   describe "Subobjects", USE_VCR do
@@ -28,7 +28,7 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
   end
 
-  describe "Delegated Object", USE_VCR do #
+  describe "Delegated Object", USE_VCR do
     it 'has a present Offer' do
       expect(subject.offer).to be_present
     end
@@ -42,13 +42,13 @@ RSpec.describe ContractCmd::Cross::Expand do
     before(:each) { hydrate(offer_bu) }
 
     it 'detects an invalid object' do
-      subject.project
+      subject.cmd_cast
       expect(subject).to be_valid
     end
 
     it 'gets the right object count' do
       expect(Contract.count).to eq(0)
-      subject.project
+      subject.cmd_cast
       expect(Contract.count).to eq(1)
     end
   end
@@ -57,25 +57,25 @@ RSpec.describe ContractCmd::Cross::Expand do
     before(:each) { hydrate(offer_bu) }
 
     it 'detects a valid object' do
-      subject.project
+      subject.cmd_cast
       expect(subject).to be_valid
     end
 
     it 'gets the right object count' do
-      expect(Contract.count).to eq(0) #
-      subject.project
+      expect(Contract.count).to eq(0)
+      subject.cmd_cast
       expect(Contract.count).to eq(1)
     end
 
     it 'sets the contract status' do
-      subject.project
-      expect(subject.commit.contract.status).to eq("open")
+      subject.cmd_cast
+      expect(subject.contract.status).to eq("open")
     end
 
     it 'adjusts the user balance' do
       expect(usr1.balance).to eq(1000.0)
       expect(usr2.balance).to eq(1000.0)
-      subject.project
+      subject.cmd_cast
       usr1.reload
       usr2.reload
       expect(usr1.balance).to eq(996.0)
@@ -83,67 +83,41 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
   end
 
-  # describe "#event_data", USE_VCR do
-  #   it 'returns a hash' do
-  #     expect(subject.event_data).to be_a(Hash)
-  #   end
-  # end
-  #
-  # describe "#event_save", USE_VCR do
-  #   it 'creates an event' do
-  #     expect(Event.count).to eq(0)
-  #     subject.project
-  #     # expect(Event.count).to eq(4)
-  #   end
-  #
-  #   it 'chains with #project' do
-  #     expect(Event.count).to eq(0)
-  #     expect(Contract.count).to eq(0)
-  #     subject.project
-  #     # expect(Event.count).to eq(4)   # TODO: retest ...
-  #     expect(Contract.count).to eq(0)
-  #   end
-  # end #
-
   describe "crossing", USE_VCR do
     let(:lcl_offer_bf) { FB.create(:offer_bf).offer }
 
     context "with single offer_bu" do
-      it 'matches higher values', :focus do
+      it 'matches higher values' do
         FB.create(:offer_bu)
-        result = klas.new(lcl_offer_bf, :expand)
-        # result.project
-        # binding.pry
-        result.cmd_cast
-        # binding.pry
-        # expect(Contract.count).to eq(1)
+        klas.new(lcl_offer_bf, :expand).cmd_cast
+        expect(Contract.count).to eq(1)
         expect(Position.count).to eq(2)
       end
 
       it 'generates position ownership' do
         FB.create(:offer_bu)
-        klas.new(lcl_offer_bf, :expand).project
-        expect(Position.first.user_id).to_not be_nil
-        expect(Position.last.user_id).to_not be_nil
+        klas.new(lcl_offer_bf, :expand).cmd_cast
+        expect(Position.first.user_uuid).to_not be_nil
+        expect(Position.last.user_uuid).to_not be_nil
       end
 
       it 'attaches offer to position' do
         FB.create(:offer_bu)
-        klas.new(lcl_offer_bf, :expand).project
-        expect(Position.first.offer_id).to_not be_nil #
-        expect(Position.last.offer_id).to_not be_nil
+        klas.new(lcl_offer_bf, :expand).cmd_cast
+        expect(Position.first.offer_uuid).to_not be_nil
+        expect(Position.last.offer_uuid).to_not be_nil
       end
 
       it 'matches equal values' do
         FB.create(:offer_bu)
-        klas.new(lcl_offer_bf, :expand).project
+        klas.new(lcl_offer_bf, :expand).cmd_cast
         expect(Contract.count).to eq(1)
       end
 
       it 'fails to match lower values' do
         FB.create(:offer_bu, price: 0.1, volume: 1)
         expect(Contract.count).to eq(0)
-        klas.new(lcl_offer_bf, :expand).project
+        klas.new(lcl_offer_bf, :expand).cmd_cast
         expect(Contract.count).to eq(0)
       end
     end
@@ -152,21 +126,21 @@ RSpec.describe ContractCmd::Cross::Expand do
       it 'matches higher value' do
         _offer_bu1 = FB.create(:offer_bu, price: 0.5, volume: 10).offer
         _offer_bu2 = FB.create(:offer_bu, price: 0.5, volume: 10).offer
-        klas.new(lcl_offer_bf, :expand).project
-        expect(Contract.count).to eq(0)
+        klas.new(lcl_offer_bf, :expand).cmd_cast
+        expect(Contract.count).to eq(0) #
       end
 
       it 'matches equal value' do
         _offer_bu1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
         _offer_bu2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-        klas.new(lcl_offer_bf, :expand).project
+        klas.new(lcl_offer_bf, :expand).cmd_cast
         expect(Contract.count).to eq(1)
       end
 
       it 'fails to match lower value' do
         _offer_bu1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
         _offer_bu2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-        klas.new(lcl_offer_bf, :expand).project
+        klas.new(lcl_offer_bf, :expand).cmd_cast
         expect(Contract.count).to eq(1)
       end
     end
@@ -176,7 +150,7 @@ RSpec.describe ContractCmd::Cross::Expand do
         _offer_bu1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
         _offer_bu2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
         _offer_bu3 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-        klas.new(lcl_offer_bf, :expand).project
+        klas.new(lcl_offer_bf, :expand).cmd_cast
         expect(Contract.count).to eq(1)
         expect(Offer.assigned.count).to eq(2)
         expect(Offer.unassigned.count).to eq(2)
@@ -188,19 +162,21 @@ RSpec.describe ContractCmd::Cross::Expand do
         _offer_bu1 = FB.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu2 = FB.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu3 = FB.create(:offer_bu, price: 0.6, volume: 4).offer
-        klas.new(lcl_offer_bf, :expand).project
+        klas.new(lcl_offer_bf, :expand).cmd_cast
         expect(Contract.count).to eq(1)
         expect(Position.fixed.count).to eq(1)
         expect(Position.unfixed.count).to eq(3)
         expect(Amendment.count).to eq(1)
       end
 
+      # TODO FixMe
       it "has compatible volumes on both sides of the escrow" do
         _offer_bu1 = FB.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu2 = FB.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu3 = FB.create(:offer_bu, price: 0.6, volume: 4).offer
-        klas.new(lcl_offer_bf, :expand).project
-        expect(Escrow.count).to eq(1)
+        klas.new(lcl_offer_bf, :expand).cmd_cast
+        expect(Escrow.count).to eq(2)
+        binding.pry
         expect(Escrow.first.fixed_value).to eq(4.0)
         expect(Escrow.first.unfixed_value).to eq(6.0)
         expect(Escrow.first.total_value).to eq(10.0)
@@ -208,7 +184,7 @@ RSpec.describe ContractCmd::Cross::Expand do
     end
 
     context "overlapping pricing" do
-      it "generates correct prices" do
+      it "generates correct prices", :focus do
         _offer_bu1 = FB.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu2 = FB.create(:offer_bu, price: 0.6, volume: 3).offer
         _offer_bu3 = FB.create(:offer_bu, price: 0.6, volume: 4).offer

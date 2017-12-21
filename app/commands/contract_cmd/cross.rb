@@ -21,7 +21,6 @@ module ContractCmd
         # noinspection RubyArgCount
         @commit = commit_class.new(bundle).generate
         @commit.events.each do |ev|
-          tst_log "#{ev.name.to_s.rjust(15)}, #{ev.klas}"  #.............
           add_event(ev.name, ev.klas.new(cmd_opts.merge(ev.params)))
         end
       end

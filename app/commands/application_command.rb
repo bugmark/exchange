@@ -95,7 +95,7 @@ class ApplicationCommand
   # ----- persistence methods -----
 
   def save
-    raise "NOT ALLOWED - USE #project"
+    raise "NOT ALLOWED - USE #cmd_cast"
   end
 
   # synonym for project
@@ -108,9 +108,9 @@ class ApplicationCommand
           self.define_singleton_method(key) { eval varname }
           object = event.ev_cast
           self.instance_variable_set varname, object
-          tst_log "ERROR ON #{key}"    unless object.valid?
-          tst_log object.errors.messages.inspect unless object.valid?
-          binding.pry                  unless object.valid?
+          # tst_log "ERROR ON #{key}"    unless object.valid?
+          # tst_log object.errors.messages.inspect unless object.valid?
+          # binding.pry                  unless object.valid?
           raise ActiveRecord::Rollback unless object.valid?
         end
       end

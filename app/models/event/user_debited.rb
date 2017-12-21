@@ -10,7 +10,7 @@ class Event::UserDebited < Event
 
   def cast_object
     user = User.find_by_uuid(uuid)
-    user.balance += amount if user
+    user.balance -= amount if user
     user
   end
 
