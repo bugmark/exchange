@@ -68,8 +68,6 @@ group :development do
 
   # ----- pry / development support -----
   gem 'byebug'                   # debugger
-  gem 'pry-doc'                  # doc functions
-  gem 'pry-docmore'              # more doc functions
   gem 'pry-byebug'               # debugger
   gem 'pry-rescue'               # opens pry on failing test
   gem 'pry-stack_explorer'       # stack display and navigation
