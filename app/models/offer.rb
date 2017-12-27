@@ -7,19 +7,20 @@ class Offer < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user            , optional: true , foreign_key: "user_uuid"     , primary_key: "uuid"
-  belongs_to :bug             , optional: true , foreign_key: "stm_bug_uuid"  , primary_key: "uuid"
-  belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid" , primary_key: "uuid"
-  has_one    :position                         , foreign_key: "offer_uuid"    , primary_key: "uuid"
-  belongs_to :salable_position, optional: true , foreign_key: "salable_position_id" , class_name: "Position"
-  has_one    :reoffer_parent                   , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
-  belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
-  belongs_to :transfer        , optional: true
+  belongs_to :user            , optional: true , foreign_key: "user_uuid"            , primary_key: "uuid"
+  belongs_to :bug             , optional: true , foreign_key: "stm_bug_uuid"         , primary_key: "uuid"
+  belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid"        , primary_key: "uuid"
+  has_one    :position                         , foreign_key: "offer_uuid"           , primary_key: "uuid"
+  has_one    :prototype_parent                 , foreign_key: "prototype_uuid"       , primary_key: "uuid" , class_name: "Offer"
+  belongs_to :prototype_child , optional: true , foreign_key: "prorotype_uuid"       , primary_key: "uuid" , class_name: "Offer"
+  belongs_to :salable_position, optional: true , foreign_key: "salable_position_uuid", primary_key: "uuid" , class_name: "Position"
+  # belongs_to :transfer        , optional: true
 
   has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Offer'
   has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Offer'
 
-  belongs_to :amendment, optional: true
+  belongs_to :amendment, optional: true, foreign_key: "amendment_uuid", primary_key: "uuid"
+
   def escrow() position&.escrow end
 
   # ----- VALIDATIONS -----
@@ -75,7 +76,7 @@ class Offer < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status stm_bug_id stm_status))
+      select(%i(uuid type user_uuid salable_position_uuid prototype_uuid volume price value poolable aon status stm_bug_id stm_status))
     end
     alias_method :ss, :select_subset
   end

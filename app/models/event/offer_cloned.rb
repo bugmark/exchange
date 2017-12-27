@@ -14,7 +14,16 @@ class Event::OfferCloned < Event
   validates :prototype_uuid , presence: true
 
   def cast_object
-    Offer.new(payload.without_blanks)
+    proto  = Offer.find_by_uuid(prototype_uuid)
+    params = valid_params(proto.attributes).merge(payload).without_blanks
+    Offer.new(params)
+  end
+
+  private
+
+  def valid_params(attributes)
+    skips = %w(id uuid created_at updated_at)
+    attributes.without(*skips).merge({"status" => "open"})
   end
 end
 

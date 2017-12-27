@@ -27,7 +27,7 @@ RSpec.describe Offer::Sell, type: :model do
 
   describe "Associations", USE_VCR do
     it { should respond_to(:salable_position)        }
-    it { should respond_to(:transfer)                }
+    # it { should respond_to(:transfer)                }
   end
 
   describe "Object Creation", USE_VCR do
@@ -42,9 +42,9 @@ RSpec.describe Offer::Sell, type: :model do
   describe "Associations", USE_VCR do
     before(:each) do hydrate(soff) end
 
-    it "finds the user" do
-      expect(soff.salable_position).to eq(pos1)
-    end
+    # it "finds the user" do
+    #   expect(soff.salable_position).to eq(pos1)
+    # end
   end
 end
 

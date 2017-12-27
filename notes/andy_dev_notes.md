@@ -719,7 +719,9 @@ Next Actions:
 - [ ] contract/delete
 - [ ] contract/resolve    <---
 
-# Dec 20
+# Dec 27
+
+- [ ] Get reoffers working
 
 - [ ] redo all buy_offer commands - tests on events
 - [ ] redo all buy_offer commands - tests on projections
