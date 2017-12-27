@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.describe Offer, type: :model do
   def valid_params(extras = {})
     {
-      user: user                                           ,
+      user_uuid: user.uuid                                 ,
       maturation_range: Time.now-1.week..Time.now+1.week   ,
       status:  'open'                                      ,
+      volume:  5                                           ,
+      price:   0.2
     }.merge(extras)
   end
 

@@ -4,14 +4,16 @@ RSpec.describe Offer::Sell, type: :model do
 
   def soff_params(user = {})
     {
-      salable_position_id: pos1.id
+      salable_position_id: pos1.id                   ,
+      volume:              2                         ,
+      price:               0.8
     }
   end
 
   def position_params(opts = {})
     {
-      user_id:  user.id       ,
-      offer_id: boff.id       ,
+      user_uuid:  user.uuid       ,
+      offer_uuid: boff.uuid       ,
     }.merge(opts)
   end
 

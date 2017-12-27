@@ -5,9 +5,9 @@ class Position < ApplicationRecord
   before_validation :default_attributes
   before_validation :update_value
 
-  belongs_to :offer       , optional:   true      , foreign_key: "position_uuid", primary_key: "uuid"
+  belongs_to :offer       , optional:   true      , foreign_key: "offer_uuid", primary_key: "uuid"
   has_many   :offers_sell , class_name: "Offer"   , foreign_key: "salable_position_id"
-  belongs_to :user                                , optional: true
+  belongs_to :user        , optional: true        , foreign_key: "user_uuid" , primary_key: "uuid"
   belongs_to :escrow                              , optional: true
   belongs_to :parent      , class_name: "Position", optional: true
   has_many   :children    , class_name: "Position"

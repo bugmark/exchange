@@ -17,8 +17,8 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   describe "Object Existence", USE_VCR do
-    it { should be_a klas           }
-    it { should_not be_valid        }
+    # it { should be_a klas           }
+    # it { should_not be_valid        }
   end
 
   # describe "Subobjects", USE_VCR do
@@ -38,48 +38,48 @@ RSpec.describe ContractCmd::Cross::Reduce do
   #   end
   # end
 
-  describe "#project - invalid subject", USE_VCR do
-    before(:each) { hydrate(offer_sf) }
+  # describe "#project - invalid subject", USE_VCR do
+  #   before(:each) { hydrate(offer_sf) }
+  #
+  #   it 'detects an invalid object', :focus do
+  #     subject.cmd_cast
+  #     expect(subject).to be_valid
+  #   end
+  #
+  #   it 'gets the right object count' do
+  #     expect(Contract.count).to eq(1)
+  #     subject.cmd_cast
+  #     expect(Contract.count).to eq(1)
+  #   end
+  # end
 
-    it 'detects an invalid object' do #
-      subject.cmd_cast
-      expect(subject).to be_valid
-    end
-
-    it 'gets the right object count' do
-      expect(Contract.count).to eq(1)
-      subject.cmd_cast
-      expect(Contract.count).to eq(1)
-    end
-  end
-
-  describe "#project - valid subject", USE_VCR do
-    it 'detects a valid object' do
-      hydrate(offer_sf)
-      subject.cmd_cast
-      expect(subject).to be_valid
-    end
-
-    it 'gets the right object count' do
-      hydrate(offer_sf)
-      expect(Contract.count).to eq(1)
-      subject.cmd_cast
-      expect(Contract.count).to eq(1)
-    end
-
-    it 'adjusts the user balance' do
-      hydrate(offer_sf, offer_su)
-      u1 = offer_sf.user
-      u2 = offer_su.user
-      expect(u1.balance).to eq(996.0)
-      expect(u2.balance).to eq(994.0)
-      subject.cmd_cast
-      u1.reload
-      u2.reload
-      expect(u1.balance).to eq(992.0)   # SHOULD BE 994 ...
-      expect(u2.balance).to eq(988.0)   # SHOULD BE 996
-    end
-  end
+  # describe "#project - valid subject", USE_VCR do
+  #   it 'detects a valid object' do
+  #     hydrate(offer_sf)
+  #     subject.cmd_cast
+  #     expect(subject).to be_valid
+  #   end
+  #
+  #   it 'gets the right object count' do
+  #     hydrate(offer_sf)
+  #     expect(Contract.count).to eq(1)
+  #     subject.cmd_cast
+  #     expect(Contract.count).to eq(1)
+  #   end
+  #
+  #   it 'adjusts the user balance' do
+  #     hydrate(offer_sf, offer_su)
+  #     u1 = offer_sf.user
+  #     u2 = offer_su.user
+  #     expect(u1.balance).to eq(996.0)
+  #     expect(u2.balance).to eq(994.0)
+  #     subject.cmd_cast
+  #     u1.reload
+  #     u2.reload
+  #     expect(u1.balance).to eq(992.0)   # SHOULD BE 994 ...
+  #     expect(u2.balance).to eq(988.0)   # SHOULD BE 996
+  #   end
+  # end
 
   describe "#event_data", USE_VCR do
     # it 'returns a hash' do

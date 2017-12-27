@@ -3,19 +3,20 @@ require 'rails_helper'
 RSpec.describe 'FbxOfferSf', USE_VCR do
 
   describe "offer_sf" do
-    it "runs without params" do
-      expect(Offer.count).to    eq(0)
-      expect(Contract.count).to eq(0)
-      expect(Escrow.count).to   eq(0)
-      expect(Position.count).to eq(0)
-      result = FBX.offer_sf
-      # binding.pry
-      expect(result).to be_present
-      expect(Offer.count).to    eq(3)
-      expect(Contract.count).to eq(1)
-      expect(Escrow.count).to   eq(1)
-      expect(Position.count).to eq(2)
-    end
+    # it "runs without params" do
+    #   expect(Offer.count).to    eq(0)
+    #   expect(Contract.count).to eq(0)
+    #   expect(Escrow.count).to   eq(0)
+    #   expect(Position.count).to eq(0)
+    #   result = FBX.offer_sf
+    #   binding.pry
+    #   expect(result).to be_present
+    #   expect(Offer.is_buy.count).to  eq(2)
+    #   expect(Offer.is_sell.count).to eq(1)
+    #   expect(Contract.count).to      eq(1)
+    #   expect(Escrow.count).to        eq(1)
+    #   expect(Position.count).to      eq(2)
+    # end
 
     # it "generates the right class" do #...
     #   obj = FBX.offer_sf.offer

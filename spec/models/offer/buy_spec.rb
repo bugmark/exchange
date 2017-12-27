@@ -4,7 +4,9 @@ RSpec.describe Offer::Buy, type: :model do
 
   def valid_params
     {
-      user_uuid:    usr.uuid
+      user_uuid:    usr.uuid                      ,
+      price:        0.1                           ,
+      volume:       10
     }
   end
 
