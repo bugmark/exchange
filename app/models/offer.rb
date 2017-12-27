@@ -7,10 +7,10 @@ class Offer < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user            , optional: true , foreign_key: "user_uuid", primary_key: "uuid"
-  belongs_to :bug             , optional: true , foreign_key: "stm_bug_id"
-  belongs_to :repo            , optional: true , foreign_key: "stm_repo_id"
-  has_one    :position                         , foreign_key: "offer_id"
+  belongs_to :user            , optional: true , foreign_key: "user_uuid"     , primary_key: "uuid"
+  belongs_to :bug             , optional: true , foreign_key: "stm_bug_uuid"  , primary_key: "uuid"
+  belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid" , primary_key: "uuid"
+  has_one    :position                         , foreign_key: "offer_uuid"    , primary_key: "uuid"
   belongs_to :salable_position, optional: true , foreign_key: "salable_position_id" , class_name: "Position"
   has_one    :reoffer_parent                   , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
   belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
@@ -170,12 +170,34 @@ class Offer < ApplicationRecord
     self.volume - self.value
   end
 
+  def opposite_side
+    return "unfixed" if self.side == "fixed"
+    return "fixed"   if self.side == "unfixed"
+    ""
+  end
+
+  # ----- maturation -----
+
   def maturation_date
     self.maturation.strftime("%b-%d")
   end
 
   def maturation_time
     self.maturation.strftime("%b-%d %H:%M:%S")
+  end
+
+  def maturation_beg=(date)
+    m_beg = date.to_time
+    m_end = self.maturation_range&.last || m_beg+2.days
+    m_end = m_beg+2.days if m_beg > m_end
+    self.maturation_range = m_beg..m_end
+  end
+
+  def maturation_end=(date)
+    m_end  = date.to_time
+    m_beg  = self.maturation_range&.last || m_end-2.days
+    m_beg  = m_end-2.day if m_beg > m_end
+    self.maturation_range = m_beg..m_end
   end
 
   def maturation=(date)
@@ -189,12 +211,6 @@ class Offer < ApplicationRecord
 
   def bugm_time_period
     BugmTime.future_week_dates.index(self.maturation.strftime("%y-%m-%d"))
-  end
-
-  def opposite_side
-    return "unfixed" if self.side == "fixed"
-    return "fixed"   if self.side == "unfixed"
-    ""
   end
 
   # ----- PREDICATES -----
@@ -253,34 +269,40 @@ end
 #
 # Table name: offers
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  repo_type           :string
-#  user_id             :integer
-#  user_uuid           :string
-#  prototype_id        :integer
-#  amendment_id        :integer
-#  reoffer_parent_id   :integer
-#  salable_position_id :integer
-#  volume              :integer          default(1)
-#  price               :float            default(0.5)
-#  value               :float
-#  poolable            :boolean          default(TRUE)
-#  aon                 :boolean          default(FALSE)
-#  status              :string
-#  expiration          :datetime
-#  maturation_range    :tsrange
-#  xfields             :hstore           not null
-#  jfields             :jsonb            not null
-#  exid                :string
-#  uuid                :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  stm_bug_id          :integer
-#  stm_repo_id         :integer
-#  stm_title           :string
-#  stm_status          :string
-#  stm_labels          :string
-#  stm_xfields         :hstore           not null
-#  stm_jfields         :jsonb            not null
+#  id                    :integer          not null, primary key
+#  type                  :string
+#  repo_type             :string
+#  user_id               :integer
+#  user_uuid             :string
+#  prototype_id          :integer
+#  prototype_uuid        :string
+#  amendment_id          :integer
+#  amendment_uuid        :string
+#  reoffer_parent_id     :integer
+#  reoffer_parent_uuid   :string
+#  salable_position_id   :integer
+#  salable_position_uuid :string
+#  volume                :integer
+#  price                 :float
+#  value                 :float
+#  poolable              :boolean          default(FALSE)
+#  aon                   :boolean          default(FALSE)
+#  status                :string
+#  expiration            :datetime
+#  maturation_range      :tsrange
+#  xfields               :hstore           not null
+#  jfields               :jsonb            not null
+#  exid                  :string
+#  uuid                  :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  stm_bug_id            :integer
+#  stm_bug_uuid          :string
+#  stm_repo_id           :integer
+#  stm_repo_uuid         :string
+#  stm_title             :string
+#  stm_status            :string
+#  stm_labels            :string
+#  stm_xfields           :hstore           not null
+#  stm_jfields           :jsonb            not null
 #

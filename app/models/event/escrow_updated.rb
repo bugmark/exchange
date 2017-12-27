@@ -7,7 +7,8 @@ class Event::EscrowUpdated < Event
   validates :uuid , presence: true
 
   def cast_object
-    Escrow.new(payload.without_blanks)
+    # Escrow.new(payload.without_blanks)
+    Escrow.find_by_uuid(uuid)
   end
 end
 

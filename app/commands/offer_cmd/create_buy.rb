@@ -19,6 +19,7 @@ module OfferCmd
       args  = set_price(args)
       args  = set_type(args)
       args  = set_uuid(args)
+      args  = set_maturation(args)
       @args = args
       add_event :offer, Event::OfferBuyCreated.new(event_opts(args))
     end
@@ -44,6 +45,14 @@ module OfferCmd
     def set_uuid(args)
       return args if args[:uuid] || args["uuid"]
       args.merge(uuid: SecureRandom.uuid)
+    end
+
+    def set_maturation(args)
+      return args unless args["maturation_range"]
+      args["maturation_beg"] = args["maturation_range"].first
+      args["maturation_end"] = args["maturation_range"].last
+      args.delete("maturation_range")
+      args
     end
 
     def offer_class

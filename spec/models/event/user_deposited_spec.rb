@@ -42,7 +42,7 @@ RSpec.describe Event::UserDeposited, :type => :model do
   end
 
   describe "Deposit to a non-existant user" do
-    it "blows up", :focus do
+    it "blows up" do
       sub = klas.new(valid_params(uuid: "DUMMY"))
       obj = sub.ev_cast
       expect(obj).to be_nil

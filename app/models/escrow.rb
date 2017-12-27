@@ -3,12 +3,12 @@ class Escrow < ApplicationRecord
   has_paper_trail
   acts_as_list :scope => :contract, :column => :sequence
 
-  belongs_to :contract , optional: true
-  belongs_to :amendment, optional: true
+  belongs_to :contract , optional: true, foreign_key: "contract_uuid" , primary_key: "uuid"
+  belongs_to :amendment, optional: true, foreign_key: "amendment_uuid", primary_key: "uuid"
 
-  has_many :positions
-  has_many :fixed_positions   , -> { where(side: 'fixed')   }, class_name: "Position"
-  has_many :unfixed_positions , -> { where(side: 'unfixed') }, class_name: "Position"
+  has_many :positions                                        , class_name: "Position", primary_key: "uuid", foreign_key: "escrow_uuid"
+  has_many :fixed_positions   , -> { where(side: 'fixed')   }, class_name: "Position", primary_key: "uuid", foreign_key: "escrow_uuid"
+  has_many :unfixed_positions , -> { where(side: 'unfixed') }, class_name: "Position", primary_key: "uuid", foreign_key: "escrow_uuid"
 
   has_many :users, :through => :positions
 
@@ -64,15 +64,17 @@ end
 #
 # Table name: escrows
 #
-#  id            :integer          not null, primary key
-#  type          :string
-#  sequence      :integer
-#  contract_id   :integer
-#  amendment_id  :integer
-#  fixed_value   :float            default(0.0)
-#  unfixed_value :float            default(0.0)
-#  exid          :string
-#  uuid          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id             :integer          not null, primary key
+#  type           :string
+#  sequence       :integer
+#  contract_id    :integer
+#  contract_uuid  :string
+#  amendment_id   :integer
+#  amendment_uuid :string
+#  fixed_value    :float            default(0.0)
+#  unfixed_value  :float            default(0.0)
+#  exid           :string
+#  uuid           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #

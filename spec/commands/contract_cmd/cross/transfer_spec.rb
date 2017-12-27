@@ -86,7 +86,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
       expect(Position.count).to eq(4)
     end
 
-    it 'generates an escrow', :focus do
+    it 'generates an escrow' do
       hydrate(offer_bu, offer_su)
       subject.project
       expect(Escrow.count).to eq(2)
@@ -159,7 +159,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
     end
 
     context "with extra bids" do
-      it 'does minimal matching', :focus do
+      it 'does minimal matching' do
         _bid1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
         _bid2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
         _bid3 = FB.create(:offer_bu, price: 0.6, volume: 10).offer

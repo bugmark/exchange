@@ -21,7 +21,7 @@ class Commit::Expand < Commit
     # generate artifacts
     expand_position(bundle.offer, ctx, ctx.offer_price)
     bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
-    suspend_overlimit_offers(bundle)
+    suspend_overlimit_offers(bundle, ctx)
     generate_reoffers(ctx)
 
     # update escrow value

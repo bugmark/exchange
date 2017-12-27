@@ -71,26 +71,26 @@ module FBX
 
   def expand_obf(opts = {})
     _obu, obf = FBX.create_buy_offers(opts)
-    ContractCmd::Cross.new(obf, :expand).project
+    ContractCmd::Cross.new(obf, :expand).cmd_cast
   end
 
   def expand_obu(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
-    ContractCmd::Cross.new(obu, :expand).project
+    ContractCmd::Cross.new(obu, :expand).cmd_cast
   end
 
   def offer_sf(opts = {})
     _obu, obf = FBX.create_buy_offers(opts)
-    cntr = ContractCmd::Cross.new(obf, :expand).project.contract
+    cntr = ContractCmd::Cross.new(obf, :expand).cmd_cast.contract
     posn = cntr.escrows.last.fixed_positions.first
-    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osf, opts)).project
+    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osf, opts)).cmd_cast
   end
 
   def offer_su(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
-    cntr = ContractCmd::Cross.new(obu, :expand).project.contract
+    cntr = ContractCmd::Cross.new(obu, :expand).cmd_cast.contract
     posn = cntr.escrows.last.unfixed_positions.first
-    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).project
+    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).cmd_cast
   end
 
   module_function :expand_obf, :expand_obu, :offer_sf, :offer_su

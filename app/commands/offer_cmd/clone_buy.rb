@@ -1,46 +1,35 @@
 require 'ostruct'
 
 module OfferCmd
-  class CloneBuy
+  class CloneBuy < ApplicationCommand
 
-    attr_reader :offer, :command
+    attr_reader :prototype_offer
 
-    delegate :project, :valid?, :errors, :to => :command
-
-    def initialize(offer, new_attrs)
-      @offer   = Offer.find(offer.to_i)
-      @command = cmd_obj(valid_attrs(new_attrs))
-    end
-
-    def influx_tags
-      {
-        side: offer.side
-      }
-    end
-
-    def influx_fields
-      {
-        id:     offer.id     ,
-        volume: offer.volume ,
-        price:  offer.price
-      }
+    def initialize(prototype_offer, new_args)
+      @prototype_offer = Offer.find(prototype_offer.to_i)
+      args = new_args.stringify_keys
+      args = proto.attributes.merge(args).merge({prototype_uuid: proto.uuid})
+      args = set_maturation(args)
+      add_event :offer, Event::OfferCloned.new(event_opts(args))
     end
 
     private
 
-    def cmd_obj(attrs)
-      if offer.is_buy?
-        OfferCmd::CreateBuyOld.new(offer.cmd_type, attrs)
-      else
-        opts = {
-          project:    false,
-          valid?:     false,
-          errors:     {
-            messages: ["must be a buy offer"]
-          }
-        }
-        OpenStruct.new opts
-      end
+    def proto
+      prototype_offer
+    end
+
+    def event_opts(opts)
+      exclude = %w(id deposit profit xfields jfields stm_xfields stm_jfields)
+      cmd_opts.merge(opts).without(*exclude)
+    end
+
+    def set_maturation(args)
+      return args unless args["maturation_range"]
+      args["maturation_beg"] = args["maturation_range"].first
+      args["maturation_end"] = args["maturation_range"].last
+      args.delete("maturation_range")
+      args
     end
 
     def valid_attrs(new_attrs)

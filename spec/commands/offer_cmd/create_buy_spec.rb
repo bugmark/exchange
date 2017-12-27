@@ -96,14 +96,14 @@ RSpec.describe OfferCmd::CreateBuy do
   end
 
   describe "creation with a maturation" do
-    it "generates a valid object", :focus do
+    it "generates a valid object" do
       tst_time = Time.now
       obj = klas.new(:offer_bu, valid_params(maturation: tst_time))
       expect(obj).to be_valid
       expect(obj.cmd_cast.offer.maturation.strftime("%H%M%S")).to eq(tst_time.strftime("%H%M%S"))
     end
 
-    it "generates a valid object from a string", :focus do
+    it "generates a valid object from a string" do
       tst_date = "17-10-04"
       obj = klas.new(:offer_bu, valid_params(maturation: tst_date))
       expect(obj).to be_valid

@@ -1,23 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe Event::UserCreated, :type => :model do
-
-  PWD = "dingo"
+RSpec.describe Event::OfferCloned, :type => :model do
 
   def valid_params(alt = {})
     {
-      cmd_type:           "Test::UserCreated"        ,
-      cmd_uuid:           SecureRandom.uuid          ,
-      email:              "bing@bong.com"            ,
-      uuid:               SecureRandom.uuid          ,
-      encrypted_password: User.new(password: PWD).encrypted_password
+      :cmd_type       => "Test::Offer::Clone"       ,
+      :cmd_uuid       => SecureRandom.uuid          ,
+      :uuid           => SecureRandom.uuid          ,
+      :volume         => 2                          ,
+      :price          => 0.6                        ,
+      :prototype_uuid => proto.uuid
     }.merge(alt)
   end
 
-  let(:klas)   { described_class         }
-  subject      { klas.new(valid_params)  }
+  let(:proto)  { FB.create(:offer_bf).offer        }
+  let(:klas)   { described_class                   }
+  subject      { klas.new(valid_params)            }
 
-  describe "Object Creation" do
+  describe "Object Creation", USE_VCR do
     it { should be_valid }
 
     it 'saves the object to the database' do
@@ -25,24 +25,17 @@ RSpec.describe Event::UserCreated, :type => :model do
       expect(subject).to be_valid
     end
 
-    it 'emits a user object' do
-      obj = subject.ev_cast
-      expect(obj).to be_a(User) #
-    end
-
     it 'prevents calling save' do
       expect {subject.save}.to raise_error(NoMethodError)
     end
   end
 
-  describe "Casting" do
-    it "increments the user count" do
-      expect(User.count).to eq(0)
-      result = subject.ev_cast
-      expect(result).to be_a(User)
-      expect(Event.count).to eq(1)
-      expect(User.count).to  eq(1)
-      expect(User.first.balance).to eq(0.0)
+  describe "Casting", USE_VCR do
+    it "creates an event" do
+      expect(Event.count).to eq(0)
+      obj = subject.ev_cast
+      expect(obj).to be_a(Offer)
+      expect(Event.count).to eq(5)
     end
   end
 end

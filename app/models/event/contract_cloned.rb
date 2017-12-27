@@ -1,6 +1,6 @@
 require 'ext/hash'
 
-class Event::ContractedCloned < Event
+class Event::ContractCloned < Event
 
   jsonb_fields_for :payload, Contract
 

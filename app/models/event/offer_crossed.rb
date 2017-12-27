@@ -4,12 +4,7 @@ class Event::OfferCrossed < Event
 
   jsonb_fields_for :payload, Offer
 
-  validates :uuid     , presence: true
-  # validates :user_uuid, presence: true
-  # validates :volume   , presence: true
-  # validates :price    , presence: true
-
-  # before_validation :set_defaults
+  validates :uuid, presence: true
 
   private
 
@@ -17,10 +12,6 @@ class Event::OfferCrossed < Event
     offer = Offer.find_by_uuid(uuid)
     offer.status = "crossed"
     offer
-  end
-
-  def set_defaults
-    payload["status"] ||= 'open'
   end
 
   def user_uuids

@@ -5,15 +5,15 @@ class Position < ApplicationRecord
   before_validation :default_attributes
   before_validation :update_value
 
-  belongs_to :offer       , optional:   true
-  has_many   :offers_sell , class_name: "Offer"   , :foreign_key => :salable_position_id
+  belongs_to :offer       , optional:   true      , foreign_key: "position_uuid", primary_key: "uuid"
+  has_many   :offers_sell , class_name: "Offer"   , foreign_key: "salable_position_id"
   belongs_to :user                                , optional: true
   belongs_to :escrow                              , optional: true
   belongs_to :parent      , class_name: "Position", optional: true
   has_many   :children    , class_name: "Position"
   has_one    :contract    , :through => :escrow
 
-  belongs_to :amendment, optional: true
+  belongs_to :amendment, optional: true, foreign_key: "amendment_uuid", primary_key: "uuid"
 
   # ----- VALIDATIONS -----
 
@@ -67,18 +67,23 @@ end
 #
 # Table name: positions
 #
-#  id           :integer          not null, primary key
-#  offer_id     :integer
-#  user_id      :integer
-#  amendment_id :integer
-#  escrow_id    :integer
-#  parent_id    :integer
-#  volume       :integer
-#  price        :float
-#  value        :float
-#  side         :string
-#  exid         :string
-#  uuid         :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id             :integer          not null, primary key
+#  offer_id       :integer
+#  offer_uuid     :string
+#  user_id        :integer
+#  user_uuid      :string
+#  amendment_id   :integer
+#  amendment_uuid :string
+#  escrow_id      :integer
+#  escrow_uuid    :string
+#  parent_id      :integer
+#  parent_uuid    :string
+#  volume         :integer
+#  price          :float
+#  value          :float
+#  side           :string
+#  exid           :string
+#  uuid           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #

@@ -2,24 +2,16 @@ require "ext/hash"
 
 class Event::OfferSuspended < Event
 
-  jsonb_fields_for :payload, Offer, {extras: {"maturation" => :datetime}}
+  jsonb_fields_for :payload, Offer
 
-  validates :uuid     , presence: true
-  # validates :user_uuid, presence: true
-  # validates :volume   , presence: true
-  # validates :price    , presence: true
-
-  # before_validation :set_defaults
+  validates :uuid, presence: true
 
   private
 
   def cast_object
-    klas = payload['type'].constantize
-    klas.new(payload)
-  end
-
-  def set_defaults
-    payload["status"] ||= 'open'
+    offer = Offer.find_by_uuid(uuid)
+    offer.status = "suspended"
+    offer
   end
 
   def user_uuids

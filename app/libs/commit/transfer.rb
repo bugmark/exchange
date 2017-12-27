@@ -26,7 +26,6 @@ class Commit::Transfer < Commit
 
     # update escrow value
     ctx = update_escrow_value(ctx)
-    # ctx.e_escrow.update_attributes(fixed_value: ctx.e_escrow.fixed_values, unfixed_value: ctx.e_escrow.unfixed_values)
 
     # return self
     self

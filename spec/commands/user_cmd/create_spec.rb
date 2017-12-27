@@ -63,8 +63,8 @@ RSpec.describe UserCmd::Create do
   end
 
   context "with a negative balance" do
-    it "rejects the transaction", :focus do
-      opt = valid_params({"balance" => -100.0}) #......
+    it "rejects the transaction" do
+      opt = valid_params({"balance" => -100.0})
       obj = klas.new(opt)
       obj.cmd_cast
       expect(obj.user).to_not be_valid

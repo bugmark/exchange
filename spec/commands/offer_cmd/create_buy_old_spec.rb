@@ -138,7 +138,7 @@ RSpec.describe OfferCmd::CreateBuyOld do
       expect(obj.maturation.strftime("%H%M%S")).to eq(tst_time.strftime("%H%M%S"))
     end
 
-    it "generates a valid object from a string", :focus do
+    it "generates a valid object from a string" do
       tst_date = "17-10-04"
       obj = klas.new(:offer_bu, valid_params(maturation: tst_date))
       expect(obj).to be_valid

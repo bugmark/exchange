@@ -71,17 +71,6 @@ module ContractCmd
         errors.add :base, "Err2: no volume match"
         return false
       end
-
-      # if allsums == [0]
-      #   binding.pry
-      #   errors.add :base, "Err3: counteroffer volume sums to zero"
-      #   return false
-      # end
-
-      # if counter_pool == 0 && allsums[1..-1].min > offer.volume
-      #   errors.add :base, "Err4: no volume match (counteroffer AON)"
-      #   return false
-      # end
     end
   end
 end

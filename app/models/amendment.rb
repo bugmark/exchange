@@ -3,11 +3,11 @@ class Amendment < ApplicationRecord
   has_paper_trail
   acts_as_list :scope => :contract, :column => :sequence
 
-  belongs_to :contract, :optional => true
+  belongs_to :contract, :optional => true, foreign_key: "contract_uuid", primary_key: "uuid"
 
-  has_many :offers
-  has_one  :escrow
-  has_many :positions
+  has_many :offers    , foreign_key: "amendment_uuid", primary_key: "uuid"
+  has_one  :escrow    , foreign_key: "amendment_uuid", primary_key: "uuid"
+  has_many :positions , foreign_key: "amendment_uuid", primary_key: "uuid"
 
   def short_type
     type.split("::").last.downcase
@@ -40,14 +40,15 @@ end
 #
 # Table name: amendments
 #
-#  id          :integer          not null, primary key
-#  type        :string
-#  sequence    :integer
-#  contract_id :integer
-#  xfields     :hstore           not null
-#  jfields     :jsonb            not null
-#  exid        :string
-#  uuid        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id            :integer          not null, primary key
+#  type          :string
+#  sequence      :integer
+#  contract_id   :integer
+#  contract_uuid :string
+#  xfields       :hstore           not null
+#  jfields       :jsonb            not null
+#  exid          :string
+#  uuid          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #

@@ -2,12 +2,16 @@ require 'ext/hash'
 
 class Event::OfferCloned < Event
 
-  jsonb_fields_for :payload, Offer
+  EXTRAS = {
+    "maturation"     => :datetime ,
+    "maturation_beg" => :datetime ,
+    "maturation_end" => :datetime
+  }
 
-  validates :uuid         , presence: true
-  validates :type         , presence: true
-  validates :prototype_id , presence: true
-  validates :maturation   , presence: true
+  jsonb_fields_for :payload, Offer, {extras: EXTRAS}
+
+  validates :uuid           , presence: true
+  validates :prototype_uuid , presence: true
 
   def cast_object
     Offer.new(payload.without_blanks)
@@ -31,4 +35,5 @@ end
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#
 #

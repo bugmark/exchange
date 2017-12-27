@@ -2,7 +2,13 @@ require "ext/hash"
 
 class Event::OfferBuyCreated < Event
 
-  jsonb_fields_for :payload, Offer, {extras: {"maturation" => :datetime}}
+  EXTRAS = {
+    "maturation"     => :datetime,
+    "maturation_beg" => :datetime,
+    "maturation_end" => :datetime
+  }
+
+  jsonb_fields_for :payload, Offer, {extras: EXTRAS}
 
   validates :uuid     , presence: true
   validates :user_uuid, presence: true
