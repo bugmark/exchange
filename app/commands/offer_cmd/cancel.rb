@@ -1,8 +1,8 @@
 module OfferCmd
   class Cancel < ApplicationCommand
 
-    attr_subobjects :offer
-    attr_delegate_fields :offer, class_name: "Offer"
+    # attr_subobjects :offer
+    # attr_delegate_fields :offer, class_name: "Offer"
 
     def initialize(offer)
       @offer = Offer.find(offer.to_i)
@@ -12,9 +12,9 @@ module OfferCmd
       offer.attributes
     end
 
-    def transact_before_project
-      offer.status = "canceled"
-    end
+    # def transact_before_project
+    #   offer.status = "canceled"
+    # end
 
     def influx_tags
       {

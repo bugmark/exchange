@@ -35,7 +35,7 @@ RSpec.describe Event::OfferCloned, :type => :model do
       expect(Event.count).to eq(0)
       obj = subject.ev_cast
       expect(obj).to be_a(Offer)
-      expect(Event.count).to eq(5)
+      expect(Event.count).to eq(6)
     end
   end
 end

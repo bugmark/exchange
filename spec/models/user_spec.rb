@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do #
       expect(usr.offers_bf.count).to  eq(0)
     end
 
-    it 'handles offers_bf and offers_bu' do  #...
+    it 'handles offers_bf and offers_bu', :focus do
       gen_unfixed; gen_fixed
       expect(usr.offers.count).to eq(2)
       expect(usr.offers_buy.count).to eq(2)

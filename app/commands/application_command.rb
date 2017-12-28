@@ -41,29 +41,29 @@ class ApplicationCommand
 
   # define an attr_accessor for each subobject
   # define a method `subobject_symbols` that returns the list of subobjects
-  def self.attr_subobjects(*klas_list)
-    attr_accessor(*klas_list)
-    define_method 'subobject_symbols' do
-      klas_list
-    end
-  end
+  # def self.attr_subobjects(*klas_list)
+  #   attr_accessor(*klas_list)
+  #   define_method 'subobject_symbols' do
+  #     klas_list
+  #   end
+  # end
 
   # delegate all fields of an object to the subobject
-  def self.attr_delegate_fields(sym, opts = {})  #class_name
-    klas_name = opts[:class_name] || sym
-    klas    = klas_name.to_s.camelize.constantize
-    getters = klas.attribute_names.map(&:to_sym)
-    setters = klas.attribute_names.map { |x| "#{x}=".to_sym }
-    delegate *getters, to: sym
-    delegate *setters, to: sym
-  end
+  # def self.attr_delegate_fields(sym, opts = {})  #class_name
+  #   klas_name = opts[:class_name] || sym
+  #   klas    = klas_name.to_s.camelize.constantize
+  #   getters = klas.attribute_names.map(&:to_sym)
+  #   setters = klas.attribute_names.map { |x| "#{x}=".to_sym }
+  #   delegate *getters, to: sym
+  #   delegate *setters, to: sym
+  # end
 
-  def self.attr_vdelegate(method, klas_sym)
-    getter = method
-    setter = "#{method}=".to_sym
-    delegate getter, to: klas_sym
-    delegate setter, to: klas_sym
-  end
+  # def self.attr_vdelegate(method, klas_sym)
+  #   getter = method
+  #   setter = "#{method}=".to_sym
+  #   delegate getter, to: klas_sym
+  #   delegate setter, to: klas_sym
+  # end
 
   # ----- template methods - override in subclass
 
@@ -84,14 +84,6 @@ class ApplicationCommand
     state[:events]
   end
 
-  def self.from_event(_event)
-    raise "from_event: override in subclass"
-  end
-
-  def transact_before_project
-    # override in subclass
-  end
-
   # ----- persistence methods -----
 
   def save
@@ -100,7 +92,6 @@ class ApplicationCommand
 
   # synonym for project
   def cmd_cast
-    # binding.pry if events.length > 9
     if valid?
       ActiveRecord::Base.transaction do
         events.each do |key, event|
@@ -108,28 +99,12 @@ class ApplicationCommand
           self.define_singleton_method(key) { eval varname }
           object = event.ev_cast
           self.instance_variable_set varname, object
-          # tst_log "ERROR ON #{key}"    unless object.valid?
-          # tst_log object.errors.messages.inspect unless object.valid?
-          # binding.pry                  unless object.valid?
           raise ActiveRecord::Rollback unless object.valid?
         end
       end
       self
     else
       nil
-    end
-  end
-
-  # pro*jekt* - create a projection - an aggregate data view
-  def project
-    valid?
-    # puts errors.inspect unless valid?
-    if valid?
-      transact_before_project # perform a transaction, if any
-      subs.each(&:save)       # save all subobjects
-      self
-    else
-      false
     end
   end
 
@@ -149,23 +124,6 @@ class ApplicationCommand
       false
     end
   end
-
-  # def valid?
-  #   if subs.map(&:nil?).any?
-  #     errors.add(:base, "missing sub-object (#{missing_subobjects.join(', ')})")
-  #     return false
-  #   end
-  #   if super && subs.map(&:valid?).all?
-  #     true
-  #   else
-  #     subs.each do |object|
-  #       object.valid?                        # populate the subobject errors
-  #       object.errors.each do |field, error| # transfer the error messages
-  #         errors.add(field, error)
-  #       end
-  #     end
-  #     false
-  #   end
 
   def invalid?
     !valid?
@@ -195,32 +153,32 @@ class ApplicationCommand
     {"cmd_type" => cmd_type, "cmd_uuid" => cmd_uuid}
   end
 
-  def save_event
-    base = {cmd_type: cmd_type, cmd_id: cmd_id, user_ids: user_ids}
-    data = {data: event_data}
-    both = data.merge(base)
-    Event.new(both).save
+  # def save_event
+  #   base = {cmd_type: cmd_type, cmd_id: cmd_id, user_ids: user_ids}
+  #   data = {data: event_data}
+  #   both = data.merge(base)
+  #   Event.new(both).save
+  #
+  #   if ! Rails.env.test? && File.exist?("/etc/influxdb/influxdb.conf")
+  #     mname = "cmd." + self.class.name.gsub("::", "_")
+  #     InfluxDB::Rails.client.write_point mname,
+  #                                        tags:   influx_tags,
+  #                                        values: influx_fields
+  #   end
+  #   self
+  # end
 
-    if ! Rails.env.test? && File.exist?("/etc/influxdb/influxdb.conf")
-      mname = "cmd." + self.class.name.gsub("::", "_")
-      InfluxDB::Rails.client.write_point mname,
-                                         tags:   influx_tags,
-                                         values: influx_fields
-    end
-    self
-  end
+  # def subobjects
+  #   subobject_symbols.map { |el| self.send(el) }
+  # end
 
-  def subobjects
-    subobject_symbols.map { |el| self.send(el) }
-  end
+  # alias_method :subs, :subobjects
 
-  alias_method :subs, :subobjects
-
-  def missing_subobjects
-    subobject_symbols.
-      map {|el| [el, self.send(el)]}.
-      select {|el| el.last.nil?}.
-      map {|el| el.first}
-  end
+  # def missing_subobjects
+  #   subobject_symbols.
+  #     map {|el| [el, self.send(el)]}.
+  #     select {|el| el.last.nil?}.
+  #     map {|el| el.first}
+  # end
 
 end

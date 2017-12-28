@@ -7,8 +7,8 @@ require 'ext/array'
 module ContractCmd
   class Cross < ApplicationCommand
 
-    attr_subobjects :offer
-    attr_reader     :counters, :type, :bundle, :commit
+    # attr_subobjects :offer
+    attr_reader     :offer, :counters, :type, :bundle, :commit
 
     validate :cross_integrity
 
@@ -24,9 +24,6 @@ module ContractCmd
           add_event(ev.name, ev.klas.new(cmd_opts.merge(ev.params)))
         end
       end
-    end
-
-    def transact_before_project
     end
 
     def contract

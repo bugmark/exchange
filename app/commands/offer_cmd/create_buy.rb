@@ -5,7 +5,7 @@ module OfferCmd
 
     attr_reader :typ
 
-    attr_delegate_fields :offer_new , class_name: "Offer::Buy"
+    # attr_delegate_fields :offer_new , class_name: "Offer::Buy"
 
     validate :user_balance
     validate :deposit_amount
@@ -15,10 +15,10 @@ module OfferCmd
     def initialize(typ, offer_args)
       @typ  = typ
       args  = offer_args.stringify_keys
+      args  = set_uuid(args)
       args  = to_num(args)
       args  = set_price(args)
       args  = set_type(args)
-      args  = set_uuid(args)
       args  = set_maturation(args)
       @args = args
       add_event :offer, Event::OfferBuyCreated.new(event_opts(args))
@@ -44,7 +44,7 @@ module OfferCmd
 
     def set_uuid(args)
       return args if args[:uuid] || args["uuid"]
-      args.merge(uuid: SecureRandom.uuid)
+      {uuid: SecureRandom.uuid}.merge(args)
     end
 
     def set_maturation(args)

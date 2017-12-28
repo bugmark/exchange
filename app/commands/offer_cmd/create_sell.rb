@@ -1,9 +1,9 @@
 module OfferCmd
   class CreateSell < ApplicationCommand
 
-    attr_subobjects      :offer
-    attr_reader          :salable_position
-    attr_delegate_fields :offer, class_name: "Offer::Sell"
+    # attr_subobjects      :offer
+    # attr_reader          :salable_position
+    # attr_delegate_fields :offer, class_name: "Offer::Sell"
 
     def initialize(position, attr)
       @salable_position = position
@@ -12,9 +12,9 @@ module OfferCmd
       @offer            = klas.new(sell_offer_params)
     end
 
-    def transact_before_project
-      offer.status = "open"
-    end
+    # def transact_before_project
+    #   offer.status = "open"
+    # end
 
     private
 

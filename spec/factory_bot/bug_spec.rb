@@ -8,4 +8,3 @@ RSpec.describe 'Bug Factory' do
     expect(Bug.count).to eq(1)
   end
 end
-#

@@ -27,12 +27,16 @@ FactoryBot.define do
   end
 
   factory :bug, class: BugCmd::Sync do
-    to_create { |instance| instance.project }
+    to_create { |instance| instance.cmd_cast }
     initialize_with { new(attributes) }
 
     sequence :stm_title do |n|
       "Bug #{n}"
     end
+    sequence :exid do |n|
+      "exid#{n}"
+    end
+    type "Bug::GitHub"
     stm_repo_id { FB.create(:repo).repo.id }
   end
 
@@ -45,8 +49,8 @@ FactoryBot.define do
     price  0.60
     volume 10
     maturation Time.now + 1.day
-    user_uuid  { FB.create(:user).user.uuid   }
-    stm_bug_id { FB.create(:bug).id           }
+    user_uuid    { FB.create(:user).user.uuid   }
+    stm_bug_uuid { FB.create(:bug).bug.uuid     }
     stm_status "closed"
     poolable   false
     aon        false
@@ -59,8 +63,8 @@ FactoryBot.define do
     price      0.40
     volume     10
     maturation Time.now + 1.day
-    user_uuid  { FB.create(:user).user.uuid   }
-    stm_bug_id { FB.create(:bug).id           }
+    user_uuid    { FB.create(:user).user.uuid   }
+    stm_bug_uuid { FB.create(:bug).bug.uuid     }
     stm_status "closed"
     poolable   false
     aon        false

@@ -1,8 +1,8 @@
 module ContractCmd
   class Resolve < ApplicationCommand
 
-    attr_subobjects      :contract
-    attr_delegate_fields :contract
+    # attr_subobjects      :contract
+    # attr_delegate_fields :contract
 
     validate :resolvable_contract
 
@@ -20,20 +20,20 @@ module ContractCmd
       end.sort.uniq
     end
 
-    def transact_before_project
-      contract.status = "resolved"
-      contract.awarded_to = contract.awardee
-      contract.escrows.each do |escrow|
-        poslist = contract.awarded_to == "fixed" ? escrow.fixed_positions : escrow.unfixed_positions
-        psum  = poslist.map {|p| p.value}.sum
-        poslist.each do |position|
-          prorata = position.value / psum
-          payout  = (position.escrow.total_value - position.value) * prorata
-          new_bal = position.user.balance + payout
-          position.user.update_attribute(:balance, new_bal)
-        end
-      end
-    end
+    # def transact_before_project
+    #   contract.status = "resolved"
+    #   contract.awarded_to = contract.awardee
+    #   contract.escrows.each do |escrow|
+    #     poslist = contract.awarded_to == "fixed" ? escrow.fixed_positions : escrow.unfixed_positions
+    #     psum  = poslist.map {|p| p.value}.sum
+    #     poslist.each do |position|
+    #       prorata = position.value / psum
+    #       payout  = (position.escrow.total_value - position.value) * prorata
+    #       new_bal = position.user.balance + payout
+    #       position.user.update_attribute(:balance, new_bal)
+    #     end
+    #   end
+    # end
 
     private
 

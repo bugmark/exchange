@@ -715,18 +715,22 @@ Next Actions:
 - [ ] offer/suspend
 - [ ] contract/clone
 - [ ] contract/create
-- [ ] contract/cross      <---
+- [x] contract/cross 
 - [ ] contract/delete
-- [ ] contract/resolve    <---
+- [ ] contract/resolve
 
 # Dec 27
 
-- [ ] Get reoffers working
+- [x] Get reoffers working
+- [x] redo all buy_offer commands - tests on events
+- [x] redo all buy_offer commands - tests on projections
+- [x] redo all cross_expand commands - tests on events
+- [x] redo all cross_expand commands - tests on projections
 
-- [ ] redo all buy_offer commands - tests on events
-- [ ] redo all buy_offer commands - tests on projections
-- [ ] redo all cross_expand commands - tests on events
-- [ ] redo all cross_expand commands - tests on projections
+- [ ] get rid of #project method
+- [ ] rename #cmd_cast to #project
+- [ ] remove old ApplicationCommand code
+- [ ] get rid of ID fields
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers

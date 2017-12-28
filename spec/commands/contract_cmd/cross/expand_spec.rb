@@ -21,23 +21,6 @@ RSpec.describe ContractCmd::Cross::Expand do
     it { should_not be_valid    }
   end
 
-  describe "Subobjects", USE_VCR do
-    it { should respond_to :subobject_symbols }
-    it 'returns an array' do
-      expect(subject.subobject_symbols).to be_an(Array)
-    end
-  end
-
-  describe "Delegated Object", USE_VCR do
-    it 'has a present Offer' do
-      expect(subject.offer).to be_present
-    end
-
-    it 'has a Offer with the right class' do
-      expect(subject.offer).to be_a(Offer)
-    end
-  end
-
   describe "#project - invalid subject", USE_VCR do
     before(:each) { hydrate(offer_bu) }
 
