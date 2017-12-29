@@ -7,7 +7,7 @@ module Core
     def index
       if stm_repo_id = params["stm_repo_id"]&.to_i
         @repo = Repo.find(stm_repo_id)
-        @bugs = Bug.where(stm_repo_id: stm_repo_id)
+        @bugs = @repo.bugs
       else
         @repo = nil
         @bugs = Bug.all

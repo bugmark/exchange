@@ -68,22 +68,17 @@ end
 # Table name: positions
 #
 #  id             :integer          not null, primary key
-#  offer_id       :integer
+#  uuid           :string
+#  exid           :string
 #  offer_uuid     :string
-#  user_id        :integer
 #  user_uuid      :string
-#  amendment_id   :integer
 #  amendment_uuid :string
-#  escrow_id      :integer
 #  escrow_uuid    :string
-#  parent_id      :integer
 #  parent_uuid    :string
 #  volume         :integer
 #  price          :float
 #  value          :float
 #  side           :string
-#  exid           :string
-#  uuid           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

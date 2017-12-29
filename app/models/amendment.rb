@@ -1,7 +1,7 @@
 class Amendment < ApplicationRecord
 
   has_paper_trail
-  acts_as_list :scope => :contract, :column => :sequence
+  acts_as_list :column => :sequence, :scope => 'contract_uuid = \'#{contract_uuid}\''
 
   belongs_to :contract, :optional => true, foreign_key: "contract_uuid", primary_key: "uuid"
 
@@ -17,7 +17,7 @@ class Amendment < ApplicationRecord
 
   class << self
     def select_subset
-      select(%i(id type sequence contract_id))
+      select(%i(id type sequence contract_uuid))
     end
     alias_method :ss, :select_subset
   end
@@ -41,14 +41,13 @@ end
 # Table name: amendments
 #
 #  id            :integer          not null, primary key
+#  uuid          :string
+#  exid          :string
 #  type          :string
 #  sequence      :integer
-#  contract_id   :integer
 #  contract_uuid :string
 #  xfields       :hstore           not null
 #  jfields       :jsonb            not null
-#  exid          :string
-#  uuid          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

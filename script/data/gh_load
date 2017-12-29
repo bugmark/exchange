@@ -9,9 +9,9 @@ def sync(name)
   }
 
   repo_cmd = RepoCmd::GhCreate.new(opts)
-  repo_cmd.cmd_cast
+  repo_cmd.project
   item = RepoCmd::GhSync.from_repo(repo_cmd.repo)
-  item.cmd_cast
+  item.project
 end
 
 # %w(mvscorg/bugmark mvscorg/bugmark-guides mvscorg/bugmark-slides elixir-lang/gen_stage elixir-lang/flow elixir-lang/gettext rust-lang/regex filterbubbler/filterbubbler-web-ext filterbubbler/filterbubbler-wp-plugin).each do |name|

@@ -8,7 +8,7 @@ FactoryBot.define do
   # ----- BASE -----
 
   factory :user, class: UserCmd::Create do
-    to_create { |instance| instance.cmd_cast }
+    to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     sequence :email do |n|
@@ -19,7 +19,7 @@ FactoryBot.define do
   end
 
   factory :repo, class: RepoCmd::GhCreate do
-    to_create { |instance| instance.cmd_cast }
+    to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     type "Repo::GitHub"
@@ -27,7 +27,7 @@ FactoryBot.define do
   end
 
   factory :bug, class: BugCmd::Sync do
-    to_create { |instance| instance.cmd_cast }
+    to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     sequence :stm_title do |n|
@@ -37,13 +37,13 @@ FactoryBot.define do
       "exid#{n}"
     end
     type "Bug::GitHub"
-    stm_repo_id { FB.create(:repo).repo.id }
+    stm_repo_uuid { FB.create(:repo).repo.uuid }
   end
 
   # ----- BUY OFFERS -----
 
   factory :offer_bu, class: OfferCmd::CreateBuy do
-    to_create { |instance| instance.cmd_cast }
+    to_create { |instance| instance.project }
     initialize_with { new(:offer_bu, attributes) }
 
     price  0.60
@@ -57,7 +57,7 @@ FactoryBot.define do
   end
 
   factory :offer_bf, class: OfferCmd::CreateBuy do
-    to_create { |instance| instance.cmd_cast }
+    to_create { |instance| instance.project }
     initialize_with { new(:offer_bf, attributes) }
 
     price      0.40
@@ -75,26 +75,27 @@ module FBX
 
   def expand_obf(opts = {})
     _obu, obf = FBX.create_buy_offers(opts)
-    ContractCmd::Cross.new(obf, :expand).cmd_cast
+    res = ContractCmd::Cross.new(obf, :expand)
+    res.project
   end
 
   def expand_obu(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
-    ContractCmd::Cross.new(obu, :expand).cmd_cast
+    ContractCmd::Cross.new(obu, :expand).project
   end
 
   def offer_sf(opts = {})
     _obu, obf = FBX.create_buy_offers(opts)
-    cntr = ContractCmd::Cross.new(obf, :expand).cmd_cast.contract
+    cntr = ContractCmd::Cross.new(obf, :expand).project.contract
     posn = cntr.escrows.last.fixed_positions.first
-    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osf, opts)).cmd_cast
+    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osf, opts)).project
   end
 
   def offer_su(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
-    cntr = ContractCmd::Cross.new(obu, :expand).cmd_cast.contract
+    cntr = ContractCmd::Cross.new(obu, :expand).project.contract
     posn = cntr.escrows.last.unfixed_positions.first
-    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).cmd_cast
+    OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).project
   end
 
   module_function :expand_obf, :expand_obu, :offer_sf, :offer_su

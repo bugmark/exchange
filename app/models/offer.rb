@@ -7,14 +7,15 @@ class Offer < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user            , optional: true , foreign_key: "user_uuid"            , primary_key: "uuid"
-  belongs_to :bug             , optional: true , foreign_key: "stm_bug_uuid"         , primary_key: "uuid"
-  belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid"        , primary_key: "uuid"
-  has_one    :position                         , foreign_key: "offer_uuid"           , primary_key: "uuid"
-  has_one    :prototype_parent                 , foreign_key: "prototype_uuid"       , primary_key: "uuid" , class_name: "Offer"
-  belongs_to :prototype_child , optional: true , foreign_key: "prorotype_uuid"       , primary_key: "uuid" , class_name: "Offer"
-  belongs_to :salable_position, optional: true , foreign_key: "salable_position_uuid", primary_key: "uuid" , class_name: "Position"
-  # belongs_to :transfer        , optional: true
+  with_options primary_key: "uuid" do
+    belongs_to :user            , optional: true , foreign_key: "user_uuid"
+    belongs_to :bug             , optional: true , foreign_key: "stm_bug_uuid"
+    belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid"
+    has_one    :position                         , foreign_key: "offer_uuid"
+    has_one    :prototype_parent                 , foreign_key: "prototype_uuid"        , class_name: "Offer"
+    belongs_to :prototype_child , optional: true , foreign_key: "prorotype_uuid"        , class_name: "Offer"
+    belongs_to :salable_position, optional: true , foreign_key: "salable_position_uuid" , class_name: "Position"
+  end
 
   has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Offer'
   has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Offer'
@@ -271,17 +272,13 @@ end
 # Table name: offers
 #
 #  id                    :integer          not null, primary key
+#  uuid                  :string
+#  exid                  :string
 #  type                  :string
 #  repo_type             :string
-#  user_id               :integer
 #  user_uuid             :string
-#  prototype_id          :integer
 #  prototype_uuid        :string
-#  amendment_id          :integer
 #  amendment_uuid        :string
-#  reoffer_parent_id     :integer
-#  reoffer_parent_uuid   :string
-#  salable_position_id   :integer
 #  salable_position_uuid :string
 #  volume                :integer
 #  price                 :float
@@ -293,13 +290,9 @@ end
 #  maturation_range      :tsrange
 #  xfields               :hstore           not null
 #  jfields               :jsonb            not null
-#  exid                  :string
-#  uuid                  :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  stm_bug_id            :integer
 #  stm_bug_uuid          :string
-#  stm_repo_id           :integer
 #  stm_repo_uuid         :string
 #  stm_title             :string
 #  stm_status            :string

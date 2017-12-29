@@ -7,13 +7,16 @@ class User < ApplicationRecord
 
   before_save :default_values
 
-  has_many :offers     , class_name: "Offer"                 , primary_key: "uuid", foreign_key: "user_uuid"
-  has_many :offers_buy , class_name: "Offer::Buy"            , primary_key: "uuid", foreign_key: "user_uuid"
-  has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"   , primary_key: "uuid", foreign_key: "user_uuid"
-  has_many :offers_bf  , class_name: "Offer::Buy::Fixed"     , primary_key: "uuid", foreign_key: "user_uuid"
-  has_many :offers_sell, class_name: "Offer::Sell"           , primary_key: "uuid", foreign_key: "user_uuid"
-  has_many :offers_su  , class_name: "Offer::Sell::Unfixed"  , primary_key: "uuid", foreign_key: "user_uuid"
-  has_many :offers_sf  , class_name: "Offer::Sell::Fixed"    , primary_key: "uuid", foreign_key: "user_uuid"
+  with_options foreign_key: "user_uuid", primary_key: "uuid" do
+    has_many :offers     , class_name: "Offer"
+    has_many :offers_buy , class_name: "Offer::Buy"
+    has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"
+    has_many :offers_bf  , class_name: "Offer::Buy::Fixed"
+    has_many :offers_sell, class_name: "Offer::Sell"
+    has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
+    has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
+    has_many :positions
+  end
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 
@@ -36,7 +39,7 @@ class User < ApplicationRecord
     event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc') #.
   end
 
-  has_many :positions
+
 
   def xtag
     "usr"
@@ -47,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def contracts
-    positions.map(&:contract).flatten.uniq.sort_by {|c| c.id}
+    positions.map(&:contract).flatten.uniq.sort_by {|c| c.uuid}
   end
 
   # ----- ACCOUNT BALANCES AND RESERVES-----
@@ -116,10 +119,10 @@ end
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  uuid                   :string
+#  exid                   :string
 #  admin                  :boolean
 #  balance                :float            default(0.0)
-#  exid                   :string
-#  uuid                   :string
 #  jfields                :jsonb            not null
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null

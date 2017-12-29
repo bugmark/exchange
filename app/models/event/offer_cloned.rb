@@ -26,6 +26,7 @@ class Event::OfferCloned < Event
     attributes.without(*skips).merge({"status" => "open"})
   end
 end
+#
 
 # == Schema Information
 #
@@ -44,5 +45,4 @@ end
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
-#
 #

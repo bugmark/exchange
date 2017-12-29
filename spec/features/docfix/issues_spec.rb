@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "Issues" do
 
-  let(:user) { FB.create(:user).user                                 }
-  let(:repo) { FB.create(:repo).repo                                 }
-  let(:bug)  { Bug.create(stm_repo_id: repo.id, type: "Bug::GitHub") }
+  let(:user) { FB.create(:user).user                                     }
+  let(:repo) { FB.create(:repo).repo                                     }
+  let(:bug)  { Bug.create(stm_repo_uuid: repo.uuid, type: "Bug::GitHub") }
 
   include_context 'Integration Environment'
 

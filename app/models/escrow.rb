@@ -1,7 +1,7 @@
 class Escrow < ApplicationRecord
 
   has_paper_trail
-  acts_as_list :scope => :contract, :column => :sequence
+  acts_as_list :column => :sequence, :scope => 'contract_uuid = \'#{contract_uuid}\''
 
   belongs_to :contract , optional: true, foreign_key: "contract_uuid" , primary_key: "uuid"
   belongs_to :amendment, optional: true, foreign_key: "amendment_uuid", primary_key: "uuid"
@@ -23,7 +23,7 @@ class Escrow < ApplicationRecord
 
   class << self
     def select_subset
-      select(%i(id type sequence contract_id amendment_id fixed_value unfixed_value))
+      select(%i(id type sequence contract_uuid amendment_uudid fixed_value unfixed_value))
     end
     alias_method :ss, :select_subset
   end
@@ -65,16 +65,14 @@ end
 # Table name: escrows
 #
 #  id             :integer          not null, primary key
+#  uuid           :string
+#  exid           :string
 #  type           :string
 #  sequence       :integer
-#  contract_id    :integer
 #  contract_uuid  :string
-#  amendment_id   :integer
 #  amendment_uuid :string
 #  fixed_value    :float            default(0.0)
 #  unfixed_value  :float            default(0.0)
-#  exid           :string
-#  uuid           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #

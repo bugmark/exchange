@@ -30,8 +30,8 @@ RSpec.describe Event::OfferCloned, :type => :model do
     end
   end
 
-  describe "Casting", USE_VCR do
-    it "creates an event" do
+  describe "Projecting", USE_VCR do
+    it "creates an event", :focus do
       expect(Event.count).to eq(0)
       obj = subject.ev_cast
       expect(obj).to be_a(Offer)

@@ -22,16 +22,16 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :bugs do |t|
       t.string   :type             # BugZilla, GitHub, Cve
+      t.string   :uuid
+      t.string   :exid
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
-      t.string   :exid
-      t.string   :uuid
       t.timestamps
     end
+    add_index :bugs, :type
     add_index :bugs, :uuid
     add_index :bugs, :exid
-    add_index :bugs, :type
     add_index :bugs, :jfields, using: :gin
     add_index :bugs, :xfields, using: :gin
 
@@ -40,15 +40,15 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :exid
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
       t.string   :repo_type                 # BugZilla, GitHub, CVE
-      t.integer  :user_id                   # the party who made the offer
+      # t.integer  :user_id                   # the party who made the offer
       t.string   :user_uuid                 # the party who made the offer
-      t.integer  :prototype_id              # optional offer prototype
+      # t.integer  :prototype_id              # optional offer prototype
       t.string   :prototype_uuid            # optional offer prototype
-      t.integer  :amendment_id              # the generating amendment
+      # t.integer  :amendment_id              # the generating amendment
       t.string   :amendment_uuid            # the generating amendment
-      t.integer  :reoffer_parent_id         # for ReOffers - an Offer
-      t.string   :reoffer_parent_uuid       # for ReOffers - an Offer
-      t.integer  :salable_position_id       # for SaleOffers - a Position
+      # t.integer  :reoffer_parent_id         # for ReOffers - an Offer
+      # t.string   :reoffer_parent_uuid       # for ReOffers - an Offer
+      # t.integer  :salable_position_id       # for SaleOffers - a Position
       t.string   :salable_position_uuid     # for SaleOffers - a Position
       t.integer  :volume                    # Greater than zero
       t.float    :price                     # between 0.00 and 1.00
@@ -66,15 +66,15 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :offers, :uuid
     add_index :offers, :exid
     add_index :offers, :type
-    add_index :offers, :user_id
+    # add_index :offers, :user_id
     add_index :offers, :user_uuid
-    add_index :offers, :prototype_id
+    # add_index :offers, :prototype_id
     add_index :offers, :prototype_uuid
-    add_index :offers, :amendment_id
+    # add_index :offers, :amendment_id
     add_index :offers, :amendment_uuid
-    add_index :offers, :reoffer_parent_id
-    add_index :offers, :reoffer_parent_uuid
-    add_index :offers, :salable_position_id
+    # add_index :offers, :reoffer_parent_id
+    # add_index :offers, :reoffer_parent_uuid
+    # add_index :offers, :salable_position_id
     add_index :offers, :salable_position_uuid
     add_index :offers, :poolable
     add_index :offers, :volume
@@ -87,7 +87,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :contracts do |t|
       t.string   :uuid
       t.string   :exid
-      t.integer  :prototype_id        # optional contract prototype
+      t.integer  :prototype_uuid      # optional contract prototype
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :status              # open, matured, resolved
       t.string   :awarded_to          # fixed, unfixed
@@ -98,15 +98,15 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :contracts, :uuid
     add_index :contracts, :exid
-    add_index :contracts, :prototype_id
+    add_index :contracts, :prototype_uuid
     add_index :contracts, :xfields, using: :gin
     add_index :contracts, :jfields, using: :gin
 
     # ----- STATEMENT FIELDS -----
     %i(bugs offers contracts).each do |table|
-      add_column table, :stm_bug_id    , :integer
+      # add_column table, :stm_bug_id    , :integer
       add_column table, :stm_bug_uuid  , :string
-      add_column table, :stm_repo_id   , :integer
+      # add_column table, :stm_repo_id   , :integer
       add_column table, :stm_repo_uuid , :string
       add_column table, :stm_title     , :string
       add_column table, :stm_status    , :string
@@ -114,9 +114,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_column table, :stm_xfields   , :hstore , null: false, default: {}
       add_column table, :stm_jfields   , :jsonb  , null: false, default: {}
 
-      add_index table, :stm_repo_id
+      # add_index table, :stm_repo_id
       add_index table, :stm_repo_uuid
-      add_index table, :stm_bug_id
+      # add_index table, :stm_bug_id
       add_index table, :stm_bug_uuid
       add_index table, :stm_title
       add_index table, :stm_status
@@ -128,15 +128,15 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :positions do |t|
       t.string   :uuid
       t.string   :exid
-      t.integer  :offer_id
+      # t.integer  :offer_id
       t.string   :offer_uuid
-      t.integer  :user_id
+      # t.integer  :user_id
       t.string   :user_uuid
-      t.integer  :amendment_id
+      # t.integer  :amendment_id
       t.string   :amendment_uuid
-      t.integer  :escrow_id
+      # t.integer  :escrow_id
       t.string   :escrow_uuid
-      t.integer  :parent_id
+      # t.integer  :parent_id
       t.string   :parent_uuid
       t.integer  :volume
       t.float    :price
@@ -146,15 +146,15 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :positions, :uuid
     add_index :positions, :exid
-    add_index :positions, :offer_id
+    # add_index :positions, :offer_id
     add_index :positions, :offer_uuid
-    add_index :positions, :user_id
+    # add_index :positions, :user_id
     add_index :positions, :user_uuid
-    add_index :positions, :amendment_id
+    # add_index :positions, :amendment_id
     add_index :positions, :amendment_uuid
-    add_index :positions, :escrow_id
+    # add_index :positions, :escrow_id
     add_index :positions, :escrow_uuid
-    add_index :positions, :parent_id
+    # add_index :positions, :parent_id
     add_index :positions, :parent_uuid
     add_index :positions, :volume
     add_index :positions, :price
@@ -166,9 +166,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :exid
       t.string   :type
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
-      t.integer  :contract_id
+      # t.integer  :contract_id
       t.string   :contract_uuid
-      t.integer  :amendment_id
+      # t.integer  :amendment_id
       t.string   :amendment_uuid
       t.float    :fixed_value  ,     default: 0.0
       t.float    :unfixed_value,     default: 0.0
@@ -177,9 +177,9 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :escrows, :uuid
     add_index :escrows, :exid
     add_index :escrows, :type
-    add_index :escrows, :contract_id
+    # add_index :escrows, :contract_id
     add_index :escrows, :contract_uuid
-    add_index :escrows, :amendment_id
+    # add_index :escrows, :amendment_id
     add_index :escrows, :amendment_uuid
     add_index :escrows, :sequence
 
@@ -188,7 +188,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :exid
       t.string   :type               # expand, transfer, reduce, resolve
       t.integer  :sequence           # SORTABLE POSITION USING ACTS_AS_LIST
-      t.integer  :contract_id
+      # t.integer  :contract_id
       t.string   :contract_uuid
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
@@ -197,7 +197,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :amendments, :uuid
     add_index :amendments, :exid
     add_index :amendments, :sequence
-    add_index :amendments, :contract_id
+    # add_index :amendments, :contract_id
     add_index :amendments, :contract_uuid
     add_index :amendments, :xfields, using: :gin
     add_index :amendments, :jfields, using: :gin

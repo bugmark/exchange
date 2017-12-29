@@ -4,7 +4,7 @@ RSpec.describe OfferCmd::CreateBuy do
 
   def gen_obf(opts = {})
     lcl_opts = {volume: 10, price: 0.40, user_uuid: user.uuid}
-    klas.new(:offer_bf, lcl_opts.merge(opts)).cmd_cast
+    klas.new(:offer_bf, lcl_opts.merge(opts)).project
   end
 
   def valid_params(args = {})
@@ -34,7 +34,7 @@ RSpec.describe OfferCmd::CreateBuy do
 
   describe "#cmd_cast" do
     it 'saves the object to the database' do
-      subject.cmd_cast
+      subject.project
       expect(subject).to be_valid
     end
 
@@ -42,19 +42,19 @@ RSpec.describe OfferCmd::CreateBuy do
       expect(User.count).to eq(0)
       expect(Event.count).to eq(0)
       expect(Offer.count).to eq(0)
-      subject.cmd_cast
+      subject.project
       expect(User.count).to eq(1)
       expect(Event.count).to eq(3)
       expect(Offer.count).to eq(1)
     end
 
     it 'returns an instance of klas' do
-      obj = subject.cmd_cast
+      obj = subject.project
       expect(obj).to be_a(klas)
     end
 
     it 'returns an sub-instance of klas' do
-      obj = subject.cmd_cast
+      obj = subject.project
       expect(obj.offer).to be_a(Offer)
     end
   end
@@ -68,7 +68,7 @@ RSpec.describe OfferCmd::CreateBuy do
     it "generates price" do
       obj = klas.new(:offer_bu, valid_params(deposit: 2, volume: 20))
       expect(obj).to be_valid
-      expect(obj.cmd_cast.offer.price).to eq(0.1)
+      expect(obj.project.offer.price).to eq(0.1)
     end
 
     it "validates deposit" do
@@ -86,7 +86,7 @@ RSpec.describe OfferCmd::CreateBuy do
     it "generates price" do
       obj = klas.new(:offer_bu, valid_params(profit: 2, volume: 20))
       expect(obj).to be_valid
-      expect(obj.cmd_cast.offer.price).to eq(0.9)
+      expect(obj.project.offer.price).to eq(0.9)
     end
 
     it "validates profit" do
@@ -100,14 +100,14 @@ RSpec.describe OfferCmd::CreateBuy do
       tst_time = Time.now
       obj = klas.new(:offer_bu, valid_params(maturation: tst_time))
       expect(obj).to be_valid
-      expect(obj.cmd_cast.offer.maturation.strftime("%H%M%S")).to eq(tst_time.strftime("%H%M%S"))
+      expect(obj.project.offer.maturation.strftime("%H%M%S")).to eq(tst_time.strftime("%H%M%S"))
     end
 
     it "generates a valid object from a string" do
       tst_date = "17-10-04"
       obj = klas.new(:offer_bu, valid_params(maturation: tst_date))
       expect(obj).to be_valid
-      date = obj.cmd_cast.offer.maturation + 1.day
+      date = obj.project.offer.maturation + 1.day
       expect(date.strftime("%y-%m-%d")).to eq(tst_date)
     end
   end

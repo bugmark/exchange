@@ -1,10 +1,10 @@
 module CoreOffersHelper
   def core_statement_stats(obj)
     string = {
-      "BugID"  => obj.stm_bug_id    ,
-      "RepoID" => obj.stm_repo_id   ,
-      "Title"  => obj.stm_title     ,
-      "Status" => obj.stm_status    ,
+      "BugID"  => obj.stm_bug_uuid    ,
+      "RepoID" => obj.stm_repo_uuid   ,
+      "Title"  => obj.stm_title       ,
+      "Status" => obj.stm_status      ,
       # "Labels" => obj.stm_labels    ,
     }.map {|x,y| "<u>#{x}</u>[#{y}]"}.join(" ")
     raw string
@@ -12,7 +12,7 @@ module CoreOffersHelper
 
   def core_offer_header(filter)
     return "All Offers" if filter.nil?
-    lbls = {"stm_repo_id" => "Repo", "stm_bug_id" => "Bug", "user_id" => "User"}
+    lbls = {"stm_repo_uuid" => "Repo", "stm_bug_uuid" => "Bug", "user_id" => "User"}
     lbl  = lbls[filter.key]
     all_link = "<a href='/core/offers'>All Offers</a>"
     obj_link = "<a href='/core/#{lbl.downcase}s/#{filter.obj.id}'>#{lbl} #{filter.obj.id}</a>"

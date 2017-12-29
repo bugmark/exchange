@@ -726,11 +726,13 @@ Next Actions:
 - [x] redo all buy_offer commands - tests on projections
 - [x] redo all cross_expand commands - tests on events
 - [x] redo all cross_expand commands - tests on projections
+- [x] get rid of #project method
+- [x] rename #cmd_cast to #project
+- [x] remove old ApplicationCommand code
 
-- [ ] get rid of #project method
-- [ ] rename #cmd_cast to #project
-- [ ] remove old ApplicationCommand code
-- [ ] get rid of ID fields
+# Dec 29
+
+- [x] get rid of ID fields
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers

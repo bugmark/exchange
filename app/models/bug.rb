@@ -7,11 +7,16 @@ class Bug < ApplicationRecord
 
   after_save :update_stm_ids
 
-  belongs_to :repo      , :foreign_key => :stm_repo_id
-  has_many   :offers    , :foreign_key => :stm_bug_id, :dependent  => :destroy
-  has_many   :offers_bf , :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Fixed"
-  has_many   :offers_bu , :foreign_key => :stn_bug_id, :class_name => "Offer::Buy::Unfixed"
-  has_many   :contracts , :foreign_key => :stm_bug_id, :dependent  => :destroy
+  with_options primary_key: "uuid" do
+    belongs_to :repo      , :foreign_key => :stm_repo_uuid
+  end
+
+  with_options foreign_key: "stm_bug_uuid", primary_key: "uuid" do
+    has_many   :offers    , :dependent  => :destroy
+    has_many   :offers_bf , :class_name => "Offer::Buy::Fixed"
+    has_many   :offers_bu , :class_name => "Offer::Buy::Unfixed"
+    has_many   :contracts , :dependent  => :destroy
+  end
 
   hstore_accessor :stm_xfields, :html_url  => :string
   jsonb_accessor  :stm_jfields, :comments  => :string
@@ -62,9 +67,9 @@ class Bug < ApplicationRecord
   private
 
   def update_stm_ids
-    return if self.id.nil?
-    return if self.stm_bug_id.present?
-    update_attribute :stm_bug_id, self.id
+    return if self.uuid.nil?
+    return if self.stm_bug_uuid.present?
+    update_attribute :stm_bug_uuid, self.uuid
   end
 end
 
@@ -74,16 +79,14 @@ end
 #
 #  id            :integer          not null, primary key
 #  type          :string
+#  uuid          :string
+#  exid          :string
 #  xfields       :hstore           not null
 #  jfields       :jsonb            not null
 #  synced_at     :datetime
-#  exid          :string
-#  uuid          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  stm_bug_id    :integer
 #  stm_bug_uuid  :string
-#  stm_repo_id   :integer
 #  stm_repo_uuid :string
 #  stm_title     :string
 #  stm_status    :string

@@ -4,7 +4,7 @@ RSpec.describe OfferCmd::CloneBuy do
 
   def gen_obf(opts = {})
     lcl_opts = {volume: 10, price: 0.40, user_uuid: user.uuid}
-    OfferCmd::CreateBuy.new(:offer_bf, lcl_opts.merge(opts)).cmd_cast
+    OfferCmd::CreateBuy.new(:offer_bf, lcl_opts.merge(opts)).project
   end
 
   def valid_params(args = {})
@@ -14,7 +14,7 @@ RSpec.describe OfferCmd::CloneBuy do
   end
 
   # noinspection RubyArgCount
-  let(:offer_bf) { gen_obf.cmd_cast.offer                               }
+  let(:offer_bf) { gen_obf.project.offer                               }
 
   def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
@@ -30,23 +30,23 @@ RSpec.describe OfferCmd::CloneBuy do
 
   describe "#project" do
     it 'saves the object to the database' do
-      subject.cmd_cast
+      subject.project
       expect(subject).to be_valid
     end
 
     it 'gets the right object count' do
       hydrate(offer_bf)
       expect(Offer.count).to eq(1)
-      subject.cmd_cast
+      subject.project
       expect(Offer.count).to eq(2)
     end
 
     it 'updates the clone params' do
       hydrate(offer_bf)
       expect(Offer.count).to eq(1)
-      result = klas.new(offer_bf, stm_bug_id: 111).cmd_cast
+      result = klas.new(offer_bf, stm_bug_uuid: "asdf").project
       expect(Offer.count).to eq(2)
-      expect(result.offer.stm_bug_id).to eq(111)
+      expect(result.offer.stm_bug_uuid).to eq("asdf")
     end
   end
 
@@ -54,7 +54,7 @@ RSpec.describe OfferCmd::CloneBuy do
     it "does not create an offer" do
       hydrate(offer_bf)
       expect(Offer.count).to eq(1)
-      klas.new(offer_bf, volume: 10000).cmd_cast
+      klas.new(offer_bf, volume: 10000).project
       expect(Offer.count).to eq(1)
     end
 

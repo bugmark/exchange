@@ -4,7 +4,7 @@ describe "Repos", USE_VCR do
 
   include_context 'Integration Environment'
 
-  before(:each) { hydrate(repo1) }
+  before(:each) { hydrate(repo1) } #....
 
   it "renders index" do
     visit "/core/repos"

@@ -3,11 +3,11 @@ module MatchUtils
 
   def match_attrs
     {
-      stm_bug_id:  self.stm_bug_id   ,
-      stm_repo_id: self.stm_repo_id  ,
-      stm_title:   self.stm_title    ,
-      stm_status:  self.stm_status   ,
-      stm_labels:  self.stm_labels   ,
+      stm_bug_uuid:  self.stm_bug_uuid   ,
+      stm_repo_uuid: self.stm_repo_uuid  ,
+      stm_title:     self.stm_title      ,
+      stm_status:    self.stm_status     ,
+      stm_labels:    self.stm_labels     ,
     }
   end
 

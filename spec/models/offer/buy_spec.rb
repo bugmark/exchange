@@ -69,17 +69,13 @@ end
 # Table name: offers
 #
 #  id                    :integer          not null, primary key
+#  uuid                  :string
+#  exid                  :string
 #  type                  :string
 #  repo_type             :string
-#  user_id               :integer
 #  user_uuid             :string
-#  prototype_id          :integer
 #  prototype_uuid        :string
-#  amendment_id          :integer
 #  amendment_uuid        :string
-#  reoffer_parent_id     :integer
-#  reoffer_parent_uuid   :string
-#  salable_position_id   :integer
 #  salable_position_uuid :string
 #  volume                :integer
 #  price                 :float
@@ -91,13 +87,9 @@ end
 #  maturation_range      :tsrange
 #  xfields               :hstore           not null
 #  jfields               :jsonb            not null
-#  exid                  :string
-#  uuid                  :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  stm_bug_id            :integer
 #  stm_bug_uuid          :string
-#  stm_repo_id           :integer
 #  stm_repo_uuid         :string
 #  stm_title             :string
 #  stm_status            :string

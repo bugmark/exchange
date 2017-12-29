@@ -4,12 +4,12 @@ RSpec.describe Event::BugSynced, :type => :model do
 
   def valid_params(alt = {})
     {
-      cmd_type:           "Test::BugCreated"        ,
+      cmd_type:           "Test::BugCreated"         ,
       cmd_uuid:           SecureRandom.uuid          ,
       type:               "Bug::GitHub"              ,
       uuid:               SecureRandom.uuid          ,
       stm_title:          "ping/pong"                ,
-      stm_repo_id:        repo.id                    ,
+      stm_repo_uuid:      repo.uuid                  ,
       exid:               "bingbingbing"
     }.merge(alt)
   end

@@ -4,11 +4,13 @@ class Repo < ApplicationRecord
 
   has_paper_trail
 
-  has_many :bugs      , :dependent => :destroy, :foreign_key => :stm_repo_id
-  has_many :offers    , :dependent => :destroy, :foreign_key => :stm_repo_id
-  has_many :contracts , :dependent => :destroy, :foreign_key => :stm_repo_id
+  with_options foreign_key: "stm_repo_uuid", primary_key: "uuid", :dependent => :destroy do
+    has_many :bugs
+    has_many :offers
+    has_many :contracts
+  end
 
-  validates :name     , uniqueness: true, presence: true
+  validates :name, uniqueness: true, presence: true
 
   before_validation :set_defaults
 

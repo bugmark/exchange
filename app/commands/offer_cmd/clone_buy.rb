@@ -33,7 +33,7 @@ module OfferCmd
     end
 
     def valid_attrs(new_attrs)
-      alt  = {prototype_id: offer.id, status: "open"}
+      alt  = {prototype_uuid: offer.uuid, status: "open"}
       offer.attributes.except(:id, "id").merge(alt).merge(new_attrs)
     end
   end

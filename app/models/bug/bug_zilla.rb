@@ -8,16 +8,14 @@ end
 #
 #  id            :integer          not null, primary key
 #  type          :string
+#  uuid          :string
+#  exid          :string
 #  xfields       :hstore           not null
 #  jfields       :jsonb            not null
 #  synced_at     :datetime
-#  exid          :string
-#  uuid          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  stm_bug_id    :integer
 #  stm_bug_uuid  :string
-#  stm_repo_id   :integer
 #  stm_repo_uuid :string
 #  stm_title     :string
 #  stm_status    :string

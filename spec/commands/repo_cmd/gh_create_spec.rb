@@ -26,13 +26,13 @@ RSpec.describe RepoCmd::GhCreate do
 
   describe "#cmd_cast", USE_VCR do
     it 'saves the object to the database' do
-      subject.cmd_cast
+      subject.project
       expect(subject).to be_valid
     end
 
     it 'gets the right object count' do
       expect(Repo.count).to eq(0)
-      subject.cmd_cast
+      subject.project
       expect(Repo.count).to eq(1)
     end
   end

@@ -37,38 +37,9 @@ class ApplicationCommand
   # form handling inspired by
   # http://blog.sundaycoding.com/blog/2016/01/08/contextual-validations-with-form-objects
 
-  # ----- configuration methods
-
-  # define an attr_accessor for each subobject
-  # define a method `subobject_symbols` that returns the list of subobjects
-  # def self.attr_subobjects(*klas_list)
-  #   attr_accessor(*klas_list)
-  #   define_method 'subobject_symbols' do
-  #     klas_list
-  #   end
-  # end
-
-  # delegate all fields of an object to the subobject
-  # def self.attr_delegate_fields(sym, opts = {})  #class_name
-  #   klas_name = opts[:class_name] || sym
-  #   klas    = klas_name.to_s.camelize.constantize
-  #   getters = klas.attribute_names.map(&:to_sym)
-  #   setters = klas.attribute_names.map { |x| "#{x}=".to_sym }
-  #   delegate *getters, to: sym
-  #   delegate *setters, to: sym
-  # end
-
-  # def self.attr_vdelegate(method, klas_sym)
-  #   getter = method
-  #   setter = "#{method}=".to_sym
-  #   delegate getter, to: klas_sym
-  #   delegate setter, to: klas_sym
-  # end
-
-  # ----- template methods - override in subclass
+  # ----- instance methods
 
   def add_event(key, event)
-    binding.pry if key.nil? || key.blank?
     raise "EMPTY KEY" if key.nil? || key.blank?
     raise "DUPLICATE KEY (#{key})" if state[:events][key]
     state[:events][key] = event
@@ -90,8 +61,7 @@ class ApplicationCommand
     raise "NOT ALLOWED - USE #cmd_cast"
   end
 
-  # synonym for project
-  def cmd_cast
+  def project
     if valid?
       ActiveRecord::Base.transaction do
         events.each do |key, event|
@@ -152,33 +122,4 @@ class ApplicationCommand
   def cmd_opts
     {"cmd_type" => cmd_type, "cmd_uuid" => cmd_uuid}
   end
-
-  # def save_event
-  #   base = {cmd_type: cmd_type, cmd_id: cmd_id, user_ids: user_ids}
-  #   data = {data: event_data}
-  #   both = data.merge(base)
-  #   Event.new(both).save
-  #
-  #   if ! Rails.env.test? && File.exist?("/etc/influxdb/influxdb.conf")
-  #     mname = "cmd." + self.class.name.gsub("::", "_")
-  #     InfluxDB::Rails.client.write_point mname,
-  #                                        tags:   influx_tags,
-  #                                        values: influx_fields
-  #   end
-  #   self
-  # end
-
-  # def subobjects
-  #   subobject_symbols.map { |el| self.send(el) }
-  # end
-
-  # alias_method :subs, :subobjects
-
-  # def missing_subobjects
-  #   subobject_symbols.
-  #     map {|el| [el, self.send(el)]}.
-  #     select {|el| el.last.nil?}.
-  #     map {|el| el.first}
-  # end
-
 end

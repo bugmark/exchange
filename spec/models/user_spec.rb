@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do #
       expect(usr.offers).to eq([])
     end
 
-    it 'returns a offer if one exists' do
+    it 'returns a offer if one exists', :focus do
       gen_unfixed
       expect(usr.offers.count).to     eq(1)
       expect(usr.offers_buy.count).to eq(1)
@@ -50,7 +50,7 @@ RSpec.describe User, type: :model do #
       expect(usr.offers_bf.count).to  eq(0)
     end
 
-    it 'handles offers_bf and offers_bu', :focus do
+    it 'handles offers_bf and offers_bu' do
       gen_unfixed; gen_fixed
       expect(usr.offers.count).to eq(2)
       expect(usr.offers_buy.count).to eq(2)
@@ -170,10 +170,10 @@ end
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  uuid                   :string
+#  exid                   :string
 #  admin                  :boolean
 #  balance                :float            default(0.0)
-#  exid                   :string
-#  uuid                   :string
 #  jfields                :jsonb            not null
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null

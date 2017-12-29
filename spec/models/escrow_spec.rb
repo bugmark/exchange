@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Escrow, type: :model do
   def valid_params(opt = {})
     {
-      amendment_id: 1,
-      type:         "Escrow::Expand"
+      amendment_uuid: "asdfasdf",
+      type:           "Escrow::Expand"
     }.merge(opt)
   end
 
@@ -22,7 +22,7 @@ RSpec.describe Escrow, type: :model do
     it { should respond_to(:amendment)              }
   end
 
-  describe "Object Creation" do
+  describe "Object Creation", USE_VCR do
     it { should be_valid }
 
     it 'saves the object to the database' do
@@ -45,16 +45,14 @@ end
 # Table name: escrows
 #
 #  id             :integer          not null, primary key
+#  uuid           :string
+#  exid           :string
 #  type           :string
 #  sequence       :integer
-#  contract_id    :integer
 #  contract_uuid  :string
-#  amendment_id   :integer
 #  amendment_uuid :string
 #  fixed_value    :float            default(0.0)
 #  unfixed_value  :float            default(0.0)
-#  exid           :string
-#  uuid           :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
