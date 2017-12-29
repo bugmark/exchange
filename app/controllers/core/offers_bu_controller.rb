@@ -6,15 +6,16 @@ module Core
     before_action :authenticate_user!, :except => [:index, :show]
 
     def new
-      @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, new_opts(params))
+      new_opts = new_opts(params)
+      @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, new_opts).offer_new
     end
 
     def create
-      opts = params["offer_cmd_create_buy"]
+      opts = params["offer_buy_unfixed"]
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, new_opts.merge(valid_params(opts)))
       if @offer_bu.project
         flash[:notice] = "Offer created! (BU)"
-        redirect_to("/core/offers/#{@offer_bu.id}")
+        redirect_to("/core/offers/#{@offer_bu.offer.id}")
       else
         render 'core/offers_bu/new'
       end
@@ -37,10 +38,10 @@ module Core
         stm_status:  "closed"                 ,
         maturation:  BugmTime.now + 3.minutes ,
       }
-      key = "stm_bug_id" if params["stm_bug_id"]
-      key = "stm_repo_id" if params["stm_repo_id"]
-      id = params["stm_bug_id"] || params["stm_repo_id"]
-      opts.merge({key => id}).without_blanks
+      key = "stm_bug_uuid" if params["stm_bug_uuid"]
+      key = "stm_repo_uuid" if params["stm_repo_uuid"]
+      id = params["stm_bug_uuid"] || params["stm_repo_uuid"]
+      opts.merge({key => id}).without_blanks.stringify_keys
     end
   end
 end

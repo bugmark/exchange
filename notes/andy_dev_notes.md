@@ -734,6 +734,8 @@ Next Actions:
 
 - [x] get rid of ID fields
 
+- [ ] test sell offers
+
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers

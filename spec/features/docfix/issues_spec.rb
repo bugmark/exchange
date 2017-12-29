@@ -17,30 +17,30 @@ describe "Issues" do
   it "renders show", USE_VCR do
     hydrate(bug)
     visit "/docfix/issues/#{bug.id}"
-    expect(page).to_not be_nil #.
+    expect(page).to_not be_nil
   end
 
-  # it "generates an OBF", USE_VCR do
-  #   login_as(usr1, :scope => :user)
-  #   hydrate(bug)
-  #   visit "/docfix/issues/#{bug.id}"
-  #   click_on "BE THE FIRST TO INVEST"
-  #   click_on "Buy Unfixed"
-  #   expect(Offer.count).to eq(0)
-  #   click_on "Create Offer"
-  #   expect(page).to_not be_nil
-  #   expect(Offer.count).to eq(1)
-  # end
+  it "generates an OBF", USE_VCR do
+    login_as(usr1, :scope => :user)
+    hydrate(bug)
+    visit "/docfix/issues/#{bug.id}"
+    click_on "BE THE FIRST TO INVEST"
+    click_on "Buy Unfixed"
+    expect(Offer.count).to eq(0)
+    click_on "Create Offer"
+    expect(page).to_not be_nil
+    expect(Offer.count).to eq(1)
+  end
 
-  # it "generates an OBU", USE_VCR do
-  #   login_as(usr1, :scope => :user)
-  #   hydrate(bug)
-  #   visit "/docfix/issues/#{bug.id}"
-  #   click_on "BE THE FIRST TO INVEST"
-  #   click_on "Buy Fixed"
-  #   expect(Offer.count).to eq(0)
-  #   click_on "Create Offer"
-  #   expect(page).to_not be_nil
-  #   expect(Offer.count).to eq(1)
-  # end
+  it "generates an OBU", USE_VCR do
+    login_as(usr1, :scope => :user)
+    hydrate(bug)
+    visit "/docfix/issues/#{bug.id}"
+    click_on "BE THE FIRST TO INVEST"
+    click_on "Buy Fixed"
+    expect(Offer.count).to eq(0)
+    click_on "Create Offer"
+    expect(page).to_not be_nil
+    expect(Offer.count).to eq(1)
+  end
 end

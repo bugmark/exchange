@@ -31,6 +31,7 @@ module CoreOffersHelper
   # end
 
   def core_offer_attach_link(offer)
+    return ""
     type = offer.attach_type
     obj  = offer.attach_obj
     raw "<a href='/core/#{type}/#{obj.id}'>#{obj.xid}</a>"

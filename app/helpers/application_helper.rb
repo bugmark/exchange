@@ -19,6 +19,7 @@ module ApplicationHelper
   # -----
 
   def obj_link(event)
+    return  ""
     return event.klas unless event.klas == "ContractCmd::Cross"
     raw <<-EOF
       <a href="/docfix/contracts/#{event.data['id']}"}>
