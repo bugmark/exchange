@@ -1,28 +1,77 @@
 module OfferCmd
   class CreateSell < ApplicationCommand
 
-    # attr_subobjects      :offer
-    # attr_reader          :salable_position
-    # attr_delegate_fields :offer, class_name: "Offer::Sell"
+    attr_reader :args, :salable_position
 
-    def initialize(position, attr)
+    def initialize(position, args)
       @salable_position = position
-      @volume           = attr[:volume] || salable_position.volume
-      @price            = attr[:price]  || salable_position.price
-      @offer            = klas.new(sell_offer_params)
+      @args  = ArgHandler.new(args, self)
+        .apply( &:set_price_and_volume  )
+        .apply( &:set_offer_type        )
+        .apply( &:set_user              )
+        .apply( &:set_salable_uuid      )
+        .apply( &:set_status            )
+        .apply( &:event_opts            )
+      add_event :offer, Event::OfferSellCreated.new(@args.to_h)
     end
 
-    # def transact_before_project
-    #   offer.status = "open"
-    # end
+    class ArgHandler
 
-    private
+      attr_reader :args, :caller, :salable_position
 
-    def klas
-      case salable_position.side
-        when "unfixed" then Offer::Sell::Unfixed
-        when "fixed"   then Offer::Sell::Fixed
-        else raise "unknown position side (#{salable_position.side})"
+      def initialize(args, caller)
+        @args             = args.stringify_keys
+        @caller           = caller
+        @salable_position = caller.salable_position
+      end
+
+      def set_price_and_volume
+        @args["volume"] = @args["volume"] || salable_position.volume
+        @args["price"]  = @args["price"]  || salable_position.price
+        self
+      end
+
+      def set_offer_type
+        @args["type"] = klas
+        self
+      end
+
+      def event_opts
+        @args = caller.send(:cmd_opts)
+                  .merge(@args)
+                  .without("deposit", "profit")
+                  .merge(salable_position.offer.match_attrs)
+                  .stringify_keys
+        self
+      end
+
+      def set_user
+        @args["user_uuid"] = salable_position.user_uuid
+        self
+      end
+
+      def set_salable_uuid
+        @args["salable_position_uuid"] = salable_position.uuid
+        self
+      end
+
+      def set_status
+        @args["status"] = "open"
+        self
+      end
+
+      def to_h
+        @args
+      end
+
+      private
+
+      def klas
+        case salable_position.side
+          when "unfixed" then "Offer::Sell::Unfixed"
+          when "fixed"   then "Offer::Sell::Fixed"
+          else raise "unknown position side (#{salable_position.side})"
+        end
       end
     end
 

@@ -94,7 +94,7 @@ module FBX
   def offer_su(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
     cntr = ContractCmd::Cross.new(obu, :expand).project.contract
-    posn = cntr.escrows.last.unfixed_positions.first
+    posn = cntr.escrows.last.unfixed_positions.first      #
     OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).project
   end
 
@@ -114,10 +114,10 @@ module FBX
 
   def FBX.default_opts
     {
-      obf: {},
-      obu: {},
-      osf: {},
-      osu: {},
+      obf: {uuid: SecureRandom.uuid},
+      obu: {uuid: SecureRandom.uuid},
+      osf: {uuid: SecureRandom.uuid},
+      osu: {uuid: SecureRandom.uuid},
     }
   end
 end

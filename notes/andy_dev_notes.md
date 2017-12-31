@@ -709,9 +709,9 @@ Next Actions:
 - [x] repo/gh_sync
 - [x] bug/sync
 - [ ] offer/cancel
-- [ ] offer/clone
+- [x] offer/clone
 - [x] offer/create_buy
-- [ ] offer/create_sell
+- [x] offer/create_sell
 - [ ] offer/suspend
 - [ ] contract/clone
 - [ ] contract/create
@@ -734,7 +734,9 @@ Next Actions:
 
 - [x] get rid of ID fields
 
-- [ ] test sell offers
+# Dec 30
+
+- [x] test sell offers
 
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers

@@ -12,7 +12,7 @@ RSpec.describe OfferCmd::CreateBuy do
       user_uuid: user.uuid            ,
       volume:    10                   ,
       price:     0.3
-    }.merge(args) #
+    }.merge(args)
   end
 
   def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
