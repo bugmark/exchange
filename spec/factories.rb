@@ -72,11 +72,23 @@ FactoryBot.define do
 end
 
 module FBX
+  def position_f(opts = {})
+    _obu, obf = FBX.create_buy_offers(opts)
+    ContractCmd::Cross.new(obf, :expand).project
+    obf.reload
+    obf.position
+  end
+
+  def position_u(opts = {})
+    obu, _obf = FBX.create_buy_offers(opts)
+    ContractCmd::Cross.new(obu, :expand).project
+    obu.reload
+    obu.position
+  end
 
   def expand_obf(opts = {})
     _obu, obf = FBX.create_buy_offers(opts)
-    res = ContractCmd::Cross.new(obf, :expand)
-    res.project
+    ContractCmd::Cross.new(obf, :expand).project
   end
 
   def expand_obu(opts = {})
@@ -98,7 +110,9 @@ module FBX
     OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).project
   end
 
-  module_function :expand_obf, :expand_obu, :offer_sf, :offer_su
+  module_function :offer_sf   , :offer_su
+  module_function :position_f , :position_u
+  module_function :expand_obf , :expand_obu
 
   # ----- private -----
 

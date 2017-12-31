@@ -5,14 +5,15 @@ RSpec.describe OfferCmd::CreateSell do
   def valid_params(args = {})
     {
       uuid:      SecureRandom.uuid    ,
-    }.merge(args)
+    }.merge(args) #
   end
 
   def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
   let(:user)   { FB.create(:user)                                     }
   let(:bof1)   { FB.create(:offer_bu, user_uuid: user.uuid).offer     }
-  let(:pos1)   { Position.create(offer: bof1, user: user)             }
+  # let(:pos1)   { Position.create(offer: bof1, user: user)             }
+  let(:pos1)   { FBX.position_unfixed                                 }
   let(:user)   { FB.create(:user).user                                }
   let(:klas)   { described_class                                      }
   subject      { klas.new(pos1, valid_params(volume: 10, price: 0.4)) }

@@ -53,7 +53,7 @@ class Contract < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id type prototype_uuid mode status stm_status stm_bug_uuid stm_repo_uuid awarded_to))
+      select(%i(id uuid type prototype_uuid status stm_status stm_bug_uuid stm_repo_uuid awarded_to))
     end
     alias_method :ss, :select_subset
   end

@@ -31,7 +31,7 @@ class Position < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id offer_id user_id amendment_id escrow_id parent_id volume price value side))
+      select(%i(id uuid offer_uuid user_uuid amendment_uuid escrow_uuid parent_uuid volume price value side))
     end
     alias_method :ss, :select_subset
   end

@@ -10,6 +10,7 @@ module OfferCmd
         .apply( &:set_offer_type        )
         .apply( &:set_user              )
         .apply( &:set_salable_uuid      )
+        .apply( &:set_maturation        )
         .apply( &:set_status            )
         .apply( &:event_opts            )
       add_event :offer, Event::OfferSellCreated.new(@args.to_h)
@@ -33,6 +34,13 @@ module OfferCmd
 
       def set_offer_type
         @args["type"] = klas
+        self
+      end
+
+      def set_maturation
+        puts("NO SP") unless salable_position
+        puts("NO ESCROW") unless salable_position.escrow
+        # @args["maturation"] = salable_position.contract.maturation
         self
       end
 

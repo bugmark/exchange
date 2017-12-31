@@ -10,6 +10,15 @@ RSpec.describe ContractCmd::Cross::Reduce do
   let(:klas)     { described_class                        }
   subject        { klas.new(offer_su, :reduce)            }
 
+  describe "BASE", USE_VCR do
+    it "bings" do
+      hydrate(offer_su, offer_sf)
+      gg = subject
+      expect(1).to eq(1)
+    end
+  end #......
+
+
   describe "Attributes", USE_VCR do 
     # it { should respond_to :offer          }
     # it { should respond_to :counters      }
@@ -22,7 +31,7 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   # describe "Subobjects", USE_VCR do
-  #   it { should respond_to :subobject_symbols } #
+  #   it { should respond_to :subobject_symbols } #..
   #   it 'returns an array' do
   #     expect(subject.subobject_symbols).to be_an(Array)
   #   end

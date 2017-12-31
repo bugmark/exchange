@@ -7,7 +7,6 @@ require 'ext/array'
 module ContractCmd
   class Cross < ApplicationCommand
 
-    # attr_subobjects :offer
     attr_reader     :offer, :counters, :type, :bundle, :commit
 
     validate :cross_integrity
@@ -17,9 +16,12 @@ module ContractCmd
       @offer       = Offer.find(offer.to_i)
       @counters    = @offer.qualified_counteroffers(commit_type)
       if valid?
+        tst_log "BUNDLING"
         @bundle = Bundle.new(type, offer, counters).generate
+        tst_log "COMMITTING"
         # noinspection RubyArgCount
         @commit = commit_class.new(bundle).generate
+        binding.pry unless type.to_s == "expand"
         @commit.events.each do |ev|
           add_event(ev.name, ev.klas.new(cmd_opts.merge(ev.params)))
         end
