@@ -89,12 +89,12 @@ RSpec.describe ContractCmd::Cross::Reduce do
         expect(Position.last.user_uuid).to_not be_nil
       end
 
-    #   it 'matches equal values' do
-    #     FB.create(:offer_bu)
-    #     klas.new(lcl_ask, :reduce).project
-    #     expect(Contract.count).to eq(1)
-    #   end
-    #
+      # it 'matches equal values' do
+      #   FB.create(:offer_bu)
+      #   klas.new(lcl_ask, :reduce).project
+      #   expect(Contract.count).to eq(1)
+      # end
+
     #   it 'fails to match lower values' do
     #     FB.create(:offer_bu, price: 0.1, volume: 1)
     #     expect(Contract.count).to eq(0)

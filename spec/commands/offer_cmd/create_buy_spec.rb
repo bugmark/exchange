@@ -7,7 +7,7 @@ RSpec.describe OfferCmd::CreateBuy do
     klas.new(:offer_bf, lcl_opts.merge(opts)).project
   end
 
-  def valid_params(args = {})
+  def valid_params(args = {}) #
     {
       user_uuid: user.uuid            ,
       volume:    10                   ,

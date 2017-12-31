@@ -39,7 +39,7 @@ class Position < ApplicationRecord
   # ----- INSTANCE METHODS -----
 
   def xtag
-    "pos" #
+    "pos"
   end
 
   def dumptree

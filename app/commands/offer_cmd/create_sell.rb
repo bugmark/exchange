@@ -5,14 +5,14 @@ module OfferCmd
 
     def initialize(position, args)
       @salable_position = position
-      @args  = ArgHandler.new(args, self)
-        .apply( &:set_price_and_volume  )
-        .apply( &:set_offer_type        )
-        .apply( &:set_user              )
-        .apply( &:set_salable_uuid      )
-        .apply( &:set_maturation        )
-        .apply( &:set_status            )
-        .apply( &:event_opts            )
+      @args = ArgHandler.new(args, self)
+                .apply(&:set_price_and_volume)
+                .apply(&:set_offer_type)
+                .apply(&:set_user)
+                .apply(&:set_salable_uuid)
+                .apply(&:set_maturation)
+                .apply(&:set_status)
+                .apply(&:event_opts)
       add_event :offer, Event::OfferSellCreated.new(@args.to_h)
     end
 
