@@ -11,7 +11,7 @@ RSpec.describe ContractCmd::Cross::Reduce do
   subject        { klas.new(offer_su, :reduce)            }
 
   describe "Attributes", USE_VCR do 
-    # it { should respond_to :offer         }
+    # it { should respond_to :offer          }
     # it { should respond_to :counters      }
     # it { should respond_to :type          }
   end

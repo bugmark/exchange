@@ -738,12 +738,13 @@ Next Actions:
 
 - [x] test sell offers
 
+- [ ] test (cross-reduce)     user balance adjustments
+- [ ] test (cross-reduce)     auto-suspend sale-offers
+
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
 
-- [ ] test (cross-reduce)     user balance adjustments
-- [ ] test (cross-reduce)     auto-suspend sale-offers
 - [ ] test (contract-resolve) user balance adjustments
 
 - [ ] add ContractCmd::Create with tests
