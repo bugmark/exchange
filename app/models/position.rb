@@ -7,8 +7,8 @@ class Position < ApplicationRecord
 
   belongs_to :offer       , optional:   true      , foreign_key: "offer_uuid", primary_key: "uuid"
   has_many   :offers_sell , class_name: "Offer"   , foreign_key: "salable_position_id"
-  belongs_to :user        , optional: true        , foreign_key: "user_uuid" , primary_key: "uuid"
-  belongs_to :escrow                              , optional: true
+  belongs_to :user        , optional: true        , foreign_key: "user_uuid"  , primary_key: "uuid"
+  belongs_to :escrow      , optional: true        , foreign_key: "escrow_uuid", primary_key: "uuid"
   belongs_to :parent      , class_name: "Position", optional: true
   has_many   :children    , class_name: "Position"
   has_one    :contract    , :through => :escrow

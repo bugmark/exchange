@@ -7,7 +7,6 @@ class Offer::Sell::Unfixed < Offer::Sell
   alias_method :xtag, :side
 
   def qualified_counteroffers(cross_type)
-    binding.pry
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type

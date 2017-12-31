@@ -38,9 +38,9 @@ module OfferCmd
       end
 
       def set_maturation
-        puts("NO SP") unless salable_position
+        puts("NO SP")     unless salable_position
         puts("NO ESCROW") unless salable_position.escrow
-        # @args["maturation"] = salable_position.contract.maturation
+        @args["maturation"] = salable_position.contract.maturation
         self
       end
 

@@ -23,7 +23,7 @@ class Escrow < ApplicationRecord
 
   class << self
     def select_subset
-      select(%i(id type sequence contract_uuid amendment_uudid fixed_value unfixed_value))
+      select(%i(id type sequence contract_uuid amendment_uuid fixed_value unfixed_value))
     end
     alias_method :ss, :select_subset
   end

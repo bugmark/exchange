@@ -12,8 +12,7 @@ RSpec.describe OfferCmd::CreateSell do
 
   let(:user)   { FB.create(:user)                                     }
   let(:bof1)   { FB.create(:offer_bu, user_uuid: user.uuid).offer     }
-  # let(:pos1)   { Position.create(offer: bof1, user: user)             }
-  let(:pos1)   { FBX.position_unfixed                                 }
+  let(:pos1)   { FBX.position_u                                       }
   let(:user)   { FB.create(:user).user                                }
   let(:klas)   { described_class                                      }
   subject      { klas.new(pos1, valid_params(volume: 10, price: 0.4)) }
@@ -47,8 +46,8 @@ RSpec.describe OfferCmd::CreateSell do
       expect(Offer.count).to eq(0)
       subject.project
       expect(Offer.is_sell.count).to eq(1)
-      expect(Offer.is_buy.count).to eq(1)
-      expect(Offer.count).to eq(2)
+      expect(Offer.is_buy.count).to eq(2)
+      expect(Offer.count).to eq(3)
     end
   end
 
