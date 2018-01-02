@@ -9,9 +9,12 @@ class Commit::Reduce < Commit
 
     # look up contract
     ctx.c_contract = bundle.offer.obj.salable_position.contract
+    ctx.c_uuid     = ctx.c_contract.uuid
 
     # generate amendment, escrow, price
-    gen_escrow_and_amendment(ctx, Amendment::Reduce, Escrow::Reduce)
+    ctx.e_type = "Escrow::Reduce"
+    ctx.a_type = "Amendment::Reduce"
+    gen_escrow_and_amendment(ctx)
 
     # calculate price for offer and counter
     ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min

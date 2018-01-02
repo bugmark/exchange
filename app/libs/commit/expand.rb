@@ -10,7 +10,9 @@ class Commit::Expand < Commit
     ctx = find_or_gen_contract(ctx)
 
     # generate amendment and escrow
-    ctx = gen_escrow_and_amendment(ctx, Amendment::Expand, Escrow::Expand)
+    ctx.e_type = "Escrow::Expand"
+    ctx.a_type = "Amendment::Expand"
+    ctx = gen_escrow_and_amendment(ctx)
 
     # calculate price for offer and counter - half-way between the two
     ctx.counter_min   = bundle.counters.map {|el| el.obj.price}.min

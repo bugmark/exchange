@@ -8,7 +8,9 @@ RSpec.describe ContractCmd::Cross::Reduce do
   let(:offer_sf) { FBX.offer_sf.offer                     }
   let(:user)     { FB.create(:user).user                  }
   let(:klas)     { described_class                        }
-  subject        { klas.new(offer_su, :reduce)            }
+  let(:sub_xf)   { klas.new(offer_sf, :reduce)            }
+  let(:sub_xu)   { klas.new(offer_su, :reduce)            }
+  subject        { sub_xf                                 }
 
   describe "Attributes", USE_VCR do 
     it { should respond_to :offer          }
@@ -30,7 +32,7 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   describe "#project - invalid subject", USE_VCR do
-    before(:each) { hydrate(offer_sf) }
+    before(:each) { hydrate(offer_su, offer_sf) }
 
     it 'detects an invalid object', :focus do
       subject.project
@@ -45,21 +47,25 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   describe "#project - valid subject", USE_VCR do
+    before(:each) { hydrate(offer_su, offer_sf) }
+
+
     it 'detects a valid object' do
-      hydrate(offer_sf)
       subject.project
       expect(subject).to be_valid
     end
 
     it 'gets the right object count' do
-      hydrate(offer_sf)
       expect(Contract.count).to eq(1)
+      expect(Escrow.count).to eq(2)
+      expect(Contract.first.escrows.count).to eq(2)
       subject.project
       expect(Contract.count).to eq(1)
+      expect(Escrow.count).to eq(3)
+      expect(Contract.first.escrows.count).to eq(3)
     end
 
     it 'adjusts the user balance' do
-      hydrate(offer_sf, offer_su)
       u1 = offer_sf.user
       u2 = offer_su.user
       expect(u1.balance).to eq(996.0)
@@ -73,12 +79,12 @@ RSpec.describe ContractCmd::Cross::Reduce do
   end
 
   describe "crossing", USE_VCR do
-    let(:lcl_ask) { FB.create(:offer_bf).offer }
+    let(:lcl_offer_bf) { FB.create(:offer_bf).offer }
 
-    context "with single bid" do
-      it 'matches higher values' do
+    context "with single offer_bf" do
+      it 'matches nothing' do
         FB.create(:offer_bu)
-        klas.new(lcl_ask, :reduce).project
+        klas.new(lcl_offer_bf, :reduce).project
         expect(Contract.count).to eq(0)
         expect(Position.count).to eq(0)
       end
@@ -88,54 +94,6 @@ RSpec.describe ContractCmd::Cross::Reduce do
         expect(Position.first.user_uuid).to_not be_nil
         expect(Position.last.user_uuid).to_not be_nil
       end
-
-      # it 'matches equal values' do
-      #   FB.create(:offer_bu)
-      #   klas.new(lcl_ask, :reduce).project
-      #   expect(Contract.count).to eq(1)
-      # end
-
-    #   it 'fails to match lower values' do
-    #     FB.create(:offer_bu, price: 0.1, volume: 1)
-    #     expect(Contract.count).to eq(0)
-    #     klas.new(lcl_ask, :reduce).project
-    #     expect(Contract.count).to eq(0)
-    #   end
-    # end
-
-    # context "with multiple bids" do
-    #   it 'matches higher value' do
-    #     _bid1 = FB.create(:offer_bu, price: 0.5, volume: 10).offer
-    #     _bid2 = FB.create(:offer_bu, price: 0.5, volume: 10).offer
-    #     klas.new(lcl_ask, :reduce).project
-    #     expect(Contract.count).to eq(0)
-    #   end
-    #
-    #   it 'matches equal value' do
-    #     _bid1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     klas.new(lcl_ask, :reduce).project
-    #     expect(Contract.count).to eq(1)
-    #   end
-    #
-    #   it 'fails to match lower value' do
-    #     _bid1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     klas.new(lcl_ask, :reduce).project
-    #     expect(Contract.count).to eq(1)
-    #   end
-    # end
-
-    # context "with extra bids" do
-    #   it 'does minimal matching' do
-    #     _bid1 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid2 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     _bid3 = FB.create(:offer_bu, price: 0.6, volume: 10).offer
-    #     klas.new(lcl_ask, :reduce).project
-    #     expect(Contract.count).to eq(1)
-    #     expect(Offer.assigned.count).to eq(0)
-    #     expect(Offer.unassigned.count).to eq(0)
-    #   end
     end
   end
 end
