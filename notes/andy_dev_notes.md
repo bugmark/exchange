@@ -738,6 +738,8 @@ Next Actions:
 
 - [x] test sell offers
 
+# Jan 02
+
 - [ ] test (cross-reduce)     user balance adjustments
 - [ ] test (cross-reduce)     auto-suspend sale-offers
 
