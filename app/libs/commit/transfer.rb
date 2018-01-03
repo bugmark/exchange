@@ -8,10 +8,14 @@ class Commit::Transfer < Commit
     ctx = base_context
 
     # look up contract
-    # ctx.c_contract = bundle.offer.obj.salable_position.c_contract
+    ctx.c_contract = bundle.offer.obj.salable_position.contract ||
+                     bundle.offer.obj.position.contract
+    ctx.c_uuid     = ctx.c_contract
 
     # generate amendment & escrow
-    gen_escrow_and_amendment(ctx, Amendment::Transfer, Escrow::Transfer)
+    ctx.e_type = "Escrow::Transfer"
+    ctx.a_type = "Amendment::Transfer"
+    gen_escrow_and_amendment(ctx)
 
     # calculate price for offer and counters
     clist             = bundle.counters.map {|el| el.obj.price}

@@ -740,6 +740,18 @@ Next Actions:
 
 # Jan 02
 
+- [x] reduce base operation
+- [x] transfer base operation
+
+- [ ] core API - generate user key
+- [ ] core API - add rate limiting
+- [ ] core API
+- [ ] core API ruby bindings with rest-client
+- [ ] core API elixir bindings with rest-client
+
+- [ ] oracle API : gh implementation
+- [ ] core: Restful API CLI and Ruby Gem
+
 - [ ] test (cross-reduce)     user balance adjustments
 - [ ] test (cross-reduce)     auto-suspend sale-offers
 
@@ -756,18 +768,10 @@ Next Actions:
 - [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing
 
-- [ ] core: Restful API - generate user key
-- [ ] core: Restful API - add rate limiting
-- [ ] core: Restful API
-- [ ] core: Restful API ruby bindings with rest-client
-- [ ] core: Restful API CLI and Ruby Gem
 
 # TBD
 
 - [ ] move repo to bugmark org
-
-- [ ] docfix: clickable depth charts
-- [ ] docfix: fix rounding errors
 
 - [ ] METRICS: add Georg command-data capture
 - [ ] METRICS: add Georg stats capture with cron process
