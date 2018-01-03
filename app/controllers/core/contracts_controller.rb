@@ -5,17 +5,17 @@ module Core
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve, :chart]
 
-    # stm_bug_id (optional)
+    # stm_bug_uuid (optional)
     def index
       @bug = @repo = nil
       base_scope = Contract.all
       case
-        when stm_bug_id = params["stm_bug_id"]&.to_i
-          @bug = Bug.find(stm_bug_id)
-          @contracts = base_scope.where(stm_bug_id: stm_bug_id)
-        when stm_repo_id = params["stm_repo_id"]&.to_i
-          @repo = Repo.find(stm_repo_id)
-          @contracts = base_scope.where(stm_repo_id: stm_repo_id)
+        when stm_bug_uuid = params["stm_bug_uuid"]
+          @bug = Bug.find_by_uuid(stm_bug_uuid)
+          @contracts = base_scope.where(stm_bug_uuid: stm_bug_uuid)
+        when stm_repo_uuid = params["stm_repo_uuid"]
+          @repo = Repo.find_by_uuid(stm_repo_uuid)
+          @contracts = base_scope.where(stm_repo_uuid: stm_repo_uuid)
         else
           @contracts = base_scope
       end
@@ -25,7 +25,7 @@ module Core
       @contract = Contract.find(params["id"])
     end
 
-    # stm_bug_id or stm_repo_id, type(forecast | reward)
+    # stm_bug_uud or stm_repo_uuid
     def new
       @contract = ContractCmd::Publish.new(new_opts(params))
     end
@@ -133,11 +133,11 @@ module Core
         type: "Contract::#{params["type"]&.capitalize}",
         price: 0.10,
         maturation: BugmTime.now + 3.minutes,
-        user_id: current_user.id
+        user_uuid: current_user.uuid
       }
-      key = "stm_bug_id" if params["stm_bug_id"]
-      key = "stm_repo_id" if params["stm_repo_id"]
-      id = params["stm_bug_id"] || params["stm_repo_id"]
+      key = "stm_bug_uuid" if params["stm_bug_uuid"]
+      key = "stm_repo_uuid" if params["stm_repo_uuid"]
+      id = params["stm_bug_uuid"] || params["stm_repo_uuid"]
       opts.merge({key => id})
     end
   end

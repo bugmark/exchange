@@ -38,7 +38,7 @@ class Bug < ApplicationRecord
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
       alt << "substring(stm_title for 20) as title"
-      select(%i(id type stm_repo_id stm_bug_id stm_status stm_labels) + alt)
+      select(%i(id type stm_repo_uuid stm_bug_uuid stm_status stm_labels) + alt)
     end
     alias_method :ss, :select_subset
   end

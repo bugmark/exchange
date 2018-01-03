@@ -161,7 +161,7 @@ class Offer < ApplicationRecord
   end
 
   def attach_type
-    self.stm_bug_id ? "bugs" : "repos"
+    self.stm_bug_uuid ? "bugs" : "repos"
   end
 
   def attach_obj

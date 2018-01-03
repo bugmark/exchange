@@ -12,7 +12,7 @@ module CoreOffersHelper
 
   def core_offer_header(filter)
     return "All Offers" if filter.nil?
-    lbls = {"stm_repo_uuid" => "Repo", "stm_bug_uuid" => "Bug", "user_id" => "User"}
+    lbls = {"stm_repo_uuid" => "Repo", "stm_bug_uuid" => "Bug", "user_uuid" => "User"}
     lbl  = lbls[filter.key]
     all_link = "<a href='/core/offers'>All Offers</a>"
     obj_link = "<a href='/core/#{lbl.downcase}s/#{filter.obj.id}'>#{lbl} #{filter.obj.id}</a>"

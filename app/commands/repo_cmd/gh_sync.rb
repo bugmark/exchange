@@ -23,15 +23,15 @@ module RepoCmd
       issues = Octokit.issues(repo.name)
       issues.each_with_index do |el, idx|
         attrs = {
-          stm_repo_id: repo.id           ,
-          type:        "Bug::GitHub"     ,
-          exid:        el["id"]          ,
-          stm_title:   el["title"]       ,
-          stm_labels:  labels_for(el)    ,
-          stm_status:  el["state"]       ,
-          comments:    comments_for(el)  ,
-          html_url:    el["html_url"]    ,
-          synced_at:   BugmTime.now
+          stm_repo_uuid: repo.uuid           ,
+          type:          "Bug::GitHub"     ,
+          exid:          el["id"]          ,
+          stm_title:     el["title"]       ,
+          stm_labels:    labels_for(el)    ,
+          stm_status:    el["state"]       ,
+          comments:      comments_for(el)  ,
+          html_url:      el["html_url"]    ,
+          synced_at:     BugmTime.now
         }.stringify_keys
         add_event("bug#{idx}".to_sym, Event::BugSynced.new(event_opts(attrs)))
       end

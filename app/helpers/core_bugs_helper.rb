@@ -11,9 +11,9 @@ module CoreBugsHelper
 
   def core_bug_repo_link(bug, filter)
     repo = bug.repo
-    id   = repo.id
+    uuid = repo.uuid
     name = repo.name
-    l1   = "<a href='/core/bugs?stm_repo_id=#{id}'><i class='fa fa-filter'></i></a> | "
+    l1   = "<a href='/core/bugs?stm_repo_uuid=#{uuid}'><i class='fa fa-filter'></i></a> | "
     l2   = "<a href='/core/repos/#{id}'>#{name}</a>"
     raw (filter.nil? ? l1 + l2 : l2)
   end
@@ -21,7 +21,7 @@ module CoreBugsHelper
   def core_bug_offer_link(bug)
     count = bug.offers.open.count
     if count > 0
-      raw "<a class='offerlink' href='/core/offers?stm_bug_id=#{bug.id}'>#{count}</a>"
+      raw "<a class='offerlink' href='/core/offers?stm_bug_uuid=#{bug.uuid}'>#{count}</a>"
     else
       count
     end
@@ -30,7 +30,7 @@ module CoreBugsHelper
   def core_bug_contract_link(bug)
     count = bug.contracts.count
     if count > 0
-      raw "<a class='contractlink' href='/core/contracts?stm_bug_id=#{bug.id}'>#{count}</a>"
+      raw "<a class='contractlink' href='/core/contracts?stm_bug_uuid=#{bug.uuid}'>#{count}</a>"
     else
       count
     end
@@ -47,12 +47,12 @@ module CoreBugsHelper
   end
 
   def core_bug_fixed_new_link(bug)
-    path = "/core/offers_bf/new?type=git_hub&stm_bug_id=#{bug.id}"
+    path = "/core/offers_bf/new?type=git_hub&stm_bug_uuid=#{bug.uuid}"
     raw "<a href='#{path}'>fixed</a>"
   end
 
   def core_bug_unfixed_new_link(bug)
-    path = "/core/offers_bu/new?type=git_hub&stm_bug_id=#{bug.id}"
+    path = "/core/offers_bu/new?type=git_hub&stm_bug_uuid=#{bug.uuid}"
     raw "<a href='#{path}'>unfixed</a>"
   end
 

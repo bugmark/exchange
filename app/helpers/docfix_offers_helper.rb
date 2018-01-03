@@ -142,8 +142,8 @@ module DocfixOffersHelper
 
   def docfix_offer_project_link(offer)
     raw <<-END.strip_heredoc
-      <a href="/docfix/projects/#{offer.stm_repo_id}">
-        #{offer.repo.name} (Project ##{offer.stm_repo_id})
+      <a href="/docfix/projects/#{offer.repo.id}">
+        #{offer.repo.name} (Project ##{offer.repo.id})
       </a>
     END
   end

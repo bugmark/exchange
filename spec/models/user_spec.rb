@@ -13,8 +13,8 @@ RSpec.describe User, type: :model do #
     FB.create(:offer_bf, {user_uuid: usr.uuid}.merge(args))
   end
 
-  let(:usr)  { FB.create(:user, balance: 100.0).user       }
-  let(:ask)  { FB.create(:offer_bf, user_id: user.id)      }
+  let(:usr)  { FB.create(:user, balance: 100.0).user           }
+  let(:ask)  { FB.create(:offer_bf, user_uuid: user.uuid)      }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 

@@ -11,8 +11,8 @@ STDOUT.flush
 require "./config/environment"
 
 WEEK_ENDS = BugmTime.future_week_ends
-USER_IDS  = User.where("email ilike 'test%'").pluck(:id)
-ISSUE_IDS = Bug.all[0..3].pluck(:id)
+USER_IDS  = User.where("email ilike 'test%'").pluck(:uuid)
+ISSUE_IDS = Bug.all[0..3].pluck(:uuid)
 VOLUMES   = (30..50).step(5).to_a
 PRICES    = (5..95).step(5).to_a.map {|x| x / 100.0}
 count     = 0
@@ -33,11 +33,11 @@ end
 def buy
   typ  = %i(offer_bf offer_bu).sample
   opts = {
-    user_id: USER_IDS.sample     ,
-    volume:  VOLUMES.sample      ,
-    price:   PRICES.sample       ,
-    stm_bug_id: ISSUE_IDS.sample ,
-    maturation: WEEK_ENDS.sample
+    user_uuid:    USER_IDS.sample     ,
+    volume:       VOLUMES.sample      ,
+    price:        PRICES.sample       ,
+    stm_bug_uuid: ISSUE_IDS.sample    ,
+    maturation:   WEEK_ENDS.sample
   }
   FB.create(typ, opts)
 end

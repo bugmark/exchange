@@ -37,7 +37,7 @@ RSpec.describe Bug, type: :model do
     it 'has scope methods' do
       expect(klas).to respond_to :base_scope
       expect(klas).to respond_to :by_id
-      expect(klas).to respond_to :by_repoid
+      expect(klas).to respond_to :by_repo_uuid
       expect(klas).to respond_to :by_title
       expect(klas).to respond_to :by_status
       expect(klas).to respond_to :by_labels
@@ -66,7 +66,7 @@ RSpec.describe Bug, type: :model do
     end
   end
 
-  describe "stm_bug_id", USE_VCR do
+  describe "stm_bug_uuid", USE_VCR do
     it "starts empty" do
       expect(subject.stm_bug_uuid).to be_nil
     end

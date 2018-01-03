@@ -743,6 +743,15 @@ Next Actions:
 - [x] reduce base operation
 - [x] transfer base operation
 
+- [x] get scripts working
+- [x] get bot working
+- [ ] get UI working
+- [ ] get event display working
+
+- [ ] deploy
+
+- [ ] make the bot resell
+
 - [ ] core API - generate user key
 - [ ] core API - add rate limiting
 - [ ] core API
