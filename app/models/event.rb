@@ -10,6 +10,8 @@ class Event < ApplicationRecord
   validates :cmd_type, presence: true
   validates :cmd_uuid, presence: true
 
+  jsonb_accessor :jfields, :etherscan_url => :string
+
   # generate jsonb fields for a class
   def self.jsonb_fields_for(field, klas, opts = {})
     fields = klas.attribute_names.reduce({}) do |acc, name|

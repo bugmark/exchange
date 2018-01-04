@@ -5,8 +5,8 @@ table.table.table-sm
     td: b ID
     td = @event.id
   tr
-    td: b COMMAND
-    td = @event.klas
+    td: b TYPE
+    td = @event.event_type
   tr
     td: b UUREF
     td = @event.uuid
@@ -17,8 +17,8 @@ table.table.table-sm
     td: b CHAIN_HASH
     td = @event.chain_hash
   tr
-    td: b DATA
-    td = @event.data
+    td: b PAYLOAD
+    td = @event.payload
   tr
     td: b CREATED
     td = @event.created_at

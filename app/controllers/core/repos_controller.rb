@@ -8,7 +8,7 @@ module Core
     end
 
     def show
-      @repo = Repo.find(params["id"])
+      @repo = Repo.find_by_uuid(params["id"])
     end
 
     def new

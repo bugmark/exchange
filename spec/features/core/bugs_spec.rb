@@ -14,8 +14,8 @@ describe "Bugs" do
 
   it "renders show", USE_VCR do
     hydrate(bug)
-    visit "/core/bugs/#{bug.id}"
-    expect(page).to_not be_nil #.
+    visit "/core/bugs/#{bug.uuid}"
+    expect(page).to_not be_nil
   end
 
   it "clicks thru to show", USE_VCR do

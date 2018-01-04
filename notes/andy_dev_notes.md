@@ -745,21 +745,26 @@ Next Actions:
 
 - [x] get scripts working
 - [x] get bot working
-- [ ] get UI working
-- [ ] get event display working
 
-- [ ] deploy
+# Jan 03
+
+- [x] get UI working
+- [x] get event display working
+
+- [ ] core API - generate user key
+- [ ] core API - testing strategy
+- [ ] core API - build all queries
+- [ ] core API - build all commands
+- [ ] core API ruby bindings
+- [ ] core API elixir bindings
+
+- [ ] core API - add rate limiting
+
+- [ ] UI add multiple accounts
 
 - [ ] make the bot resell
 
-- [ ] core API - generate user key
-- [ ] core API - add rate limiting
-- [ ] core API
-- [ ] core API ruby bindings with rest-client
-- [ ] core API elixir bindings with rest-client
-
 - [ ] oracle API : gh implementation
-- [ ] core: Restful API CLI and Ruby Gem
 
 - [ ] test (cross-reduce)     user balance adjustments
 - [ ] test (cross-reduce)     auto-suspend sale-offers
@@ -776,6 +781,8 @@ Next Actions:
 
 - [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing
+
+- [ ] test gigalixir
 
 
 # TBD

@@ -6,7 +6,7 @@ module RepoCmd
     attr_accessor :repo
 
     def initialize(args)
-      @repo = Repo.find_or_create_by(args)
+      @repo = Repo.find_by(args)
       sync_bugs
     end
 

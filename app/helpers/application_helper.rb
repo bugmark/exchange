@@ -47,7 +47,6 @@ module ApplicationHelper
   # -----
 
   def refresh_tag
-    dev_log "PAGE #{debug_lbl}"
     return "" unless refreshable?
     raw "<meta http-equiv='refresh' content='15' />"
   end

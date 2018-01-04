@@ -11,7 +11,7 @@ module Core
     end
 
     def show
-      @offer = Offer.find(params["id"])
+      @offer = Offer.find_by_uuid(params["id"])
     end
 
     def cross
@@ -49,9 +49,9 @@ module Core
       return nil unless params.keys.any? { |key| keylist.include?(key) }
       key = params.keys.find {|key| keylist.include?(key)}
       obj = case key
-        when "stm_repo_uuid" then Repo.find(params[key])
-        when "stm_bug_uuid"  then Bug.find(params[key])
-        when "user_uuid"     then User.find(params[key])
+        when "stm_repo_uuid" then Repo.find_by_uuid(params[key])
+        when "stm_bug_uuid"  then Bug.find_by_uuid(params[key])
+        when "user_uuid"     then User.find_by_uuid(params[key])
       end
       OpenStruct.new(key: key, obj: obj)
     end

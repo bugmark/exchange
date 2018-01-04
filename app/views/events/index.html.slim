@@ -8,8 +8,8 @@ table[width='100%']
 table.table.table-sm
   tr
     th ID
-    th Command
-    th Data
+    th Type
+    th Payload
     th UserID
     th Created
     th Links
@@ -17,9 +17,9 @@ table.table.table-sm
     tr
       td
         a[href="/events/#{event.id}"] #{event.id}
-      td = event.klas
-      td = event.data.to_s[0..30] + " ..."
-      td = event.user_ids.join(", ")
+      td = event.event_type
+      td = event.payload.to_s[0..30] + " ..."
+      td = event.id
       td = event.created_at.strftime("%m-%d %H:%M:%S")
       td = docfix_event_etherscan(event)
 

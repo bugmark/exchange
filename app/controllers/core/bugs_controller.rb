@@ -15,7 +15,7 @@ module Core
     end
 
     def show
-      @bug = Bug.find(params["id"])
+      @bug = Bug.find_by_uuid(params["id"])
     end
   end
 end

@@ -55,6 +55,11 @@ class ApplicationCommand
     state[:events]
   end
 
+  def set(name, object)
+    varname = "@#{name.to_s}"
+    self.instance_variable_set varname, object
+  end
+
   # ----- persistence methods -----
 
   def save

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'FbxPositionU', USE_VCR do
 
   describe "postion_f" do
-    it "runs without params" do
+    it "runs without params", :focus do
       expect(Offer.count).to    eq(0)
       expect(Contract.count).to eq(0)
       expect(Escrow.count).to   eq(0)
@@ -18,5 +18,4 @@ RSpec.describe 'FbxPositionU', USE_VCR do
       expect(Position.count).to      eq(2)
     end
   end
-
 end

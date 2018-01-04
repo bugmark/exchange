@@ -1,3 +1,4 @@
+require 'ostruct'
 require 'factory_bot'
 require_relative "../app/commands/application_command"
 
@@ -12,7 +13,8 @@ FactoryBot.define do
     initialize_with { new(attributes) }
 
     sequence :email do |n|
-      "test#{n}@bugmark.net"
+      random = ('a'..'z').to_a.shuffle[0,8].join
+      "#{random}#{n}@bugmark.net"
     end
     password "bugmark"
     balance 1000.0
@@ -22,7 +24,6 @@ FactoryBot.define do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
-    type "Repo::GitHub"
     name "mvscorg/bugmark"
   end
 
@@ -37,7 +38,7 @@ FactoryBot.define do
       "exid#{n}"
     end
     type "Bug::GitHub"
-    stm_repo_uuid { FB.create(:repo).repo.uuid }
+    stm_repo_uuid { FB.create(:repo).repo&.uuid || Repo.first&.uuid || SecureRandom.uuid  }
   end
 
   # ----- BUY OFFERS -----
@@ -106,7 +107,7 @@ module FBX
   def offer_su(opts = {})
     obu, _obf = FBX.create_buy_offers(opts)
     cntr = ContractCmd::Cross.new(obu, :expand).project.contract
-    posn = cntr.escrows.last.unfixed_positions.first      #
+    posn = cntr.escrows.last.unfixed_positions.first
     OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).project
   end
 
@@ -117,8 +118,12 @@ module FBX
   # ----- private -----
 
   def FBX.create_buy_offers(opts)
-    obu = FB.create(:offer_bu, FBX.opts_for(:obu, opts)).offer
-    obf = FB.create(:offer_bf, FBX.opts_for(:obf, opts)).offer
+    bug      = FB.create(:bug).bug
+    xopt     = opts.merge({stm_bug_uuid: bug.uuid})
+    obu_opts = FBX.opts_for(:obu, xopt)
+    obf_opts = FBX.opts_for(:obf, xopt)
+    obu      = FB.create(:offer_bu, obu_opts).offer
+    obf      = FB.create(:offer_bf, obf_opts).offer
     [obu, obf]
   end
 

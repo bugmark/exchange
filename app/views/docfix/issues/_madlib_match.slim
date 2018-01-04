@@ -29,7 +29,7 @@
         b #{lcl_offer.offer_new.volume.to_i - lcl_offer.offer_new.deposit.to_i}
         '  tokens if this happens
       p this would set the unfixed marketprice at #{(lcl_offer.offer_new.deposit.to_f / lcl_offer.offer_new.volume).round(2)} & return a total of #{lcl_offer.offer_new.volume} tokens
-      p and will immediately match offer ##{@offer&.id} to form a contract
+      p and will immediately match offer ##{@offer.id} to form a contract
       button.btn.btn-primary#sBtn[type='submit'] Match Offer and Form Contract
       p[style="margin-top: 10px;"]
         span#errMsg[style='color: red;']

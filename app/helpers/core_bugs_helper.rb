@@ -1,6 +1,6 @@
 module CoreBugsHelper
   def core_bug_id_link(bug)
-    raw "<a href='/core/bugs/#{bug.id}'>#{bug.xid}</a>"
+    raw "<a href='/core/bugs/#{bug.uuid}'>#{bug.xid}</a>"
   end
 
   def core_bug_title_link(bug)
@@ -14,7 +14,7 @@ module CoreBugsHelper
     uuid = repo.uuid
     name = repo.name
     l1   = "<a href='/core/bugs?stm_repo_uuid=#{uuid}'><i class='fa fa-filter'></i></a> | "
-    l2   = "<a href='/core/repos/#{id}'>#{name}</a>"
+    l2   = "<a href='/core/repos/#{uuid}'>#{name}</a>"
     raw (filter.nil? ? l1 + l2 : l2)
   end
 

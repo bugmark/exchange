@@ -44,9 +44,9 @@ RSpec.describe 'FbxOfferSf', USE_VCR do
       expect(obj.price).to eq(0.6)
     end
 
-    it "can sets the sale price" do
+    it "can sets the sale price", :focus do
       opts = {osu: {price: 0.2}}
-      obj = FBX.offer_su(opts)
+      obj  = FBX.offer_su(opts)
       expect(obj.offer.price).to eq(0.2)
     end
   end

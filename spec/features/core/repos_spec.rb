@@ -12,7 +12,7 @@ describe "Repos", USE_VCR do
   end
 
   it "renders show" do
-    visit "/core/repos/#{repo1.id}"
+    visit "/core/repos/#{repo1.uuid}"
     expect(page).to_not be_nil
   end
 
@@ -52,6 +52,6 @@ describe "Repos", USE_VCR do
     click_on "unfixed"
     click_on "Create"
 
-    expect(Offer::Buy::Unfixed.count).to eq(1)
+    expect(Offer::Buy::Unfixed.count).to eq(1) #
   end #....
 end
