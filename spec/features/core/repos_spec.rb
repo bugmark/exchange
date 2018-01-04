@@ -53,5 +53,5 @@ describe "Repos", USE_VCR do
     click_on "Create"
 
     expect(Offer::Buy::Unfixed.count).to eq(1) #
-  end #....
+  end
 end

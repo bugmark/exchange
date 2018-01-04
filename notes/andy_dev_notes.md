@@ -750,13 +750,19 @@ Next Actions:
 
 - [x] get UI working
 - [x] get event display working
+- [x] fix all specs
+
+# Jan 04
 
 - [ ] core API - generate user key
 - [ ] core API - testing strategy
+
 - [ ] core API - build all queries
 - [ ] core API - build all commands
+
 - [ ] core API ruby bindings
 - [ ] core API elixir bindings
+- [ ] core API python bindings
 
 - [ ] core API - add rate limiting
 
@@ -784,7 +790,6 @@ Next Actions:
 
 - [ ] test gigalixir
 
-
 # TBD
 
 - [ ] move repo to bugmark org
@@ -797,6 +802,7 @@ Next Actions:
 - [ ] FEEDBACK: should fixed-side offers be AON?
 
 - [ ] create a staging server
+- [ ] create a research server
 
 - [ ] core: expose AON in UI
 - [ ] core: expose poolable in UI

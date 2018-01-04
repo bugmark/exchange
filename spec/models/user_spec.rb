@@ -173,6 +173,7 @@ end
 #  uuid                   :string
 #  exid                   :string
 #  admin                  :boolean
+#  auth_token             :string
 #  balance                :float            default(0.0)
 #  jfields                :jsonb            not null
 #  last_seen_at           :datetime

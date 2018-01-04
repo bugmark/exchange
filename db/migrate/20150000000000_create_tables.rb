@@ -174,6 +174,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuid
       t.string   :exid
       t.boolean  :admin
+      t.string   :auth_token
       t.float    :balance, default: 0.0
       t.jsonb    :jfields , null: false, default: {}
       t.datetime :last_seen_at
@@ -181,6 +182,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     end
     add_index :users, :uuid
     add_index :users, :exid
+    add_index :users, :auth_token
     add_index :users, :jfields, using: :gin
 
     # the event store...
