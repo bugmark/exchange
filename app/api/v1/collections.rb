@@ -1,7 +1,10 @@
 module V1
   class Collections < Grape::API
 
-    desc "bong bong"
+    http_basic do |email, password|
+      @current_user = User.find_by_email(email)
+      @current_user && @current_user.valid_password?(password)
+    end
 
     resource :repos do
       desc "Return all repos"

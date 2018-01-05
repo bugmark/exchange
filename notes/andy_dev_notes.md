@@ -755,13 +755,20 @@ Next Actions:
 # Jan 04
 
 - [x] core API - add basic auth
+- [x] core API - swagger doc for basic auth
+- [x] core API - swagger-codegen (ruby bindings)
+- [x] core API - swagger-codegen (elixir bindings)
+- [x] core API - swagger-codegen (python bindings)
+- [x] core API - testing strategy
 
-- [ ] core API - swagger doc for basic auth
-- [ ] core API - swagger-codegen (ruby bindings)
-- [ ] core API - swagger-codegen (elixir bindings)
-- [ ] core API - swagger-codegen (python bindings
+# Jan 05
 
-- [ ] core API - testing strategy
+- [ ] core API - get basic auth in request specs
+
+- [ ] core API - build working ruby script
+
+- [ ] oracle API : design the oracle
+- [ ] oracle API : gh implementation
 
 - [ ] core API - build all queries
 - [ ] core API - build all commands
@@ -771,8 +778,6 @@ Next Actions:
 - [ ] UI add multiple accounts
 
 - [ ] make the bot resell
-
-- [ ] oracle API : gh implementation
 
 - [ ] test (cross-reduce)     user balance adjustments
 - [ ] test (cross-reduce)     auto-suspend sale-offers

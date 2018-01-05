@@ -4,24 +4,11 @@ module V1
   class Base < Grape::API
     mount V1::Collections
 
-    http_basic do |email, password|
-      @current_user = User.find_by_email(email)
-      @current_user && @current_user.valid_password?(password)
-    end
-
     helpers do
       def current_user
         @current_user
       end
     end
-
-    desc "bing bing"
-
-    # content_type :xml,  'application/xml'
-    # content_type :json, 'application/json'
-    # content_type :yaml, 'text/plain'
-    # content_type :txt,  'text/plain'
-    # default_format :json
 
     add_swagger_documentation(
         api_version:   "v1"       ,
