@@ -1,5 +1,8 @@
 module V1
   class Collections < Grape::API
+
+    desc "bong bong"
+
     resource :repos do
       desc "Return all repos"
       get "", :root => :repos do
@@ -62,6 +65,8 @@ module V1
           Event.all
         end
       end
+
+      desc "Update an event"
       params do
         requires :id           , type: Integer
         requires :etherscan_url, type: String

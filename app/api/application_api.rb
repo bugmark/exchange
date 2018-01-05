@@ -1,4 +1,4 @@
 class ApplicationApi < Grape::API
-  mount V1::Base => "/v1"
-  mount Vz::Base => "/vz"
+  mount V1::Base    => "/v1"
+  mount Vtest::Base => "/vtest"
 end

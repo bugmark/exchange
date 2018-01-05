@@ -1,4 +1,4 @@
-module Vz
+module Vtest
   class Test < Grape::API
 
     resource :issues do

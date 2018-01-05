@@ -1,7 +1,7 @@
 require "grape-swagger"
 
-module Vz
+module Vtest
   class Base < Grape::API
-    mount Vz::Test
+    mount Vtest::Test
   end
 end

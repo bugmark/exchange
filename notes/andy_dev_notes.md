@@ -754,15 +754,17 @@ Next Actions:
 
 # Jan 04
 
-- [ ] core API - generate user key
+- [x] core API - add basic auth
+
+- [ ] core API - swagger doc for basic auth
+- [ ] core API - swagger-codegen (ruby bindings)
+- [ ] core API - swagger-codegen (elixir bindings)
+- [ ] core API - swagger-codegen (python bindings
+
 - [ ] core API - testing strategy
 
 - [ ] core API - build all queries
 - [ ] core API - build all commands
-
-- [ ] core API ruby bindings
-- [ ] core API elixir bindings
-- [ ] core API python bindings
 
 - [ ] core API - add rate limiting
 
