@@ -763,7 +763,9 @@ Next Actions:
 
 # Jan 05
 
-- [ ] core API - get basic auth in request specs
+- [x] core API - get basic auth in request specs
+
+- [ ] make an install script for bmx_ruby
 
 - [ ] core API - build working ruby script
 

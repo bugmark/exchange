@@ -10,6 +10,9 @@ module V1
       end
     end
 
+    content_type   :json, 'application/json'
+    default_format :json
+
     add_swagger_documentation(
         api_version:   "v1"       ,
         mount_path:    "/docs"    ,

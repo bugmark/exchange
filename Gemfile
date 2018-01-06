@@ -41,6 +41,7 @@ gem 'pg_search'                   # full-text search
 
 gem 'grape'
 gem 'grape-swagger'
+gem 'grape-swagger-entity'
 gem 'grape-swagger-rails'
 
 gem 'rack-cors', require: 'rack/cors'
