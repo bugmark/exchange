@@ -1,6 +1,5 @@
 module Entities
   class Event < Grape::Entity
-    # include API::Entities::Defaults
 
     expose :id        , documentation: {type: Integer, desc: "Sequential ID"   }
     expose :event_type, documentation: {type: String,  desc: "Event Type"      }

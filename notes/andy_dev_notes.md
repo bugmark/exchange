@@ -767,13 +767,15 @@ Next Actions:
 - [x] make an install script for bmx_ruby
 - [x] core API - build working ruby script
 
-- [ ] oracle API : design the oracle
-- [ ] oracle API : gh implementation
+# Jan 06
+
+- [ ] language bindings working with basic auth
 
 - [ ] core API - build all queries
 - [ ] core API - build all commands
 
-- [ ] core API - add rate limiting
+- [ ] oracle API : design the oracle
+- [ ] oracle API : gh implementation
 
 - [ ] UI add multiple accounts
 
@@ -798,6 +800,8 @@ Next Actions:
 - [ ] test gigalixir
 
 # TBD
+
+- [ ] core API - add rate limiting (gottfrois/grape-attack)
 
 - [ ] move repo to bugmark org
 
