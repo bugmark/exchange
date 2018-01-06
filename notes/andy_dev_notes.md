@@ -764,10 +764,8 @@ Next Actions:
 # Jan 05
 
 - [x] core API - get basic auth in request specs
-
-- [ ] make an install script for bmx_ruby
-
-- [ ] core API - build working ruby script
+- [x] make an install script for bmx_ruby
+- [x] core API - build working ruby script
 
 - [ ] oracle API : design the oracle
 - [ ] oracle API : gh implementation
