@@ -769,7 +769,7 @@ Next Actions:
 
 # Jan 06
 
-- [ ] language bindings working with basic auth
+- [x] language bindings working with basic auth
 
 - [ ] core API - build all queries
 - [ ] core API - build all commands
