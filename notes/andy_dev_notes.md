@@ -771,13 +771,13 @@ Next Actions:
 
 - [x] language bindings working with basic auth
 
+- [ ] subdomain deployment
+- [ ] SSL certs for subdomains
+
 - [ ] core API - build all queries
 - [ ] core API - build all commands
 
-- [ ] oracle API : design the oracle
-- [ ] oracle API : gh implementation
-
-- [ ] UI add multiple accounts
+- [ ] write CLI
 
 - [ ] make the bot resell
 
@@ -787,6 +787,11 @@ Next Actions:
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
+
+- [ ] oracle API : design the oracle
+- [ ] oracle API : gh implementation
+
+- [ ] UI add multiple accounts
 
 - [ ] test (contract-resolve) user balance adjustments
 
