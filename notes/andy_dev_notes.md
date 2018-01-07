@@ -771,13 +771,25 @@ Next Actions:
 
 - [x] language bindings working with basic auth
 
+# Jan 07
+
+- [ ] do another pass re UI tweaks
+
+- [ ] deploy to production
+
+- [ ] create a staging server
+- [ ] create a research server
+
 - [ ] subdomain deployment
 - [ ] SSL certs for subdomains
 
+- [ ] move repo to bugmark org (bugmark)
+- [ ] push binding repos to bugmark org (bmx_ruby, bmx_python, bmx_elixir)
+ 
+- [ ] write CLI
+
 - [ ] core API - build all queries
 - [ ] core API - build all commands
-
-- [ ] write CLI
 
 - [ ] make the bot resell
 
@@ -808,17 +820,12 @@ Next Actions:
 
 - [ ] core API - add rate limiting (gottfrois/grape-attack)
 
-- [ ] move repo to bugmark org
-
 - [ ] METRICS: add Georg command-data capture
 - [ ] METRICS: add Georg stats capture with cron process
 
 - [ ] FEEDBACK: make a feature spec that follows the demo
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
-
-- [ ] create a staging server
-- [ ] create a research server
 
 - [ ] core: expose AON in UI
 - [ ] core: expose poolable in UI
