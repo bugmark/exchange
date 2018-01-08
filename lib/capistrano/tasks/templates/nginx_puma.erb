@@ -15,8 +15,8 @@ server {
   # ssl_certificate_key <%= fetch(:release_path) %>/.certs/<%= fetch(:rails_env) %>.key;
   # ssl_certificate     /etc/letsencrypt/live/bugmark.net/fullchain.pem;
   # ssl_certificate_key /etc/letsencrypt/live/bugmark.net/privkey.pem;
-  ssl_certificate     /etc/letsencrypt/live/<%= fetch(:host_server_name) %>/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/<%= fetch(:host_server_name) %>/privkey.pem;
+  ssl_certificate     /etc/letsencrypt/live/<%= fetch(:host) %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= fetch(:host) %>/privkey.pem;
   ssl_session_timeout 5m;
   ssl_protocols       SSLv2 SSLv3 TLSv1;
   ssl_ciphers         HIGH:!aNULL:!MD5;
