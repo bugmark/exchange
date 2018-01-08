@@ -1,7 +1,7 @@
 # only run in dev branch
 branch = `git rev-parse --abbrev-ref HEAD`.chomp
 puts "CURRENT BRANCH <#{branch}>"
-puts ' TARGET ENVIRONMENT: VAGRANT '.center(70, '-')
+puts ' TARGET ENVIRONMENT: PRODUCTION '.center(70, '-')
 
 abort "EXITING: VAGRANT CAP ONLY RUNS IN MASTER BRANCH" unless branch == "master"
 
