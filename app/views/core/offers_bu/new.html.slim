@@ -27,8 +27,8 @@ hr
     | Match Params (blank for "don't care")
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
     .row
-      .col-md-6 = f.number_field  :stm_repo_uuid  , label: "Repo ID"
-      .col-md-6 = f.number_field  :stm_bug_uuid   , label: "Bug ID"
+      .col-md-6 = f.text_field  :stm_repo_uuid  , label: "Repo ID"
+      .col-md-6 = f.text_field  :stm_bug_uuid   , label: "Bug ID"
     .row
       .col-md-6 = f.text_field    :stm_title      , label: "Bug Title (substring match)"
       .col-md-6 = f.text_field    :stm_status     , label: "Bug Status (open | closed | <blank>)"

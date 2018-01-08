@@ -18,6 +18,7 @@ module Docfix
         else
           @bug = @offer_bu.offer.bug
           flash.now["error"] = "Error!"
+          binding.pry
           render "docfix/issues/match_bu"
         end
       else

@@ -773,7 +773,12 @@ Next Actions:
 
 # Jan 07
 
-- [ ] do another pass re UI tweaks
+- [x] do another pass re UI tweaks
+
+- [x] display UUID on show actions (repo, bug, user, offer, contract)
+- [x] pre-fill the repo/bug ID for offer_bu, offer_bf
+
+- [ ] demo script works end-to-end
 
 - [ ] deploy to production
 

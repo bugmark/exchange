@@ -15,7 +15,9 @@ table width='100%'
           | (
           a[href="/core/contracts/#{@contract.id}/graph"] graph
           | )
-
+      tr
+        td <b>UUID</b>
+        td = @contract.uuid
       tr
         td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@contract)}
   .col-md-6
