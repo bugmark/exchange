@@ -16,7 +16,6 @@ set :web_port,    8500
 
 # ===== Source Access =====
 
-# set :repo_url,         'ssh://git@github.com/mvscorg/bugmark.git'
 set :repo_url,         'https://github.com/mvscorg/bugmark.git'
 
 # ===== Tasks =====
