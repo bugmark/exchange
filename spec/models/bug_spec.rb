@@ -4,27 +4,27 @@ RSpec.describe Bug, type: :model do
 
   def valid_params(repo, extra_params = {})
     {
-      stm_repo_id: repo.id
+      stm_repo_uuid: repo.uuid
     }.merge(extra_params)
   end
 
   let(:klas)   { described_class                            }
-  let(:repo)   { Repo.create(name: "asdf/qwer")             }
+  let(:repo)   { FB.create(:repo).repo                      }
   subject      { klas.new(valid_params(repo))               }
 
-  describe "Attributes" do
-    it { should respond_to :exref                  }
-    it { should respond_to :uuref                  }
+  describe "Attributes", USE_VCR do
+    it { should respond_to :exid                  }
+    it { should respond_to :uuid                  }
   end
 
-  describe "Associations" do
+  describe "Associations", USE_VCR do
     it { should respond_to(:repo)         }
     it { should respond_to(:offers)       }
     it { should respond_to(:offers_bf)    }
     it { should respond_to(:offers_bu)    }
   end
 
-  describe "Object Creation" do
+  describe "Object Creation", USE_VCR do
     it { should be_valid }
 
     it 'saves the object to the database' do
@@ -33,60 +33,52 @@ RSpec.describe Bug, type: :model do
     end
   end
 
-  describe "Scopes" do
+  describe "Scopes", USE_VCR do
     it 'has scope methods' do
       expect(klas).to respond_to :base_scope
       expect(klas).to respond_to :by_id
-      expect(klas).to respond_to :by_repoid
+      expect(klas).to respond_to :by_repo_uuid
       expect(klas).to respond_to :by_title
       expect(klas).to respond_to :by_status
       expect(klas).to respond_to :by_labels
     end
   end
 
-  describe ".by_id" do
-    before(:each) { subject.save}
-
-    it 'returns a matching record' do
-      expect(klas.by_id(subject.id).count).to eq(1)
-    end
-  end
-
-  describe ".match" do
+  describe ".match", USE_VCR do
     before(:each) { subject.save}
 
     it 'matches id' do
       expect(subject).to_not be_nil
       expect(klas.count).to eq(1)
-      expect(klas.match({id: subject.id}).length).to eq(1)
+      expect(klas.match({uuid: subject.uuid}).length).to eq(1)
     end
   end
 
-  describe "#uuref" do
+  describe "#uuid", USE_VCR do
     it 'generates a string' do
       subject.save
-      expect(subject.uuref).to be_a(String) #.
+      expect(subject.uuid).to be_a(String)
     end
 
     it 'generates a 36-character string' do
       subject.save
-      expect(subject.uuref.length).to eq(36)
+      expect(subject.uuid.length).to eq(36)
     end
   end
 
-  describe "stm_bug_id" do
+  describe "stm_bug_uuid", USE_VCR do
     it "starts empty" do
-      expect(subject.stm_bug_id).to be_nil
+      expect(subject.stm_bug_uuid).to be_nil
     end
 
-    it "fills when saved" do  #
+    it "fills when saved" do
       subject.save
-      expect(subject.stm_bug_id).to_not be_nil
-      expect(subject.stm_bug_id).to eq(subject.id)
+      expect(subject.stm_bug_uuid).to_not be_nil
+      expect(subject.stm_bug_uuid).to eq(subject.uuid)
     end
   end
 
-  describe "#html_url" do
+  describe "#html_url", USE_VCR do
     it { should respond_to :html_url                   }
     it { should respond_to :html_url=                  }
 
@@ -101,20 +93,20 @@ end
 #
 # Table name: bugs
 #
-#  id          :integer          not null, primary key
-#  type        :string
-#  xfields     :hstore           not null
-#  jfields     :jsonb            not null
-#  synced_at   :datetime
-#  exref       :string
-#  uuref       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  stm_bug_id  :integer
-#  stm_repo_id :integer
-#  stm_title   :string
-#  stm_status  :string
-#  stm_labels  :string
-#  stm_xfields :hstore           not null
-#  stm_jfields :jsonb            not null
+#  id            :integer          not null, primary key
+#  type          :string
+#  uuid          :string
+#  exid          :string
+#  xfields       :hstore           not null
+#  jfields       :jsonb            not null
+#  synced_at     :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  stm_bug_uuid  :string
+#  stm_repo_uuid :string
+#  stm_title     :string
+#  stm_status    :string
+#  stm_labels    :string
+#  stm_xfields   :hstore           not null
+#  stm_jfields   :jsonb            not null
 #

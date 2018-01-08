@@ -4,11 +4,15 @@ class Repo < ApplicationRecord
 
   has_paper_trail
 
-  has_many :bugs      , :dependent => :destroy, :foreign_key => :stm_repo_id
-  has_many :offers    , :dependent => :destroy, :foreign_key => :stm_repo_id
-  has_many :contracts , :dependent => :destroy, :foreign_key => :stm_repo_id
+  with_options foreign_key: "stm_repo_uuid", primary_key: "uuid", :dependent => :destroy do
+    has_many :bugs
+    has_many :offers
+    has_many :contracts
+  end
 
-  validates :name     , uniqueness: true, presence: true
+  validates :name, uniqueness: true, presence: true
+
+  before_validation :set_defaults
 
   def xtag
     "rep"
@@ -39,6 +43,12 @@ class Repo < ApplicationRecord
     end
     alias_method :ss, :select_subset
   end
+
+  private
+
+  def set_defaults
+    self.uuid ||= SecureRandom.uuid
+  end
 end
 
 # == Schema Information
@@ -47,12 +57,12 @@ end
 #
 #  id         :integer          not null, primary key
 #  type       :string
+#  uuid       :string
 #  name       :string
 #  xfields    :hstore           not null
 #  jfields    :jsonb            not null
 #  synced_at  :datetime
-#  exref      :string
-#  uuref      :string
+#  exid       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

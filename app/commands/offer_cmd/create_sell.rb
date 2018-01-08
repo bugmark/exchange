@@ -1,50 +1,85 @@
 module OfferCmd
   class CreateSell < ApplicationCommand
 
-    attr_subobjects      :offer
-    attr_reader          :salable_position
-    attr_delegate_fields :offer, class_name: "Offer::Sell"
+    attr_reader :args, :salable_position
 
-    def initialize(position, attr)
+    def initialize(position, args)
       @salable_position = position
-      @volume           = attr[:volume] || salable_position.volume
-      @price            = attr[:price]  || salable_position.price
-      @offer            = klas.new(sell_offer_params)
+      @args = ArgHandler.new(args, self)
+                .apply(&:set_price_and_volume)
+                .apply(&:set_offer_type)
+                .apply(&:set_user)
+                .apply(&:set_salable_uuid)
+                .apply(&:set_maturation)
+                .apply(&:set_status)
+                .apply(&:event_opts)
+      add_event :offer, Event::OfferSellCreated.new(@args.to_h)
     end
 
-    def event_data
-      offer.attributes
-    end
+    class ArgHandler
 
-    def transact_before_project
-      offer.status = "open"
-    end
+      attr_reader :args, :caller, :salable_position
 
-    def influx_tags
-      {
-        side: offer.side
-      }
-    end
+      def initialize(args, caller)
+        @args             = args.stringify_keys
+        @caller           = caller
+        @salable_position = caller.salable_position
+      end
 
-    def user_ids
-      [offer.user_id]
-    end
+      def set_price_and_volume
+        @args["volume"] = @args["volume"] || salable_position.volume
+        @args["price"]  = @args["price"]  || salable_position.price
+        self
+      end
 
-    def influx_fields
-      {
-        id:     offer.id     ,
-        volume: offer.volume ,
-        price:  offer.price
-      }
-    end
+      def set_offer_type
+        @args["type"] = klas
+        self
+      end
 
-    private
+      def set_maturation
+        puts("NO SP")     unless salable_position
+        puts("NO ESCROW") unless salable_position.escrow
+        @args["maturation"] = salable_position.contract.maturation
+        self
+      end
 
-    def klas
-      case salable_position.side
-        when "unfixed" then Offer::Sell::Unfixed
-        when "fixed"   then Offer::Sell::Fixed
-        else raise "unknown position side (#{salable_position.side})"
+      def event_opts
+        @args = caller.send(:cmd_opts)
+                  .merge(@args)
+                  .without("deposit", "profit")
+                  .merge(salable_position.offer.match_attrs)
+                  .stringify_keys
+        self
+      end
+
+      def set_user
+        @args["user_uuid"] = salable_position.user_uuid
+        self
+      end
+
+      def set_salable_uuid
+        @args["salable_position_uuid"] = salable_position.uuid
+        self
+      end
+
+      def set_status
+        @args["status"] = "open"
+        self
+      end
+
+      def to_h
+        @args
+      end
+
+      private
+
+      def klas
+        case salable_position.side
+          when "unfixed" then "Offer::Sell::Unfixed"
+          when "fixed"   then "Offer::Sell::Fixed"
+          else raise "unknown position side (#{salable_position.side})"
+        end
       end
     end
 

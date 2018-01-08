@@ -669,35 +669,161 @@ Next Actions:
 
 # Dec 13
 
+- [x] rename EventLine to Event
+- [x] refactor events to enable balance generation
+- [x] add state object to all commands (with events field)
+- [x] each event type has a project method
+- [x] each event type has a validation method
+- [x] create event subtypes
+
+# Dec 14
+
+- [x] get user_create command working with new structure
+- [x] commands should generate an array of events
+- [x] use jsonb_accessor to get at event data elements
+- [x] commands should check validity of all events
+- [x] commands should take a common project (cast) method
+- [x] use UUIDS instead of IDS in commands and events
+- [x] make user_create work with an initial balance
+
+# Dec 15
+
+- [x] fix hirb output
+- [x] get CreateBuy::OfferCmd working with new structure
+
+# Dec 16
+
+- [x] chain validations: command -> event -> object
+- [x] test chained validations in web form
+
+# Dec 17
+
+- [x] add tests for event projection & validation
+- [x] add transaction sequence to Events
+- [x] add end-transaction events to events
+
+# Dec 18-19
+
+- [x] user/create
+- [x] repo/gh_create
+- [x] repo/gh_sync
+- [x] bug/sync
+- [ ] offer/cancel
+- [x] offer/clone
+- [x] offer/create_buy
+- [x] offer/create_sell
+- [ ] offer/suspend
+- [ ] contract/clone
+- [ ] contract/create
+- [x] contract/cross 
+- [ ] contract/delete
+- [ ] contract/resolve
+
+# Dec 27
+
+- [x] Get reoffers working
+- [x] redo all buy_offer commands - tests on events
+- [x] redo all buy_offer commands - tests on projections
+- [x] redo all cross_expand commands - tests on events
+- [x] redo all cross_expand commands - tests on projections
+- [x] get rid of #project method
+- [x] rename #cmd_cast to #project
+- [x] remove old ApplicationCommand code
+
+# Dec 29
+
+- [x] get rid of ID fields
+
+# Dec 30
+
+- [x] test sell offers
+
+# Jan 02
+
+- [x] reduce base operation
+- [x] transfer base operation
+
+- [x] get scripts working
+- [x] get bot working
+
+# Jan 03
+
+- [x] get UI working
+- [x] get event display working
+- [x] fix all specs
+
+# Jan 04
+
+- [x] core API - add basic auth
+- [x] core API - swagger doc for basic auth
+- [x] core API - swagger-codegen (ruby bindings)
+- [x] core API - swagger-codegen (elixir bindings)
+- [x] core API - swagger-codegen (python bindings)
+- [x] core API - testing strategy
+
+# Jan 05
+
+- [x] core API - get basic auth in request specs
+- [x] make an install script for bmx_ruby
+- [x] core API - build working ruby script
+
+# Jan 06
+
+- [x] language bindings working with basic auth
+
+# Jan 07
+
+- [x] do another pass re UI tweaks
+
+- [x] display UUID on show actions (repo, bug, user, offer, contract)
+- [x] pre-fill the repo/bug ID for offer_bu, offer_bf
+
+- [ ] demo script works end-to-end
+
+- [ ] deploy to production
+
+- [ ] create a staging server
+- [ ] create a research server
+
+- [ ] subdomain deployment
+- [ ] SSL certs for subdomains
+
+- [ ] move repo to bugmark org (bugmark)
+- [ ] push binding repos to bugmark org (bmx_ruby, bmx_python, bmx_elixir)
+ 
+- [ ] write CLI
+
+- [ ] core API - build all queries
+- [ ] core API - build all commands
+
+- [ ] make the bot resell
+
+- [ ] test (cross-reduce)     user balance adjustments
+- [ ] test (cross-reduce)     auto-suspend sale-offers
+
 - [ ] test (cross-transfer) partial positions
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
 
-- [ ] test (cross-reduce)     user balance adjustments
-- [ ] test (cross-reduce)     auto-suspend sale-offers
+- [ ] oracle API : design the oracle
+- [ ] oracle API : gh implementation
+
+- [ ] UI add multiple accounts
+
 - [ ] test (contract-resolve) user balance adjustments
 
 - [ ] add ContractCmd::Create with tests
 - [ ] add ContractCmd::Clone with tests
 - [ ] add ContractCmd::Delete with tests
 
-- [ ] refactor events to enable balance generation
-
 - [ ] add OfferCmd::CloneSell with tests
 - [ ] test for 0/100 and 100/0 pricing
 
-- [ ] core: Restful API - generate user key
-- [ ] core: Restful API - add rate limiting
-- [ ] core: Restful API
-- [ ] core: Restful API ruby bindings with rest-client
-- [ ] core: Restful API CLI and Ruby Gem
+- [ ] test gigalixir
 
 # TBD
 
-- [ ] move repo to bugmark org
-
-- [ ] docfix: clickable depth charts
-- [ ] docfix: fix rounding errors
+- [ ] core API - add rate limiting (gottfrois/grape-attack)
 
 - [ ] METRICS: add Georg command-data capture
 - [ ] METRICS: add Georg stats capture with cron process
@@ -705,8 +831,6 @@ Next Actions:
 - [ ] FEEDBACK: make a feature spec that follows the demo
 - [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
-
-- [ ] create a staging server
 
 - [ ] core: expose AON in UI
 - [ ] core: expose poolable in UI

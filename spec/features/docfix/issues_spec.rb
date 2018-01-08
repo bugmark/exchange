@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "Issues" do
 
-  let(:user) { FB.create(:user).user                                 }
-  let(:repo) { FB.create(:repo).repo                                 }
-  let(:bug)  { Bug.create(stm_repo_id: repo.id, type: "Bug::GitHub") }
+  let(:user) { FB.create(:user).user                                     }
+  let(:repo) { FB.create(:repo).repo                                     }
+  let(:bug)  { Bug.create(stm_repo_uuid: repo.uuid, type: "Bug::GitHub") }
 
   include_context 'Integration Environment'
 
@@ -17,7 +17,7 @@ describe "Issues" do
   it "renders show", USE_VCR do
     hydrate(bug)
     visit "/docfix/issues/#{bug.id}"
-    expect(page).to_not be_nil #.
+    expect(page).to_not be_nil
   end
 
   it "generates an OBF", USE_VCR do

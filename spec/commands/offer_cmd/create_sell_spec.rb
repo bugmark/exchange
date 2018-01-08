@@ -4,50 +4,39 @@ RSpec.describe OfferCmd::CreateSell do
 
   def valid_params(args = {})
     {
-      user_id: user.id
-    }.merge(args)
+      uuid:      SecureRandom.uuid    ,
+    }.merge(args) #.
   end
 
-  # def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
+  let(:user)   { FB.create(:user)                                     }
+  let(:bof1)   { FB.create(:offer_bu, user_uuid: user.uuid).offer     }
+  let(:pos1)   { FBX.position_u                                       }
+  let(:user)   { FB.create(:user).user                                }
+  let(:klas)   { described_class                                      }
+  subject      { klas.new(pos1, valid_params(volume: 10, price: 0.4)) }
 
-  let(:user)   { FB.create(:user)                                           }
-  let(:bof1)   { FB.create(:offer_bu, user_id: user.id).offer               }
-  let(:pos1)   { Position.create(offer: bof1, user: user)                   }
-  let(:user)   { FB.create(:user).user                                      }
-  let(:klas)   { described_class                                            }
-  subject      { klas.new(pos1, volume: 10, price: 0.4)                     }
+  describe "Components", USE_VCR do
+    it 'has a position', :focus do
+      expect(pos1).to be_present
+    end
+  end
 
   describe "Attributes", USE_VCR do
     it { should respond_to :salable_position                   }
-    it { should respond_to :offer                              }
-  end
-
-  describe "Object Existence", USE_VCR do
-    it { should be_a klas   }
-    it "bings" do
-      expect(1).to eq(1)
-    end
-    it { should be_valid    }
-  end
-
-  describe "Subobjects", USE_VCR do
-    it { should respond_to :subobject_symbols }
-    it 'returns an array' do
-      expect(subject.subobject_symbols).to be_an(Array)
-    end
+    it { should respond_to :offer_new                          }
   end
 
   describe "Delegated Object", USE_VCR do
     it 'has a present User' do
-      expect(subject.offer.user).to be_present
+      expect(subject.offer_new.user).to be_present
     end
 
     it 'has a User with the right class' do
-      expect(subject.offer.user).to be_a(User)
+      expect(subject.offer_new.user).to be_a(User)
     end
 
     it 'should have a valid User' do
-      expect(subject.offer.user).to be_valid #
+      expect(subject.offer_new.user).to be_valid
     end
   end
 
@@ -61,8 +50,8 @@ RSpec.describe OfferCmd::CreateSell do
       expect(Offer.count).to eq(0)
       subject.project
       expect(Offer.is_sell.count).to eq(1)
-      expect(Offer.is_buy.count).to eq(1)
-      expect(Offer.count).to eq(2)
+      expect(Offer.is_buy.count).to eq(2)
+      expect(Offer.count).to eq(3)
     end
   end
 
@@ -75,9 +64,9 @@ RSpec.describe OfferCmd::CreateSell do
   #   it "volume must be less than salable-position volume"
   #   it "sell-offer-user and the position-user must be the same"
   # end
-  describe "user limits"
-  describe "multiple sell offers"
-  describe "offer to sell partial position"
+  # describe "user limits"
+  # describe "multiple sell offers"
+  # describe "offer to sell partial position"
   # describe "matured contract" do
   #   it "new sale offers are not allowed"
   # end

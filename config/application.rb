@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 require_relative '../lib/ext/kernel'
 require_relative '../lib/ext/hash'
 
+alias :apply :yield_self
+
 module Bugmark
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

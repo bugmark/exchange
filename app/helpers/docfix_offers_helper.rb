@@ -81,10 +81,10 @@ module DocfixOffersHelper
 
   def docfix_offer_assoc(offer)
     case
-      when offer.stm_bug_id
-        "issue ##{offer.stm_bug_id}"
-      when offer.stm_repo_id
-        "repo ##{offer.stm_repo_id}"
+      when offer.stm_bug_uuid
+        "issue ##{offer.bug.id}"
+      when offer.stm_repo_uuid
+        "repo ##{offer.repo.id}"
       else ""
     end
   end
@@ -113,9 +113,9 @@ module DocfixOffersHelper
 
   def docfix_offer_assoc_link(offer)
     case
-      when offer.stm_bug_id
+      when offer.stm_bug_uuid
         docfix_offer_issue_link(offer)
-      when offer.stm_repo_id
+      when offer.stm_repo_uuid
         docfix_offer_project_link(offer)
       else
         ""
@@ -124,9 +124,9 @@ module DocfixOffersHelper
 
   def docfix_offer_assoc_label(offer)
     case
-      when offer.stm_bug_id
+      when offer.stm_bug_uuid
         "Issue"
-      when offer.stm_repo_id
+      when offer.stm_repo_uuid
         "Project"
       else ""
     end
@@ -134,16 +134,16 @@ module DocfixOffersHelper
 
   def docfix_offer_issue_link(offer)
     raw <<-END.strip_heredoc
-      <a href="/docfix/issues/#{offer.stm_bug_id}">
-        #{offer.bug.stm_title} (Issue ##{offer.stm_bug_id})
+      <a href="/docfix/issues/#{offer.bug.id}">
+        #{offer.bug.stm_title} (Issue ##{offer.bug.id})
       </a>
     END
   end
 
   def docfix_offer_project_link(offer)
     raw <<-END.strip_heredoc
-      <a href="/docfix/projects/#{offer.stm_repo_id}">
-        #{offer.repo.name} (Project ##{offer.stm_repo_id})
+      <a href="/docfix/projects/#{offer.repo.id}">
+        #{offer.repo.name} (Project ##{offer.repo.id})
       </a>
     END
   end
@@ -173,7 +173,7 @@ module DocfixOffersHelper
     mdat = offer.maturation.strftime("%y-%m-%d")
     cdep = offer.volume - offer.deposit
     qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}&offer_id=#{offer.id}"
-    href = "/docfix/issues/#{offer.stm_bug_id}/#{otyp}"
+    href = "/docfix/issues/#{offer.bug.id}/#{otyp}"
     raw <<-ERB.strip_heredoc
       <a class="btn btn-secondary" href="#{href}?#{qstr}" style='width: 225px;'>
         #{label}

@@ -3,11 +3,11 @@ module Core
 
     layout 'core'
 
-    # stm_repo_id (optional)
+    # stm_repo_uuid (optional)
     def index
-      if stm_repo_id = params["stm_repo_id"]&.to_i
-        @repo = Repo.find(stm_repo_id)
-        @bugs = Bug.where(stm_repo_id: stm_repo_id)
+      if stm_repo_uuid = params["stm_repo_uuid"]
+        @repo = Repo.find_by_uuid(stm_repo_uuid)
+        @bugs = @repo.bugs
       else
         @repo = nil
         @bugs = Bug.all
@@ -15,7 +15,7 @@ module Core
     end
 
     def show
-      @bug = Bug.find(params["id"])
+      @bug = Bug.find_by_uuid(params["id"])
     end
   end
 end

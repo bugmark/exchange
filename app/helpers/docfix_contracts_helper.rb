@@ -131,10 +131,10 @@ module DocfixContractsHelper
 
   def docfix_contract_assoc(contract)
     case
-      when contract.stm_bug_id
-        "issue ##{contract.stm_bug_id}"
-      when contract.stm_repo_id
-        "repo ##{contract.stm_repo_id}"
+      when contract.stm_bug_uuid
+        "issue ##{contract.bug.id}"
+      when contract.stm_repo_uuid
+        "repo ##{contract.bug.id}"
       else ""
     end
   end
@@ -163,9 +163,9 @@ module DocfixContractsHelper
 
   def docfix_contract_assoc_link(contract)
     case
-      when contract.stm_bug_id
+      when contract.stm_bug_uuid
         docfix_contract_issue_link(contract)
-      when contract.stm_repo_id
+      when contract.stm_repo_uuid
         docfix_contract_project_link(contract)
       else
         ""
@@ -174,9 +174,9 @@ module DocfixContractsHelper
 
   def docfix_contract_assoc_label(contract)
     case
-      when contract.stm_bug_id
+      when contract.stm_bug_uuid
         "Issue"
-      when contract.stm_repo_id
+      when contract.stm_repo_uuid
         "Project"
       else ""
     end
@@ -184,7 +184,7 @@ module DocfixContractsHelper
 
   def docfix_contract_issue_link(contract)
     raw <<-END.strip_heredoc
-      <a href="/core/issues/#{contract.stm_bug_id}">
+      <a href="/core/issues/#{contract.bug.id}">
         #{contract.bug.stm_title}
       </a>
     END
@@ -192,7 +192,7 @@ module DocfixContractsHelper
 
   def docfix_contract_project_link(contract)
     raw <<-END.strip_heredoc
-      <a href="/core/projects/#{contract.stm_repo_id}">
+      <a href="/core/projects/#{contract.id}">
         #{contract.repo.name}
       </a>
     END

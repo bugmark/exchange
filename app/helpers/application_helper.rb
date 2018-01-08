@@ -19,6 +19,7 @@ module ApplicationHelper
   # -----
 
   def obj_link(event)
+    return  ""
     return event.klas unless event.klas == "ContractCmd::Cross"
     raw <<-EOF
       <a href="/docfix/contracts/#{event.data['id']}"}>
@@ -46,7 +47,6 @@ module ApplicationHelper
   # -----
 
   def refresh_tag
-    dev_log "PAGE #{debug_lbl}"
     return "" unless refreshable?
     raw "<meta http-equiv='refresh' content='15' />"
   end

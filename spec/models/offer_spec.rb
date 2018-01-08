@@ -3,16 +3,16 @@ require 'rails_helper'
 RSpec.describe Offer, type: :model do
   def valid_params(extras = {})
     {
-      user_id: user.id                                     ,
+      user_uuid: user.uuid                                 ,
       maturation_range: Time.now-1.week..Time.now+1.week   ,
-      status:  'open'                                    ,
+      status:  'open'                                      ,
+      volume:  5                                           ,
+      price:   0.2
     }.merge(extras)
   end
 
-  # def offer3(extras) Offer::Buy::Unfixed.new(valid_params(extras)) end
-
   let(:offer2) { klas.new(valid_params)  }
-  let(:user)   { FB.create(:user)        }
+  let(:user)   { FB.create(:user).user   }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
@@ -25,8 +25,8 @@ RSpec.describe Offer, type: :model do
   end
 
   describe "Attributes" do
-    it { should respond_to :exref               }
-    it { should respond_to :uuref               }
+    it { should respond_to :exid               }
+    it { should respond_to :uuid               }
   end
 
   describe "Instance Methods" do
@@ -46,7 +46,7 @@ RSpec.describe Offer, type: :model do
     it 'has scope methods' do
       expect(klas).to respond_to :base_scope
       expect(klas).to respond_to :by_id
-      expect(klas).to respond_to :by_repoid
+      expect(klas).to respond_to :by_repo_uuid
       expect(klas).to respond_to :by_title
       expect(klas).to respond_to :by_status
       expect(klas).to respond_to :by_labels
@@ -107,39 +107,39 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  describe ".is_bid" do
-    before(:each) do
-      Offer::Buy::Unfixed.create(valid_params)
-      Offer::Buy::Fixed.create(valid_params)
-      Offer::Sell::Unfixed.create(valid_params)
-      Offer::Sell::Fixed.create(valid_params)
-    end
-    
-    it "baselines" do
-      expect(Offer.count).to eq(4)
-    end
+  # describe ".is_bid" do
+  #   before(:each) do
+  #     Offer::Buy::Unfixed.create(valid_params)
+  #     Offer::Buy::Fixed.create(valid_params)
+  #     Offer::Sell::Unfixed.create(valid_params)
+  #     Offer::Sell::Fixed.create(valid_params)
+  #   end
+  #
+  #   it "baselines" do
+  #     expect(Offer.count).to eq(4)
+  #   end
+  #
+  #   it "returns bid_side" do
+  #     expect(Offer.is_unfixed.count).to eq(2) #
+  #   end
+  #
+  #   it "returns ask_side" do
+  #     expect(Offer.is_fixed.count).to eq(2)
+  #   end
+  #
+  #   it "returns buy_intent" do
+  #     expect(Offer.is_buy.count).to eq(2)
+  #   end
+  #
+  #   it "returns sell_intent" do
+  #     expect(Offer.is_sell.count).to eq(2)
+  #   end
+  # end
 
-    it "returns bid_side" do
-      expect(Offer.is_unfixed.count).to eq(2) #
-    end
-    
-    it "returns ask_side" do
-      expect(Offer.is_fixed.count).to eq(2)
-    end
-     
-    it "returns buy_intent" do
-      expect(Offer.is_buy.count).to eq(2)
-    end
-    
-    it "returns sell_intent" do
-      expect(Offer.is_sell.count).to eq(2)
-    end
-  end
-
-  describe "#overlap_offers" do #
+  describe "#overlap_offers" do #.
     before(:each) { subject.save }
 
-    it "returns one with alternate offer" do
+    it "returns one with alternate offer", :focus do
       result = offer2.overlap_offers
       expect(result.count).to eq(1)
     end
@@ -150,15 +150,15 @@ RSpec.describe Offer, type: :model do
     end
   end
 
-  describe "#uuref" do
+  describe "#uuid" do
     it 'generates a string' do
       subject.save
-      expect(subject.uuref).to be_a(String)
+      expect(subject.uuid).to be_a(String)
     end
 
     it 'generates a 36-character string' do
       subject.save
-      expect(subject.uuref.length).to eq(36)
+      expect(subject.uuid.length).to eq(36)
     end
   end
 end
@@ -167,33 +167,32 @@ end
 #
 # Table name: offers
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  repo_type           :string
-#  user_id             :integer
-#  prototype_id        :integer
-#  amendment_id        :integer
-#  reoffer_parent_id   :integer
-#  salable_position_id :integer
-#  volume              :integer          default(1)
-#  price               :float            default(0.5)
-#  value               :float
-#  poolable            :boolean          default(TRUE)
-#  aon                 :boolean          default(FALSE)
-#  status              :string
-#  expiration          :datetime
-#  maturation_range    :tsrange
-#  xfields             :hstore           not null
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  stm_bug_id          :integer
-#  stm_repo_id         :integer
-#  stm_title           :string
-#  stm_status          :string
-#  stm_labels          :string
-#  stm_xfields         :hstore           not null
-#  stm_jfields         :jsonb            not null
+#  id                    :integer          not null, primary key
+#  uuid                  :string
+#  exid                  :string
+#  type                  :string
+#  repo_type             :string
+#  user_uuid             :string
+#  prototype_uuid        :string
+#  amendment_uuid        :string
+#  salable_position_uuid :string
+#  volume                :integer
+#  price                 :float
+#  value                 :float
+#  poolable              :boolean          default(FALSE)
+#  aon                   :boolean          default(FALSE)
+#  status                :string
+#  expiration            :datetime
+#  maturation_range      :tsrange
+#  xfields               :hstore           not null
+#  jfields               :jsonb            not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  stm_bug_uuid          :string
+#  stm_repo_uuid         :string
+#  stm_title             :string
+#  stm_status            :string
+#  stm_labels            :string
+#  stm_xfields           :hstore           not null
+#  stm_jfields           :jsonb            not null
 #

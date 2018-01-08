@@ -6,7 +6,7 @@ module DocfixBaseHelper
       poolable:    false                    ,
       aon:         false                    ,
       volume:      10                       ,
-      user_id:     current_user.id          ,
+      user_uuid:   current_user.uuid        ,
       status:      "open"                   ,
       stm_status:  "closed"                 ,
       maturation:  BugmTime.now + 3.minutes     ,

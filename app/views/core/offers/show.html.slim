@@ -24,8 +24,11 @@ table width='100%'
         td <b>Resell Position</b>
         td = core_position_link(@offer.salable_position)
       tr
+        td <b>UUID</b>
+        td = core_position_link(@offer.salable_position)
+      tr
         td <b>Expiration</b>
-        td = @offer.expiration&.strftime("%Y-%m-%d %H:%M")
+        td = @offer.uuid
       tr
         td <b>Maturation</b>
         td = @offer.maturation_range

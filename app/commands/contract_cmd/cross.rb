@@ -1,41 +1,41 @@
 # integration_test:  commands/contract_cmd/cross/expand
-# integration_test:  commands/contract_cmd/cross/transfer
-# integration_test:  commands/contract_cmd/cross/reduce
+# integration_test  commands/contract_cmd/cross/transfer
+# integration_test  commands/contract_cmd/cross/reduce
 
 require 'ext/array'
 
 module ContractCmd
   class Cross < ApplicationCommand
 
-    attr_subobjects :offer
-    attr_reader     :counters, :type, :bundle, :commit
+    attr_reader     :offer, :counters, :type, :bundle, :commit
 
     validate :cross_integrity
 
     def initialize(offer, commit_type)
-      @type        = commit_type
-      @offer       = Offer.find(offer.to_i)
-      @counters    = @offer.qualified_counteroffers(commit_type)
-    end
-
-    def transact_before_project
-      @bundle = Bundle.new(type, offer, counters).generate
-      @commit = Commit.new(bundle).generate
+      @type     = commit_type
+      @offer    = Offer.find(offer.to_i)
+      @counters = @offer.qualified_counteroffers(commit_type)
+      # binding.pry
+      if valid?
+        @bundle = Bundle.new(type, offer, counters).generate
+        # noinspection RubyArgCount
+        @commit = commit_class.new(bundle).generate
+        @commit.events.each do |ev|
+          add_event(ev.name, ev.klas.new(cmd_opts.merge(ev.params)))
+        end
+      end
     end
 
     def contract
       commit&.contract
     end
 
-    def event_data
-      contract&.attributes || {}
-    end
-
-    def user_ids
-      contract&.escrows&.last&.users&.pluck(:id)&.sort&.uniq
-    end
-
     private
+
+    def commit_class
+      require "commit/#{type.to_s}"
+      "Commit::#{type.capitalize}".constantize
+    end
 
     def cross_integrity
       if offer.nil?
@@ -68,17 +68,6 @@ module ContractCmd
         errors.add :base, "Err2: no volume match"
         return false
       end
-
-      # if allsums == [0]
-      #   binding.pry
-      #   errors.add :base, "Err3: counteroffer volume sums to zero"
-      #   return false
-      # end
-
-      # if counter_pool == 0 && allsums[1..-1].min > offer.volume
-      #   errors.add :base, "Err4: no volume match (counteroffer AON)"
-      #   return false
-      # end
     end
   end
 end

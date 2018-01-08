@@ -11,7 +11,7 @@ hr
   .alert.alert-danger Please fix the errors below.
 = bootstrap_form_for(@offer_bf, url: '/core/offers_bf') do |f|
   = f.hidden_field :type
-  = f.hidden_field :user_id
+  = f.hidden_field :user_uuid
   .row
     .col-md-4 = f.number_field    :volume         , label: "Units (positive whole number)", min: 1, step: 1
     .col-md-4 = f.number_field    :price          , label: "Price (from 0.01 to 0.99)", min: 0.01, max: 0.99, step: 0.01
@@ -27,11 +27,11 @@ hr
     | Match Criteria (blank for "don't care")
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
     .row
-      .col-md-6 = f.number_field  :stm_repo_id  , label: "Repo ID"
-      .col-md-6 = f.number_field  :stm_bug_id   , label: "Bug ID"
+      .col-md-6 = f.text_field  :stm_repo_uuid  , label: "Repo ID"
+      .col-md-6 = f.text_field  :stm_bug_uuid   , label: "Bug ID"
     .row
-      .col-md-6 = f.text_field :stm_title , label: "Bug Title (substring match)"
-      .col-md-6 = f.text_field    :stm_status   , label: "Bug Status (open | closed | <blank>)"
+      .col-md-6 = f.text_field    :stm_title      , label: "Bug Title (substring match)"
+      .col-md-6 = f.text_field    :stm_status     , label: "Bug Status (open | closed | <blank>)"
   small
     | BugMark contracts are resolved on the maturation date.
        If the Match Params hit on one or more issue, the

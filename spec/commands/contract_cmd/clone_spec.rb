@@ -13,7 +13,7 @@ RSpec.describe ContractCmd::Clone do
 
   def valid_params(args = {})
     {
-      user_id: user.id #
+      user: user
     }.merge(args)
   end
 
@@ -31,7 +31,7 @@ RSpec.describe ContractCmd::Clone do
   #   it { should be_a klas   }
   #   it { should be_valid    }
   # end
-  #
+
   # describe "#project" do
   #   it 'saves the object to the database' do
   #     subject.project

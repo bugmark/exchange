@@ -25,6 +25,21 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
 end
 
+module AuthRequestHelper
+  BASE_MAIL = "test@bugmark.net"
+  BASE_PASS = "bugmark"
+
+  def create_user(email = BASE_MAIL)
+    FB.create(:user, email: email, password: BASE_PASS)
+  end
+
+  def basic_creds(email = BASE_MAIL)
+    args = [email, BASE_PASS]
+    el = ActionController::HttpAuthentication::Basic.encode_credentials(*args)
+    {'HTTP_AUTHORIZATION' => el}
+  end
+end
+
 USE_VCR = {vcr: {allow_playback_repeats: true}}
 
 RSpec.configure do |config|

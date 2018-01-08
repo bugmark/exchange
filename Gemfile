@@ -41,6 +41,7 @@ gem 'pg_search'                   # full-text search
 
 gem 'grape'
 gem 'grape-swagger'
+gem 'grape-swagger-entity'
 gem 'grape-swagger-rails'
 
 gem 'rack-cors', require: 'rack/cors'
@@ -68,8 +69,6 @@ group :development do
 
   # ----- pry / development support -----
   gem 'byebug'                   # debugger
-  gem 'pry-doc'                  # doc functions
-  gem 'pry-docmore'              # more doc functions
   gem 'pry-byebug'               # debugger
   gem 'pry-rescue'               # opens pry on failing test
   gem 'pry-stack_explorer'       # stack display and navigation

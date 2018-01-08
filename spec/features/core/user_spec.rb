@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe "User", USE_VCR do
 
-  let(:offer_bf) { FB.create(:offer_bf, user_id: user.id).offer }
-  let(:offer_bu) { FB.create(:offer_bu, user_id: user.id).offer }
+  let(:offer_bf) { FB.create(:offer_bf, user_uuid: user.uuid).offer }
+  let(:offer_bu) { FB.create(:offer_bu, user_uuid: user.uuid).offer }
   let(:user)     { FB.create(:user).user }
 
   it "renders home" do
@@ -28,4 +28,3 @@ describe "User", USE_VCR do
     expect(page).to_not be_nil
   end
 end
-#

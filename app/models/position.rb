@@ -5,15 +5,15 @@ class Position < ApplicationRecord
   before_validation :default_attributes
   before_validation :update_value
 
-  belongs_to :offer       , optional:   true
-  has_many   :offers_sell , class_name: "Offer"   , :foreign_key => :salable_position_id
-  belongs_to :user                                , optional: true
-  belongs_to :escrow                              , optional: true
+  belongs_to :offer       , optional:   true      , foreign_key: "offer_uuid", primary_key: "uuid"
+  has_many   :offers_sell , class_name: "Offer"   , foreign_key: "salable_position_id"
+  belongs_to :user        , optional: true        , foreign_key: "user_uuid"  , primary_key: "uuid"
+  belongs_to :escrow      , optional: true        , foreign_key: "escrow_uuid", primary_key: "uuid"
   belongs_to :parent      , class_name: "Position", optional: true
   has_many   :children    , class_name: "Position"
   has_one    :contract    , :through => :escrow
 
-  belongs_to :amendment, optional: true
+  belongs_to :amendment, optional: true, foreign_key: "amendment_uuid", primary_key: "uuid"
 
   # ----- VALIDATIONS -----
 
@@ -31,7 +31,7 @@ class Position < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id offer_id user_id amendment_id escrow_id parent_id volume price value side))
+      select(%i(id uuid offer_uuid user_uuid amendment_uuid escrow_uuid parent_uuid volume price value side))
     end
     alias_method :ss, :select_subset
   end
@@ -39,7 +39,7 @@ class Position < ApplicationRecord
   # ----- INSTANCE METHODS -----
 
   def xtag
-    "pos" #
+    "pos"
   end
 
   def dumptree
@@ -67,18 +67,18 @@ end
 #
 # Table name: positions
 #
-#  id           :integer          not null, primary key
-#  offer_id     :integer
-#  user_id      :integer
-#  amendment_id :integer
-#  escrow_id    :integer
-#  parent_id    :integer
-#  volume       :integer
-#  price        :float
-#  value        :float
-#  side         :string
-#  exref        :string
-#  uuref        :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id             :integer          not null, primary key
+#  uuid           :string
+#  exid           :string
+#  offer_uuid     :string
+#  user_uuid      :string
+#  amendment_uuid :string
+#  escrow_uuid    :string
+#  parent_uuid    :string
+#  volume         :integer
+#  price          :float
+#  value          :float
+#  side           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #

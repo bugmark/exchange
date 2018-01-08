@@ -14,6 +14,9 @@ table width='100%'
         td <b>Title</b>
         td = @bug.stm_title
       tr
+        td <b>UUID</b>
+        td = @bug.uuid
+      tr
         td <b>URL</b>
         td = core_bug_http_link(@bug)
       tr

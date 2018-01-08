@@ -1,3 +1,4 @@
+require 'ostruct'
 require 'factory_bot'
 require_relative "../app/commands/application_command"
 
@@ -12,7 +13,8 @@ FactoryBot.define do
     initialize_with { new(attributes) }
 
     sequence :email do |n|
-      "test#{n}@bugmark.net"
+      random = ('a'..'z').to_a.shuffle[0,8].join
+      "#{random}#{n}@bugmark.net"
     end
     password "bugmark"
     balance 1000.0
@@ -22,7 +24,6 @@ FactoryBot.define do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
-    type "Repo::GitHub"
     name "mvscorg/bugmark"
   end
 
@@ -33,7 +34,11 @@ FactoryBot.define do
     sequence :stm_title do |n|
       "Bug #{n}"
     end
-    stm_repo_id { FB.create(:repo).id }
+    sequence :exid do |n|
+      "exid#{n}"
+    end
+    type "Bug::GitHub"
+    stm_repo_uuid { FB.create(:repo).repo&.uuid || Repo.first&.uuid || SecureRandom.uuid  }
   end
 
   # ----- BUY OFFERS -----
@@ -44,10 +49,9 @@ FactoryBot.define do
 
     price  0.60
     volume 10
-    status "open"
     maturation Time.now + 1.day
-    user       { FB.create(:user).user   }
-    stm_bug_id { FB.create(:bug).id      }
+    user_uuid    { FB.create(:user).user.uuid   }
+    stm_bug_uuid { FB.create(:bug).bug.uuid     }
     stm_status "closed"
     poolable   false
     aon        false
@@ -59,10 +63,9 @@ FactoryBot.define do
 
     price      0.40
     volume     10
-    status     "open"
     maturation Time.now + 1.day
-    user       { FB.create(:user).user    }
-    stm_bug_id { FB.create(:bug).id       }
+    user_uuid    { FB.create(:user).user.uuid   }
+    stm_bug_uuid { FB.create(:bug).bug.uuid     }
     stm_status "closed"
     poolable   false
     aon        false
@@ -70,6 +73,19 @@ FactoryBot.define do
 end
 
 module FBX
+  def position_f(opts = {})
+    _obu, obf = FBX.create_buy_offers(opts)
+    ContractCmd::Cross.new(obf, :expand).project
+    obf.reload
+    obf.position
+  end
+
+  def position_u(opts = {})
+    obu, _obf = FBX.create_buy_offers(opts)
+    ContractCmd::Cross.new(obu, :expand).project
+    obu.reload
+    obu.position
+  end
 
   def expand_obf(opts = {})
     _obu, obf = FBX.create_buy_offers(opts)
@@ -95,13 +111,19 @@ module FBX
     OfferCmd::CreateSell.new(posn, FBX.opts_for(:osu, opts)).project
   end
 
-  module_function :expand_obf, :expand_obu, :offer_sf, :offer_su
+  module_function :offer_sf   , :offer_su
+  module_function :position_f , :position_u
+  module_function :expand_obf , :expand_obu
 
   # ----- private -----
 
   def FBX.create_buy_offers(opts)
-    obu = FB.create(:offer_bu, FBX.opts_for(:obu, opts)).offer
-    obf = FB.create(:offer_bf, FBX.opts_for(:obf, opts)).offer
+    bug      = FB.create(:bug).bug
+    xopt     = opts.merge({stm_bug_uuid: bug.uuid})
+    obu_opts = FBX.opts_for(:obu, xopt)
+    obf_opts = FBX.opts_for(:obf, xopt)
+    obu      = FB.create(:offer_bu, obu_opts).offer
+    obf      = FB.create(:offer_bf, obf_opts).offer
     [obu, obf]
   end
 
@@ -111,10 +133,10 @@ module FBX
 
   def FBX.default_opts
     {
-      obf: {},
-      obu: {},
-      osf: {},
-      osu: {},
+      obf: {uuid: SecureRandom.uuid},
+      obu: {uuid: SecureRandom.uuid},
+      osf: {uuid: SecureRandom.uuid},
+      osu: {uuid: SecureRandom.uuid},
     }
   end
 end

@@ -10,7 +10,7 @@ module Docfix
       base_opts = helpers.docfix_offer_base_opts(perm(core_opts))
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, base_opts)
       if @offer_bu.project
-        redirect_to("/docfix/offers/#{@offer_bu.id}")
+        redirect_to("/docfix/offers/#{@offer_bu.offer.id}")
       else
         @bug = @offer_bu.offer.bug
         render "docfix/issues/offer_bu"

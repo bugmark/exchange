@@ -3,7 +3,7 @@ require 'securerandom'
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  before_save :update_uuref
+  before_save :update_uuid
 
   def xid
     "#{xtag}.#{self&.id || 0}"
@@ -37,7 +37,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   private
 
-  def update_uuref
-    self.uuref ||= SecureRandom.uuid
+  def update_uuid
+    self.uuid ||= SecureRandom.uuid
   end
 end

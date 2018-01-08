@@ -3,11 +3,11 @@ module MatchUtils
 
   def match_attrs
     {
-      stm_bug_id:  self.stm_bug_id   ,
-      stm_repo_id: self.stm_repo_id  ,
-      stm_title:   self.stm_title    ,
-      stm_status:  self.stm_status   ,
-      stm_labels:  self.stm_labels   ,
+      stm_bug_uuid:  self.stm_bug_uuid   ,
+      stm_repo_uuid: self.stm_repo_uuid  ,
+      stm_title:     self.stm_title      ,
+      stm_status:    self.stm_status     ,
+      stm_labels:    self.stm_labels     ,
     }
   end
 
@@ -35,12 +35,12 @@ module MatchUtils
       where(id: id)
     end
 
-    def by_bugid(id)
-      where(stm_bug_id: id)
+    def by_bug_uuid(uuid)
+      where(stm_bug_uuid: uuid)
     end
 
-    def by_repoid(id)
-      where(stm_repo_id: id)
+    def by_repo_uuid(uuid)
+      where(stm_repo_uuid: uuid)
     end
 
     def by_title(string)
@@ -72,10 +72,10 @@ module MatchUtils
 
     def scope_for(base, key, val)
       case key
-        when :stm_bug_id then
-          base.by_bugid(val)
-        when :stm_repo_id then
-          base.by_repoid(val)
+        when :stm_bug_uuid then
+          base.by_bug_uuid(val)
+        when :stm_repo_uuid then
+          base.by_repo_uuid(val)
         when :stm_title then
           base.by_title(val)
         when :stm_status then

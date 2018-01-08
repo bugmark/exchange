@@ -1,6 +1,6 @@
 # integration_test: commands/contract_cmd/cross/expand
-# integration_test: commands/contract_cmd/cross/transfer
-# integration_test: commands/contract_cmd/cross/reduce
+# integration_test commands/contract_cmd/cross/transfer
+# integration_test commands/contract_cmd/cross/reduce
 
 require 'ostruct'
 
@@ -8,143 +8,106 @@ class Commit
 
   attr_reader :type, :bundle, :contract, :escrow, :amendment
 
-  TYPES = %i(expand transfer reduce)
+  attr_reader :events
 
   def initialize(bundle)
-    @type   = bundle.type
     @bundle = bundle
-    raise "BAD commit type (#{type})" unless TYPES.include?(type)
+    @events = []
   end
 
-  def generate() self.send(type); self end
+  def generate() raise("call in subclass") end
 
   private
 
+  def ctx_event(name, klas, params)
+    @events << OpenStruct.new(name: name.to_sym, klas: klas, params: params)
+  end
+
+  # notation:
+  # ctx.o_* - offer variables
+  # ctx.c_* - contract variables
+  # ctx.a_* - amendment variables
+  # ctx.e_* - escrow variables
   def base_context
     ctx            = OpenStruct.new
-    ctx.all_offers = [bundle.offer] + bundle.counters
-    ctx.max_start  = ctx.all_offers.map {|o| o.obj.maturation_range.begin}.max
-    ctx.min_end    = ctx.all_offers.map {|o| o.obj.maturation_range.end}.min
+    ctx.o_all      = [bundle.offer] + bundle.counters
+    ctx.o_max_beg  = ctx.o_all.map {|o| o.obj.maturation_range.begin}.max
+    ctx.o_min_end  = ctx.o_all.map {|o| o.obj.maturation_range.end}.min
     ctx
   end
 
-  def gen_connectors(ctx, amendment_klas, escrow_klas)
-    ctx.amendment = amendment_klas.create(contract: ctx.contract)
-    ctx.escrow    = escrow_klas.create(contract: ctx.contract, amendment: ctx.amendment)
+  def find_or_gen_contract(ctx, _amendment_type = "", _escrow_type = "")
+    ctx.c_matching = bundle.offer.obj.match_contracts.overlap(ctx.o_max_beg, ctx.o_min_end)
+    ctx.c_selected = ctx.c_matching.sort_by {|c| c.escrows.count}.first
+    ctx.c_uuid     = ctx.c_selected&.uuid || SecureRandom.uuid
+    ctx.c_contract = @contract = ctx.c_selected || begin
+      date = [ctx.o_max_beg, ctx.o_min_end].avg_time #
+      attr = bundle.offer.obj.match_attrs.merge(maturation: date, uuid: ctx.c_uuid)
+      ctx_event(:contract, Event::ContractCreated, attr)
+    end
+    ctx
+  end
+
+  def gen_escrow_and_amendment(ctx)
+    ctx.a_uuid = SecureRandom.uuid
+    ctx_event(:amendment, Event::AmendmentCreated, contract_uuid: ctx.c_uuid, uuid: ctx.a_uuid, type: ctx.a_type)
+    ctx.e_uuid = SecureRandom.uuid
+    ctx_event(:escrow, Event::EscrowCreated, contract_uuid: ctx.c_uuid, amendment_uuid: ctx.a_uuid, uuid: ctx.e_uuid, type: ctx.e_type)
+    ctx
+  end
+
+  def update_escrow_value(ctx)
+    ctx_event(:escrow_upd, Event::EscrowUpdated, {uuid: ctx.e_uuid})
     ctx
   end
 
   def expand_position(offer, ctx, price)
+    transfer_uuid = SecureRandom.uuid
     posargs = {
-      volume:     offer.vol         ,
-      price:      price             ,
-      amendment:  ctx.amendment     ,
-      escrow:     ctx.escrow        ,
-      offer:      offer.obj         ,
-      user:       offer.obj.user    ,
+      uuid:           SecureRandom.uuid      ,
+      volume:         offer.vol.to_i         ,
+      price:          price.to_f             ,
+      side:           offer.obj.side         ,
+      amendment_uuid: ctx.a_uuid             ,
+      escrow_uuid:    ctx.e_uuid             ,
+      offer_uuid:     offer.obj.uuid         ,
+      user_uuid:      offer.obj.user.uuid    ,
+      transfer_uuid:  transfer_uuid
     }
-    lcl_pos = Position.create(posargs)
-    new_balance = offer.obj.user.balance - lcl_pos.value
-    offer.obj.user.update_attribute(:balance, new_balance)
-    offer.obj.update_attribute(:status, 'crossed')
+    oid = offer.obj.id
+    ctx_event("position#{oid}", Event::PositionCreated, posargs)
+    lcl_val = posargs[:volume] * posargs[:price]
+    ctx_event("user#{oid}" , Event::UserDebited, {uuid: offer.obj.user_uuid, amount: lcl_val})
+    ctx_event("offer#{oid}", Event::OfferCrossed, {uuid: offer.obj.uuid})
   end
 
-  def suspend_overlimit_offers(bundle)
+  def suspend_overlimit_offers(bundle, ctx)
     list = [bundle.offer] + bundle.counters
     list.each do |offer|
       usr       = offer.obj.user
-      threshold = usr.balance - usr.token_reserve_not_poolable
+      threshold = usr.balance - offer.obj.value - usr.token_reserve_not_poolable
       uoffers   = usr.offers.open.poolable.where('value > ?', threshold)
       uoffers.each do |uoffer|
-        OfferCmd::Suspend.new(uoffer).project
+        ctx_event("offer_suspend#{uoffer.id}", Event::OfferSuspended, {uuid: uoffer.uuid})
       end
     end
   end
 
   def generate_reoffers(ctx)
-    ctx.escrow.positions.each do |position|
-      if position.volume < position.offer.volume
-        new_vol = position.offer.volume - position.volume
-        args    = {volume: new_vol, reoffer_parent_id: position.offer.id, amendment_id: ctx.amendment.id}
-        result  = OfferCmd::CloneBuy.new(position.offer, args)
-        result.project
+    idx = 0
+    position_events.each do |position|
+      volume = position.params[:volume]
+      offer  = Offer.find_by_uuid(position.params[:offer_uuid])
+      if volume < offer.volume
+        idx += 1
+        new_vol = offer.volume - volume
+        args    = {uuid: SecureRandom.uuid, volume: new_vol, prototype_uuid: offer.uuid, amendment_uuid: ctx.a_uuid}
+        ctx_event("reoffer#{idx}", Event::OfferCloned, args)
       end
     end
   end
 
-  def expand
-    ctx = base_context
-
-    # find or generate contract with maturation date
-    ctx.matching  = bundle.offer.obj.match_contracts.overlap(ctx.max_start, ctx.min_end)
-    ctx.selected  = ctx.matching.sort_by {|c| c.escrows.count}.first
-    ctx.contract  = @contract = ctx.selected || begin
-      date = [ctx.max_start, ctx.min_end].avg_time
-      attr = bundle.offer.obj.match_attrs.merge(maturation: date)
-      Contract.create(attr)
-    end
-
-    # generate amendment and escrow
-    ctx = gen_connectors(ctx, Amendment::Expand, Escrow::Expand)
-
-    # calculate price for offer and counter - half-way between the two
-    ctx.counter_min   = bundle.counters.map {|el| el.obj.price}.min
-    ctx.price_delta   = ((bundle.offer.obj.price - (1.0 - ctx.counter_min)) / 2.0).round(2)
-    ctx.counter_price = ctx.counter_min - ctx.price_delta
-    ctx.offer_price   = 1.0 - ctx.counter_price
-
-    # generate artifacts
-    expand_position(bundle.offer, ctx, ctx.offer_price)
-    bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
-    suspend_overlimit_offers(bundle)
-    generate_reoffers(ctx)
-
-    # update escrow value
-    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
-  end
-
-  def transfer
-    ctx = base_context
-
-    # look up contract
-    # ctx.contract = bundle.offer.obj.salable_position.contract
-
-    # generate amendment & escrow
-    gen_connectors(ctx, Amendment::Transfer, Escrow::Transfer)
-
-    # calculate price for offer and counters
-    clist             = bundle.counters.map {|el| el.obj.price}
-    cprice            = bundle.offer.obj.is_sell? ? clist.max : clist.min
-    oprice            = bundle.offer.obj.price
-    ctx.counter_price = [oprice, cprice].avg.round(2)
-    ctx.offer_price   = ctx.counter_price
-
-    # generate artifacts
-    expand_position(bundle.offer, ctx, ctx.offer_price)
-    bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
-
-    # update escrow value
-    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
-  end
-
-  def reduce
-    ctx = base_context
-
-    # look up contract
-    ctx.contract = bundle.offer.obj.salable_position.contract
-
-    # generate amendment, escrow, price
-    gen_connectors(ctx, Amendment::Reduce, Escrow::Reduce)
-
-    # calculate price for offer and counter
-    ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min
-    ctx.offer_price   = 1.0 - ctx.counter_price
-
-    # generate artifacts
-    expand_position(bundle.offer, ctx, ctx.offer_price)  # BUG HERE - NEED TO PAYOUT ...
-    bundle.counters.each {|offer| expand_position(offer, ctx, ctx.counter_price)}
-
-    # update escrow value
-    ctx.escrow.update_attributes(fixed_value: ctx.escrow.fixed_values, unfixed_value: ctx.escrow.unfixed_values)
+  def position_events
+    @events.select {|ev| ev.klas == Event::PositionCreated}
   end
 end

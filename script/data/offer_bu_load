@@ -1,0 +1,68 @@
+#!/usr/bin/env ruby
+
+require "./config/environment"
+
+week_ends = BugmTime.future_week_ends
+
+users = User.where("email ilike 'test%'")
+
+opts = [
+  {
+    stm_bug_uuid: Bug.second.uuid    ,
+    price:        0.90               ,
+    volume:       45                 ,
+    user_uuid:    users.second.uuid  ,
+    maturation:   week_ends.first
+  },
+  {
+    stm_bug_uuid: Bug.third.uuid     ,
+    price:        0.50               ,
+    volume:       30                 ,
+    user_uuid:    users.first.uuid   ,
+    maturation:   week_ends.first
+  },
+  {
+    stm_bug_uuid: Bug.first.uuid     ,
+    price:        0.75               ,
+    volume:       40                 ,
+    user_uuid:    users.third.uuid   ,
+    maturation:   week_ends.first
+  },
+  {
+    stm_bug_uuid: Bug.third.uuid     ,
+    price:        0.20               ,
+    volume:       35                 ,
+    user_uuid:    users.first.uuid   ,
+    maturation:   week_ends.first
+  },
+  {
+    stm_bug_uuid: Bug.second.uuid    ,
+    price:        0.50               ,
+    volume:       25                 ,
+    user_uuid:    users.third.uuid   ,
+    maturation:   week_ends.first
+  },
+  {
+    stm_bug_uuid: Bug.second.uuid    ,
+    price:        0.10               ,
+    volume:       15                 ,
+    user_uuid:    users.first.uuid   ,
+    maturation:   week_ends.first
+  },
+  {
+    stm_bug_uuid: Bug.second.uuid    ,
+    price:        0.10               ,
+    volume:       40                 ,
+    user_uuid:    users.third.uuid   ,
+    maturation:   week_ends.first
+  }
+]
+
+opts.each do |opt|
+  base = {
+    poolable:   false         ,
+    aon:        false         ,
+    stm_status: 'closed'
+  }
+  FB.create(:offer_bu, opt.merge(base))
+end

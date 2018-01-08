@@ -5,17 +5,17 @@ module Core
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve, :chart]
 
-    # stm_bug_id (optional)
+    # stm_bug_uuid (optional)
     def index
       @bug = @repo = nil
       base_scope = Contract.all
       case
-        when stm_bug_id = params["stm_bug_id"]&.to_i
-          @bug = Bug.find(stm_bug_id)
-          @contracts = base_scope.where(stm_bug_id: stm_bug_id)
-        when stm_repo_id = params["stm_repo_id"]&.to_i
-          @repo = Repo.find(stm_repo_id)
-          @contracts = base_scope.where(stm_repo_id: stm_repo_id)
+        when stm_bug_uuid = params["stm_bug_uuid"]
+          @bug = Bug.find_by_uuid(stm_bug_uuid)
+          @contracts = base_scope.where(stm_bug_uuid: stm_bug_uuid)
+        when stm_repo_uuid = params["stm_repo_uuid"]
+          @repo = Repo.find_by_uuid(stm_repo_uuid)
+          @contracts = base_scope.where(stm_repo_uuid: stm_repo_uuid)
         else
           @contracts = base_scope
       end
@@ -25,7 +25,7 @@ module Core
       @contract = Contract.find(params["id"])
     end
 
-    # stm_bug_id or stm_repo_id, type(forecast | reward)
+    # stm_bug_uud or stm_repo_uuid
     def new
       @contract = ContractCmd::Publish.new(new_opts(params))
     end
@@ -69,12 +69,35 @@ module Core
         format.png do
           require 'graphviz'
           @contract_id = params["id"]
+          @contract    = Contract.find(params["id"])
           g = GraphViz.new( :G, :type => :digraph )
-          hello = g.add_nodes("HELLO")
-          world = g.add_nodes("WORLD")
-          contr = g.add_nodes("CONTRACT #{@contract_id}")
-          g.add_edges(hello, world)
-          g.add_edges(world, contr)
+          contr   = g.add_nodes("CONTRACT #{@contract_id}")
+          escrows = @contract.escrows.map do |esc|
+            enode = g.add_nodes("ESCROW #{esc.id}", color: "blue", shape: "box")
+            esc.fixed_positions.each do |pos|
+              pn = g.add_nodes("FP #{pos.id}", color: "red")
+              g.add_edges(enode, pn)
+              oo = g.add_nodes("O #{pos.offer.id}")
+              g.add_edges(pn, oo)
+              uu = g.add_nodes("U #{pos.offer.id}/#{pos.offer.user.id}")
+              g.add_edges(oo, uu)
+            end
+            esc.unfixed_positions.each do |pos|
+              pn = g.add_nodes("UP #{pos.id}", color: "green")
+              g.add_edges(enode, pn)
+              oo = g.add_nodes("O #{pos.offer.id}")
+              g.add_edges(pn, oo)
+              uu = g.add_nodes("U #{pos.offer.id}/#{pos.offer.user.id}")
+              g.add_edges(oo, uu)
+            end
+            enode
+          end
+          g.add_edges(contr, escrows.first)
+          tgt = escrows.first
+          escrows[1..-1].each do |esc|
+            g.add_edges(tgt, esc)
+            tgt = esc
+          end
           g.output(png: "/tmp/contract#{@contract_id}.png")
           send_data(File.read("/tmp/contract#{@contract_id}.png"), disposition: 'inline', type: 'image/png', filename: 'img.png')
         end
@@ -110,11 +133,11 @@ module Core
         type: "Contract::#{params["type"]&.capitalize}",
         price: 0.10,
         maturation: BugmTime.now + 3.minutes,
-        user_id: current_user.id
+        user_uuid: current_user.uuid
       }
-      key = "stm_bug_id" if params["stm_bug_id"]
-      key = "stm_repo_id" if params["stm_repo_id"]
-      id = params["stm_bug_id"] || params["stm_repo_id"]
+      key = "stm_bug_uuid" if params["stm_bug_uuid"]
+      key = "stm_repo_uuid" if params["stm_repo_uuid"]
+      id = params["stm_bug_uuid"] || params["stm_repo_uuid"]
       opts.merge({key => id})
     end
   end

@@ -9,4 +9,4 @@ Escrow.destroy_all
 Position.destroy_all
 Amendment.destroy_all
 Contract.destroy_all
-EventLine.destroy_all
+Event.destroy_all

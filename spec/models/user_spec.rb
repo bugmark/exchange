@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User, type: :model do #
   def valid_params
     {email: "asdf@qwer.net", password: "gggggg"}
   end
 
   def gen_unfixed(args = {})
-    FB.create(:offer_bu, {user_id: usr.id}.merge(args))
+    FB.create(:offer_bu, {user_uuid: usr.uuid}.merge(args))
   end
 
   def gen_fixed(args = {})
-    FB.create(:offer_bf, {user_id: usr.id}.merge(args))
+    FB.create(:offer_bf, {user_uuid: usr.uuid}.merge(args))
   end
 
-  let(:usr) { FB.create(:user, balance: 100.0).user         }
-  let(:ask) { FB.create(:offer_bf, user_id: user.id)       }
+  let(:usr)  { FB.create(:user, balance: 100.0).user           }
+  let(:ask)  { FB.create(:offer_bf, user_uuid: user.uuid)      }
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 
@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
       expect(usr.offers).to eq([])
     end
 
-    it 'returns a offer if one exists' do
+    it 'returns a offer if one exists', :focus do
       gen_unfixed
       expect(usr.offers.count).to     eq(1)
       expect(usr.offers_buy.count).to eq(1)
@@ -65,11 +65,12 @@ RSpec.describe User, type: :model do
     end
 
     it "has a default value" do
+      hydrate usr
       expect(usr.balance).to eq(100.0)
     end
   end
 
-  describe "#token_reserve_poolable", USE_VCR do
+  describe "#token_reserve_poolable", USE_VCR do #
     it "has a value with one bid" do
       gen_unfixed(poolable: true)
       expect(usr.token_reserve_poolable).to eq(6.0)
@@ -169,10 +170,11 @@ end
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  uuid                   :string
+#  exid                   :string
 #  admin                  :boolean
+#  auth_token             :string
 #  balance                :float            default(0.0)
-#  exref                  :string
-#  uuref                  :string
 #  jfields                :jsonb            not null
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null

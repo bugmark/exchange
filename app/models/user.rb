@@ -3,22 +3,31 @@ class User < ApplicationRecord
   has_paper_trail
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable
 
-  before_save   :default_values
+  before_save :default_values
 
-  has_many :offers     , class_name: "Offer"
-  has_many :offers_buy , class_name: "Offer::Buy"
-  has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"
-  has_many :offers_bf  , class_name: "Offer::Buy::Fixed"
-  has_many :offers_sell, class_name: "Offer::Sell"
-  has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
-  has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
+  with_options foreign_key: "user_uuid", primary_key: "uuid" do
+    has_many :offers     , class_name: "Offer"
+    has_many :offers_buy , class_name: "Offer::Buy"
+    has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"
+    has_many :offers_bf  , class_name: "Offer::Buy::Fixed"
+    has_many :offers_sell, class_name: "Offer::Sell"
+    has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
+    has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
+    has_many :positions
+  end
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 
+  validates_uniqueness_of :email
+
+  validates :email    , :presence => true
+  validates :password , :presence => true, :on => :create, unless: :has_encrypted_pwd?
+  validates :balance  , :numericality => { greater_than_or_equal_to: 0.0 }
+
   def event_lines
-    EventLine.for_user(self.id)
+    Event.for_user(self.id)
   end
 
   def last_event_at
@@ -27,10 +36,10 @@ class User < ApplicationRecord
   end
 
   def new_event_lines
-    event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc')
+    event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc') #.
   end
 
-  has_many :positions
+
 
   def xtag
     "usr"
@@ -41,7 +50,7 @@ class User < ApplicationRecord
   end
 
   def contracts
-    positions.map(&:contract).flatten.uniq.sort_by {|c| c.id}
+    positions.map(&:contract).flatten.uniq.sort_by {|c| c.uuid}
   end
 
   # ----- ACCOUNT BALANCES AND RESERVES-----
@@ -76,7 +85,7 @@ class User < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id email balance))
+      select(%i(id uuid email balance))
     end
     alias_method :ss, :select_subset
   end
@@ -96,8 +105,12 @@ class User < ApplicationRecord
   private
 
   def default_values
-    self.balance = 1000.0 if self.balance.zero?
-    self.balance ||= 1000
+    # self.balance = 1000.0 if self.balance.zero?
+    # self.balance ||= 1000
+  end
+
+  def has_encrypted_pwd?
+    self.encrypted_password.present?
   end
 end
 
@@ -106,10 +119,11 @@ end
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  uuid                   :string
+#  exid                   :string
 #  admin                  :boolean
+#  auth_token             :string
 #  balance                :float            default(0.0)
-#  exref                  :string
-#  uuref                  :string
 #  jfields                :jsonb            not null
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null

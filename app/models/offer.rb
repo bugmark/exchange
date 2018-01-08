@@ -7,19 +7,21 @@ class Offer < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :user            , optional: true
-  belongs_to :bug             , optional: true , foreign_key: "stm_bug_id"
-  belongs_to :repo            , optional: true , foreign_key: "stm_repo_id"
-  has_one    :position                         , foreign_key: "offer_id"
-  belongs_to :salable_position, optional: true , foreign_key: "salable_position_id" , class_name: "Position"
-  has_one    :reoffer_parent                   , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
-  belongs_to :reoffer_child   , optional: true , foreign_key: "reoffer_parent_id"   , class_name: "Offer"
-  belongs_to :transfer        , optional: true
+  with_options primary_key: "uuid" do
+    belongs_to :user            , optional: true , foreign_key: "user_uuid"
+    belongs_to :bug             , optional: true , foreign_key: "stm_bug_uuid"
+    belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid"
+    has_one    :position                         , foreign_key: "offer_uuid"
+    has_one    :prototype_parent                 , foreign_key: "prototype_uuid"        , class_name: "Offer"
+    belongs_to :prototype_child , optional: true , foreign_key: "prorotype_uuid"        , class_name: "Offer"
+    belongs_to :salable_position, optional: true , foreign_key: "salable_position_uuid" , class_name: "Position"
+  end
 
   has_one  :prototype         , foreign_key: 'prototype_id', class_name: 'Offer'
   has_many :prototype_children, foreign_key: 'prototype_id', class_name: 'Offer'
 
-  belongs_to :amendment, optional: true
+  belongs_to :amendment, optional: true, foreign_key: "amendment_uuid", primary_key: "uuid"
+
   def escrow() position&.escrow end
 
   # ----- VALIDATIONS -----
@@ -35,6 +37,7 @@ class Offer < ApplicationRecord
   before_validation :update_value
 
   # ----- BASIC SCOPES -----
+
   class << self
     def poolable()             where(poolable: true)      end
     def not_poolable()         where(poolable: false)     end
@@ -47,11 +50,11 @@ class Offer < ApplicationRecord
     end
 
     def assigned
-      where("id IN (SELECT offer_id FROM positions)")
+      where("uuid IN (SELECT offer_uuid FROM positions)")
     end
 
     def unassigned
-      where("id NOT IN (SELECT offer_id FROM positions)")
+      where("uuid NOT IN (SELECT offer_uuid FROM positions)")
     end
 
     def by_maturation_range(range)
@@ -74,12 +77,13 @@ class Offer < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id type user_id salable_position_id prototype_id reoffer_parent_id volume price value poolable aon status stm_bug_id stm_status))
+      select(%i(id uuid type user_uuid salable_position_uuid prototype_uuid volume price value poolable aon status stm_bug_uuid stm_status))
     end
     alias_method :ss, :select_subset
   end
 
   # ----- OVERLAP UTILS -----
+
   class << self
     def by_overlap_maturation_range(range)
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
@@ -109,6 +113,7 @@ class Offer < ApplicationRecord
   end
 
   # ----- CROSS UTILS -----
+
   class << self
     def with_volume(volume)
       where(volume: volume)
@@ -156,7 +161,7 @@ class Offer < ApplicationRecord
   end
 
   def attach_type
-    self.stm_bug_id ? "bugs" : "repos"
+    self.stm_bug_uuid ? "bugs" : "repos"
   end
 
   def attach_obj
@@ -167,12 +172,34 @@ class Offer < ApplicationRecord
     self.volume - self.value
   end
 
+  def opposite_side
+    return "unfixed" if self.side == "fixed"
+    return "fixed"   if self.side == "unfixed"
+    ""
+  end
+
+  # ----- maturation -----
+
   def maturation_date
     self.maturation.strftime("%b-%d")
   end
 
   def maturation_time
     self.maturation.strftime("%b-%d %H:%M:%S")
+  end
+
+  def maturation_beg=(date)
+    m_beg = date.to_time
+    m_end = self.maturation_range&.last || m_beg+2.days
+    m_end = m_beg+2.days if m_beg > m_end
+    self.maturation_range = m_beg..m_end
+  end
+
+  def maturation_end=(date)
+    m_end  = date.to_time
+    m_beg  = self.maturation_range&.last || m_end-2.days
+    m_beg  = m_end-2.day if m_beg > m_end
+    self.maturation_range = m_beg..m_end
   end
 
   def maturation=(date)
@@ -188,13 +215,7 @@ class Offer < ApplicationRecord
     BugmTime.future_week_dates.index(self.maturation.strftime("%y-%m-%d"))
   end
 
-  # ----- predicates -----
-
-  def opposite_side
-    return "unfixed" if self.side == "fixed"
-    return "fixed"   if self.side == "unfixed"
-    ""
-  end
+  # ----- PREDICATES -----
 
   def is_matured?
     self.maturation < BugmTime.now
@@ -234,6 +255,7 @@ class Offer < ApplicationRecord
   def default_attributes
     self.status   ||= 'open'
     self.poolable ||= false
+    self.aon      ||= false
   end
 
   def update_value
@@ -249,33 +271,32 @@ end
 #
 # Table name: offers
 #
-#  id                  :integer          not null, primary key
-#  type                :string
-#  repo_type           :string
-#  user_id             :integer
-#  prototype_id        :integer
-#  amendment_id        :integer
-#  reoffer_parent_id   :integer
-#  salable_position_id :integer
-#  volume              :integer          default(1)
-#  price               :float            default(0.5)
-#  value               :float
-#  poolable            :boolean          default(TRUE)
-#  aon                 :boolean          default(FALSE)
-#  status              :string
-#  expiration          :datetime
-#  maturation_range    :tsrange
-#  xfields             :hstore           not null
-#  jfields             :jsonb            not null
-#  exref               :string
-#  uuref               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  stm_bug_id          :integer
-#  stm_repo_id         :integer
-#  stm_title           :string
-#  stm_status          :string
-#  stm_labels          :string
-#  stm_xfields         :hstore           not null
-#  stm_jfields         :jsonb            not null
+#  id                    :integer          not null, primary key
+#  uuid                  :string
+#  exid                  :string
+#  type                  :string
+#  repo_type             :string
+#  user_uuid             :string
+#  prototype_uuid        :string
+#  amendment_uuid        :string
+#  salable_position_uuid :string
+#  volume                :integer
+#  price                 :float
+#  value                 :float
+#  poolable              :boolean          default(FALSE)
+#  aon                   :boolean          default(FALSE)
+#  status                :string
+#  expiration            :datetime
+#  maturation_range      :tsrange
+#  xfields               :hstore           not null
+#  jfields               :jsonb            not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  stm_bug_uuid          :string
+#  stm_repo_uuid         :string
+#  stm_title             :string
+#  stm_status            :string
+#  stm_labels            :string
+#  stm_xfields           :hstore           not null
+#  stm_jfields           :jsonb            not null
 #
