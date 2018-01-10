@@ -20,12 +20,12 @@ list.each do |el|
   note        = el.css('Note[Type="Description"]')
   description = note.first&.text&.gsub("\n"," ") || "NA"
   attrs = {
-    type:    "Bug::Cvrf",
+    type:    "Issue::Cvrf",
     repo_id: repo.id,
     title:   el.css('Title').first&.text,
     status:  "NA",
     synced_at: Time.now
   }
-  Bug.create attrs
+  Issue.create attrs
 end
 

@@ -5,7 +5,7 @@ class Repo < ApplicationRecord
   has_paper_trail
 
   with_options foreign_key: "stm_repo_uuid", primary_key: "uuid", :dependent => :destroy do
-    has_many :bugs
+    has_many :issues
     has_many :offers
     has_many :contracts
   end

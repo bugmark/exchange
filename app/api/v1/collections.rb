@@ -21,10 +21,10 @@ module V1
       end
     end
 
-    resource :bugs do
+    resource :issues do
       desc "Return all bugs"
-      get "", :root => :bugs do
-        Bug.all
+      get "", :root => :issues do
+        Issue.all
       end
     end
 

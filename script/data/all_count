@@ -4,7 +4,7 @@ require "./config/environment"
 
 puts "- Users:      #{User.count}"
 puts "- Repos:      #{Repo.count}"
-puts "- Bugs:       #{Bug.count}"
+puts "- Bugs:       #{Issue.count}"
 puts "- BU Offers:  #{Offer::Buy::Unfixed.count}"
 puts "- BF Offers:  #{Offer::Buy::Fixed.count}"
 puts "- Contracts:  #{Contract.count}"

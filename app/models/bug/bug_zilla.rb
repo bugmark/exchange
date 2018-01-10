@@ -1,4 +1,4 @@
-class Bug::BugZilla < Bug
+class Issue::BugZilla < Bug
 
 end
 
@@ -15,7 +15,7 @@ end
 #  synced_at     :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  stm_bug_uuid  :string
+#  stm_issue_uuid  :string
 #  stm_repo_uuid :string
 #  stm_title     :string
 #  stm_status    :string

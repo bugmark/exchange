@@ -38,9 +38,9 @@ module Core
         maturation: BugmTime.now + 3.minutes  ,
         user_uuid:  current_user.uuid
       }
-      key = "stm_bug_uuid" if params["stm_bug_uuid"]
+      key = "stm_issue_uuid" if params["stm_issue_uuid"]
       key = "stm_repo_uuid" if params["stm_repo_uuid"]
-      id = params["stm_bug_uuid"] || params["stm_repo_uuid"]
+      id = params["stm_issue_uuid"] || params["stm_repo_uuid"]
       opts.merge({key => id}).without_blanks.stringify_keys
     end
   end

@@ -9,12 +9,12 @@ css:
 - content_for :page_js do
   javascript:
     window.Vals = {
-      f1: [#{docfix_issue_of_vol(@offer.bug, @offer.bugm_time_period)}],
-      u1: [#{docfix_issue_ou_vol(@offer.bug, @offer.bugm_time_period)}],
+      f1: [#{docfix_issue_of_vol(@offer.issue, @offer.issuem_time_period)}],
+      u1: [#{docfix_issue_ou_vol(@offer.issue, @offer.issuem_time_period)}],
     };
   = javascript_pack_tag "docfix/offers/show/depth"
 
-= breadcrumb [%w(BugMark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
+= breadcrumb [%w(Bugmark /docfix/home), %w(Offers /docfix/offers), "Offer ##{@offer.id}"]
 small
   a href="/docfix/offers" return to overview
 
@@ -68,7 +68,7 @@ small
       tr[style='background: lightgray; text-align: center;']
         td
           small
-            b Other Open Buy Offers for Issue ##{@offer.bug.id}
+            b Other Open Buy Offers for Issue ##{@offer.issue.id}
             br
             span.badge.badge-pill>[style='background: red;' ] fixed
             span.badge.badge-pill>[style='background: blue;'] unfixed

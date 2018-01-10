@@ -15,8 +15,8 @@ module Docfix
 
     def offer_buy
       @contract = Contract.find(params["id"])
-      @bug      = @contract.bug
-      opts   = helpers.docfix_offer_base_opts(perm(params), {stm_bug_uuid: @bug.uuid})
+      @bug      = @contract.issue
+      opts   = helpers.docfix_offer_base_opts(perm(params), {stm_issue_uuid: @bug.uuid})
       @offer = OfferCmd::CreateBuy.new(:offer_bf, opts)
     end
 

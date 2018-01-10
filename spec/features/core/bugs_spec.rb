@@ -4,7 +4,7 @@ describe "Bugs" do
 
   let(:user) { FB.create(:user).user                                     }
   let(:repo) { FB.create(:repo).repo                                     }
-  let(:bug)  { Bug.create(stm_repo_uuid: repo.uuid, type: "Bug::GitHub") }
+  let(:issue)  { Issue.create(stm_repo_uuid: repo.uuid, type: "Issue::GitHub") }
 
   it "renders index", USE_VCR do
     hydrate(bug)
@@ -29,7 +29,7 @@ describe "Bugs" do
     login_as(user, :scope => :user)
     hydrate(bug)
     expect(Offer::Buy::Fixed.count).to eq(0)
-    expect(Bug.count).to eq(1)
+    expect(Issue.count).to eq(1)
 
     visit "/core/bugs"
     click_on "fixed"
@@ -42,7 +42,7 @@ describe "Bugs" do
     login_as(user, :scope => :user)
     hydrate(bug)
     expect(Offer::Buy::Unfixed.count).to eq(0)
-    expect(Bug.count).to eq(1)
+    expect(Issue.count).to eq(1)
 
     visit "/core/bugs"
     click_on "unfixed"

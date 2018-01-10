@@ -18,7 +18,7 @@ RSpec.describe Offer, type: :model do
 
   describe "Associations" do
     it { should respond_to(:user)               }
-    it { should respond_to(:bug)                }
+    it { should respond_to(:issue)                }
     it { should respond_to(:repo)               }
     it { should respond_to(:position)           }
     it { should respond_to(:amendment)          }
@@ -188,7 +188,7 @@ end
 #  jfields               :jsonb            not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  stm_bug_uuid          :string
+#  stm_issue_uuid          :string
 #  stm_repo_uuid         :string
 #  stm_title             :string
 #  stm_status            :string

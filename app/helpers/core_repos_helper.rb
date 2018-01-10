@@ -18,7 +18,7 @@ module CoreReposHelper
   end
 
   def core_repo_bug_link(repo)
-    count = repo.bugs.count
+    count = repo.issues.count
     if count > 0
       raw "<a class='buglink' href='/core/bugs?stm_repo_uuid=#{repo.uuid}'>#{count}</a>"
     else

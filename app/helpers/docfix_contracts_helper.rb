@@ -93,7 +93,7 @@ module DocfixContractsHelper
   # ----- issue buttons -----
 
   def docfix_contract_action_btns(contract)
-    bug = contract.bug
+    bug = contract.issue
     return "" unless bug.present?
     raw <<-HTML.strip_heredoc
     <a class='btn btn-secondary' style='width: 100%; margin: 5px;' href='/docfix/issues/#{bug.id}/offer_buy'>
@@ -131,10 +131,10 @@ module DocfixContractsHelper
 
   def docfix_contract_assoc(contract)
     case
-      when contract.stm_bug_uuid
-        "issue ##{contract.bug.id}"
+      when contract.stm_issue_uuid
+        "issue ##{contract.issue.id}"
       when contract.stm_repo_uuid
-        "repo ##{contract.bug.id}"
+        "repo ##{contract.issue.id}"
       else ""
     end
   end
@@ -163,7 +163,7 @@ module DocfixContractsHelper
 
   def docfix_contract_assoc_link(contract)
     case
-      when contract.stm_bug_uuid
+      when contract.stm_issue_uuid
         docfix_contract_issue_link(contract)
       when contract.stm_repo_uuid
         docfix_contract_project_link(contract)
@@ -174,7 +174,7 @@ module DocfixContractsHelper
 
   def docfix_contract_assoc_label(contract)
     case
-      when contract.stm_bug_uuid
+      when contract.stm_issue_uuid
         "Issue"
       when contract.stm_repo_uuid
         "Project"
@@ -184,8 +184,8 @@ module DocfixContractsHelper
 
   def docfix_contract_issue_link(contract)
     raw <<-END.strip_heredoc
-      <a href="/core/issues/#{contract.bug.id}">
-        #{contract.bug.stm_title}
+      <a href="/core/issues/#{contract.issue.id}">
+        #{contract.issue.stm_title}
       </a>
     END
   end

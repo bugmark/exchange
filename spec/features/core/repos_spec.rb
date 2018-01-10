@@ -25,7 +25,7 @@ describe "Repos", USE_VCR do
   it "click thru to bug index" do
     hydrate(bug1)
     visit "/core/repos"
-    find('.buglink').click
+    find('.issuelink').click
     expect(page).to_not be_nil
   end
 
@@ -33,7 +33,7 @@ describe "Repos", USE_VCR do
     login_as(usr1, :scope => :user)
     hydrate(bug1)
     expect(Offer::Buy::Fixed.count).to eq(0)
-    expect(Bug.count).to eq(1)
+    expect(Issue.count).to eq(1)
 
     visit "/core/repos"
     click_on "fixed"
@@ -46,7 +46,7 @@ describe "Repos", USE_VCR do
     login_as(usr1, :scope => :user)
     hydrate(bug1)
     expect(Offer::Buy::Unfixed.count).to eq(0)
-    expect(Bug.count).to eq(1)
+    expect(Issue.count).to eq(1)
 
     visit "/core/repos"
     click_on "unfixed"

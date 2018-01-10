@@ -13,7 +13,7 @@
       input#hiVal[type='hidden' name="authenticity_token" value="#{form_authenticity_token}"]
       input#hiTyp[type='hidden' name="offer_cmd_create_buy[type]"         value="#{lcl_offer.type}"]
       input#hiUsr[type='hidden' name="offer_cmd_create_buy[user_uuid]"    value="#{lcl_offer.user.uuid}"]
-      input#hiBug[type='hidden' name="offer_cmd_create_buy[stm_bug_uuid]" value="#{lcl_offer.bug.uuid}"]
+      input#hiBug[type='hidden' name="offer_cmd_create_buy[stm_issue_uuid]" value="#{lcl_offer.issue.uuid}"]
       input#hiSta[type='hidden' name="offer_cmd_create_buy[stm_status]"   value="#{lcl_offer.stm_status}"]
       input#hiMat[type='hidden' name="offer_cmd_create_buy[maturation]"   value="#{lcl_offer.maturation.strftime('%y-%m-%d')}"]
       input#hiVol[type='hidden' name="offer_cmd_create_buy[volume]"       value="#{lcl_offer.volume}"]

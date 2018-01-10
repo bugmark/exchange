@@ -81,8 +81,8 @@ module DocfixOffersHelper
 
   def docfix_offer_assoc(offer)
     case
-      when offer.stm_bug_uuid
-        "issue ##{offer.bug.id}"
+      when offer.stm_issue_uuid
+        "issue ##{offer.issue.id}"
       when offer.stm_repo_uuid
         "repo ##{offer.repo.id}"
       else ""
@@ -113,7 +113,7 @@ module DocfixOffersHelper
 
   def docfix_offer_assoc_link(offer)
     case
-      when offer.stm_bug_uuid
+      when offer.stm_issue_uuid
         docfix_offer_issue_link(offer)
       when offer.stm_repo_uuid
         docfix_offer_project_link(offer)
@@ -124,7 +124,7 @@ module DocfixOffersHelper
 
   def docfix_offer_assoc_label(offer)
     case
-      when offer.stm_bug_uuid
+      when offer.stm_issue_uuid
         "Issue"
       when offer.stm_repo_uuid
         "Project"
@@ -134,8 +134,8 @@ module DocfixOffersHelper
 
   def docfix_offer_issue_link(offer)
     raw <<-END.strip_heredoc
-      <a href="/docfix/issues/#{offer.bug.id}">
-        #{offer.bug.stm_title} (Issue ##{offer.bug.id})
+      <a href="/docfix/issues/#{offer.issue.id}">
+        #{offer.issue.stm_title} (Issue ##{offer.issue.id})
       </a>
     END
   end
@@ -151,7 +151,7 @@ module DocfixOffersHelper
   # ----- issue buttons -----
 
   def docfix_offer_buy_btns(offer)
-    bug = offer.bug
+    bug = offer.issue
     return "" unless bug.present?
     docfix_issue_bu_btn(bug) + docfix_issue_bf_btn(bug)
   end
@@ -173,7 +173,7 @@ module DocfixOffersHelper
     mdat = offer.maturation.strftime("%y-%m-%d")
     cdep = offer.volume - offer.deposit
     qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}&offer_id=#{offer.id}"
-    href = "/docfix/issues/#{offer.bug.id}/#{otyp}"
+    href = "/docfix/issues/#{offer.issue.id}/#{otyp}"
     raw <<-ERB.strip_heredoc
       <a class="btn btn-secondary" href="#{href}?#{qstr}" style='width: 225px;'>
         #{label}

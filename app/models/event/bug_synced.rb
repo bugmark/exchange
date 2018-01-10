@@ -11,7 +11,7 @@ class Event::BugSynced < Event
   validates :stm_title , presence: true
 
   def cast_object
-    bug = Bug.find_or_initialize_by(exid: payload["exid"])
+    bug = Issue.find_or_initialize_by(exid: payload["exid"])
     bug.assign_attributes(payload.without_blanks)
     bug
   end

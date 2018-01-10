@@ -47,9 +47,9 @@ RSpec.describe ContractCmd::Delete do
   #   it 'updates the clone params' do
   #     hydrate(offer_bf)
   #     expect(Offer.count).to eq(1)
-  #     result = klas.new(offer_bf, stm_bug_id: 111).project
+  #     result = klas.new(offer_bf, stm_issue_id: 111).project
   #     expect(Offer.count).to eq(2)
-  #     expect(result.offer.stm_bug_id).to eq(111)
+  #     expect(result.offer.stm_issue_id).to eq(111)
   #   end
   # end
   #

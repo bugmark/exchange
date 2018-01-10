@@ -12,7 +12,7 @@ css:
     width: 80%;
   }
 
-= breadcrumb [%w(BugMark /docfix/home), %w(Contracts /docfix/contracts), @contract.id]
+= breadcrumb [%w(Bugmark /docfix/home), %w(Contracts /docfix/contracts), @contract.id]
 
 small
   a href="/docfix/contracts" return to overview
@@ -25,7 +25,7 @@ small
         tr
           td
             b Issue
-          td = @contract.bug.id
+          td = @contract.issue.id
         tr
           td
             b Created

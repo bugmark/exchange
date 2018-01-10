@@ -5,7 +5,7 @@ class IssueQuery
 
   def search
     if free_qry.blank? && lang_qry.blank?
-      Bug.all
+      Issue.all
     else
       qscore(free_qry, lang_qry)
     end
@@ -22,7 +22,7 @@ class IssueQuery
     qs << rank_str("stm_jfields->'comments'"   , freq) if freq.present?
     qs << rank_str("repos.xfields->'languages'", lanq) if lanq.present?
     rank = qs.join(" + ")
-    Bug.joins(:repo).where("#{rank} > 0").order("#{rank} desc")
+    Issue.joins(:repo).where("#{rank} > 0").order("#{rank} desc")
   end
 
   def rank_str(field, qry)

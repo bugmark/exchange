@@ -3,7 +3,7 @@ module BugCmd
 
     def initialize(xargs)
       args = xargs.stringify_keys
-      add_event :bug, Event::BugSynced.new(bug_opts(args))
+      add_event :issue, Event::BugSynced.new(bug_opts(args))
     end
 
     private

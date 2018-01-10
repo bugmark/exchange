@@ -4,7 +4,7 @@ module Vtest
     resource :issues do
       desc "Return all issues"
       get "", :root => :issues do
-        Bug.all
+        Issue.all
       end
     end
 

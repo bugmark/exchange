@@ -1,7 +1,7 @@
 - content_for :page_js do
   = javascript_pack_tag "docfix/issues/offer"
 
-= breadcrumb [%w(BugMark /docfix/home), %w(Issues /docfix/issues), ["Issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "Offer to Buy Unfixed"]
+= breadcrumb [%w(Bugmark /docfix/home), %w(Issues /docfix/issues), ["Issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "Offer to Buy Unfixed"]
 
 small
   a href="/docfix/issues/#{@bug.id}" return to issue #{@bug.id}

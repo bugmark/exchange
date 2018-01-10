@@ -261,7 +261,7 @@ Next Actions:
 - [x] cross: generate escrow
 - [x] cross: generate positions
 - [x] set default offer to non-poolable
-- [x] auto-update Bug#stm_bug_id
+- [x] auto-update Bug#stm_issue_id
 - [x] build out data loading scripts for offers
 - [x] run and edit UI
 
@@ -614,7 +614,7 @@ Next Actions:
 - [x] Show list of open offers on an issue, grouped by maturation date
 - [x] Add Chart.js
 - [x] JJ Contract Sparkline
-- [x] fix www.bugmark.net SSL cert
+- [x] fix www.issuemark.net SSL cert
 
 # Dec 07
 

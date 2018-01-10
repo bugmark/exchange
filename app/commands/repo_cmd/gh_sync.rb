@@ -24,7 +24,7 @@ module RepoCmd
       issues.each_with_index do |el, idx|
         attrs = {
           stm_repo_uuid: repo.uuid           ,
-          type:          "Bug::GitHub"     ,
+          type:          "Issue::GitHub"     ,
           exid:          el["id"]          ,
           stm_title:     el["title"]       ,
           stm_labels:    labels_for(el)    ,

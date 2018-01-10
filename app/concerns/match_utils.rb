@@ -3,7 +3,7 @@ module MatchUtils
 
   def match_attrs
     {
-      stm_bug_uuid:  self.stm_bug_uuid   ,
+      stm_issue_uuid:  self.stm_issue_uuid   ,
       stm_repo_uuid: self.stm_repo_uuid  ,
       stm_title:     self.stm_title      ,
       stm_status:    self.stm_status     ,
@@ -12,7 +12,7 @@ module MatchUtils
   end
 
   def match()                 Offer.match(match_attrs)            end
-  def match_bugs()            Bug.match(match_attrs)              end
+  def match_bugs()            Issue.match(match_attrs)              end
   def match_contracts()       Contract.match(match_attrs)         end
   def match_offers()          Offer.match(match_attrs)            end
 
@@ -35,8 +35,8 @@ module MatchUtils
       where(id: id)
     end
 
-    def by_bug_uuid(uuid)
-      where(stm_bug_uuid: uuid)
+    def by_issue_uuid(uuid)
+      where(stm_issue_uuid: uuid)
     end
 
     def by_repo_uuid(uuid)
@@ -72,8 +72,8 @@ module MatchUtils
 
     def scope_for(base, key, val)
       case key
-        when :stm_bug_uuid then
-          base.by_bug_uuid(val)
+        when :stm_issue_uuid then
+          base.by_issue_uuid(val)
         when :stm_repo_uuid then
           base.by_repo_uuid(val)
         when :stm_title then

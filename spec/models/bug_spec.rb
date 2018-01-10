@@ -66,15 +66,15 @@ RSpec.describe Bug, type: :model do
     end
   end
 
-  describe "stm_bug_uuid", USE_VCR do
+  describe "stm_issue_uuid", USE_VCR do
     it "starts empty" do
-      expect(subject.stm_bug_uuid).to be_nil
+      expect(subject.stm_issue_uuid).to be_nil
     end
 
     it "fills when saved" do
       subject.save
-      expect(subject.stm_bug_uuid).to_not be_nil
-      expect(subject.stm_bug_uuid).to eq(subject.uuid)
+      expect(subject.stm_issue_uuid).to_not be_nil
+      expect(subject.stm_issue_uuid).to eq(subject.uuid)
     end
   end
 
@@ -102,7 +102,7 @@ end
 #  synced_at     :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  stm_bug_uuid  :string
+#  stm_issue_uuid  :string
 #  stm_repo_uuid :string
 #  stm_title     :string
 #  stm_status    :string

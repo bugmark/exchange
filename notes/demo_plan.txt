@@ -30,13 +30,13 @@ On the 27th, we'd like a documentation fix market that works like a REAL SAAS
 [ ] MARKETING  Marketing documentation (landing page)
 [ ] MARKETING  Testimonials - teams who are using the system
 [ ] MARKETING  Identify/Contact repos that need doccco improvement (ethereum)
-[ ] COMMUNITY  BugMark Forum (discourse)
-[ ] COMMUNITY  BugMark Slack
-[ ] COMMUNITY  BugMark Blog
+[ ] COMMUNITY  Bugmark Forum (discourse)
+[ ] COMMUNITY  Bugmark Slack
+[ ] COMMUNITY  Bugmark Blog
 [ ] COMMUNITY  Contribution Guidelines, etc. (eating our own dogfood - see https://www.docker.com/contribute)
 [ ] BLOCKCHAIN Live Integration with Solidity Contracts (configuration TBD)
 [ ] MISC       invite capabilities, etc.
 [ ] MISC       search
 [ ] MISC       private repos
 [ ] MONITORING InfluxDB Application Metrics & Grafana Pages
-[ ] API        An API and/or CLI way to interact with BugMark
+[ ] API        An API and/or CLI way to interact with Bugmark

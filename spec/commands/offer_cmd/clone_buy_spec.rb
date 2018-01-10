@@ -44,9 +44,9 @@ RSpec.describe OfferCmd::CloneBuy do
     it 'updates the clone params' do
       hydrate(offer_bf)
       expect(Offer.count).to eq(1)
-      result = klas.new(offer_bf, stm_bug_uuid: "asdf").project
+      result = klas.new(offer_bf, stm_issue_uuid: "asdf").project
       expect(Offer.count).to eq(2)
-      expect(result.offer.stm_bug_uuid).to eq("asdf")
+      expect(result.offer.stm_issue_uuid).to eq("asdf")
     end
   end
 

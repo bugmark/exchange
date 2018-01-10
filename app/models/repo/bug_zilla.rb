@@ -1,6 +1,6 @@
 class Repo::BugZilla < Repo
 
-  # has_many :bugs, :dependent => :destroy
+  # has_many :issues, :dependent => :destroy
 
 end
 

@@ -16,12 +16,12 @@ module Docfix
           flash[:notice] = "New contract is created"
           redirect_to ("/docfix/contracts/#{contract.id}")
         else
-          @bug = @offer_bf.offer.bug
+          @bug = @offer_bf.offer.issue
           flash.now["error"] = "Error!"
           render "docfix/issues/match_bf"
         end
       else
-        @bug = @offer_bf.offer.bug
+        @bug = @offer_bf.offer.issue
         flash.now["error"] = "Error!"
         render "docfix/issues/match_bf"
       end

@@ -7,15 +7,15 @@ module Core
     def index
       if stm_repo_uuid = params["stm_repo_uuid"]
         @repo = Repo.find_by_uuid(stm_repo_uuid)
-        @bugs = @repo.bugs
+        @bugs = @repo.issues
       else
         @repo = nil
-        @bugs = Bug.all
+        @bugs = Issue.all
       end
     end
 
     def show
-      @bug = Bug.find_by_uuid(params["id"])
+      @bug = Issue.find_by_uuid(params["id"])
     end
   end
 end

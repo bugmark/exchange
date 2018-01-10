@@ -45,12 +45,12 @@ module Core
     private
 
     def set_filter(params)
-      keylist = %w(stm_repo_uuid stm_bug_uuid user_uuid)
+      keylist = %w(stm_repo_uuid stm_issue_uuid user_uuid)
       return nil unless params.keys.any? { |key| keylist.include?(key) }
       key = params.keys.find {|key| keylist.include?(key)}
       obj = case key
         when "stm_repo_uuid" then Repo.find_by_uuid(params[key])
-        when "stm_bug_uuid"  then Bug.find_by_uuid(params[key])
+        when "stm_issue_uuid"  then Issue.find_by_uuid(params[key])
         when "user_uuid"     then User.find_by_uuid(params[key])
       end
       OpenStruct.new(key: key, obj: obj)

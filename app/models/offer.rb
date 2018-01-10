@@ -9,7 +9,7 @@ class Offer < ApplicationRecord
 
   with_options primary_key: "uuid" do
     belongs_to :user            , optional: true , foreign_key: "user_uuid"
-    belongs_to :bug             , optional: true , foreign_key: "stm_bug_uuid"
+    belongs_to :issue           , optional: true , foreign_key: "stm_issue_uuid"
     belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid"
     has_one    :position                         , foreign_key: "offer_uuid"
     has_one    :prototype_parent                 , foreign_key: "prototype_uuid"        , class_name: "Offer"
@@ -77,7 +77,7 @@ class Offer < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id uuid type user_uuid salable_position_uuid prototype_uuid volume price value poolable aon status stm_bug_uuid stm_status))
+      select(%i(id uuid type user_uuid salable_position_uuid prototype_uuid volume price value poolable aon status stm_issue_uuid stm_status))
     end
     alias_method :ss, :select_subset
   end
@@ -161,7 +161,7 @@ class Offer < ApplicationRecord
   end
 
   def attach_type
-    self.stm_bug_uuid ? "bugs" : "repos"
+    self.stm_issue_uuid ? "bugs" : "repos"
   end
 
   def attach_obj
@@ -292,7 +292,7 @@ end
 #  jfields               :jsonb            not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  stm_bug_uuid          :string
+#  stm_issue_uuid          :string
 #  stm_repo_uuid         :string
 #  stm_title             :string
 #  stm_status            :string

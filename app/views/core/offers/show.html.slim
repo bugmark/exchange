@@ -61,7 +61,7 @@ table.table
       th Create
   - @offer.match_bugs.each do |bid|
     tr
-      td = core_bug_id_link(bid)
+      td = core_issue_id_link(bid)
       td = bid.type
       td = core_bug_title_link(bid)
       td = core_bug_contract_link(bid)

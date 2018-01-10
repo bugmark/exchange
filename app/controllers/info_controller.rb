@@ -33,7 +33,7 @@ class InfoController < ApplicationController
 
   def mailpost
     @address = save_address(params["mail_addr"])
-    flash[:notice] = " Thanks for joining the BugMark mailing list! (#{@address})"
+    flash[:notice] = " Thanks for joining the Bugmark mailing list! (#{@address})"
     redirect_to "/info/home"
   end
 

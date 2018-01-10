@@ -1,6 +1,6 @@
-# BugMark DevEnv
+# Bugmark DevEnv
 
-This covers the config and install of software components for BugMark development.
+This covers the config and install of software components for Bugmark development.
 
 NOTE: you don't need the full development environment to contribute
 documentation fixes!  Just clone the repo, edit text files and submit PR's.

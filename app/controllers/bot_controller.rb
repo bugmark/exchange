@@ -17,7 +17,7 @@ class BotController < ApplicationController
   end
 
   def timeinc
-    Bug.open[0..2].each do |bug|
+    Issue.open[0..2].each do |bug|
       bug.update_attribute :stm_status, 'closed'
     end
     BugmTime.increment_day_jump(8)

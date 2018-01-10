@@ -27,7 +27,7 @@ FactoryBot.define do
     name "mvscorg/bugmark"
   end
 
-  factory :bug, class: BugCmd::Sync do
+  factory :issue, class: BugCmd::Sync do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
@@ -37,7 +37,7 @@ FactoryBot.define do
     sequence :exid do |n|
       "exid#{n}"
     end
-    type "Bug::GitHub"
+    type "Issue::GitHub"
     stm_repo_uuid { FB.create(:repo).repo&.uuid || Repo.first&.uuid || SecureRandom.uuid  }
   end
 
@@ -51,7 +51,7 @@ FactoryBot.define do
     volume 10
     maturation Time.now + 1.day
     user_uuid    { FB.create(:user).user.uuid   }
-    stm_bug_uuid { FB.create(:bug).bug.uuid     }
+    stm_issue_uuid { FB.create(:issue).issue.uuid     }
     stm_status "closed"
     poolable   false
     aon        false
@@ -65,7 +65,7 @@ FactoryBot.define do
     volume     10
     maturation Time.now + 1.day
     user_uuid    { FB.create(:user).user.uuid   }
-    stm_bug_uuid { FB.create(:bug).bug.uuid     }
+    stm_issue_uuid { FB.create(:issue).issue.uuid     }
     stm_status "closed"
     poolable   false
     aon        false
@@ -118,8 +118,8 @@ module FBX
   # ----- private -----
 
   def FBX.create_buy_offers(opts)
-    bug      = FB.create(:bug).bug
-    xopt     = opts.merge({stm_bug_uuid: bug.uuid})
+    bug      = FB.create(:issue).issue
+    xopt     = opts.merge({stm_issue_uuid: bug.uuid})
     obu_opts = FBX.opts_for(:obu, xopt)
     obf_opts = FBX.opts_for(:obf, xopt)
     obu      = FB.create(:offer_bu, obu_opts).offer

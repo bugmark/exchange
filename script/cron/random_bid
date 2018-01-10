@@ -7,7 +7,7 @@ user1, user2, user3 = users
 
 users.each {|user| user.update_attribute(:balance, 500) if user.balance < 100}
 
-bug_ids = Bug.all.pluck(:id)[0..1]
+issue_ids = Issue.all.pluck(:id)[0..1]
 # prices  = (40..60).to_a.map {|price| price / 100.0}
 prices  = [0.40, 0.45, 0.50, 0.55, 0.60]
 volumes = (1..10).to_a
@@ -19,9 +19,9 @@ offers = users.map do |user|
   opt    = opts.shuffle.first
   price  = prices.shuffle.first
   volume = volumes.shuffle.first
-  bug_id = bug_ids.shuffle.first
+  issue_id = issue_ids.shuffle.first
 
-  offer = OfferCmd::CreateBuy.new(opt, {user: user, price: price, volume: volume, stm_bug_id: bug_id}).project
+  offer = OfferCmd::CreateBuy.new(opt, {user: user, price: price, volume: volume, stm_issue_id: issue_id}).project
   offer.offer
 end
 

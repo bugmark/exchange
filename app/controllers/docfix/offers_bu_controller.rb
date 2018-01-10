@@ -12,7 +12,7 @@ module Docfix
       if @offer_bu.project
         redirect_to("/docfix/offers/#{@offer_bu.offer.id}")
       else
-        @bug = @offer_bu.offer.bug
+        @bug = @offer_bu.offer.issue
         render "docfix/issues/offer_bu"
       end
     end

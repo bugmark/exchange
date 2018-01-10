@@ -31,8 +31,8 @@ module ApplicationHelper
   # -----
 
   def issue_links
-    num_open   = Bug.open.count
-    num_closed = Bug.closed.count
+    num_open   = Issue.open.count
+    num_closed = Issue.closed.count
     "Open #{num_open} | Closed #{num_closed}"
   end
 

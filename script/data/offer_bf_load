@@ -8,35 +8,35 @@ users = User.where("email ilike 'test%'")
 
 opts = [
   {
-    stm_bug_uuid: Bug.second.uuid     ,
+    stm_issue_uuid: Issue.second.uuid     ,
     price:        0.10                ,
     volume:       45                  ,
     user_uuid:    users.first.uuid    ,
     maturation:   week_ends.first
   },
   {
-    stm_bug_uuid: Bug.third.uuid      ,
+    stm_issue_uuid: Issue.third.uuid      ,
     price:        0.50                ,
     volume:       35                  ,
     user_uuid:    users.second.uuid   ,
     maturation:   week_ends.first
   },
   {
-    stm_bug_uuid: Bug.first.uuid      ,
+    stm_issue_uuid: Issue.first.uuid      ,
     price:        0.25                ,
     volume:       20                  ,
     user_uuid:    users.last.uuid     ,
     maturation:   week_ends.first
   },
   {
-    stm_bug_uuid: Bug.third.uuid      ,
+    stm_issue_uuid: Issue.third.uuid      ,
     price:        0.80                ,
     volume:       25                  ,
     user_uuid:    users.last.uuid     ,
     maturation:   week_ends.first
   },
   {
-    stm_bug_uuid: Bug.first.uuid      ,
+    stm_issue_uuid: Issue.first.uuid      ,
     price:        0.50                ,
     volume:       35                  ,
     user_uuid:    users.last.uuid     ,

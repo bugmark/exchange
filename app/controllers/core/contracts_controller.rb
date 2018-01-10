@@ -5,14 +5,14 @@ module Core
 
     before_action :authenticate_user!, :except => [:index, :show, :resolve, :chart]
 
-    # stm_bug_uuid (optional)
+    # stm_issue_uuid (optional)
     def index
       @bug = @repo = nil
       base_scope = Contract.all
       case
-        when stm_bug_uuid = params["stm_bug_uuid"]
-          @bug = Bug.find_by_uuid(stm_bug_uuid)
-          @contracts = base_scope.where(stm_bug_uuid: stm_bug_uuid)
+        when stm_issue_uuid = params["stm_issue_uuid"]
+          @bug = Issue.find_by_uuid(stm_issue_uuid)
+          @contracts = base_scope.where(stm_issue_uuid: stm_issue_uuid)
         when stm_repo_uuid = params["stm_repo_uuid"]
           @repo = Repo.find_by_uuid(stm_repo_uuid)
           @contracts = base_scope.where(stm_repo_uuid: stm_repo_uuid)
@@ -135,9 +135,9 @@ module Core
         maturation: BugmTime.now + 3.minutes,
         user_uuid: current_user.uuid
       }
-      key = "stm_bug_uuid" if params["stm_bug_uuid"]
+      key = "stm_issue_uuid" if params["stm_issue_uuid"]
       key = "stm_repo_uuid" if params["stm_repo_uuid"]
-      id = params["stm_bug_uuid"] || params["stm_repo_uuid"]
+      id = params["stm_issue_uuid"] || params["stm_repo_uuid"]
       opts.merge({key => id})
     end
   end

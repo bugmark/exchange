@@ -1,7 +1,7 @@
 doctype html
 html[lang="en-US"]
   head
-    title = @page_title || "BugMark"
+    title = @page_title || "Bugmark"
     = csrf_meta_tags
     link[href="/img/bugfav.ico" rel="icon" type="image/x-icon"]
     meta[name="google-site-verification" content="UUWuW0CZrLjsEb0HUaB_7IMJqyqNyKLhaSWvQX_Sq6U"]
@@ -16,7 +16,7 @@ html[lang="en-US"]
         span.navbar-toggler-icon
       a.navbar-brand[href="/"]
         img[src="/img/icon2.ico" style='position: relative; top: -1px; margin-right: 3px; background:grey']
-        | BugMark
+        | Bugmark
       .collapse.navbar-collapse
         - unless content_for(:navbar)
           ul.navbar-nav.mr-auto
@@ -34,7 +34,7 @@ html[lang="en-US"]
         = content_for(:footerbar)
         div[style="text-align: center"]
           small
-            | Powered by BugMark
+            | Powered by Bugmark
             - if BugmTime.day_offset != 0
               '  |
               b DemoTime +#{BugmTime.day_offset} days: #{BugmTime.now.strftime("%y-%m-%d %H:%M")}

@@ -22,7 +22,7 @@ module V1
         },
         security:    [{base: []}],
         info: {
-          title:        "BugMark API"                                 ,
+          title:        "Bugmark API"                                 ,
           description:  "all calls require BASIC AUTH"                ,
           contact_name: "Andrew Leak - andy@r210.com - 650-823-0836"  ,
         }

@@ -265,14 +265,14 @@ RSpec.describe ContractCmd::Cross::Expand do
       end
 
       it "suspends over-limit orders", :focus do #
-        bugid = FB.create(:bug).bug.uuid
-        obf = FB.create(:offer_bf, stm_bug_uuid: bugid).offer
+        bugid = FB.create(:issue).issue.uuid
+        obf = FB.create(:offer_bf, stm_issue_uuid: bugid).offer
         xusr = FB.create(:user, balance: 8.0).user
-        offer_bu1 = FB.create(:offer_bu, stm_bug_uuid: bugid, volume: 10, user_uuid: xusr.uuid, poolable: true)
+        offer_bu1 = FB.create(:offer_bu, stm_issue_uuid: bugid, volume: 10, user_uuid: xusr.uuid, poolable: true)
         expect(offer_bu1).to be_valid
         expect(xusr.balance).to eq(8.0)
         expect(xusr.token_available).to eq(2.0)
-        offer_bu2 = FB.create(:offer_bu, stm_bug_uuid: bugid, volume: 10, user_uuid: xusr.uuid, poolable: true)
+        offer_bu2 = FB.create(:offer_bu, stm_issue_uuid: bugid, volume: 10, user_uuid: xusr.uuid, poolable: true)
         expect(offer_bu2).to be_valid
         expect(xusr.token_available).to eq(2.0)
         expect(Offer.count).to eq(3)
@@ -328,9 +328,9 @@ RSpec.describe ContractCmd::Cross::Expand do
 
     context "with AON" do
       it "combines matching targets" do
-        bugid = FB.create(:bug).bug.uuid
-        offer_bf = FB.create(:offer_bf, aon: true, stm_bug_uuid: bugid).offer
-        offer_bu = FB.create(:offer_bu, aon: true, stm_bug_uuid: bugid).offer
+        bugid = FB.create(:issue).issue.uuid
+        offer_bf = FB.create(:offer_bf, aon: true, stm_issue_uuid: bugid).offer
+        offer_bu = FB.create(:offer_bu, aon: true, stm_issue_uuid: bugid).offer
         klas.new(offer_bf, :expand).project
         expect(Contract.count).to eq(1)
       end
@@ -343,9 +343,9 @@ RSpec.describe ContractCmd::Cross::Expand do
       end
 
       it "adjusts the BF offer" do
-        bugid    = FB.create(:bug).bug.uuid
-        offer_bf = FB.create(:offer_bf, stm_bug_uuid: bugid, volume: 11).offer
-        offer_bu = FB.create(:offer_bu, stm_bug_uuid: bugid, aon: true).offer
+        bugid    = FB.create(:issue).issue.uuid
+        offer_bf = FB.create(:offer_bf, stm_issue_uuid: bugid, volume: 11).offer
+        offer_bu = FB.create(:offer_bu, stm_issue_uuid: bugid, aon: true).offer
         klas.new(offer_bf, :expand).project
         expect(Contract.count).to eq(1)
         expect(Offer.open.count).to eq(1)  # the re-offer!

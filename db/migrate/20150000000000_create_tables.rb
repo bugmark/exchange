@@ -20,7 +20,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :repos, :jfields, using: :gin
     add_index :repos, :xfields, using: :gin
 
-    create_table :bugs do |t|
+    create_table :issues do |t|
       t.string   :type             # BugZilla, GitHub, Cve
       t.string   :uuid
       t.string   :exid
@@ -29,11 +29,11 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.datetime :synced_at
       t.timestamps
     end
-    add_index :bugs, :type
-    add_index :bugs, :uuid
-    add_index :bugs, :exid
-    add_index :bugs, :jfields, using: :gin
-    add_index :bugs, :xfields, using: :gin
+    add_index :issues, :type
+    add_index :issues, :uuid
+    add_index :issues, :exid
+    add_index :issues, :jfields, using: :gin
+    add_index :issues, :xfields, using: :gin
 
     create_table :offers do |t|
       t.string   :uuid
@@ -91,8 +91,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :contracts, :jfields, using: :gin
 
     # ----- STATEMENT FIELDS -----
-    %i(bugs offers contracts).each do |table|
-      add_column table, :stm_bug_uuid  , :string
+    %i(issues offers contracts).each do |table|
+      add_column table, :stm_issue_uuid  , :string
       add_column table, :stm_repo_uuid , :string
       add_column table, :stm_title     , :string
       add_column table, :stm_status    , :string
@@ -101,7 +101,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_column table, :stm_jfields   , :jsonb  , null: false, default: {}
 
       add_index table, :stm_repo_uuid
-      add_index table, :stm_bug_uuid
+      add_index table, :stm_issue_uuid
       add_index table, :stm_title
       add_index table, :stm_status
       add_index table, :stm_labels

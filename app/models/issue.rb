@@ -1,4 +1,4 @@
-class Bug < ApplicationRecord
+class Issue < ApplicationRecord
 
   include MatchUtils
   include PgSearch
@@ -11,7 +11,7 @@ class Bug < ApplicationRecord
     belongs_to :repo      , :foreign_key => :stm_repo_uuid
   end
 
-  with_options foreign_key: "stm_bug_uuid", primary_key: "uuid" do
+  with_options foreign_key: "stm_issue_uuid", primary_key: "uuid" do
     has_many   :offers    , :dependent  => :destroy
     has_many   :offers_bf , :class_name => "Offer::Buy::Fixed"
     has_many   :offers_bu , :class_name => "Offer::Buy::Unfixed"
@@ -38,7 +38,7 @@ class Bug < ApplicationRecord
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
       alt << "substring(stm_title for 20) as title"
-      select(%i(id uui type stm_repo_uuid stm_bug_uuid stm_status stm_labels) + alt)
+      select(%i(id uui type stm_repo_uuid stm_issue_uuid stm_status stm_labels) + alt)
     end
     alias_method :ss, :select_subset
   end
@@ -58,7 +58,7 @@ class Bug < ApplicationRecord
   end
 
   def xtype
-    self.type.gsub("Bug::","")
+    self.type.gsub("Issue::","")
   end
 
   def has_offers?()    offers.count > 0    end
@@ -68,8 +68,8 @@ class Bug < ApplicationRecord
 
   def update_stm_ids
     return if self.uuid.nil?
-    return if self.stm_bug_uuid.present?
-    update_attribute :stm_bug_uuid, self.uuid
+    return if self.stm_issue_uuid.present?
+    update_attribute :stm_issue_uuid, self.uuid
   end
 end
 
@@ -86,7 +86,7 @@ end
 #  synced_at     :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  stm_bug_uuid  :string
+#  stm_issue_uuid  :string
 #  stm_repo_uuid :string
 #  stm_title     :string
 #  stm_status    :string

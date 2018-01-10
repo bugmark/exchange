@@ -19,7 +19,7 @@ class History
     end
     @lcl_hash[current_period.to_s] = {
       "date"               => date_for(current_period),
-      "closed_issues"      => Bug.closed.count,
+      "closed_issues"      => Issue.closed.count,
       "resolved_contracts" => Contract.resolved.count,
       "balance"            => user.balance
     }

@@ -6,7 +6,7 @@ RSpec.describe Event::BugSynced, :type => :model do
     {
       cmd_type:           "Test::BugCreated"         ,
       cmd_uuid:           SecureRandom.uuid          ,
-      type:               "Bug::GitHub"              ,
+      type:               "Issue::GitHub"              ,
       uuid:               SecureRandom.uuid          ,
       stm_title:          "ping/pong"                ,
       stm_repo_uuid:      repo.uuid                  ,
@@ -38,11 +38,11 @@ RSpec.describe Event::BugSynced, :type => :model do
 
   describe "Casting", USE_VCR do
     it "increments the bug count" do
-      expect(Bug.count).to eq(0)
+      expect(Issue.count).to eq(0)
       result = subject.ev_cast
       expect(result).to be_a(Bug)
       expect(Event.count).to eq(2)
-      expect(Bug.count).to  eq(1)
+      expect(Issue.count).to  eq(1)
     end
   end
 end

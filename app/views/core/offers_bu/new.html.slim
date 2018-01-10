@@ -20,7 +20,7 @@ hr
     .col-md-12
       small
         | Bids and Asks are defined in Standard Units.
-          BugMark trades standard units that payoff either 1 token or 0 tokens.
+          Bugmark trades standard units that payoff either 1 token or 0 tokens.
           The price for a unit varies between 0.00 and 1.00 tokens.
           For all contracts, the Bid Price and the Ask Price always total 1.00.
   div style='background: lightgrey; padding: 4px; margin-top: 10px;'
@@ -28,12 +28,12 @@ hr
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
     .row
       .col-md-6 = f.text_field  :stm_repo_uuid  , label: "Repo ID"
-      .col-md-6 = f.text_field  :stm_bug_uuid   , label: "Bug ID"
+      .col-md-6 = f.text_field  :stm_issue_uuid   , label: "Bug ID"
     .row
       .col-md-6 = f.text_field    :stm_title      , label: "Bug Title (substring match)"
       .col-md-6 = f.text_field    :stm_status     , label: "Bug Status (open | closed | <blank>)"
   small
-    | BugMark contracts are resolved on the maturation date.
+    | Bugmark contracts are resolved on the maturation date.
        If the Match Params hit on one or more issue, the
        contract resolves to TRUE, otherwise FALSE.
   p style='margin-top: 10px;' = f.submit "Create Offer to Buy Unfixed"

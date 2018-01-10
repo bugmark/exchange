@@ -7,7 +7,7 @@ class Contract < ApplicationRecord
   has_paper_trail
 
   belongs_to :repo            , foreign_key: "stm_repo_uuid" , primary_key: "uuid", optional: true
-  belongs_to :bug             , foreign_key: "stm_bug_uuid"  , primary_key: "uuid", optional: true
+  belongs_to :issue             , foreign_key: "stm_issue_uuid", primary_key: "uuid", optional: true
   has_one  :prototype         , foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
   has_many :prototype_children, foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
 
@@ -53,7 +53,7 @@ class Contract < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id uuid type prototype_uuid status stm_status stm_bug_uuid stm_repo_uuid awarded_to))
+      select(%i(id uuid type prototype_uuid status stm_status stm_issue_uuid stm_repo_uuid awarded_to))
     end
     alias_method :ss, :select_subset
   end
@@ -77,7 +77,7 @@ class Contract < ApplicationRecord
   end
 
   def attach_type
-    self.bug_id ? "bugs" : "repos"
+    self.issue_id ? "bugs" : "repos"
   end
 
   def attach_obj
@@ -200,7 +200,7 @@ end
 #  jfields        :jsonb            not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#  stm_bug_uuid   :string
+#  stm_issue_uuid   :string
 #  stm_repo_uuid  :string
 #  stm_title      :string
 #  stm_status     :string
