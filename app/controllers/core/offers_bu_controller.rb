@@ -8,8 +8,6 @@ module Core
     def new
       new_opts = new_opts(params)
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, new_opts).offer_new
-      binding.pry
-      x = 1
     end
 
     def create
