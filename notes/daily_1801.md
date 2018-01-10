@@ -19,6 +19,12 @@ Discussion:
 
 - goal: alpha-CLI for linux tomorrow
 
+    bing
+    bong
+    boom
+
+test
+
     <code>
     aleak@soak (master) ~/src/bmx_ruby> bin/bmx_ruby help
     Commands:
