@@ -17,7 +17,7 @@ Wed Jan 10
 
 Discussion:
 
-- goal to have an alpha-CLI tomorrow for linux users
+- goal: alpha-CLI for linux tomorrow
 
     aleak@soak (master) ~/src/bmx_ruby> bin/bmx_ruby help
     Commands:
@@ -33,7 +33,7 @@ Discussion:
 
 Target Outcomes Jan 10:
 - [ ] cli integration with basic-auth
-- [ ] finalize cli publishing 
-- [ ] Build out offer and user sub-commands
+- [ ] working cli publish/distribution process
 - [ ] Writeup linux installation instructions
+- [ ] Build out offer and user sub-commands
 
