@@ -19,6 +19,7 @@ Discussion:
 
 - goal: alpha-CLI for linux tomorrow
 
+    <code>
     aleak@soak (master) ~/src/bmx_ruby> bin/bmx_ruby help
     Commands:
       bmx_ruby config SUBCOMMAND ...ARGS    # set BMX host and user credentials
@@ -30,6 +31,7 @@ Discussion:
       bmx_ruby offer SUBCOMMAND ...ARGS     # manage offer
       bmx_ruby repo SUBCOMMAND ...ARGS      # manage repo
       bmx_ruby user SUBCOMMAND ...ARGS      # manage user
+    </code>
 
 Target Outcomes Jan 10:
 - [ ] cli integration with basic-auth
