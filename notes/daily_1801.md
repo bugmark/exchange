@@ -15,7 +15,7 @@ Target Outcomes Jan 09:
 Wed Jan 10
 ----------------------------------------------
 
-Discussion: goal - alpha-CLI for linux tomorrow
+Goal: alpha-CLI for linux tomorrow
 
     aleak@soak (master) ~/src/bmx_ruby> bin/bmx_ruby help
     Commands:
