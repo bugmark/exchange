@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Bug, type: :model do
+RSpec.describe Issue, type: :model do
 
   def valid_params(repo, extra_params = {})
     {

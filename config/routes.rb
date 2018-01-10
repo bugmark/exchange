@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       get 'sync', :on => :member
     end
     resources :repo_git_hubs, path: "/core/repos"
-    resources :issues
+    resources :bugs
     resources :offers_bu
     resources :offers_bf
     resources :offers do

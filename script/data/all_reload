@@ -13,25 +13,12 @@ echo "START `date`"
 
 echo LOADING ENV $RAILS_ENV
 
-echo Clear Old Data
-script/data/all_clear
-
-echo Load User Data
-script/data/user_load
-
-echo Load GH data
-script/data/gh_load
-
-echo Load Offers to BuyUnfixed
-bundle exec script/data/offer_bu_load
-
-echo Load Offers to BuyFixed
-bundle exec script/data/offer_bf_load
-
-echo Load Contracts
-bundle exec script/data/contract_load
-
-echo Counts
-bundle exec script/data/all_count
+( echo Clear Old Data ; script/data/all_clear                 ) && 
+( echo Load User Data ; script/data/user_load                 ) &&
+( echo Load GH data   ; script/data/gh_load                   ) &&
+( echo Load OfferBU   ; bundle exec script/data/offer_bu_load ) &&
+( echo Load OfferBF   ; bundle exec script/data/offer_bf_load ) &&
+( echo Load Contracts ; bundle exec script/data/contract_load ) &&
+( echo Counts         ; bundle exec script/data/all_count     ) 
 
 echo "DONE `date`"

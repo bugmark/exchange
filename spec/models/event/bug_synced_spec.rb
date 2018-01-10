@@ -28,7 +28,7 @@ RSpec.describe Event::BugSynced, :type => :model do
 
     it 'emits a bug object' do
       obj = subject.ev_cast
-      expect(obj).to be_a(Bug)
+      expect(obj).to be_a(Issue)
     end
 
     it 'prevents calling save' do
@@ -40,9 +40,9 @@ RSpec.describe Event::BugSynced, :type => :model do
     it "increments the bug count" do
       expect(Issue.count).to eq(0)
       result = subject.ev_cast
-      expect(result).to be_a(Bug)
+      expect(result).to be_a(Issue)
       expect(Event.count).to eq(2)
-      expect(Issue.count).to  eq(1)
+      expect(Issue.count).to eq(1)
     end
   end
 end

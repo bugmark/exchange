@@ -1,33 +1,33 @@
 require 'rails_helper'
 
-describe "Bugs" do
+describe "Issues", USE_VCR do
 
-  let(:user) { FB.create(:user).user                                     }
-  let(:repo) { FB.create(:repo).repo                                     }
-  let(:issue)  { Issue.create(stm_repo_uuid: repo.uuid, type: "Issue::GitHub") }
+  let(:user)  { FB.create(:user).user                                         }
+  let(:repo)  { FB.create(:repo).repo                                         }
+  let(:issue) { Issue.create(stm_repo_uuid: repo.uuid, type: "Issue::GitHub") }
 
-  it "renders index", USE_VCR do
-    hydrate(bug)
+  it "renders index" do
+    hydrate(issue)
     visit "/core/bugs"
     expect(page).to_not be_nil
   end
 
-  it "renders show", USE_VCR do
-    hydrate(bug)
-    visit "/core/bugs/#{bug.uuid}"
+  it "renders show" do
+    hydrate(issue)
+    visit "/core/bugs/#{issue.uuid}"
     expect(page).to_not be_nil
   end
 
-  it "clicks thru to show", USE_VCR do
-    hydrate(bug)
+  it "clicks thru to show" do
+    hydrate(issue)
     visit "/core/bugs"
-    click_on "bug.#{bug.id}"
+    click_on "bug.#{issue.id}"
     expect(page).to_not be_nil
   end
 
-  it "creates an OBF", USE_VCR do
+  it "creates an OBF" do
     login_as(user, :scope => :user)
-    hydrate(bug)
+    hydrate(issue)
     expect(Offer::Buy::Fixed.count).to eq(0)
     expect(Issue.count).to eq(1)
 
@@ -38,9 +38,9 @@ describe "Bugs" do
     expect(Offer::Buy::Fixed.count).to eq(1)
   end
 
-  it "creates a OBU", USE_VCR do
+  it "creates a OBU" do
     login_as(user, :scope => :user)
-    hydrate(bug)
+    hydrate(issue)
     expect(Offer::Buy::Unfixed.count).to eq(0)
     expect(Issue.count).to eq(1)
 

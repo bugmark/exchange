@@ -9,8 +9,8 @@ css:
 - content_for :page_js do
   javascript:
     window.Vals = {
-      f1: [#{docfix_issue_of_vol(@offer.issue, @offer.issuem_time_period)}],
-      u1: [#{docfix_issue_ou_vol(@offer.issue, @offer.issuem_time_period)}],
+      f1: [#{docfix_issue_of_vol(@offer.issue, @offer.bugm_time_period)}],
+      u1: [#{docfix_issue_ou_vol(@offer.issue, @offer.bugm_time_period)}],
     };
   = javascript_pack_tag "docfix/offers/show/depth"
 

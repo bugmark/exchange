@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Issues" do
+describe "Issues", USE_VCR do
 
   let(:user) { FB.create(:user).user                                     }
   let(:repo) { FB.create(:repo).repo                                     }
@@ -8,22 +8,22 @@ describe "Issues" do
 
   include_context 'Integration Environment'
 
-  it "renders index", USE_VCR do
-    hydrate(bug)
+  it "renders index" do
+    hydrate(issue)
     visit "/docfix/issues"
     expect(page).to_not be_nil
   end
 
-  it "renders show", USE_VCR do
-    hydrate(bug)
-    visit "/docfix/issues/#{bug.id}"
+  it "renders show" do
+    hydrate(issue)
+    visit "/docfix/issues/#{issue.id}"
     expect(page).to_not be_nil
   end
 
-  it "generates an OBF", USE_VCR do
+  it "generates an OBF" do
     login_as(usr1, :scope => :user)
-    hydrate(bug)
-    visit "/docfix/issues/#{bug.id}"
+    hydrate(issue)
+    visit "/docfix/issues/#{issue.id}"
     click_on "BE THE FIRST TO INVEST"
     click_on "Buy Unfixed"
     expect(Offer.count).to eq(0)
@@ -32,10 +32,10 @@ describe "Issues" do
     expect(Offer.count).to eq(1)
   end
 
-  it "generates an OBU", USE_VCR do
+  it "generates an OBU" do
     login_as(usr1, :scope => :user)
-    hydrate(bug)
-    visit "/docfix/issues/#{bug.id}"
+    hydrate(issue)
+    visit "/docfix/issues/#{issue.id}"
     click_on "BE THE FIRST TO INVEST"
     click_on "Buy Fixed"
     expect(Offer.count).to eq(0)

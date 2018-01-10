@@ -1,4 +1,4 @@
-class Issue::GitHub < Bug
+class Issue::GitHub < Issue
 
 end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Bug Factory' do
+RSpec.describe 'Issue Factory' do
 
   it "runs without params", USE_VCR do
     expect(Issue.count).to eq(0)

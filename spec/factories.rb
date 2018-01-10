@@ -32,7 +32,7 @@ FactoryBot.define do
     initialize_with { new(attributes) }
 
     sequence :stm_title do |n|
-      "Bug #{n}"
+      "Issue #{n}"
     end
     sequence :exid do |n|
       "exid#{n}"

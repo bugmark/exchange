@@ -4,7 +4,7 @@ class Event::BugSynced < Event
 
   EXTRAS = {extras: {"html_url" => :string, "comments" => :string}}
 
-  jsonb_fields_for :payload, Bug, EXTRAS
+  jsonb_fields_for :payload, Issue, EXTRAS
 
   validates :type      , presence: true
   validates :exid      , presence: true

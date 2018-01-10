@@ -1,4 +1,4 @@
-class Issue::BugZilla < Bug
+class Issue::BugZilla < Issue
 
 end
 
