@@ -24,7 +24,7 @@ Type=simple
 
 WorkingDirectory=/home/deploy/run/bugmark/current
 EnvironmentFile=/home/deploy/run/bugmark/current/.env
-ExecStart=/bin/bash -lc 'bin/puma -p <%= fetch(:web_port) %> -C config/puma.rb -e production -S $USR_HOME/.issuemark_Puma_State'
+ExecStart=/bin/bash -lc 'bin/puma -p <%= fetch(:web_port) %> -C config/puma.rb -e production -S $USR_HOME/.Bugmark_Puma_State'
 
 Restart=always
 KillMode=mixed

@@ -614,7 +614,7 @@ Next Actions:
 - [x] Show list of open offers on an issue, grouped by maturation date
 - [x] Add Chart.js
 - [x] JJ Contract Sparkline
-- [x] fix www.issuemark.net SSL cert
+- [x] fix www.bugmark.net SSL cert
 
 # Dec 07
 

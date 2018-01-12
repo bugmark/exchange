@@ -4,7 +4,7 @@ Tue Jan 09
 ----------------------------------------------
 
 Discussion:
-- research.issuemark.net is live
+- research.bugmark.net is live
 - ruby bindings work end-to-end with basic auth
 
 Target Outcomes Jan 09:
