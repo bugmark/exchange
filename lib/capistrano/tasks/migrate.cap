@@ -10,7 +10,7 @@ namespace :deploy do
       # the database and reload all data
       execute "[ -f /etc/systemd/system/bugmark.service ] && sudo systemctl stop bugmark || echo pending"
       execute "cd #{release_path} && bundle exec script/data/all_production"
-      execute "sudo systemctl start bugmark"
+      execute "[ -f /etc/systemd/system/bugmark.service ] && sudo systemctl start bugmark || echo pending"
       # execute "cd #{release_path} && RAILS_ENV=production bundle exec rake db:migrate"
     end
   end
