@@ -55,7 +55,7 @@ namespace :systemd do
   desc "Stop the application services"
   task :stop do
     on roles(:all) do
-      execute "[ -f /etc/systemd/system/bugmark.service ] && sudo systemctl stop bugmark"
+      execute "[ -f /etc/systemd/system/bugmark.service ] && sudo systemctl stop bugmark || echo pending"
     end
   end
 
