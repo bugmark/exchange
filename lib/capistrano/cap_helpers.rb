@@ -6,8 +6,12 @@ def render(from)
 end
 
 def template(from, to)
-  tmpfile = '/tmp/cap_template'
-  File.open(tmpfile, 'w') {|f| f.puts render(from)}
-  upload! tmpfile, to
+  tdir = "/tmp/cap_template"
+  tfil = "#{tdir}/#{SecureRandom.uuid}"
+  system("rm -f #{tdir}") unless Dir.exist?(tdir)
+  system("mkdir -p #{tdir}")
+  File.open(tfil, 'w') {|f| f.puts render(from)}
+  upload! tfil, to
+  system("rm -f #{tfil}")
 end
 
