@@ -6,7 +6,7 @@ RSpec.describe Event::BugSynced, :type => :model do
     {
       cmd_type:           "Test::BugCreated"         ,
       cmd_uuid:           SecureRandom.uuid          ,
-      type:               "Issue::GitHub"              ,
+      type:               "Issue::GitHub"            ,
       uuid:               SecureRandom.uuid          ,
       stm_title:          "ping/pong"                ,
       stm_repo_uuid:      repo.uuid                  ,
