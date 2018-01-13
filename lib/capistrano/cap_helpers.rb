@@ -12,6 +12,6 @@ def template(from, to)
   system("mkdir -p #{tdir}")
   File.open(tfil, 'w') {|f| f.puts render(from)}
   upload! tfil, to
-  system("rm -f #{tfil}")
+  # system("rm -f #{tfil}")
 end
 
