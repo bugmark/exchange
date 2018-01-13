@@ -12,6 +12,6 @@ set :branch,    'master'
 
 set :rails_env, 'production'
 
-role :app, %w(deploy@research.bugmark.net)
-role :db,  %w(deploy@research.bugmark.net)
-role :web, %w(deploy@research.bugmark.net)
+role :app, %w(deploy@demo.bugmark.net)
+role :db,  %w(deploy@demo.bugmark.net)
+role :web, %w(deploy@demo.bugmark.net)
