@@ -13,6 +13,6 @@ def template(from, to, locals = {})
   system("rm -f #{tdir}") unless Dir.exist?(tdir)
   system("mkdir -p #{tdir}")
   File.open(tfil, 'w') {|f| f.puts render(from, locals)}
-  upload! tfil, to
-  # system("rm -f #{tfil}")
+  upload!(tfil, to)
+  system("rm -f #{tfil}")
 end

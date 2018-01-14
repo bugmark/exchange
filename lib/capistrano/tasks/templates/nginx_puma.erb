@@ -39,9 +39,10 @@ server {
     add_header Cache-Control public;
     break;
   }
-  location = /robots.txt { }
-  location = /500.html   { }
-  location = /422.html   { }
+  location /.well-known { }
+  location /robots.txt  { }
+  location /500.html    { }
+  location /422.html    { }
   location /cable {
     proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
     proxy_http_version 1.1;

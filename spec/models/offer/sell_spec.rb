@@ -73,7 +73,7 @@ end
 #  jfields               :jsonb            not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  stm_issue_uuid          :string
+#  stm_issue_uuid        :string
 #  stm_repo_uuid         :string
 #  stm_title             :string
 #  stm_status            :string

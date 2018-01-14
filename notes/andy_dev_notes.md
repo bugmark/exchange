@@ -778,20 +778,33 @@ Next Actions:
 - [x] display UUID on show actions (repo, bug, user, offer, contract)
 - [x] pre-fill the repo/bug ID for offer_bu, offer_bf
 
-- [ ] demo script works end-to-end
+# Jan 08
 
-- [ ] deploy to production
-
-- [ ] create a staging server
-- [ ] create a research server
-
-- [ ] subdomain deployment
-- [ ] SSL certs for subdomains
-
-- [ ] move repo to bugmark org (bugmark)
-- [ ] push binding repos to bugmark org (bmx_ruby, bmx_python, bmx_elixir)
+- [x] move repo to bugmark org (bugmark)
+- [x] push binding repos to bugmark org (bmx_ruby, bmx_python, bmx_elixir)
  
-- [ ] write CLI
+# Jan 09
+
+- [x] create a demo server
+- [x] create a research server
+
+# Jan 10
+
+- [x] create CLI
+- [x] auto-set hostname on provision
+
+# Jan 11
+
+- [x] auto-create SSL certs on provision
+
+# Jan 12
+
+- [x] deploy to base, demo and research machines
+- [x] prevent total-rebuild on deploy
+
+# Jan 13
+
+- [ ] demo script works end-to-end
 
 - [ ] core API - build all queries
 - [ ] core API - build all commands
