@@ -2,11 +2,8 @@
 
 h2 Find issues (#{@bugs.count})
 
-b Get involved in Bugmark by finding issues that you want
-  to get involved in by either contributing to a fix
-  (don't forget to buy the fixed side before) or investing
-  in a fix by investing in or creating offers for the unfixed
-  side.  Easy peasy lemon squeezy!
+b Get involved in Bugmark by finding issues that matter
+  to you.
 
 div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
   = bootstrap_form_for(@query, url: '/docfix/issues', method: 'get') do |f|
