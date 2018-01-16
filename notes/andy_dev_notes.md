@@ -804,6 +804,8 @@ Next Actions:
 
 # Jan 13
 
+- [ ] UserCreate: duplicate emails need to return error message
+
 - [ ] demo script works end-to-end
 
 - [ ] core API - build all queries

@@ -6,6 +6,61 @@ module V1
       @current_user && @current_user.valid_password?(password)
     end
 
+    resource :ping do
+      desc "Check server access",
+           is_array: false   ,
+           http_codes: [
+             { code: 200, message: "Server status", model: Entities::Status}
+           ]
+      get do
+        {status: "OK"}
+      end
+    end
+
+    resource :users do
+      desc "Create a user",
+           http_codes: [
+             { code: 200, message: "Outcome", model: Entities::Status}
+           ]
+      params do
+        requires :usermail , type: String
+        requires :password , type: String
+      end
+      post do
+        opts    = { email: params[:usermail], password: params[:password] }
+        command = UserCmd::Create.new(opts)
+        if command.valid?
+          command.project
+          {status: "OK"}
+        else
+          {status: "Error", message: command.errors.messages.to_s}
+        end
+      end
+
+      desc "List users",
+           http_codes: [
+                         { code: 200, message: "Outcome", model: Entities::Userl}
+                       ]
+      get ':uuid', requirements: { uuid: /.*/ } do
+        opts    = { email: params[:usermail], password: params[:password] }
+        command = UserCmd::Create.new(opts)
+        if command.valid?
+          command.project
+          {status: "OK"}
+        else
+          {status: "Error", message: command.errors.messages.to_s}
+        end
+      end
+
+      desc "Show a user",
+           http_codes: [
+
+           ]
+      get do
+        
+      end
+    end
+
     resource :repos do
       desc "Return all repos"
       get "", :root => :repos do
