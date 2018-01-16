@@ -2,7 +2,16 @@ require "grape-swagger"
 
 module V1
   class Base < Grape::API
+
     mount V1::Collections
+    mount V1::Config
+    mount V1::Users
+    mount V1::Repos
+    mount V1::Issues
+    mount V1::Offers
+    mount V1::Contracts
+    mount V1::Positions
+    mount V1::Events
 
     helpers do
       def current_user
