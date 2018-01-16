@@ -6,6 +6,18 @@ module V1
       @current_user && @current_user.valid_password?(password)
     end
 
+    helpers do
+      def user_details(user)
+        {
+          uuid:      user.uuid  ,
+          usermail:  user.email ,
+          balance:   user.balance ,
+          offers:    user.offers.open.map {|offer| offer.uuid} ,
+          positions: user.positions.map   {|position| position.uuid}
+        }
+      end
+    end
+
     resource :ping do
       desc "Check server access",
            is_array: false   ,
@@ -37,27 +49,27 @@ module V1
         end
       end
 
-      desc "List users",
+      desc "Show user detail",
            http_codes: [
-                         { code: 200, message: "Outcome", model: Entities::Userl}
-                       ]
-      get ':uuid', requirements: { uuid: /.*/ } do
-        opts    = { email: params[:usermail], password: params[:password] }
-        command = UserCmd::Create.new(opts)
-        if command.valid?
-          command.project
-          {status: "OK"}
-        else
-          {status: "Error", message: command.errors.messages.to_s}
-        end
+             { code: 200, message: "User detail", model: Entities::UserDetail }
+           ]
+      get ':usermail', requirements: { usermail: /.*/ } do
+        user = User.find_by_email(params[:usermail])
+        user ? user_details(user) : error!("Not found", 404)
       end
 
-      desc "Show a user",
+      desc "List users",
+           is_array: true ,
            http_codes: [
-
+             { code: 200, message: "User details", model: Entities::UserOverview }
            ]
       get do
-        
+        User.all.map do |user|
+          {
+            uuid:     user.uuid    ,
+            usermail: user.email
+          }
+        end
       end
     end
 
