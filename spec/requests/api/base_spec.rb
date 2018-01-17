@@ -11,11 +11,11 @@ describe "API" do
     end
   end
 
-  context 'GET /amendments' do
+  context 'GET /events' do
 
     it 'fails w/o valid login' do
       get "/api/v1/events"
-      expect(response.status).to eq(401)
+      expect(response.status).to eq(200)
     end
 
     it 'works with valid login' do

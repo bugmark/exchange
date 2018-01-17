@@ -33,20 +33,11 @@ module V1
         end
       end
 
-      desc "Show user detail",
-           http_codes: [
-             { code: 200, message: "User detail", model: Entities::UserDetail }
-           ]
-      get ':usermail', requirements: { usermail: /.*/ } do
-        user = User.find_by_email(params[:usermail])
-        user ? user_details(user) : error!("Not found", 404)
-      end
-
-      desc "List users",
+      desc "List all users",
            is_array: true ,
            http_codes: [
-             { code: 200, message: "User details", model: Entities::UserOverview }
-           ]
+                       { code: 200, message: "User list", model: Entities::UserOverview }
+                     ]
       get do
         User.all.map do |user|
           {
@@ -54,6 +45,15 @@ module V1
             usermail: user.email
           }
         end
+      end
+
+      desc "Show user detail",
+           http_codes: [
+             { code: 200, message: "User detail", model: Entities::UserDetail }
+           ]
+      get ':usermail', requirements: { usermail: /.*/ } do
+        user = User.find_by_email(params[:usermail])
+        user ? user_details(user) : error!("Not found", 404)
       end
 
       desc "Deposit funds",
