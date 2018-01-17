@@ -15,12 +15,5 @@ module V1
         Position.all
       end
     end
-
-    resource :amendments do
-      desc "Return all amendments"
-      get "", :root => :amendments do
-        Amendment.all
-      end
-    end
   end
 end
