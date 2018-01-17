@@ -82,9 +82,9 @@ module DocfixOffersHelper
   def docfix_offer_assoc(offer)
     case
       when offer.stm_issue_uuid
-        "issue ##{offer.issue.id}"
+        "Issue ##{offer.issue.id}"
       when offer.stm_repo_uuid
-        "repo ##{offer.repo.id}"
+        "Repo ##{offer.repo.id}"
       else ""
     end
   end

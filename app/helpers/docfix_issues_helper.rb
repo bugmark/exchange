@@ -52,16 +52,12 @@ module DocfixIssuesHelper
   # -----
 
   def docfix_issue_ou_vol(bug, period)
-    return 0
-    return 0 if Rails.env.test?
     date   = BugmTime.future_week_ends[period]
     offers = docfix_base_offers(bug, date).is_unfixed
     docfix_issue_values(offers)
   end
 
   def docfix_issue_of_vol(bug, period)
-    return 0
-    return 0 if Rails.env.test?
     dev_log "#{bug.to_i}, #{period}"
     date   = BugmTime.future_week_ends[period]
     offers = docfix_base_offers(bug, date).is_fixed

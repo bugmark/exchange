@@ -10,14 +10,14 @@
 .row
   .col-md-12.text-center
     form[action="/docfix/#{lcl_action}" method="post"]
-      input#hiVal[type='hidden' name="authenticity_token"                 value="#{form_authenticity_token}"]
-      input#hiTyp[type='hidden' name="offer_cmd_create_buy[type]"         value="#{lcl_offer.typ}"]
-      input#hiUsr[type='hidden' name="offer_cmd_create_buy[user_uuid]"    value="#{lcl_offer.user.uuid}"]
-      / input#hiBug[type='hidden' name="offer_cmd_create_buy[stm_issue_uuid]" value="#{lcl_offer.stm_issue_uuid}"]
-      / input#hiSta[type='hidden' name="offer_cmd_create_buy[stm_status]"   value="#{lcl_offer.stm_status}"]
-      input#hiMat[type='hidden' name="offer_cmd_create_buy[maturation]"   value="#{lcl_offer.maturation.strftime('%y-%m-%d')}"]
-      / input#hiVol[type='hidden' name="offer_cmd_create_buy[volume]"       value="#{lcl_offer.volume}"]
-      / input#hiDep[type='hidden' name="offer_cmd_create_buy[deposit]"      value="#{lcl_offer.deposit}"]
+      input#hiVal[type='hidden' name="authenticity_token"                   value="#{form_authenticity_token}"]
+      input#hiTyp[type='hidden' name="offer_cmd_create_buy[type]"           value="#{lcl_offer.typ}"]
+      input#hiUsr[type='hidden' name="offer_cmd_create_buy[user_uuid]"      value="#{lcl_offer.user.uuid}"]
+      input#hiBug[type='hidden' name="offer_cmd_create_buy[stm_issue_uuid]" value="#{lcl_offer.offer_new.stm_issue_uuid}"]
+      input#hiSta[type='hidden' name="offer_cmd_create_buy[stm_status]"     value="#{lcl_offer.offer_new.stm_status}"]
+      input#hiMat[type='hidden' name="offer_cmd_create_buy[maturation]"     value="#{lcl_offer.offer_new.maturation.strftime('%y-%m-%d')}"]
+      input#hiVol[type='hidden' name="offer_cmd_create_buy[volume]"         value="#{lcl_offer.offer_new.volume}"]
+      input#hiDep[type='hidden' name="offer_cmd_create_buy[deposit]"        value="#{lcl_offer.offer_new.deposit}"]
       .form-inline.madline
         ' I will deposit
         b #{lcl_offer.offer_new.deposit}

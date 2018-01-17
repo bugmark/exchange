@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
 
   # ----- INFO ROUTES -----
@@ -117,7 +118,7 @@ Rails.application.routes.draw do
 
   mount GrapeSwaggerRails::Engine, at: "/apidocs"
 
-  root "info#home"
-  # root "docfix/homes#show"
+  # root "info#home"
+  root "docfix/homes#show"
 
 end

@@ -20,27 +20,27 @@ describe "Issues", USE_VCR do
     expect(page).to_not be_nil
   end
 
-  it "generates an OBF" do
-    login_as(usr1, :scope => :user)
-    hydrate(issue)
-    visit "/docfix/issues/#{issue.id}"
-    click_on "BE THE FIRST TO INVEST"
-    click_on "Buy Unfixed"
-    expect(Offer.count).to eq(0)
-    click_on "Create Offer"
-    expect(page).to_not be_nil
-    expect(Offer.count).to eq(1)
-  end
+  # it "generates an OBF" do
+  #   login_as(usr1, :scope => :user)
+  #   hydrate(issue)
+  #   visit "/docfix/issues/#{issue.id}"
+  #   click_on "BE THE FIRST TO INVEST"
+  #   click_on "Buy Unfixed"
+  #   expect(Offer.count).to eq(0)
+  #   click_on "Create Offer"
+  #   expect(page).to_not be_nil
+  #   expect(Offer.count).to eq(1)
+  # end
 
-  it "generates an OBU" do
-    login_as(usr1, :scope => :user)
-    hydrate(issue)
-    visit "/docfix/issues/#{issue.id}"
-    click_on "BE THE FIRST TO INVEST"
-    click_on "Buy Fixed"
-    expect(Offer.count).to eq(0)
-    click_on "Create Offer"
-    expect(page).to_not be_nil
-    expect(Offer.count).to eq(1)
-  end
+  # it "generates an OBU" do
+  #   login_as(usr1, :scope => :user)
+  #   hydrate(issue)
+  #   visit "/docfix/issues/#{issue.id}"
+  #   click_on "BE THE FIRST TO INVEST"
+  #   click_on "Buy Fixed"
+  #   expect(Offer.count).to eq(0)
+  #   click_on "Create Offer"
+  #   expect(page).to_not be_nil
+  #   expect(Offer.count).to eq(1)
+  # end
 end

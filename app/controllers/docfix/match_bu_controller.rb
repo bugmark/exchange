@@ -9,8 +9,11 @@ module Docfix
       core_opts = params["offer_cmd_create_buy"]
       base_opts = helpers.docfix_offer_base_opts(perm(core_opts))
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, base_opts)
-      if @offer_bu.project
-        cross = ContractCmd::Cross.new(@offer_bu.offer, :expand).project
+      if @offer_bu.valid?
+        @offer_bu.project
+        cmd   = ContractCmd::Cross.new(@offer_bu.offer, :expand)
+        cross = cmd.project
+        # binding.pry
         if cross
           contract = cross.contract
           flash[:notice] = "New contract is created"
