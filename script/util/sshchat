@@ -2,5 +2,5 @@
 
 # sshchat
 
-ssh bugmark.net -p 2022
+ssh research.bugmark.net -p 2022
 

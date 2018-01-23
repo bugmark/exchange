@@ -27,7 +27,7 @@ module V1
            ]
       get ':uuid', requirements: { uuid: /.*/ } do
         repo = Repo.find_by_uuid(params[:uuid])
-        repo ? issue_details(repo) : error!("Not found", 404)
+        repo ? repo_details(repo) : error!("Not found", 404)
       end
     end
   end
