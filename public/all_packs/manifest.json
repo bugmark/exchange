@@ -1,8 +1,14 @@
 {
-  "application.js": "http://192.168.1.77:9092/all_packs/application.js",
-  "docfix/issues/depth.js": "http://192.168.1.77:9092/all_packs/docfix/issues/depth.js",
-  "docfix/issues/offer.js": "http://192.168.1.77:9092/all_packs/docfix/issues/offer.js",
-  "docfix/offers/show/depth.js": "http://192.168.1.77:9092/all_packs/docfix/offers/show/depth.js",
-  "hello_react.js": "http://192.168.1.77:9092/all_packs/hello_react.js",
-  "info/chart.js": "http://192.168.1.77:9092/all_packs/info/chart.js"
+  "application.js": "/all_packs/application-882d3b97bdf8be981b47.js",
+  "application.js.map": "/all_packs/application-882d3b97bdf8be981b47.js.map",
+  "docfix/issues/depth.js": "/all_packs/docfix/issues/depth-12b57a8a2544918fecb0.js",
+  "docfix/issues/depth.js.map": "/all_packs/docfix/issues/depth-12b57a8a2544918fecb0.js.map",
+  "docfix/issues/offer.js": "/all_packs/docfix/issues/offer-28ba8385c89f90d44979.js",
+  "docfix/issues/offer.js.map": "/all_packs/docfix/issues/offer-28ba8385c89f90d44979.js.map",
+  "docfix/offers/show/depth.js": "/all_packs/docfix/offers/show/depth-eb1ba39705464afd1797.js",
+  "docfix/offers/show/depth.js.map": "/all_packs/docfix/offers/show/depth-eb1ba39705464afd1797.js.map",
+  "hello_react.js": "/all_packs/hello_react-0c6825e8c23ab97ef6b3.js",
+  "hello_react.js.map": "/all_packs/hello_react-0c6825e8c23ab97ef6b3.js.map",
+  "info/chart.js": "/all_packs/info/chart-d0520418f774c1d9f5da.js",
+  "info/chart.js.map": "/all_packs/info/chart-d0520418f774c1d9f5da.js.map"
 }
