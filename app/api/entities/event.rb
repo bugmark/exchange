@@ -8,6 +8,7 @@ module Entities
     expose :cmd_uuid  , documentation: {type: String,  desc: "Command UUID"    }
     expose :local_hash, documentation: {type: String,  desc: "Local Hash"      }
     expose :chain_hash, documentation: {type: String,  desc: "Blockchain Hash" }
+    expose :jfields   , documentation: {type: Hash,    desc: "JSON Fields"     }
     expose :payload   , documentation: {type: Hash,    desc: "Event Payload"   }
     expose :user_uuids, documentation: {type: String,  desc: "User UUIDs", is_array: true }
   end
