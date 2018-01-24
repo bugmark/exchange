@@ -15,7 +15,6 @@ module ContractCmd
       @type     = commit_type
       @offer    = Offer.find(offer.to_i)
       @counters = @offer.qualified_counteroffers(commit_type)
-      # binding.pry #
       if valid?
         @bundle = Bundle.new(type, offer, counters).generate
         # noinspection RubyArgCount

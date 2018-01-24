@@ -11,7 +11,6 @@ class Offer::Buy::Unfixed < Offer::Buy
   def qualified_counteroffers(cross_type)
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
-    # binding.pry
     case cross_type
       when :expand   then base.is_buy_fixed.align_complement(self)
       when :transfer then base.is_sell_unfixed.align_lte(self)

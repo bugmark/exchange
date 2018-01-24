@@ -32,8 +32,6 @@ module Docfix
       @bug      = Issue.find(params["id"])
       opts      = helpers.docfix_offer_base_opts(perm(params), {stm_issue_uuid: @bug.uuid, deposit: deposit, volume: vol, maturation: mdate})
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, opts).offer_new
-      # binding.pry
-      # x = 1
     end
 
     def offer_buy
@@ -60,8 +58,6 @@ module Docfix
       @bug      = Issue.find(params["id"])
       opts      = helpers.docfix_offer_base_opts(perm(params), {stm_issue_uuid: @bug.uuid, deposit: deposit, volume: vol, maturation: mdate})
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, opts)
-      # binding.pry
-      # x = 1
     end
 
     private

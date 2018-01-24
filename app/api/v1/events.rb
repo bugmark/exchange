@@ -18,12 +18,13 @@ module V1
         end
       end
 
-      desc "Update an event"
+      desc "Update an event",
+           consumes: ['multipart/form-data']
       params do
         requires :id           , type: Integer
         requires :etherscan_url, type: String
       end
-      put "", :root => :events do
+      put do
         el = Event.find(params[:id])
         el.update_attribute(:etherscan_url, params[:etherscan_url])
       end

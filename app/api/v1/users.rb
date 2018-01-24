@@ -4,8 +4,8 @@ module V1
     helpers do
       def user_details(user)
         {
-          uuid:      user.uuid  ,
-          usermail:  user.email ,
+          uuid:      user.uuid    ,
+          usermail:  user.email   ,
           balance:   user.balance ,
           offers:    user.offers.open.map {|offer| offer.uuid} ,
           positions: user.positions.map   {|position| position.uuid}
@@ -17,7 +17,8 @@ module V1
       desc "Create a user",
            http_codes: [
              { code: 200, message: "Outcome", model: Entities::Status}
-           ]
+           ],
+           consumes: ['multipart/form-data']
       params do
         requires :usermail , type: String
         requires :password , type: String
@@ -59,10 +60,11 @@ module V1
       desc "Deposit funds",
            http_codes: [
              { code: 200, message: "Deposit funds", model: Entities::Status }
-           ]
-           params do
-             requires :amount , type: Float
-           end
+           ],
+           consumes: ['multipart/form-data']
+      params do
+        requires :amount , type: Float
+      end
       put ':uuid/deposit' do
         user = User.find_by_uuid(params[:uuid])
         args = {uuid: params[:uuid], amount: params[:amount] }
@@ -77,12 +79,16 @@ module V1
 
       desc "Withdraw funds",
            http_codes: [
-             { code: 200, message: "Withdraw user funds" }
-           ]
+             { code: 200, message: "Withdraw funds" }
+           ],
+           consumes: ['multipart/form-data']
+      params do
+        requires :amount , type: Float
+      end
       put ':uuid/withdraw' do
         user = User.find_by_uuid(params[:uuid])
         args = {uuid: params[:uuid], amount: params[:amount] }
-        cmd  = UserCmd::Deposit.new(args)
+        cmd  = UserCmd::Withdraw.new(args)
         if user && cmd.valid?
           cmd.project
           {status: "OK"}

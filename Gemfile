@@ -40,6 +40,7 @@ gem 'will_paginate'               # pagination
 gem 'pg_search'                   # full-text search
 
 gem 'grape'
+gem 'grape_logging'
 gem 'grape-swagger'
 gem 'grape-swagger-entity'
 gem 'grape-swagger-rails'

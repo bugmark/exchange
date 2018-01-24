@@ -13,7 +13,6 @@ module Docfix
         @offer_bu.project
         cmd   = ContractCmd::Cross.new(@offer_bu.offer, :expand)
         cross = cmd.project
-        # binding.pry
         if cross
           contract = cross.contract
           flash[:notice] = "New contract is created"

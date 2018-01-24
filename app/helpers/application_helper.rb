@@ -125,7 +125,6 @@ module ApplicationHelper
 
   def app_user_path(user)
     layout = controller.send(:_layout, ["no_op_arg"])
-    # binding.pry
     case layout.to_s
       when "docfix" then docfix_user_path(user)
       when "core"   then core_user_path(user)

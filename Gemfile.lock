@@ -157,6 +157,8 @@ GEM
       grape-swagger (>= 0.20.4)
     grape-swagger-rails (0.3.0)
       railties (>= 3.2.12)
+    grape_logging (1.7.0)
+      grape
     graphviz (0.4.0)
     guard (2.14.1)
       formatador (>= 0.2.4)
@@ -430,6 +432,7 @@ DEPENDENCIES
   grape-swagger
   grape-swagger-entity
   grape-swagger-rails
+  grape_logging
   graphviz
   guard
   guard-rspec_min!

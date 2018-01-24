@@ -1,7 +1,17 @@
 require "grape-swagger"
+require "grape_logging"
 
 module V1
   class Base < Grape::API
+
+    use GrapeLogging::Middleware::RequestLogger, {logger: logger}
+
+    http_basic do |email, password|
+      dev_log email
+      dev_log password
+      @current_user = User.find_by_email(email)
+      @current_user && @current_user.valid_password?(password)
+    end
 
     mount V1::Collections
     mount V1::Config
@@ -19,7 +29,7 @@ module V1
       end
     end
 
-    content_type   :json, 'application/json'
+    # content_type   :json, 'application/json'
     default_format :json
 
     add_swagger_documentation(
