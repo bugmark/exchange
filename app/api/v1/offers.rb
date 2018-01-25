@@ -11,6 +11,32 @@ module V1
     end
 
     resource :offers do
+      desc "Create a buy offer",
+           http_codes: [
+                         { code: 200, message: "Outcome", model: Entities::Status}
+                       ],
+           consumes: ['multipart/form-data']
+      params do
+        requires :side       , type: String    , desc: "fixed or unfixed"
+        requires :volume     , type: Integer   , desc: "number of positions"
+        requires :price      , type: Float     , desc: "between 0.0 and 1.0"
+        requires :issue      , type: String    , desc: "issue UUID"
+        optional :maturation , type: String    , desc: "YYMMDD_HHMM (default now + 1.week)"
+        optional :expiration , type: String    , desc: "YYMMDD_HHMM (default now + 1.day)"
+        optional :aon        , type: Boolean   , desc: "all-or-none (default false)"
+      end
+      post '/buy' do
+        # opts    = { email: params[:usermail], password: params[:password] }
+        # command = UserCmd::Create.new(opts)
+        # if command.valid?
+        #   command.project
+        #   {status: "OK"}
+        # else
+        #   {status: "Error", message: command.errors.messages.to_s}
+        # end
+        {status: "OK"}
+      end
+
       desc "List all offers",
            is_array: true ,
            http_codes: [
