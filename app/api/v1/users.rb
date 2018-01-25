@@ -3,13 +3,14 @@ module V1
 
     helpers do
       def user_details(user)
-        {
-          uuid:      user.uuid    ,
-          usermail:  user.email   ,
-          balance:   user.balance ,
-          offers:    user.offers.open.map {|offer| offer.uuid} ,
-          positions: user.positions.map   {|position| position.uuid}
+        opts = {
+          uuid:     user.uuid    ,
+          usermail: user.email   ,
+          balance:  user.balance
         }
+        opts[:offers]    = user.offers.open.map {|offer| offer.uuid}       if params[:offers]
+        opts[:positions] = user.positions.map   {|position| position.uuid} if params[:positions]
+        opts
       end
     end
 
@@ -52,6 +53,11 @@ module V1
            http_codes: [
              { code: 200, message: "User detail", model: Entities::UserDetail }
            ]
+      params do
+        requires :usermail , type: String , desc: "user email address"
+        optional :offers   , type: Boolean, desc: "include open offers"
+        optional :positions, type: Boolean, desc: "include open positions"
+      end
       get ':usermail', requirements: { usermail: /.*/ } do
         user = User.find_by_email(params[:usermail])
         user ? user_details(user) : error!("Not found", 404)

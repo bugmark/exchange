@@ -9,11 +9,5 @@ module V1
       end
     end
 
-    resource :positions do
-      desc "Return all positions"
-      get "", :root => :positions do
-        Position.all
-      end
-    end
   end
 end
