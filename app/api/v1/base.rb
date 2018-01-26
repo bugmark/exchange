@@ -29,7 +29,7 @@ module V1
       end
     end
 
-    # content_type   :json, 'application/json'
+    content_type   :json, 'application/json'
     default_format :json
 
     add_swagger_documentation(

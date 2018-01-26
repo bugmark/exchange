@@ -7,18 +7,18 @@ class BugmTime < Time
       super + day_offset.days
     end
 
-    def increment_day_jump(number)
+    def day_offset
+      return 0 unless File.exist?(DAY_JUMP_FILE)
+      File.read(DAY_JUMP_FILE).to_i
+    end
+
+    def increment_day_offset(number)
       new_val = day_offset + number
       File.open(DAY_JUMP_FILE, 'w') {|f| f.puts new_val}
     end
 
-    def clear_day_jump
+    def clear_day_offset
       system "rm -f #{DAY_JUMP_FILE}"
-    end
-
-    def day_offset
-      return 0 unless File.exist?(DAY_JUMP_FILE)
-      File.read(DAY_JUMP_FILE).to_i
     end
 
     def future_week_ends(count = 4)

@@ -20,7 +20,7 @@ class BotController < ApplicationController
     Issue.open[0..2].each do |bug|
       bug.update_attribute :stm_status, 'closed'
     end
-    BugmTime.increment_day_jump(8)
+    BugmTime.increment_day_offset(8)
     Contract.matured.unresolved.each do |cnt|
       ContractCmd::Resolve.new(cnt).project
     end
