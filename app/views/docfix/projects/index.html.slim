@@ -5,9 +5,8 @@ h2 Find projects (#{@projects.count})
 b Find projects, organizations, topics and repositories you are interested in
   and might want to contribute to in the future.  You can contribute by
   fixing issues and earn tokens by investing in their fixed side.  Are you
-  an avid user of a software listed here?  Contribute by investing in the
-  unfixed side of a project or repository issues and incentivize
-  developers to fix the issue.
+  a user of a project listed here?  Contribute by investing in the
+  unfixed side of issues to incentivize developers to fix the issue.
 
 div[style='background: lightgrey; margin-top: 10px; margin-bottom: 10px; padding: 20px;']
   = bootstrap_form_for(@query, url: '/docfix/projects', method: 'get') do |f|
