@@ -17,24 +17,35 @@ module V1
                        ],
            consumes: ['multipart/form-data']
       params do
-        requires :side       , type: String    , desc: "fixed or unfixed"
+        requires :side       , type: String    , desc: "fixed or unfixed", values: %w(fixed unfixed)
         requires :volume     , type: Integer   , desc: "number of positions"
         requires :price      , type: Float     , desc: "between 0.0 and 1.0"
         requires :issue      , type: String    , desc: "issue UUID"
         optional :maturation , type: String    , desc: "YYMMDD_HHMM (default now + 1.week)"
         optional :expiration , type: String    , desc: "YYMMDD_HHMM (default now + 1.day)"
-        optional :aon        , type: Boolean   , desc: "all-or-none (default false)"
+        optional :poolable   , type: Boolean   , desc: "poolable? (default false)"   , default: false
+        optional :aon        , type: Boolean   , desc: "all-or-none? (default false)", default: false
       end
       post '/buy' do
-        # opts    = { email: params[:usermail], password: params[:password] }
-        # command = UserCmd::Create.new(opts)
-        # if command.valid?
-        #   command.project
-        #   {status: "OK"}
-        # else
-        #   {status: "Error", message: command.errors.messages.to_s}
-        # end
-        {status: "OK"}
+        side = params[:side].to_s
+        opts = {
+          price:          0.00       ,
+          volume:         10         ,
+          user_uuid:      "TBD"      ,
+          stm_issue_uuid: "TBD"      ,
+          stm_status:     "closed"   ,
+          poolable:       false      ,
+          aon:            false      ,
+          maturation:     Time.now + 1.week ,
+          expiration:     Time.now + 1.day
+        }
+        cmd = OfferCmd::CreateBuy(side, opts)
+        if cmd.valid?
+          result = cmd.project
+          {status: "OK", event_uuid: result.event.uuid, offer_uuid: result.event}
+        else
+          {status: "ERROR", message: "INVALID OFFER"}
+        end
       end
 
       desc "List all offers",

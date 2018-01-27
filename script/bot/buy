@@ -10,7 +10,7 @@ puts "Loading Environment..."
 STDOUT.flush
 require "./config/environment"
 
-WEEK_ENDS = BugmTime.future_week_ends
+WEEK_ENDS = BugmTime.next_week_ends
 USER_IDS  = User.where("email ilike 'test%'").pluck(:uuid)
 ISSUE_IDS = Issue.all[0..3].pluck(:uuid)
 VOLUMES   = (30..50).step(5).to_a

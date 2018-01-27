@@ -43,7 +43,7 @@ module DocfixIssuesHelper
   # -----
 
   def docfix_issue_depth_header(bug, period)
-    date = BugmTime.future_week_ends[period]
+    date = BugmTime.next_week_ends[period]
     dstr = date.strftime("%a %b-%d")
     count = bug.offers.open.overlaps_date(date).count
     "#{dstr} (#{count})"
@@ -52,14 +52,14 @@ module DocfixIssuesHelper
   # -----
 
   def docfix_issue_ou_vol(bug, period)
-    date   = BugmTime.future_week_ends[period]
+    date   = BugmTime.next_week_ends[period]
     offers = docfix_base_offers(bug, date).is_unfixed
     docfix_issue_values(offers)
   end
 
   def docfix_issue_of_vol(bug, period)
     dev_log "#{bug.to_i}, #{period}"
-    date   = BugmTime.future_week_ends[period]
+    date   = BugmTime.next_week_ends[period]
     offers = docfix_base_offers(bug, date).is_fixed
     docfix_issue_values(offers)
   end

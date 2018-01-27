@@ -2,7 +2,7 @@
 
 require "./config/environment"
 
-week_ends = BugmTime.future_week_ends
+week_ends = BugmTime.next_week_ends
 
 users = User.where("email ilike 'test%'")
 

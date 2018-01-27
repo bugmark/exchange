@@ -13,7 +13,6 @@ module V1
       @current_user && @current_user.valid_password?(password)
     end
 
-    mount V1::Time
     mount V1::Config
     mount V1::Users
     mount V1::Repos
@@ -22,6 +21,7 @@ module V1
     mount V1::Contracts
     mount V1::Positions
     mount V1::Events
+    mount V1::BmxHost
 
     helpers do
       def current_user
