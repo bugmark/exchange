@@ -18,8 +18,8 @@ module V1
            consumes: ['multipart/form-data']
       params do
         requires :side       , type: String    , desc: "fixed or unfixed", values: %w(fixed unfixed)
-        requires :volume     , type: Integer   , desc: "number of positions"
-        requires :price      , type: Float     , desc: "between 0.0 and 1.0"
+        requires :volume     , type: Integer   , desc: "number of positions", values: ->(x){x > 0}
+        requires :price      , type: Float     , desc: "between 0.0 and 1.0", values: 0.00..1.00
         requires :issue      , type: String    , desc: "issue UUID"
         optional :maturation , type: String    , desc: "YYMMDD_HHMM (default now + 1.week)"
         optional :expiration , type: String    , desc: "YYMMDD_HHMM (default now + 1.day)"
@@ -27,7 +27,11 @@ module V1
         optional :aon        , type: Boolean   , desc: "all-or-none? (default false)", default: false
       end
       post '/buy' do
-        side = params[:side].to_s
+        side = case params[:side]
+                 when "fixed" then :offer_bf
+                 when "unfixed" then :offer_bu
+                 else "NA"
+               end
         opts = {
           price:          0.00       ,
           volume:         10         ,
@@ -39,12 +43,12 @@ module V1
           maturation:     Time.now + 1.week ,
           expiration:     Time.now + 1.day
         }
-        cmd = OfferCmd::CreateBuy(side, opts)
+        cmd = OfferCmd::CreateBuy.new(side, opts)
         if cmd.valid?
           result = cmd.project
-          {status: "OK", event_uuid: result.event.uuid, offer_uuid: result.event}
+          {status: "OK", event_uuid: result.events[:offer].event_uuid, offer_uuid: result.offer.uuid}
         else
-          {status: "ERROR", message: "INVALID OFFER"}
+          error!({status: "ERROR", message: "INVALID OFFER"}, 404)
         end
       end
 

@@ -1,33 +1,33 @@
 module V1
   class Issues < V1::App
 
-    helpers do
-      def issue_details(repo)
-        {
-          type:  repo.type  ,
-          uuid:  repo.uuid
-        }
-      end
-    end
-
     resource :issues do
-      desc "List all issues",
-           is_array: true ,
-           http_codes: [
-             { code: 200, message: "Issue list", model: Entities::IssueOverview }
-           ]
+
+      # ---------- list all issues ----------
+      desc "List all issues", {
+        is_array: true ,
+        success: Entities::IssueOverview
+      }
       get do
-        Issue.all.map {|issue| {uuid: issue.uuid}}
+        present Issue.all, with: Entities::IssueOverview
       end
 
-      desc "Show issue detail",
-           http_codes: [
-             { code: 200, message: "Issue detail", model: Entities::IssueDetail }
-           ]
-      get ':uuid', requirements: { uuid: /.*/ } do
-        issue = Issue.find_by_uuid(params[:uuid])
-        issue ? issue_details(issue) : error!("Not found", 404)
+      # ---------- show one issue ----------
+      desc "Show issue detail", {
+        success: Entities::IssueDetail     ,
+        failure: [[404, "ISSUE UUID NOT FOUND"]]
+      }
+      params do
+        requires :issue_uuid , type: String , desc: "issue uuid"
       end
+      get ':issue_uuid', requirements: { issue_uuid: /.*/ } do
+        if issue = Issue.find_by_uuid(params[:issue_uuid])
+          present(issue, with: Entities::IssueDetail)
+        else
+          error!("issue uuid not found", 404)
+        end
+      end
+
     end
   end
 end

@@ -15,40 +15,43 @@ module V1
     end
 
     resource :users do
-      desc "Create a user",
-           http_codes: [
-             { code: 200, message: "Outcome", model: Entities::Status}
-           ],
-           consumes: ['multipart/form-data']
+
+      # ---------- create a user ----------
+      # TODO: return error code for duplicate user
+      desc "Create a user", {
+        success:  Entities::Status         ,
+        consumes: ['multipart/form-data']  ,
+        detail: <<-EOF.strip_heredoc
+          Create a user.  Supply an optional opening balance.  (Default 0.0)
+        EOF
+      }
       params do
-        requires :usermail , type: String
-        requires :password , type: String
+        requires :usermail , type: String , desc: "user email"
+        requires :password , type: String , desc: "user password"
+        optional :balance  , type: Float  , desc: "opening balance"
       end
       post do
-        opts    = { email: params[:usermail], password: params[:password] }
+        opts = { email: params[:usermail], password: params[:password] }
+        opts[:balance] = params[:balance] if params[:balance]
         command = UserCmd::Create.new(opts)
         if command.valid?
           command.project
           {status: "OK"}
         else
-          {status: "Error", message: command.errors.messages.to_s}
+          {status: "error", message: command.errors.messages.to_s}
         end
       end
 
-      desc "List all users",
-           is_array: true ,
-           http_codes: [
-                       { code: 200, message: "User list", model: Entities::UserOverview }
-                     ]
+      # ---------- list user ----------
+      desc "List all users", {
+        is_array: true ,
+        success:  Entities::UserOverview
+      }
       get do
-        User.all.map do |user|
-          {
-            uuid:     user.uuid    ,
-            usermail: user.email
-          }
-        end
+        present(User.all, with: Entities::UserOverview)
       end
 
+      # ---------- show user detail ----------
       desc "Show user detail",
            http_codes: [
              { code: 200, message: "User detail", model: Entities::UserDetail }
@@ -63,6 +66,7 @@ module V1
         user ? user_details(user) : error!("Not found", 404)
       end
 
+      # ---------- create a user ----------
       desc "Deposit funds",
            http_codes: [
              { code: 200, message: "Deposit funds", model: Entities::Status }
@@ -83,6 +87,7 @@ module V1
         end
       end
 
+      # ---------- create a user ----------
       desc "Withdraw funds",
            http_codes: [
              { code: 200, message: "Withdraw funds" }

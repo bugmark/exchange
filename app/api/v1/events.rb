@@ -1,6 +1,5 @@
 module V1
   class Events < V1::App
-
     resource :events do
       desc "Return events",
            is_array: true   ,
@@ -16,6 +15,15 @@ module V1
         else
           Event.all
         end
+      end
+
+      desc "Show event record",
+           http_codes: [
+                         { code: 200, message: "Event detail", model: Entities::Event }
+                       ]
+      get ':event_uuid', requirements: { event_uuid: /.*/ } do
+        event = Event.find_by_event_uuid(params[:event_uuid])
+        event ? event : error!("Not found", 404)
       end
 
       desc "Update an event",

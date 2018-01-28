@@ -1,10 +1,10 @@
 require "grape-swagger"
-require "grape_logging"
+require "grape_logging" unless Rails.env.test?
 
 module V1
   class Base < Grape::API
 
-    use GrapeLogging::Middleware::RequestLogger, {logger: logger}
+    use GrapeLogging::Middleware::RequestLogger, {logger: logger} unless Rails.env.test?
 
     http_basic do |email, password|
       dev_log email
@@ -21,7 +21,7 @@ module V1
     mount V1::Contracts
     mount V1::Positions
     mount V1::Events
-    mount V1::BmxHost
+    mount V1::Host
 
     helpers do
       def current_user
