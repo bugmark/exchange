@@ -1,19 +1,6 @@
 module V1
   class Users < V1::App
 
-    helpers do
-      def user_details(user)
-        opts = {
-          uuid:     user.uuid    ,
-          usermail: user.email   ,
-          balance:  user.balance
-        }
-        opts[:offers]    = user.offers.open.map {|offer| offer.uuid}       if params[:offers]
-        opts[:positions] = user.positions.map   {|position| position.uuid} if params[:positions]
-        opts
-      end
-    end
-
     resource :users do
 
       # ---------- create a user ----------
@@ -52,26 +39,32 @@ module V1
       end
 
       # ---------- show user detail ----------
-      desc "Show user detail",
-           http_codes: [
-             { code: 200, message: "User detail", model: Entities::UserDetail }
-           ]
+      desc "Show user detail", {
+        success: Entities::UserDetail
+      }
       params do
-        requires :usermail , type: String , desc: "user email address"
+        requires :email    , type: String , desc: "user email address"
         optional :offers   , type: Boolean, desc: "include open offers"
         optional :positions, type: Boolean, desc: "include open positions"
       end
-      get ':usermail', requirements: { usermail: /.*/ } do
-        user = User.find_by_email(params[:usermail])
-        user ? user_details(user) : error!("Not found", 404)
+      get ':email', requirements: { email: /.*/ } do
+        if user = User.find_by_email(params[:email])
+          opts = {
+            with:      Entities::UserDetail   ,
+            offers:    params[:offers].to_s   ,
+            positions: params[:offers].to_s   ,
+          }
+          present(user, opts)
+        else
+          error!("Not found", 404)
+        end
       end
 
       # ---------- create a user ----------
-      desc "Deposit funds",
-           http_codes: [
-             { code: 200, message: "Deposit funds", model: Entities::Status }
-           ],
-           consumes: ['multipart/form-data']
+      desc "Deposit funds", {
+        success:  Entities::Status            ,
+        consumes: ['multipart/form-data']
+      }
       params do
         requires :amount , type: Float
       end
@@ -83,16 +76,15 @@ module V1
           cmd.project
           {status: "OK"}
         else
-          {status: "Error"}
+          {status: "error"}
         end
       end
 
       # ---------- create a user ----------
-      desc "Withdraw funds",
-           http_codes: [
-             { code: 200, message: "Withdraw funds" }
-           ],
-           consumes: ['multipart/form-data']
+      desc "Withdraw funds", {
+        success:  Entities::Status            ,
+        consumes: ['multipart/form-data']
+      }
       params do
         requires :amount , type: Float
       end
