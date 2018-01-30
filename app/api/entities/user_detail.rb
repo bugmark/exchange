@@ -3,7 +3,11 @@ module Entities
     expose :uuid      , documentation: { type: String, desc: "UUID"          }
     expose :email     , documentation: { type: String, desc: "eMail Address" }
     expose :balance   , documentation: { type: Float , desc: "Balance"       }
-    expose :offers    , documentation: { type: String, is_array: true }, using: Entities::OfferOverview   , if: {offers: "true"}
-    expose :positions , documentation: { type: String, is_array: true }, using: Entities::PositionOverview, if: {positions: "true"}
+    expose :offers    , documentation: { type: String, desc: "offer UUIDs"    , is_array: true }, if: {offers: "true"} do |user|
+      user.offers.open.map {|off| off.uuid}
+    end
+    expose :positions , documentation: { type: String, desc: "posistion UUID, ", is_array: true }, if: {positions: "true"} do |user|
+      user.positions.map {|pos| pos.uuid}
+    end
   end
 end

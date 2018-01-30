@@ -3,9 +3,12 @@ module V1
 
     resource :host do
 
-      # ---------- list host info ----------
-      desc "info", {
-        success: Entities::HostInfo
+      # ---------- show host info ----------
+      desc "get host info", {
+        success: Entities::HostInfo                ,
+        detail: <<-EOF.strip_heredoc
+          Show host info: host-time, day offset, datastore type, etc.
+        EOF
       }
       get "/info" do
         fn = "/tmp/bugm_build_date.txt"
@@ -18,17 +21,35 @@ module V1
         }
       end
 
-      # ---------- increment day offset ----------
-      desc "increment day offset", {
-        success:  Entities::Status     ,
-        consumes: ['multipart/form-data']
+      # ---------- ping: get heartbeat ----------
+      desc "check server access", {
+        success: Entities::Status
       }
-      params do
-        optional :count, type: Integer, desc: "count (default 1)"
-      end
-      put "/increment_day_offset" do
-        BugmTime.increment_day_offset(params[:count] || 1)
+      get "/ping" do
         {status: "OK"}
+      end
+
+      # ---------- list host counts ----------
+      desc "counts", {
+        success: Entities::HostCount                   ,
+        detail: <<-EOF.strip_heredoc
+          Show host object counts: number of users, offers, contracts, etc.
+        EOF
+      }
+      get "/counts" do
+        {
+          host_name:  BugmHost.name             ,
+          host_time:  BugmTime.now.to_s         ,
+          num_users:  User.count                ,
+          num_repos:  Repo.count                ,
+          num_issues: Issue.count               ,
+          bu_offers:  Offer::Buy::Unfixed.count ,
+          bf_offers:  Offer::Buy::Fixed.count   ,
+          contracts:  Contract.count            ,
+          positions:  Position.count            ,
+          escrows:    Escrow.count              ,
+          amendments: Amendment.count
+        }
       end
 
       # ---------- next week-ends ----------
@@ -43,6 +64,19 @@ module V1
         BugmTime.next_week_ends(params[:count] || 4).map do |str|
           {week_end: str}
         end
+      end
+
+      # ---------- increment day offset ----------
+      desc "increment day offset", {
+        success:  Entities::Status     ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        optional :count, type: Integer, desc: "count (default 1)"
+      end
+      put "/increment_day_offset" do
+        BugmTime.increment_day_offset(params[:count] || 1)
+        {status: "OK"}
       end
 
       # ---------- rebuild the system----------
@@ -71,6 +105,7 @@ module V1
         error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
         list = %w(Repo User Offer Escrow Position Amendment Contract Event)
         list.each {|el| Object.const_get(el).destroy_all}
+        BugmTime.clear_day_offset
         UserCmd::Create.new({email: 'admin@bugmark.net', password: 'bugmark'}).project
         {status: "OK", message: "all data destroyed - login with admin@bugmark.net"}
       end

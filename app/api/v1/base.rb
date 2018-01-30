@@ -13,7 +13,6 @@ module V1
       @current_user && @current_user.valid_password?(password)
     end
 
-    mount V1::Config
     mount V1::Users
     mount V1::Repos
     mount V1::Issues

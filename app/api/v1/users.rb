@@ -3,6 +3,37 @@ module V1
 
     resource :users do
 
+      # ---------- list all users ----------
+      desc "List all users", {
+        is_array: true ,
+        success:  Entities::UserOverview
+      }
+      get do
+        present(User.all, with: Entities::UserOverview)
+      end
+
+      # ---------- show user detail ----------
+      desc "Show user detail", {
+        success: Entities::UserDetail
+      }
+      params do
+        requires :email    , type: String , desc: "user email address"
+        optional :offers   , type: Boolean, desc: "include open offers"
+        optional :positions, type: Boolean, desc: "include open positions"
+      end
+      get ':email' do
+        if user = User.find_by_email(params[:email])
+          opts = {
+            with:      Entities::UserDetail      ,
+            offers:    params[:offers].to_s      ,
+            positions: params[:positions].to_s   ,
+          }
+          present(user, opts)
+        else
+          error!("not found", 404)
+        end
+      end
+
       # ---------- create a user ----------
       # TODO: return error code for duplicate user
       desc "Create a user", {
@@ -29,38 +60,7 @@ module V1
         end
       end
 
-      # ---------- list user ----------
-      desc "List all users", {
-        is_array: true ,
-        success:  Entities::UserOverview
-      }
-      get do
-        present(User.all, with: Entities::UserOverview)
-      end
-
-      # ---------- show user detail ----------
-      desc "Show user detail", {
-        success: Entities::UserDetail
-      }
-      params do
-        requires :email    , type: String , desc: "user email address"
-        optional :offers   , type: Boolean, desc: "include open offers"
-        optional :positions, type: Boolean, desc: "include open positions"
-      end
-      get ':email', requirements: { email: /.*/ } do
-        if user = User.find_by_email(params[:email])
-          opts = {
-            with:      Entities::UserDetail   ,
-            offers:    params[:offers].to_s   ,
-            positions: params[:offers].to_s   ,
-          }
-          present(user, opts)
-        else
-          error!("Not found", 404)
-        end
-      end
-
-      # ---------- create a user ----------
+      # ---------- deposit funds ----------
       desc "Deposit funds", {
         success:  Entities::Status            ,
         consumes: ['multipart/form-data']
@@ -80,7 +80,7 @@ module V1
         end
       end
 
-      # ---------- create a user ----------
+      # ---------- withdraw funds ----------
       desc "Withdraw funds", {
         success:  Entities::Status            ,
         consumes: ['multipart/form-data']
