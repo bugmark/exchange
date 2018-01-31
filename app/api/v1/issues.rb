@@ -8,8 +8,12 @@ module V1
         is_array: true ,
         success: Entities::IssueOverview
       }
+      params do
+        optional :limit , type: Integer , desc: "count limit"
+      end
       get do
-        present Issue.all, with: Entities::IssueOverview
+        list = Issue.all.limit(params[:limit] || 999)
+        present list, with: Entities::IssueOverview
       end
 
       # ---------- show one issue ----------

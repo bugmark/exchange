@@ -11,5 +11,6 @@ module Entities
     expose :positions  , documentation: { type: Integer , desc: "Number of Positions"             }
     expose :escrows    , documentation: { type: Integer , desc: "Number of Escrows"               }
     expose :amendments , documentation: { type: Integer , desc: "Number of Amendments"            }
+    expose :events     , documentation: { type: Integer , desc: "Number of Events"                }
   end
 end

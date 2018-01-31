@@ -22,6 +22,7 @@ module V1
         optional :positions, type: Boolean, desc: "include open positions"
       end
       get ':email' do
+        tst_log params[:email]
         if user = User.find_by_email(params[:email])
           opts = {
             with:      Entities::UserDetail      ,
@@ -37,7 +38,7 @@ module V1
       # ---------- create a user ----------
       # TODO: return error code for duplicate user
       desc "Create a user", {
-        success:  Entities::Status         ,
+        success:  Entities::UserOverview   ,
         consumes: ['multipart/form-data']  ,
         detail: <<-EOF.strip_heredoc
           Create a user.  Supply an optional opening balance.  (Default 0.0)
@@ -54,7 +55,7 @@ module V1
         command = UserCmd::Create.new(opts)
         if command.valid?
           command.project
-          {status: "OK"}
+          present(command.user, with: Entities::UserOverview)
         else
           {status: "error", message: command.errors.messages.to_s}
         end

@@ -11,14 +11,15 @@ module V1
         EOF
       }
       get "/info" do
-        fn = "/tmp/bugm_build_date.txt"
-        {
-          host_name:   BugmHost.name        ,
-          host_time:   BugmTime.now.to_s    ,
-          day_offset:  BugmTime.day_offset  ,
-          datastore:   BugmHost.datastore   ,
+        fn   = "/tmp/bugm_build_date.txt"
+        data = {
+          host_name:   BugmHost.name,
+          host_time:   BugmTime.now.to_s,
+          day_offset:  BugmTime.day_offset,
+          datastore:   BugmHost.datastore,
           released_at: File.exist?(fn) ? File.read(fn).strip : "NA"
         }
+        present(data, with: Entities::HostInfo)
       end
 
       # ---------- ping: get heartbeat ----------
@@ -48,22 +49,21 @@ module V1
           contracts:  Contract.count            ,
           positions:  Position.count            ,
           escrows:    Escrow.count              ,
-          amendments: Amendment.count
+          amendments: Amendment.count           ,
+          events:     Event.count
         }
       end
 
       # ---------- next week-ends ----------
       desc "next week-ends", {
-        is_array: true,
-        success:  Entities::TimeWeekEnds
+        success:  Entities::NextWeekEnds
       }
       params do
         optional :count, type: Integer, desc: "count (default 4)"
       end
       get "/next_week_ends" do
-        BugmTime.next_week_ends(params[:count] || 4).map do |str|
-          {week_end: str}
-        end
+        list = BugmTime.next_week_ends(params[:count] || 4)
+        present({next_week_ends: list}, with: Entities::NextWeekEnds)
       end
 
       # ---------- increment day offset ----------
@@ -81,9 +81,10 @@ module V1
 
       # ---------- rebuild the system----------
       desc "rebuild", {
-        success: Entities::Status                               ,
-        failure: [[403, "Can't Rebuild Permanent Datastore"]]   ,
-        detail: <<-EOF.strip_heredoc
+        success:  Entities::Status                               ,
+        failure:  [[403, "Can't Rebuild Permanent Datastore"]]   ,
+        consumes: ['multipart/form-data']                        ,
+        detail: <<~EOF
           Destroy all data and rebuild the system. The rebuilt system 
           will have one user: `user/pass` = `admin@bugmark.net/bugmark`.
 

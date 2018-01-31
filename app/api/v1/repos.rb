@@ -36,7 +36,7 @@ module V1
       # TODO: return error code for duplicate repo
       # TODO: return error code for non-existant repo
       desc "Create a repo", {
-        success:  Entities::Status         ,
+        success:  Entities::RepoOverview   ,
         consumes: ['multipart/form-data']  ,
         detail: <<-EOF.strip_heredoc
           Create a GitHub repo.
