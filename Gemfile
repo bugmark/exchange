@@ -47,7 +47,7 @@ gem 'grape-swagger-rails'
 
 gem 'rack-cors', require: 'rack/cors'
 
-gem 'influxdb-rails'
+# gem 'influxdb-rails'
 
 gem 'factory_bot_rails'          # for data loading in production
 
