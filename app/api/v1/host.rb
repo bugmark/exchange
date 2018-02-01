@@ -16,6 +16,7 @@ module V1
           host_name:   BugmHost.name,
           host_time:   BugmTime.now.to_s,
           day_offset:  BugmTime.day_offset,
+          usermail:    current_user&.email,
           datastore:   BugmHost.datastore,
           released_at: File.exist?(fn) ? File.read(fn).strip : "NA"
         }

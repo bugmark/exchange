@@ -6,6 +6,13 @@ module V1
 
     use GrapeLogging::Middleware::RequestLogger, {logger: logger} unless Rails.env.test?
 
+    http_basic do |email, password|
+      dev_log email
+      dev_log password
+      @current_user = User.find_by_email(email)
+      @current_user && @current_user.valid_password?(password)
+    end
+
     helpers do
       def current_user
         @current_user
@@ -28,10 +35,10 @@ module V1
         api_version: "v1"       ,
         mount_path:  "/docs"    ,
         base_path:   "/api/v1"  ,
-        # security_definitions: {
-        #   base: {type: "basic"}
-        # },
-        # security:    [{base: []}],
+        security_definitions: {
+          base: {type: "basic"}
+        },
+        security:    [{base: []}],
         info: {
           title:        "Bugmark API"                                 ,
           description:  "all calls require BASIC AUTH"                ,

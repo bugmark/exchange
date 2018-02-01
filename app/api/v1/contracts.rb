@@ -33,8 +33,9 @@ module V1
       params do
         requires :commit_type , type: String , desc: "expand, transfer or reduce", values: %w(expand transfer reduce)
       end
-      post ':offer_uuid', requirements: { offer_uuid: /.*/ } do
-        cmd = OfferCmd::CreateBuy.new(params[:offer_uuid], params[:commit_type])
+      post ':offer_uuid' do
+        offer = Offer.find_by_uuid(params[:offer_uuid])
+        cmd   = ContractCmd::Cross.new(offer, params[:commit_type].to_sym)
         if cmd.valid?
           cmd.project
           present({status: "OK"}, with: Entities::Status)
