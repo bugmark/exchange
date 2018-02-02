@@ -28,7 +28,7 @@ module V1
       # ---------- cross offer ----------
       desc "Cross offer", {
         success:    Entities::Status            ,
-        failure:    [[430, "INVALID OFFER"]]    ,
+        failure:    [[404, "INVALID OFFER"]]    ,
         consumes:   ['multipart/form-data']
       }
       params do
@@ -41,7 +41,7 @@ module V1
           cmd.project
           present({status: "OK"}, with: Entities::Status)
         else
-          error!("invalid offer", 430)
+          error!("invalid offer", 404)
         end
       end
     end
