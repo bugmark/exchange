@@ -15,20 +15,20 @@ module V1
       # ---------- show contract detail ----------
       desc "Show contract detail", {
         success: Entities::ContractDetail         ,
-        failure: [[404, "CONTRACT UUID NOT FOUND"]]
+        failure: [[431, "CONTRACT UUID NOT FOUND"]]
       }
       get ':uuid', requirements: { uuid: /.*/ } do
         if contract = Contract.find_by_uuid(params[:uuid])
           present(contract, with: Entities::ContractDetail)
         else
-          error!("contract uuid not found", 404)
+          error!("contract uuid not found", 431)
         end
       end
 
       # ---------- cross offer ----------
       desc "Cross offer", {
         success:    Entities::Status            ,
-        failure:    [[400, "INVALID OFFER"]]    ,
+        failure:    [[430, "INVALID OFFER"]]    ,
         consumes:   ['multipart/form-data']
       }
       params do
@@ -41,7 +41,7 @@ module V1
           cmd.project
           present({status: "OK"}, with: Entities::Status)
         else
-          error!("invalid offer", 400)
+          error!("invalid offer", 430)
         end
       end
     end
