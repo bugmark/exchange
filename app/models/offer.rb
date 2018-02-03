@@ -212,7 +212,7 @@ class Offer < ApplicationRecord
   end
 
   def bugm_time_period
-    BugmTime.next_week_dates.index(self.maturation.strftime("%y-%m-%d"))
+    BugmTime.next_week_dates.index(self.maturation.strftime("%Y-%m-%d"))
   end
 
   # ----- PREDICATES -----

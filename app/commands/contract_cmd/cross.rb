@@ -1,6 +1,6 @@
 # integration_test:  commands/contract_cmd/cross/expand
-# integration_test  commands/contract_cmd/cross/transfer
-# integration_test  commands/contract_cmd/cross/reduce
+# integration_test   commands/contract_cmd/cross/transfer
+# integration_test   commands/contract_cmd/cross/reduce
 
 require 'ext/array'
 

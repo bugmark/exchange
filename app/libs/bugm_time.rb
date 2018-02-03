@@ -27,7 +27,7 @@ class BugmTime < Time
     end
 
     def next_week_dates(count = 4)
-      next_week_ends(count).map {|x| x.strftime("%y-%m-%d")}
+      next_week_ends(count).map {|x| x.strftime("%Y-%m-%d")}
     end
   end
 end

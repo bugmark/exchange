@@ -1,4 +1,4 @@
-#!/usr/bin/env rubyoiem,.dtt
+#!/usr/bin/env ruby
 
 require "./config/environment"
 

@@ -13,15 +13,15 @@ module OfferCmd
     def initialize(typ, offer_args)
       @typ  = typ
       @args = ArgHandler.new(offer_args, self)
-                .apply(&:default_values)
-                .apply(&:numify)
-                .apply(&:set_uuid)
-                .apply(&:set_type)
-                .apply(&:set_price)
-                .apply(&:set_maturation)
-                .apply(&:event_opts)
-                .apply(&:stringify)
-                .to_h
+        .apply(&:default_values)
+        .apply(&:numify)
+        .apply(&:set_uuid)
+        .apply(&:set_type)
+        .apply(&:set_price)
+        .apply(&:set_maturation)
+        .apply(&:event_opts)
+        .apply(&:stringify)
+        .to_h
       add_event :offer, Event::OfferBuyCreated.new(clean_args)
     end
 

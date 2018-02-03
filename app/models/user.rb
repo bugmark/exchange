@@ -76,7 +76,7 @@ class User < ApplicationRecord
 
   class << self
     def demo_accounts
-      qry = %w(joe jane test).map {|x| "email ilike '#{x}%'"}.join(" OR ")
+      qry = %w(joe jane test admin).map {|x| "email ilike '#{x}%'"}.join(" OR ")
       where(qry).order('email asc')
     end
 

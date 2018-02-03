@@ -2,7 +2,15 @@
 
 require "./config/environment"
 
+def admin_user
+  User.find_by_email("admin@bugmark.net")
+end
+
+def create_admin_user
 UserCmd::Create.new(email: "admin@bugmark.net", password: "bugmark").project
+end
+
+admin_user || create_admin_user
 
 FB.create :user, email: "test1@bugmark.net"
 FB.create :user, email: "test2@bugmark.net"

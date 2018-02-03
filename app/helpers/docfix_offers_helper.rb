@@ -2,7 +2,7 @@ module DocfixOffersHelper
   def docfix_offer_madlib_dates(base_date)
     all = BugmTime.next_week_ends(4)
     lst = all.map.with_index do |date, idx|
-      data = date.strftime("%y-%m-%d")
+      data = date.strftime("%Y-%m-%d")
       labl = date.strftime("%b %e")
       actv = base_date == data ? "active" : ""
       <<-ERB.strip_heredoc
@@ -170,7 +170,7 @@ module DocfixOffersHelper
 
   def docfix_offer_match(offer, label)
     otyp = "match_b#{offer.opposite_side[0]}"
-    mdat = offer.maturation.strftime("%y-%m-%d")
+    mdat = offer.maturation.strftime("%Y-%m-%d")
     cdep = offer.volume - offer.deposit
     qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}&offer_id=#{offer.id}"
     href = "/docfix/issues/#{offer.issue.id}/#{otyp}"

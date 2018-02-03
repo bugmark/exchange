@@ -15,7 +15,7 @@
       input#hiUsr[type='hidden' name="offer_cmd_create_buy[user_uuid]"      value="#{lcl_offer.user.uuid}"]
       input#hiBug[type='hidden' name="offer_cmd_create_buy[stm_issue_uuid]" value="#{lcl_offer.offer_new.stm_issue_uuid}"]
       input#hiSta[type='hidden' name="offer_cmd_create_buy[stm_status]"     value="#{lcl_offer.offer_new.stm_status}"]
-      input#hiMat[type='hidden' name="offer_cmd_create_buy[maturation]"     value="#{lcl_offer.offer_new.maturation.strftime('%y-%m-%d')}"]
+      input#hiMat[type='hidden' name="offer_cmd_create_buy[maturation]"     value="#{lcl_offer.offer_new.maturation.strftime('%Y-%m-%d')}"]
       input#hiVol[type='hidden' name="offer_cmd_create_buy[volume]"         value="#{lcl_offer.offer_new.volume}"]
       input#hiDep[type='hidden' name="offer_cmd_create_buy[deposit]"        value="#{lcl_offer.offer_new.deposit}"]
       .form-inline.madline
@@ -23,7 +23,7 @@
         b #{lcl_offer.offer_new.deposit}
         '  tokens towards issue ##{@bug.id} being <span id='oSide'>#{lcl_offer.offer_new.side}</span> on
       p
-        h3 #{lcl_offer.offer_new.maturation.strftime('%y-%m-%d')}
+        h3 #{lcl_offer.offer_new.maturation.strftime('%Y-%m-%d')}
       .form-inline.madline
         ' and will require a profit of
         b #{lcl_offer.offer_new.volume.to_i - lcl_offer.offer_new.deposit.to_i}

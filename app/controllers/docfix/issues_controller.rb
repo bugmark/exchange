@@ -19,7 +19,7 @@ module Docfix
     def offer_bf
       deposit = params[:deposit]    || 20
       vol     = params[:volume]     || 100
-      mdate   = params[:maturation] || BugmTime.next_week_ends.first.strftime("%y-%m-%d")
+      mdate   = params[:maturation] || BugmTime.next_week_ends.first.strftime("%Y-%m-%d")
       @bug      = Issue.find(params["id"])
       opts      = helpers.docfix_offer_base_opts(perm(params), {stm_issue_uuid: @bug.uuid, deposit: deposit, volume: vol, maturation: mdate})
       @offer_bf = OfferCmd::CreateBuy.new(:offer_bf, opts).offer_new
@@ -28,7 +28,7 @@ module Docfix
     def offer_bu
       deposit = params[:deposit]    || 80
       vol     = params[:volume]     || 100
-      mdate   = params[:maturation] || BugmTime.next_week_ends.first.strftime("%y-%m-%d")
+      mdate   = params[:maturation] || BugmTime.next_week_ends.first.strftime("%Y-%m-%d")
       @bug      = Issue.find(params["id"])
       opts      = helpers.docfix_offer_base_opts(perm(params), {stm_issue_uuid: @bug.uuid, deposit: deposit, volume: vol, maturation: mdate})
       @offer_bu = OfferCmd::CreateBuy.new(:offer_bu, opts).offer_new
@@ -43,7 +43,7 @@ module Docfix
     def match_bf
       deposit   = params[:deposit]    || 20
       vol       = params[:volume]     || 100
-      mdate     = params[:maturation] || BugmTime.next_week_ends.first.strftime("%y-%m-%d")
+      mdate     = params[:maturation] || BugmTime.next_week_ends.first.strftime("%Y-%m-%d")
       @offer    = Offer.find(params[:offer_id]) if params[:offer_id]
       @bug      = Issue.find(params["id"])
       opts      = helpers.docfix_offer_base_opts(perm(params), {stm_issue_uuid: @bug.uuid, deposit: deposit, volume: vol, maturation: mdate})
@@ -53,7 +53,7 @@ module Docfix
     def match_bu
       deposit   = params[:deposit]    || 80
       vol       = params[:volume]     || 100
-      mdate     = params[:maturation] || BugmTime.next_week_ends.first.strftime("%y-%m-%d")
+      mdate     = params[:maturation] || BugmTime.next_week_ends.first.strftime("%Y-%m-%d")
       @offer    = Offer.find(params[:offer_id]) if params[:offer_id]
       @bug      = Issue.find(params["id"])
       opts      = helpers.docfix_offer_base_opts(perm(params), {stm_issue_uuid: @bug.uuid, deposit: deposit, volume: vol, maturation: mdate})
