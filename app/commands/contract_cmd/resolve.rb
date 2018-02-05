@@ -19,7 +19,6 @@ module ContractCmd
       contract.status = "resolved"
       contract.awarded_to = contract.awardee
       contract.save
-      binding.pry
       contract.escrows.each do |escrow|
         poslist = contract.awarded_to == "fixed" ? escrow.fixed_positions : escrow.unfixed_positions
         psum  = poslist.map {|p| p.value}.sum

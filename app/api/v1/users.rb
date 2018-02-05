@@ -8,8 +8,14 @@ module V1
         is_array: true ,
         success:  Entities::UserOverview
       }
+      params do
+        optional :with_email, type: String, desc: "email filter"
+      end
       get do
-        present(User.all, with: Entities::UserOverview)
+        email = params[:with_email]
+        scope = User.all
+        scope = scope.where("email like ?", "%#{email}%") if email
+        present(scope, with: Entities::UserOverview)
       end
 
       # ---------- show user detail ----------

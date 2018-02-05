@@ -11,14 +11,16 @@ module V1
         success: Entities::OfferOverview
       }
       params do
-        optional :type   , type: String  , desc: "type"
-        optional :status , type: String  , desc: "status"
-        optional :limit  , type: Integer , desc: "limit"
+        optional :with_type   , type: String  , desc: "type filter"
+        optional :with_status , type: String  , desc: "status filter"
+        optional :limit       , type: Integer , desc: "limit"
       end
       get do
+        type   = params[:with_type]
+        status = params[:with_status]
         scope = Offer.all
-        scope = scope.where("type like ?", "%#{params[:type]}%") if params[:type]
-        scope = scope.where(status: params[:status]) if params[:status]
+        scope = scope.where("type like ?", "%#{type}%") if type
+        scope = scope.where(status: status) if status
         scope = scope.limit(params[:limit]) if params[:limit]
         present(scope.all, with: Entities::OfferOverview)
       end

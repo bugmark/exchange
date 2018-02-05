@@ -40,17 +40,17 @@ module V1
       }
       get "/counts" do
         {
-          host_name:  BugmHost.name             ,
-          host_time:  BugmTime.now.to_s         ,
-          num_users:  User.count                ,
-          num_repos:  Repo.count                ,
-          num_issues: Issue.count               ,
-          bu_offers:  Offer::Buy::Unfixed.count ,
-          bf_offers:  Offer::Buy::Fixed.count   ,
-          contracts:  Contract.count            ,
-          positions:  Position.count            ,
-          escrows:    Escrow.count              ,
-          amendments: Amendment.count           ,
+          host_name:  BugmHost.name                  ,
+          host_time:  BugmTime.now.to_s              ,
+          num_users:  User.count                     ,
+          num_repos:  Repo.count                     ,
+          num_issues: Issue.count                    ,
+          bu_offers:  Offer::Buy::Unfixed.open.count ,
+          bf_offers:  Offer::Buy::Fixed.open.count   ,
+          contracts:  Contract.count                 ,
+          positions:  Position.count                 ,
+          escrows:    Escrow.count                   ,
+          amendments: Amendment.count                ,
           events:     Event.count
         }
       end
