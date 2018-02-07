@@ -7,10 +7,10 @@ RSpec.shared_context 'Integration Environment' do
   let(:usr2)   { FB.create(:user).user                                     }
   let(:usr3)   { FB.create(:user).user                                     }
   let(:usr4)   { FB.create(:user).user                                     }
-  let(:repo1)  { FB.create(:repo).repo                                     }
-  let(:repo2)  { FB.create(:repo).repo                                     }
-  let(:issue1) { FB.create(:issue , stm_repo_uuid: repo1.uuid)             }
-  let(:issue2) { FB.create(:issue , stm_repo_uuid: repo1.uuid)             }
+  let(:repo1)  { FB.create(:gh_repo).repo                                  }
+  let(:repo2)  { FB.create(:gh_repo).repo                                  }
+  let(:issue1) { FB.create(:gh_issue , stm_repo_uuid: repo1.uuid)          }
+  let(:issue2) { FB.create(:gh_issue , stm_repo_uuid: repo1.uuid)          }
 
   let(:offer_bu1) { FB.create(:offer_bu , stm_repo_uuid:  repo1.uuid, user: usr1) }
   let(:offer_bu2) { FB.create(:offer_bu , stm_repo_uuid:  repo2.uuid)             }

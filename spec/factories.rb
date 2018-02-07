@@ -20,14 +20,22 @@ FactoryBot.define do
     balance 1000.0
   end
 
-  factory :repo, class: RepoCmd::GhCreate do
+  factory :gh_repo, class: RepoCmd::GhCreate do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     name "mvscorg/bugmark"
   end
 
-  factory :issue, class: BugCmd::Sync do
+  factory :repo, class: RepoCmd::Create do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    name "TestRepo1"
+    type "Test"
+  end
+
+  factory :gh_issue, class: IssueCmd::Sync do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
@@ -38,6 +46,20 @@ FactoryBot.define do
       "exid#{n}"
     end
     type "Issue::GitHub"
+    stm_repo_uuid { FB.create(:gh_repo).repo&.uuid || Repo.first&.uuid || SecureRandom.uuid  }
+  end
+
+  factory :issue, class: IssueCmd::Sync do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    sequence :stm_title do |n|
+      "Issue #{n}"
+    end
+    sequence :exid do |n|
+      "exid#{n}"
+    end
+    type "Issue::Test"
     stm_repo_uuid { FB.create(:repo).repo&.uuid || Repo.first&.uuid || SecureRandom.uuid  }
   end
 
@@ -51,7 +73,7 @@ FactoryBot.define do
     volume 10
     maturation Time.now + 1.day
     user_uuid    { FB.create(:user).user.uuid   }
-    stm_issue_uuid { FB.create(:issue).issue.uuid     }
+    stm_issue_uuid { FB.create(:gh_issue).issue.uuid     }
     stm_status "closed"
     poolable   false
     aon        false
@@ -65,7 +87,7 @@ FactoryBot.define do
     volume     10
     maturation Time.now + 1.day
     user_uuid    { FB.create(:user).user.uuid   }
-    stm_issue_uuid { FB.create(:issue).issue.uuid     }
+    stm_issue_uuid { FB.create(:gh_issue).issue.uuid     }
     stm_status "closed"
     poolable   false
     aon        false
@@ -118,7 +140,7 @@ module FBX
   # ----- private -----
 
   def FBX.create_buy_offers(opts)
-    bug      = FB.create(:issue).issue
+    bug      = FB.create(:gh_issue).issue
     xopt     = opts.merge({stm_issue_uuid: bug.uuid})
     obu_opts = FBX.opts_for(:obu, xopt)
     obf_opts = FBX.opts_for(:obf, xopt)

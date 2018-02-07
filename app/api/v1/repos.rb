@@ -43,19 +43,25 @@ module V1
         EOF
       }
       params do
-        requires :name , type: String , desc: "repo name"
-        optional :sync , type: Boolean, desc: "sync on create"
+        requires :type   , type: String , desc: "repo type", values: %w(GitHub Test)
+        requires :name   , type: String , desc: "repo name"
+        optional :ghsync , type: Boolean, desc: "GH sync on create"
       end
       post do
-        opts = { name: params[:name], type: "Repo::GitHub" }
-        cmd = RepoCmd::GhCreate.new(opts)
-        if cmd.valid?
-          cmd.project
-          repo = cmd.repo
-          RepoCmd::GhSync.from_repo(repo).project if params[:sync]
-          present(repo, with: Entities::RepoDetail)
+        type, name, ghsync = [params[:type], params[:name], params[:ghsync]]
+        opts = { name: name, type: "Repo::#{type}" }
+        cmd = RepoCmd::Create.new(opts)
+        if rep1 = Repo.find_by_name(name)
+          present(rep1, with: Entities::RepoDetail)
         else
-          error!(400, cmd.errors.messages.to_s)
+          if cmd.valid?
+            cmd.project
+            rep2 = cmd.repo
+            RepoCmd::GhSync.from_repo(rep2).project if ghsync && type == "GitHub"
+            present(rep2, with: Entities::RepoDetail)
+          else
+            error!(400, cmd.errors.messages.to_s)
+          end
         end
       end
 

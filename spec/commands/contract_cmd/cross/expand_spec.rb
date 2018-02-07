@@ -265,7 +265,7 @@ RSpec.describe ContractCmd::Cross::Expand do
       end
 
       it "suspends over-limit orders", :focus do #
-        bugid = FB.create(:issue).issue.uuid
+        bugid = FB.create(:gh_issue).issue.uuid
         obf = FB.create(:offer_bf, stm_issue_uuid: bugid).offer
         xusr = FB.create(:user, balance: 8.0).user
         offer_bu1 = FB.create(:offer_bu, stm_issue_uuid: bugid, volume: 10, user_uuid: xusr.uuid, poolable: true)
@@ -328,7 +328,7 @@ RSpec.describe ContractCmd::Cross::Expand do
 
     context "with AON" do
       it "combines matching targets" do
-        bugid = FB.create(:issue).issue.uuid
+        bugid = FB.create(:gh_issue).issue.uuid
         offer_bf = FB.create(:offer_bf, aon: true, stm_issue_uuid: bugid).offer
         offer_bu = FB.create(:offer_bu, aon: true, stm_issue_uuid: bugid).offer
         klas.new(offer_bf, :expand).project
@@ -343,7 +343,7 @@ RSpec.describe ContractCmd::Cross::Expand do
       end
 
       it "adjusts the BF offer" do
-        bugid    = FB.create(:issue).issue.uuid
+        bugid    = FB.create(:gh_issue).issue.uuid
         offer_bf = FB.create(:offer_bf, stm_issue_uuid: bugid, volume: 11).offer
         offer_bu = FB.create(:offer_bu, stm_issue_uuid: bugid, aon: true).offer
         klas.new(offer_bf, :expand).project

@@ -32,6 +32,41 @@ module V1
         end
       end
 
+      # ---------- sync an issue ----------
+      desc "Sync", {
+        success:  Entities::IssueDetail            ,
+        failure:  [[404, "ISSUE EXID NOT FOUND"]]  ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        requires :exid       , type: String , desc: "issue exid"
+        optional :type       , type: String , desc: "issue type", values: %w(Test GitHub)
+        optional :repo_uuid  , type: String , desc: "repo uuid"
+        optional :issue_uuid , type: String , desc: "issue uuid"
+        optional :title      , type: String , desc: "TBD"
+        optional :status     , type: String , desc: "TBD"
+        optional :labels     , type: String , desc: "TBD"
+        optional :xfields    , type: String , desc: "TBD"
+        optional :jfields    , type: String , desc: "TBD"
+      end
+      post ':exid' do
+        opts = {}
+        opts["type"] = "Issue::" + params[:type] if params[:type]
+        opts["exid"] = params[:exid]
+        %w(repo_uuid issue_uuid title status labels).each do |el|
+          opts["stm_" + el] = params[el.to_sym] if params[el.to_sym]
+        end
+        %w(xfields jfields).each do |el|
+          opts["stm_" + el] = JSON.parse(params[el.to_sym]) if params[el.to_sym]
+        end
+        cmd = IssueCmd::Sync.new(opts)
+        if cmd.valid?
+          issue = cmd.project.issue
+          present(issue, with: Entities::IssueDetail)
+        else
+          error!(cmd.errors.messages.join(", "), 404)
+        end
+      end
     end
   end
 end

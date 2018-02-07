@@ -33,7 +33,7 @@ module RepoCmd
           html_url:      el["html_url"]    ,
           synced_at:     BugmTime.now
         }.stringify_keys
-        add_event("bug#{idx}".to_sym, Event::BugSynced.new(event_opts(attrs)))
+        add_event("bug#{idx}".to_sym, Event::IssueSynced.new(event_opts(attrs)))
       end
       add_event :repo, Event::RepoSynced.new(event_opts(uuid: repo.uuid))
     end

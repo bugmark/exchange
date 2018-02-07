@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Event::BugSynced, :type => :model do
+RSpec.describe Event::IssueSynced, :type => :model do
 
   def valid_params(alt = {})
     {

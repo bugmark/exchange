@@ -1,19 +1,17 @@
 require 'ext/hash'
 
-class Event::BugSynced < Event
+class Event::IssueSynced < Event
 
   EXTRAS = {extras: {"html_url" => :string, "comments" => :string}}
 
   jsonb_fields_for :payload, Issue, EXTRAS
 
-  validates :type      , presence: true
   validates :exid      , presence: true
-  validates :stm_title , presence: true
 
   def cast_object
-    bug = Issue.find_or_initialize_by(exid: payload["exid"])
-    bug.assign_attributes(payload.without_blanks)
-    bug
+    issue = Issue.find_or_initialize_by(exid: payload["exid"])
+    issue.assign_attributes(payload.without_blanks)
+    issue
   end
 end
 

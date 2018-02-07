@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "Issues", USE_VCR do
 
-  let(:user) { FB.create(:user).user                                     }
-  let(:repo) { FB.create(:repo).repo                                     }
-  let(:issue)  { Issue.create(stm_repo_uuid: repo.uuid, type: "Issue::GitHub") }
+  let(:user)  { FB.create(:user).user                                         }
+  let(:repo)  { FB.create(:gh_repo).repo                                      }
+  let(:issue) { Issue.create(stm_repo_uuid: repo.uuid, type: "Issue::GitHub") }
 
   include_context 'Integration Environment'
 
