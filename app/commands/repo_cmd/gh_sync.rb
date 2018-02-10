@@ -21,6 +21,7 @@ module RepoCmd
 
     def sync_bugs
       issues = Octokit.issues(repo.name)
+      return if issues.blank?
       issues.each_with_index do |el, idx|
         attrs = {
           stm_repo_uuid: repo.uuid           ,

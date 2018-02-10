@@ -9,13 +9,25 @@ class Event::UserCredited < Event
   validates :amount , presence: true
 
   def cast_object
-    user = User.find_by_uuid(uuid)
     user.balance += amount if user
     user
   end
 
+  def influx_fields
+    {
+      credit_amount:  self.amount          ,
+      new_balance:    user.balance
+    }
+  end
+
   def user_uuids
     [uuid]
+  end
+
+  private
+
+  def user
+    @usr ||= User.find_by_uuid(uuid)
   end
 end
 

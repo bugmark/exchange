@@ -2,21 +2,5 @@
 
 require './config/environment'
 
-Repo.destroy_all
-User.destroy_all
-Offer.destroy_all
-Escrow.destroy_all
-Position.destroy_all
-Amendment.destroy_all
-Contract.destroy_all
-Event.destroy_all
+BugmHost.reset
 
-def admin_user
-  User.find_by_email("admin@bugmark.net")
-end
-
-def create_admin_user
-  UserCmd::Create.new(email: "admin@bugmark.net", password: "bugmark").project
-end
-
-admin_user || create_admin_user

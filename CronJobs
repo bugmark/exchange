@@ -43,6 +43,7 @@ if rails_production?
 
   every 5.minutes do
     run_scripts 'cron/contract_cross', app: 'BUGMARK', rails_env: "production"
+    run_scripts 'metrics/base'       , app: 'BUGMARK', rails_env: "production"
   end
 
   every 10.minutes do

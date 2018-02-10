@@ -7,7 +7,7 @@ def admin_user
 end
 
 def create_admin_user
-UserCmd::Create.new(email: "admin@bugmark.net", password: "bugmark").project
+  UserCmd::Create.new(email: "admin@bugmark.net", password: "bugmark").project
 end
 
 admin_user || create_admin_user
@@ -17,3 +17,4 @@ FB.create :user, email: "test2@bugmark.net"
 FB.create :user, email: "test3@bugmark.net"
 FB.create :user, email: "joe@bugmark.net"
 FB.create :user, email: "jane@bugmark.net"
+

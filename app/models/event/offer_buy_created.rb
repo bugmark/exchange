@@ -17,11 +17,30 @@ class Event::OfferBuyCreated < Event
 
   before_validation :set_defaults
 
+  # def influx_tags
+  #   {
+  #     side: "TBD" ,
+  #     cmd_type:
+  #   }
+  # end
+
+  def influx_fields
+    {
+      id:     offer.id     ,
+      volume: offer.volume ,
+      price:  offer.price
+    }
+  end
+
   private
 
-  def cast_object
+  def offer
     klas = payload['type'].constantize
-    klas.new(payload)
+    @off ||= klas.new(payload)
+  end
+
+  def cast_object
+    offer
   end
 
   def set_defaults

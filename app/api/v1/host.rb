@@ -76,7 +76,32 @@ module V1
         optional :count, type: Integer, desc: "count (default 1)"
       end
       put "/increment_day_offset" do
+        error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
         BugmTime.increment_day_offset(params[:count] || 1)
+        {status: "OK"}
+      end
+
+      # ---------- increment hour offset ----------
+      desc "increment hour offset", {
+        success:  Entities::Status     ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        optional :count, type: Integer, desc: "count (default 1)"
+      end
+      put "/increment_hour_offset" do
+        error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
+        BugmTime.increment_hour_offset(params[:count] || 1)
+        {status: "OK"}
+      end
+
+      # ---------- set current time ----------
+      desc "set current time", {
+        success:  Entities::Status
+      }
+      put "/set_current_time" do
+        error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
+        BugmTime.clear_offset if BugmTime.total_hour_offset < 0
         {status: "OK"}
       end
 
@@ -101,14 +126,14 @@ module V1
         EOF
       }
       params do
-        requires :affirm, type: String, desc: "confirmation", values: ["destroy_all_data"]
+        requires :affirm         , type: String , desc: "confirmation", values: ["destroy_all_data"]
+        optional :with_day_offset, type: Integer, desc: "initial day offset"
       end
       post "/rebuild" do
         error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
-        list = %w(Repo User Offer Escrow Position Amendment Contract Event)
-        list.each {|el| Object.const_get(el).destroy_all}
-        BugmTime.clear_day_offset
-        UserCmd::Create.new({email: 'admin@bugmark.net', password: 'bugmark'}).project
+        offset = options[:with_day_offset]
+        BugmHost.reset
+        BugmTime.set_day_offset(offset) if offset
         {status: "OK", message: "all data destroyed - login with admin@bugmark.net"}
       end
     end

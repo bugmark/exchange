@@ -63,7 +63,7 @@ class ApplicationCommand
   # ----- persistence methods -----
 
   def save
-    raise "NOT ALLOWED - USE #cmd_cast"
+    raise "NOT ALLOWED - USE #project"
   end
 
   def project

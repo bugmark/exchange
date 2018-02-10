@@ -28,7 +28,6 @@ module V1
         optional :positions, type: Boolean, desc: "include open positions"
       end
       get ':email' do
-        tst_log params[:email]
         if user = User.find_by_email(params[:email])
           opts = {
             with:      Entities::UserDetail      ,

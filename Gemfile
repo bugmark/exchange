@@ -1,10 +1,5 @@
 source 'https://rubygems.org'
 
-# git_source(:github) do |repo_name|
-#   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-#   "https://github.com/#{repo_name}.git"
-# end
-
 gem 'rails'        , '~> 5.1.3'   # rails
 gem 'pg'           , '~> 0.18'    # postgres support
 gem 'puma'         , '~> 3.9'     # app server
@@ -47,7 +42,7 @@ gem 'grape-swagger-rails'
 
 gem 'rack-cors', require: 'rack/cors'
 
-# gem 'influxdb-rails'
+gem 'influxdb-rails'
 
 gem 'factory_bot_rails'          # for data loading in production
 

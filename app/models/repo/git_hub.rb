@@ -48,6 +48,7 @@ class Repo::GitHub < Repo
   def set_readme
     return if Rails.env.test?
     readme_url = Octokit.readme(self.name)[:download_url]
+    return if readme_url.blank?
     update_attribute :readme_url, readme_url
     readme_txt = open(readme_url) { |io| io.read }
     update_attribute :readme_txt, readme_txt

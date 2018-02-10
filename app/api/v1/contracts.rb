@@ -17,12 +17,42 @@ module V1
         success: Entities::ContractDetail         ,
         failure: [[431, "CONTRACT UUID NOT FOUND"]]
       }
-      get ':uuid', requirements: { uuid: /.*/ } do
+      get ':uuid' do
         if contract = Contract.find_by_uuid(params[:uuid])
           present(contract, with: Entities::ContractDetail)
         else
           error!("contract uuid not found", 431)
         end
+      end
+
+      # ---------- show contract history ----------
+      desc "Show price and volume history", {
+        success: Entities::Status                        ,
+        failure: [[431, "CONTRACT UUID NOT FOUND"]]
+      }
+      params do
+        optional :show_series, type: Boolean, desc: "include all contract series"
+      end
+      get ':uuid/history' do
+        present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
+      end
+
+      # ---------- show contract open_offers ----------
+      desc "Show contract open_offers", {
+        success: Entities::Status                        ,
+        failure: [[431, "CONTRACT UUID NOT FOUND"]]
+      }
+      get ':uuid/open_offers' do
+        present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
+      end
+
+      # ---------- show contract history ----------
+      desc "Show contract series", {
+        success: Entities::Status                        ,
+        failure: [[431, "CONTRACT UUID NOT FOUND"]]
+      }
+      get ':uuid/series' do
+        present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
       end
 
       # ---------- cross offer ----------

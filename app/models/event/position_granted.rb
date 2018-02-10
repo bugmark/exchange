@@ -1,6 +1,6 @@
 require 'ext/hash'
 
-class Event::PositionCreated < Event
+class Event::PositionGranted < Event
 
   jsonb_fields_for :payload, Position
 

@@ -1,17 +1,9 @@
 require 'ext/hash'
 
-class Event::PositionRevoked < Event
+# PLACEHOLDER TO FACILITATE EVENT DESTRUCTION
 
-  jsonb_fields_for :payload, Position
+class Event::BugSynced < Event
 
-  validates :uuid       , presence: true
-  validates :user_uuid  , presence: true
-
-  jsonb_accessor :jfields, :transfer_uuid => :string
-
-  def cast_object
-    Position.new(payload.without_blanks)
-  end
 end
 
 # == Schema Information

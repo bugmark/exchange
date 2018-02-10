@@ -12,27 +12,27 @@ class Event < ApplicationRecord
 
   jsonb_accessor :jfields, :etherscan_url => :string
 
-  # generate jsonb fields for a class
-  def self.jsonb_fields_for(field, klas, opts = {})
-    fields = klas.attribute_names.reduce({}) do |acc, name|
-      sname = name.to_s
-      acc[sname] = klas.columns_hash[sname]&.type
-      acc
-    end
-
-    new_fields = fields
-      .without_blanks
-      .merge(opts.fetch(:extras, {}))
-      .without(*(opts.fetch(:exclude, [])))
-      .delete_if {|k, v| %i(jsonb hstore tsrange).include?(v)}
-      .delete_if {|k, v| %w(created_at updated_at).include?(k)}
-
-    new_fields.each do |key, val|
-      jsonb_accessor field, {key => val}
-    end
-  end
-
   class << self
+    # generate jsonb fields for a class
+    def jsonb_fields_for(field, klas, opts = {})
+      fields = klas.attribute_names.reduce({}) do |acc, name|
+        sname = name.to_s
+        acc[sname] = klas.columns_hash[sname]&.type
+        acc
+      end
+
+      new_fields = fields
+        .without_blanks
+        .merge(opts.fetch(:extras, {}))
+        .without(*(opts.fetch(:exclude, [])))
+        .delete_if {|k, v| %i(jsonb hstore tsrange).include?(v)}
+        .delete_if {|k, v| %w(created_at updated_at).include?(k)}
+
+      new_fields.each do |key, val|
+        jsonb_accessor field, {key => val}
+      end
+    end
+
     def for_user(user)
       # user_id = user.to_i
       # where("? = any(user_uuids)", user_id)
@@ -40,16 +40,32 @@ class Event < ApplicationRecord
     end
   end
 
+  def influx_tags()   {} end
+  def influx_fields() {} end
+
   def ev_cast
     if valid?
       if new_object&.save
         self.projected_at = BugmTime.now
         self.send(:save!)
+        point_cast
       end
       new_object
     else
       nil
     end
+  end
+
+  def point_cast
+    return unless File.exist?("/etc/influxdb/influxdb.conf")
+    return if Rails.env.test?
+    mname = self.class.name.gsub("Event::", "")
+    args  = {
+      tags:      base_tags.merge(influx_tags)      ,
+      values:    base_fields.merge(influx_fields)  ,
+      timestamp: BugmTime.now.to_i
+    }
+    InfluxStats.write_point mname, args
   end
 
   def cast_object
@@ -62,6 +78,19 @@ class Event < ApplicationRecord
 
   private
 
+  def base_tags
+    {
+      cmd_type:   self.cmd_type.gsub("Event::", "")     ,
+      event_type: self.event_type.gsub("Event::", "")
+    }
+  end
+
+  def base_fields
+    {
+      id: self.id
+    }
+  end
+
   def save(*)
     super
   end
@@ -70,7 +99,7 @@ class Event < ApplicationRecord
     prev = Event.last
     self.payload     ||= {}
     self.event_uuid  ||= SecureRandom.uuid
-    self.local_hash    = Digest::MD5.hexdigest([self.uuid, payload].to_json)
+    self.local_hash    = Digest::MD5.hexdigest([self.event_uuid, payload].to_json)
     self.chain_hash    = Digest::MD5.hexdigest([prev&.chain_hash, self.local_hash].to_json)
   end
 end
