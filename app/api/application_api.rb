@@ -7,8 +7,8 @@ class InfluxLogger < Grape::Middleware::Base
   def after
     return nil if Rails.env.test?
     @time   = Time.now - @time
-    @status = @app_response.status
-    @size   = @app_response.body.join.size
+    @status = @app_response&.status
+    @size   = @app_response&.body&.join&.size
     InfluxDB::Rails.client.write_point "bmx.api", {tags: tags, values: fields}
     nil
   end
@@ -20,14 +20,14 @@ class InfluxLogger < Grape::Middleware::Base
       method: env['REQUEST_METHOD'] ,
       path:   env['PATH_INFO']      ,
       query:  env['QUERY_STRING']   ,
-      status: @status
+      status: @status || "NA"
     }
   end
 
   def fields
     {
       time: @time   ,
-      size: @size
+      size: @size || 0
     }
   end
 end

@@ -10,18 +10,18 @@ class Event::IssueSynced < Event
 
   def influx_tags
     {
-      type:     issue.type
+      type: issue.type
     }
   end
 
   def influx_fields
     {
-      id:             issue.id             ,
-      stm_issue_uuid: issue.id             ,
-      stm_repo_uuid:  issue.stm_repo_uuid  ,
-      stm_status:     issue.stm_status     ,
-      stm_labels:     issue.stm_labels     ,
-    }
+      id:             issue.id            ,
+      stm_issue_uuid: issue.uuid          ,
+      stm_repo_uuid:  issue.stm_repo_uuid ,
+      stm_status:     issue.stm_status    ,
+      stm_labels:     issue.stm_labels    ,
+    }.delete_if {|_k, v| v.nil?}
   end
 
   def cast_object

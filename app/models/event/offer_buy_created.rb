@@ -34,7 +34,7 @@ class Event::OfferBuyCreated < Event
       stm_issue_uuid: offer.stm_issue_uuid                         ,
       stm_repo_uuid:  offer.stm_repo_uuid || offer.issue.repo.uuid ,
       stm_status:     offer.stm_status
-    }
+    }.delete_if {|_k, v| v.nil?}
   end
 
   private
