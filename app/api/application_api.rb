@@ -17,6 +17,7 @@ class InfluxLogger < Grape::Middleware::Base
 
   def lcl_response
     return @app_response if @app_response.is_a?(Rack::Response)
+    return Rack::Response.new(["Error"], 500, {}) if @app_response.nil?
     @lcl_response ||= Rack::Response.new(@app_response[2], @app_response[0], @app_response[1])
   end
 

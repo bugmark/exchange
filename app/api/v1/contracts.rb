@@ -26,14 +26,11 @@ module V1
       end
 
       # ---------- show contract history ----------
-      desc "Show price and volume history", {
+      desc "Show contract escrows", {
         success: Entities::Status                        ,
         failure: [[431, "CONTRACT UUID NOT FOUND"]]
       }
-      params do
-        optional :show_series, type: Boolean, desc: "include all contract series"
-      end
-      get ':uuid/history' do
+      get ':uuid/escrows' do
         present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
       end
 

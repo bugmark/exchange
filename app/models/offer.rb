@@ -211,6 +211,14 @@ class Offer < ApplicationRecord
     [self.maturation_range.first, self.maturation_range.last].avg_time
   end
 
+  def maturation_beg
+    self.maturation_range.first
+  end
+
+  def maturation_end
+    self.maturation_range.last
+  end
+
   def bugm_time_period
     BugmTime.next_week_dates.index(self.maturation.strftime("%Y-%m-%d"))
   end
