@@ -80,7 +80,7 @@ class Event < ApplicationRecord
 
   def base_tags
     {
-      cmd_type:   self.cmd_type.gsub("Event::", "")     ,
+      cmd_type:   self.cmd_type.gsub("::", "_").gsub("Cmd", "")     ,
       event_type: self.event_type.gsub("Event::", "")
     }
   end

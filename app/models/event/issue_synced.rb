@@ -8,10 +8,31 @@ class Event::IssueSynced < Event
 
   validates :exid      , presence: true
 
+  def influx_tags
+    {
+      type:     issue.type
+    }
+  end
+
+  def influx_fields
+    {
+      id:             issue.id             ,
+      stm_issue_uuid: issue.id             ,
+      stm_repo_uuid:  issue.stm_repo_uuid  ,
+      stm_status:     issue.stm_status     ,
+      stm_labels:     issue.stm_labels     ,
+    }
+  end
+
   def cast_object
-    issue = Issue.find_or_initialize_by(exid: payload["exid"])
     issue.assign_attributes(payload.without_blanks)
     issue
+  end
+
+  private
+
+  def issue
+    @iss ||= Issue.find_or_initialize_by(exid: payload["exid"])
   end
 end
 

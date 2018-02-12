@@ -17,18 +17,23 @@ class Event::OfferBuyCreated < Event
 
   before_validation :set_defaults
 
-  # def influx_tags
-  #   {
-  #     side: "TBD" ,
-  #     cmd_type:
-  #   }
-  # end
+  def influx_tags
+    {
+      side:     offer.side       ,
+      intent:   offer.intent     ,
+      poolable: offer.poolable   ,
+      aon:      offer.aon
+    }
+  end
 
   def influx_fields
     {
-      id:     offer.id     ,
-      volume: offer.volume ,
-      price:  offer.price
+      id:             offer.id                                     ,
+      volume:         offer.volume                                 ,
+      price:          offer.price                                  ,
+      stm_issue_uuid: offer.stm_issue_uuid                         ,
+      stm_repo_uuid:  offer.stm_repo_uuid || offer.issue.repo.uuid ,
+      stm_status:     offer.stm_status
     }
   end
 

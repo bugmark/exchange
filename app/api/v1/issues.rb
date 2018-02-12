@@ -40,11 +40,11 @@ module V1
       }
       params do
         requires :exid       , type: String , desc: "issue exid"
-        optional :type       , type: String , desc: "issue type", values: %w(Test GitHub)
-        optional :repo_uuid  , type: String , desc: "repo uuid"
+        requires :type       , type: String , desc: "issue type", values: %w(Test GitHub)
+        requires :repo_uuid  , type: String , desc: "repo uuid"
         optional :issue_uuid , type: String , desc: "issue uuid"
-        optional :title      , type: String , desc: "TBD"
-        optional :status     , type: String , desc: "TBD"
+        optional :title      , type: String , desc: "issue title"
+        optional :status     , type: String , desc: "issue status" , values: %w(open closed)
         optional :labels     , type: String , desc: "TBD"
         optional :xfields    , type: String , desc: "TBD"
         optional :jfields    , type: String , desc: "TBD"

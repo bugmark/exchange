@@ -16,6 +16,7 @@ module V1
           host_name:   BugmHost.name,
           host_time:   BugmTime.now.to_s,
           day_offset:  BugmTime.day_offset,
+          hour_offset: BugmTime.hour_offset,
           usermail:    current_user&.email,
           datastore:   BugmHost.datastore,
           released_at: File.exist?(fn) ? File.read(fn).strip : "NA"
@@ -115,7 +116,14 @@ module V1
           will have one user: `user/pass` = `admin@bugmark.net/bugmark`.
 
           To run this command, you must post a confirmation parameter:
+
           `/host/rebuild?confirm=destroy_all_data`
+
+          Optionally, you can use the 'with_day_offset' param to set the start 
+          date for your system.  This can be used for simulations where you
+          want to use historical data:
+
+          `host/rebuild?confirm=destroy_all_data&with_day_offset=-90`
 
           The rebuild command is intended for use on hosts dedicated for 
           research and testing. (and not production!)  The rebuild command will
@@ -131,8 +139,8 @@ module V1
       end
       post "/rebuild" do
         error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
-        offset = options[:with_day_offset]
         BugmHost.reset
+        offset = params[:with_day_offset]
         BugmTime.set_day_offset(offset) if offset
         {status: "OK", message: "all data destroyed - login with admin@bugmark.net"}
       end

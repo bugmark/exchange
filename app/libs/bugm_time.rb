@@ -43,7 +43,7 @@ class BugmTime < Time
       new_offset  = hour_offset + number
       days, hours = [new_offset / 24, new_offset % 24]
       increment_day_offset(days) if days > 0
-      File.open(DAY_JUMP_FILE, 'w') {|f| f.puts hours}
+      File.open(HOUR_JUMP_FILE, 'w') {|f| f.puts hours}
     end
 
     # -------------------------------------------------------
