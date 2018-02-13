@@ -31,7 +31,8 @@ module V1
       }
       get ':uuid' do
         offer = Offer.find_by_uuid(params[:uuid])
-        offer ? offer_details(offer) : error!("Not found", 404)
+        error!("not found", 404) if offer.nil?
+        present(offer, with: Entities::OfferDetail)
       end
 
       # ---------- create buy offer ----------
