@@ -30,7 +30,7 @@ RSpec.describe Offer, type: :model do
   end
 
   describe "Instance Methods" do
-    it { should respond_to(:match_bugs) }
+    it { should respond_to(:match_issues) }
   end
 
   describe "Object Creation" do

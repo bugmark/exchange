@@ -48,16 +48,16 @@ table.table
       td = core_amend_escrow_stats(amend)
       td #{core_amend_ask_positions_link(amend)}<br/>#{core_amend_ask_positions_stats(amend)}
 hr
-b Matching Bugs (#{@contract.match_bugs.count})
+b Matching Bugs (#{@contract.match_issues.count})
 table.table
-  - if @contract.match_bugs.count > 0
+  - if @contract.match_issues.count > 0
     tr
       th ID
       th Type
       th Title
       th Contracts
       th Create
-  - @contract.match_bugs.each do |bug|
+  - @contract.match_issues.each do |bug|
     tr
       td = core_issue_id_link(bug)
       td = bug.type

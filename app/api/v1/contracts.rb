@@ -27,20 +27,27 @@ module V1
 
       # ---------- show contract history ----------
       desc "Show contract escrows", {
-        success: Entities::Status                        ,
+        is_array: true                                  ,
+        success:  Entities::EscrowDetail                ,
         failure: [[431, "CONTRACT UUID NOT FOUND"]]
       }
       get ':uuid/escrows' do
-        present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
+        contract = Contract.find_by_uuid(params[:uuid])
+        error!("contract UUID not found", 431) if contract.nil?
+        present(contract.escrows, with: Entities::EscrowDetail)
       end
 
       # ---------- show contract open_offers ----------
       desc "Show contract open_offers", {
-        success: Entities::Status                        ,
-        failure: [[431, "CONTRACT UUID NOT FOUND"]]
+        is_array: true                                  ,
+        success:  Entities::OfferDetail                 ,
+        failure:  [[431, "CONTRACT UUID NOT FOUND"]]
       }
       get ':uuid/open_offers' do
-        present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
+        contract = Contract.find_by_uuid(params[:uuid])
+        error!("contract UUID not found", 431) if contract.nil?
+        scope = contract.match_offers.open.by_overlap_maturation(contract.maturation)
+        present(scope, with: Entities::OfferDetail)
       end
 
       # ---------- show contract history ----------

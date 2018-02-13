@@ -50,16 +50,16 @@ table width='100%'
         td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@offer)}
 
 hr
-b Matching Bugs (#{@offer.match_bugs.count})
+b Matching Bugs (#{@offer.match_issues.count})
 table.table
-  - if @offer.match_bugs.count > 0
+  - if @offer.match_issues.count > 0
     tr
       th ID
       th Type
       th Title
       th Contracts
       th Create
-  - @offer.match_bugs.each do |bid|
+  - @offer.match_issues.each do |bid|
     tr
       td = core_issue_id_link(bid)
       td = bid.type
