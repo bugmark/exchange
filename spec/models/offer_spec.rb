@@ -4,7 +4,7 @@ RSpec.describe Offer, type: :model do
   def valid_params(extras = {})
     {
       user_uuid: user.uuid                                 ,
-      maturation_range: Time.now-1.week..Time.now+1.week   ,
+      maturation_range: BugmTime.now-1.week..BugmTime.now+1.week   ,
       status:  'open'                                      ,
       volume:  5                                           ,
       price:   0.2
@@ -75,12 +75,12 @@ RSpec.describe Offer, type: :model do
     before(:each) { subject.save }
 
     it "returns a range search" do
-      result = klas.by_overlap_maturation_range(Time.now..Time.now+1.minute)
+      result = klas.by_overlap_maturation_range(BugmTime.now..BugmTime.now+1.minute)
       expect(result.length).to eq(1)
     end
 
     it "returns zero when there is a miss" do
-      result = klas.by_overlap_maturation_range(Time.now-2.years..Time.now-1.year)
+      result = klas.by_overlap_maturation_range(BugmTime.now-2.years..BugmTime.now-1.year)
       expect(result.length).to eq(0)
     end
   end
@@ -89,12 +89,12 @@ RSpec.describe Offer, type: :model do
     before(:each) { subject.save }
 
     it "returns a date search" do
-      result = klas.by_overlap_maturation(Time.now)
+      result = klas.by_overlap_maturation(BugmTime.now)
       expect(result.length).to eq(1)
     end
 
     it "returns zero when there is a miss" do
-      result = klas.by_overlap_maturation(Time.now-2.years)
+      result = klas.by_overlap_maturation(BugmTime.now-2.years)
       expect(result.length).to eq(0)
     end
   end

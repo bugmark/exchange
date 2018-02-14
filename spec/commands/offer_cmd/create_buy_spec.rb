@@ -97,7 +97,7 @@ RSpec.describe OfferCmd::CreateBuy do
 
   describe "creation with a maturation" do
     it "generates a valid object" do
-      tst_time = Time.now
+      tst_time = BugmTime.now
       obj = klas.new(:offer_bu, valid_params(maturation: tst_time))
       expect(obj).to be_valid
       expect(obj.project.offer.maturation.strftime("%H%M%S")).to eq(tst_time.strftime("%H%M%S"))

@@ -56,8 +56,8 @@ module V1
           when "unfixed" then :offer_bu
           else "NA"
         end
-        matur = params[:maturation] ? Time.parse(params[:maturation]) : Time.now + 1.week
-        expir = params[:expiration] ? Time.parse(params[:expiration]) : Time.now + 1.day
+        matur = params[:maturation] ? Time.parse(params[:maturation]) : BugmTime.now + 1.week
+        expir = params[:expiration] ? Time.parse(params[:expiration]) : BugmTime.now + 1.day
         opts  = {
           user_uuid:      current_user.uuid          ,
           price:          params[:price]             ,

@@ -11,7 +11,7 @@ RSpec.describe Event::OfferBuyCreated, :type => :model do
       :user_uuid    =>  user.uuid                  ,
       :volume       =>  10                         ,
       :price        =>  0.6                        ,
-      :maturation   =>  Time.now - 1.day
+      :maturation   =>  BugmTime.now - 1.day
     }.merge(alt)
   end
 

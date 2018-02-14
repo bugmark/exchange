@@ -50,7 +50,7 @@ module V1
         present(scope, with: Entities::OfferDetail)
       end
 
-      # ---------- show contract history ----------
+      # ---------- show contract series ----------
       desc "Show contract series", {
         success: Entities::Status                        ,
         failure: [[431, "CONTRACT UUID NOT FOUND"]]
@@ -75,7 +75,26 @@ module V1
           cmd.project
           present({status: "OK"}, with: Entities::Status)
         else
-          error!("invalid offer", 404)
+          error!(cmd.errors.messages.values.join(" | "), 404)
+        end
+      end
+
+      # ---------- resolve contract ----------
+      desc "Resolve contract", {
+        success:    Entities::Status            ,
+        failure:    [[404, "INVALID OFFER"]]    ,
+        consumes:   ['multipart/form-data']
+      }
+      put ':uuid/resolve' do
+        uuid = params[:uuid]
+        contract = Contract.find_by_uuid(uuid)
+        error!("contract not found (#{uuid}", 404) if contract.nil?
+        cmd   = ContractCmd::Resolve.new(contract)
+        if cmd.valid?
+          cmd.project
+          present({status: "OK"}, with: Entities::Status)
+        else
+          error!(cmd.errors.messages.values.join(" | "), 404)
         end
       end
     end

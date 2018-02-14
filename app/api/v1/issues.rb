@@ -40,7 +40,6 @@ module V1
       }
       params do
         requires :exid       , type: String , desc: "issue exid"
-        requires :type       , type: String , desc: "issue type", values: %w(Test GitHub)
         requires :repo_uuid  , type: String , desc: "repo uuid"
         optional :issue_uuid , type: String , desc: "issue uuid"
         optional :title      , type: String , desc: "issue title"
@@ -50,8 +49,11 @@ module V1
         optional :jfields    , type: String , desc: "TBD"
       end
       post ':exid' do
+        repo_uuid = params[:repo_uuid]
+        repo = Repo.find_by_uuid(repo_uuid)
+        error!("Repo not found (#{repo_uuid})") if repo.nil?
         opts = {}
-        opts["type"] = "Issue::" + params[:type] if params[:type]
+        opts["type"] = repo.type.gsub("Repo", "Issue")
         opts["exid"] = params[:exid]
         %w(repo_uuid issue_uuid title status labels).each do |el|
           opts["stm_" + el] = params[el.to_sym] if params[el.to_sym]

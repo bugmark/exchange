@@ -4,7 +4,7 @@ RSpec.describe Offer::Buy::Unfixed, type: :model do
   def valid_params(extras = {})
     {
       user_uuid: user.uuid                                  ,
-      maturation_range: Time.now-1.week..Time.now+1.week    ,
+      maturation_range: BugmTime.now-1.week..BugmTime.now+1.week    ,
       status:  'open'                                       ,
     }.merge(extras)
   end

@@ -8,7 +8,7 @@ class Event::RepoSynced < Event
 
   def cast_object
     repo = Repo.find_or_initialize_by(uuid: payload["uuid"])
-    repo.assign_attributes(synced_at: Time.now)
+    repo.assign_attributes(synced_at: BugmTime.now)
     repo
   end
 end
