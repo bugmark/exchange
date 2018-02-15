@@ -5,7 +5,6 @@ class Event::ContractCreated < Event
   jsonb_fields_for :payload, Contract
 
   validates :uuid       , presence: true
-  # validates :type       , presence: true
   validates :maturation , presence: true
 
   def cast_object

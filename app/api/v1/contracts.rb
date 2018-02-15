@@ -59,6 +59,42 @@ module V1
         present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
       end
 
+      # ---------- create contract ----------
+      desc "Create contract", {
+        success:  Entities::ContractCreated    ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        optional :issue      , type: String  , desc: "issue UUID"
+        optional :repo       , type: String  , desc: "repo UUID"
+        optional :title      , type: String  , desc: "title"
+        optional :status     , type: String  , desc: "status"
+        optional :labels     , type: String  , desc: "labels"
+        optional :maturation , type: String  , desc: "YYMMDD_HHMM (default now + 1.week)"
+      end
+      post '/create' do
+        matur = params[:maturation] ? Time.parse(params[:maturation]) : BugmTime.now + 1.week
+        opts = {
+          uuid:           SecureRandom.uuid          ,
+          stm_issue_uuid: params[:issue]             ,
+          stm_repo_uuid:  params[:repo]              ,
+          stm_title:      params[:title]             ,
+          stm_status:     params[:status]            ,
+          stm_labels:     params[:labels]            ,
+          maturation:     matur                      ,
+        }.delete_if {|_k,v| v.nil?}
+        cmd = ContractCmd::Create.new(opts)
+        if cmd.valid?
+          result = cmd.project
+          eu = result.events[:contract].event_uuid
+          cu = result.contract.uuid
+          {status: "OK", event_uuid: eu, contract_uuid: cu}
+        else
+          msg = cmd.errors.messages.map {|k, v| "#{k}: #{v.join(", ")}"}.join(" | ")
+          error!({status: "ERROR", message: msg}, 404)
+        end
+      end
+
       # ---------- cross offer ----------
       desc "Cross offer", {
         success:    Entities::Status            ,
@@ -68,14 +104,15 @@ module V1
       params do
         requires :commit_type , type: String , desc: "expand, transfer or reduce", values: %w(expand transfer reduce)
       end
-      post ':offer_uuid' do
+      post ':offer_uuid/cross' do
         offer = Offer.find_by_uuid(params[:offer_uuid])
         cmd   = ContractCmd::Cross.new(offer, params[:commit_type].to_sym)
         if cmd.valid?
           cmd.project
           present({status: "OK"}, with: Entities::Status)
         else
-          error!(cmd.errors.messages.values.join(" | "), 404)
+          msg = cmd.errors.messages.map {|k, v| "#{k}:#{v}"}.join(" | ")
+          error!(msg, 404)
         end
       end
 
@@ -97,6 +134,7 @@ module V1
           error!(cmd.errors.messages.values.join(" | "), 404)
         end
       end
+
     end
   end
 end

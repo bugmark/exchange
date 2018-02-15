@@ -1,8 +1,5 @@
 module ContractCmd
-  class Delete < ApplicationCommand
-
-    # attr_subobjects :contract
-    # attr_delegate_fields :contract
+  class Cancel < ApplicationCommand
 
     validate :existing_contract
     validate :no_amendments

@@ -22,10 +22,10 @@ module V1
         failure: [[404, "ISSUE UUID NOT FOUND"]]
       }
       params do
-        requires :issue_uuid , type: String , desc: "issue uuid"
+        requires :issue_exid , type: String , desc: "issue exid"
       end
-      get ':issue_uuid', requirements: { issue_uuid: /.*/ } do
-        if issue = Issue.find_by_uuid(params[:issue_uuid])
+      get ':issue_exid' do
+        if issue = Issue.find_by_exid(params[:issue_exid])
           present(issue, with: Entities::IssueDetail)
         else
           error!("issue uuid not found", 404)
@@ -40,7 +40,7 @@ module V1
       }
       params do
         requires :exid       , type: String , desc: "issue exid"
-        requires :repo_uuid  , type: String , desc: "repo uuid"
+        optional :repo_uuid  , type: String , desc: "repo uuid"
         optional :issue_uuid , type: String , desc: "issue uuid"
         optional :title      , type: String , desc: "issue title"
         optional :status     , type: String , desc: "issue status" , values: %w(open closed)
@@ -51,9 +51,9 @@ module V1
       post ':exid' do
         repo_uuid = params[:repo_uuid]
         repo = Repo.find_by_uuid(repo_uuid)
-        error!("Repo not found (#{repo_uuid})") if repo.nil?
+        error!("Repo not found (#{repo_uuid})") if repo_uuid && repo.nil?
         opts = {}
-        opts["type"] = repo.type.gsub("Repo", "Issue")
+        opts["type"] = repo.type.gsub("Repo", "Issue") if repo
         opts["exid"] = params[:exid]
         %w(repo_uuid issue_uuid title status labels).each do |el|
           opts["stm_" + el] = params[el.to_sym] if params[el.to_sym]
