@@ -1,3 +1,5 @@
+require 'ext/hash'
+
 class InfluxLogger < Grape::Middleware::Base
 
   def before
@@ -27,7 +29,7 @@ class InfluxLogger < Grape::Middleware::Base
       path:   env['PATH_INFO']      ,
       query:  env['QUERY_STRING']   ,
       status: @status || "NA"
-    }.delete_if {|_k, v| v.nil?}
+    }.without_blanks
   end
 
   def fields

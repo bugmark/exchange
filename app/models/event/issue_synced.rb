@@ -21,7 +21,7 @@ class Event::IssueSynced < Event
       stm_repo_uuid:  issue.stm_repo_uuid ,
       stm_status:     issue.stm_status    ,
       stm_labels:     issue.stm_labels    ,
-    }.delete_if {|_k, v| v.nil?}
+    }.without_blanks
   end
 
   def cast_object

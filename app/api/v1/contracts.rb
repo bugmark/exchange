@@ -1,3 +1,5 @@
+require 'ext/hash'
+
 module V1
   class Contracts < V1::App
 
@@ -82,7 +84,7 @@ module V1
           stm_status:     params[:status]            ,
           stm_labels:     params[:labels]            ,
           maturation:     matur                      ,
-        }.delete_if {|_k,v| v.nil?}
+        }.without_blanks
         cmd = ContractCmd::Create.new(opts)
         if cmd.valid?
           result = cmd.project

@@ -1,3 +1,5 @@
+require 'ext/hash'
+
 module ContractCmd
   class Clone
 
@@ -24,7 +26,7 @@ module ContractCmd
         stm_status:     attrs["status"]     || proto.stm_status       ,
         stm_labels:     attrs["labels"]     || proto.stm_labels       ,
         maturation:     attrs["maturation"] || proto.maturation
-      }.delete_if {|_k,v| v.nil?}
+      }.without_blanks
       cmd_opts.merge(vals)
     end
 
