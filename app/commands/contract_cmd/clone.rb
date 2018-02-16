@@ -1,17 +1,17 @@
 module ContractCmd
   class Clone
 
-    validate :unique_clone
-    validate :prototype_presence
-
-    attr_reader :prototype
-
-    def initialize(contract, new_attrs)
-      @prototype = Contract.find(contract.to_i)
-      add_event(:clone, Event::ContractCreated.new(opts(@prototype, new_attrs)))
-    end
-
-    private
+    # validate :unique_clone
+    # validate :prototype_presence
+    #
+    # attr_reader :prototype
+    #
+    # def initialize(contract, new_attrs)
+    #   @prototype = Contract.find(contract.to_i)
+    #   add_event(:clone, Event::ContractCreated.new(opts(@prototype, new_attrs)))
+    # end
+    #
+    # private
 
     def opts(proto, attrs)
       vals = {

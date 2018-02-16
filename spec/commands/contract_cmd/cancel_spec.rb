@@ -1,30 +1,30 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Delete do
+#RSpec.describe ContractCmd::Cancel do
 
   # TEST FOR
   # - existance of escrows
 
-  def gen_obf(opts = {})
-    lcl_opts = {volume: 10, price: 0.40, user: user}
-    OfferCmd::CreateBuy.new(:offer_bf, lcl_opts.merge(opts)).project
-  end
+  # def gen_obf(opts = {})
+  #   lcl_opts = {volume: 10, price: 0.40, user: user}
+  #   OfferCmd::CreateBuy.new(:offer_bf, lcl_opts.merge(opts)).project
+  # end
 
-  def valid_params(args = {})
-    {
-      user: user
-    }.merge(args)
-  end
+  # def valid_params(args = {})
+  #   {
+  #     user: user
+  #   }.merge(args)
+  # end
 
   # noinspection RubyArgCount
-  let(:offer_bf) { gen_obf.project.offer                                }
+  # let(:offer_bf) { gen_obf.project.offer                                }
 
-  def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
+  # def offer(typ, args = {}) klas.new(typ, valid_params(args)) end
 
-  let(:user)   { FB.create(:user).user                                  }
-  let(:klas)   { described_class                                        }
+  # let(:user)   { FB.create(:user).user                                  }
+  # let(:klas)   { described_class                                        }
   # noinspection RubyArgCount
-  subject      { klas.new(offer_bf, valid_params)                       }
+  # subject      { klas.new(offer_bf, valid_params)                       }
 
   # describe "Object Existence" do
   #   it { should be_a klas   }
@@ -76,4 +76,4 @@ RSpec.describe ContractCmd::Delete do
   #     expect(klone).to_not be_valid
   #   end
   # end
-end
+# end

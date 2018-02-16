@@ -5,6 +5,7 @@ module Entities
     expose :num_users  , documentation: { type: Integer , desc: "Number of Users"                 }
     expose :num_repos  , documentation: { type: Integer , desc: "Number of Repos"                 }
     expose :num_issues , documentation: { type: Integer , desc: "Number of Issues"                }
+    expose :offers     , documentation: { type: Integer , desc: "Number of Open Offers"           }
     expose :bu_offers  , documentation: { type: Integer , desc: "Number of Offers to Buy Fixed"   }
     expose :bf_offers  , documentation: { type: Integer , desc: "Number of Offers to Buy Unfixed" }
     expose :contracts  , documentation: { type: Integer , desc: "Number of Contracts"             }

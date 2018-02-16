@@ -11,15 +11,14 @@ module V1
         EOF
       }
       get "/info" do
-        fn   = "/tmp/bugm_build_date.txt"
         data = {
-          host_name:   BugmHost.name,
-          host_time:   BugmTime.now.to_s,
-          day_offset:  BugmTime.day_offset,
-          hour_offset: BugmTime.hour_offset,
-          usermail:    current_user&.email,
-          datastore:   BugmHost.datastore,
-          released_at: File.exist?(fn) ? File.read(fn).strip : "NA"
+          host_name:   BugmHost.name              ,
+          host_time:   BugmTime.now.to_s          ,
+          day_offset:  BugmTime.day_offset        ,
+          hour_offset: BugmTime.hour_offset       ,
+          datastore:   BugmHost.datastore         ,
+          released_at: BugmTime.released_at       ,
+          usermail:    current_user&.email
         }
         present(data, with: Entities::HostInfo)
       end
@@ -40,18 +39,20 @@ module V1
         EOF
       }
       get "/counts" do
+        DatapointCmd::Base.new.project      # record metrics...
         {
           host_name:  BugmHost.name                  ,
           host_time:  BugmTime.now.to_s              ,
           num_users:  User.count                     ,
           num_repos:  Repo.count                     ,
           num_issues: Issue.count                    ,
+          offers:     Offer.open.count               ,
           bu_offers:  Offer::Buy::Unfixed.open.count ,
           bf_offers:  Offer::Buy::Fixed.open.count   ,
           contracts:  Contract.count                 ,
           positions:  Position.count                 ,
-          escrows:    Escrow.count                   ,
           amendments: Amendment.count                ,
+          escrows:    Escrow.count                   ,
           events:     Event.count
         }
       end

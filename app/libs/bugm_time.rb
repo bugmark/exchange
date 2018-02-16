@@ -28,6 +28,13 @@ class BugmTime < Time
 
     # -------------------------------------------------------
 
+    def released_at
+      fn   = "/tmp/bugm_build_date.txt"
+      File.exist?(fn) ? File.read(fn).strip : "NA"
+    end
+
+    # -------------------------------------------------------
+
     def set_day_offset(number)
       File.open(DAY_JUMP_FILE, 'w') {|f| f.puts number}
     end

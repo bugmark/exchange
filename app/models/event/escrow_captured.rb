@@ -7,8 +7,13 @@ class Event::EscrowCaptured < Event
   validates :uuid , presence: true
 
   def cast_object
-    Escrow.new(payload.without_blanks)
+    escrow
   end
+
+  def escrow
+    @esc ||= Escrow.new(payload.without_blanks)
+  end
+
 end
 
 # == Schema Information

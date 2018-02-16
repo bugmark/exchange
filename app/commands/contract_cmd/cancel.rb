@@ -1,26 +1,26 @@
 module ContractCmd
   class Cancel < ApplicationCommand
 
-    validate :existing_contract
-    validate :no_amendments
+    # validate :existing_contract
+    # validate :no_amendments
 
-    def initialize(contract)
-      @contract = Contract.find(contract.to_i)
-    end
+    # def initialize(contract)
+    #   @contract = Contract.find(contract.to_i)
+    # end
 
-    private
+    # private
 
-    def existing_contract
+    # def existing_contract
       # if BugmTime.now < contract.maturation
       #   errors.add(:maturation, "contract has not matured")
       # end
-    end
+    # end
 
-    def no_amendments
+    # def no_amendments
       # if BugmTime.now < contract.maturation
       #   errors.add(:maturation, "contract has not matured")
       # end
-    end
+    # end
   end
 end
 
