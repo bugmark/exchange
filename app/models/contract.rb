@@ -18,7 +18,7 @@ class Contract < ApplicationRecord
 
   before_validation :default_values
 
-  validates :status, inclusion: {in: %w(open matured resolved)}
+  validates :status, inclusion: {in: %w(open resolved cancelled)}
   validates :maturation, presence: true
 
   # ----- SCOPES -----
@@ -110,8 +110,8 @@ class Contract < ApplicationRecord
 
   # VALID STATUSES
   # > open      - active
-  # > matured   - past mature date
   # > resolved  - assigned
+  # > cancelled - cancelled
 
   def match_assertion
     match_issues.count > 0

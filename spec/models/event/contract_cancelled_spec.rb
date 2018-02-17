@@ -1,22 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe Event::ContractCreated, :type => :model do
+RSpec.describe Event::ContractCancelled, :type => :model do
 
   def valid_params(alt = {})
     {
       :cmd_type   => "Test::Contract::Create"   ,
       :cmd_uuid   => SecureRandom.uuid          ,
-      :uuid       => SecureRandom.uuid          ,
-      :maturation => BugmTime.now + 1.hour      ,
-      :type       => "Contract::Test"           ,
-      :status     => "open"                     ,
+      :uuid       => contract.uuid
     }.merge(alt)
   end
 
-  let(:klas)   { described_class                   }
-  subject      { klas.new(valid_params)            }
+  let(:contract) { FB.create(:contract).contract }
+  let(:klas)     { described_class               }
+  subject        { klas.new(valid_params)        }
 
-  describe "Object Creation" do
+  describe "object creation" do
     it { should be_valid }
 
     it 'saves the object to the database' do
@@ -30,16 +28,17 @@ RSpec.describe Event::ContractCreated, :type => :model do
 
   describe "Projecting" do
     it "creates an event" do
-      expect(Event.count).to eq(0)
+      hydrate(contract)
+      expect(Event.count).to eq(1)
       obj = subject.ev_cast
       expect(obj).to be_a(Contract)
-      expect(Event.count).to eq(1)
+      expect(Event.count).to eq(2)
     end
 
     it "has the right status" do
       obj = subject.ev_cast
       expect(obj).to be_a(Contract)
-      expect(obj.status).to eq("open")
+      expect(obj.status).to eq("cancelled")
     end
   end
 end

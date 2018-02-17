@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do #
+RSpec.describe User, type: :model do
   def valid_params
     {email: "asdf@qwer.net", password: "gggggg"}
   end
@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do #
       expect(usr.offers).to eq([])
     end
 
-    it 'returns a offer if one exists', :focus do
+    it 'returns a offer if one exists' do
       gen_unfixed
       expect(usr.offers.count).to     eq(1)
       expect(usr.offers_buy.count).to eq(1)

@@ -28,8 +28,8 @@ FactoryBot.define do
   end
 
   factory :repo, class: RepoCmd::Create do
-    to_create { |instance| instance.project }
-    initialize_with { new(attributes) }
+    to_create       { |instance| instance.project }
+    initialize_with { new(attributes)             }
 
     name "TestRepo1"
     type "Test"
@@ -72,8 +72,8 @@ FactoryBot.define do
     price  0.60
     volume 10
     maturation Time.now + 1.day
-    user_uuid    { FB.create(:user).user.uuid   }
-    stm_issue_uuid { FB.create(:gh_issue).issue.uuid     }
+    user_uuid      { FB.create(:user).user.uuid     }
+    stm_issue_uuid { FB.create(:issue).issue.uuid   }
     stm_status "closed"
     poolable   false
     aon        false
@@ -86,11 +86,21 @@ FactoryBot.define do
     price      0.40
     volume     10
     maturation Time.now + 1.day
-    user_uuid    { FB.create(:user).user.uuid   }
-    stm_issue_uuid { FB.create(:gh_issue).issue.uuid     }
+    user_uuid      { FB.create(:user).user.uuid    }
+    stm_issue_uuid { FB.create(:issue).issue.uuid  }
     stm_status "closed"
     poolable   false
     aon        false
+  end
+
+  factory :contract, class: ContractCmd::Create do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    uuid       SecureRandom.uuid
+    maturation BugmTime.now + 1.hour
+    type       "Contract::Test"
+    status     "open"
   end
 end
 
@@ -107,6 +117,10 @@ module FBX
     ContractCmd::Cross.new(obu, :expand).project
     obu.reload
     obu.position
+  end
+
+  def expand(opts = {})
+    expand_obf(opts)
   end
 
   def expand_obf(opts = {})
@@ -135,12 +149,13 @@ module FBX
 
   module_function :offer_sf   , :offer_su
   module_function :position_f , :position_u
+  module_function :expand     , :expand
   module_function :expand_obf , :expand_obu
 
   # ----- private -----
 
   def FBX.create_buy_offers(opts)
-    bug      = FB.create(:gh_issue).issue
+    bug      = FB.create(:issue).issue
     xopt     = opts.merge({stm_issue_uuid: bug.uuid})
     obu_opts = FBX.opts_for(:obu, xopt)
     obf_opts = FBX.opts_for(:obf, xopt)

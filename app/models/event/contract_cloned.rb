@@ -5,7 +5,6 @@ class Event::ContractCloned < Event
   jsonb_fields_for :payload, Contract
 
   validates :uuid         , presence: true
-  # validates :type         , presence: true
   validates :prototype_id , presence: true
   validates :maturation   , presence: true
 

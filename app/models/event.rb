@@ -49,6 +49,8 @@ class Event < ApplicationRecord
         self.projected_at = BugmTime.now
         self.send(:save!)
         point_cast
+      else
+        # raise "EVENT OBJECT DID NOT SAVE"
       end
       new_object
     else

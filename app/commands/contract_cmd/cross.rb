@@ -17,7 +17,6 @@ module ContractCmd
       @counters = @offer.qualified_counteroffers(commit_type)
       if valid?
         @bundle = Bundle.new(type, offer, counters).generate
-        # noinspection RubyArgCount
         @commit = commit_class.new(bundle).generate
         @commit.events.each do |ev|
           add_event(ev.name, ev.klas.new(cmd_opts.merge(ev.params)))

@@ -97,6 +97,68 @@ module V1
         end
       end
 
+      # ---------- clone contract ----------
+      desc "Clone contract", {
+        success:  Entities::ContractCreated    ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        optional :issue      , type: String  , desc: "issue UUID"
+        optional :repo       , type: String  , desc: "repo UUID"
+        optional :title      , type: String  , desc: "title"
+        optional :status     , type: String  , desc: "status"
+        optional :labels     , type: String  , desc: "labels"
+        optional :maturation , type: String  , desc: "YYMMDD_HHMM (default now + 1.week)"
+      end
+      post ':contract_uuid/clone' do
+        matur = params[:maturation] ? Time.parse(params[:maturation]) : BugmTime.now + 1.week
+        opts = {
+          uuid:           SecureRandom.uuid          ,
+          stm_issue_uuid: params[:issue]             ,
+          stm_repo_uuid:  params[:repo]              ,
+          stm_title:      params[:title]             ,
+          stm_status:     params[:status]            ,
+          stm_labels:     params[:labels]            ,
+          maturation:     matur                      ,
+        }.without_blanks
+        cuuid    = params[:contract_uuid]
+        contract = Contract.find_by_uuid(cuuid)
+        pkg      = {status: "ERROR", message: "contract not found (#{cuuid})"}
+        error!(pkg, 404) unless contract
+        cmd = ContractCmd::Clone.new(contract, opts)
+        if cmd.valid?
+          result = cmd.project
+          eu = result.events[:contract].event_uuid
+          cu = result.contract.uuid
+          {status: "OK", event_uuid: eu, contract_uuid: cu}
+        else
+          msg = cmd.errors.messages.map {|k, v| "#{k}: #{v.join(", ")}"}.join(" | ")
+          error!({status: "ERROR", message: msg}, 404)
+        end
+      end
+
+      # ---------- cancel contract ----------
+      desc "Cancel contract", {
+        success:  Entities::ContractCreated    ,
+        consumes: ['multipart/form-data']
+      }
+      post ':contract_uuid/cancel' do
+        cuuid    = params[:contract_uuid]
+        contract = Contract.find_by_uuid(cuuid)
+        pkg      = {status: "ERROR", message: "contract not found (#{cuuid})"}
+        error!(pkg, 404) unless contract
+        cmd = ContractCmd::Cancel.new(contract, opts)
+        if cmd.valid?
+          result = cmd.project
+          eu = result.events[:contract].event_uuid
+          cu = result.contract.uuid
+          {status: "OK", event_uuid: eu, contract_uuid: cu}
+        else
+          msg = cmd.errors.messages.map {|k, v| "#{k}: #{v.join(", ")}"}.join(" | ")
+          error!({status: "ERROR", message: msg}, 404)
+        end
+      end
+
       # ---------- cross offer ----------
       desc "Cross offer", {
         success:    Entities::Status            ,
