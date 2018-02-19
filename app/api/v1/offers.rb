@@ -1,3 +1,4 @@
+require 'ext/hash'
 require 'time'
 
 module V1
@@ -42,9 +43,13 @@ module V1
       }
       params do
         requires :side       , type: String  , desc: "fixed or unfixed"   , values: %w(fixed unfixed)
-        requires :volume     , type: Integer , desc: "number of positions"#, values: ->(x){x > 0}
+        requires :volume     , type: Integer , desc: "number of positions"
         requires :price      , type: Float   , desc: "between 0.0 and 1.0", values: 0.00..1.00
-        requires :issue      , type: String  , desc: "issue UUID"
+        optional :repo       , type: String  , desc: "repo UUID"
+        optional :issue      , type: String  , desc: "issue UUID"
+        optional :title      , type: String  , desc: "issue title"
+        optional :labels     , type: String  , desc: "issue labels"
+        optional :status     , type: String  , desc: "issue status", values: %w(open closed)
         optional :maturation , type: String  , desc: "YYMMDD_HHMM (default now + 1.week)"
         optional :expiration , type: String  , desc: "YYMMDD_HHMM (default now + 1.day)"
         optional :poolable   , type: Boolean , desc: "poolable? (default false)"   , default: false
@@ -59,16 +64,19 @@ module V1
         matur = params[:maturation] ? Time.parse(params[:maturation]) : BugmTime.now + 1.week
         expir = params[:expiration] ? Time.parse(params[:expiration]) : BugmTime.now + 1.day
         opts  = {
-          user_uuid:      current_user.uuid          ,
-          price:          params[:price]             ,
-          volume:         params[:volume]            ,
-          stm_issue_uuid: params[:issue]             ,
-          stm_status:     "closed"                   ,
-          poolable:       params[:poolable] || false ,
-          aon:            params[:aon] || false      ,
-          maturation:     matur                      ,
+          user_uuid:      current_user.uuid           ,
+          price:          params[:price]              ,
+          volume:         params[:volume]             ,
+          stm_repo_uuid:  params[:repo]               ,
+          stm_issue_uuid: params[:issue]              ,
+          stm_title:      params[:title]              ,
+          stm_labels:     params[:labels]             ,
+          stm_status:     params[:status]             ,
+          poolable:       params[:poolable] || false  ,
+          aon:            params[:aon] || false       ,
+          maturation:     matur                       ,
           expiration:     expir
-        }
+        }.without_blanks
         cmd = OfferCmd::CreateBuy.new(side, opts)
         if cmd.valid?
           result = cmd.project

@@ -11,7 +11,7 @@ module V1
         success: Entities::ContractOverview
       }
       get do
-        present Contract.all, with: Entities::ContractOverview
+        present Contract.open, with: Entities::ContractOverview
       end
 
       # ---------- show contract detail ----------
@@ -128,8 +128,8 @@ module V1
         cmd = ContractCmd::Clone.new(contract, opts)
         if cmd.valid?
           result = cmd.project
-          eu = result.events[:contract].event_uuid
-          cu = result.contract.uuid
+          eu = result.events[:clone].event_uuid
+          cu = result.clone.uuid
           {status: "OK", event_uuid: eu, contract_uuid: cu}
         else
           msg = cmd.errors.messages.map {|k, v| "#{k}: #{v.join(", ")}"}.join(" | ")
@@ -147,7 +147,7 @@ module V1
         contract = Contract.find_by_uuid(cuuid)
         pkg      = {status: "ERROR", message: "contract not found (#{cuuid})"}
         error!(pkg, 404) unless contract
-        cmd = ContractCmd::Cancel.new(contract, opts)
+        cmd = ContractCmd::Cancel.new(contract)
         if cmd.valid?
           result = cmd.project
           eu = result.events[:contract].event_uuid

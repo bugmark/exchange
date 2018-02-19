@@ -49,7 +49,7 @@ module V1
           offers:     Offer.open.count               ,
           bu_offers:  Offer::Buy::Unfixed.open.count ,
           bf_offers:  Offer::Buy::Fixed.open.count   ,
-          contracts:  Contract.count                 ,
+          contracts:  Contract.open.count            ,
           positions:  Position.count                 ,
           amendments: Amendment.count                ,
           escrows:    Escrow.count                   ,
