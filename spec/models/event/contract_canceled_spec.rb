@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Event::ContractCancelled, :type => :model do
+RSpec.describe Event::ContractCanceled, :type => :model do
 
   def valid_params(alt = {})
     {
@@ -32,13 +32,13 @@ RSpec.describe Event::ContractCancelled, :type => :model do
       expect(Event.count).to eq(1)
       obj = subject.ev_cast
       expect(obj).to be_a(Contract)
-      expect(Event.count).to eq(2)
+      expect(Event.count).to eq(1)
     end
 
     it "has the right status" do
       obj = subject.ev_cast
       expect(obj).to be_a(Contract)
-      expect(obj.status).to eq("cancelled")
+      expect(obj.status).to eq("canceled")
     end
   end
 end

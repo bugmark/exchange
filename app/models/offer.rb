@@ -139,10 +139,6 @@ class Offer < ApplicationRecord
       base = where('price <= ?', offer.price)
       offer.id.nil? ? base : base.where.not(id: offer.id)
     end
-
-    # def crosses()
-    #
-    # end
   end
 
   def has_qualified_counteroffers?(cross_type)
@@ -172,10 +168,28 @@ class Offer < ApplicationRecord
     self.volume - self.value
   end
 
-  def opposite_side
+  def counter_side
     return "unfixed" if self.side == "fixed"
     return "fixed"   if self.side == "unfixed"
     ""
+  end
+
+  def counter_class
+    case self.type
+      when "Offer::Buy::Fixed"    then "Offer::Buy::Unfixed"
+      when "Offer::Buy::Unfixed"  then "Offer::Buy::Fixed"
+      when "Offer::Sell::Fixed"   then "Offer::Buy::Unfixed"
+      when "Offer::Sell::Unfixed" then "Offer::Buy::Fixed"
+    end
+  end
+
+  def counter_price
+    case self.type
+      when "Offer::Buy::Fixed"    then 1.0 - self.price
+      when "Offer::Buy::Unfixed"  then 1.0 - self.price
+      when "Offer::Sell::Fixed"   then self.price
+      when "Offer::Sell::Unfixed" then self.price
+    end
   end
 
   # ----- maturation -----

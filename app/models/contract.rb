@@ -72,6 +72,10 @@ class Contract < ApplicationRecord
 
   # ----- INSTANCE METHODS -----
 
+  def num_escrows()    escrows.count    end
+  def num_amendments() amendments.count end
+  def num_positions()  positions.count  end
+
   def users
     (bid_users + ask_users).uniq
   end
@@ -111,7 +115,7 @@ class Contract < ApplicationRecord
   # VALID STATUSES
   # > open      - active
   # > resolved  - assigned
-  # > cancelled - cancelled
+  # > cancelled - canceled
 
   def match_assertion
     match_issues.count > 0

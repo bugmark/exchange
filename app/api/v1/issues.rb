@@ -32,6 +32,23 @@ module V1
         end
       end
 
+      # ---------- show issue contracts ----------
+      desc "Show issue contracts", {
+        is_array: true                         ,
+        success:  Entities::ContractDetail     ,
+        failure:  [[404, "ISSUE UUID NOT FOUND"]]
+      }
+      params do
+        requires :issue_exid , type: String , desc: "issue exid"
+      end
+      get ':issue_exid/contracts' do
+        if issue = Issue.find_by_exid(params[:issue_exid])
+          present(issue.contracts, with: Entities::ContractDetail)
+        else
+          error!("issue uuid not found", 404)
+        end
+      end
+
       # ---------- sync an issue ----------
       desc "Sync", {
         success:  Entities::IssueDetail            ,

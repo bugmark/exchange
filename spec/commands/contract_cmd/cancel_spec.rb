@@ -30,7 +30,7 @@ RSpec.describe ContractCmd::Cancel do
       expect(Contract.first.status).to eq("open")
       result = klas.new(proto).project.contract
       expect(Contract.count).to eq(1)
-      expect(result.status).to eq("cancelled")
+      expect(result.status).to eq("canceled")
     end
   end
 end

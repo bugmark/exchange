@@ -23,12 +23,12 @@ module V1
         success: Entities::UserDetail
       }
       params do
-        requires :email    , type: String , desc: "user email address"
+        requires :uuid     , type: String , desc: "user uuid"
         optional :offers   , type: Boolean, desc: "include open offers"
         optional :positions, type: Boolean, desc: "include open positions"
       end
-      get ':email' do
-        if user = User.find_by_email(params[:email])
+      get ':uuid' do
+        if user = User.find_by_uuid(params[:uuid])
           opts = {
             with:      Entities::UserDetail      ,
             offers:    params[:offers].to_s      ,

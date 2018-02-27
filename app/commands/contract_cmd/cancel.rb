@@ -9,7 +9,7 @@ module ContractCmd
 
     def initialize(contract)
       @proto = Contract.find(contract.to_i)
-      add_event :contract, Event::ContractCancelled.new(cancel_args)
+      add_event :contract, Event::ContractCanceled.new(cancel_args)
     end
 
     private

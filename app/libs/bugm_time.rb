@@ -26,6 +26,11 @@ class BugmTime < Time
       day_offset * 24 + hour_offset
     end
 
+    def offset_eval(string)
+      new_str = string.gsub('_', '(') + ")"
+      eval(new_string)
+    end
+
     # -------------------------------------------------------
 
     def released_at
@@ -77,6 +82,52 @@ class BugmTime < Time
 
     def next_week_dates(count = 4)
       next_week_ends(count).map {|x| x.strftime("%Y-%m-%d")}
+    end
+
+    private
+
+    def minutes(count = 1)
+      now + count.minutes
+    end
+
+    def hours(count = 1)
+      now + count.hours
+    end
+
+    def days(count = 1)
+      now + count.days
+    end
+
+    def weeks(count = 1)
+      now + count.weeks
+    end
+
+    def months(count = 1)
+      now + count.months
+    end
+
+    def end_of_today
+      end_of_day
+    end
+
+    def end_of_tomorrow
+      end_of_day(1)
+    end
+
+    def end_of_hour(count = 0)
+      now + count.hours
+    end
+
+    def end_of_day(count = 0)
+      now.end_of_day + count.days
+    end
+
+    def end_of_week(count = 0)
+      now.end_of_week + count.weeks
+    end
+
+    def end_of_month(count = 0)
+      now.end_of_month + count.months
     end
   end
 end

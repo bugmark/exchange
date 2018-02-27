@@ -1,27 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe Event::OfferCloned, :type => :model do
+RSpec.describe Event::OfferCanceled, :type => :model do
 
   def valid_params(alt = {})
     {
-      :cmd_type       => "Test::Offer::Clone"       ,
-      :cmd_uuid       => SecureRandom.uuid          ,
-      :uuid           => SecureRandom.uuid          ,
-      :volume         => 2                          ,
-      :price          => 0.6                        ,
-      :prototype_uuid => proto.uuid
+      :cmd_type       => "Test::Offer::Clone"  ,
+      :cmd_uuid       => SecureRandom.uuid     ,
+      :uuid           => offer.uuid            ,
     }.merge(alt)
   end
 
-  let(:proto)  { FB.create(:offer_bf).offer        }
-  let(:klas)   { described_class                   }
-  subject      { klas.new(valid_params)            }
+  let(:offer) { FB.create(:offer_bf).offer   }
+  let(:klas)  { described_class              }
+  subject     { klas.new(valid_params)       }
 
-  describe "Object Creation", USE_VCR do
+  describe "object creation" do
     it { should be_valid }
 
     it 'saves the object to the database' do
-      subject.ev_cast
       expect(subject).to be_valid
     end
 
@@ -32,16 +28,17 @@ RSpec.describe Event::OfferCloned, :type => :model do
 
   describe "Projecting" do
     it "creates an event" do
-      expect(Event.count).to eq(0)
+      hydrate(offer)
+      expect(Event.count).to eq(5)
       obj = subject.ev_cast
       expect(obj).to be_a(Offer)
       expect(Event.count).to eq(6)
     end
 
-    it "copies the maturation date" do
-      hydrate(proto)
+    it "has the right status" do
       obj = subject.ev_cast
-      expect(obj.maturation_range).to eq(proto.maturation_range)
+      expect(obj).to be_a(Offer)
+      expect(obj.status).to eq("canceled")
     end
   end
 end

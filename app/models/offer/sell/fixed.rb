@@ -6,7 +6,7 @@ class Offer::Sell::Fixed < Offer::Sell
   def cmd_type() :offer_sf end
   alias_method :xtag, :side
 
-  def qualified_counteroffers(cross_type)
+  def qualified_counteroffers(cross_type = :transfer)
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type

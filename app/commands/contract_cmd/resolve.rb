@@ -3,6 +3,7 @@ module ContractCmd
 
     attr_reader :contract
 
+
     validate :resolvable_contract
 
     def initialize(contract)
@@ -17,6 +18,7 @@ module ContractCmd
 
     def project
       contract.status = "resolved"
+
       contract.awarded_to = contract.awardee
       contract.save
       contract.escrows.each do |escrow|

@@ -159,17 +159,17 @@ module DocfixOffersHelper
   # ----- match button -----
 
   def docfix_offer_match_vert(offer)
-    label = "Match Offer<br/><small>(buy #{offer.opposite_side} side)</small>"
+    label = "Match Offer<br/><small>(buy #{offer.counter_side} side)</small>"
     docfix_offer_match(offer, label)
   end
 
   def docfix_offer_match_horiz(offer)
-    label = "Match Offer<small> (buy #{offer.opposite_side} side)</small>"
+    label = "Match Offer<small> (buy #{offer.counter_side} side)</small>"
     docfix_offer_match(offer, label)
   end
 
   def docfix_offer_match(offer, label)
-    otyp = "match_b#{offer.opposite_side[0]}"
+    otyp = "match_b#{offer.counter_side[0]}"
     mdat = offer.maturation.strftime("%Y-%m-%d")
     cdep = offer.volume - offer.deposit
     qstr = "volume=#{offer.volume}&deposit=#{cdep}&maturation=#{mdat}&offer_id=#{offer.id}"

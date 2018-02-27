@@ -8,7 +8,7 @@ class Offer::Buy::Unfixed < Offer::Buy
   def cmd_type() :offer_bu end
   alias_method :xtag, :side
 
-  def qualified_counteroffers(cross_type)
+  def qualified_counteroffers(cross_type = :expand)
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type

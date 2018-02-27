@@ -63,6 +63,7 @@ class Issue < ApplicationRecord
 
   def has_offers?()    offers.count > 0    end
   def has_contracts?() contracts.count > 0 end
+  def num_contracts()  contracts.count     end
 
   private
 

@@ -1,6 +1,6 @@
 require 'ext/hash'
 
-class Event::ContractCancelled < Event
+class Event::ContractCanceled < Event
 
   jsonb_fields_for :payload, Contract
 
@@ -9,7 +9,7 @@ class Event::ContractCancelled < Event
   validates :uuid , presence: true
 
   def cast_object
-    contract.status = "cancelled"
+    contract.status = "canceled"
     contract
   end
 

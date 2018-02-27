@@ -12,7 +12,7 @@ class Offer::Buy::Fixed < Offer::Buy
   #   @mb_reserve ||= matching_bids.reduce(0) {|acc, bid| acc + bid.value}
   # end
 
-  def qualified_counteroffers(cross_type)
+  def qualified_counteroffers(cross_type = :expand)
     return Offer.none unless self.is_open?
     base = match.open.overlaps(self)
     case cross_type

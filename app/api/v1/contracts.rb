@@ -27,7 +27,7 @@ module V1
         end
       end
 
-      # ---------- show contract history ----------
+      # ---------- show contract escrows ----------
       desc "Show contract escrows", {
         is_array: true                                  ,
         success:  Entities::EscrowDetail                ,
@@ -37,6 +37,30 @@ module V1
         contract = Contract.find_by_uuid(params[:uuid])
         error!("contract UUID not found", 431) if contract.nil?
         present(contract.escrows, with: Entities::EscrowDetail)
+      end
+
+      # ---------- show contract amendments ----------
+      desc "Show contract amendments", {
+        is_array: true                                     ,
+        success:  Entities::AmendmentDetail                ,
+        failure: [[431, "CONTRACT UUID NOT FOUND"]]
+      }
+      get ':uuid/amendments' do
+        contract = Contract.find_by_uuid(params[:uuid])
+        error!("contract UUID not found", 431) if contract.nil?
+        present(contract.amendments, with: Entities::AmendmentDetail)
+      end
+
+      # ---------- show contract positions ----------
+      desc "Show contract positions", {
+        is_array: true                                  ,
+        success:  Entities::PositionDetail                ,
+        failure: [[431, "CONTRACT UUID NOT FOUND"]]
+      }
+      get ':uuid/positions' do
+        contract = Contract.find_by_uuid(params[:uuid])
+        error!("contract UUID not found", 431) if contract.nil?
+        present(contract.positions, with: Entities::PositionDetail)
       end
 
       # ---------- show contract open_offers ----------
@@ -63,7 +87,7 @@ module V1
 
       # ---------- create contract ----------
       desc "Create contract", {
-        success:  Entities::ContractCreated    ,
+        success:  Entities::ContractStatus    ,
         consumes: ['multipart/form-data']
       }
       params do
@@ -90,7 +114,8 @@ module V1
           result = cmd.project
           eu = result.events[:contract].event_uuid
           cu = result.contract.uuid
-          {status: "OK", event_uuid: eu, contract_uuid: cu}
+          cs = result.contract.status
+          {status: "OK", event_uuid: eu, contract_uuid: cu, contract_status: cs}
         else
           msg = cmd.errors.messages.map {|k, v| "#{k}: #{v.join(", ")}"}.join(" | ")
           error!({status: "ERROR", message: msg}, 404)
@@ -99,7 +124,7 @@ module V1
 
       # ---------- clone contract ----------
       desc "Clone contract", {
-        success:  Entities::ContractCreated    ,
+        success:  Entities::ContractStatus    ,
         consumes: ['multipart/form-data']
       }
       params do
@@ -130,7 +155,8 @@ module V1
           result = cmd.project
           eu = result.events[:clone].event_uuid
           cu = result.clone.uuid
-          {status: "OK", event_uuid: eu, contract_uuid: cu}
+          cs = result.contract.status
+          {status: "OK", event_uuid: eu, contract_uuid: cu, contract_status: cs}
         else
           msg = cmd.errors.messages.map {|k, v| "#{k}: #{v.join(", ")}"}.join(" | ")
           error!({status: "ERROR", message: msg}, 404)
@@ -139,7 +165,7 @@ module V1
 
       # ---------- cancel contract ----------
       desc "Cancel contract", {
-        success:  Entities::ContractCreated    ,
+        success:  Entities::ContractStatus    ,
         consumes: ['multipart/form-data']
       }
       post ':contract_uuid/cancel' do
@@ -152,7 +178,8 @@ module V1
           result = cmd.project
           eu = result.events[:contract].event_uuid
           cu = result.contract.uuid
-          {status: "OK", event_uuid: eu, contract_uuid: cu}
+          cs = result.contract.status
+          {status: "OK", event_uuid: eu, contract_uuid: cu, contract_status: cs}
         else
           msg = cmd.errors.messages.map {|k, v| "#{k}: #{v.join(", ")}"}.join(" | ")
           error!({status: "ERROR", message: msg}, 404)
@@ -161,8 +188,8 @@ module V1
 
       # ---------- cross offer ----------
       desc "Cross offer", {
-        success:    Entities::Status            ,
-        failure:    [[404, "INVALID OFFER"]]    ,
+        success:    Entities::ContractStatus   ,
+        failure:    [[404, "INVALID OFFER"]]   ,
         consumes:   ['multipart/form-data']
       }
       params do
@@ -172,8 +199,11 @@ module V1
         offer = Offer.find_by_uuid(params[:offer_uuid])
         cmd   = ContractCmd::Cross.new(offer, params[:commit_type].to_sym)
         if cmd.valid?
-          cmd.project
-          present({status: "OK"}, with: Entities::Status)
+          result = cmd.project
+          eu = result.events.first[1].event_uuid
+          cu = result.contract.uuid
+          cs = result.contract.status
+          {status: "OK", event_uuid: eu, contract_uuid: cu, contract_status: cs}
         else
           msg = cmd.errors.messages.map {|k, v| "#{k}:#{v}"}.join(" | ")
           error!(msg, 404)
@@ -182,7 +212,7 @@ module V1
 
       # ---------- resolve contract ----------
       desc "Resolve contract", {
-        success:    Entities::Status            ,
+        success:    Entities::ContractStatus    ,
         failure:    [[404, "INVALID OFFER"]]    ,
         consumes:   ['multipart/form-data']
       }
@@ -192,8 +222,11 @@ module V1
         error!("contract not found (#{uuid}", 404) if contract.nil?
         cmd   = ContractCmd::Resolve.new(contract)
         if cmd.valid?
-          cmd.project
-          present({status: "OK"}, with: Entities::Status)
+          result = cmd.project
+          eu = result.events[:contract].event_uuid
+          cu = result.contract.uuid
+          cs = result.contract.status
+          {status: "OK", event_uuid: eu, contract_uuid: cu, contract_status: cs}
         else
           error!(cmd.errors.messages.values.join(" | "), 404)
         end

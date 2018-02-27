@@ -10,15 +10,20 @@ module V1
           Show host info: host-time, day offset, datastore type, etc.
         EOF
       }
+      params do
+        optional :strftime, type: String, desc: "STRFTIME string for host_time"
+      end
       get "/info" do
+        host_time = BugmTime.now.strftime(params[:strftime] || "%Y-%m-%d_%H:%M")
         data = {
-          host_name:   BugmHost.name              ,
-          host_time:   BugmTime.now.to_s          ,
-          day_offset:  BugmTime.day_offset        ,
-          hour_offset: BugmTime.hour_offset       ,
-          datastore:   BugmHost.datastore         ,
-          released_at: BugmTime.released_at       ,
-          usermail:    current_user&.email
+          host_name:   BugmHost.name        ,
+          host_time:   host_time            ,
+          day_offset:  BugmTime.day_offset  ,
+          hour_offset: BugmTime.hour_offset ,
+          datastore:   BugmHost.datastore   ,
+          released_at: BugmTime.released_at ,
+          usermail:    current_user&.email  ,
+          useruuid:    current_user&.uuid
         }
         present(data, with: Entities::HostInfo)
       end
@@ -42,7 +47,6 @@ module V1
         DatapointCmd::Base.new.project      # record metrics...
         {
           host_name:  BugmHost.name                  ,
-          host_time:  BugmTime.now.to_s              ,
           num_users:  User.count                     ,
           num_repos:  Repo.count                     ,
           num_issues: Issue.count                    ,
