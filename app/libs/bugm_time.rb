@@ -27,8 +27,8 @@ class BugmTime < Time
     end
 
     def offset_eval(string)
-      new_str = string.gsub('_', '(') + ")"
-      eval(new_string)
+      new_str = string.gsub('-', '(') + ")"
+      eval(new_str)
     end
 
     # -------------------------------------------------------
