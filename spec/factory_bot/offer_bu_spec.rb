@@ -24,4 +24,27 @@ RSpec.describe 'OfferBU Factory', USE_VCR do
     offer = FB.create(:offer_bu, user_uuid: usr.uuid).offer
     expect(offer.user).to eq(usr)
   end
+
+  it "handles a middle price" do
+    offer = FB.create(:offer_bu, price: 0.1).offer
+    expect(offer).to be_valid
+    expect(offer.price).to eq(0.1)
+  end
+
+  it "handles a zero price" do
+    offer = FB.create(:offer_bu, price: 0.0).offer
+    expect(offer).to be_valid
+    expect(offer.price).to eq(0.0)
+  end
+
+  it "handles a 1.0 price" do
+    offer = FB.create(:offer_bu, price: 1.0).offer
+    expect(offer).to be_valid
+    expect(offer.price).to eq(1.0)
+  end
+
+  it "rejects a 2.0 price" do
+    offer = FB.create(:offer_bu, price: 2.0).offer
+    expect(offer).to_not be_valid
+  end
 end

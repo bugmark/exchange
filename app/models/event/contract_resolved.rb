@@ -10,6 +10,7 @@ class Event::ContractResolved < Event
 
   def cast_object
     contract.status = "resolved"
+    contract.awarded_to = contract.awardee
     contract
   end
 

@@ -14,6 +14,7 @@ module Entities
     expose :stm_title     , documentation: { type: String , desc: "stm_title"      }
     expose :stm_status    , documentation: { type: String , desc: "stm_status"     }
     expose :expiration    , documentation: { type: Time   , desc: "expiration"     }
+    expose :maturation    , documentation: { type: Time   , desc: "TBD"            }
     expose :maturation_beg, documentation: { type: Time   , desc: "maturation_beg" }
     expose :maturation_end, documentation: { type: Time   , desc: "maturation_end" }
   end
