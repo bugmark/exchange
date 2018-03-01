@@ -46,18 +46,20 @@ module V1
       get "/counts" do
         DatapointCmd::Base.new.project      # record metrics...
         {
-          host_name:  BugmHost.name                  ,
-          num_users:  User.count                     ,
-          num_repos:  Repo.count                     ,
-          num_issues: Issue.count                    ,
-          offers:     Offer.open.count               ,
-          bu_offers:  Offer::Buy::Unfixed.open.count ,
-          bf_offers:  Offer::Buy::Fixed.open.count   ,
-          contracts:  Contract.open.count            ,
-          positions:  Position.count                 ,
-          amendments: Amendment.count                ,
-          escrows:    Escrow.count                   ,
-          events:     Event.count
+          host_name:      BugmHost.name                      ,
+          users:          User.count                         ,
+          repos:          Repo.count                         ,
+          issues:         Issue.count                        ,
+          offers:         Offer.count                        ,
+          offers_open:    Offer.open.count                   ,
+          offers_open_bu: Offer::Buy::Unfixed.open.count     ,
+          offers_open_bf: Offer::Buy::Fixed.open.count       ,
+          contracts:      Contract.count                     ,
+          contracts_open: Contract.open.count                ,
+          positions:      Position.count                     ,
+          amendments:     Amendment.count                    ,
+          escrows:        Escrow.count                       ,
+          events:         Event.count
         }
       end
 
