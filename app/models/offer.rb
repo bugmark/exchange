@@ -218,7 +218,7 @@ class Offer < ApplicationRecord
 
   def maturation=(date)
     tdate = date.to_time
-    self.maturation_range = tdate-1.day..tdate+1.day
+    self.maturation_range = tdate-1.hour..tdate+1.hour
   end
 
   def maturation

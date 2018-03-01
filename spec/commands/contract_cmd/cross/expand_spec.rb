@@ -232,7 +232,7 @@ RSpec.describe ContractCmd::Cross::Expand do
         _offer_bu3 = FB.create(:offer_bu, volume: 3).offer
         offer_bf   = FB.create(:offer_bf, volume: 3).offer
         klas.new(offer_bf, :expand).project
-        expect(Contract.count).to eq(1)
+        expect(Contract.count).to eq(2)
         expect(Escrow.count).to eq(2)
       end
     end
