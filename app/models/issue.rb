@@ -5,7 +5,8 @@ class Issue < ApplicationRecord
 
   has_paper_trail
 
-  after_save :update_stm_ids
+  before_validation :set_defaults
+  after_save        :update_stm_ids
 
   with_options primary_key: "uuid" do
     belongs_to :repo      , :foreign_key => :stm_repo_uuid
@@ -21,7 +22,8 @@ class Issue < ApplicationRecord
   hstore_accessor :stm_xfields, :html_url  => :string
   jsonb_accessor  :stm_jfields, :comments  => :string
 
-  VALID_STM_STATUS = %w(open closed) + ["", nil]
+  VALID_STM_STATUS = %w(open closed)
+
   validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
 
   # ----- SCOPES -----
@@ -66,6 +68,10 @@ class Issue < ApplicationRecord
   def num_contracts()  contracts.count     end
 
   private
+
+  def set_defaults
+    self.stm_status ||= "open"
+  end
 
   def update_stm_ids
     return if self.uuid.nil?

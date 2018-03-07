@@ -13,5 +13,7 @@ module Entities
     expose :stm_title      , documentation: { type: String   , desc: "TBD"             }
     expose :stm_status     , documentation: { type: String   , desc: "TBD"             }
     expose :stm_labels     , documentation: { type: String   , desc: "TBD"             }
+    expose :total_value    , documentation: { type: Integer  , desc: "TBD"             }
+    expose :awardee        , documentation: { type: String   , desc: "TBD"             }
   end
 end

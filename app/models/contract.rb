@@ -6,10 +6,10 @@ class Contract < ApplicationRecord
 
   has_paper_trail
 
-  belongs_to :repo            , foreign_key: "stm_repo_uuid" , primary_key: "uuid", optional: true
-  belongs_to :issue           , foreign_key: "stm_issue_uuid", primary_key: "uuid", optional: true
-  has_one  :prototype         , foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
-  has_many :prototype_children, foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
+  belongs_to :repo              , foreign_key: "stm_repo_uuid" , primary_key: "uuid", optional: true
+  belongs_to :issue             , foreign_key: "stm_issue_uuid", primary_key: "uuid", optional: true
+  has_one    :prototype         , foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
+  has_many   :prototype_children, foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
 
   has_many :escrows   , -> {order(:sequence => :asc)}, foreign_key: "contract_uuid", primary_key: "uuid"
   has_many :amendments, -> {order(:sequence => :asc)}, foreign_key: "contract_uuid", primary_key: "uuid"

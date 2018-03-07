@@ -32,11 +32,28 @@ module V1
         end
       end
 
+      # ---------- show issue offers ----------
+      desc "Show issue offers", {
+        is_array: true                      ,
+        success:  Entities::OfferDetail     ,
+        failure:  [[404, "ISSUE EXID NOT FOUND"]]
+      }
+      params do
+        requires :issue_exid , type: String , desc: "issue exid"
+      end
+      get ':issue_exid/offers' do
+        if issue = Issue.find_by_exid(params[:issue_exid])
+          present(issue.offers, with: Entities::OfferDetail)
+        else
+          error!("issue exid not found", 404)
+        end
+      end
+
       # ---------- show issue contracts ----------
       desc "Show issue contracts", {
         is_array: true                         ,
         success:  Entities::ContractDetail     ,
-        failure:  [[404, "ISSUE UUID NOT FOUND"]]
+        failure:  [[404, "ISSUE EXID NOT FOUND"]]
       }
       params do
         requires :issue_exid , type: String , desc: "issue exid"
@@ -45,7 +62,7 @@ module V1
         if issue = Issue.find_by_exid(params[:issue_exid])
           present(issue.contracts, with: Entities::ContractDetail)
         else
-          error!("issue uuid not found", 404)
+          error!("issue exid not found", 404)
         end
       end
 
