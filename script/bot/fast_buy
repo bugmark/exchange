@@ -1,10 +1,7 @@
 #!/usr/bin/env ruby
 
-PROCNAME = "bot_buy"
+PROCNAME = "fast_bot_buy"
 Process.setproctitle(PROCNAME)
-
-BMX_SAVE_EVENTS  = "FALSE"
-BMX_SAVE_METRICS = "FALSE"
 
 # for C-c
 trap "SIGINT" do
@@ -12,12 +9,16 @@ trap "SIGINT" do
   exit 130
 end
 
-# for "pkill -f bot_buy"
+# for "pkill -f fast_bot_buy"
 trap "SIGTERM" do
   puts "TERMINATED #{Time.now}"
   STDOUT.flush
   exit 130
 end
+
+# run in turbo mode
+BMX_SAVE_EVENTS  = "FALSE"
+BMX_SAVE_METRICS = "FALSE"
 
 puts "----- BUGMARK OFFER BOT -------------------------------------------"
 puts "START #{Time.now} | C-c to exit"
@@ -27,6 +28,7 @@ STDOUT.flush
 
 require "./config/environment"
 
+# delete all host data and create admin user
 BugmHost.reset
 
 def buy
@@ -53,8 +55,6 @@ end
 def pa(el)
   el.to_s.rjust(2, "0")
 end
-
-admin_user || create_admin_user
 
 FB.create :user, email: "test1@bugmark.net"
 FB.create :user, email: "test2@bugmark.net"
