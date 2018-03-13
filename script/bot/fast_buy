@@ -6,15 +6,6 @@ Process.setproctitle(PROCNAME)
 BMX_SAVE_EVENTS  = "FALSE"
 BMX_SAVE_METRICS = "FALSE"
 
-puts "----- BUGMARK OFFER BOT -------------------------------------------"
-puts "START #{Time.now} | C-c to exit"
-puts "Process Name: #{PROCNAME}"
-puts "Loading Environment..."
-STDOUT.flush
-require "./config/environment"
-
-BugmHost.reset
-
 # for C-c
 trap "SIGINT" do
   puts "\nExiting"
@@ -28,22 +19,24 @@ trap "SIGTERM" do
   exit 130
 end
 
-def admin_user
-  User.find_by_email("admin@bugmark.net")
-end
+puts "----- BUGMARK OFFER BOT -------------------------------------------"
+puts "START #{Time.now} | C-c to exit"
+puts "Process Name: #{PROCNAME}"
+puts "Loading Environment..."
+STDOUT.flush
 
-def create_admin_user
-  UserCmd::Create.new(email: "admin@bugmark.net", password: "bugmark").project
-end
+require "./config/environment"
+
+BugmHost.reset
 
 def buy
   typ  = %i(offer_bf offer_bu).sample
   opts = {
-    user_uuid:    USER_IDS.sample     ,
-    volume:       VOLUMES.sample      ,
-    price:        PRICES.sample       ,
+    user_uuid:      USER_IDS.sample     ,
+    volume:         VOLUMES.sample      ,
+    price:          PRICES.sample       ,
     stm_issue_uuid: ISSUE_IDS.sample    ,
-    maturation:   WEEK_ENDS.sample
+    maturation:     WEEK_ENDS.sample
   }
   FB.create(typ, opts)
 end
