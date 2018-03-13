@@ -103,6 +103,48 @@ module V1
         {status: "OK"}
       end
 
+      # ---------- go past end_of_day ----------
+      desc "go past end-of-day", {
+        success:  Entities::Status     ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        optional :count, type: Integer, desc: "count (default 1)"
+      end
+      put "/go_past_end_of_day" do
+        error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
+        BugmTime.go_past_end_of_day(params[:count] || 1)
+        {status: "OK"}
+      end
+
+      # ---------- go past end_of_week ----------
+      desc "go past end-of-week", {
+        success:  Entities::Status     ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        optional :count, type: Integer, desc: "count (default 1)"
+      end
+      put "/go_past_end_of_week" do
+        error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
+        BugmTime.go_past_end_of_week(params[:count] || 1)
+        {status: "OK"}
+      end
+
+      # ---------- go past end_of_month ----------
+      desc "go past end-of-month", {
+        success:  Entities::Status     ,
+        consumes: ['multipart/form-data']
+      }
+      params do
+        optional :count, type: Integer, desc: "count (default 1)"
+      end
+      put "/go_past_end_of_month" do
+        error!("Permanent Datastore", 403) if BugmHost.datastore != 'mutable'
+        BugmTime.go_past_end_of_month(params[:count] || 1)
+        {status: "OK"}
+      end
+
       # ---------- set current time ----------
       desc "set current time", {
         success:  Entities::Status

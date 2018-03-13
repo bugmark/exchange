@@ -63,21 +63,18 @@ class BugmTime < Time
     def go_past_end_of_day(count = 1)
       return if count < 1
       hours_till_eod = sec_to_hours(end_of_day(count - 1) - now)
-      binding.pry
       increment_hour_offset(hours_till_eod)
     end
 
     def go_past_end_of_week(count = 1)
       return if count < 1
       hours_till_eow = sec_to_hours(end_of_week(count - 1) - now)
-      binding.pry
       increment_hour_offset(hours_till_eow)
     end
 
     def go_past_end_of_month(count = 1)
       return if count < 1
       hours_till_eom = sec_to_hours(end_of_month(count - 1) - now)
-      binding.pry
       increment_hour_offset(hours_till_eom)
     end
 
