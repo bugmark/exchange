@@ -16,12 +16,12 @@ module MatchUtils
   def match_contracts()       Contract.match(match_attrs)         end
   def match_offers()          Offer.match(match_attrs)            end
 
-  def match_buy_offers()      Offer::Buy.match(match_attrs)       end
-  def match_buy_bid_offers()  Offer::Buy::Unfixed.match(match_attrs)  end
-  def match_buy_ask_offers()  Offer::Buy::Fixed.match(match_attrs)  end
-  def match_sell_offers()     Offer::Sell.match(match_attrs)      end
-  def match_sell_bid_offers() Offer::Sell::Unfixed.match(match_attrs) end
-  def match_sell_ask_offers() Offer::Sell::Fixed.match(match_attrs) end
+  def match_buy_offers()  Offer::Buy.match(match_attrs)           end
+  def match_bu_offers()   Offer::Buy::Unfixed.match(match_attrs)  end
+  def match_bf_offers()   Offer::Buy::Fixed.match(match_attrs)    end
+  def match_sell_offers() Offer::Sell.match(match_attrs)          end
+  def match_su_offers()   Offer::Sell::Unfixed.match(match_attrs) end
+  def match_sf_offers()   Offer::Sell::Fixed.match(match_attrs)   end
 
   module ClassMethods
 

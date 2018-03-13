@@ -47,8 +47,8 @@ class Event < ApplicationRecord
     if valid?
       if new_object&.save
         self.projected_at = BugmTime.now
-        self.send(:save!)
-        point_cast
+        self.send(:save!) unless BMX_SAVE_EVENTS  == "FALSE"
+        point_cast        unless BMX_SAVE_METRICS == "FALSE"
       else
         # raise "EVENT OBJECT DID NOT SAVE"
       end

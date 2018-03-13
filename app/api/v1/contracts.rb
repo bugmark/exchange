@@ -77,13 +77,13 @@ module V1
       end
 
       # ---------- show contract series ----------
-      desc "Show contract series", {
-        success: Entities::Status                        ,
-        failure: [[431, "CONTRACT UUID NOT FOUND"]]
-      }
-      get ':uuid/series' do
-        present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
-      end
+      # desc "Show contract series", {
+      #   success: Entities::Status                        ,
+      #   failure: [[431, "CONTRACT UUID NOT FOUND"]]
+      # }
+      # get ':uuid/series' do
+      #   present({status: "OK", message: "UNDER CONSTRUCTION"}, with: Entities::Status)
+      # end
 
       # ---------- create contract ----------
       desc "Create contract", {
