@@ -1,0 +1,8 @@
+{
+  "application.js": "/packs-test/application.js",
+  "docfix/issues/depth.js": "/packs-test/docfix/issues/depth.js",
+  "docfix/issues/offer.js": "/packs-test/docfix/issues/offer.js",
+  "docfix/offers/show/depth.js": "/packs-test/docfix/offers/show/depth.js",
+  "hello_react.js": "/packs-test/hello_react.js",
+  "info/chart.js": "/packs-test/info/chart.js"
+}
