@@ -708,16 +708,16 @@ Next Actions:
 - [x] repo/gh_create
 - [x] repo/gh_sync
 - [x] bug/sync
-- [ ] offer/cancel
+- [x] offer/cancel
 - [x] offer/clone
 - [x] offer/create_buy
 - [x] offer/create_sell
-- [ ] offer/suspend
-- [ ] contract/clone
-- [ ] contract/create
+- [x] offer/suspend
+- [x] contract/clone
+- [x] contract/create
 - [x] contract/cross 
-- [ ] contract/delete
-- [ ] contract/resolve
+- [x] contract/delete
+- [x] contract/resolve
 
 # Dec 27
 
@@ -804,14 +804,30 @@ Next Actions:
 
 # Jan 13
 
-- [ ] UserCreate: duplicate emails need to return error message
+- [x] demo script works end-to-end
 
-- [ ] demo script works end-to-end
+# Mar 15
 
-- [ ] core API - build all queries
-- [ ] core API - build all commands
+- [x] working CLI
+- [x] working Restful API
+- [x] METRICS: add Georg command-data capture
+- [x] METRICS: add Georg stats capture with cron process
+- [x] build bot framework
+- [x] core API - build all queries
+- [x] core API - build all commands
+- [x] oracle API : design the oracle
+- [x] oracle API : gh implementation
+- [x] add ContractCmd::Create with tests
+- [x] add ContractCmd::Clone with tests
+- [x] add ContractCmd::Delete with tests
+- [x] test (contract-resolve) user balance adjustments
+- [x] test for 0/100 and 100/0 pricing
+- [x] FEEDBACK: the offer amounts seem wrong
 
-- [ ] make the bot resell
+# Mar 16
+
+- [ ] test partial crosses (:expand)
+- [ ] add command to create sell offer
 
 - [ ] test (cross-reduce)     user balance adjustments
 - [ ] test (cross-reduce)     auto-suspend sale-offers
@@ -820,43 +836,25 @@ Next Actions:
 - [ ] test (cross-transfer) auto-suspended sale-offers
 - [ ] test (cross-transfer) sell-offer re-offers
 
-- [ ] oracle API : design the oracle
-- [ ] oracle API : gh implementation
-
-- [ ] UI add multiple accounts
-
-- [ ] test (contract-resolve) user balance adjustments
-
-- [ ] add ContractCmd::Create with tests
-- [ ] add ContractCmd::Clone with tests
-- [ ] add ContractCmd::Delete with tests
-
-- [ ] add OfferCmd::CloneSell with tests
-- [ ] test for 0/100 and 100/0 pricing
-
-- [ ] test gigalixir
-
 # TBD
 
-- [ ] core API - add rate limiting (gottfrois/grape-attack)
+- [ ] CMD - UserCreate: duplicate emails need to return error message
+- [ ] CMD - add OfferCmd::CloneSell with tests
 
-- [ ] METRICS: add Georg command-data capture
-- [ ] METRICS: add Georg stats capture with cron process
+- [ ] API: add rate limiting (gottfrois/grape-attack)
 
 - [ ] FEEDBACK: make a feature spec that follows the demo
-- [ ] FEEDBACK: the offer amounts seem wrong
 - [ ] FEEDBACK: should fixed-side offers be AON?
 
 - [ ] core: expose AON in UI
 - [ ] core: expose poolable in UI
 
-- [ ] docfix: test event replay
-- [ ] docfix: get blockchain reporting working
-- [ ] docfix: write events to testnet
+- [ ] exchange: test event replay
+- [ ] exchange: get blockchain reporting working
+- [ ] exchange: write events to testnet
 
-- [ ] move GH API Key to .env
-
-- [ ] auto-renew SSL cert
+- [ ] devops: move GH API Key to .env
+- [ ] devops: auto-renew SSL cert
 
 - [ ] docfix: move offer pages to modals
 - [ ] docfix: get notification emails working
@@ -884,5 +882,6 @@ Next Actions:
 - [ ] core: enable event replay
 
 - [ ] core: rewrite the exchange in elixir
+- [ ] core: test gigalixir
 - [ ] core: add GraphQL API
 - [ ] core: wrote standalone UI in Sinatra

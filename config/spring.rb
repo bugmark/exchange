@@ -1,3 +1,4 @@
+Spring.quiet = true
 %w(
   .ruby-version
   .rbenv-vars
