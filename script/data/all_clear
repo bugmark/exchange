@@ -2,7 +2,5 @@
 
 require './config/environment'
 
-Repo.destroy_all
-User.destroy_all
-Contract.destroy_all
-EventLine.destroy_all
+BugmHost.reset
+

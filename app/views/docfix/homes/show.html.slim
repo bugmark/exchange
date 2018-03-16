@@ -1,0 +1,64 @@
+= render partial: "docfix/homes/docfix_show"
+
+.jumbotron.d-md-up
+  .row
+    .col-md-6
+      h2 = content_for(:jumbo_hdr1)
+    .col-md-6[style='padding-top: 15px;']
+      b = content_for(:jumbo_hdr2)
+  .row
+    .col-md-6
+      p = content_for(:jumbo_body1)
+    .col-md-6
+      p = content_for(:jumbo_body2)
+
+.jumbotron.d-sm-dn
+  h2 = content_for(:jumbo_hdr1)
+  = content_for(:jumbo_body1)
+
+.row
+  .col-md-12.text-center
+    h3 style='margin-bottom: 20px;'
+      b How you can get involved
+.d-md-up
+  .row
+    .col-md-4
+      h3 = content_for(:detail_hdr1)
+    .col-md-4
+      h3 = content_for(:detail_hdr2)
+    .col-md-4
+      h3 = content_for(:detail_hdr3)
+  .row[style='margin-bottom: 20px;']
+    .col-md-4 = content_for(:detail_body1)
+    .col-md-4 = content_for(:detail_body2)
+    .col-md-4 = content_for(:detail_body3)
+  .row
+    .col-md-4
+      a.btn.btn-primary[href="/docfix/profile/my_offers" type="button" style="width: 100%"]
+        = content_for(:detail_btn1)
+    .col-md-4
+      a.btn.btn-primary[href="/docfix/profile/my_issues" type="button" style="width: 100%"]
+        = content_for(:detail_btn2)
+    .col-md-4
+      a.btn.btn-primary[href="/docfix/projects" type="button" style="width: 100%"]
+        = content_for(:detail_btn3)
+
+.d-sm-dn
+  .row
+    .col-md-12
+      h3 = content_for(:detail_hdr1)
+      = content_for(:detail_body1)
+      button.btn.btn-primary[type="button" style="width: 100%"]
+        = content_for(:detail_btn1)
+  .row
+    .col-md-12
+      h3[style='margin-top: 30px;'] = content_for(:detail_hdr2)
+      = content_for(:detail_body2)
+      button.btn.btn-primary[type="button" style="width: 100%"]
+        = content_for(:detail_btn2)
+  .row
+    .col-md-12
+      h3[style='margin-top: 30px;'] = content_for(:detail_hdr2)
+      = content_for(:detail_body2)
+      button.btn.btn-primary[type="button" style="width: 100%"]
+        = content_for(:detail_btn2)

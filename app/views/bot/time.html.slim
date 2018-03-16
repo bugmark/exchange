@@ -1,0 +1,82 @@
+css:
+  .imger {
+    display:       inline-block;
+    width:         350px;
+    text-align:    center;
+  }
+  .imger2 {
+    width: 800px;
+  }
+  .mb {
+    margin-bottom: 30px;
+  }
+  .mt {
+    margin-top: 30px;
+  }
+
+table.table.table-sm
+  tr
+    td
+      h2 Demo Time
+    td[align='right']
+      a[href="/bot/home"] Bot Home
+  tr
+    td[colspan=2 style='padding-bottom: 20px; padding-top: 20px;']
+      p Two things happen after a contract is formed:<br/>
+      .imger.mb
+        img[src="/img/PR.png" style='height: 150px;']
+        br
+        u Step 1: Developer submits a pull request.
+      .imger.mb
+        img[src="/img/CLOSE.png" style='height: 150px;']
+        br
+        u Step 2: Project maintainer closes the issue.
+      p Then when the maturation date is reached, the contract
+        is resolved by examining issue status (open or closed).
+      | For demonstration purposes, you can move the system time forward, past the maturation date.
+  tr
+    td[colspan=2]
+      .imger
+        b> Real Day
+        = Time.now.strftime("%b %d")
+      .imger
+        b> Demo Day
+        | #{BugmTime.now.strftime("%b %d")} (offset #{BugmTime.day_offset} days)
+  tr
+    td[colspan=2]
+      .imger2
+        table.table-bordered.table-condensed.table-hover.mb.mt[style='width: 100%;']
+          tr
+            th
+            th Dec 12
+            th Dec 20
+            th Dec 28
+            th Jan 5
+          tr
+            td # Closed Issues
+            td = @history.period(0)["closed_issues"]
+            td = @history.period(1)["closed_issues"]
+            td = @history.period(2)["closed_issues"]
+            td = @history.period(3)["closed_issues"]
+          tr
+            td # Resolved Contracts
+            td = @history.period(0)["resolved_contracts"]
+            td = @history.period(1)["resolved_contracts"]
+            td = @history.period(2)["resolved_contracts"]
+            td = @history.period(3)["resolved_contracts"]
+          tr
+            td Account Balance
+            td = @history.period(0)["balance"]
+            td = @history.period(1)["balance"]
+            td = @history.period(2)["balance"]
+            td = @history.period(3)["balance"]
+
+  tr
+    td: b Increment System Day Offset
+    td
+      a[href="/bot/timeinc"] Move the system forward eight days, close three issues, resolve matured contracts
+      p
+      | <span style='color: red;'>WARNING</span>: the system time can only be moved forward, not back!<br/>
+        To reset the system days offset to zero, you must rebuild the system
+        from scratch.
+

@@ -1,0 +1,32 @@
+table width='100%'
+  tr
+    td
+      h2 Contracts
+    td align='right'
+      - case
+        - when @bug
+          | Contracts for Bug ##{@bug.id}
+        - when @repo
+          | Contracts for Repo ##{@repo.id}
+        - else
+          | All Contracts
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
+  thead
+    tr
+      th ID
+      th Amendments
+      th Value
+      th Matures
+      th Status
+      th Awardee
+      th Action
+  tbody
+    - @contracts.each do |contract|
+      tr
+        td = core_contract_id_link(contract)
+        td = contract.amendments.count
+        td = contract.total_value
+        td = core_contract_mature_date(contract)
+        td = core_contract_status(contract)
+        td = contract.awardee
+        td = core_contract_actions(contract)

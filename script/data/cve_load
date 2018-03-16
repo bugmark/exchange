@@ -12,7 +12,7 @@ repo_name = "Mitre/CVE"
 
 Repo.find_by_name(repo_name).try(:destroy)
 
-repo = Repo.create(name: repo_name, type: "Repo::Cvrf", json_url: "https://cve.mitre.org/data/downloads/index.html")
+repo = Repo.create(name: repo_name, type: "Repo::Cvrf")
 
 list = doc.search("//Vulnerability")
 
@@ -20,12 +20,12 @@ list.each do |el|
   note        = el.css('Note[Type="Description"]')
   description = note.first&.text&.gsub("\n"," ") || "NA"
   attrs = {
-    type:    "Bug::Cvrf",
+    type:    "Issue::Cvrf",
     repo_id: repo.id,
     title:   el.css('Title').first&.text,
     status:  "NA",
     synced_at: Time.now
   }
-  Bug.create attrs
+  Issue.create attrs
 end
 

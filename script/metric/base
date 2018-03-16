@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+puts "----- Generate Base Metric (#{Time.now}) ------------------------------"
+STDOUT.flush
+
+require "./config/environment"
+
+DatapointCmd::Base.new.project
+
+puts "Done"

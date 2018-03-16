@@ -30,72 +30,56 @@ class ApplicationCommand
   #   - events can be replayed
 
   # - using commands from controllers
-  #    `Command.new(params).save_event.project`
+  #    `Command.new(params).project`
   # - using commands to replay events
   #    `Command.from_event(event).project`
 
   # form handling inspired by
   # http://blog.sundaycoding.com/blog/2016/01/08/contextual-validations-with-form-objects
 
-  # ----- configuration methods
+  # ----- instance methods
 
-  # define an attr_accessor for each subobject
-  # define a method `subobject_symbols` that returns the list of subobjects
-  def self.attr_subobjects(*klas_list)
-    attr_accessor(*klas_list)
-    define_method 'subobject_symbols' do
-      klas_list
+  def add_event(key, event)
+    raise "EMPTY KEY" if key.nil? || key.blank?
+    raise "DUPLICATE KEY (#{key})" if state[:events][key]
+    state[:events][key] = event
+    self.define_singleton_method("#{key.to_s}_event".to_sym) do
+      state[:events][key]
+    end
+    self.define_singleton_method("#{key.to_s}_new".to_sym) do
+      state[:events][key].new_object
     end
   end
 
-  # delegate all fields of a subobject to the subobject
-  def self.attr_delegate_fields(*klas_list)
-    klas_list.each do |sym|
-      klas = sym.to_s.camelize.constantize
-      getters = klas.attribute_names.map(&:to_sym)
-      setters = klas.attribute_names.map { |x| "#{x}=".to_sym }
-      delegate *getters, to: sym
-      delegate *setters, to: sym
-    end
+  def events
+    state[:events]
   end
 
-  # ----- template methods - override in subclass
-
-  def self.from_event(_event)
-    raise "from_event: override in subclass"
+  def set(name, object)
+    varname = "@#{name.to_s}"
+    self.instance_variable_set varname, object
   end
 
-  def event_data
-    {}
-  end
-
-  def transact_before_project
-    # override in subclass
-  end
-
-  # ----- persistence methods
+  # ----- persistence methods -----
 
   def save
-    raise "NOT ALLOWED - USE #save_event and/or #project"
+    raise "NOT ALLOWED - USE #project"
   end
 
-  def save_event
-    if valid?
-      base = {klas: self.class.name}
-      data = {data: self.event_data}
-      EventLine.new(data.merge(base)).save
-    end
-    self
-  end
-
-  # pro*jekt* - create a projection - an aggregate data view
   def project
     if valid?
-      transact_before_project # perform a transaction, if any
-      subs.each(&:save)       # save all subobjects
+      ActiveRecord::Base.transaction do
+        events.each do |key, event|
+          varname = "@#{key.to_s}"
+          self.define_singleton_method(key) { eval varname }
+          object = event.ev_cast
+          self.instance_variable_set varname, object
+          raise ActiveRecord::Rollback unless object.valid?
+        end
+      end
       self
     else
-      false
+      nil
     end
   end
 
@@ -103,12 +87,12 @@ class ApplicationCommand
 
   # validations can live in the Command or the Sub-Object (or both!)
   def valid?
-    if super && subs.map(&:valid?).all?
+    if super && events.values.map(&:valid?).all?
       true
     else
-      subs.each do |object|
-        object.valid?                        # populate the subobject errors
-        object.errors.each do |field, error| # transfer the error messages
+      events.values.each do |obj|
+        obj.valid?
+        obj.errors.each do |field, error|
           errors.add(field, error)
         end
       end
@@ -120,12 +104,27 @@ class ApplicationCommand
     !valid?
   end
 
-  private
-
-  def subobjects
-    subobject_symbols.map { |el| self.send(el) }
+  def state
+    @state ||= {}
+    @state[:events] ||= {}
+    @state
   end
 
-  alias_method :subs, :subobjects
+  def state=(val)
+    @state = val
+  end
 
+  private
+
+  def cmd_uuid
+    @cmd_uuid ||= SecureRandom.uuid
+  end
+
+  def cmd_type
+    @cmd_type ||= self.class.name
+  end
+
+  def cmd_opts
+    {"cmd_type" => cmd_type, "cmd_uuid" => cmd_uuid}
+  end
 end

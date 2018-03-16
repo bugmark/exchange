@@ -6,12 +6,10 @@ Rake::Task["deploy:migrating"].clear_comments
 namespace :deploy do
   task :migrating do
     on roles(:all) do |host|
-      # while the system is under development, recreate
-      # the database and reload all data
-      execute "sudo systemctl stop bugmark"
-      execute "cd #{release_path} && bundle exec script/data/all_production"
-      execute "sudo systemctl start bugmark"
-      # execute "cd #{release_path} && RAILS_ENV=production bundle exec rake db:migrate"
+      execute "[ -f /etc/systemd/system/bugmark.service ] && sudo systemctl stop bugmark || echo pending"
+      # execute "cd #{release_path} && bundle exec script/data/all_production"
+      execute "cd #{release_path} && RAILS_ENV=production bundle exec rake db:migrate"
+      execute "[ -f /etc/systemd/system/bugmark.service ] && sudo systemctl start bugmark || echo pending"
     end
   end
 end

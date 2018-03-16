@@ -1,0 +1,12 @@
+= breadcrumb [%w(Bugmark /docfix/home), %w(Projects /docfix/projects), @project.name]
+
+small
+  a href="/docfix/projects" return to overview
+
+.row
+  .col-md-8
+    h2 = @project.name
+  .col-md-4
+    i.fa.fa-eye>
+    | PUT ON WATCHLIST
+

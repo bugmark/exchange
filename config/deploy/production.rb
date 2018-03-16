@@ -1,7 +1,7 @@
 # only run in dev branch
 branch = `git rev-parse --abbrev-ref HEAD`.chomp
 puts "CURRENT BRANCH <#{branch}>"
-puts ' TARGET ENVIRONMENT: VAGRANT '.center(70, '-')
+puts ' TARGET ENVIRONMENT: PRODUCTION '.center(70, '-')
 
 abort "EXITING: VAGRANT CAP ONLY RUNS IN MASTER BRANCH" unless branch == "master"
 
@@ -12,6 +12,7 @@ set :branch,    'master'
 
 set :rails_env, 'production'
 
-role :app, ['deploy@bugmark.net']
-role :db,  ['deploy@bugmark.net']
-role :web, ['deploy@bugmark.net']
+role :app, %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@blockcve.bugmark.net)
+role :db,  %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@blockcve.bugmark.net)
+role :web, %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@blockcve.bugmark.net)
+

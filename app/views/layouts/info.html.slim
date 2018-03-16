@@ -1,0 +1,15 @@
+- content_for :navbar do
+  ul.navbar-nav.mr-auto
+    = nav_link("Docfix" , "/docfix/home" )
+    = nav_link("Core"   , "/core/home"   )
+    = nav_link("API"    , "/apidocs"     )
+    = nav_link("Bot"    , "/bot/home"    )
+    = nav_link("Events" , "/events"      )
+
+- content_for :devise do
+  ' .
+
+- content_for :body do
+  = yield
+
+= render template: "layouts/application"

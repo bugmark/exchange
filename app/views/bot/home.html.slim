@@ -1,0 +1,43 @@
+table.table.table-sm
+  tr
+    td
+      h2 Trading Bot
+    td[align='right']
+      a[href="/events"] Event Log
+  tr
+    td
+      b Actions:
+      ul
+        li: a[href='/bot/start'] Start the Trading Bot
+        li: a[href='/bot/stop'] Stop the Trading Bot
+        li: a[href='/bot/log_show'] Show the Bot Log
+        li: a[href='/bot/log_reset'] Reset the Bot Log
+    td[width='66%']
+      b Overview:
+      ul
+        li Generates one buy offer every 30 seconds
+        li Attempts to cross every open offer once per minute
+      b Buy Offers:
+      ul
+        li Only trades on the first three issues
+        li Randomly on fixed and unfixed side
+        li Users selected randomly from test<1|2|3>@bugmark.net
+        li Price selected randomly between 0.0 and 1.0
+        li Volume selected randomly between 2 and 10 units
+  tr
+    td[colspan=2]
+      h2 Total Rebuild
+  tr
+    td
+      b Actions:
+      ul
+        li
+          a>[href='/bot/build'] Rebuild from Scratch
+          span>[style='color: red;'] CAREFUL!
+        li
+          a[href='/bot/build_log'] Show the Rebuild Log
+    td
+      b Overview:
+      p
+        | Delete all data and rebuild from scratch.
+

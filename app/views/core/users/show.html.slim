@@ -1,0 +1,109 @@
+css:
+  .mbt {
+    margin-bottom: 10px;
+    margin-top:    10px;
+  }
+
+  .bg { background: lightgrey; }
+  .by { background: lightyellow; }
+
+table.table style='margin-bottom: 0; padding-bottom: 0'
+  tr
+    td
+      h3 Trading Activity
+    td align='right'
+      | #{@user.xid} / #{@user.email}<br/>
+      small #{link_to "Settings", edit_user_registration_path}
+
+div.text-center.bg
+  b Account Balance: #{@user.balance} Tokens (Reserve: #{@user.token_reserve} => Available: #{@user.token_available})
+
+.mbt.by
+  .text-center: b Most Recent Events
+  table.table.table-condensed
+    - if @user.event_lines.count > 0
+      tr
+        th ID
+        th Type
+        th Date
+    - @user.event_lines.order('id desc').limit(3).each do |event|
+      tr
+        td = event.id
+        td = event.cmd_type
+        td = event.created_at.strftime("%m-%d %H:%M:%S")
+
+.mbt.bg
+  .text-center: b Contracts (#{@user.contracts.count})
+  table.table.table-condensed
+    - if @user.contracts.count > 0
+      tr
+        th ID
+        th Amendments
+        th Value
+        th Matures
+        th Status
+        th Awardee
+        th Action
+    - @user.contracts.each do |contract|
+      tr
+        td = core_contract_id_link(contract)
+        td = contract.amendments.count
+        td = contract.total_value
+        td = core_contract_mature_date(contract)
+        td = core_contract_status(contract)
+        td = contract.awardee
+        td = core_contract_actions(contract)
+
+.mbt.by
+  .text-center: b Positions (#{@user.positions.count})
+  table.table.table-condensed
+    - if @user.positions.count > 0
+      tr
+        th ID
+        th Value
+        th Matures
+        th Status
+        th Action
+    - @user.positions.each do |position|
+      tr
+        td = core_position_link(position)
+        td = position.value
+        td = position.contract.maturation
+        td = position.contract.status
+        td = core_position_actions(position)
+
+.mbt.bg
+  .text-center: b Offers to Buy (#{@user.offers_buy.count})
+  table.table.table-condensed
+    - if @user.offers_buy.count > 0
+      tr
+        th ID
+        th Value
+        th Matures
+        th Status
+        th Action
+    - @user.offers_buy.each do |offer|
+      tr
+        td = core_offer_id_link(offer)
+        td = offer.value
+        td = offer.maturation
+        td = offer.status
+        td = core_offer_actions(offer)
+
+.mbt.by
+  .text-center: b Offers to Sell (#{@user.offers_sell.count})
+  table.table.table-condensed
+    - if @user.offers_sell.count > 0
+      tr
+        th ID
+        th Value
+        th Matures
+        th Status
+        th Action
+    - @user.offers_sell.each do |offer|
+      tr
+        td = core_offer_id_link(offer)
+        td = offer.value
+        td = offer.maturation
+        td = offer.status
+        td = core_offer_actions(offer)

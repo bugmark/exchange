@@ -45,29 +45,41 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts_as_list (0.9.5)
+      activerecord (>= 3.0)
     addressable (2.4.0)
-    airbrussh (1.1.2)
+    airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (2.7.2)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     arel (8.0.0)
+    autoprefixer-rails (7.2.3)
+      execjs
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
     bindex (0.5.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap (4.0.0.beta3)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.3, < 2)
+      sass (>= 3.5.2)
     bootstrap_form (2.7.0)
     builder (3.2.3)
     byebug (9.0.6)
-    capistrano (3.8.0)
+    capistrano (3.10.1)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (1.2.0)
+    capistrano-bundler (1.3.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-rails (1.2.3)
+    capistrano-rails (1.3.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capybara (2.15.1)
@@ -79,8 +91,11 @@ GEM
       xpath (~> 2.0)
     childprocess (0.7.0)
       ffi (~> 1.0, >= 1.0.11)
+    choice (0.2.0)
     chronic (0.10.2)
     coderay (1.1.1)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -90,10 +105,13 @@ GEM
     coffee-script-source (1.12.2)
     colored (1.2)
     concurrent-ruby (1.0.5)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    crass (1.0.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.3.0)
+    devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.2)
@@ -101,28 +119,47 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.3)
     dotenv (2.2.1)
-    erubi (1.6.1)
+    equalizer (0.0.11)
+    erubi (1.7.0)
     execjs (2.7.0)
-    factory_girl (4.8.0)
+    factory_bot (4.8.2)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.8.0)
-      factory_girl (~> 4.8.0)
+    factory_bot_rails (4.8.2)
+      factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    faraday-http-cache (2.0.0)
+      faraday (~> 0.8)
     ffi (1.9.18)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     formatador (0.2.5)
-    github_api (0.17.0)
-      addressable (~> 2.4.0)
-      descendants_tracker (~> 0.0.4)
-      faraday (~> 0.8, < 0.10)
-      hashie (>= 3.4)
-      mime-types (>= 1.16, < 3.0)
-      oauth2 (~> 1.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    grape (0.19.1)
+      activesupport
+      builder
+      hashie (>= 2.1.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      mustermann-grape (~> 0.4.0)
+      rack (>= 1.3.0)
+      rack-accept
+      virtus (>= 1.0.0)
+    grape-entity (0.6.1)
+      activesupport (>= 5.0.0)
+      multi_json (>= 1.3.2)
+    grape-swagger (0.27.3)
+      grape (>= 0.16.2)
+    grape-swagger-entity (0.2.3)
+      grape-entity (>= 0.5.0)
+      grape-swagger (>= 0.20.4)
+    grape-swagger-rails (0.3.0)
+      railties (>= 3.2.12)
+    grape_logging (1.7.0)
+      grape
+    graphviz (0.4.0)
     guard (2.14.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -132,9 +169,18 @@ GEM
       pry (>= 0.9.12)
       shellany (~> 0.0)
       thor (>= 0.18.1)
+    hashdiff (0.3.6)
     hashie (3.5.5)
     hirb (0.7.3)
-    i18n (0.8.6)
+    hstore_accessor (1.0.3)
+      activerecord (>= 4.0.0)
+    i18n (0.9.1)
+      concurrent-ruby (~> 1.0)
+    ice_nine (0.11.2)
+    influxdb (0.5.2)
+    influxdb-rails (0.4.2)
+      influxdb (~> 0.5.0)
+      railties (> 3)
     interception (0.5)
     jbuilder (2.6.4)
       activesupport (>= 3.0.0)
@@ -143,12 +189,18 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jwt (1.5.6)
+    jsonb_accessor (1.0.0)
+      activerecord (>= 5.0)
+      activesupport (>= 5.0)
+      pg (>= 0.18.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.0.3)
+    loofah (2.1.1)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.12)
     mail (2.6.6)
@@ -156,29 +208,37 @@ GEM
     method_source (0.8.2)
     mime-types (2.99.3)
     mini_mime (0.1.3)
-    mini_portile2 (2.2.0)
-    minitest (5.10.3)
-    multi_json (1.12.1)
+    mini_portile2 (2.3.0)
+    minitest (5.11.1)
+    multi_json (1.12.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mustermann (0.4.0)
+      tool (~> 0.2)
+    mustermann-grape (0.4.0)
+      mustermann (= 0.4.0)
     nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (4.1.0)
+    net-ssh (4.2.0)
     nio4r (2.1.0)
-    nokogiri (1.8.0)
-      mini_portile2 (~> 2.2.0)
+    nokogiri (1.8.1)
+      mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oauth2 (1.3.1)
-      faraday (>= 0.8, < 0.12)
-      jwt (~> 1.0)
-      multi_json (~> 1.3)
-      multi_xml (~> 0.5)
-      rack (>= 1.2, < 3)
+    octokit (4.6.2)
+      sawyer (~> 0.8.0, >= 0.5.3)
     orm_adapter (0.5.0)
-    pg (0.20.0)
+    paper_trail (6.0.2)
+      activerecord (>= 4.0, < 5.2)
+      request_store (~> 1.1)
+    pg (0.21.0)
+    pg_search (2.1.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      arel (>= 6)
+    popper_js (1.12.9)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -186,12 +246,6 @@ GEM
     pry-byebug (3.4.2)
       byebug (~> 9.0)
       pry (~> 0.10)
-    pry-doc (0.10.0)
-      pry (~> 0.9)
-      yard (~> 0.9)
-    pry-docmore (0.1.1)
-      pry
-      pry-doc
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     pry-rescue (1.4.5)
@@ -202,6 +256,11 @@ GEM
       pry (>= 0.9.11)
     puma (3.9.1)
     rack (2.0.3)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-cors (1.0.2)
+    rack-proxy (0.6.2)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.1.3)
@@ -219,6 +278,11 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
+    rails-erd (1.5.0)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     rails-ujs (0.1.0)
@@ -229,11 +293,12 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (12.0.0)
+    rake (12.3.0)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
     redis (3.3.3)
+    request_store (1.3.2)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -254,15 +319,24 @@ GEM
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    ruby-graphviz (1.2.3)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
-    sass (3.4.24)
+    safe_yaml (1.0.4)
+    sass (3.5.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sawyer (0.8.1)
+      addressable (>= 2.3.5, < 2.6)
+      faraday (~> 0.8, < 1.0)
     selenium-webdriver (3.4.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
@@ -290,19 +364,26 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.13.1)
+    sshkit (1.15.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.7.7)
-    thor (0.19.4)
+    thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.7)
-    tzinfo (1.2.3)
+    tool (0.2.3)
+    tzinfo (1.2.4)
       thread_safe (~> 0.1)
     tzinfo-data (1.2017.2)
       tzinfo (>= 1.0.0)
     uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
+    vcr (3.0.3)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -310,9 +391,13 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    webpacker (2.0)
+    webmock (3.0.1)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
+    webpacker (3.0.2)
       activesupport (>= 4.2)
-      multi_json (~> 1.2)
+      rack-proxy (>= 0.6.1)
       railties (>= 4.2)
     websocket (1.2.4)
     websocket-driver (0.6.5)
@@ -320,16 +405,18 @@ GEM
     websocket-extensions (0.1.2)
     whenever (0.9.7)
       chronic (>= 0.6.3)
+    will_paginate (3.1.6)
     xpath (2.1.0)
       nokogiri (~> 1.3)
-    yard (0.9.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list
   annotate
   bcrypt (~> 3.1.7)
+  bootstrap
   bootstrap_form
   byebug
   capistrano-rails
@@ -338,26 +425,39 @@ DEPENDENCIES
   colored
   devise
   dotenv
-  factory_girl_rails
+  factory_bot_rails
+  faraday-http-cache
   font-awesome-sass
-  github_api
+  grape
+  grape-swagger
+  grape-swagger-entity
+  grape-swagger-rails
+  grape_logging
+  graphviz
   guard
   guard-rspec_min!
   hirb
+  hstore_accessor
+  influxdb-rails
   jbuilder (~> 2.5)
   jquery-rails
+  jsonb_accessor
+  launchy
   listen (>= 3.0.5, < 3.2)
   mini_portile2
   nokogiri
+  octokit
+  paper_trail
   pg (~> 0.18)
+  pg_search
   pry-byebug
-  pry-doc
-  pry-docmore
   pry-rails
   pry-rescue
   pry-stack_explorer
   puma (~> 3.9)
+  rack-cors
   rails (~> 5.1.3)
+  rails-erd
   rails-ujs
   redis (~> 3.0)
   rspec-rails
@@ -369,9 +469,12 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
   uglifier (>= 1.3.0)
+  vcr
   web-console (>= 3.3.0)
+  webmock
   webpacker
   whenever
+  will_paginate
 
 BUNDLED WITH
-   1.15.3
+   1.16.1

@@ -1,0 +1,31 @@
+table width='100%'
+  tr
+    td
+      h2 Bugs
+    td align='right'
+      - if @repo
+        ' Bugs for Repo ##{@repo.id} |
+        = link_to "All Bugs", "/core/bugs"
+      - else
+        | All Bugs
+
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
+  thead
+    tr
+      th ID
+      th Repo
+      th Title
+      th Offers
+      th Contracts
+      th Offer
+  tbody
+    - @bugs.each do |bug|
+      tr
+        td = core_issue_id_link(bug)
+        td = core_bug_repo_link(bug, @repo)
+        td = core_bug_title_link(bug)
+        td = core_bug_offer_link(bug)
+        td = core_bug_contract_link(bug)
+        td
+          nobr
+            = core_bug_actions(bug)

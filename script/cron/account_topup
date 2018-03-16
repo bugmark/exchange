@@ -6,5 +6,5 @@ require "./config/environment"
 
 User.low_balance.each do |user|
   puts "RESET USER BALANCE #{user.id}"
-  user.update_attribute(:token_balance, 100)
+  user.update_attribute(:balance, 100)
 end

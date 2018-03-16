@@ -3,16 +3,21 @@
 #   include_context 'Integration Environment'
 #   ...
 RSpec.shared_context 'Integration Environment' do
-  let(:usr1)   { FG.create(:user)                                  }
-  let(:usr2)   { FG.create(:user)                                  }
-  let(:usr3)   { FG.create(:user)                                  }
-  let(:usr4)   { FG.create(:user)                                  }
-  let(:repo1)  { FG.create(:repo)                                  }
-  let(:repo2)  { FG.create(:repo)                                  }
-  let(:bug1)   { FG.create(:bug, repo_id: repo1.id)                }
-  let(:bug2)   { FG.create(:bug, repo_id: repo1.id)                }
-  let(:con1)   { FG.create(:contract, publisher_id: usr1.id)       }
-  let(:con2)   { FG.create(:contract, publisher_id: usr2.id)       }
+  let(:usr1)   { FB.create(:user).user                                     }
+  let(:usr2)   { FB.create(:user).user                                     }
+  let(:usr3)   { FB.create(:user).user                                     }
+  let(:usr4)   { FB.create(:user).user                                     }
+  let(:repo1)  { FB.create(:gh_repo).repo                                  }
+  let(:repo2)  { FB.create(:gh_repo).repo                                  }
+  let(:issue1) { FB.create(:gh_issue , stm_repo_uuid: repo1.uuid)          }
+  let(:issue2) { FB.create(:gh_issue , stm_repo_uuid: repo1.uuid)          }
+
+  let(:offer_bu1) { FB.create(:offer_bu , stm_repo_uuid:  repo1.uuid, user: usr1) }
+  let(:offer_bu2) { FB.create(:offer_bu , stm_repo_uuid:  repo2.uuid)             }
+  let(:offer_bu3) { FB.create(:offer_bu , stm_issue_uuid: issue1.uuid)            }
+  let(:offer_bf1) { FB.create(:offer_bf , stm_repo_uuid:  repo1.uuid, user: usr2) }
+  let(:offer_bf2) { FB.create(:offer_bf , stm_repo_uuid:  repo2.uuid)             }
+  let(:offer_bf3) { FB.create(:offer_bf , stm_issue_uuid: issue1.uuid)            }
 end
 
 def hydrate(*args); end

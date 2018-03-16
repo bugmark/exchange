@@ -1,0 +1,38 @@
+- @df_script = "https://docs.google.com/document/d/19ZnHdJEjzJ-cOKq9RrZ3xU1DhTol_qWnvyif_gQjwi4/edit"
+- @df_cast   = "https://vimeo.com/245232429"
+
+- content_for :page_js do
+  coffee:
+    $(document).ready ->
+      $('.spark').sparkline('html', {type: 'bar'})
+
+h4 Bugmark Experiments
+
+table.table.table-striped
+  tr
+    td: a[href="/docfix"] Docfix
+    td
+      ' An experimental UI optimized for documentation fixes.  See our
+      a>[href="#{@df_script}" target="_blank"] Demo Script.
+  tr
+    td: a[href="/core"] Core
+    td An experimental UI to test trading mechanisms
+  tr
+    td: a[href="/bot/home"] Bot
+    td An automated trading bot
+  tr
+    td: a[href="/bot/time"] DemoTime
+    td Move the demo time forward to a future time.
+  tr
+    td: a[href="/events"] Events
+    td A live view of the Bugmark EventStore
+  tr
+    td: a[href="/apidocs" target="_blank"] API
+    td Documentation for the Bugmark Restful API
+  tr
+    td: a[href="http://bugmark.net:3030" target="_blank"] Visualization
+    td
+      ' Grafana-based experiments with charting and visualization
+      span.spark 1,4,5,2,3,4,6,4,2,4,5,6,4,2,1,3,5,6
+
+

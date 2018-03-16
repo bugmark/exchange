@@ -1,0 +1,12 @@
+= render partial: "docfix/homes/docfix_terms"
+
+nav aria-label="breadcrumb" role="navigation"
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/docfix/home" Bugmark
+    li.breadcrumb-item.active aria-current="page"
+      | Terms
+
+.row
+  .col-md-12
+    = content_for(:terms_body)

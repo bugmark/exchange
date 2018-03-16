@@ -1,62 +1,107 @@
 require 'rails_helper'
 
-RSpec.describe ContractCmd::Resolve, type: :model do
+RSpec.describe ContractCmd::Resolve do
 
-  def contract_params
+  include_context 'Integration Environment'
+
+  def offer_args(user, alt = {})
     {
-      token_value:     10            ,
-      publisher_id:    user.id       ,
-      counterparty_id: user.id
-    }
+      user_uuid:      user.uuid         ,
+      stm_issue_uuid: issue.uuid        ,
+      maturation:     Time.now - 1.day
+    }.merge(alt)
   end
 
-  let(:kontrakt) { Contract.create(contract_params)                       }
-  let(:user)     { User.create(email: 'xx@yy.com', password: 'yyyyyy')    }
-  let(:klas)     { described_class                                        }
-  subject        { klas.find(kontrakt.id)                                 }
-
-  describe "Attributes" do
-    it { should respond_to :counterparty           }
-    it { should respond_to :contract               }
-    it { should respond_to :token_value        }
+  def gen_offer(usr, type, args = {})
+    FB.create(type, offer_args(usr, args)).offer
   end
 
-  describe "Delegated Object" do
-    it 'has a present Contract' do
-      expect(subject.contract).to be_present
-    end
+  let(:issue)    { FB.create(:issue).issue                               }
+  let(:obf)      { gen_offer(usr1, :offer_bf)                            }
+  let(:obu)      { gen_offer(usr2, :offer_bu)                            }
+  let(:contract) { ContractCmd::Cross.new(obf, :expand).project.contract }
+  let(:klas)     { described_class                                       }
+  subject        { klas.new(contract)                                    }
 
-    it 'has a Contract with the right class' do
-      expect(subject.contract).to be_a(Contract)
-    end
-
-    it 'should have a valid Contract' do
-      expect(subject.contract).to be_valid
-    end
-  end
-
-  describe "Object Saving" do
-    it 'saves the object to the database' do
-      subject.matures_at = Time.now - 1.day
-      subject.project
+  describe "project" do
+    it "has a valid command" do
+      hydrate(issue, obf, obu)
       expect(subject).to be_valid
     end
 
-    it 'gets the right object count' do
-      expect(kontrakt).to be_present
+    it "runs w/o error" do
+      hydrate(issue, obf, obu)
+      expect(subject.project).to_not be_nil
+    end
+
+    it "has the right setup counts" do
+      hydrate(issue, obf, obu)
+      expect(Offer.open.count).to eq(2)
+      expect(Contract.count).to eq(0)
+      hydrate(contract)
+      expect(Offer.open.count).to eq(0)
       expect(Contract.count).to eq(1)
+    end
+
+    it "has the right user balances" do
+      hydrate(issue, obf, obu, contract)
+      expect(User.first.balance).to eq(996.0)
+      expect(User.last.balance).to eq(994.0)
       subject.project
-      expect(Contract.count).to eq(1)
+      expect(User.first.balance).to eq(996.0)
+      expect(User.last.balance).to eq(1004.0)
     end
   end
 
-  describe "Object Transaction" do
-    it 'adjusts the user balance' do
-      expect(user.token_balance).to eq(100)
-      subject.project
-      user.reload
-      expect(user.token_balance).to eq(100)
+  describe "pricing" do
+    it "handles median price" do
+      o1 = gen_offer(usr1, :offer_bf, {price: 0.1 })
+      o2 = gen_offer(usr2, :offer_bu, {price: 0.9 })
+      ct = ContractCmd::Cross.new(o1, :expand).project.contract
+      expect(User.first.balance).to eq(999.0)
+      expect(User.last.balance).to  eq(991.0)
+      cmd = klas.new(ct)
+      expect(cmd).to be_valid
+      cmd.project
+      expect(User.first.balance).to eq( 999.0)
+      expect(User.last.balance).to  eq(1001.0)
+    end
+
+    it "handles median price" do
+      o1 = gen_offer(usr1, :offer_bf, {price: 0.9 })
+      o2 = gen_offer(usr2, :offer_bu, {price: 0.1 })
+      ct = ContractCmd::Cross.new(o1, :expand).project.contract
+      expect(User.first.balance).to eq(991.0)
+      expect(User.last.balance).to  eq(999.0)
+      cmd = klas.new(ct)
+      expect(cmd).to be_valid
+      cmd.project
+      expect(User.first.balance).to eq( 991.0)
+      expect(User.last.balance).to  eq(1009.0)
+    end
+
+    it "handles zero price" do
+      o1 = gen_offer(usr1, :offer_bf, {price: 0.0 })
+      o2 = gen_offer(usr2, :offer_bu, {price: 1.0 })
+      ct = ContractCmd::Cross.new(o1, :expand).project.contract
+      expect(User.first.balance).to eq(1000.0)
+      expect(User.last.balance).to  eq( 990.0)
+      klas.new(ct).project
+      expect(User.first.balance).to eq(1000.0)
+      expect(User.last.balance).to  eq(1000.0)
+    end
+
+    it "handles 1.0 price" do
+      o1 = gen_offer(usr1, :offer_bf, {price: 1.0 })
+      o2 = gen_offer(usr2, :offer_bu, {price: 0.0 })
+      ct = ContractCmd::Cross.new(o1, :expand).project.contract
+      expect(User.first.balance).to eq( 990.0)
+      expect(User.last.balance).to  eq(1000.0)
+      cmd = klas.new(ct)
+      expect(cmd).to be_valid
+      cmd.project
+      expect(User.first.balance).to eq( 990.0)
+      expect(User.last.balance).to  eq(1010.0)
     end
   end
 end
-

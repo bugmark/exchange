@@ -1,9 +1,0 @@
-h2 Contracts New
-hr
-| Use this form to add a new GitHub repo
-hr
-- if @repo.errors.any?
-  .alert.alert-danger Please fix the errors below.
-= bootstrap_form_for(@repo) do |f|
-  = f.text_field   :name, placeholder: "<GitHub Account Name>/<GitHub Repo Name>"
-  = f.submit

@@ -6,21 +6,15 @@ require __dir__ + '/../cap_helpers'
 before "deploy:symlink:release", "puma:nginx_conf"
 
 namespace :puma do
-  desc "Upload Certs to Deploy Targets"
-  task :certs do
-    on roles(:all) do |server|
-      cmd = "rsync -a .certs #{ fetch(:user) }@#{server.hostname}:#{release_path}"
-      puts cmd
-      run_locally { execute cmd }
-      execute "cd #{release_path}/.certs/staging ; ./generate"
-    end
-  end
   desc "Export a puma config file for nginx."
-  task :nginx_conf => :certs do
+  task :nginx_conf do
     on roles(:web) do |server|
-      # set :is_prod_host, (server.hostname == "bugmark")
-      template "nginx_puma.erb", "/etc/nginx/conf.d/bugmark.conf"
-      execute  "sudo /etc/init.d/nginx reload"
+      locals = {host: server.hostname}
+      puts "-" * 80
+      puts "HOST IS #{server.hostname}".center(80)
+      puts "-" * 80
+      template "nginx_puma.erb", "/etc/nginx/conf.d/bugmark.conf", locals
+      execute  "sudo systemctl restart nginx"
     end
   end
 end

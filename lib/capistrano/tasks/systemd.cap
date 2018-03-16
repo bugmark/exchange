@@ -49,15 +49,13 @@ namespace :systemd do
   task :start do
     on roles(:all) do
       execute "sudo systemctl start bugmark"
-      # execute "sudo systemctl start sidekiq"
     end
   end
 
   desc "Stop the application services"
   task :stop do
     on roles(:all) do
-      execute "sudo systemctl stop bugmark"
-      # execute "sudo systemctl stop sidekiq"
+      execute "[ -f /etc/systemd/system/bugmark.service ] && sudo systemctl stop bugmark || echo pending"
     end
   end
 

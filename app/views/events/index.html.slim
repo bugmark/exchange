@@ -1,0 +1,29 @@
+table[width='100%']
+  tr
+    td
+      H1 Events (#{@events.count})
+    td[align='right']
+      a[href="/bot/home"] Bot Home
+
+table.table.table-sm
+  tr
+    th ID
+    th Type
+    th Payload
+    th UserID
+    th Created
+    th Links
+  - @events.each do |event|
+    tr
+      td
+        a[href="/events/#{event.id}"] #{event.id}
+      td = event.event_type
+      td = event.payload.to_s[0..30] + " ..."
+      td = event.id
+      td = event.created_at.strftime("%m-%d %H:%M:%S")
+      td = docfix_event_etherscan(event)
+
+hr
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @offers, container: false

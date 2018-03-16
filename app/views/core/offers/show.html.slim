@@ -1,0 +1,70 @@
+table width='100%'
+  tr
+    td
+      h2 OFFER [#{@offer.xid}]
+    td align='right'
+      = link_to("All Offers", "/core/offers")
+
+.row
+  .col-md-6
+    table.table
+      tr
+        td <b>Status</b>
+        td = @offer.status
+      tr
+        td <b>User</b>
+        td = core_user_link(@offer.user)
+      tr
+        td <b>Volume</b>
+        td = @offer.volume
+      tr
+        td <b>Position</b>
+        td = core_position_link(@offer.position)
+      tr
+        td <b>Resell Position</b>
+        td = core_position_link(@offer.salable_position)
+      tr
+        td <b>UUID</b>
+        td = core_position_link(@offer.salable_position)
+      tr
+        td <b>Expiration</b>
+        td = @offer.uuid
+      tr
+        td <b>Maturation</b>
+        td = @offer.maturation_range
+  .col-md-6
+    table.table
+      tr
+        td <b>Attached To</b>
+        td = core_offer_attach_link(@offer)
+      tr
+        td <b>Action</b>
+        td = core_offer_actions(@offer)
+      tr
+        td <b>Price</b>
+        td = @offer.price
+      tr
+        td <b>Value</b>
+        td = @offer.value
+      tr
+        td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@offer)}
+
+hr
+b Matching Bugs (#{@offer.match_issues.count})
+table.table
+  - if @offer.match_issues.count > 0
+    tr
+      th ID
+      th Type
+      th Title
+      th Contracts
+      th Create
+  - @offer.match_issues.each do |bid|
+    tr
+      td = core_issue_id_link(bid)
+      td = bid.type
+      td = core_bug_title_link(bid)
+      td = core_bug_contract_link(bid)
+      td
+        nobr
+          = core_bug_contract_link(bid)

@@ -1,45 +1,35 @@
-require 'net/http'
-require 'uri'
-
 class Repo < ApplicationRecord
 
-  has_many :bugs         , :dependent => :destroy
-  has_many :contracts    , :dependent => :destroy
-  has_many :bug_contracts, :through   => :bugs    , :source => :contracts
+  include PgSearch
 
-  validates :json_url , uniqueness: true, presence: true
-  validates :name     , uniqueness: true, presence: true
+  has_paper_trail
 
-  def xid
-    "rep.#{self.id}"
+  with_options foreign_key: "stm_repo_uuid", primary_key: "uuid", :dependent => :destroy do
+    has_many :issues
+    has_many :offers
+    has_many :contracts
+  end
+
+  validates :name, uniqueness: true, presence: true
+
+  before_validation :set_defaults
+
+  def xtag
+    "rep"
   end
 
   def xtype
     self.type.gsub("Repo::","")
   end
 
-  def has_contracts?
-    contracts.count != 0 || bug_contracts.count != 0
+  def org
+    "TBD"
   end
 
-  # def sync
-  #   self.update_attribute(:synced_at, Time.now)
-  #   json = open(self.json_url) {|io| io.read}
-  #   JSON.parse(json).each do |el|
-  #     attrs = {
-  #       repo_id:   self.id         ,
-  #       type:      "Bug::GitHub"   ,
-  #       json_url:  el["url"]       ,
-  #       html_url:  el["html_url"]  ,
-  #       title:     el["title"]     ,
-  #       labels:    el["labels"]    ,
-  #       status:    el["state"]     ,
-  #       synced_at: Time.now
-  #     }
-  #     bug = Bug.find_or_create_by(exref: el["id"])
-  #     bug.update_attributes(attrs)
-  #   end
-  # end
+  def has_contracts?
+    return false
+    contracts.count != 0 || bug_contracts.count != 0
+  end
 
   # ----- SCOPES -----
 
@@ -47,6 +37,17 @@ class Repo < ApplicationRecord
     def github
       where(type: "Repo::GitHub")
     end
+
+    def select_subset
+      select(:id, :name, "xfields->'languages' as lang", "jfields->'readme_url' as readme_url", "substring(jfields->>'readme_txt' for 50) as readme_txt")
+    end
+    alias_method :ss, :select_subset
+  end
+
+  private
+
+  def set_defaults
+    self.uuid ||= SecureRandom.uuid
   end
 end
 
@@ -56,13 +57,12 @@ end
 #
 #  id         :integer          not null, primary key
 #  type       :string
+#  uuid       :string
 #  name       :string
-#  json_url   :string
-#  html_url   :string
+#  xfields    :hstore           not null
 #  jfields    :jsonb            not null
 #  synced_at  :datetime
-#  exref      :string
-#  uuref      :string
+#  exid       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

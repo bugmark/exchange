@@ -1,0 +1,82 @@
+- content_for :page_js do
+  coffee:
+    $(document).ready ->
+      $('.spark').sparkline('html', {type: 'bar'})
+
+css:
+  .zh {
+    font-weight: bold;
+    height:      30px;
+  }
+
+  .gbtn {
+    width: 200px;
+    display: block;
+  }
+
+  .tdog {
+    margin-top: 10px;
+  }
+
+  .tt {
+    margin-right: 10px;
+  }
+
+  .nw {
+    white-space: nowrap;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+
+= breadcrumb [%w(Bugmark /docfix/home), "Contracts"]
+
+h2 Contracts (#{Contract.count})
+
+b Check out the running contracts to get an impression of the trading volume
+  going on on Bugmark.  filter this view by your preferences, add contracts
+  to your watchlist in case they influence an issue you want to invest in
+  or make new investments.  You can also resell your own contracts.
+
+table.table.table-sm.tdog
+  tr[style='background: lightgrey;']
+    td.nw
+    td.nw
+      = docfix_contract_sort("Maturation date", "date"  , @sort)
+    td.nw
+      = docfix_contract_sort("Contract volume", "volsum", @sort)
+    td.nw
+    td.nw
+  tr
+    td[colspan=4 style='height: 5px;']
+  - @contracts.each do |contract|
+    tr
+      td
+        .zh = docfix_contract_show_link(contract)
+        small
+          p
+            b =docfix_contract_assoc_label(contract)
+            br
+            = docfix_contract_assoc_link(contract)
+          p
+            b Created on<br/>
+            = contract.created_at
+      td
+        .zh Maturation date
+        = contract.maturation.strftime("%m-%d %H:%M")
+      td
+        .zh Contract volume
+        | #{contract.volsum.to_i} tokens
+        br
+        | #{pluralize(contract.escrows.count, "escrow")}
+        br
+        span.spark = contract.escrows.map {|x| x.value }.join(",")
+      td
+        .zh Price per unit
+        = docfix_contract_price(contract)
+      td
+        .zh Actions
+        = docfix_contract_action_btns(contract)
+
+.text-center[style='margin-top: 30px;']
+  = will_paginate @contracts, container: false

@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# contract_cross
+
+require "./config/environment"
+
+Offer.open.each do |offer|
+  puts "Crossing #{offer.id}"
+  ContractCmd::Cross.new(offer, :expand)
+end

@@ -1,0 +1,17 @@
+- content_for :page_js do
+  = javascript_pack_tag "docfix/issues/offer"
+
+= breadcrumb [%w(Bugmark /docfix/home), %w(Issues /docfix/issues), ["Issue ##{@bug.id}", "/docfix/issues/#{@bug.id}"], "Offer to Buy Fixed"]
+
+small
+  a href="/docfix/issues/#{@bug.id}" return to issue #{@bug.id}
+
+hr
+
+h4 Create Offer to Buy Fixed
+
+b> Issue
+=> @bug.stm_title
+| (Issue ##{@bug.id})
+hr
+= render "docfix/issues/madlib_offer", lcl_offer: @offer_bf, lcl_action: "offers_bf", lcl_bug: @bug

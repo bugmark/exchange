@@ -1,0 +1,56 @@
+table width='100%'
+  tr
+    td
+      h2 BUG [#{@bug.xid}]
+    td align='right'
+      = link_to("All Bugs", "/core/bugs")
+.row
+  .col-md-6
+    table.table
+      tr
+        td <b>Type</b>
+        td = @bug.xtype
+      tr
+        td <b>Title</b>
+        td = @bug.stm_title
+      tr
+        td <b>UUID</b>
+        td = @bug.uuid
+      tr
+        td <b>URL</b>
+        td = core_bug_http_link(@bug)
+      tr
+        td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@bug)}
+  .col-md-6
+    table.table
+      tr
+        td <b>Offers</b>
+        td = core_bug_offer_link(@bug)
+      tr
+        td <b>Contracts</b>
+        td = core_bug_contract_link(@bug)
+      tr
+        td <b>Action</b>
+        td = core_bug_actions(@bug)
+        
+hr
+b Open Offers (#{@bug.offers.open.count})
+table.table
+  - if @bug.offers.open.count > 0
+    tr
+      th ID
+      th User
+      th Status
+      th Volume
+      th Price
+      th Action
+  - @bug.offers.open.each do |offer|
+    tr
+      td #{core_offer_id_link(offer)}
+      td = core_user_link(offer.user)
+      td = offer.status
+      td = offer.volume
+      td = offer.price
+      td
+        nobr
+          = core_offer_actions(offer)

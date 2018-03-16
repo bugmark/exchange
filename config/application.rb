@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 require_relative '../lib/ext/kernel'
 require_relative '../lib/ext/hash'
 
+alias :apply :yield_self
+
 module Bugmark
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -16,8 +18,20 @@ module Bugmark
 
     config.time_zone = "Pacific Time (US & Canada)"
 
+    config.paths.add File.join('app', 'api'), glob: File.join("**", "*.rb")
+
     base = "#{config.root}/app"
     config.autoload_paths += %W(#{base}/commands)
+    config.autoload_paths += %W(#{base}/libs)
+    config.autoload_paths += %W(#{base}/api)
+    config.autoload_paths += %W(#{base}/queries)
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins  '*'
+        resource '*', :headers => :any, :methods => %i(get post options)
+      end
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

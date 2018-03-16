@@ -1,0 +1,53 @@
+- content_for :page_js do
+  coffee:
+    $(document).ready ->
+      $('.spark').sparkline('html', {type: 'bar'})
+
+
+css:
+  .holder {
+    margin-top: 50px;
+    padding:    50px;
+    background: lightgrey;
+    width: 80%;
+  }
+
+= breadcrumb [%w(Bugmark /docfix/home), %w(Contracts /docfix/contracts), @contract.id]
+
+small
+  a href="/docfix/contracts" return to overview
+.row
+  .col-md-7
+    h2 Contract #{@contract.id}
+    p
+    small
+      table.table-sm
+        tr
+          td
+            b Issue
+          td = @contract.issue.id
+        tr
+          td
+            b Created
+          td = @contract.created_at.strftime("%y-%m-%d %H:%M:%S")
+        tr
+          td
+            b Maturation date
+          td = @contract.maturation_str
+    h5[style='margin-top: 30px;'] Contract Escrows
+    table.table.table-condensed[style='margin-top: 10px;']
+      tr
+        th ID
+        th Date
+        th Value
+      - @contract.escrows.each do |escrow|
+        tr
+          td = escrow.sequence
+          td = escrow.created_at.strftime("%m-%d %H:%M")
+          td = escrow.total_value.to_i
+  .col-md-5
+    b TRADING OVERVIEW
+    p
+    = docfix_contract_price(@contract)
+    .holder
+      span.spark = @contract.escrows.map {|x| x.value }.join(",")

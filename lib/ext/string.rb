@@ -1,3 +1,5 @@
+require 'time'
+
 class String
 
   def id
@@ -58,4 +60,7 @@ class String
     '1' + self.gsub('-','')
   end
 
+  def to_time
+    Time.parse(self)
+  end
 end

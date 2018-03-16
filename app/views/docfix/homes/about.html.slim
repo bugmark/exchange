@@ -1,0 +1,56 @@
+= render partial: "docfix/homes/docfix_about"
+
+nav aria-label="breadcrumb" role="navigation"
+  ol.breadcrumb
+    li.breadcrumb-item
+      a href="/docfix/home" Bugmark
+    li.breadcrumb-item.active aria-current="page"
+      | About
+
+.row
+  .col-md-8
+    h3 = content_for(:tl_hdr)
+  .col-md-4
+    b = content_for(:tr_hdr)
+.row
+  .col-md-8 = content_for(:tl_body)
+  .col-md-4 = content_for(:tr_body)
+
+.row
+  .col-md-12.text-center
+    h3 style='margin-bottom: 20px;'
+      b How you can get involved
+
+.row
+  .col-md-4
+    h3 = content_for(:ml_hdr)
+  .col-md-4
+    h3 = content_for(:mm_hdr)
+  .col-md-4
+    h3 = content_for(:mr_hdr)
+.row
+  .col-md-4 = content_for(:ml_body)
+  .col-md-4 = content_for(:mm_body)
+  .col-md-4 = content_for(:mr_body)
+.row
+  .col-md-4 = content_for(:ml_ftr)
+  .col-md-4 = content_for(:mm_ftr)
+  .col-md-4 = content_for(:mr_ftr)
+
+
+.row
+  .col-md-12.text-center
+    button.btn.btn-primary[type='button' style='margin: 50px;']
+      | SIGN UP TODAY
+
+.row
+  .col-md-12.text-center
+    h4 Further information
+
+.row
+  .col-md-4
+    b Find out more: futures contracts
+  .col-md-4
+    b Find out more: blockchain
+  .col-md-4
+    b Join the conversation

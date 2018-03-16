@@ -5,16 +5,17 @@ require './config/environment'
 def sync(name)
   opts = {
     name: name               ,
-    type: "Repo::GitHub"         
+    type: "Repo::GitHub"
   }
 
   repo_cmd = RepoCmd::GhCreate.new(opts)
-  repo_cmd.save_event.project
-  RepoCmd::GhSync.from_repo(repo_cmd.repo).save_event.project
+  repo_cmd.project
+  item = RepoCmd::GhSync.from_repo(repo_cmd.repo)
+  item.project
 end
 
 # %w(mvscorg/bugmark mvscorg/bugmark-guides mvscorg/bugmark-slides elixir-lang/gen_stage elixir-lang/flow elixir-lang/gettext rust-lang/regex filterbubbler/filterbubbler-web-ext filterbubbler/filterbubbler-wp-plugin).each do |name|
-%w(mvscorg/bugmark mvscorg/bugmark-guides mvscorg/bugmark-slides elixir-lang/gen_stage).each do |name|
+%w(bugmark/bmx_cl_ruby bugmark/bmx_api_ruby bugmark/bugmark bugmark/bugmark_docs).each do |name|
   puts "Loading #{name}"
   sync(name)
 end

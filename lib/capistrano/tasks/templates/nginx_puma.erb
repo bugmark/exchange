@@ -11,8 +11,8 @@ server {
 server {
   listen 443 ssl;
   ssl on;
-  ssl_certificate     <%= fetch(:release_path) %>/.certs/<%= fetch(:rails_env) %>.pem;
-  ssl_certificate_key <%= fetch(:release_path) %>/.certs/<%= fetch(:rails_env) %>.key;
+  ssl_certificate     /etc/letsencrypt/live/<%= @host %>/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/<%= @host %>/privkey.pem;
   ssl_session_timeout 5m;
   ssl_protocols       SSLv2 SSLv3 TLSv1;
   ssl_ciphers         HIGH:!aNULL:!MD5;
@@ -39,9 +39,10 @@ server {
     add_header Cache-Control public;
     break;
   }
-  location = /robots.txt { }
-  location = /500.html   { }
-  location = /422.html   { }
+  location /.well-known { }
+  location /robots.txt  { }
+  location /500.html    { }
+  location /422.html    { }
   location /cable {
     proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
     proxy_http_version 1.1;

@@ -11,12 +11,11 @@ set :deploy_to,   -> { "/home/#{fetch(:user)}/run/#{fetch(:application).downcase
 
 # ===== Nginx Config =====
 
-set :vhost_names, %w(bugmark.net *.bugmark.net *.mozdm.net mozdm.net)
+set :vhost_names, %w(bugmark.net *.bugmark.net)
 set :web_port,    8500
 
 # ===== Source Access =====
 
-# set :repo_url,         'ssh://git@github.com/mvscorg/bugmark.git'
 set :repo_url,         'https://github.com/mvscorg/bugmark.git'
 
 # ===== Tasks =====

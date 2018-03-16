@@ -1,0 +1,68 @@
+table width='100%'
+  tr
+    td
+      h2 CONTRACT [#{@contract.xid}]
+    td align='right'
+      = link_to("All Contracts", "/core/contracts")
+
+.row
+  .col-md-6
+    table.table
+      tr
+        td <b>Status</b>
+        td
+          => @contract.status
+          | (
+          a[href="/core/contracts/#{@contract.id}/graph"] graph
+          | )
+      tr
+        td <b>UUID</b>
+        td = @contract.uuid
+      tr
+        td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@contract)}
+  .col-md-6
+    table.table
+      tr
+        td <b>Contract Maturation</b>
+        td = @contract.maturation_str
+      tr
+        td <b>Total Value</b>
+        td = @contract.total_value
+      tr
+        td <b>Action</b>
+        td = core_contract_actions(@contract)
+hr
+b Amendments (#{@contract.amendments.count})
+table.table
+  tr
+    th ID
+    th Type
+    th Bid Positions
+    th Escrow Value
+    th Ask Positions
+  - @contract.amendments.each do |amend|
+    tr
+      td = amend.sequence
+      td = amend.short_type
+      td #{core_amend_bid_positions_link(amend)}<br/>#{core_amend_bid_positions_stats(amend)}
+      td = core_amend_escrow_stats(amend)
+      td #{core_amend_ask_positions_link(amend)}<br/>#{core_amend_ask_positions_stats(amend)}
+hr
+b Matching Bugs (#{@contract.match_issues.count})
+table.table
+  - if @contract.match_issues.count > 0
+    tr
+      th ID
+      th Type
+      th Title
+      th Contracts
+      th Create
+  - @contract.match_issues.each do |bug|
+    tr
+      td = core_issue_id_link(bug)
+      td = bug.type
+      td = core_bug_title_link(bug)
+      td = core_bug_contract_link(bug)
+      td
+        nobr
+          = core_bug_actions(bug)

@@ -1,47 +1,129 @@
-class Contract < ApplicationRecord
-  belongs_to :bug , optional: true
-  belongs_to :repo, optional: true
+require 'ostruct'
 
-  belongs_to :publisher   , class_name: "User", foreign_key: 'publisher_id'
-  belongs_to :counterparty, class_name: "User", foreign_key: 'counterparty_id', optional: true
+class Contract < ApplicationRecord
+
+  include MatchUtils
+
+  has_paper_trail
+
+  belongs_to :repo              , foreign_key: "stm_repo_uuid" , primary_key: "uuid", optional: true
+  belongs_to :issue             , foreign_key: "stm_issue_uuid", primary_key: "uuid", optional: true
+  has_one    :prototype         , foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
+  has_many   :prototype_children, foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
+
+  has_many :escrows   , -> {order(:sequence => :asc)}, foreign_key: "contract_uuid", primary_key: "uuid"
+  has_many :amendments, -> {order(:sequence => :asc)}, foreign_key: "contract_uuid", primary_key: "uuid"
+
+  has_many :positions, :through => :escrows
 
   before_validation :default_values
-  validates :status, inclusion: {in: %w(open taken lapsed awarded)}
-  validates :matures_at, presence: true
+
+  validates :status, inclusion: {in: %w(open resolved cancelled)}
+  validates :maturation, presence: true
+
+  # ----- SCOPES -----
+  class << self
+    def inc_volsum
+      volsum = "sum(escrows.fixed_value)+sum(escrows.unfixed_value) as volsum"
+      select("contracts.*", volsum).joins(:escrows).group("id")
+    end
+
+    def pending_resolution
+      expired.unresolved
+    end
+
+    def open
+      where(status: 'open')
+    end
+
+    def matured
+      where("maturation < ?", BugmTime.now)
+    end
+
+    def expired
+      where("maturation < ?", BugmTime.now)
+    end
+
+    def resolved
+      where("status = ?", "resolved")
+    end
+
+    def unresolved
+      where("status != ?", "resolved")
+    end
+
+    def select_subset
+      select(%i(id uuid type prototype_uuid status stm_status stm_issue_uuid stm_repo_uuid awarded_to))
+    end
+    alias_method :ss, :select_subset
+  end
+
+  # ----- OVERLAP UTILS -----
+  class << self
+    def overlap(beg, fin)
+      where('maturation > ?::timestamp', beg).
+        where('maturation < ?::timestamp', fin)
+    end
+  end
+
+  def overlap_offers
+    Offer.by_overlap_maturation(self.maturation)
+  end
+
+  # ----- INSTANCE METHODS -----
+
+  def num_escrows()    escrows.count    end
+  def num_amendments() amendments.count end
+  def num_positions()  positions.count  end
+
+  def users
+    (bid_users + ask_users).uniq
+  end
 
   def attach_type
-    self.bug_id ? "bugs" : "repos"
+    self.issue_id ? "bugs" : "repos"
   end
 
   def attach_obj
     bug || repo
   end
 
-  # VALID STATUSES
-  # > open      - can be taken
-  # > withdrawn - withdrawn by publisher (before taken)
-  # > taken     - taken by a counterparty
-  # > lapsed    - expired before being taken
-  # > awarded   - in favor of publisher or counterparty
-
-  # returns list of matching bugs
-  def match_list
-    @bugmatch ||= Bug.match(match_attrs)
+  def bid_tokens
+    # bids.reduce(0) {|acc, bid| acc + bid.token_value}
+    0
   end
 
-  # returns boolean result of the match assertion
-  def match_assertion
-    match_length = match_list.count
-    if self.bug_presence
-      match_length > 0
-    else
-      match_length == 0
+  def ask_tokens
+    # asks.reduce(0) {|acc, ask| acc + ask.token_value}
+    0
+  end
+
+  def distribution_tokens
+    bid_tokens + ask_tokens
+  end
+
+  def bidder_allocation
+    total_bids = bid_tokens
+    total_dist = distribution_tokens
+    bids.reduce({}) do |acc, bid|
+      # acc[bid.id] = ((bid.token_value.to_f / total_bids) * total_dist).to_i
+      acc[bid.id] = 1
+      acc
     end
+  end
+
+  # VALID STATUSES
+  # > open      - active
+  # > resolved  - assigned
+  # > cancelled - canceled
+
+  def match_assertion
+    match_issues.count > 0
   end
 
   def awardee
     self.awarded_to || begin
-      match_assertion ? "publisher" : "counterparty"
+      match_assertion ? "fixed" : "unfixed"
     end
   end
 
@@ -49,20 +131,28 @@ class Contract < ApplicationRecord
     self.send awardee.to_sym
   end
 
-  def to_i
-    self.id
+  def xtag
+    "con"
   end
 
-  def xid
-    "con.#{self.id}"
+  def total_value
+    (escrows.pluck(:fixed_value).sum + escrows.pluck(:unfixed_value).sum).round(2)
   end
 
-  def matures_at_str
-    self.matures_at.strftime("%b-%d %H:%M:%S")
+  def value
+    opts = {
+      fixed: escrows.pluck(:fixed_value).sum    ,
+      unfixed: escrows.pluck(:unfixed_value).sum
+    }
+    OpenStruct.new(opts)
+  end
+
+  def maturation_str
+    self.maturation.strftime("%b-%d %H:%M:%S")
   end
 
   def matured?
-    self.matures_at < Time.now
+    self.maturation < BugmTime.now
   end
 
   def unmatured?
@@ -70,46 +160,31 @@ class Contract < ApplicationRecord
   end
 
   def resolved?
-    %w(awarded lapsed).include?(self.status)
+    self.status == 'resolved'
   end
 
   def unresolved?
     ! resolved?
   end
 
-  # ----- SCOPES -----
+  def dumptree
+    dt_hdr
+    dump
+    escrows.each {|esc| esc.dumptree}
+    dt_ftr("contract #{self.id}")
+  end
+  alias_method :dt, :dumptree
 
-  class << self
-    def pending_resolution
-      expired.unresolved
-    end
-
-    def expired
-      where("matures_at < ?", Time.now)
-    end
-
-    def unresolved
-      where("status != ?", "awarded").where("status != ?", "lapsed")
-    end
-
+  def dumpstats
+    puts "Escrows:   #{escrows.count}"
+    puts "Positions: #{positions.count}"
   end
 
   private
 
   def default_values
     self.status       ||= 'open'
-    self.bug_presence ||= true
-    self.matures_at   ||= Time.now + 1.week
-  end
-
-  def match_attrs
-    {
-      id:      self.bug_id,
-      repo_id: self.repo_id,
-      title:   self.bug_title,
-      status:  self.bug_status,
-      labels:  self.bug_labels
-    }
+    self.maturation   ||= BugmTime.now + 1.week
   end
 end
 
@@ -117,24 +192,23 @@ end
 #
 # Table name: contracts
 #
-#  id              :integer          not null, primary key
-#  type            :string
-#  publisher_id    :integer
-#  counterparty_id :integer
-#  token_value     :float
-#  terms           :string
-#  status          :string
-#  awarded_to      :string
-#  matures_at      :datetime
-#  repo_id         :integer
-#  bug_id          :integer
-#  bug_title       :string
-#  bug_status      :string
-#  bug_labels      :string
-#  bug_presence    :boolean
-#  jfields         :jsonb            not null
-#  exref           :string
-#  uuref           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id             :integer          not null, primary key
+#  uuid           :string
+#  exid           :string
+#  prototype_uuid :integer
+#  type           :string
+#  status         :string
+#  awarded_to     :string
+#  maturation     :datetime
+#  xfields        :hstore           not null
+#  jfields        :jsonb            not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  stm_issue_uuid :string
+#  stm_repo_uuid  :string
+#  stm_title      :string
+#  stm_status     :string
+#  stm_labels     :string
+#  stm_xfields    :hstore           not null
+#  stm_jfields    :jsonb            not null
 #

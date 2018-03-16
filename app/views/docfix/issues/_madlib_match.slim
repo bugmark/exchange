@@ -1,0 +1,35 @@
+- if lcl_offer.errors.any?
+  .alert.alert-danger
+    b : u Error!
+    small
+      - lcl_offer.errors.messages.each do |msg|
+        p
+          b #{msg.first.to_s}
+          '  - #{msg.last.uniq.join}
+
+.row
+  .col-md-12.text-center
+    form[action="/docfix/#{lcl_action}" method="post"]
+      input#hiVal[type='hidden' name="authenticity_token"                   value="#{form_authenticity_token}"]
+      input#hiTyp[type='hidden' name="offer_cmd_create_buy[type]"           value="#{lcl_offer.typ}"]
+      input#hiUsr[type='hidden' name="offer_cmd_create_buy[user_uuid]"      value="#{lcl_offer.user.uuid}"]
+      input#hiBug[type='hidden' name="offer_cmd_create_buy[stm_issue_uuid]" value="#{lcl_offer.offer_new.stm_issue_uuid}"]
+      input#hiSta[type='hidden' name="offer_cmd_create_buy[stm_status]"     value="#{lcl_offer.offer_new.stm_status}"]
+      input#hiMat[type='hidden' name="offer_cmd_create_buy[maturation]"     value="#{lcl_offer.offer_new.maturation.strftime('%Y-%m-%d')}"]
+      input#hiVol[type='hidden' name="offer_cmd_create_buy[volume]"         value="#{lcl_offer.offer_new.volume}"]
+      input#hiDep[type='hidden' name="offer_cmd_create_buy[deposit]"        value="#{lcl_offer.offer_new.deposit}"]
+      .form-inline.madline
+        ' I will deposit
+        b #{lcl_offer.offer_new.deposit}
+        '  tokens towards issue ##{@bug.id} being <span id='oSide'>#{lcl_offer.offer_new.side}</span> on
+      p
+        h3 #{lcl_offer.offer_new.maturation.strftime('%Y-%m-%d')}
+      .form-inline.madline
+        ' and will require a profit of
+        b #{lcl_offer.offer_new.volume.to_i - lcl_offer.offer_new.deposit.to_i}
+        '  tokens if this happens
+      p this would set the unfixed marketprice at #{(lcl_offer.offer_new.deposit.to_f / lcl_offer.offer_new.volume).round(2)} & return a total of #{lcl_offer.offer_new.volume} tokens
+      p and will immediately match offer ##{@offer.id} to form a contract
+      button.btn.btn-primary#sBtn[type='submit'] Match Offer and Form Contract
+      p[style="margin-top: 10px;"]
+        span#errMsg[style='color: red;']

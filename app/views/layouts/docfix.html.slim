@@ -1,0 +1,25 @@
+- content_for :navbar do
+  ul.navbar-nav.mr-auto
+    = nav_link("Docfix"   , "/docfix/home"        )
+    = nav_link("Projects" , "/docfix/projects"    )
+    = nav_link("Issues"   , "/docfix/issues"      )
+    = nav_link("Offers"   , "/docfix/offers"      )
+    = nav_link("Contracts", "/docfix/contracts"   )
+    = nav_link("About"    , "/docfix/home/about"  )
+
+- content_for :body do
+  = yield
+
+- content_for :footerbar do
+  .row
+    .col-md-4.text-center
+      small =link_to "Find out more about Bugmark", "/docfix/home/about"
+    .col-md-4.text-center
+      small = link_to "Request to add project", "/docfix/projects/new"
+    .col-md-4.text-center
+      small
+        = link_to "Contact", "/docfix/home/contact"
+        '  |
+        = link_to "Terms and Conditions", "/docfix/home/terms"
+
+= render template: "layouts/application"

@@ -1,0 +1,14 @@
+h1 New Events
+
+| New since your last session (ended at #{@session_end})
+
+table.table
+  tr
+    th Event ID
+    th Event Type
+    th On
+  - @new_events.each do |event|
+    tr
+      td = event.id
+      td = obj_link(event)
+      td = event.created_at.strftime("%m-%d %H:%M:%S")

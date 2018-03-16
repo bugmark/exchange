@@ -1,0 +1,9 @@
+:output:
+  Event:
+    :ancestor: true
+    :options:
+      :fields:
+        - id
+        - cmd_type
+        - event_type
+        - payload

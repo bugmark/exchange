@@ -1,0 +1,24 @@
+css:
+  .logstyle {
+    padding: 20px;
+    border:  1px solid black;
+    font:    12px courier, sans-serif;
+  }
+
+h1 Bugmark Total Rebuild
+hr
+p The Bugmark database is rebuilding now.
+  All data is being rebuilt from scratch.
+
+p The system will be DOWN until the rebuild process completes.
+  This will take a couple minutes.
+p
+  small
+    a>[href='/bot/home'] Bot Home
+    - if refreshable?
+      ' | page auto-refresh every 15 seconds...
+
+p.logstyle
+  = raw @logtext
+
+p Problems?  Contact Andy 650-823-0836 / andy@r210.com

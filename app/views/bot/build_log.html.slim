@@ -1,0 +1,14 @@
+css:
+  .logstyle {
+    padding: 20px;
+    border:  1px solid black;
+    font:    12px courier, sans-serif;
+  }
+
+H1 Build Log
+small
+  a>[href='/bot/home'] Bot Home
+  - if refreshable?
+    ' | page auto-refresh every 15 seconds...
+p.logstyle
+  = raw @logtext

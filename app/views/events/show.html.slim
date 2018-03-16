@@ -1,0 +1,27 @@
+H1 Event #{@event.id}
+
+table.table.table-sm
+  tr
+    td: b ID
+    td = @event.id
+  tr
+    td: b TYPE
+    td = @event.event_type
+  tr
+    td: b UUREF
+    td = @event.uuid
+  tr
+    td: b LOCAL_HASH
+    td = @event.local_hash
+  tr
+    td: b CHAIN_HASH
+    td = @event.chain_hash
+  tr
+    td: b PAYLOAD
+    td = @event.payload
+  tr
+    td: b CREATED
+    td = @event.created_at
+  tr
+    td: b LINKS
+    td = docfix_event_etherscan(@event)

@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Contract, type: :model do
 
-  def valid_params
+  include_context 'Integration Environment' #
+
+  def valid_params(opts = {})
     {
-      token_value: 10                  ,
-      publisher_id:    user.id
-    }
+
+    }.merge(opts)
   end
 
   let(:user) { User.create email: "asdf@qwer.net", password: "gggggg" }
@@ -14,15 +15,13 @@ RSpec.describe Contract, type: :model do
   subject    { klas.new(valid_params)                                 }
 
   describe "Associations" do
-    it { should respond_to(:repo)              }
-    it { should respond_to(:bug)               }
-    it { should respond_to(:publisher)         }
-    it { should respond_to(:counterparty)      }
+    it { should respond_to(:escrows)            }
+    it { should respond_to(:amendments)         }
   end
 
   describe "Attributes" do
-    it { should respond_to :exref              }
-    it { should respond_to :uuref              }
+    it { should respond_to :exid              }
+    it { should respond_to :uuid              }
   end
 
   describe "Object Creation" do
@@ -39,46 +38,15 @@ RSpec.describe Contract, type: :model do
     end
   end
 
-  describe "#uuref" do
+  describe "#uuid" do
     it 'holds a string' do
       subject.save
-      expect(subject.uuref).to be_a(String)
+      expect(subject.uuid).to be_a(String)
     end
 
     it 'holds a 36-character string' do
       subject.save
-      expect(subject.uuref.length).to eq(36)
-    end
-  end
-
-  describe "#match_list" do
-    it 'returns an empty list' do
-      expect(subject.match_list).to be_empty
-    end
-  end
-
-  describe "#match_assertion" do
-    it 'return true by default' do
-      subject.save
-      expect(subject.match_assertion).to be_falsey
-    end
-
-    it 'return false if bug_presence is true' do
-      subject.bug_presence = false
-      expect(subject.match_assertion).to be_truthy
-    end
-  end
-
-  describe "#awardee" do
-    it "returns publisher" do
-      subject.save
-      expect(subject.awardee).to eq("counterparty")
-    end
-
-    it "returns counterparty" do
-      subject.save
-      subject.bug_presence = false
-      expect(subject.awardee).to eq("publisher")
+      expect(subject.uuid.length).to eq(36)
     end
   end
 
@@ -88,24 +56,23 @@ end
 #
 # Table name: contracts
 #
-#  id              :integer          not null, primary key
-#  type            :string
-#  publisher_id    :integer
-#  counterparty_id :integer
-#  token_value     :float
-#  terms           :string
-#  status          :string
-#  awarded_to      :string
-#  matures_at      :datetime
-#  repo_id         :integer
-#  bug_id          :integer
-#  bug_title       :string
-#  bug_status      :string
-#  bug_labels      :string
-#  bug_presence    :boolean
-#  jfields         :jsonb            not null
-#  exref           :string
-#  uuref           :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id             :integer          not null, primary key
+#  uuid           :string
+#  exid           :string
+#  prototype_uuid :integer
+#  type           :string
+#  status         :string
+#  awarded_to     :string
+#  maturation     :datetime
+#  xfields        :hstore           not null
+#  jfields        :jsonb            not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  stm_issue_uuid :string
+#  stm_repo_uuid  :string
+#  stm_title      :string
+#  stm_status     :string
+#  stm_labels     :string
+#  stm_xfields    :hstore           not null
+#  stm_jfields    :jsonb            not null
 #

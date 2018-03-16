@@ -1,53 +1,59 @@
+require 'ext/array'
+
 module RepoCmd
   class GhSync < ApplicationCommand
 
-    attr_subobjects      :repo
-    attr_delegate_fields :repo
+    attr_accessor :repo
 
     def initialize(args)
-      @repo = Repo.find_or_create_by(args)
+      @repo = Repo.find_by(args)
+      sync_bugs
     end
 
     def self.from_repo(repo)
       instance = allocate
       instance.repo = repo
+      instance.send(:sync_bugs)
       instance
-    end
-
-    def transact_before_project
-      sync_bugs
-      repo.synced_at = Time.now
-    end
-
-    def self.from_event(event)
-      instance = allocate
-      instance.repo = Repo.find_or_create_by(event.data)
-      instance
-    end
-
-    def event_data
-      {id: repo.id}
     end
 
     private
 
     def sync_bugs
-      json = open(repo.json_url) {|io| io.read}
-      JSON.parse(json).each do |el|
+      issues = Octokit.issues(repo.name)
+      return if issues.blank?
+      issues.each_with_index do |el, idx|
         attrs = {
-          repo_id:   self.id         ,
-          type:      "Bug::GitHub"   ,
-          exref:     el["id"]        ,
-          json_url:  el["url"]       ,
-          html_url:  el["html_url"]  ,
-          title:     el["title"]     ,
-          labels:    el["labels"]    ,
-          status:    el["state"]     ,
-          synced_at: Time.now
-        }
-        bug = BugCmd::Sync.new(attrs)
-        bug.save_event.project
+          stm_repo_uuid: repo.uuid           ,
+          type:          "Issue::GitHub"     ,
+          exid:          el["id"]          ,
+          stm_title:     el["title"]       ,
+          stm_labels:    labels_for(el)    ,
+          stm_status:    el["state"]       ,
+          comments:      comments_for(el)  ,
+          html_url:      el["html_url"]    ,
+          synced_at:     BugmTime.now
+        }.stringify_keys
+        add_event("bug#{idx}".to_sym, Event::IssueSynced.new(event_opts(attrs)))
       end
+      add_event :repo, Event::RepoSynced.new(event_opts(uuid: repo.uuid))
+    end
+
+    def event_opts(args)
+      cmd_opts.merge(args)
+    end
+
+    def labels_for(el)
+      el["labels"].map {|x| x[:name]}.join(", ")
+    end
+
+    def comments_for(el)
+      body = Octokit.issue(repo.name, el["number"])[:body]
+      list = Octokit.issue_comments(repo.name, el["number"])
+      lmap = list.blank? ? nil : list.map {|el| el["body"]}.join(" | ")
+      base = [body, lmap].without_blanks.join(" | ")
+      return "" if base.blank? || base.empty?
+      base
     end
   end
 end

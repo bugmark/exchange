@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+
+PROCNAME = "bot_buy"
+Process.setproctitle(PROCNAME)
+
+puts "----- BUGMARK OFFER BOT -------------------------------------------"
+puts "START #{Time.now} | C-c to exit"
+puts "Process Name: #{PROCNAME}"
+puts "Loading Environment..."
+STDOUT.flush
+require "./config/environment"
+
+WEEK_ENDS = BugmTime.next_week_ends
+USER_IDS  = User.where("email ilike 'test%'").pluck(:uuid)
+ISSUE_IDS = Issue.all[0..3].pluck(:uuid)
+VOLUMES   = (30..50).step(5).to_a
+PRICES    = (5..95).step(5).to_a.map {|x| x / 100.0}
+count     = 0
+
+# for C-c
+trap "SIGINT" do
+  puts "\nExiting"
+  exit 130
+end
+
+# for "pkill -f bot_buy"
+trap "SIGTERM" do
+  puts "TERMINATED #{Time.now}"
+  STDOUT.flush
+  exit 130
+end
+
+def buy
+  typ  = %i(offer_bf offer_bu).sample
+  opts = {
+    user_uuid:    USER_IDS.sample     ,
+    volume:       VOLUMES.sample      ,
+    price:        PRICES.sample       ,
+    stm_issue_uuid: ISSUE_IDS.sample    ,
+    maturation:   WEEK_ENDS.sample
+  }
+  FB.create(typ, opts)
+end
+
+def cross
+  print "Crossing"
+  Offer.open.is_buy.each do |offer|
+    print "."
+    ContractCmd::Cross.new(offer, :expand).project
+  end
+  puts "."
+end
+
+def pa(el)
+  el.to_s.rjust(2, "0")
+end
+
+while true do
+  count += 1
+  time  = Time.now.strftime("%H:%M:%S")
+  puts "Cycle: #{pa count} | #{time} | #{pa Offer.open.count} open offers | #{pa Contract.count} contracts | #{pa Escrow.count} escrows"
+  STDOUT.flush
+  if count < 50
+    sleep 5
+  else
+    sleep 20
+  end
+  buy
+  cross if count % 2 == 0
+  STDOUT.flush
+  abort "Terminating after 99 cycles #{Time.now}" if count == 99
+end

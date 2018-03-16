@@ -1,0 +1,55 @@
+table width='100%'
+  tr
+    td
+      h2 POSITION [#{@position.xid}]
+    td align='right'
+      = link_to("All Positions", "/core/positions")
+
+.row
+  .col-md-6
+    table.table
+      tr
+        td <b>Contract</b>
+        td = core_contract_id_link(@position.contract)
+      tr
+        td <b>Owner</b>
+        td = core_user_link(@position.user)
+      tr
+        td <b>Offer</b>
+        td = core_offer_id_link(@position.offer)
+  .col-md-6
+    table.table
+      tr
+        td <b>Volume</b>
+        td = @position.volume
+      tr
+        td <b>Price</b>
+        td = @position.price
+      tr
+        td <b>Value</b>
+        td = @position.value
+      tr
+        td <b>Actions</b>
+        td = core_position_actions(@position)
+
+hr
+b Resell Offers (#{@position.offers_sell.count})
+table.table
+  - if @position.offers_sell.count > 0
+    tr
+      th ID
+      th User
+      th Status
+      th Volume
+      th Price
+      th Action
+  - @position.offers_sell.each do |offer|
+    tr
+      td #{core_offer_id_link(offer)}
+      td = core_user_link(offer.user)
+      td = offer.status
+      td = offer.volume
+      td = offer.price
+      td
+        nobr
+          = core_offer_actions(offer)

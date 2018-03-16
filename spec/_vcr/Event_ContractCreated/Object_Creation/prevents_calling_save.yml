@@ -1,0 +1,151 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/mvscorg/bugmark
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.6.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic YW5keWw6MDNkNWE4Zjk2MDk2MzY2YWI0YWQ4MGI2ZTgyM2MzZDQ5YjgyZmVlMg==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Date:
+      - Wed, 14 Feb 2018 21:26:58 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '154'
+      Server:
+      - GitHub.com
+      Status:
+      - 301 Moved Permanently
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4995'
+      X-Ratelimit-Reset:
+      - '1518647216'
+      X-Oauth-Scopes:
+      - admin:org, admin:org_hook, admin:public_key, admin:repo_hook, gist, notifications,
+        repo, user
+      X-Accepted-Oauth-Scopes:
+      - admin:repo_hook, delete_repo, read:repo_hook, repo, repo:status, repo:task,
+        repo_deployment, write:repo_hook
+      Location:
+      - https://api.github.com/repositories/93794717
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.035808'
+      Vary:
+      - Accept-Encoding
+      X-Github-Request-Id:
+      - C136:4DA3:102038:132A7E:5A84A9A2
+    body:
+      encoding: UTF-8
+      string: '{"message":"Moved Permanently","url":"https://api.github.com/repositories/93794717","documentation_url":"https://developer.github.com/v3/#http-redirects"}'
+    http_version: 
+  recorded_at: Wed, 14 Feb 2018 21:26:58 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/mvscorg/bugmark
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - Octokit Ruby Gem 4.6.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic YW5keWw6MDNkNWE4Zjk2MDk2MzY2YWI0YWQ4MGI2ZTgyM2MzZDQ5YjgyZmVlMg==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Date:
+      - Wed, 14 Feb 2018 21:26:58 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '154'
+      Server:
+      - GitHub.com
+      Status:
+      - 301 Moved Permanently
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4994'
+      X-Ratelimit-Reset:
+      - '1518647216'
+      X-Oauth-Scopes:
+      - admin:org, admin:org_hook, admin:public_key, admin:repo_hook, gist, notifications,
+        repo, user
+      X-Accepted-Oauth-Scopes:
+      - admin:repo_hook, delete_repo, read:repo_hook, repo, repo:status, repo:task,
+        repo_deployment, write:repo_hook
+      Location:
+      - https://api.github.com/repositories/93794717
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.042777'
+      Vary:
+      - Accept-Encoding
+      X-Github-Request-Id:
+      - C26A:4DA4:48112:533D6:5A84A9A2
+    body:
+      encoding: UTF-8
+      string: '{"message":"Moved Permanently","url":"https://api.github.com/repositories/93794717","documentation_url":"https://developer.github.com/v3/#http-redirects"}'
+    http_version: 
+  recorded_at: Wed, 14 Feb 2018 21:26:58 GMT
+recorded_with: VCR 3.0.3

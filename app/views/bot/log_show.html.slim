@@ -1,0 +1,21 @@
+css:
+  .logstyle {
+    padding: 20px;
+    border:  1px solid black;
+    font:    12px courier, sans-serif;
+  }
+
+H1 Trading Bot Log
+small
+  a>[href='/bot/home'] Bot Home
+  ' |
+  a>[href='/bot/start'] Start Bot
+  ' |
+  a>[href='/bot/stop'] Stop Bot
+  ' |
+  a>[href='/bot/log_reset'] Reset Log
+  - if refreshable?
+    ' | page auto-refresh every 15 seconds...
+
+p.logstyle
+  = raw @logtext

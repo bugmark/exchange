@@ -1,0 +1,14 @@
+
+.d-md-up {
+  @extend .d-none;
+  @extend .d-md-block;
+}
+
+.d-sm-dn {
+  @extend .d-block;
+  @extend .d-md-none;
+}
+
+.badge-default {
+  background: gray;
+}

@@ -4,7 +4,7 @@
 namespace :assets do
   desc "Precompile assets on local machine then upload them to the server."
   task :precompile do
-    run_locally { execute "rake assets:precompile RAILS_ENV=production" }
+    run_locally { execute "RAILS_ENV=production rails assets:precompile" }
     on roles(:all) do |server|
       run_locally { execute "rsync -qr public/assets #{fetch(:user)}@#{server.hostname}:#{shared_path}/public/ ; echo done" }
       run_locally { execute "rsync -qr public/all_packs  #{fetch(:user)}@#{server.hostname}:#{shared_path}/public/ ; echo done" }
