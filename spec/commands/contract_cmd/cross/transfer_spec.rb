@@ -11,11 +11,11 @@ RSpec.describe ContractCmd::Cross::Transfer do
   let(:klas)     { described_class       }
   subject        { transfer              }
 
-  describe "Attributes", USE_VCR do
+  describe "Attributes" do
     it { should respond_to :offer }
   end
 
-  describe "Object Existence", USE_VCR do
+  describe "Object Existence" do
     it { should be_a klas }
     it "should be valid" do
       hydrate(offer_bu, transfer)
@@ -23,7 +23,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
     end
   end
 
-  describe "Delegated Object", USE_VCR do
+  describe "Delegated Object" do
     it 'has a present Offer' do
       expect(subject.offer).to be_present
     end
@@ -33,7 +33,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
     end
   end
 
-  describe "#project - invalid subject", USE_VCR do
+  describe "#project - invalid subject" do
     it 'detects an invalid object' do
       hydrate(offer_su, offer_bu)
       subject.project
@@ -50,7 +50,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
     end
   end
 
-  describe "#project - valid subject", USE_VCR do
+  describe "#project - valid subject" do
     it 'detects a valid object' do
       hydrate(offer_bu)
       subject.project

@@ -826,17 +826,33 @@ Next Actions:
 
 # Mar 16
 
-- [ ] test partial crosses (:expand)
-- [ ] add command to create sell offer
-
-- [ ] test (cross-reduce)     user balance adjustments
-- [ ] test (cross-reduce)     auto-suspend sale-offers
-
-- [ ] test (cross-transfer) partial positions
-- [ ] test (cross-transfer) auto-suspended sale-offers
-- [ ] test (cross-transfer) sell-offer re-offers
+- [x] test command to create sell offer
+- [x] test (cross-expand)     partial crosses / re-offers
+- [x] test (cross-reduce)     user balance adjustments
+- [x] test (cross-reduce)     auto-suspend sale-offers
+- [x] test (cross-transfer) partial positions
+- [x] test (cross-transfer) auto-suspended sale-offers
+- [x] test (cross-transfer) sell-offer re-offers
 
 # TBD
+
+- [ ] SSBOTS: testing strategy for server-side bots
+
+- [ ] SSBOTS: All-Or-None (AON) Offers
+- [ ] SSBOTS: Poolable Offers & Overbalance Suspension (Buy and Sell Offers)
+- [ ] SSBOTS: Price Overlaps & Finding Optimal Fit
+- [ ] SSBOTS: Date Overlaps & Finding Optimal Fit
+- [ ] SSBOTS: Buy Offer Partial Positions & Re-Offers
+- [ ] SSBOTS: Sale Offers
+- [ ] SSBOTS: Sale Offer Partial Positions & Re-Offers
+- [ ] SSBOTS: 'Transfer' and 'Reduce' Crosses
+
+- [ ] API: create sell offer
+- [ ] CLI: create sell offer
+- [ ] CLI: cancel sell offer
+
+- [ ] EXCHANGE - trade on identity (individual and group)
+- [ ] EXCHANGE - add wallet Oracle
 
 - [ ] CMD - UserCreate: duplicate emails need to return error message
 - [ ] CMD - add OfferCmd::CloneSell with tests
