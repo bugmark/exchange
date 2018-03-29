@@ -6,10 +6,10 @@ module V1
 
     resource :offers do
 
-      # ---------- list all contracts ----------
-      desc "List all offers", {
+      # ---------- list all offers ----------
+      desc "List all offer ids", {
         is_array: true ,
-        success: Entities::OfferOverview
+        success: Entities::OfferIds
       }
       params do
         optional :with_type   , type: String  , desc: "type filter"
@@ -23,11 +23,31 @@ module V1
         scope = scope.where("type like ?", "%#{type}%") if type
         scope = scope.where(status: status) if status
         scope = scope.limit(params[:limit]) if params[:limit]
-        present(scope.all, with: Entities::OfferOverview)
+        present(scope.all, with: Entities::OfferIds)
+      end
+
+      # ---------- list offer details ----------
+      desc "List all offer details", {
+        is_array: true ,
+        success: Entities::OfferDetail
+      }
+      params do
+        optional :with_type   , type: String  , desc: "type filter"
+        optional :with_status , type: String  , desc: "status filter"
+        optional :limit       , type: Integer , desc: "limit"
+      end
+      get '/detail' do
+        type   = params[:with_type]
+        status = params[:with_status]
+        scope = Offer.all
+        scope = scope.where("type like ?", "%#{type}%") if type
+        scope = scope.where(status: status) if status
+        scope = scope.limit(params[:limit]) if params[:limit]
+        present(scope.all, with: Entities::OfferDetail)
       end
 
       # ---------- list offer detail ----------
-      desc "Show offer detail", {
+      desc "Show details for one offer", {
         success: Entities::OfferDetail
       }
       get ':uuid' do

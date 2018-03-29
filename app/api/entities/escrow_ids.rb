@@ -1,5 +1,5 @@
 module Entities
-  class EscrowOverview < Grape::Entity
+  class EscrowIds < Grape::Entity
     expose :uuid      , documentation: { type: String, desc: "UUID"          }
   end
 end

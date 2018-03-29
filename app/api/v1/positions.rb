@@ -6,10 +6,10 @@ module V1
       # ---------- list all positions ----------
       desc "List all positions", {
            is_array: true                       ,
-           success:  Entities::PositionOverview
+           success:  Entities::PositionIds
       }
       get do
-        present(Position.all, with: Entities::PositionOverview)
+        present(Position.all, with: Entities::PositionIds)
       end
 
       # ---------- show position detail ----------

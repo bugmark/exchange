@@ -3,10 +3,10 @@ module V1
 
     resource :users do
 
-      # ---------- list all users ----------
-      desc "List all users", {
+      # ---------- list all user ids ----------
+      desc "List all user ids", {
         is_array: true ,
-        success:  Entities::UserOverview
+        success:  Entities::UserIds
       }
       params do
         optional :with_email, type: String, desc: "email filter"
@@ -15,11 +15,26 @@ module V1
         email = params[:with_email]
         scope = User.all
         scope = scope.where("email like ?", "%#{email}%") if email
-        present(scope, with: Entities::UserOverview)
+        present(scope, with: Entities::UserIds)
+      end
+
+      # ---------- list all user details ----------
+      desc "List all user details", {
+        is_array: true ,
+        success:  Entities::UserDetail
+      }
+      params do
+        optional :with_email, type: String, desc: "email filter"
+      end
+      get '/detail' do
+        email = params[:with_email]
+        scope = User.all
+        scope = scope.where("email like ?", "%#{email}%") if email
+        present(scope, with: Entities::UserDetail)
       end
 
       # ---------- show user detail ----------
-      desc "Show user detail", {
+      desc "Show details for one user", {
         success: Entities::UserDetail
       }
       params do
@@ -43,7 +58,7 @@ module V1
       # ---------- create a user ----------
       # TODO: return error code for duplicate user
       desc "Create a user", {
-        success:  Entities::UserOverview   ,
+        success:  Entities::UserIds        ,
         consumes: ['multipart/form-data']  ,
         detail: <<-EOF.strip_heredoc
           Create a user.  Supply an optional opening balance.  (Default 0.0)

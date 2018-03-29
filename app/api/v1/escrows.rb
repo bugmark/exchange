@@ -6,10 +6,10 @@ module V1
       # ---------- list all escrows ----------
       desc "List all escrows", {
         is_array: true                       ,
-        success:  Entities::EscrowOverview
+        success:  Entities::EscrowIds
       }
       get do
-        present(Escrow.all, with: Entities::EscrowOverview)
+        present(Escrow.all, with: Entities::EscrowIds)
       end
 
       # ---------- show escrow detail ----------
