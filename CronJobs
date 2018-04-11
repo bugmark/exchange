@@ -12,7 +12,7 @@
 
 # TODO: ADD LOGROTATE
 
-CRON_UTIL = File.expand_path("~/util/pdev_util/bin/SysRole")
+CRON_UTIL = File.expand_path("~/util/code_util/bin/SysRole")
 
 if File.exist?(CRON_UTIL)
   load CRON_UTIL
