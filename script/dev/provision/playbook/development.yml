@@ -8,7 +8,7 @@
     # - rem_user:     deploy
     - lcl_user:     "{{ lookup('env', 'USER') }}"
     - lcl_root:     "/home/{{lcl_user}}/src/bugmark"
-    - dotenv:       "{{lcl_root}}/.env"
+    # - dotenv:       "{{lcl_root}}/.env"
     - pg_user:      "bugmark"
     - pg_pass:      "yodog"
     - pg_dbs:
@@ -20,7 +20,7 @@
   become: true
   roles:
     - Vars/predicates
-    - Vars/lclhost
+    # - Vars/lclhost
     - CLI/pkg
     - CLI/user
     - CLI/tzone
