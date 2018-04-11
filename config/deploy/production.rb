@@ -12,7 +12,7 @@ set :branch,    'master'
 
 set :rails_env, 'production'
 
-role :app, %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@blockcve.bugmark.net)
-role :db,  %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@blockcve.bugmark.net)
-role :web, %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@blockcve.bugmark.net)
+role :app, %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@research.bugmark.net)
+role :db,  %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@research.bugmark.net)
+role :web, %w(deploy@bugmark.net deploy@demo.bugmark.net deploy@research.bugmark.net)
 

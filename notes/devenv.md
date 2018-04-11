@@ -1,41 +1,71 @@
 # Bugmark DevEnv
 
-This covers the config and install of software components for Bugmark development.
+This covers the config and install of software components for Bugmark
+development.
 
 NOTE: you don't need the full development environment to contribute
 documentation fixes!  Just clone the repo, edit text files and submit PR's.
+
+## Required Skills
+
+To be successful, you'll need good skills with the following tools:
+- Git
+- Linux command line
+- Web development
+- PostgresQL
+- Ruby/Rails
+- Vim, Emacs or some command-line editor
+- Tmux (nice to have)
+
+## Host Machine
+
+We assume that you're using Ubuntu 16.04 as your host machine.  If you're Mac
+savvy, you'll be able to get things running on a Mac. 
+
+Your host machine can exist in a few different forms:
+1) a destop Ubuntu system
+2) a Virtual Machine running locally (using Vagrant)
+3) a Virtual Machine running in the data center
+
+Of the three options, the best and simplest is 3), running in the data center.
+We like Linode - you can allocate a cheap node for development that will cost
+$5/month.
+
+WARNING: if you choose to install on a local system (option 1), this
+configuration process will install many packages and will make changes to your
+user configuration, including:
+- adding items to your `.bashrc`, modifying your path
+- adding your UserID to `sudoers`
+
+In this case, it is ususally best to use a dedicated user-id.
 
 ## Development VM Configuration
 
 Follow these steps to set up a working development environment running on an
 Ubuntu Virtual machine.
 
-NOTE: this configuration process will install many packages and will make
-changes to your user configuration, including:
-- adding items to your `.bashrc`, modifying your path
-- adding your UserID to `sudoers`
-
-To preserve your settings, perform this configuration under a separate userid.
-
 Let's get started:
 
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
-   `wget raw.githubusercontent.com/mvscorg/bugmark/Vagrantfile`
+   `wget raw.githubusercontent.com/bugmark/exchange/master/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
 
 4. Login to your virtual machine using `vagrant ssh`
 
-5. Clone the repo 
-   `mkdir src; cd src; git clone https://github.com/mvscorg/bugmark.git`
 
-6. CD to the repo directory `cd ~/src/bugmark`
+## Cloning the Bugmark Exchange
+
+1. Clone the repo 
+   `mkdir src; cd src; git clone https://github.com/bugmark/exchange.git`
+
+2. CD to the repo directory `cd ~/src/exchange`
 
 ## Development Environment Provisioning
 
-On the new VM:
+On the host machine:
 
 1. Checkout the dev branch `git checkout -b dev origin/dev`
 
@@ -57,27 +87,21 @@ Follow these steps to bootstrap the app in your development environment.
 
 2. Install NPM components: `yarn install`
 
-3. Get seed data from a partner: (you might get by without this...)
+3. Run migrations `bundle exec rails db:migrate`
 
-| PARTNER COMMAND         | YOUR COMMAND          |
-|-------------------------|-----------------------|
-| `script/seed/share_env` | `script/seed/get_env` |
+4. Load seed data `script/data/all_reload`
 
-4. Run migrations `bundle exec rails db:migrate`
-
-5. Load seed data `script/data/all_reload`
-
-6. Start the tmux development session `script/dev/session`
+5. Start the tmux development session `script/dev/session`
 
    A cheat-sheet for tmux navigation is in `~/.tmux.conf`.
 
 ## Host Web Access
 
-1. Get the VM IP address `ifconfig`  
+1. Get the host IP address `ifconfig`  
 
-2. On your host machine, add the VM IP Address to `/etc/hosts`
+2. On your local machine, add the VM IP Address to `/etc/hosts`
 
-3. On your host machine, browse to `http://<hostname>:3000`
+3. On your local machine, browse to `http://<hostname>:3000`
 
 ## Online Collaboration
 

@@ -6,10 +6,10 @@ module V1
       # ---------- list all amendments ----------
       desc "List all amendments", {
            is_array: true                       ,
-           success:  Entities::AmendmentOverview
+           success:  Entities::AmendmentIds
       }
       get do
-        present(Amendment.all, with: Entities::AmendmentOverview)
+        present(Amendment.all, with: Entities::AmendmentIds)
       end
 
       # ---------- show amendment detail ----------

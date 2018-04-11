@@ -3,17 +3,26 @@ module V1
 
     resource :repos do
 
-      # ---------- list all repos ----------
-      desc "List all repos", {
+      # ---------- list all repo ids ----------
+      desc "List all repo ids", {
         is_array: true ,
-        success:  Entities::RepoOverview
+        success:  Entities::RepoIds
       }
       get do
-        present(Repo.all, with: Entities::RepoOverview)
+        present(Repo.all, with: Entities::RepoIds)
+      end
+
+      # ---------- list all repo details ----------
+      desc "List all repo details", {
+        is_array: true ,
+        success:  Entities::RepoDetail
+      }
+      get '/detail' do
+        present(Repo.all, with: Entities::RepoDetail)
       end
 
       # ---------- show repo detail ----------
-      desc "Show repo detail", {
+      desc "Show detail for one repo", {
         success: Entities::RepoDetail
       }
       params do
@@ -36,7 +45,7 @@ module V1
       # TODO: return error code for duplicate repo
       # TODO: return error code for non-existant repo
       desc "Create a repo", {
-        success:  Entities::RepoOverview   ,
+        success:  Entities::RepoIds        ,
         consumes: ['multipart/form-data']  ,
         detail: <<-EOF.strip_heredoc
           Create a GitHub repo.

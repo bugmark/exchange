@@ -8,10 +8,10 @@ module V1
       # ---------- list all contracts ----------
       desc "List all contracts", {
         is_array:   true ,
-        success: Entities::ContractOverview
+        success: Entities::ContractIds
       }
       get do
-        present Contract.open, with: Entities::ContractOverview
+        present Contract.open, with: Entities::ContractIds
       end
 
       # ---------- show contract detail ----------

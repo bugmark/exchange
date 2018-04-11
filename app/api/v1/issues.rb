@@ -4,20 +4,33 @@ module V1
     resource :issues do
 
       # ---------- list all issues ----------
-      desc "List all issues", {
+      desc "List all issue ids", {
         is_array: true ,
-        success: Entities::IssueOverview
+        success: Entities::IssueIds
       }
       params do
         optional :limit , type: Integer , desc: "count limit"
       end
       get do
         list = Issue.all.limit(params[:limit] || 999)
-        present list, with: Entities::IssueOverview
+        present list, with: Entities::IssueIds
+      end
+
+      # ---------- list all issues with details----------
+      desc "List all issues details", {
+        is_array: true ,
+        success: Entities::IssueDetail
+      }
+      params do
+        optional :limit , type: Integer , desc: "count limit"
+      end
+      get '/detail' do
+        list = Issue.all.limit(params[:limit] || 999)
+        present list, with: Entities::IssueDetail
       end
 
       # ---------- show one issue ----------
-      desc "Show issue detail", {
+      desc "Show detail for one issue", {
         success: Entities::IssueDetail     ,
         failure: [[404, "ISSUE UUID NOT FOUND"]]
       }

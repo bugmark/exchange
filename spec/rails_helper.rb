@@ -25,6 +25,8 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
 end
 
+USE_VCR = {vcr: {allow_playback_repeats: true}}
+
 module AuthRequestHelper
   BASE_MAIL = "test@bugmark.net"
   BASE_PASS = "bugmark"
@@ -39,8 +41,6 @@ module AuthRequestHelper
     {'HTTP_AUTHORIZATION' => el}
   end
 end
-
-USE_VCR = {vcr: {allow_playback_repeats: true}}
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

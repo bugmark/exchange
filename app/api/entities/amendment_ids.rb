@@ -1,5 +1,5 @@
 module Entities
-  class AmendmentOverview < Grape::Entity
+  class AmendmentIds < Grape::Entity
     expose :uuid      , documentation: { type: String, desc: "UUID"          }
   end
 end
