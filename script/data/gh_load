@@ -15,7 +15,7 @@ def sync(name)
 end
 
 # %w(mvscorg/bugmark mvscorg/bugmark-guides mvscorg/bugmark-slides elixir-lang/gen_stage elixir-lang/flow elixir-lang/gettext rust-lang/regex filterbubbler/filterbubbler-web-ext filterbubbler/filterbubbler-wp-plugin).each do |name|
-%w(bugmark/bmx_cl_ruby bugmark/bmx_api_ruby bugmark/bugmark bugmark/bugmark_docs).each do |name|
+%w(bugmark/bmx_cl_ruby bugmark/bmx_api_ruby bugmark/exchange bugmark/bugmark_docs).each do |name|
   puts "Loading #{name}"
   sync(name)
 end

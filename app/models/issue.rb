@@ -36,6 +36,42 @@ class Issue < ApplicationRecord
       where(stm_status: 'closed')
     end
 
+    def attached
+      joins('LEFT JOIN offers ON offers.stm_issue_uuid = issues.uuid')
+      .joins('LEFT JOIN contracts ON contracts.stm_issue_uuid = issues.uuid')
+      .where('offers.id IS NOT NULL OR contracts.id IS NOT NULL')
+      .select("DISTINCT issues.*")
+    end
+
+    def unattached
+      unoffered.uncontracted
+        .select("DISTINCT issues.*")
+    end
+
+    def offered
+      joins('LEFT JOIN offers ON offers.stm_issue_uuid = issues.uuid')
+        .where('offers.id IS NOT NULL')
+        .select("DISTINCT issues.*")
+    end
+
+    def unoffered
+      joins('LEFT JOIN offers ON offers.stm_issue_uuid = issues.uuid')
+        .where('offers.id IS NULL')
+        .select("DISTINCT issues.*")
+    end
+
+    def contracted
+      joins('LEFT JOIN contracts ON contracts.stm_issue_uuid = issues.uuid')
+        .where('contracts.id IS NOT NULL')
+        .select("DISTINCT issues.*")
+    end
+
+    def uncontracted
+      joins('LEFT JOIN contracts ON contracts.stm_issue_uuid = issues.uuid')
+        .where('contracts.id IS NULL')
+        .select("DISTINCT issues.*")
+    end
+
     def select_subset
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
