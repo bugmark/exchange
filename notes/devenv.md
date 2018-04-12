@@ -55,13 +55,12 @@ Let's get started:
 
 4. Login to your virtual machine using `vagrant ssh`
 
-
 ## Cloning the Bugmark Exchange
 
 1. Clone the repo 
    `mkdir src; cd src; git clone https://github.com/bugmark/exchange.git`
 
-2. CD to the repo directory `cd ~/src/exchange`
+2. CD to the repo directory `cd exchange`
 
 ## Development Environment Provisioning
 
@@ -87,9 +86,9 @@ Follow these steps to bootstrap the app in your development environment.
 
 2. Install NPM components: `yarn install`
 
-3. Run migrations `bundle exec rails db:migrate`
+3. Create databases `bundle exec rails db:create`
 
-4. Load seed data `script/data/all_reload`
+4. Run migrations `bundle exec rails db:migrate`
 
 5. Start the tmux development session `script/dev/session`
 

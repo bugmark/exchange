@@ -4,23 +4,15 @@
 - vars:
     - rem_host:     all           
     - rem_user:     "{{lookup('env', 'USER') }}"
-    # - rem_host:     lch1
-    # - rem_user:     deploy
     - lcl_user:     "{{ lookup('env', 'USER') }}"
     - lcl_root:     "/home/{{lcl_user}}/src/bugmark"
-    # - dotenv:       "{{lcl_root}}/.env"
     - pg_user:      "bugmark"
-    - pg_pass:      "yodog"
-    - pg_dbs:
-        - "{{pg_user}}_production"
-        - "{{pg_user}}_test"
-        - "{{pg_user}}_development"
+    - pg_pass:      "pgpass"
   remote_user: "{{rem_user}}"
   hosts:       "{{rem_host}}"
   become: true
   roles:
     - Vars/predicates
-    # - Vars/lclhost
     - CLI/pkg
     - CLI/user
     - CLI/tzone
@@ -35,11 +27,3 @@
     - yarn 
     - postgres
     - postgres_user
-    - postgres_db 
-    - redis
-    - memcached
-    - ethereum
-    # - influxdb
-    # - telegraf
-    # - grafana
-
