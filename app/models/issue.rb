@@ -28,48 +28,84 @@ class Issue < ApplicationRecord
 
   # ----- SCOPES -----
   class << self
+    # ------------------------------------------------------------------------
+    # Cross-Model Scopes
+    #
+    # START BY READING THIS REFERENCE!
+    # http://aokolish.me/blog/2015/05/26/how-to-simplify-active-record-scopes-that-reference-other-tables/
+    #
+    # Examples:
+    # - Issue.offered.merge(Offer.open)
+    # - Issue.offered.merge(Offer.crossed)
+    # - Issue.contracted.merge(Contract.open)
+    # - Issue.contracted.merge(Contract.resolved)
+    # - Issue.contracted.merge(Contract.unresolved)
+    #
+    # Note that you can use `join_offer`, `join_contract` and `distinct_issue`
+    # in standalone operations:
+    # - Issue.join_offer.merge(Offer.open).distinct_issue
+    # - Issue.join_contract.merge(Contract.open).distinct_issue
+    #
+    # You can also compose with Issue-specific scopes:
+    # - Issue.offered.merge(Offer.open).closed
+    # - Issue.offered.merge(Offer.open).open
+    #
+
+    def join_offer
+      joins('LEFT JOIN offers ON offers.stm_issue_uuid = issues.uuid')
+    end
+
+    def join_contract
+      joins('LEFT JOIN contracts ON contracts.stm_issue_uuid = issues.uuid')
+    end
+
+    def attached
+      join_offer
+        .join_contract
+        .where('offers.id IS NOT NULL OR contracts.id IS NOT NULL')
+        .distinct_issue
+    end
+
+    def unattached
+      unoffered.uncontracted
+    end
+
+    def offered
+      join_offer
+        .where('offers.id IS NOT NULL')
+        .distinct_issue
+    end
+
+    def unoffered
+      join_offer
+        .where('offers.id IS NULL')
+        .distinct_issue
+    end
+
+    def contracted
+      join_contract
+        .where('contracts.id IS NOT NULL')
+        .distinct_issue
+    end
+
+    def uncontracted
+      join_contract
+        .where('contracts.id IS NULL')
+        .distinct_issue
+    end
+
+    def distinct_issue
+      select("DISTINCT issues.*")
+    end
+
+    # ------------------------------------------------------------------------
+
     def open
       where(stm_status: 'open')
     end
 
     def closed
       where(stm_status: 'closed')
-    end
-
-    def attached
-      joins('LEFT JOIN offers ON offers.stm_issue_uuid = issues.uuid')
-      .joins('LEFT JOIN contracts ON contracts.stm_issue_uuid = issues.uuid')
-      .where('offers.id IS NOT NULL OR contracts.id IS NOT NULL')
-      .select("DISTINCT issues.*")
-    end
-
-    def unattached
-      unoffered.uncontracted
-        .select("DISTINCT issues.*")
-    end
-
-    def offered
-      joins('LEFT JOIN offers ON offers.stm_issue_uuid = issues.uuid')
-        .where('offers.id IS NOT NULL')
-        .select("DISTINCT issues.*")
-    end
-
-    def unoffered
-      joins('LEFT JOIN offers ON offers.stm_issue_uuid = issues.uuid')
-        .where('offers.id IS NULL')
-        .select("DISTINCT issues.*")
-    end
-
-    def contracted
-      joins('LEFT JOIN contracts ON contracts.stm_issue_uuid = issues.uuid')
-        .where('contracts.id IS NOT NULL')
-        .select("DISTINCT issues.*")
-    end
-
-    def uncontracted
-      joins('LEFT JOIN contracts ON contracts.stm_issue_uuid = issues.uuid')
-        .where('contracts.id IS NULL')
-        .select("DISTINCT issues.*")
     end
 
     def select_subset
