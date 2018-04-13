@@ -33,7 +33,9 @@ begin
     username: "admin"         ,
     password: "admin"
   }
+  USE_INFLUX = true
 rescue
   puts "INFLUXDB NOT FOUND"
+  USE_INFLUX = false
 end
 

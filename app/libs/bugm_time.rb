@@ -104,7 +104,7 @@ class BugmTime < Time
       next_week_ends(count).map {|x| x.strftime("%Y-%m-%d")}
     end
 
-    private
+    # private
 
     def minutes(count = 1)
       now + count.minutes
