@@ -142,5 +142,4 @@ With this, you can mount a directory from your server to your local desktop.
 
 That way you can use a Desktop GUI editor like Atom or VsCode.
 
-Here are SSHFS usage instructions:
-https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh
+Here are [SSHFS usage instructions](https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh)
