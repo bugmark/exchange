@@ -59,7 +59,7 @@ class Event < ApplicationRecord
   end
 
   def point_cast
-    return unless File.exist?("/etc/influxdb/influxdb.conf")
+    return unless InfluxUtil.has_influx?
     return if Rails.env.test?
     mname = self.class.name.gsub("Event::", "")
     args  = {

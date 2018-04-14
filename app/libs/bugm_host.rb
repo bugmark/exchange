@@ -30,7 +30,7 @@ class BugmHost
     end
 
     def reset_influx
-      return unless File.exist?("/etc/influxdb/influxdb.conf")
+      return unless InfluxUtil.has_influx?
       InfluxStats.delete_database("bugm_stats")
       InfluxStats.create_database("bugm_stats")
     end
