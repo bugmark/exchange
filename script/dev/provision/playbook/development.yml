@@ -21,6 +21,7 @@
     - Ruby/install
     - Ruby/gems
     - CLI/util_base
+    - sshd_config
     - pip
     - tmux
     - nodejs
