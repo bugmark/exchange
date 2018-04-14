@@ -134,3 +134,13 @@ Session participant:
 
 Use Google Hangouts.
 
+### SSHFS
+
+There is a remote-mount utility "sshfs" installed on your server.
+
+With this, you can mount a directory from your server to your local desktop.
+
+That way you can use a Desktop GUI editor like Atom or VsCode.
+
+Here are SSHFS usage instructions:
+https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh
