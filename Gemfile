@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+# ----- test_bench utilities -----
+gem 'sinatra'
+gem 'sinatra-contrib'
+
+# ----- exchange utilities -----
 gem 'rails'        , '~> 5.1.3'   # rails
 gem 'pg'           , '~> 0.18'    # postgres support
 gem 'puma'         , '~> 3.9'     # app server
