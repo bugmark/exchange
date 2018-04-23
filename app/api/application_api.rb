@@ -8,6 +8,7 @@ class InfluxLogger < Grape::Middleware::Base
 
   def after
     return nil if Rails.env.test?
+    return unless InfluxUtil.has_influx?
     @time   = Time.now - @time
     @status = lcl_response&.status
     @size   = lcl_response&.body&.join&.size

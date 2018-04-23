@@ -38,7 +38,6 @@ class ApplicationCommand
   # http://blog.sundaycoding.com/blog/2016/01/08/contextual-validations-with-form-objects
 
   # ----- instance methods
-
   def add_event(key, event)
     raise "EMPTY KEY" if key.nil? || key.blank?
     raise "DUPLICATE KEY (#{key})" if state[:events][key]

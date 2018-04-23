@@ -8,7 +8,7 @@ RSpec.describe ContractCmd::Resolve do
     {
       user_uuid:      user.uuid         ,
       stm_issue_uuid: issue.uuid        ,
-      maturation:     Time.now - 1.day
+      maturation:     BugmTime.now - 1.day
     }.merge(alt)
   end
 
