@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 # ----- test_bench utilities -----
 gem 'sinatra'
-# gem 'sinatra-contrib'
 
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.1.3'   # rails
@@ -14,7 +13,7 @@ gem 'coffee-rails' , '~> 4.2'     # javascript support
 gem 'jbuilder'     , '~> 2.5'     # json generator
 gem 'redis'        , '~> 3.0'     # redis helper
 gem 'bcrypt'       , '~> 3.1.7'   # encryption utilities
-gem 'dotenv'                      # hidden files
+gem 'dotenv'                      # .env files
 gem 'hstore_accessor'             # hstore fields
 gem 'jsonb_accessor'              # jsonb fields
 gem 'colored'                     # colored console text
