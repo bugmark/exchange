@@ -5,6 +5,14 @@ GIT
     guard-rspec_min (0.0.1)
       guard
 
+GIT
+  remote: git://github.com/bugmark/iora.git
+  revision: d57502ad8eea276997fa9414de9fb7f835dc52df
+  specs:
+    iora (0.1.1)
+      deep_merge (~> 1.2)
+      octokit (~> 4.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -111,6 +119,7 @@ GEM
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
     debug_inspector (0.0.3)
+    deep_merge (1.2.1)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.4.3)
@@ -451,6 +460,7 @@ DEPENDENCIES
   hirb
   hstore_accessor
   influxdb-rails
+  iora!
   jbuilder (~> 2.5)
   jquery-rails
   jsonb_accessor
