@@ -1,6 +1,5 @@
 class Escrow < ApplicationRecord
 
-  # has_paper_trail
   acts_as_list :column => :sequence, :scope => 'contract_uuid = \'#{contract_uuid}\''
 
   belongs_to :contract , optional: true, foreign_key: "contract_uuid" , primary_key: "uuid"

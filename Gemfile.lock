@@ -69,7 +69,6 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    backports (3.11.3)
     bcrypt (3.1.11)
     bindex (0.5.0)
     binding_of_caller (0.8.0)
@@ -236,9 +235,6 @@ GEM
     octokit (4.8.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     orm_adapter (0.5.0)
-    paper_trail (9.0.0)
-      activerecord (>= 4.2, < 5.3)
-      request_store (~> 1.1)
     pg (0.21.0)
     pg_search (2.1.2)
       activerecord (>= 4.2)
@@ -264,7 +260,7 @@ GEM
       pry (>= 0.9.11)
     public_suffix (3.0.2)
     puma (3.11.4)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-cors (1.0.2)
@@ -309,8 +305,6 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redis (3.3.5)
-    request_store (1.4.1)
-      rack (>= 1.4)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -358,13 +352,6 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.1)
       tilt (~> 2.0)
-    sinatra-contrib (2.0.1)
-      backports (>= 2.0)
-      multi_json
-      mustermann (~> 1.0)
-      rack-protection (= 2.0.1)
-      sinatra (= 2.0.1)
-      tilt (>= 1.3, < 3)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
@@ -469,7 +456,6 @@ DEPENDENCIES
   mini_portile2
   nokogiri
   octokit
-  paper_trail
   pg (~> 0.18)
   pg_search
   pry-byebug
@@ -486,7 +472,6 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   sinatra
-  sinatra-contrib
   slim-rails
   spring
   spring-commands-rspec

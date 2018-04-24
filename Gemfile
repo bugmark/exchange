@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # ----- test_bench utilities -----
 gem 'sinatra'
-gem 'sinatra-contrib'
+# gem 'sinatra-contrib'
 
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.1.3'   # rails
@@ -33,7 +33,6 @@ gem 'devise'                      # authentication
 gem 'whenever'                    # cron jobs
 gem 'slim-rails'                  # slim templates
 gem 'tzinfo-data'                 # timezone support
-gem 'paper_trail'                 # model versioning
 gem 'acts_as_list'                # sortable lists by position
 gem 'bootstrap'                   # twitter bootstrap
 

@@ -1,7 +1,5 @@
 class Position < ApplicationRecord
 
-  # has_paper_trail
-
   before_validation :default_attributes
   before_validation :update_value
 

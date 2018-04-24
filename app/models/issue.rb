@@ -3,8 +3,6 @@ class Issue < ApplicationRecord
   include MatchUtils
   include PgSearch
 
-  # has_paper_trail
-
   before_validation :set_defaults
   after_save        :update_stm_ids
 

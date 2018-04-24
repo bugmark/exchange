@@ -5,8 +5,6 @@ class Offer < ApplicationRecord
 
   include MatchUtils
 
-  # has_paper_trail
-
   with_options primary_key: "uuid" do
     belongs_to :user            , optional: true , foreign_key: "user_uuid"
     belongs_to :issue           , optional: true , foreign_key: "stm_issue_uuid"

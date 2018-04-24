@@ -24,6 +24,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type             # BugZilla, GitHub, Cve
       t.string   :uuid
       t.string   :exid
+      t.integer  :sequence
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
@@ -32,6 +33,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :issues, :type
     add_index :issues, :uuid
     add_index :issues, :exid
+    add_index :issues, :sequence
     add_index :issues, :jfields, using: :gin
     add_index :issues, :xfields, using: :gin
 
@@ -95,18 +97,22 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_column table, :stm_issue_uuid  , :string
       add_column table, :stm_repo_uuid , :string
       add_column table, :stm_title     , :string
+      add_column table, :stm_body      , :string
       add_column table, :stm_status    , :string
       add_column table, :stm_labels    , :string
-      add_column table, :stm_xfields   , :hstore , null: false, default: {}
+      add_column table, :stm_comments  , :jsonb  , null: false, default: {}
       add_column table, :stm_jfields   , :jsonb  , null: false, default: {}
+      add_column table, :stm_xfields   , :hstore , null: false, default: {}
 
       add_index table, :stm_repo_uuid
       add_index table, :stm_issue_uuid
       add_index table, :stm_title
+      add_index table, :stm_body
       add_index table, :stm_status
       add_index table, :stm_labels
-      add_index table, :stm_xfields  , :using => :gin
+      add_index table, :stm_comments , :using => :gin
       add_index table, :stm_jfields  , :using => :gin
+      add_index table, :stm_xfields  , :using => :gin
     end
 
     create_table :positions do |t|
