@@ -129,7 +129,7 @@ GEM
     factory_bot_rails (4.8.2)
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
-    faraday (0.15.0)
+    faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
     faraday-http-cache (2.0.0)
       faraday (~> 0.8)
@@ -437,6 +437,7 @@ DEPENDENCIES
   devise
   dotenv
   factory_bot_rails
+  faraday (= 0.14.0)
   faraday-http-cache
   font-awesome-sass
   grape

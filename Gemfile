@@ -19,6 +19,7 @@ gem 'hstore_accessor'             # hstore fields
 gem 'jsonb_accessor'              # jsonb fields
 gem 'colored'                     # colored console text
 gem 'octokit'                     # github integration
+gem 'faraday', '0.14.0'           # http fetching
 gem 'faraday-http-cache'          # octokit caching
 gem 'graphviz'                    # graph generator
 gem 'nokogiri'                    # XML parser
