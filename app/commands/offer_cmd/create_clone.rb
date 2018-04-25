@@ -25,7 +25,7 @@ module OfferCmd
     end
 
     def event_opts(opts)
-      exclude = %w(id deposit profit xfields maturation_range jfields stm_xfields stm_jfields)
+      exclude = %w(id deposit profit xfields maturation_range jfields stm_comments stm_xfields stm_jfields)
       cmd_opts.merge(opts).without(*exclude).merge({uuid: SecureRandom.uuid})
     end
 
