@@ -5,6 +5,7 @@ gem 'sinatra'
 github 'sinatra/sinatra' do
   gem 'sinatra-contrib'
 end
+gem 'kramdown'
 
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.1.3'   # rails
