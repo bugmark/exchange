@@ -36,7 +36,10 @@ class Offer < ApplicationRecord
 
   # ----- BASIC SCOPES -----
 
+  # scope :with_questions, -> { includes(:questions, :group_questions) }
+
   class << self
+    def with_issue()           includes(:issue)           end
     def poolable()             where(poolable: true)      end
     def not_poolable()         where(poolable: false)     end
     def with_status(status)    where(status: status)      end
