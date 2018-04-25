@@ -1,11 +1,15 @@
 source 'https://rubygems.org'
 
 # ----- test_bench utilities -----
-gem 'sinatra'
-github 'sinatra/sinatra' do
-  gem 'sinatra-contrib'
+
+group :test_bench do
+  gem 'sinatra'
+  gem 'sinatra-flash'
+  github 'sinatra/sinatra' do
+    gem 'sinatra-contrib'
+  end
+  gem 'kramdown'
 end
-gem 'kramdown'
 
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.1.3'   # rails
