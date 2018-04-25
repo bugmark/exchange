@@ -60,6 +60,7 @@ class Event < ApplicationRecord
 
   def point_cast
     return unless InfluxUtil.has_influx?
+    return unless USE_INFLUX == true
     return if Rails.env.test?
     mname = self.class.name.gsub("Event::", "")
     args  = {
