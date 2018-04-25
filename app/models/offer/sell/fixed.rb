@@ -38,7 +38,7 @@ end
 #
 # Table name: offers
 #
-#  id                    :integer          not null, primary key
+#  id                    :bigint(8)        not null, primary key
 #  uuid                  :string
 #  exid                  :string
 #  type                  :string
@@ -62,8 +62,10 @@ end
 #  stm_issue_uuid        :string
 #  stm_repo_uuid         :string
 #  stm_title             :string
+#  stm_body              :string
 #  stm_status            :string
 #  stm_labels            :string
-#  stm_xfields           :hstore           not null
+#  stm_comments          :jsonb            not null
 #  stm_jfields           :jsonb            not null
+#  stm_xfields           :hstore           not null
 #

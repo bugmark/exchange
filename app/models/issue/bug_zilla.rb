@@ -6,10 +6,11 @@ end
 #
 # Table name: issues
 #
-#  id             :integer          not null, primary key
+#  id             :bigint(8)        not null, primary key
 #  type           :string
 #  uuid           :string
 #  exid           :string
+#  sequence       :integer
 #  xfields        :hstore           not null
 #  jfields        :jsonb            not null
 #  synced_at      :datetime
@@ -18,8 +19,10 @@ end
 #  stm_issue_uuid :string
 #  stm_repo_uuid  :string
 #  stm_title      :string
+#  stm_body       :string
 #  stm_status     :string
 #  stm_labels     :string
-#  stm_xfields    :hstore           not null
+#  stm_comments   :jsonb            not null
 #  stm_jfields    :jsonb            not null
+#  stm_xfields    :hstore           not null
 #
