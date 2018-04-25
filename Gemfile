@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 # ----- test_bench utilities -----
 gem 'sinatra'
+github 'sinatra/sinatra' do
+  gem 'sinatra-contrib'
+end
 
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.1.3'   # rails
@@ -16,6 +19,7 @@ gem 'bcrypt'       , '~> 3.1.7'   # encryption utilities
 gem 'dotenv'                      # .env files
 gem 'hstore_accessor'             # hstore fields
 gem 'jsonb_accessor'              # jsonb fields
+gem 'awesome_print'               # terminal output
 gem 'colored'                     # colored console text
 gem 'octokit'                     # github integration
 gem 'faraday', '0.14.0'           # http fetching
