@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 group :test_bench do
   gem 'sinatra'
   gem 'sinatra-flash'
-  github 'sinatra/sinatra' do
+  github 'andyl/sinatra' do
     gem 'sinatra-contrib'
   end
   gem 'kramdown'
