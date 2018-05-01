@@ -57,12 +57,12 @@ table.table
       th Title
       th Contracts
       th Create
-  - @contract.match_issues.each do |bug|
+  - @contract.match_issues.each do |issue|
     tr
-      td = core_issue_id_link(bug)
-      td = bug.type
-      td = core_bug_title_link(bug)
-      td = core_bug_contract_link(bug)
+      td = core_issue_id_link(issue)
+      td = issue.type
+      td = core_issue_title_link(issue)
+      td = core_issue_contract_link(issue)
       td
         nobr
-          = core_bug_actions(bug)
+          = core_issue_actions(issue)

@@ -1,7 +1,7 @@
 table width='100%'
   tr
     td
-      h2 OFFER [#{@offer.xid}]
+      h2 Offer [#{@offer.xid}]
     td align='right'
       = link_to("All Offers", "/core/offers")
 
@@ -50,7 +50,7 @@ table width='100%'
         td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@offer)}
 
 hr
-b Matching Bugs (#{@offer.match_issues.count})
+b Matching Issues (#{@offer.match_issues.count})
 table.table
   - if @offer.match_issues.count > 0
     tr
@@ -63,8 +63,8 @@ table.table
     tr
       td = core_issue_id_link(bid)
       td = bid.type
-      td = core_bug_title_link(bid)
-      td = core_bug_contract_link(bid)
+      td = core_issue_title_link(bid)
+      td = core_issue_contract_link(bid)
       td
         nobr
-          = core_bug_contract_link(bid)
+          = core_issue_contract_link(bid)
