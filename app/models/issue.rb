@@ -126,11 +126,11 @@ class Issue < ApplicationRecord
   end
 
   def xtag
-    "bug"
+    "issue"
   end
 
   def xtype
-    self.type.gsub("Issue::","")
+    self.type&.gsub("Issue::","")
   end
 
   def has_offers?()    offers.count > 0    end

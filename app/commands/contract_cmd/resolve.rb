@@ -7,7 +7,7 @@ module ContractCmd
 
     def initialize(contract)
       @base_contract = Contract.find(contract.to_i)
-      add_event(:contract, Event::ContractResolved.new(con_opts(contract)))
+      add_event(:contract, Event::ContractResolved.new(con_opts(@base_contract)))
       resolve_escrows
     end
 

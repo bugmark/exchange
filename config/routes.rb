@@ -118,8 +118,12 @@ Rails.application.routes.draw do
 
   mount GrapeSwaggerRails::Engine, at: "/apidocs"
 
-  # root "info#home"
-  # root "docfix/homes#show"
-  root "core/homes#show"
+  # ----- ROOT PATH -----
+
+  constraints(subdomain: %w(demo docfix)) do
+    root to: redirect("/docfix")
+  end
+
+  root to: redirect("/core")
 
 end

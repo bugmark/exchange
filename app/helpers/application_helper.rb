@@ -18,6 +18,20 @@ module ApplicationHelper
 
   # -----
 
+  def brand_title
+    return "Bugmark Core" if request.path =~ /core/
+    return "Bugmark Docfix" if request.path =~ /docfix/
+    "Bugmark"
+  end
+
+  def brand_path
+    return "/core" if request.path =~ /core/
+    return "/docfix" if request.path =~ /docfix/
+    "/"
+  end
+
+  # -----
+
   def obj_link(event)
     return  ""
     return event.klas unless event.klas == "ContractCmd::Cross"

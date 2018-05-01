@@ -2,6 +2,10 @@ class Repo::Test < Repo
 
   # has_many :issues, :dependent => :destroy
 
+  def html_url
+    "#{self.name}"
+  end
+
 end
 
 # == Schema Information

@@ -156,11 +156,11 @@ class Offer < ApplicationRecord
   end
 
   def attach_type
-    self.stm_issue_uuid ? "bugs" : "repos"
+    self.stm_issue_uuid ? "issues" : "repos"
   end
 
   def attach_obj
-    bug || repo
+    issue || repo
   end
 
   def complementary_value

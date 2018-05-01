@@ -60,6 +60,7 @@ module CoreReposHelper
   end
 
   def core_repo_http_link(repo)
+    return "NA" unless repo.type == "Repo::Github"
     url = repo.html_url
     raw "<a href='#{url}' target='_blank'>#{url}</a>"
   end

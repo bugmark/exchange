@@ -21,7 +21,7 @@ describe "Issues", USE_VCR do
   it "clicks thru to show" do
     hydrate(issue)
     visit "/core/issues"
-    click_on "bug.#{issue.id}"
+    click_on "issue.#{issue.id}"
     expect(page).to_not be_nil
   end
 

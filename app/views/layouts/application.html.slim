@@ -1,7 +1,7 @@
 doctype html
 html[lang="en-US"]
   head
-    title = @page_title || "Bugmark"
+    title = @page_title || brand_title
     = csrf_meta_tags
     link[href="/img/bugfav.ico" rel="icon" type="image/x-icon"]
     meta[name="google-site-verification" content="UUWuW0CZrLjsEb0HUaB_7IMJqyqNyKLhaSWvQX_Sq6U"]
@@ -14,16 +14,17 @@ html[lang="en-US"]
     nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
       button.navbar-toggler.navbar-toggler-right[type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"]
         span.navbar-toggler-icon
-      a.navbar-brand[href="/"]
+      a.navbar-brand[href="#{brand_path}"]
         img[src="/img/icon2.ico" style='position: relative; top: -1px; margin-right: 3px; background:grey']
-        | Bugmark
+        = brand_title
       .collapse.navbar-collapse
         - unless content_for(:navbar)
           ul.navbar-nav.mr-auto
         - else
           = content_for(:navbar)
         - if ! content_for?(:devise)
-          = render "layouts/devise"
+          = # noinspection RubyArgCount
+          render "layouts/devise"
         - else
           = content_for(:devise)
     .container-fluid[style="margin-top: 65px;"]
