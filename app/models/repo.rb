@@ -29,6 +29,9 @@ class Repo < ApplicationRecord
     contracts.count != 0 || bug_contracts.count != 0
   end
 
+  def readme_txt() "" end
+  def languages() "" end
+
   # ----- SCOPES -----
 
   class << self
