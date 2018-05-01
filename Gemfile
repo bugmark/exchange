@@ -12,14 +12,14 @@ group :test_bench do
 end
 
 # ----- exchange utilities -----
-gem 'rails'        , '~> 5.2.0'   # rails
-gem 'pg'           , '~> 0.18'    # postgres support
+gem 'rails'        , '~> 5.2'     # rails
+gem 'pg'           , '~> 1.0'     # postgres support
 gem 'puma'         , '~> 3.9'     # app server
 gem 'sass-rails'   , '~> 5.0'     # javascript support
 gem 'uglifier'     , '>= 1.3.0'   # javascript support
 gem 'coffee-rails' , '~> 4.2'     # javascript support
 gem 'jbuilder'     , '~> 2.5'     # json generator
-gem 'redis'        , '~> 3.0'     # redis helper
+gem 'redis'        , '~> 4.0'     # redis helper
 gem 'bcrypt'       , '~> 3.1.7'   # encryption utilities
 gem 'dotenv'                      # .env files
 gem 'hstore_accessor'             # hstore fields
