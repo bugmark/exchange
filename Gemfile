@@ -12,7 +12,7 @@ group :test_bench do
 end
 
 # ----- exchange utilities -----
-gem 'rails'        , '~> 5.1.3'   # rails
+gem 'rails'        , '~> 5.2.0'   # rails
 gem 'pg'           , '~> 0.18'    # postgres support
 gem 'puma'         , '~> 3.9'     # app server
 gem 'sass-rails'   , '~> 5.0'     # javascript support
