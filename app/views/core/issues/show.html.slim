@@ -1,42 +1,42 @@
 table width='100%'
   tr
     td
-      h2 BUG [#{@bug.xid}]
+      h2 ISSUE [#{@issue.xid}]
     td align='right'
-      = link_to("All Bugs", "/core/bugs")
+      = link_to("All Issues", "/core/issues")
 .row
   .col-md-6
     table.table
       tr
         td <b>Type</b>
-        td = @bug.xtype
+        td = @issue.xtype
       tr
         td <b>Title</b>
-        td = @bug.stm_title
+        td = @issue.stm_title
       tr
         td <b>UUID</b>
-        td = @bug.uuid
+        td = @issue.uuid
       tr
         td <b>URL</b>
-        td = core_bug_http_link(@bug)
+        td = core_issue_http_link(@issue)
       tr
-        td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@bug)}
+        td colspan=2 <b>Statement</b><br/>#{core_statement_stats(@issue)}
   .col-md-6
     table.table
       tr
         td <b>Offers</b>
-        td = core_bug_offer_link(@bug)
+        td = core_issue_offer_link(@issue)
       tr
         td <b>Contracts</b>
-        td = core_bug_contract_link(@bug)
+        td = core_issue_contract_link(@issue)
       tr
         td <b>Action</b>
-        td = core_bug_actions(@bug)
+        td = core_issue_actions(@issue)
         
 hr
-b Open Offers (#{@bug.offers.open.count})
+b Open Offers (#{@issue.offers.open.count})
 table.table
-  - if @bug.offers.open.count > 0
+  - if @issue.offers.open.count > 0
     tr
       th ID
       th User
@@ -44,7 +44,7 @@ table.table
       th Volume
       th Price
       th Action
-  - @bug.offers.open.each do |offer|
+  - @issue.offers.open.each do |offer|
     tr
       td #{core_offer_id_link(offer)}
       td = core_user_link(offer.user)

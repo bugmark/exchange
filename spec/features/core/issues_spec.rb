@@ -8,19 +8,19 @@ describe "Issues", USE_VCR do
 
   it "renders index" do
     hydrate(issue)
-    visit "/core/bugs"
+    visit "/core/issues"
     expect(page).to_not be_nil
   end
 
   it "renders show" do
     hydrate(issue)
-    visit "/core/bugs/#{issue.uuid}"
+    visit "/core/issues/#{issue.uuid}"
     expect(page).to_not be_nil
   end
 
   it "clicks thru to show" do
     hydrate(issue)
-    visit "/core/bugs"
+    visit "/core/issues"
     click_on "bug.#{issue.id}"
     expect(page).to_not be_nil
   end
@@ -31,7 +31,7 @@ describe "Issues", USE_VCR do
     expect(Offer::Buy::Fixed.count).to eq(0)
     expect(Issue.count).to eq(1)
 
-    visit "/core/bugs"
+    visit "/core/issues"
     click_on "fixed"
     click_on "Create"
 
@@ -44,7 +44,7 @@ describe "Issues", USE_VCR do
     expect(Offer::Buy::Unfixed.count).to eq(0)
     expect(Issue.count).to eq(1)
 
-    visit "/core/bugs"
+    visit "/core/issues"
     click_on "unfixed"
     click_on "Create"
 

@@ -1,0 +1,31 @@
+table width='100%'
+  tr
+    td
+      h2 Issues
+    td align='right'
+      - if @repo
+        ' Issues for Repo ##{@repo.id} |
+        = link_to "All Issues", "/core/issues"
+      - else
+        | All Issues
+
+table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspacing="0"
+  thead
+    tr
+      th ID
+      th Repo
+      th Title
+      th Offers
+      th Contracts
+      th Offer
+  tbody
+    - @issues.each do |issue|
+      tr
+        td = core_issue_id_link(issue)
+        td = core_issue_repo_link(issue, @repo)
+        td = core_issue_title_link(issue)
+        td = core_issue_offer_link(issue)
+        td = core_issue_contract_link(issue)
+        td
+          nobr
+            = core_issue_actions(issue)

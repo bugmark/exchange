@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Core::BugsController, type: :controller do
+RSpec.describe Core::IssuesController, type: :controller do
 
 end
