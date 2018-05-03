@@ -65,7 +65,7 @@ module V1
         requires :side              , type: String  , desc: "fixed or unfixed"   , values: %w(fixed unfixed)
         requires :volume            , type: Integer , desc: "number of positions"
         requires :price             , type: Float   , desc: "between 0.0 and 1.0", values: 0.00..1.00
-        optional :repo              , type: String  , desc: "repo UUID"
+        optional :tracker              , type: String  , desc: "tracker UUID"
         optional :issue             , type: String  , desc: "issue UUID"
         optional :title             , type: String  , desc: "issue title"
         optional :labels            , type: String  , desc: "issue labels"
@@ -100,7 +100,7 @@ module V1
           user_uuid:      current_user.uuid           ,
           price:          params[:price]              ,
           volume:         params[:volume]             ,
-          stm_repo_uuid:  params[:repo]               ,
+          stm_tracker_uuid:  params[:tracker]               ,
           stm_issue_uuid: params[:issue]              ,
           stm_title:      params[:title]              ,
           stm_labels:     params[:labels]             ,
@@ -127,7 +127,7 @@ module V1
       params do
         optional :volume            , type: Integer , desc: "number of positions"
         optional :price             , type: Float   , desc: "between 0.0 and 1.0", values: 0.00..1.00
-        optional :repo              , type: String  , desc: "repo UUID"
+        optional :tracker              , type: String  , desc: "tracker UUID"
         optional :issue             , type: String  , desc: "issue UUID"
         optional :title             , type: String  , desc: "issue title"
         optional :labels            , type: String  , desc: "issue labels"
@@ -158,7 +158,7 @@ module V1
           user_uuid:      current_user.uuid ,
           price:          params[:price]    ,
           volume:         params[:volume]   ,
-          stm_repo_uuid:  params[:repo]     ,
+          stm_tracker_uuid:  params[:tracker]     ,
           stm_issue_uuid: params[:issue]    ,
           stm_title:      params[:title]    ,
           stm_labels:     params[:labels]   ,

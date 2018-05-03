@@ -45,11 +45,11 @@ module Core
     private
 
     def set_filter(params)
-      keylist = %w(stm_repo_uuid stm_issue_uuid user_uuid)
+      keylist = %w(stm_tracker_uuid stm_issue_uuid user_uuid)
       return nil unless params.keys.any? { |key| keylist.include?(key) }
       key = params.keys.find {|key| keylist.include?(key)}
       obj = case key
-        when "stm_repo_uuid" then Repo.find_by_uuid(params[key])
+        when "stm_tracker_uuid" then Tracker.find_by_uuid(params[key])
         when "stm_issue_uuid"  then Issue.find_by_uuid(params[key])
         when "user_uuid"     then User.find_by_uuid(params[key])
       end

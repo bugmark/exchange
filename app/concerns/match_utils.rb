@@ -4,7 +4,7 @@ module MatchUtils
   def match_attrs
     {
       stm_issue_uuid:  self.stm_issue_uuid   ,
-      stm_repo_uuid: self.stm_repo_uuid  ,
+      stm_tracker_uuid: self.stm_tracker_uuid  ,
       stm_title:     self.stm_title      ,
       stm_status:    self.stm_status     ,
       stm_labels:    self.stm_labels     ,
@@ -39,8 +39,8 @@ module MatchUtils
       where(stm_issue_uuid: uuid)
     end
 
-    def by_repo_uuid(uuid)
-      where(stm_repo_uuid: uuid)
+    def by_tracker_uuid(uuid)
+      where(stm_tracker_uuid: uuid)
     end
 
     def by_title(string)
@@ -74,8 +74,8 @@ module MatchUtils
       case key
         when :stm_issue_uuid then
           base.by_issue_uuid(val)
-        when :stm_repo_uuid then
-          base.by_repo_uuid(val)
+        when :stm_tracker_uuid then
+          base.by_tracker_uuid(val)
         when :stm_title then
           base.by_title(val)
         when :stm_status then

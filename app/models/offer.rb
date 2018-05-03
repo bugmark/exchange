@@ -8,7 +8,7 @@ class Offer < ApplicationRecord
   with_options primary_key: "uuid" do
     belongs_to :user            , optional: true , foreign_key: "user_uuid"
     belongs_to :issue           , optional: true , foreign_key: "stm_issue_uuid"
-    belongs_to :repo            , optional: true , foreign_key: "stm_repo_uuid"
+    belongs_to :tracker            , optional: true , foreign_key: "stm_tracker_uuid"
     has_one    :position                         , foreign_key: "offer_uuid"
     has_one    :prototype_parent                 , foreign_key: "prototype_uuid"        , class_name: "Offer"
     belongs_to :prototype_child , optional: true , foreign_key: "prorotype_uuid"        , class_name: "Offer"
@@ -156,11 +156,11 @@ class Offer < ApplicationRecord
   end
 
   def attach_type
-    self.stm_issue_uuid ? "issues" : "repos"
+    self.stm_issue_uuid ? "issues" : "trackers"
   end
 
   def attach_obj
-    issue || repo
+    issue || tracker
   end
 
   def complementary_value
@@ -296,7 +296,7 @@ end
 #  uuid                  :string
 #  exid                  :string
 #  type                  :string
-#  repo_type             :string
+#  tracker_type          :string
 #  user_uuid             :string
 #  prototype_uuid        :string
 #  amendment_uuid        :string
@@ -314,7 +314,7 @@ end
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  stm_issue_uuid        :string
-#  stm_repo_uuid         :string
+#  stm_tracker_uuid      :string
 #  stm_title             :string
 #  stm_body              :string
 #  stm_status            :string

@@ -15,8 +15,8 @@
 SIMPLEST SCENARIO
 -----------------
 
-Joe navigate to the project and sees a link to a market for that repo.
-Joe visits the market for that repo and finds a bug he cares about ( might already have a bug id )
+Joe navigate to the project and sees a link to a market for that tracker.
+Joe visits the market for that tracker and finds a bug he cares about ( might already have a bug id )
 Joe sees that there are no bids on the bug in a) his web3 browser? b) the rails representation of the bug ?
 
 > Just for signing up in the Marketplace, Joe gets 1000 free BugCoin [ future: use bank ach to top-up bugcoin ]

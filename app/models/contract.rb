@@ -4,7 +4,7 @@ class Contract < ApplicationRecord
 
   include MatchUtils
 
-  belongs_to :repo              , foreign_key: "stm_repo_uuid" , primary_key: "uuid", optional: true
+  belongs_to :tracker              , foreign_key: "stm_tracker_uuid" , primary_key: "uuid", optional: true
   belongs_to :issue             , foreign_key: "stm_issue_uuid", primary_key: "uuid", optional: true
   has_one    :prototype         , foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
   has_many   :prototype_children, foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
@@ -51,7 +51,7 @@ class Contract < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id uuid type prototype_uuid status stm_status stm_issue_uuid stm_repo_uuid awarded_to))
+      select(%i(id uuid type prototype_uuid status stm_status stm_issue_uuid stm_tracker_uuid awarded_to))
     end
     alias_method :ss, :select_subset
   end
@@ -79,11 +79,11 @@ class Contract < ApplicationRecord
   end
 
   def attach_type
-    self.issue_id ? "bugs" : "repos"
+    self.issue_id ? "bugs" : "trackers"
   end
 
   def attach_obj
-    bug || repo
+    bug || tracker
   end
 
   def bid_tokens
@@ -197,25 +197,25 @@ end
 #
 # Table name: contracts
 #
-#  id             :bigint(8)        not null, primary key
-#  uuid           :string
-#  exid           :string
-#  prototype_uuid :integer
-#  type           :string
-#  status         :string
-#  awarded_to     :string
-#  maturation     :datetime
-#  xfields        :hstore           not null
-#  jfields        :jsonb            not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  stm_issue_uuid :string
-#  stm_repo_uuid  :string
-#  stm_title      :string
-#  stm_body       :string
-#  stm_status     :string
-#  stm_labels     :string
-#  stm_comments   :jsonb            not null
-#  stm_jfields    :jsonb            not null
-#  stm_xfields    :hstore           not null
+#  id               :bigint(8)        not null, primary key
+#  uuid             :string
+#  exid             :string
+#  prototype_uuid   :integer
+#  type             :string
+#  status           :string
+#  awarded_to       :string
+#  maturation       :datetime
+#  xfields          :hstore           not null
+#  jfields          :jsonb            not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  stm_issue_uuid   :string
+#  stm_tracker_uuid :string
+#  stm_title        :string
+#  stm_body         :string
+#  stm_status       :string
+#  stm_labels       :string
+#  stm_comments     :jsonb            not null
+#  stm_jfields      :jsonb            not null
+#  stm_xfields      :hstore           not null
 #

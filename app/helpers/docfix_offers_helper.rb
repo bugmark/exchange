@@ -83,8 +83,8 @@ module DocfixOffersHelper
     case
       when offer.stm_issue_uuid
         "Issue ##{offer.issue.id}"
-      when offer.stm_repo_uuid
-        "Repo ##{offer.repo.id}"
+      when offer.stm_tracker_uuid
+        "Tracker ##{offer.tracker.id}"
       else ""
     end
   end
@@ -115,7 +115,7 @@ module DocfixOffersHelper
     case
       when offer.stm_issue_uuid
         docfix_offer_issue_link(offer)
-      when offer.stm_repo_uuid
+      when offer.stm_tracker_uuid
         docfix_offer_project_link(offer)
       else
         ""
@@ -126,7 +126,7 @@ module DocfixOffersHelper
     case
       when offer.stm_issue_uuid
         "Issue"
-      when offer.stm_repo_uuid
+      when offer.stm_tracker_uuid
         "Project"
       else ""
     end
@@ -142,8 +142,8 @@ module DocfixOffersHelper
 
   def docfix_offer_project_link(offer)
     raw <<-END.strip_heredoc
-      <a href="/docfix/projects/#{offer.repo.id}">
-        #{offer.repo.name} (Project ##{offer.repo.id})
+      <a href="/docfix/projects/#{offer.tracker.id}">
+        #{offer.tracker.name} (Project ##{offer.tracker.id})
       </a>
     END
   end

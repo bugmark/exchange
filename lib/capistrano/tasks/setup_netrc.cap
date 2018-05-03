@@ -3,10 +3,10 @@
 
 namespace :setup do
 
-  # Configure https access to send username/password when pulling from private repo on github.
+  # Configure https access to send username/password when pulling from private tracker on github.
   # More on '.netrc':
   # http://publib.boulder.ibm.com/infocenter/aix/v6r1/index.jsp?topic=%2Fcom.ibm.aix.files%2Fdoc%2Faixfiles%2Fnetrc.htm
-  # Github read-only access for private repos:
+  # Github read-only access for private trackers:
   # https://help.github.com/articles/how-do-i-add-a-collaborator
   # to test that the .netrc configuration works:
   # - log onto machine

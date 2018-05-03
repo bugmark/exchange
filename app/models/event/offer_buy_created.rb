@@ -32,7 +32,7 @@ class Event::OfferBuyCreated < Event
       volume:         offer.volume                                 ,
       price:          offer.price                                  ,
       stm_issue_uuid: offer.stm_issue_uuid                         ,
-      stm_repo_uuid:  offer.stm_repo_uuid || offer.issue.repo.uuid ,
+      stm_tracker_uuid:  offer.stm_tracker_uuid || offer.issue.tracker.uuid ,
       stm_status:     offer.stm_status
     }.without_blanks
   end

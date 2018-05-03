@@ -3,8 +3,8 @@ table width='100%'
     td
       h2 Issues
     td align='right'
-      - if @repo
-        ' Issues for Repo ##{@repo.id} |
+      - if @tracker
+        ' Issues for Tracker ##{@tracker.id} |
         = link_to "All Issues", "/core/issues"
       - else
         | All Issues
@@ -13,7 +13,7 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
   thead
     tr
       th ID
-      th Repo
+      th Tracker
       th Title
       th Offers
       th Contracts
@@ -22,7 +22,7 @@ table.table.table-striped.table-bordered.table-hover#xTable width="100%" cellspa
     - @issues.each do |issue|
       tr
         td = core_issue_id_link(issue)
-        td = core_issue_repo_link(issue, @repo)
+        td = core_issue_tracker_link(issue, @tracker)
         td = core_issue_title_link(issue)
         td = core_issue_offer_link(issue)
         td = core_issue_contract_link(issue)

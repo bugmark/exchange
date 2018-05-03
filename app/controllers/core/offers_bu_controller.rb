@@ -39,8 +39,8 @@ module Core
         maturation:  BugmTime.now + 3.minutes ,
       }
       key = "stm_issue_uuid" if params["stm_issue_uuid"]
-      key = "stm_repo_uuid" if params["stm_repo_uuid"]
-      id = params["stm_issue_uuid"] || params["stm_repo_uuid"]
+      key = "stm_tracker_uuid" if params["stm_tracker_uuid"]
+      id = params["stm_issue_uuid"] || params["stm_tracker_uuid"]
       opts.merge({key => id}).without_blanks.stringify_keys
     end
   end

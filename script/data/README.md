@@ -2,13 +2,13 @@
 
 GitHub Issues:
 
-https://api.github.com/repos/<username>/<repo>/issues
-curl https://api.github.com/repos/mvscorg/bugmark/issues > GH.json
+https://api.github.com/trackers/<username>/<tracker>/issues
+curl https://api.github.com/trackers/mvscorg/bugmark/issues > GH.json
 
 GitHub Labels:
 
-https://api.github.com/repos/<username>/<repo>/labels
-curl https://api.github.com/repos/mvscorg/bugmark/labels > GH_labels.json
+https://api.github.com/trackers/<username>/<tracker>/labels
+curl https://api.github.com/trackers/mvscorg/bugmark/labels > GH_labels.json
 
 Bugzilla Issues:
 

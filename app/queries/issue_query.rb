@@ -16,13 +16,13 @@ class IssueQuery
   def qscore(freq, lanq)
     qs = []
     qs << rank_str("'uuid'||bugs.uuid"         , freq) if freq.present?
-    qs << rank_str("'repo'||stm_repo_uuid"     , freq) if freq.present?
+    qs << rank_str("'tracker'||stm_tracker_uuid"     , freq) if freq.present?
     qs << rank_str("stm_title"                 , freq) if freq.present?
     qs << rank_str("stm_labels"                , freq) if freq.present?
     qs << rank_str("stm_jfields->'comments'"   , freq) if freq.present?
-    qs << rank_str("repos.xfields->'languages'", lanq) if lanq.present?
+    qs << rank_str("trackers.xfields->'languages'", lanq) if lanq.present?
     rank = qs.join(" + ")
-    Issue.joins(:repo).where("#{rank} > 0").order("#{rank} desc")
+    Issue.joins(:tracker).where("#{rank} > 0").order("#{rank} desc")
   end
 
   def rank_str(field, qry)

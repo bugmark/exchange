@@ -1,0 +1,9 @@
+h2 Contracts New
+hr
+| Use this form to add a new GitHub tracker
+hr
+- if @tracker.errors.any?
+  .alert.alert-danger Please fix the errors below.
+= bootstrap_form_for(@tracker, url: "/core/trackers") do |f|
+  = f.text_field   :name, placeholder: "<GitHub Account Name>/<GitHub tracker Name>"
+  = f.submit

@@ -9,12 +9,12 @@ RSpec.describe Event::IssueSynced, :type => :model do
       type:               "Issue::GitHub"            ,
       uuid:               SecureRandom.uuid          ,
       stm_title:          "ping/pong"                ,
-      stm_repo_uuid:      repo.uuid                  ,
+      stm_tracker_uuid:      tracker.uuid                  ,
       exid:               "bingbingbing"
     }.merge(alt)
   end
 
-  let(:repo)   { FB.create(:repo).repo   }
+  let(:tracker)   { FB.create(:tracker).tracker   }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 

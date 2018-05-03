@@ -9,7 +9,7 @@ module Docfix
     end
 
     def show
-      @project = Repo.find(params[:id])
+      @project = Tracker.find(params[:id])
     end
 
     def new

@@ -27,7 +27,7 @@ hr
     | Match Criteria (blank for "don't care")
   div style='background: lightyellow; padding: 10px; margin-bottom: 8px;'
     .row
-      .col-md-6 = f.text_field  :stm_repo_uuid  , label: "Repo ID"
+      .col-md-6 = f.text_field  :stm_tracker_uuid  , label: "Tracker ID"
       .col-md-6 = f.text_field  :stm_issue_uuid   , label: "Bug ID"
     .row
       .col-md-6 = f.text_field    :stm_title      , label: "Bug Title (substring match)"

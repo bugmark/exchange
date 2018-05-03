@@ -23,7 +23,7 @@ module V1
     default_format :json
 
     mount V1::Users
-    mount V1::Repos
+    mount V1::Trackers
     mount V1::Issues
     mount V1::Offers
     mount V1::Contracts

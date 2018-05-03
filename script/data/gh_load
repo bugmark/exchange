@@ -5,12 +5,12 @@ require './config/environment'
 def sync(name)
   opts = {
     name: name               ,
-    type: "Repo::GitHub"
+    type: "Tracker::GitHub"
   }
 
-  repo_cmd = RepoCmd::GhCreate.new(opts)
-  repo_cmd.project
-  item = RepoCmd::GhSync.from_repo(repo_cmd.repo)
+  tracker_cmd = TrackerCmd::GhCreate.new(opts)
+  tracker_cmd.project
+  item = TrackerCmd::GhSync.from_tracker(tracker_cmd.tracker)
   item.project
 end
 

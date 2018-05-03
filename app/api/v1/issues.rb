@@ -87,7 +87,7 @@ module V1
       }
       params do
         requires :exid       , type: String , desc: "issue exid"
-        optional :repo_uuid  , type: String , desc: "repo uuid"
+        optional :tracker_uuid  , type: String , desc: "tracker uuid"
         optional :issue_uuid , type: String , desc: "issue uuid"
         optional :title      , type: String , desc: "issue title"
         optional :status     , type: String , desc: "issue status" , values: %w(open closed)
@@ -96,13 +96,13 @@ module V1
         optional :jfields    , type: String , desc: "TBD"
       end
       post ':exid' do
-        repo_uuid = params[:repo_uuid]
-        repo = Repo.find_by_uuid(repo_uuid)
-        error!("Repo not found (#{repo_uuid})") if repo_uuid && repo.nil?
+        tracker_uuid = params[:tracker_uuid]
+        tracker = Tracker.find_by_uuid(tracker_uuid)
+        error!("Tracker not found (#{tracker_uuid})") if tracker_uuid && tracker.nil?
         opts = {}
-        opts["type"] = repo.type.gsub("Repo", "Issue") if repo
+        opts["type"] = tracker.type.gsub("Tracker", "Issue") if tracker
         opts["exid"] = params[:exid]
-        %w(repo_uuid issue_uuid title status labels).each do |el|
+        %w(tracker_uuid issue_uuid title status labels).each do |el|
           opts["stm_" + el] = params[el.to_sym] if params[el.to_sym]
         end
         %w(xfields jfields).each do |el|

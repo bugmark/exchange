@@ -6,7 +6,7 @@ RSpec.describe IssueCmd::Sync do
 
   def valid_params(opts = {})
     {
-      stm_repo_uuid: repo.uuid          ,
+      stm_tracker_uuid: tracker.uuid          ,
       stm_title:     "Tst Issue 1"      ,
       stm_status:    "open"             ,
       stm_comments:  []                 ,
@@ -15,7 +15,7 @@ RSpec.describe IssueCmd::Sync do
     }.merge(opts)
   end
 
-  let(:repo) { FB.create(:repo).repo }
+  let(:tracker) { FB.create(:tracker).tracker }
   let(:klas) { described_class       }
   subject { klas.new(valid_params)   }
 
@@ -36,10 +36,10 @@ RSpec.describe IssueCmd::Sync do
         expect(subject).to be_valid
       end
 
-      it 'gets the right Repo count' do
-        expect(Repo.count).to eq(0)
+      it 'gets the right Tracker count' do
+        expect(Tracker.count).to eq(0)
         subject.project
-        expect(Repo.count).to eq(1)
+        expect(Tracker.count).to eq(1)
       end
 
       it 'gets the right Issue count' do

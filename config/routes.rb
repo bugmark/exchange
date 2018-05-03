@@ -42,10 +42,10 @@ Rails.application.routes.draw do
   namespace :core do
     resource :home
 
-    resources :repos do
+    resources :trackers do
       get 'sync', :on => :member
     end
-    resources :repo_git_hubs, path: "/core/repos"
+    resources :tracker_git_hubs, path: "/core/trackers"
     resources :issues
     resources :offers_bu
     resources :offers_bf

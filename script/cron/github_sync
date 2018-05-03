@@ -4,7 +4,7 @@
 
 require "./config/environment"
 
-Repo.github.each do |repo|
-  puts "Resync Repo #{repo.id}"
-  repo.sync
+Tracker.github.each do |tracker|
+  puts "Resync Tracker #{tracker.id}"
+  tracker.sync
 end

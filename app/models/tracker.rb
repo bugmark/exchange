@@ -2,7 +2,7 @@ class Tracker < ApplicationRecord
 
   include PgSearch
 
-  with_options foreign_key: "stm_repo_uuid", primary_key: "uuid", :dependent => :destroy do
+  with_options foreign_key: "stm_tracker_uuid", primary_key: "uuid", :dependent => :destroy do
     has_many :issues
     has_many :offers
     has_many :contracts
@@ -54,7 +54,7 @@ end
 
 # == Schema Information
 #
-# Table name: repos
+# Table name: trackers
 #
 #  id         :bigint(8)        not null, primary key
 #  type       :string

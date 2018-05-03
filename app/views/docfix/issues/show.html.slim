@@ -42,15 +42,15 @@ small
           small = docfix_issue_comments(@bug)
         td
           p
-            b Project / Repository
+            b Project / Trackersitory
             br
-            a[href='/docfix/projects/#{@bug.repo.id}'] = @bug.repo.name
+            a[href='/docfix/projects/#{@bug.tracker.id}'] = @bug.tracker.name
           p
             b Issue labels
             br
             = @bug.stm_labels.blank? ? "NA" : @bug.stm_labels
           p
-            b View Issue On Repository
+            b View Issue On Trackersitory
             br
             = core_issue_http_link(@bug)
   .col-md-4
@@ -59,7 +59,7 @@ small
     p
       small
         b> Project languages
-        = @bug.repo.languages
+        = @bug.tracker.languages
     table[style='width: 100%; border: 1px solid black;']
       tr[style='background: lightgray; text-align: center;']
         td

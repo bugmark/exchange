@@ -2,7 +2,7 @@ module Entities
   class HostCount < Grape::Entity
     expose :host_name      , documentation: { type: String  , desc: "Bugmark Hostname"                     }
     expose :users          , documentation: { type: Integer , desc: "Number of Users"                      }
-    expose :repos          , documentation: { type: Integer , desc: "Number of Repos"                      }
+    expose :trackers          , documentation: { type: Integer , desc: "Number of Trackers"                      }
     expose :issues         , documentation: { type: Integer , desc: "Number of Issues"                     }
     expose :offers         , documentation: { type: Integer , desc: "Number of Offers"                     }
     expose :offers_open    , documentation: { type: Integer , desc: "Number of Open Offers"                }

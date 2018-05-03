@@ -9,12 +9,12 @@ module CoreIssuesHelper
     title
   end
 
-  def core_issue_repo_link(issue, filter)
-    repo = issue.repo
-    uuid = repo.uuid
-    name = repo.name
-    l1   = "<a href='/core/issues?stm_repo_uuid=#{uuid}'><i class='fa fa-filter'></i></a> | "
-    l2   = "<a href='/core/repos/#{uuid}'>#{name}</a>"
+  def core_issue_tracker_link(issue, filter)
+    tracker = issue.tracker
+    uuid = tracker.uuid
+    name = tracker.name
+    l1   = "<a href='/core/issues?stm_tracker_uuid=#{uuid}'><i class='fa fa-filter'></i></a> | "
+    l2   = "<a href='/core/trackers/#{uuid}'>#{name}</a>"
     raw (filter.nil? ? l1 + l2 : l2)
   end
 

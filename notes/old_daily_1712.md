@@ -160,7 +160,7 @@ Mon Nov 27
 ----------------------------------------------
 
 Target Outcomes from last week:
-- [x] implement full-text search (repos, issues)
+- [x] implement full-text search (trackers, issues)
 - [x] cleanup JJ demo pages
 - [x] implement BOT and BOT dashboard (see /bot/home)
 

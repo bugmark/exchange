@@ -18,7 +18,7 @@ class Event::IssueSynced < Event
     {
       id:             issue.id            ,
       stm_issue_uuid: issue.uuid          ,
-      stm_repo_uuid:  issue.stm_repo_uuid ,
+      stm_tracker_uuid:  issue.stm_tracker_uuid ,
       stm_status:     issue.stm_status    ,
       stm_labels:     issue.stm_labels    ,
     }.without_blanks

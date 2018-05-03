@@ -35,9 +35,9 @@ Next Actions:
 # Aug 01
 
 Next Actions:
-- [x] add repo add/remove
-- [x] add repo sync
-- [x] add repo sync to cron
+- [x] add tracker add/remove
+- [x] add tracker sync
+- [x] add tracker sync to cron
 - [x] UI: add font awesome
 - [x] UI: add table sorting
 - [x] UI: change 'forecast' to 'contract'
@@ -47,9 +47,9 @@ Next Actions:
 # Aug 02
 
 Next Actions:
-- [x] Add a bugmark-guides repo
-- [x] Add a bugmark-slides repo
-- [x] UI: fix repo show page
+- [x] Add a bugmark-guides tracker
+- [x] Add a bugmark-slides tracker
+- [x] UI: fix tracker show page
 - [x] UI: fix bug show page
 - [x] UI: fix contract show page
 - [x] UI: add a contract resolve link
@@ -61,7 +61,7 @@ Next Actions:
 - [x] add tests for contract-resolution use cases
 - [x] UI: add days/hours/minutes for contract maturation
 - [x] UI: add selective display of actions
-- [x] UI: selective repo destroy (no contracts)
+- [x] UI: selective tracker destroy (no contracts)
 
 # Aug 04
 
@@ -94,7 +94,7 @@ Next Actions:
 
 # Sep 05
 
-- [x] add etag field to repo and bug as xfields
+- [x] add etag field to tracker and bug as xfields
 
 # Sep 06
 
@@ -106,7 +106,7 @@ Next Actions:
 - [x] create bid/ask loading scripts
 - [x] build out bids/new page
 - [x] build out asks/new page
-- [x] contract change from forecast to repo type
+- [x] contract change from forecast to tracker type
 - [x] build out Offers page                    
 
 # Sep 07
@@ -275,13 +275,13 @@ Next Actions:
 - [x] refactor escrows to use acts_as_list
 - [x] change expiration and maturation date field names
 - [x] update cross to use new escrow strategy 
-- [x] /repo      - add offers   count/link
-- [x] /repo      - add contract count/link
-- [x] /repo/:id  - add bids/asks/contracts
+- [x] /tracker      - add offers   count/link
+- [x] /tracker      - add contract count/link
+- [x] /tracker/:id  - add bids/asks/contracts
 - [x] /bug/:id   - namespace bug helpers
 - [x] /bug/:id   - add offers/contracts
 - [x] /offers    - make namespaced offers helper
-- [x] /offers    - filter by repo
+- [x] /offers    - filter by tracker
 - [x] /offers    - filter by bug
 - [x] /offers    - filter by user
 - [x] /bids/:id  - ...
@@ -499,9 +499,9 @@ Next Actions:
 
 # Nov 22
 
-- [x] attach README to repo
+- [x] attach README to tracker
 - [x] make README searchable
-- [x] Repo text-index (later)
+- [x] Tracker text-index (later)
 - [x] create project search action 
 - [x] create project query
 - [x] JJ Project Search
@@ -513,7 +513,7 @@ Next Actions:
 
 # Nov 25
 
-- [x] display repo fields
+- [x] display tracker fields
 - [x] feature spec for project search
 - [x] update project contracts/offers
 - [x] attach issue description
@@ -705,8 +705,8 @@ Next Actions:
 # Dec 18-19
 
 - [x] user/create
-- [x] repo/gh_create
-- [x] repo/gh_sync
+- [x] tracker/gh_create
+- [x] tracker/gh_sync
 - [x] bug/sync
 - [x] offer/cancel
 - [x] offer/clone
@@ -775,13 +775,13 @@ Next Actions:
 
 - [x] do another pass re UI tweaks
 
-- [x] display UUID on show actions (repo, bug, user, offer, contract)
-- [x] pre-fill the repo/bug ID for offer_bu, offer_bf
+- [x] display UUID on show actions (tracker, bug, user, offer, contract)
+- [x] pre-fill the tracker/bug ID for offer_bu, offer_bf
 
 # Jan 08
 
-- [x] move repo to bugmark org (bugmark)
-- [x] push binding repos to bugmark org (bmx_ruby, bmx_python, bmx_elixir)
+- [x] move tracker to bugmark org (bugmark)
+- [x] push binding trackers to bugmark org (bmx_ruby, bmx_python, bmx_elixir)
  
 # Jan 09
 
@@ -866,7 +866,7 @@ Next Actions:
 - [ ] core: expose poolable in UI
 
 - [ ] exchange: test event replay
-- [ ] exchange: get blockchain reporting working
+- [ ] exchange: get blockchain trackerrting working
 - [ ] exchange: write events to testnet
 
 - [ ] devops: move GH API Key to .env
@@ -889,7 +889,7 @@ Next Actions:
 - [ ] core: write Commit#resolve
 - [ ] core: implement all-or-none
 
-- [ ] core: add repo sync
+- [ ] core: add tracker sync
 - [ ] core: bid_buy/ask_buy: add suspended offers to the user-detail page
 - [ ] core: feature specs for sell, take and cross actions
 - [ ] core: generate contract-graph

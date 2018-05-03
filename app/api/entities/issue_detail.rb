@@ -3,7 +3,7 @@ module Entities
     expose :type           , documentation: { type: String  , desc: "Issue Type" }
     expose :uuid           , documentation: { type: String  , desc: "Issue UUID" }
     expose :exid           , documentation: { type: String  , desc: "TBD"        }
-    expose :stm_repo_uuid  , documentation: { type: String  , desc: "TBD"        }
+    expose :stm_tracker_uuid  , documentation: { type: String  , desc: "TBD"        }
     expose :stm_issue_uuid , documentation: { type: String  , desc: "TBD"        }
     expose :stm_title      , documentation: { type: String  , desc: "TBD"        }
     expose :stm_status     , documentation: { type: String  , desc: "TBD"        }

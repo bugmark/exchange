@@ -26,7 +26,7 @@ Goal: alpha-CLI for linux tomorrow
       bmx_ruby help [COMMAND]               # Describe available commands or one specific command
       bmx_ruby issue SUBCOMMAND ...ARGS     # manage issue
       bmx_ruby offer SUBCOMMAND ...ARGS     # manage offer
-      bmx_ruby repo SUBCOMMAND ...ARGS      # manage repo
+      bmx_ruby tracker SUBCOMMAND ...ARGS      # manage tracker
       bmx_ruby user SUBCOMMAND ...ARGS      # manage user
 
 Target Outcomes Jan 10:

@@ -4698,7 +4698,7 @@ if (ExecutionEnvironment.canUseDOM) {
   // IE8: When updating a just created node with innerHTML only leading
   // whitespace is removed. When updating an existing node with innerHTML
   // whitespace in root TextNodes is also collapsed.
-  // @see quirksmode.org/bugreports/archives/2004/11/innerhtml_and_t.html
+  // @see quirksmode.org/bugtrackerrts/archives/2004/11/innerhtml_and_t.html
 
   // Feature detection; only IE8 is known to behave improperly like this.
   var testElement = document.createElement('div');
@@ -5996,7 +5996,7 @@ function getEventCharCode(nativeEvent) {
     charCode = keyCode;
   }
 
-  // Some non-printable keys are reported in `charCode`/`keyCode`, discard them.
+  // Some non-printable keys are trackerrted in `charCode`/`keyCode`, discard them.
   // Must not discard the (non-)printable Enter-key.
   if (charCode >= 32 || charCode === 13) {
     return charCode;
@@ -10422,7 +10422,7 @@ var invariant = __webpack_require__(3);
 function toArray(obj) {
   var length = obj.length;
 
-  // Some browsers builtin objects can report typeof 'function' (e.g. NodeList
+  // Some browsers builtin objects can trackerrt typeof 'function' (e.g. NodeList
   // in old versions of Safari).
   !(!Array.isArray(obj) && (typeof obj === 'object' || typeof obj === 'function')) ?  true ? invariant(false, 'toArray: Array-like object expected') : invariant(false) : void 0;
 
@@ -12644,7 +12644,7 @@ var HTMLDOMPropertyConfig = {
       if (node.type !== 'number' || node.hasAttribute('value') === false) {
         node.setAttribute('value', '' + value);
       } else if (node.validity && !node.validity.badInput && node.ownerDocument.activeElement !== node) {
-        // Don't assign an attribute if validation reports bad
+        // Don't assign an attribute if validation trackerrts bad
         // input. Chrome will clear the value. Additionally, don't
         // operate on inputs that have focus, otherwise Chrome might
         // strip off trailing decimal places and cause the user's
@@ -15202,7 +15202,7 @@ var ReactDOMInput = {
     if (value != null) {
       if (value === 0 && node.value === '') {
         node.value = '0';
-        // Note: IE9 reports a number inputs as 'text', so check props instead.
+        // Note: IE9 trackerrts a number inputs as 'text', so check props instead.
       } else if (props.type === 'number') {
         // Simulate `input.valueAsNumber`. IE9 does not support it
         var valueAsNumber = parseFloat(node.value, 10) || 0;
@@ -16563,7 +16563,7 @@ function endLifeCycleTimer(debugID, timerType) {
     return;
   }
   if (currentTimerType !== timerType && !lifeCycleTimerHasWarned) {
-     true ? warning(false, 'There is an internal error in the React performance measurement code. ' + 'We did not expect %s timer to stop while %s timer is still in ' + 'progress for %s instance. Please report this as a bug in React.', timerType, currentTimerType || 'no', debugID === currentTimerDebugID ? 'the same' : 'another') : void 0;
+     true ? warning(false, 'There is an internal error in the React performance measurement code. ' + 'We did not expect %s timer to stop while %s timer is still in ' + 'progress for %s instance. Please trackerrt this as a bug in React.', timerType, currentTimerType || 'no', debugID === currentTimerDebugID ? 'the same' : 'another') : void 0;
     lifeCycleTimerHasWarned = true;
   }
   if (isProfiling) {
@@ -16645,7 +16645,7 @@ function markEnd(debugID, markType) {
 
   // Chrome has an issue of dropping markers recorded too fast:
   // https://bugs.chromium.org/p/chromium/issues/detail?id=640652
-  // To work around this, we will not report very small measurements.
+  // To work around this, we will not trackerrt very small measurements.
   // I determined the magic number by tweaking it back and forth.
   // 0.05ms was enough to prevent the issue, but I set it to 0.1ms to be safe.
   // When the bug is fixed, we can `measure()` unconditionally if we want to.
@@ -19677,7 +19677,7 @@ var WheelEventInterface = {
   },
   deltaZ: null,
 
-  // Browsers without "deltaMode" is reporting in raw wheel delta where one
+  // Browsers without "deltaMode" is trackerrting in raw wheel delta where one
   // notch on the scroll is always +/- 120, roughly equivalent to pixels.
   // A good approximation of DOM_DELTA_LINE (1) is 5% of viewport size or
   // ~40 pixels, for DOM_DELTA_SCREEN (2) it is 87.5% of viewport size.
@@ -20149,7 +20149,7 @@ var translateToKey = {
  */
 function getEventKey(nativeEvent) {
   if (nativeEvent.key) {
-    // Normalize inconsistent values reported by browsers due to
+    // Normalize inconsistent values trackerrted by browsers due to
     // implementations of a working draft specification.
 
     // FireFox implements `key` but returns `MozPrintableKey` for all

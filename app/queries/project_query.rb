@@ -5,7 +5,7 @@ class ProjectQuery
 
   def search
     if readme_qry.blank? && language_qry.blank?
-      Repo.all
+      Tracker.all
     else
       qscore(readme_qry, language_qry)
     end
@@ -20,7 +20,7 @@ class ProjectQuery
     qs << rank_str("jfields->'readme_txt'"   , rdme_qry) if rdme_qry.present?
     qs << rank_str("xfields->'languages'"    , lang_qry) if lang_qry.present?
     rank = qs.join(" + ")
-    Repo.where("#{rank} > 0").order("#{rank} desc")
+    Tracker.where("#{rank} > 0").order("#{rank} desc")
   end
 
   def rank_str(field, qry)

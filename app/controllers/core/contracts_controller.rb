@@ -7,15 +7,15 @@ module Core
 
     # stm_issue_uuid (optional)
     def index
-      @bug = @repo = nil
+      @bug = @tracker = nil
       base_scope = Contract.all
       case
         when stm_issue_uuid = params["stm_issue_uuid"]
           @bug = Issue.find_by_uuid(stm_issue_uuid)
           @contracts = base_scope.where(stm_issue_uuid: stm_issue_uuid)
-        when stm_repo_uuid = params["stm_repo_uuid"]
-          @repo = Repo.find_by_uuid(stm_repo_uuid)
-          @contracts = base_scope.where(stm_repo_uuid: stm_repo_uuid)
+        when stm_tracker_uuid = params["stm_tracker_uuid"]
+          @tracker = Tracker.find_by_uuid(stm_tracker_uuid)
+          @contracts = base_scope.where(stm_tracker_uuid: stm_tracker_uuid)
         else
           @contracts = base_scope
       end
@@ -25,7 +25,7 @@ module Core
       @contract = Contract.find(params["id"])
     end
 
-    # stm_bug_uud or stm_repo_uuid
+    # stm_bug_uud or stm_tracker_uuid
     def new
       @contract = ContractCmd::Publish.new(new_opts(params))
     end
@@ -136,8 +136,8 @@ module Core
         user_uuid: current_user.uuid
       }
       key = "stm_issue_uuid" if params["stm_issue_uuid"]
-      key = "stm_repo_uuid" if params["stm_repo_uuid"]
-      id = params["stm_issue_uuid"] || params["stm_repo_uuid"]
+      key = "stm_tracker_uuid" if params["stm_tracker_uuid"]
+      id = params["stm_issue_uuid"] || params["stm_tracker_uuid"]
       opts.merge({key => id})
     end
   end

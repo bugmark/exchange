@@ -60,11 +60,11 @@ FB.create :user, email: "test1@bugmark.net"
 FB.create :user, email: "test2@bugmark.net"
 FB.create :user, email: "test3@bugmark.net"
 
-repo = FB.create(:repo).repo
-FB.create :issue, stm_repo_uuid: repo.uuid
-FB.create :issue, stm_repo_uuid: repo.uuid
-FB.create :issue, stm_repo_uuid: repo.uuid
-FB.create :issue, stm_repo_uuid: repo.uuid
+tracker = FB.create(:tracker).tracker
+FB.create :issue, stm_tracker_uuid: tracker.uuid
+FB.create :issue, stm_tracker_uuid: tracker.uuid
+FB.create :issue, stm_tracker_uuid: tracker.uuid
+FB.create :issue, stm_tracker_uuid: tracker.uuid
 
 WEEK_ENDS = BugmTime.next_week_ends
 USER_IDS  = User.where("email ilike 'test%'").pluck(:uuid)

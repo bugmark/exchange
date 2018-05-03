@@ -21452,7 +21452,7 @@ module.exports = function(Chart) {
 			// 2. Split the remaining width equally between each vertical axis
 			// 3. Split the remaining height equally between each horizontal axis
 			// 4. Give each layout the maximum size it can be. The layout will return it's minimum size
-			// 5. Adjust the sizes of each axis based on it's minimum reported size.
+			// 5. Adjust the sizes of each axis based on it's minimum trackerrted size.
 			// 6. Refit each axis
 			// 7. Position each axis in the final location
 			// 8. Tell the chart the final location of the chart area

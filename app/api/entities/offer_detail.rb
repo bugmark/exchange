@@ -10,7 +10,7 @@ module Entities
     expose :value         , documentation: { type: Float  , desc: "offer value"    }
     expose :poolable      , documentation: { type: String , desc: "offer poolable" }
     expose :aon           , documentation: { type: String , desc: "offer aon"      }
-    expose :stm_repo_uuid , documentation: { type: String , desc: "stm_repo_uuid"  }
+    expose :stm_tracker_uuid , documentation: { type: String , desc: "stm_tracker_uuid"  }
     expose :stm_title     , documentation: { type: String , desc: "stm_title"      }
     expose :stm_status    , documentation: { type: String , desc: "stm_status"     }
     expose :expiration    , documentation: { type: Time   , desc: "expiration"     }

@@ -4,7 +4,7 @@ This covers the config and install of software components for Bugmark
 development.
 
 NOTE: you don't need the full development environment to contribute
-documentation fixes!  Just clone the repo, edit text files and submit PR's.
+documentation fixes!  Just clone the tracker, edit text files and submit PR's.
 
 ## Required Skills
 
@@ -57,10 +57,10 @@ Let's get started:
 
 ## Cloning the Bugmark Exchange
 
-1. Clone the repo 
+1. Clone the tracker 
    `mkdir src; cd src; git clone https://github.com/bugmark/exchange.git`
 
-2. CD to the repo directory `cd exchange`
+2. CD to the tracker directory `cd exchange`
 
 ## Development Environment Provisioning
 

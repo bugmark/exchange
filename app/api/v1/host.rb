@@ -48,7 +48,7 @@ module V1
         {
           host_name:      BugmHost.name                      ,
           users:          User.count                         ,
-          repos:          Repo.count                         ,
+          trackers:          Tracker.count                         ,
           issues:         Issue.count                        ,
           offers:         Offer.count                        ,
           offers_open:    Offer.open.count                   ,

@@ -11,7 +11,7 @@ echo "=== ANSIBLE INSTALL ====================================="
 echo "Installing Python Dependencies"
 sudo apt-get install software-properties-common -y -q
 echo "Add ansible PPA"
-sudo apt-add-repository ppa:ansible/ansible
+sudo apt-add-trackersitory ppa:ansible/ansible
 echo "Apt Update"
 sudo apt-get update
 echo "Install Ansible"

@@ -126,7 +126,9 @@ end
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  email                  :string           default(""), not null
+#  name                   :string           not null
+#  email                  :string           not null
+#  mobile                 :string           not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime

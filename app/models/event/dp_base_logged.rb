@@ -27,7 +27,7 @@ class Event::DpBaseLogged < Event
       day_offset:  BugmTime.day_offset            ,
       hour_offset: BugmTime.hour_offset           ,
       num_users:   User.count                     ,
-      num_repos:   Repo.count                     ,
+      num_trackers:   Tracker.count                     ,
       num_issues:  Issue.count                    ,
       num_offers:  Offer.open.count               ,
       bf_offers:   Offer::Buy::Fixed.open.count   ,

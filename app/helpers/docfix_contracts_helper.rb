@@ -133,8 +133,8 @@ module DocfixContractsHelper
     case
       when contract.stm_issue_uuid
         "issue ##{contract.issue.id}"
-      when contract.stm_repo_uuid
-        "repo ##{contract.issue.id}"
+      when contract.stm_tracker_uuid
+        "tracker ##{contract.issue.id}"
       else ""
     end
   end
@@ -165,7 +165,7 @@ module DocfixContractsHelper
     case
       when contract.stm_issue_uuid
         docfix_contract_issue_link(contract)
-      when contract.stm_repo_uuid
+      when contract.stm_tracker_uuid
         docfix_contract_project_link(contract)
       else
         ""
@@ -176,7 +176,7 @@ module DocfixContractsHelper
     case
       when contract.stm_issue_uuid
         "Issue"
-      when contract.stm_repo_uuid
+      when contract.stm_tracker_uuid
         "Project"
       else ""
     end
@@ -193,7 +193,7 @@ module DocfixContractsHelper
   def docfix_contract_project_link(contract)
     raw <<-END.strip_heredoc
       <a href="/core/projects/#{contract.id}">
-        #{contract.repo.name}
+        #{contract.tracker.name}
       </a>
     END
   end

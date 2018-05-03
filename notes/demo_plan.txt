@@ -24,12 +24,12 @@ On the 27th, we'd like a documentation fix market that works like a REAL SAAS
 [ ] ONBOARDING Training materials - screencasts, white paper, user-guide
 [ ] GITHUB     authenticated requests - https://github.com/blog/1509-personal-api-tokens
 [ ] GITHUB     ETAG conditional requests - https://developer.github.com/v3/#conditional-requests
-[ ] GITHUB     image badges on a repo level
+[ ] GITHUB     image badges on a tracker level
 [ ] GITHUB     image badges on an issue level
 [ ] GITHUB     issue webhooks - https://developer.github.com/v3/activity/events/types/#issuesevent
 [ ] MARKETING  Marketing documentation (landing page)
 [ ] MARKETING  Testimonials - teams who are using the system
-[ ] MARKETING  Identify/Contact repos that need doccco improvement (ethereum)
+[ ] MARKETING  Identify/Contact trackers that need doccco improvement (ethereum)
 [ ] COMMUNITY  Bugmark Forum (discourse)
 [ ] COMMUNITY  Bugmark Slack
 [ ] COMMUNITY  Bugmark Blog
@@ -37,6 +37,6 @@ On the 27th, we'd like a documentation fix market that works like a REAL SAAS
 [ ] BLOCKCHAIN Live Integration with Solidity Contracts (configuration TBD)
 [ ] MISC       invite capabilities, etc.
 [ ] MISC       search
-[ ] MISC       private repos
+[ ] MISC       private trackers
 [ ] MONITORING InfluxDB Application Metrics & Grafana Pages
 [ ] API        An API and/or CLI way to interact with Bugmark

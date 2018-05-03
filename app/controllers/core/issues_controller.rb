@@ -3,13 +3,13 @@ module Core
 
     layout 'core'
 
-    # stm_repo_uuid (optional)
+    # stm_tracker_uuid (optional)
     def index
-      if stm_repo_uuid = params["stm_repo_uuid"]
-        @repo   = Repo.find_by_uuid(stm_repo_uuid)
-        @issues = @repo.issues
+      if stm_tracker_uuid = params["stm_tracker_uuid"]
+        @tracker   = Tracker.find_by_uuid(stm_tracker_uuid)
+        @issues = @tracker.issues
       else
-        @repo   = nil
+        @tracker   = nil
         @issues = Issue.all
       end
     end

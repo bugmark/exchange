@@ -19,7 +19,7 @@ RSpec.describe Offer, type: :model do
   describe "Associations" do
     it { should respond_to(:user)               }
     it { should respond_to(:issue)                }
-    it { should respond_to(:repo)               }
+    it { should respond_to(:tracker)               }
     it { should respond_to(:position)           }
     it { should respond_to(:amendment)          }
   end
@@ -46,7 +46,7 @@ RSpec.describe Offer, type: :model do
     it 'has scope methods' do
       expect(klas).to respond_to :base_scope
       expect(klas).to respond_to :by_id
-      expect(klas).to respond_to :by_repo_uuid
+      expect(klas).to respond_to :by_tracker_uuid
       expect(klas).to respond_to :by_title
       expect(klas).to respond_to :by_status
       expect(klas).to respond_to :by_labels
@@ -171,7 +171,7 @@ end
 #  uuid                  :string
 #  exid                  :string
 #  type                  :string
-#  repo_type             :string
+#  tracker_type          :string
 #  user_uuid             :string
 #  prototype_uuid        :string
 #  amendment_uuid        :string
@@ -189,7 +189,7 @@ end
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  stm_issue_uuid        :string
-#  stm_repo_uuid         :string
+#  stm_tracker_uuid      :string
 #  stm_title             :string
 #  stm_body              :string
 #  stm_status            :string

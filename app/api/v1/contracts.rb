@@ -92,7 +92,7 @@ module V1
       }
       params do
         optional :issue      , type: String  , desc: "issue UUID"
-        optional :repo       , type: String  , desc: "repo UUID"
+        optional :tracker       , type: String  , desc: "tracker UUID"
         optional :title      , type: String  , desc: "title"
         optional :status     , type: String  , desc: "status"
         optional :labels     , type: String  , desc: "labels"
@@ -103,7 +103,7 @@ module V1
         opts = {
           uuid:           SecureRandom.uuid          ,
           stm_issue_uuid: params[:issue]             ,
-          stm_repo_uuid:  params[:repo]              ,
+          stm_tracker_uuid:  params[:tracker]              ,
           stm_title:      params[:title]             ,
           stm_status:     params[:status]            ,
           stm_labels:     params[:labels]            ,
@@ -129,7 +129,7 @@ module V1
       }
       params do
         optional :issue      , type: String  , desc: "issue UUID"
-        optional :repo       , type: String  , desc: "repo UUID"
+        optional :tracker       , type: String  , desc: "tracker UUID"
         optional :title      , type: String  , desc: "title"
         optional :status     , type: String  , desc: "status"
         optional :labels     , type: String  , desc: "labels"
@@ -140,7 +140,7 @@ module V1
         opts = {
           uuid:           SecureRandom.uuid          ,
           stm_issue_uuid: params[:issue]             ,
-          stm_repo_uuid:  params[:repo]              ,
+          stm_tracker_uuid:  params[:tracker]              ,
           stm_title:      params[:title]             ,
           stm_status:     params[:status]            ,
           stm_labels:     params[:labels]            ,

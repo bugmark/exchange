@@ -20,18 +20,18 @@ FactoryBot.define do
     balance 1000.0
   end
 
-  factory :gh_repo, class: RepoCmd::GhCreate do
+  factory :gh_tracker, class: TrackerCmd::GhCreate do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
     name "mvscorg/bugmark"
   end
 
-  factory :repo, class: RepoCmd::Create do
+  factory :tracker, class: TrackerCmd::Create do
     to_create       { |instance| instance.project }
     initialize_with { new(attributes)             }
 
-    name "TestRepo1"
+    name "TestTracker1"
     type "Test"
   end
 
@@ -46,7 +46,7 @@ FactoryBot.define do
       "exid#{n}"
     end
     type "Issue::GitHub"
-    stm_repo_uuid { FB.create(:gh_repo).repo&.uuid || Repo.first&.uuid || SecureRandom.uuid  }
+    stm_tracker_uuid { FB.create(:gh_tracker).tracker&.uuid || Tracker.first&.uuid || SecureRandom.uuid  }
   end
 
   factory :issue, class: IssueCmd::Sync do
@@ -60,7 +60,7 @@ FactoryBot.define do
       "exid#{n}"
     end
     type "Issue::Test"
-    stm_repo_uuid { FB.create(:repo).repo&.uuid || Repo.first&.uuid || SecureRandom.uuid  }
+    stm_tracker_uuid { FB.create(:tracker).tracker&.uuid || Tracker.first&.uuid || SecureRandom.uuid  }
   end
 
   # ----- BUY OFFERS -----

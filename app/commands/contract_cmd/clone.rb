@@ -23,7 +23,7 @@ module ContractCmd
         prototype_uuid: proto.uuid                                  ,
         status:         "open"                                      ,
         stm_issue_uuid: atts["issue_uuid"] || proto.stm_issue_uuid ,
-        stm_repo_uuid:  atts["repo_uuid"]  || proto.stm_repo_uuid  ,
+        stm_tracker_uuid:  atts["tracker_uuid"]  || proto.stm_tracker_uuid  ,
         stm_title:      atts["title"]      || proto.stm_title      ,
         stm_status:     atts["status"]     || proto.stm_status     ,
         stm_labels:     atts["labels"]     || proto.stm_labels     ,

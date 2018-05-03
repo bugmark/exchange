@@ -1,0 +1,35 @@
+table width='100%'
+  tr
+    td
+      h2 Tracker [#{@tracker.xid}]
+    td align='right'
+      = link_to("All Trackers", "/core/trackers")
+.row
+  .col-md-6
+    table.table
+      tr
+        td <b>Type</b>
+        td = @tracker.xtype
+      tr
+        td <b>Name</b>
+        td = @tracker.name
+      tr
+        td <b>UUID</b>
+        td = @tracker.uuid
+      tr
+        td <b>URL</b>
+        td = core_tracker_http_link(@tracker)
+  .col-md-6
+    table.table
+      tr
+        td <b>Trackers</b>
+        td = core_tracker_bug_link(@tracker)
+      tr
+        td <b>Offers</b>
+        td = core_tracker_offer_link(@tracker)
+      tr
+        td <b>Contracts</b>
+        td = core_tracker_contract_link(@tracker)
+      tr
+        td <b>Actions</b>
+        td = tracker_actions(@tracker)

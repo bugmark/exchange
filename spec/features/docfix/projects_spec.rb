@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe "Repos", USE_VCR do
+describe "Trackers", USE_VCR do
 
   include_context 'Integration Environment'
 
-  before(:each) { hydrate(repo1) }
+  before(:each) { hydrate(tracker1) }
 
   it "renders index" do
     visit "/docfix/projects"
@@ -12,7 +12,7 @@ describe "Repos", USE_VCR do
   end
 
   it "renders show" do
-    visit "/docfix/projects/#{repo1.id}"
+    visit "/docfix/projects/#{tracker1.id}"
     expect(page).to_not be_nil
   end
 end

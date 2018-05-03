@@ -54,7 +54,7 @@ end
 #  uuid                  :string
 #  exid                  :string
 #  type                  :string
-#  repo_type             :string
+#  tracker_type          :string
 #  user_uuid             :string
 #  prototype_uuid        :string
 #  amendment_uuid        :string
@@ -72,7 +72,7 @@ end
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  stm_issue_uuid        :string
-#  stm_repo_uuid         :string
+#  stm_tracker_uuid      :string
 #  stm_title             :string
 #  stm_body              :string
 #  stm_status            :string
