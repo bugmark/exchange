@@ -9,7 +9,7 @@ module IssueCmd
     private
 
     def issue_opts(args)
-      cmd_opts.merge(args)
+      cmd_opts.merge(args).exclude("stm_comments")
     end
   end
 end

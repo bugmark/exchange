@@ -7,7 +7,7 @@ class Issue < ApplicationRecord
   after_save        :update_stm_ids
 
   with_options primary_key: "uuid" do
-    belongs_to :repo      , :foreign_key => :stm_repo_uuid
+    belongs_to :tracker , :foreign_key => :stm_tracker_uuid
   end
 
   with_options foreign_key: "stm_issue_uuid", primary_key: "uuid" do
@@ -18,7 +18,7 @@ class Issue < ApplicationRecord
   end
 
   hstore_accessor :stm_xfields, :html_url  => :string
-  jsonb_accessor  :stm_jfields, :comments  => :string
+  # jsonb_accessor  :stm_jfields, :comments  => :string
 
   VALID_STM_STATUS = %w(open closed)
 
@@ -110,7 +110,7 @@ class Issue < ApplicationRecord
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
       alt << "substring(stm_title for 20) as title"
-      select(%i(id uuid type stm_repo_uuid stm_issue_uuid stm_status stm_labels) + alt)
+      select(%i(id uuid type stm_tracker_uuid stm_issue_uuid stm_status stm_labels) + alt)
     end
     alias_method :ss, :select_subset
   end

@@ -178,6 +178,13 @@ class Contract < ApplicationRecord
     puts "Positions: #{positions.count}"
   end
 
+  def value_for(user)
+    return nil unless resolved?
+    positions.where(user_uuid: user.uuid, side: awardee).reduce(0) do |acc, pos|
+      acc + pos.escrow.total_value
+    end
+  end
+
   private
 
   def default_values

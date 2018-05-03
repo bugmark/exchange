@@ -49,7 +49,7 @@ module CoreContractsHelper
 
   def core_contract_mature_date(contract)
     color = BugmTime.now > contract.maturation ? "red" : "green"
-    date = contract.maturation
+    date = contract.maturation.strftime("%m-%d %H:%M %Z")
     raw "<span style='color: #{color};'>#{date}</span>"
   end
 

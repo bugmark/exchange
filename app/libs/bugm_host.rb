@@ -19,7 +19,7 @@ class BugmHost
     private
 
     def reset_postgres
-      tables = %w(Repo User Offer Escrow Position Amendment Contract Event)
+      tables = %w(Tracker User Offer Escrow Position Amendment Contract Event)
       tables.each {|el| Object.const_get(el).destroy_all}
       BugmTime.clear_offset
       UserCmd::Create.new({email: 'admin@bugmark.net', password: 'bugmark'}).project

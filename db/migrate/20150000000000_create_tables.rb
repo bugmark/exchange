@@ -3,22 +3,22 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     enable_extension "hstore"
 
-    create_table :repos do |t|
-      t.string   :type            # Repo::BugZilla, Repo::GitHub, Repo::Cvrf
+    create_table :trackers do |t|
+      t.string   :type       # Tracker::BugZilla, Tracker::GitHub, Tracker::Cvrf
       t.string   :uuid
-      t.string   :name            # mvscorg/xdmarket
+      t.string   :name       # mvscorg/xdmarket
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
       t.string   :exid
       t.timestamps
     end
-    add_index :repos, :uuid
-    add_index :repos, :exid
-    add_index :repos, :type
-    add_index :repos, :name
-    add_index :repos, :jfields, using: :gin
-    add_index :repos, :xfields, using: :gin
+    add_index :trackers, :uuid
+    add_index :trackers, :exid
+    add_index :trackers, :type
+    add_index :trackers, :name
+    add_index :trackers, :jfields, using: :gin
+    add_index :trackers, :xfields, using: :gin
 
     create_table :issues do |t|
       t.string   :type             # BugZilla, GitHub, Cve
@@ -41,7 +41,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuid
       t.string   :exid
       t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
-      t.string   :repo_type                 # BugZilla, GitHub, CVE
+      t.string   :tracker_type              # BugZilla, GitHub, CVE
       t.string   :user_uuid                 # the party who made the offer
       t.string   :prototype_uuid            # optional offer prototype
       t.string   :amendment_uuid            # the generating amendment
@@ -94,17 +94,17 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     # ----- STATEMENT FIELDS -----
     %i(issues offers contracts).each do |table|
-      add_column table, :stm_issue_uuid  , :string
-      add_column table, :stm_repo_uuid , :string
-      add_column table, :stm_title     , :string
-      add_column table, :stm_body      , :string
-      add_column table, :stm_status    , :string
-      add_column table, :stm_labels    , :string
-      add_column table, :stm_comments  , :jsonb  , null: false, default: {}
-      add_column table, :stm_jfields   , :jsonb  , null: false, default: {}
-      add_column table, :stm_xfields   , :hstore , null: false, default: {}
+      add_column table, :stm_issue_uuid   , :string
+      add_column table, :stm_tracker_uuid , :string
+      add_column table, :stm_title        , :string
+      add_column table, :stm_body         , :string
+      add_column table, :stm_status       , :string
+      add_column table, :stm_labels       , :string
+      add_column table, :stm_comments     , :jsonb  , null: false, default: {}
+      add_column table, :stm_jfields      , :jsonb  , null: false, default: {}
+      add_column table, :stm_xfields      , :hstore , null: false, default: {}
 
-      add_index table, :stm_repo_uuid
+      add_index table, :stm_tracker_uuid
       add_index table, :stm_issue_uuid
       add_index table, :stm_title
       add_index table, :stm_body

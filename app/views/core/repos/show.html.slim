@@ -1,9 +1,9 @@
 table width='100%'
   tr
     td
-      h2 REPO [#{@repo.xid}]
+      h2 Tracker [#{@repo.xid}]
     td align='right'
-      = link_to("All Repos", "/core/repos")
+      = link_to("All Trackers", "/core/repos")
 .row
   .col-md-6
     table.table
@@ -22,7 +22,7 @@ table width='100%'
   .col-md-6
     table.table
       tr
-        td <b>Bugs</b>
+        td <b>Trackers</b>
         td = core_repo_bug_link(@repo)
       tr
         td <b>Offers</b>

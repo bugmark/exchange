@@ -9,6 +9,7 @@ RSpec.describe IssueCmd::Sync do
       stm_repo_uuid: repo.uuid          ,
       stm_title:     "Tst Issue 1"      ,
       stm_status:    "open"             ,
+      stm_comments:  []                 ,
       type:          "Issue::Test"      ,
       exid:          SecureRandom.uuid
     }.merge(opts)

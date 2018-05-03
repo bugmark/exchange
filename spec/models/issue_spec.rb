@@ -15,6 +15,7 @@ RSpec.describe Issue, type: :model do
   describe "Attributes", USE_VCR do
     it { should respond_to :exid                  }
     it { should respond_to :uuid                  }
+    it { should respond_to :stm_comments          }
   end
 
   describe "Associations", USE_VCR do

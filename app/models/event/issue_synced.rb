@@ -2,7 +2,7 @@ require 'ext/hash'
 
 class Event::IssueSynced < Event
 
-  EXTRAS = {extras: {"html_url" => :string, "comments" => :string}}
+  EXTRAS = {extras: {"html_url" => :string}}
 
   jsonb_fields_for :payload, Issue, EXTRAS
 

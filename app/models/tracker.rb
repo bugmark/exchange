@@ -1,4 +1,4 @@
-class Repo < ApplicationRecord
+class Tracker < ApplicationRecord
 
   include PgSearch
 
@@ -13,11 +13,11 @@ class Repo < ApplicationRecord
   before_validation :set_defaults
 
   def xtag
-    "rep"
+    "tracker"
   end
 
   def xtype
-    self.type.gsub("Repo::","")
+    self.type.gsub("Tracker::","")
   end
 
   def org
@@ -36,7 +36,7 @@ class Repo < ApplicationRecord
 
   class << self
     def github
-      where(type: "Repo::GitHub")
+      where(type: "Tracker::GitHub")
     end
 
     def select_subset

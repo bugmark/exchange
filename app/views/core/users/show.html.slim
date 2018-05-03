@@ -61,6 +61,7 @@ div.text-center.bg
       tr
         th ID
         th Value
+        th Side
         th Matures
         th Status
         th Action
@@ -68,7 +69,8 @@ div.text-center.bg
       tr
         td = core_position_link(position)
         td = position.value
-        td = position.contract.maturation
+        td = position.side
+        td = position.contract.maturation.strftime("%m-%d %H:%M %Z")
         td = position.contract.status
         td = core_position_actions(position)
 

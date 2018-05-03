@@ -21,7 +21,7 @@ RSpec.describe Event::IssueSynced, :type => :model do
   describe "Object Creation", USE_VCR do
     it { should be_valid }
 
-    it 'saves the object to the database' do
+    it 'saves the object to the database' do #..
       subject.ev_cast
       expect(subject).to be_valid
     end
@@ -37,7 +37,7 @@ RSpec.describe Event::IssueSynced, :type => :model do
   end
 
   describe "Casting", USE_VCR do
-    it "increments the bug count" do
+    it "increments the issue count" do
       expect(Issue.count).to eq(0)
       result = subject.ev_cast
       expect(result).to be_a(Issue)
