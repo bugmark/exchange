@@ -55,7 +55,7 @@ class Tracker::GitHub < Tracker
   end
 
   def tracker_presence
-    tracker = Octokit.tracker(self.name)
+    tracker = Octokit.repo(self.name)
     return if tracker.present?
     errors.add :name, "GitHub tracker does not exist"
   end

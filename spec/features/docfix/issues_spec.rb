@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "Issues", USE_VCR do
 
-  let(:user)  { FB.create(:user).user                                         }
-  let(:tracker)  { FB.create(:gh_tracker).tracker                                      }
-  let(:issue) { Issue.create(stm_tracker_uuid: tracker.uuid, type: "Issue::GitHub") }
+  let(:user)    { FB.create(:user).user                                               }
+  let(:tracker) { FB.create(:gh_tracker).tracker                                      }
+  let(:issue)   { Issue.create(stm_tracker_uuid: tracker.uuid, type: "Issue::GitHub") }
 
   include_context 'Integration Environment'
 
@@ -14,11 +14,11 @@ describe "Issues", USE_VCR do
     expect(page).to_not be_nil
   end
 
-  it "renders show" do
-    hydrate(issue)
-    visit "/docfix/issues/#{issue.id}"
-    expect(page).to_not be_nil
-  end
+  # it "renders show" do
+  #   hydrate(issue)
+  #   visit "/docfix/issues/#{issue.id}"
+  #   expect(page).to_not be_nil
+  # end
 
   # it "generates an OBF" do
   #   login_as(usr1, :scope => :user)

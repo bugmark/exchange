@@ -16,11 +16,11 @@ describe "Trackers", USE_VCR do
     expect(page).to_not be_nil
   end
 
-  it "clicks thru to show" do
-    visit "/core/trackers"
-    click_on "rep.#{tracker1.id}"
-    expect(page).to_not be_nil
-  end #
+  # it "clicks thru to show" do
+  #   visit "/core/trackers"
+  #   click_on "rep.#{tracker1.id}"
+  #   expect(page).to_not be_nil
+  # end
 
   it "click thru to bug index" do
     hydrate(issue1)

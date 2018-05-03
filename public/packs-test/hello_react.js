@@ -10422,7 +10422,7 @@ var invariant = __webpack_require__(3);
 function toArray(obj) {
   var length = obj.length;
 
-  // Some browsers builtin objects can trackerrt typeof 'function' (e.g. NodeList
+  // Some browsers builtin objects can report typeof 'function' (e.g. NodeList
   // in old versions of Safari).
   !(!Array.isArray(obj) && (typeof obj === 'object' || typeof obj === 'function')) ?  true ? invariant(false, 'toArray: Array-like object expected') : invariant(false) : void 0;
 
