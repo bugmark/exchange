@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Event::RepoCreated, :type => :model do
+RSpec.describe Event::TrackerCreated, :type => :model do
 
   def valid_params(alt = {})
     {
-      cmd_type:           "Test::Repo"       ,
+      cmd_type:           "Test::Tracker"       ,
       cmd_uuid:           SecureRandom.uuid  ,
       name:               "mvscorg/bugmark"  ,
       uuid:               SecureRandom.uuid  ,
-      type:               "Repo::GitHub"
+      type:               "Tracker::GitHub"
     }.merge(alt)
   end
 
@@ -23,18 +23,18 @@ RSpec.describe Event::RepoCreated, :type => :model do
       expect(subject).to be_valid
     end
 
-    it 'emits a repo object' do
+    it 'emits a tracker object' do
       obj = subject.ev_cast
-      expect(obj).to be_a(Repo)
+      expect(obj).to be_a(Tracker)
     end
   end
 
   describe "Casting" do
-    it "increments the repo count", USE_VCR do
-      expect(Repo.count).to eq(0)
+    it "increments the tracker count", USE_VCR do
+      expect(Tracker.count).to eq(0)
       result = subject.ev_cast
-      expect(result).to be_a(Repo)
-      expect(Repo.count).to eq(1)
+      expect(result).to be_a(Tracker)
+      expect(Tracker.count).to eq(1)
     end
   end
 end
