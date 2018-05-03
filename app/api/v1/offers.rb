@@ -65,7 +65,7 @@ module V1
         requires :side              , type: String  , desc: "fixed or unfixed"   , values: %w(fixed unfixed)
         requires :volume            , type: Integer , desc: "number of positions"
         requires :price             , type: Float   , desc: "between 0.0 and 1.0", values: 0.00..1.00
-        optional :tracker              , type: String  , desc: "tracker UUID"
+        optional :tracker           , type: String  , desc: "tracker UUID"
         optional :issue             , type: String  , desc: "issue UUID"
         optional :title             , type: String  , desc: "issue title"
         optional :labels            , type: String  , desc: "issue labels"
@@ -97,24 +97,25 @@ module V1
         end
         expir = matur if expir > matur
         opts  = {
-          user_uuid:      current_user.uuid           ,
-          price:          params[:price]              ,
-          volume:         params[:volume]             ,
-          stm_tracker_uuid:  params[:tracker]               ,
-          stm_issue_uuid: params[:issue]              ,
-          stm_title:      params[:title]              ,
-          stm_labels:     params[:labels]             ,
-          stm_status:     params[:status]             ,
-          poolable:       params[:poolable] || false  ,
-          aon:            params[:aon] || false       ,
-          maturation:     matur                       ,
-          expiration:     expir
+          user_uuid:         current_user.uuid           ,
+          price:             params[:price]              ,
+          volume:            params[:volume]             ,
+          stm_tracker_uuid:  params[:tracker]            ,
+          stm_issue_uuid:    params[:issue]              ,
+          stm_title:         params[:title]              ,
+          stm_labels:        params[:labels]             ,
+          stm_status:        params[:status]             ,
+          poolable:          params[:poolable] || false  ,
+          aon:               params[:aon] || false       ,
+          maturation:        matur                       ,
+          expiration:        expir
         }.without_blanks
         cmd = OfferCmd::CreateBuy.new(side, opts)
         if cmd.valid?
           result = cmd.project
           {status: "OK", event_uuid: result.events[:offer].event_uuid, offer_uuid: result.offer.uuid}
         else
+          # binding.pry
           error!({status: "ERROR", message: "INVALID OFFER"}, 404)
         end
       end

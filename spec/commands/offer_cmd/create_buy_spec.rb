@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OfferCmd::CreateBuy do
+RSpec.describe OfferCmd::CreateBuy do #
 
   def gen_obf(opts = {})
     lcl_opts = {volume: 10, price: 0.40, user_uuid: user.uuid}

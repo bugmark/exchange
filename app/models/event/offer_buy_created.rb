@@ -28,12 +28,12 @@ class Event::OfferBuyCreated < Event
 
   def influx_fields
     {
-      id:             offer.id                                     ,
-      volume:         offer.volume                                 ,
-      price:          offer.price                                  ,
-      stm_issue_uuid: offer.stm_issue_uuid                         ,
-      stm_tracker_uuid:  offer.stm_tracker_uuid || offer.issue.tracker.uuid ,
-      stm_status:     offer.stm_status
+      id:                offer.id                                           ,
+      volume:            offer.volume                                       ,
+      price:             offer.price                                        ,
+      stm_issue_uuid:    offer.stm_issue_uuid                               ,
+      # stm_tracker_uuid:  offer.stm_tracker_uuid || offer.issue.tracker.uuid ,
+      stm_status:        offer.stm_status
     }.without_blanks
   end
 
