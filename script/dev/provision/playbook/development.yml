@@ -27,4 +27,3 @@
     - nodejs
     - yarn 
     - postgres
-    - postgres_user
