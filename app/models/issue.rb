@@ -107,7 +107,7 @@ class Issue < ApplicationRecord
     end
 
     def by_hexid(hexid)
-      where("stm_body like ?", hexid)
+      where("stm_body like ?", "%#{hexid.to_s.gsub("/", "")}%")
     end
 
     def select_subset
