@@ -106,6 +106,10 @@ class Issue < ApplicationRecord
       where(stm_status: 'closed')
     end
 
+    def by_hexid(hexid)
+      where("stm_body like ?", hexid)
+    end
+
     def select_subset
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
