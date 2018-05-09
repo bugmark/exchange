@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email, :name
 
   validates :email    , :presence => true
   validates :password , :presence => true, :on => :create, unless: :has_encrypted_pwd?
