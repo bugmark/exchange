@@ -57,6 +57,10 @@ class User < ApplicationRecord
     positions.map(&:contract).flatten.uniq.sort_by {|c| c.uuid}
   end
 
+  def open_contracts
+    contracts.select {|el| el.status == 'open'}
+  end
+
   # ----- ACCOUNT BALANCES AND RESERVES-----
 
   def token_reserve_poolable
