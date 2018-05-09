@@ -18,7 +18,13 @@ class User < ApplicationRecord
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 
-  validates_uniqueness_of :email, :name
+  validates_uniqueness_of :email
+
+  validates_uniqueness_of :name, allow_blank: true
+  validates_format_of :name,
+    allow_blank: true,
+    with: /\A[a-zA-Z0-9.-]+\z/,
+    message: "Username can have only alphanumeric(A-Z, a-z, 0-9), period(.) and dash(-) characters."
 
   validates :email    , :presence => true
   validates :password , :presence => true, :on => :create, unless: :has_encrypted_pwd?
