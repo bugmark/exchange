@@ -34,9 +34,7 @@ class Event < ApplicationRecord
     end
 
     def for_user(user)
-      # user_id = user.to_i
-      # where("? = any(user_uuids)", user.uuid)
-      where(false)
+      where("? = any(user_uuids)", user.uuid)
     end
   end
 
