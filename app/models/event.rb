@@ -35,15 +35,17 @@ class Event < ApplicationRecord
 
     def for_user(user)
       # user_id = user.to_i
-      where("? = any(user_uuids)", user.uuid)
-      # where(false)
+      # where("? = any(user_uuids)", user.uuid)
+      where(false)
     end
   end
 
-  def influx_tags()   {} end
-  def influx_fields() {} end
+  def influx_tags()    {} end
+  def influx_fields()  {} end
+  def tgt_user_uuids() [] end
 
   def ev_cast
+    self.user_uuids = tgt_user_uuids
     if valid?
       if new_object&.save
         self.projected_at = BugmTime.now

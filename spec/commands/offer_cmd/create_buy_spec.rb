@@ -57,6 +57,13 @@ RSpec.describe OfferCmd::CreateBuy do #
       obj = subject.project
       expect(obj.offer).to be_a(Offer)
     end
+
+    it 'sets the proper user_uuid' do
+      user = subject.project.user
+      expect(Event.first.user_uuids).to be_an(Array)
+      expect(Event.count).to eq(3)
+      expect(Event.last.user_uuids.length).to eq(1)
+    end
   end
 
   describe "creation with a deposit" do

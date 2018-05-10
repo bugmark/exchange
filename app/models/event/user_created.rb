@@ -12,7 +12,7 @@ class Event::UserCreated < Event
     User.new(payload.without_blanks)
   end
 
-  def user_uuids
+  def tgt_user_uuids
     [uuid]
   end
 end

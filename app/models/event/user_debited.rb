@@ -20,7 +20,7 @@ class Event::UserDebited < Event
     }
   end
 
-  def user_uuids
+  def tgt_user_uuids
     [uuid]
   end
 

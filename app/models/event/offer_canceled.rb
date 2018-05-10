@@ -14,10 +14,10 @@ class Event::OfferCanceled < Event
     offer
   end
 
-  def user_uuids
+  def tgt_user_uuids
     [user_uuid]
   end
-end  #.
+end
 
 # == Schema Information
 #

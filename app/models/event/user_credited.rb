@@ -20,7 +20,7 @@ class Event::UserCredited < Event
     }
   end
 
-  def user_uuids
+  def tgt_user_uuids
     [uuid]
   end
 

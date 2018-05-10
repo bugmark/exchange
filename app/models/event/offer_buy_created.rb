@@ -37,6 +37,10 @@ class Event::OfferBuyCreated < Event
     }.without_blanks
   end
 
+  def tgt_user_uuids
+    [user_uuid]
+  end
+
   private
 
   def offer
@@ -50,10 +54,6 @@ class Event::OfferBuyCreated < Event
 
   def set_defaults
     payload["status"] ||= 'open'
-  end
-
-  def user_uuids
-    [user_uuid]
   end
 end
 

@@ -7,6 +7,11 @@ class Event::ContractCreated < Event
   validates :uuid       , presence: true
   validates :maturation , presence: true
 
+  # def user_uuids
+  #   binding.pry
+  #   []
+  # end
+
   def cast_object
     Contract.new(payload.without_blanks)
   end
