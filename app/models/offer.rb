@@ -152,7 +152,7 @@ class Offer < ApplicationRecord
   # ----- INSTANCE METHODS -----
 
   def xid
-    "o#{self.intent[0]}-#{xtag[0]}.#{self&.id || 0}"
+    "o#{self.intent[0]}#{xtag[0]}.#{self&.id || 0}"
   end
 
   def attach_type
