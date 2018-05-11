@@ -8,7 +8,7 @@ class Offer < ApplicationRecord
   with_options primary_key: "uuid" do
     belongs_to :user            , optional: true , foreign_key: "user_uuid"
     belongs_to :issue           , optional: true , foreign_key: "stm_issue_uuid"
-    belongs_to :tracker            , optional: true , foreign_key: "stm_tracker_uuid"
+    belongs_to :tracker         , optional: true , foreign_key: "stm_tracker_uuid"
     has_one    :position                         , foreign_key: "offer_uuid"
     has_one    :prototype_parent                 , foreign_key: "prototype_uuid"        , class_name: "Offer"
     belongs_to :prototype_child , optional: true , foreign_key: "prorotype_uuid"        , class_name: "Offer"
@@ -152,7 +152,7 @@ class Offer < ApplicationRecord
   # ----- INSTANCE METHODS -----
 
   def xid
-    "#{self.intent}-#{xtag}.#{self&.id || 0}"
+    "o#{self.intent[0]}-#{xtag[0]}.#{self&.id || 0}"
   end
 
   def attach_type
