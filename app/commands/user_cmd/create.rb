@@ -21,7 +21,7 @@ module UserCmd
     end
 
     def usr_opts(opts)
-      cmd_opts.merge(opts.slice(*%w(uuid email encrypted_password)))
+      cmd_opts.merge(opts.slice(*%w(uuid email name encrypted_password)))
     end
 
     def deposit_opts(opts)

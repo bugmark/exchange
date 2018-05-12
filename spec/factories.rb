@@ -8,7 +8,7 @@ FactoryBot.define do
 
   # ----- BASE -----
 
-  factory :user, class: UserCmd::Create do
+  factory :user0, class: UserCmd::Create do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
@@ -16,8 +16,12 @@ FactoryBot.define do
       random = ('a'..'z').to_a.shuffle[0,8].join
       "#{random}#{n}@bugmark.net"
     end
+    name { email.split("@").first }
     password "bugmark"
-    balance 1000.0
+
+    factory :user, class: UserCmd::Create do
+      balance 1000.0
+    end
   end
 
   factory :gh_tracker, class: TrackerCmd::GhCreate do

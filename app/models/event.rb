@@ -34,7 +34,8 @@ class Event < ApplicationRecord
     end
 
     def for_user(user)
-      where("? = any(user_uuids)", user.uuid)
+      return Event.none unless user.respond_to?(:uuid)
+      where("? = any(user_uuids)", user&.uuid)
     end
   end
 
