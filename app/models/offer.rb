@@ -79,6 +79,15 @@ class Offer < ApplicationRecord
     def is_unfixed() where('type like ?', "%Unfixed")     end
     def is_fixed()   where('type like ?', "%Fixed")       end
 
+    def expired_by_time() where('expiration > ?', BugmTime.now) end
+
+    def open() where(status: 'open') end
+    def not_open() where.not(status: 'open') end
+    def expired() where(status: 'expired') end
+    def not_expired() where.not(status: 'expired') end
+    def crossed() where(status: 'crossed') end
+    def not_crossed() where.not(status: 'crossed') end
+
     def display_order
       order('maturation_range asc').order('type asc').order('volume asc')
     end
@@ -258,6 +267,18 @@ class Offer < ApplicationRecord
     self.status == 'open'
   end
 
+  def is_not_open?
+    ! is_open?
+  end
+
+  def is_expired?
+    self.status == 'expired'
+  end
+
+  def is_not_expired?
+    ! is_expired?
+  end
+
   def deposit
     (self.volume * self.price).to_i
   end
@@ -266,9 +287,6 @@ class Offer < ApplicationRecord
     (self.volume * (1 - self.price)).to_i
   end
 
-  def is_not_open?
-    ! is_open?
-  end
 
   def is_buy?()          self.intent == "buy"                    end
   def is_sell?()         self.intent == "sell"                   end
