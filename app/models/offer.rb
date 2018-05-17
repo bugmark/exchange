@@ -79,7 +79,7 @@ class Offer < ApplicationRecord
     def is_unfixed() where('type like ?', "%Unfixed")     end
     def is_fixed()   where('type like ?', "%Fixed")       end
 
-    def expired_by_time() where('expiration > ?', BugmTime.now) end
+    def expired_by_time() where('expiration < ?', BugmTime.now) end
 
     def open() where(status: 'open') end
     def not_open() where.not(status: 'open') end
