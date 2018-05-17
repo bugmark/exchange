@@ -56,6 +56,14 @@ class Offer < ApplicationRecord
       where("uuid NOT IN (SELECT offer_uuid FROM positions)")
     end
 
+    def with_child
+      where("uuid IN (SELECT prototype_uuid FROM offers)")
+    end
+
+    def without_child
+      where("uuid NOT IN (SELECT prototype_uuid FROM offers where offers.prototype_uuid IS NOT NULL)")
+    end
+
     def by_maturation_range(range)
       where("maturation_range && tsrange(?, ?)", range.begin, range.end)
     end
