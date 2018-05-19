@@ -39,6 +39,10 @@ class Event < ApplicationRecord
     end
   end
 
+  def transaction_events
+    Event.where(cmd_uuid: cmd_uuid)
+  end
+
   def influx_tags()    {} end
   def influx_fields()  {} end
   def tgt_user_uuids() [] end
