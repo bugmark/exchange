@@ -130,7 +130,7 @@ class Issue < ApplicationRecord
   end
 
   def xtag
-    "ticket"
+    "issue"
   end
 
   def xtype
