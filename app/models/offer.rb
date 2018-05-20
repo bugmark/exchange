@@ -271,6 +271,14 @@ class Offer < ApplicationRecord
     ! is_open?
   end
 
+  def is_crossed?
+    self.status == 'crossed'
+  end
+
+  def is_not_crossed?
+    ! is_crossed?
+  end
+
   def is_expired?
     self.status == 'expired'
   end
