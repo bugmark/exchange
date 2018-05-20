@@ -55,6 +55,19 @@ RSpec.describe IssueCmd::Sync do
       end
     end
 
+    describe "#synced_at" do
+      it "sets the field" do
+        issue = klas.new(valid_params(exid: "asdf")).project.issue
+        expect(issue.synced_at).to_not be(nil)
+      end
+
+      it "updates the field" do
+        issue1 = klas.new(valid_params(exid: "qwer")).project.issue
+        issue2 = klas.new(valid_params(exid: "qwer")).project.issue
+        expect(issue1.synced_at).to_not eq(issue2.synced_at)
+      end
+    end
+
     context "updating an issue" do
       it 'updates the item' do
         exid = "HELLOWORLD"

@@ -9,7 +9,11 @@ module IssueCmd
     private
 
     def issue_opts(args)
-      cmd_opts.merge(args).exclude("stm_comments")
+      cmd_opts.merge(args).exclude("stm_comments").merge(lcl_opts)
+    end
+
+    def lcl_opts
+      {synced_at: BugmTime.now}
     end
   end
 end

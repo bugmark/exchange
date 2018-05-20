@@ -130,7 +130,7 @@ class Contract < ApplicationRecord
   end
 
   def xtag
-    "con"
+    "contract"
   end
 
   def total_value
