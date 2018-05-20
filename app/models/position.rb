@@ -40,6 +40,22 @@ class Position < ApplicationRecord
     "pos"
   end
 
+  def counterside
+    case self.side
+    when 'fixed' then 'unfixed'
+    when 'unfixed' then 'fixed'
+    end
+  end
+
+  def counterpositions
+    escrow.positions.where(side: counterside)
+  end
+
+  def counterusers
+    uuids = escrow.positions.where(side: counterside).pluck(:user_uuid)
+    User.where('uuid in ?', uuids)
+  end
+
   def dumptree
     dt_hdr
     dump
