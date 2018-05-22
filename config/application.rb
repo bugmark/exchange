@@ -16,7 +16,8 @@ module Bugmark
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
-    config.time_zone = "Pacific Time (US & Canada)"
+    tpath = "/etc/timezone"
+    config.time_zone = File.exist?(tpath) ? File.read(tpath).chomp : "Pacific Time (US & Canada)"
 
     config.paths.add File.join('app', 'api'), glob: File.join("**", "*.rb")
 
