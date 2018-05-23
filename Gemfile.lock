@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: git://github.com/bugmark/iora.git
-  revision: c438071e0c5ef5dc8c4f052755d6d6a0263c0233
+  revision: d66839550ece85007533d32a2e49a2a113f6875b
   specs:
     iora (0.1.2)
       deep_merge (~> 1.2)
