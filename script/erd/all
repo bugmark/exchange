@@ -29,8 +29,7 @@ orientation: vertical
 polymorphism: true
 sort: true
 warn: false
-title: ListCall All
-exclude: null
+title: Bugmark All
 only: #{klasnames}
 "
 end
@@ -42,5 +41,8 @@ File.open("./.erdconfig", "w") { |f| f.puts cfg_file(klasses) }
 cmd = "bundle exec erd --filename=ERD_ALL"
 
 puts cmd
+
 system cmd
+
+exit
 

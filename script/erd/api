@@ -30,7 +30,6 @@ polymorphism: true
 sort: true
 warn: false
 title: Bugmark API Models
-exclude: null
 only: #{klasnames}
 "
 end
