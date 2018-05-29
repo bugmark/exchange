@@ -35,5 +35,4 @@ class Commit::Transfer < Commit
     # return self
     self
   end
-
 end

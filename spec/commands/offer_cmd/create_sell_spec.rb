@@ -5,7 +5,7 @@ RSpec.describe OfferCmd::CreateSell do
   def valid_params(args = {})
     {
       uuid:      SecureRandom.uuid    ,
-    }.merge(args) #.
+    }.merge(args)
   end
 
   let(:user)   { FB.create(:user)                                     }
@@ -52,6 +52,16 @@ RSpec.describe OfferCmd::CreateSell do
       expect(Offer.is_sell.count).to eq(1)
       expect(Offer.is_buy.count).to eq(2)
       expect(Offer.count).to eq(3)
+    end
+  end
+
+  describe "price", USE_VCR do
+    it "generates a default price" do
+      expect(pos1.price).to eq(0.6)
+      # noinspection RubyArgCount
+      result = subject.project.offer
+      expect(result).to be_an(Offer)
+      expect(result.price).to eq(0.4)
     end
   end
 
