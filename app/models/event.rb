@@ -73,7 +73,11 @@ class Event < ApplicationRecord
       values:    base_fields.merge(influx_fields)  ,
       timestamp: BugmTime.now.to_i
     }
-    InfluxStats.write_point mname, args
+    begin
+      InfluxStats.write_point mname, args
+    rescue
+      "INFLUX WRITE FAILED"
+    end
   end
 
   def cast_object

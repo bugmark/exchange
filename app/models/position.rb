@@ -4,7 +4,7 @@ class Position < ApplicationRecord
   before_validation :update_value
 
   belongs_to :offer       , optional:   true      , foreign_key: "offer_uuid", primary_key: "uuid"
-  has_many   :offers_sell , class_name: "Offer"   , foreign_key: "salable_position_id"
+  has_many   :offers_sell , class_name: "Offer"   , foreign_key: "salable_position_uuid"
   belongs_to :user        , optional:   true      , foreign_key: "user_uuid"  , primary_key: "uuid"
   belongs_to :escrow      , optional:   true      , foreign_key: "escrow_uuid", primary_key: "uuid"
   belongs_to :parent      , class_name: "Position", optional: true
@@ -42,6 +42,14 @@ class Position < ApplicationRecord
 
     def unfixed
       where(side: 'unfixed')
+    end
+
+    def offered
+      where('positions.uuid IN (select salable_position_uuid FROM offers WHERE offers.salable_position_uuid IS NOT NULL)')
+    end
+
+    def unoffered
+      where('positions.uuid NOT IN (select salable_position_uuid FROM offers WHERE offers.salable_position_uuid IS NOT NULL)')
     end
 
     def select_subset
@@ -92,6 +100,7 @@ class Position < ApplicationRecord
     self.value = self.volume * self.price
   end
 end
+
 
 # == Schema Information
 #

@@ -40,11 +40,12 @@ class Commit
     ctx.c_matching = bundle.offer.obj.match_contracts.overlap(ctx.o_max_beg, ctx.o_min_end)
     ctx.c_selected = ctx.c_matching.sort_by {|c| c.escrows.count}.first
     ctx.c_uuid     = ctx.c_selected&.uuid || SecureRandom.uuid
-    ctx.c_contract = @contract = ctx.c_selected || begin
+    ctx.c_contract = ctx.c_selected || begin
       date = [ctx.o_max_beg, ctx.o_min_end].avg_time #
       attr = bundle.offer.obj.match_attrs.merge(maturation: date, uuid: ctx.c_uuid)
       ctx_event(:contract, Event::ContractCreated, attr)
     end
+    @contract = ctx.c_contract
     ctx
   end
 

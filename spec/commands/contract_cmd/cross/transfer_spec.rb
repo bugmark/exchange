@@ -59,7 +59,7 @@ RSpec.describe ContractCmd::Cross::Transfer do
   end
 
   # for transfers:
-  # - sell offer prices specify a lower limit
+  # - sell offer prices specify a lower limit #
   # - buy offer prices specify an upper limit
   #
   # describe "transfer price limits", USE_VCR do

@@ -6,7 +6,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :trackers do |t|
       t.string   :type       # Tracker::BugZilla, Tracker::GitHub, Tracker::Cvrf
       t.string   :uuid
-      t.string   :name       # mvscorg/xdmarket
+      t.string   :name       # bugmark/exchange
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
@@ -40,7 +40,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :offers do |t|
       t.string   :uuid
       t.string   :exid
-      t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
+      t.string   :type                      # BuyFixed, BuyUnfixed, SellFixed, SellUnfixed
       t.string   :tracker_type              # BugZilla, GitHub, CVE
       t.string   :user_uuid                 # the party who made the offer
       t.string   :prototype_uuid            # optional offer prototype

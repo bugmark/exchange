@@ -101,13 +101,13 @@ module V1
       post '/create' do
         matur = params[:maturation] ? Time.parse(params[:maturation]) : BugmTime.now + 1.week
         opts = {
-          uuid:           SecureRandom.uuid          ,
-          stm_issue_uuid: params[:issue]             ,
-          stm_tracker_uuid:  params[:tracker]              ,
-          stm_title:      params[:title]             ,
-          stm_status:     params[:status]            ,
-          stm_labels:     params[:labels]            ,
-          maturation:     matur                      ,
+          uuid:              SecureRandom.uuid          ,
+          stm_issue_uuid:    params[:issue]             ,
+          stm_tracker_uuid:  params[:tracker]           ,
+          stm_title:         params[:title]             ,
+          stm_status:        params[:status]            ,
+          stm_labels:        params[:labels]            ,
+          maturation:        matur                      ,
         }.without_blanks
         cmd = ContractCmd::Create.new(opts)
         if cmd.valid?

@@ -3,9 +3,10 @@ module OfferCmd
 
     attr_reader :args, :salable_position
 
-    def initialize(position, args)
+    def initialize(position, args = {})
       @salable_position = position
       @args = ArgHandler.new(args, self)
+                .apply(&:set_uuid)
                 .apply(&:set_price_and_volume)
                 .apply(&:set_offer_type)
                 .apply(&:set_user)
@@ -24,6 +25,11 @@ module OfferCmd
         @args             = args.stringify_keys
         @caller           = caller
         @salable_position = caller.salable_position
+      end
+
+      def set_uuid
+        @args["uuid"] ||= SecureRandom.uuid
+        self
       end
 
       def set_price_and_volume

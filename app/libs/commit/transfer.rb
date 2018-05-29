@@ -10,7 +10,8 @@ class Commit::Transfer < Commit
     # look up contract
     ctx.c_contract = bundle.offer.obj.salable_position.contract ||
                      bundle.offer.obj.position.contract
-    ctx.c_uuid     = ctx.c_contract
+    ctx.c_uuid     = ctx.c_contract.uuid
+    @contract      = ctx.c_contract
 
     # generate amendment & escrow
     ctx.e_type = "Escrow::Transfer"

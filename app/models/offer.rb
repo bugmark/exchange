@@ -194,8 +194,8 @@ class Offer < ApplicationRecord
     case self.type
       when "Offer::Buy::Fixed"    then "Offer::Buy::Unfixed"
       when "Offer::Buy::Unfixed"  then "Offer::Buy::Fixed"
-      when "Offer::Sell::Fixed"   then "Offer::Buy::Unfixed"
-      when "Offer::Sell::Unfixed" then "Offer::Buy::Fixed"
+      when "Offer::Sell::Fixed"   then "Offer::Buy::Fixed"
+      when "Offer::Sell::Unfixed" then "Offer::Buy::Unfixed"
     end
   end
 
