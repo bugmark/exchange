@@ -14,6 +14,8 @@ class Issue < ApplicationRecord
     has_many   :offers    , :dependent  => :destroy
     has_many   :offers_bf , :class_name => "Offer::Buy::Fixed"
     has_many   :offers_bu , :class_name => "Offer::Buy::Unfixed"
+    has_many   :offers_sf , :class_name => "Offer::Sell::Fixed"
+    has_many   :offers_su , :class_name => "Offer::Sell::Unfixed"
     has_many   :contracts , :dependent  => :destroy
   end
 
