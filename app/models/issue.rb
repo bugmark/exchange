@@ -139,6 +139,10 @@ class Issue < ApplicationRecord
     self.type&.gsub("Issue::","")
   end
 
+  def hexid
+    self.stm_body.scan(/(>|^| )\/(\h\h\h\h\h\h)/)&.first&.last
+  end
+
   def has_offers?()    offers.count > 0    end
   def has_contracts?() contracts.count > 0 end
   def num_contracts()  contracts.count     end
