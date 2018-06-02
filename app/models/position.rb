@@ -52,6 +52,14 @@ class Position < ApplicationRecord
       where('positions.uuid NOT IN (select salable_position_uuid FROM offers WHERE offers.salable_position_uuid IS NOT NULL)')
     end
 
+    def counterside_for(position)
+      where(side: position.counterside)
+    end
+
+    def counterintent_for(position)
+      joins(:offer).where('"offers"."type" ilike ?', position.counterintent)
+    end
+
     def select_subset
       select(%i(id uuid offer_uuid user_uuid amendment_uuid escrow_uuid parent_uuid volume price value side))
     end
@@ -83,14 +91,17 @@ class Position < ApplicationRecord
   end
 
   def counterpositions
-    case intent
-    when 'buy' then escrow.positions.where(side: counterside)
-    when 'sell' then escrow.positions
+    case escrow.xtype
+    when 'expand'   then escrow.positions.counterside_for(self)
+    when 'transfer' then escrow.positions.counterintent_for(self)
+    when 'reduce' then raise("NOT YET IMPLEMENTED")
+    when 'resovle' then raise("NOT YET IMPLEMENTED")
+    else raise("UNKNOWN ESCROW TYPE")
     end
   end
 
   def counterusers
-    uuids = escrow.positions.where(side: counterside).pluck(:user_uuid)
+    uuids = counterpositions.pluck(:user_uuid)
     User.where(uuid: uuids)
   end
 

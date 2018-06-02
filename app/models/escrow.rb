@@ -25,6 +25,8 @@ class Escrow < ApplicationRecord
       select(%i(id type sequence contract_uuid amendment_uuid fixed_value unfixed_value))
     end
     alias_method :ss, :select_subset
+
+
   end
 
   # ----- INSTANCE METHODS -----
@@ -46,6 +48,22 @@ class Escrow < ApplicationRecord
     self.fixed_value   = fixed_values
     self.unfixed_value = unfixed_values
   end
+
+  # -----
+
+  def xtype
+    case self.type
+    when "Escrow::Expand"   then "expand"
+    when "Escrow::Reduce"   then "reduce"
+    when "Escrow::Transfer" then "transfer"
+    when "Escrow::Resolve"  then "resolve"
+    end
+  end
+
+  def is_expand?()   xtype == "expand"   end
+  def is_reduce?()   xtype == "reduce"   end
+  def is_transfer?() xtype == "transfer" end
+  def is_resolve?()  xtype == "resolve"  end
 
   def dumptree
     dt_hdr
