@@ -57,7 +57,7 @@ class Position < ApplicationRecord
     end
 
     def counterintent_for(position)
-      joins(:offer).where('"offers"."type" ilike ?', position.counterintent)
+      joins(:offer).where('offers.type ilike ?', "%#{position.counterintent}%")
     end
 
     def select_subset
