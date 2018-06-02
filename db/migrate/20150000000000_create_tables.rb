@@ -39,7 +39,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :offers do |t|
       t.string   :uuid
-      t.string   :exid
       t.string   :type                      # BuyFixed, BuyUnfixed, SellFixed, SellUnfixed
       t.string   :tracker_type              # BugZilla, GitHub, CVE
       t.string   :user_uuid                 # the party who made the offer
@@ -60,7 +59,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :offers, :uuid
-    add_index :offers, :exid
     add_index :offers, :type
     add_index :offers, :user_uuid
     add_index :offers, :prototype_uuid
@@ -76,7 +74,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :contracts do |t|
       t.string   :uuid
-      t.string   :exid
       t.integer  :prototype_uuid      # optional contract prototype
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :status              # open, matured, resolved
@@ -87,7 +84,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :contracts, :uuid
-    add_index :contracts, :exid
     add_index :contracts, :prototype_uuid
     add_index :contracts, :xfields, using: :gin
     add_index :contracts, :jfields, using: :gin
@@ -117,7 +113,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :positions do |t|
       t.string   :uuid
-      t.string   :exid
       t.string   :offer_uuid
       t.string   :user_uuid
       t.string   :amendment_uuid
@@ -130,7 +125,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :positions, :uuid
-    add_index :positions, :exid
     add_index :positions, :offer_uuid
     add_index :positions, :user_uuid
     add_index :positions, :amendment_uuid
@@ -143,7 +137,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :escrows do |t|
       t.string   :uuid
-      t.string   :exid
       t.string   :type
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.string   :contract_uuid
@@ -153,7 +146,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :escrows, :uuid
-    add_index :escrows, :exid
     add_index :escrows, :type
     add_index :escrows, :contract_uuid
     add_index :escrows, :amendment_uuid
@@ -161,7 +153,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :amendments do |t|
       t.string   :uuid
-      t.string   :exid
       t.string   :type               # expand, transfer, reduce, resolve
       t.integer  :sequence           # SORTABLE POSITION USING ACTS_AS_LIST
       t.string   :contract_uuid
@@ -170,7 +161,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :amendments, :uuid
-    add_index :amendments, :exid
     add_index :amendments, :sequence
     add_index :amendments, :contract_uuid
     add_index :amendments, :xfields, using: :gin

@@ -71,8 +71,22 @@ class Position < ApplicationRecord
     end
   end
 
+  def intent
+    offer.intent
+  end
+
+  def counterintent
+    case intent
+    when 'buy'  then 'sell'
+    when 'sell' then 'buy'
+    end
+  end
+
   def counterpositions
-    escrow.positions.where(side: counterside)
+    case intent
+    when 'buy' then escrow.positions.where(side: counterside)
+    when 'sell' then escrow.positions
+    end
   end
 
   def counterusers
@@ -100,7 +114,6 @@ class Position < ApplicationRecord
     self.value = self.volume * self.price
   end
 end
-
 
 # == Schema Information
 #

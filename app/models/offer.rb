@@ -295,7 +295,6 @@ class Offer < ApplicationRecord
     (self.volume * (1 - self.price)).to_i
   end
 
-
   def is_buy?()          self.intent == "buy"                    end
   def is_sell?()         self.intent == "sell"                   end
   def is_unfixed?()      self.side   == "unfixed"                end
