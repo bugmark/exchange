@@ -20,7 +20,6 @@ RSpec.describe Contract, type: :model do
   end
 
   describe "Attributes" do
-    it { should respond_to :exid              }
     it { should respond_to :uuid              }
   end
 
