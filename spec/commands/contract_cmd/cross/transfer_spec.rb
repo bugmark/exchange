@@ -44,17 +44,42 @@ RSpec.describe ContractCmd::Cross::Transfer do
       hydrate(offer_su, offer_bu)
       expect(Contract.count).to eq(1)
       expect(Escrow.count).to eq(1)
+      expect(User.count).to eq(3)
+      expect(Offer.count).to eq(4)
+      expect(Offer.open.count).to eq(2)
       subject.project
+      expect(User.count).to eq(3)
       expect(Contract.count).to eq(1)
       expect(Escrow.count).to eq(2)
+      expect(Offer.count).to eq(4)
+      expect(Offer.open.count).to eq(0)
     end
   end
 
   describe "#project - valid subject" do
+    before(:each) { hydrate(offer_su, offer_bu) }
+
     it 'detects a valid object' do
-      hydrate(offer_bu)
       subject.project
       expect(subject).to be_valid
+    end
+
+    it 'sets the contract status' do
+      subject.project
+      expect(subject.contract.status).to eq("open")
+    end
+
+    it 'adjusts the user balance' do
+      usr_su = offer_su.user
+      usr_bu = offer_bu.user
+      expect(usr1.balance).to eq(1000.0)
+      expect(usr_su.balance).to eq(994.0)
+      expect(usr_bu.balance).to eq(1000.0)
+      subject.project
+      usr1.reload ; usr_su.reload ; usr_bu.reload
+      expect(usr1.balance).to eq(996.0)
+      expect(usr_su.balance).to eq(990.0)
+      expect(usr_bu.balance).to eq(996.0)
     end
   end
 
