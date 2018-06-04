@@ -307,9 +307,10 @@ class Offer < ApplicationRecord
   private
 
   def default_attributes
-    self.status   ||= 'open'
-    self.poolable ||= false
-    self.aon      ||= false
+    self.status     ||= 'open'
+    self.poolable   ||= false
+    self.aon        ||= false
+    self.expiration ||= self.maturation_range&.first
   end
 
   def update_value

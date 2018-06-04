@@ -83,6 +83,20 @@ RSpec.describe OfferCmd::CreateSell do
         expect(usr.token_reserve).to eq(4.0)
         expect(usr.token_available).to eq(990.0)
       end
+
+      it "has the same maturation date" do
+        # noinspection RubyArgCount
+        result = subject.project.offer
+        expect(result.maturation_range.to_s).to eq(result.salable_position.offer.maturation_range.to_s)
+      end
+
+      it "has the same expiration date" do
+        # noinspection RubyArgCount
+        result = subject.project.offer
+        ex1 = result.expiration.strftime("%y%m%d%H%M%S")
+        ex2 = result.salable_position.offer.expiration.strftime("%y%m%d%H%M%S")
+        expect(ex1).to eq(ex2)
+      end
     end
 
     # context "with poolable offers" do

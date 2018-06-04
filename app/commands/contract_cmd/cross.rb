@@ -30,6 +30,12 @@ module ContractCmd
 
     private
 
+    def sort_target(counters, target)
+      return counters if target.nil?
+      return counters if counters.select {|el| el.uuid == target.uuid}.nil?
+      [target] +  counters.select {|el| el.uuid != target.uuid}
+    end
+
     def commit_class
       require "commit/#{type.to_s}"
       "Commit::#{type.capitalize}".constantize
