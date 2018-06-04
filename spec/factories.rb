@@ -75,6 +75,7 @@ FactoryBot.define do
 
     price  0.60
     volume 10
+    expiration Time.now + 12.hours
     maturation Time.now + 1.day
     user_uuid      { FB.create(:user).user.uuid     }
     stm_issue_uuid { FB.create(:issue).issue.uuid   }

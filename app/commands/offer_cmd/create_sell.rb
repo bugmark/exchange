@@ -11,6 +11,7 @@ module OfferCmd
                 .apply(&:set_offer_type)
                 .apply(&:set_user)
                 .apply(&:set_salable_uuid)
+                .apply(&:set_expiration)
                 .apply(&:set_maturation)
                 .apply(&:set_status)
                 .apply(&:event_opts)
@@ -40,6 +41,11 @@ module OfferCmd
 
       def set_offer_type
         @args["type"] = klas
+        self
+      end
+
+      def set_expiration
+        @args["expiration"] = salable_position.offer.expiration
         self
       end
 
