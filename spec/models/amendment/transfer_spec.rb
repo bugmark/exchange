@@ -22,8 +22,8 @@ RSpec.describe Amendment::Transfer, type: :model do
     klas.create({
       offer:             boff     ,
       sell_offer:        soff     ,
-      salable_position:  sapos     ,
-      seller_position:   sepos     ,
+      salable_position:  sapos    ,
+      seller_position:   sepos    ,
       buyer_position:    bpos     ,
     })
   end
@@ -42,7 +42,7 @@ RSpec.describe Amendment::Transfer, type: :model do
   # describe "Associations", USE_VCR do
   #   it { should respond_to(:sell_offer)            }
   #   it { should respond_to(:buy_offer)             }
-  #   it { should respond_to(:salable_position)       }
+  #   it { should respond_to(:salable_position)      }
   #   it { should respond_to(:seller_position)       }
   #   it { should respond_to(:buyer_position)        }
   # end

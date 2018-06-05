@@ -13,10 +13,11 @@ class Commit::Transfer < Commit
     ctx.c_uuid     = ctx.c_contract.uuid
     @contract      = ctx.c_contract
 
-    # generate amendment & escrow
-    ctx.e_type = "Escrow::Transfer"
+    # generate amendment (but not escrow)
     ctx.a_type = "Amendment::Transfer"
-    gen_escrow_and_amendment(ctx)
+    ctx = gen_amendment(ctx)
+    # ctx.e_type = "Escrow::Expand"
+    # ctx = gen_escrow(ctx)
 
     # calculate price for offer and counters
     clist             = bundle.counters.map {|el| el.obj.price}
@@ -30,7 +31,7 @@ class Commit::Transfer < Commit
     bundle.counters.each {|offer| gen_position(offer, ctx, ctx.counter_price)}
 
     # update escrow value
-    ctx = update_escrow_value(ctx)
+    # ctx = update_escrow_value(ctx)
 
     # return self
     self

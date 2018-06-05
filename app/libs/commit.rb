@@ -49,9 +49,13 @@ class Commit
     ctx
   end
 
-  def gen_escrow_and_amendment(ctx)
+  def gen_amendment(ctx)
     ctx.a_uuid = SecureRandom.uuid
     ctx_event(:amendment, Event::AmendmentCreated, contract_uuid: ctx.c_uuid, uuid: ctx.a_uuid, type: ctx.a_type)
+    ctx
+  end
+
+  def gen_escrow(ctx)
     ctx.e_uuid = SecureRandom.uuid
     ctx_event(:escrow, Event::EscrowCreated, contract_uuid: ctx.c_uuid, amendment_uuid: ctx.a_uuid, uuid: ctx.e_uuid, type: ctx.e_type)
     ctx

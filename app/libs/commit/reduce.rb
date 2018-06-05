@@ -14,7 +14,8 @@ class Commit::Reduce < Commit
     # generate amendment, escrow, price
     ctx.e_type = "Escrow::Reduce"
     ctx.a_type = "Amendment::Reduce"
-    gen_escrow_and_amendment(ctx)
+    ctx = gen_escrow(ctx)
+    ctx = gen_amendment(ctx)
 
     # calculate price for offer and counter
     ctx.counter_price = bundle.counters.map {|el| el.obj.price}.min

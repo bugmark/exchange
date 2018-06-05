@@ -33,24 +33,20 @@ RSpec.describe ContractCmd::Cross::Transfer do
     end
   end
 
-  describe "#project - invalid subject" do
-    it 'detects an invalid object' do
-      hydrate(offer_su, offer_bu)
-      subject.project
-      expect(subject).to be_valid
-    end
-
+  describe "#project - basics" do
     it 'gets the right object count' do
       hydrate(offer_su, offer_bu)
       expect(Contract.count).to eq(1)
       expect(Escrow.count).to eq(1)
+      expect(Amendment.count).to eq(1)
       expect(User.count).to eq(3)
       expect(Offer.count).to eq(4)
       expect(Offer.open.count).to eq(2)
       subject.project
       expect(User.count).to eq(3)
       expect(Contract.count).to eq(1)
-      expect(Escrow.count).to eq(2)
+      expect(Escrow.count).to eq(1)
+      expect(Amendment.count).to eq(2)
       expect(Offer.count).to eq(4)
       expect(Offer.open.count).to eq(0)
     end
@@ -59,15 +55,15 @@ RSpec.describe ContractCmd::Cross::Transfer do
   describe "#project - valid subject" do
     before(:each) { hydrate(offer_su, offer_bu) }
 
-    it 'detects a valid object' do
-      subject.project
-      expect(subject).to be_valid
-    end
+    # it 'detects a valid object' do
+    #   subject.project
+    #   expect(subject).to be_valid
+    # end
 
-    it 'sets the contract status' do
-      subject.project
-      expect(subject.contract.status).to eq("open")
-    end
+    # it 'sets the contract status' do
+    #   subject.project
+    #   expect(subject.contract.status).to eq("open")
+    # end
 
     # when the sell offer is made:
     # - sellers reserve should not change
@@ -75,22 +71,22 @@ RSpec.describe ContractCmd::Cross::Transfer do
     # when the transfer cross is made:
     # - funds transfers from buyer to seller
     # - buyer account is decremented
-    it 'adjusts the user balance' do
-      usr_su = offer_su.user
-      usr_bu = offer_bu.user
-      expect(usr_su.balance).to eq(994.0)
-      expect(usr_su.token_reserve).to eq(0.0)
-      expect(usr_bu.balance).to eq(1000.0)
-      expect(usr_bu.token_reserve).to eq(4.0)
-      expect(Offer.open.count).to eq(2)
-      subject.project
-      usr_su.reload ; usr_bu.reload
-      expect(usr_su.balance).to eq(990.0)
-      expect(usr_su.token_reserve).to eq(0.0)
-      expect(usr_bu.balance).to eq(996.0)
-      expect(usr_bu.token_reserve).to eq(0.0)
-      expect(Offer.open.count).to eq(0)
-    end
+    # it 'adjusts the user balance' do
+    #   usr_su = offer_su.user
+    #   usr_bu = offer_bu.user
+    #   expect(usr_su.balance).to eq(994.0)
+    #   expect(usr_su.token_reserve).to eq(0.0)
+    #   expect(usr_bu.balance).to eq(1000.0)
+    #   expect(usr_bu.token_reserve).to eq(4.0)
+    #   expect(Offer.open.count).to eq(2)
+    #   subject.project
+    #   usr_su.reload ; usr_bu.reload
+    #   expect(usr_su.balance).to eq(990.0)
+    #   expect(usr_su.token_reserve).to eq(0.0)
+    #   expect(usr_bu.balance).to eq(996.0)
+    #   expect(usr_bu.token_reserve).to eq(0.0)
+    #   expect(Offer.open.count).to eq(0)
+    # end
   end
 
   # for transfers:
