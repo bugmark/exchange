@@ -81,9 +81,9 @@ RSpec.describe ContractCmd::Cross::Transfer do
       expect(Offer.open.count).to eq(2)
       subject.project
       usr_su.reload ; usr_bu.reload
-      expect(usr_su.balance).to eq(990.0)
+      expect(usr_su.balance).to eq(1000.0)
       expect(usr_su.token_reserve).to eq(0.0)
-      expect(usr_bu.balance).to eq(996.0)
+      expect(usr_bu.balance).to eq(994.0)
       expect(usr_bu.token_reserve).to eq(0.0)
       expect(Offer.open.count).to eq(0)
     end

@@ -39,7 +39,7 @@ class Commit::Transfer < Commit
     posargs = {
       uuid:           SecureRandom.uuid      ,
       volume:         offer.vol.to_i         ,
-      price:          price.to_f             ,
+      price:          1 - price.to_f         ,
       side:           offer.obj.side         ,
       offer_uuid:     offer.obj.uuid         ,
       user_uuid:      offer.obj.user.uuid    ,
@@ -51,7 +51,7 @@ class Commit::Transfer < Commit
     ctx_event("position#{oid}", Event::PositionCreated, posargs)
     lcl_val = posargs[:volume] * posargs[:price]
     ctx_event("offer#{oid}", Event::OfferCrossed, {uuid: offer.obj.uuid})
-    if offer.is_sell?
+    if offer.obj.is_sell?
       ctx_event("user#{oid}" , Event::UserCredited, {uuid: offer.obj.user_uuid, amount: lcl_val})
     else
       ctx_event("user#{oid}" , Event::UserDebited, {uuid: offer.obj.user_uuid, amount: lcl_val})

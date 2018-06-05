@@ -6,12 +6,12 @@ class Position < ApplicationRecord
   belongs_to :offer       , optional:   true      , foreign_key: "offer_uuid", primary_key: "uuid"
   has_many   :offers_sell , class_name: "Offer"   , foreign_key: "salable_position_uuid"
   belongs_to :user        , optional:   true      , foreign_key: "user_uuid"  , primary_key: "uuid"
-  belongs_to :escrow      , optional:   true      , foreign_key: "escrow_uuid", primary_key: "uuid"
   belongs_to :parent      , class_name: "Position", optional: true
   has_many   :children    , class_name: "Position"
-  has_one    :contract    , :through => :escrow
+  belongs_to :escrow      , optional:   true      , foreign_key: "escrow_uuid"   , primary_key: "uuid"
+  belongs_to :amendment   , optional:   true      , foreign_key: "amendment_uuid", primary_key: "uuid"
 
-  belongs_to :amendment, optional: true, foreign_key: "amendment_uuid", primary_key: "uuid"
+  has_one    :contract    , :through => :amendment
 
   # ----- VALIDATIONS -----
 
@@ -91,11 +91,11 @@ class Position < ApplicationRecord
   end
 
   def counterpositions
-    case escrow.xtype
+    case amendment.xtype
     when 'expand'   then escrow.positions.counterside_for(self)
-    when 'transfer' then escrow.positions.counterintent_for(self)
-    when 'reduce' then raise("NOT YET IMPLEMENTED")
-    when 'resovle' then raise("NOT YET IMPLEMENTED")
+    when 'transfer' then amendment.positions.counterintent_for(self)
+    when 'reduce'   then raise("NOT YET IMPLEMENTED")
+    when 'resovle'  then raise("NOT YET IMPLEMENTED")
     else raise("UNKNOWN ESCROW TYPE")
     end
   end
