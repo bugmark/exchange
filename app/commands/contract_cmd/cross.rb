@@ -7,14 +7,14 @@ require 'ext/array'
 module ContractCmd
   class Cross < ApplicationCommand
 
-    attr_reader     :offer, :counters, :type, :bundle, :commit
+    attr_reader :offer, :counters, :type, :bundle, :commit
 
     validate :cross_integrity
 
-    def initialize(offer, commit_type)
+    def initialize(offer, commit_type, counter = nil)
       @type     = commit_type
       @offer    = Offer.find(offer.to_i)
-      @counters = @offer.qualified_counteroffers(commit_type)
+      @counters = counter ? Offer.where(id: counter.id) : @offer.qualified_counteroffers(commit_type)
       if valid?
         @bundle = Bundle.new(type, offer, counters).generate
         @commit = commit_class.new(bundle).generate
@@ -29,12 +29,6 @@ module ContractCmd
     end
 
     private
-
-    def sort_target(counters, target)
-      return counters if target.nil?
-      return counters if counters.select {|el| el.uuid == target.uuid}.nil?
-      [target] +  counters.select {|el| el.uuid != target.uuid}
-    end
 
     def commit_class
       require "commit/#{type.to_s}"

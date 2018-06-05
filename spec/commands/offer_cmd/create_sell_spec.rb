@@ -74,14 +74,13 @@ RSpec.describe OfferCmd::CreateSell do
 
   describe "balances and reserves", USE_VCR do
     context "basic operation" do
-      it "adjusts the user reserve for one offer" do
+      it "makes no change to the user reserve for sell offer" do
         expect(User.count).to eq(0)
         subject.project
         expect(User.count).to eq(2)
         usr = User.first
         expect(usr.balance).to eq(994.0)
-        expect(usr.token_reserve).to eq(4.0)
-        expect(usr.token_available).to eq(990.0)
+        expect(usr.token_reserve).to eq(0.0)
       end
 
       it "has the same maturation date" do

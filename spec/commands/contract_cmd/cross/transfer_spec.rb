@@ -69,17 +69,27 @@ RSpec.describe ContractCmd::Cross::Transfer do
       expect(subject.contract.status).to eq("open")
     end
 
+    # when the sell offer is made:
+    # - sellers reserve should not change
+    # - sellers balance should not change
+    # when the transfer cross is made:
+    # - funds transfers from buyer to seller
+    # - buyer account is decremented
     it 'adjusts the user balance' do
       usr_su = offer_su.user
       usr_bu = offer_bu.user
-      expect(usr1.balance).to eq(1000.0)
       expect(usr_su.balance).to eq(994.0)
+      expect(usr_su.token_reserve).to eq(0.0)
       expect(usr_bu.balance).to eq(1000.0)
+      expect(usr_bu.token_reserve).to eq(4.0)
+      expect(Offer.open.count).to eq(2)
       subject.project
-      usr1.reload ; usr_su.reload ; usr_bu.reload
-      expect(usr1.balance).to eq(996.0)
+      usr_su.reload ; usr_bu.reload
       expect(usr_su.balance).to eq(990.0)
+      expect(usr_su.token_reserve).to eq(0.0)
       expect(usr_bu.balance).to eq(996.0)
+      expect(usr_bu.token_reserve).to eq(0.0)
+      expect(Offer.open.count).to eq(0)
     end
   end
 
