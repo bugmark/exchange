@@ -122,6 +122,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.float    :price
       t.float    :value
       t.string   :side            # 'fixed' or 'unfixed'
+      t.string   :ancestry        # for position trees
       t.timestamps
     end
     add_index :positions, :uuid
@@ -134,6 +135,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :positions, :price
     add_index :positions, :value
     add_index :positions, :side
+    add_index :positions, :ancestry
 
     create_table :escrows do |t|
       t.string   :uuid
