@@ -44,7 +44,6 @@ gem 'tzinfo-data'                 # timezone support
 gem 'acts_as_list'                # sortable lists by position
 gem 'bootstrap'                   # twitter bootstrap
 
-gem 'ancestry'                    # postgres tree structures
 gem 'will_paginate'               # pagination
 gem 'pg_search'                   # full-text search
 
