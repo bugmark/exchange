@@ -52,6 +52,14 @@ class Position < ApplicationRecord
       where('positions.uuid NOT IN (select salable_position_uuid FROM offers WHERE offers.salable_position_uuid IS NOT NULL)')
     end
 
+    def root
+      where('parent_uuid IS NULL')
+    end
+
+    def leaf
+      where('positions.uuid NOT IN (select parent_uuid FROM positions)')
+    end
+
     def counterside_for(position)
       where(side: position.counterside)
     end
