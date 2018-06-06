@@ -56,6 +56,10 @@ class Position < ApplicationRecord
       where('parent_uuid IS NULL')
     end
 
+    def branch
+      where('positions.uuid IN (SELECT parent_uuid FROM positions WHERE positions.parent_uuid IS NOT NULL)')
+    end
+
     def leaf
       where('positions.uuid NOT IN (SELECT parent_uuid FROM positions WHERE positions.parent_uuid IS NOT NULL)')
     end

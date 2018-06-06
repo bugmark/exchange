@@ -48,14 +48,6 @@ class Offer < ApplicationRecord
       define_method("not_#{status}".to_sym) { without_status(status) }
     end
 
-    def assigned
-      where("uuid IN (SELECT offer_uuid FROM positions)")
-    end
-
-    def unassigned
-      where("uuid NOT IN (SELECT offer_uuid FROM positions)")
-    end
-
     def with_child
       where("uuid IN (SELECT prototype_uuid FROM offers)")
     end
@@ -91,6 +83,69 @@ class Offer < ApplicationRecord
     def display_order
       order('maturation_range asc').order('type asc').order('volume asc')
     end
+
+    # ------------------------------------------------------------------------
+    # Cross-Model Scopes
+    #
+    # START BY READING THIS REFERENCE!
+    # http://aokolish.me/blog/2015/05/26/how-to-simplify-active-record-scopes-that-reference-other-tables/
+    #
+    # Examples:
+    # - Offer.assigned.merge(Position.open)
+    # - Offer.unassigned.merge(Position.crossed)
+    #
+    # Note that you can use `join_position`, `join_contract` and `distinct_offer`
+    # in standalone operations:
+    # - Offer.join_position.merge(Position.leaf).distinct_offer
+    #
+    # You can also compose with Offer-specific scopes:
+    # - Offer.offered.merge(Position.open).crossed
+    # - Offer.offered.merge(Position.open).open
+    #
+
+    def join_position
+      joins('LEFT JOIN positions ON positions.offer_uuid = offers.uuid')
+    end
+
+    def assigned
+      join_position
+        .where("offers.uuid IN (SELECT offer_uuid FROM positions)")
+    end
+
+    def unassigned
+      join_position
+        .where("offers.uuid NOT IN (SELECT offer_uuid FROM positions)")
+    end
+
+    def with_root_position
+      join_position
+        .merge(Position.root)
+        .assigned
+    end
+
+    def with_branch_position
+      join_position
+        .merge(Position.branch)
+        .assigned
+    end
+
+    def with_leaf_position
+      join_position
+        .merge(Position.leaf)
+        .assigned
+    end
+
+    def without_branch_position
+      join_position
+        .merge(Position.leaf)
+        .or(unassigned)
+    end
+
+    def distinct_offer
+      select("DISTINCT offers.*")
+    end
+
+    # ------------------------------------------------------------------------
 
     def select_subset
       select(%i(id uuid type user_uuid salable_position_uuid prototype_uuid volume price value poolable aon status stm_issue_uuid stm_status))
