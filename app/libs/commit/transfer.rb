@@ -36,7 +36,7 @@ class Commit::Transfer < Commit
 
   def gen_position(offer, ctx, price)
     transfer_uuid = SecureRandom.uuid
-    posargs = {
+    buyargs = {
       uuid:           SecureRandom.uuid      ,
       volume:         offer.vol.to_i         ,
       price:          1 - price.to_f         ,
@@ -44,17 +44,19 @@ class Commit::Transfer < Commit
       offer_uuid:     offer.obj.uuid         ,
       user_uuid:      offer.obj.user.uuid    ,
       amendment_uuid: ctx.a_uuid             ,
-      escrow_uuid:    offer.obj.salable_position.escrow_uuid,
+      escrow_uuid:    offer.obj.salable_position&.escrow_uuid,
       parent_uuid:    offer.obj.salable_position_uuid,
       transfer_uuid:  transfer_uuid
     }
+    sellargs = buyargs.merge({price: 0, volume: 0})
     oid = offer.obj.id
-    ctx_event("position#{oid}", Event::PositionCreated, posargs)
-    lcl_val = posargs[:volume] * posargs[:price]
+    lcl_val = buyargs[:volume] * buyargs[:price]
     ctx_event("offer#{oid}", Event::OfferCrossed, {uuid: offer.obj.uuid})
     if offer.obj.is_sell?
+      ctx_event("position#{oid}", Event::PositionCreated, sellargs)
       ctx_event("user#{oid}" , Event::UserCredited, {uuid: offer.obj.user_uuid, amount: lcl_val})
     else
+      ctx_event("position#{oid}", Event::PositionCreated, buyargs)
       ctx_event("user#{oid}" , Event::UserDebited, {uuid: offer.obj.user_uuid, amount: lcl_val})
     end
   end

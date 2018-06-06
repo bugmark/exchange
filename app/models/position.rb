@@ -64,6 +64,10 @@ class Position < ApplicationRecord
       where('positions.uuid NOT IN (SELECT parent_uuid FROM positions WHERE positions.parent_uuid IS NOT NULL)')
     end
 
+    def payable
+      where('volume > 0').leaf
+    end
+
     def counterside_for(position)
       where(side: position.counterside)
     end
