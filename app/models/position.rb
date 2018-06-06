@@ -49,7 +49,7 @@ class Position < ApplicationRecord
     end
 
     def unoffered
-      where('positions.uuid NOT IN (select salable_position_uuid FROM offers WHERE offers.salable_position_uuid IS NOT NULL)')
+      where('positions.uuid NOT IN (SELECT salable_position_uuid FROM offers WHERE offers.salable_position_uuid IS NOT NULL)')
     end
 
     def root
@@ -57,7 +57,7 @@ class Position < ApplicationRecord
     end
 
     def leaf
-      where('positions.uuid NOT IN (select parent_uuid FROM positions)')
+      where('positions.uuid NOT IN (SELECT parent_uuid FROM positions WHERE positions.parent_uuid IS NOT NULL)')
     end
 
     def counterside_for(position)

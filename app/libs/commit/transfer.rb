@@ -44,11 +44,10 @@ class Commit::Transfer < Commit
       offer_uuid:     offer.obj.uuid         ,
       user_uuid:      offer.obj.user.uuid    ,
       amendment_uuid: ctx.a_uuid             ,
-      escrow_uuid:    ctx.e_uuid             ,
-      parent_uuid:    offer.salable_position_uuid,
+      escrow_uuid:    offer.obj.salable_position.escrow_uuid,
+      parent_uuid:    offer.obj.salable_position_uuid,
       transfer_uuid:  transfer_uuid
     }
-    offer
     oid = offer.obj.id
     ctx_event("position#{oid}", Event::PositionCreated, posargs)
     lcl_val = posargs[:volume] * posargs[:price]
