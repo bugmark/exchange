@@ -75,6 +75,8 @@ class Offer < ApplicationRecord
 
     def open() where(status: 'open') end
     def not_open() where.not(status: 'open') end
+    def canceled() where(status: 'canceled') end
+    def not_canceled() where.not(status: 'canceled') end
     def expired() where(status: 'expired') end
     def not_expired() where.not(status: 'expired') end
     def crossed() where(status: 'crossed') end
@@ -342,14 +344,6 @@ class Offer < ApplicationRecord
     ! is_expired?
   end
 
-  def deposit
-    (self.volume * self.price).to_i
-  end
-
-  def profit
-    (self.volume * (1 - self.price)).to_i
-  end
-
   def is_buy?()          self.intent == "buy"                    end
   def is_sell?()         self.intent == "sell"                   end
   def is_unfixed?()      self.side   == "unfixed"                end
@@ -358,6 +352,30 @@ class Offer < ApplicationRecord
   def is_sell_fixed?()   self.type   == "Offer::Sell::Fixed"     end
   def is_buy_unfixed?()  self.type   == "Offer::Buy::Unfixed"    end
   def is_buy_fixed?()    self.type   == "Offer::Buy::Fixed"      end
+
+  # ----- volume / price / value / costs -----
+
+  def fixed_cost
+    return value          if is_buy_fixed?
+    return volume - value if is_buy_unfixed?
+    nil
+  end
+  alias_method :fixer_cost, :fixed_cost
+
+  def unfixed_cost
+    return volume - value if is_buy_fixed?
+    return value          if is_buy_unfixed?
+    nil
+  end
+  alias_method :funder_cost, :unfixed_cost
+
+  def deposit
+    (self.volume * self.price).to_i
+  end
+
+  def profit
+    (self.volume * (1 - self.price)).to_i
+  end
 
   private
 

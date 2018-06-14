@@ -104,6 +104,10 @@ class BugmTime < Time
       next_week_ends(count).map {|x| x.strftime("%Y-%m-%d")}
     end
 
+    def next_week_days(count = 4)
+      next_week_ends(count).map {|x| x.strftime("%b %d")}
+    end
+
     # private
 
     def minutes(count = 1)
