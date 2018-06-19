@@ -83,7 +83,6 @@ end
 #
 #  id             :bigint(8)        not null, primary key
 #  uuid           :string
-#  exid           :string
 #  type           :string
 #  sequence       :integer
 #  contract_uuid  :string

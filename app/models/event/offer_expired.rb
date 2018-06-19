@@ -1,33 +1,21 @@
-class Event::UserCredited < Event
+require "ext/hash"
 
-  jsonb_accessor :payload, "uuid"   => :string
-  jsonb_accessor :payload, "amount" => :float
+class Event::OfferExpired < Event
 
-  jsonb_accessor :jfields, :transfer_uuid => :string
+  jsonb_fields_for :payload, Offer
 
-  validates :uuid   , presence: true
-  validates :amount , presence: true
-
-  def cast_object
-    user.balance += amount if user
-    user
-  end
-
-  def influx_fields
-    {
-      credit_amount:  self.amount          ,
-      new_balance:    user.balance
-    }
-  end
-
-  def tgt_user_uuids
-    [uuid]
-  end
+  validates :uuid, presence: true
 
   private
 
-  def user
-    @usr ||= User.find_by_uuid(uuid)
+  def cast_object
+    offer = Offer.find_by_uuid(uuid)
+    offer.status = "expired"
+    offer
+  end
+
+  def tgt_user_uuids
+    [user_uuid]
   end
 end
 

@@ -148,7 +148,6 @@ end
 #
 #  id             :bigint(8)        not null, primary key
 #  uuid           :string
-#  exid           :string
 #  offer_uuid     :string
 #  user_uuid      :string
 #  amendment_uuid :string

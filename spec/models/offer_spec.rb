@@ -168,7 +168,6 @@ end
 #
 #  id                    :bigint(8)        not null, primary key
 #  uuid                  :string
-#  exid                  :string
 #  type                  :string
 #  tracker_type          :string
 #  user_uuid             :string

@@ -199,7 +199,6 @@ end
 #
 #  id               :bigint(8)        not null, primary key
 #  uuid             :string
-#  exid             :string
 #  prototype_uuid   :integer
 #  type             :string
 #  status           :string
