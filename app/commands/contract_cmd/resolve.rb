@@ -37,7 +37,7 @@ module ContractCmd
     end
 
     def base_opts(input)
-      cmd_opts.merge(input)
+      cmd_opts(input).merge(input)
     end
 
     def resolvable_contract

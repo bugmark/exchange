@@ -19,7 +19,7 @@ module ContractCmd
         @bundle = Bundle.new(type, offer, counters).generate
         @commit = commit_class.new(bundle).generate
         @commit.events.each do |ev|
-          add_event(ev.name, ev.klas.new(cmd_opts.merge(ev.params)))
+          add_event(ev.name, ev.klas.new(cmd_opts(ev.params).merge(ev.params)))
         end
       end
     end

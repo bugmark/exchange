@@ -18,6 +18,7 @@ FactoryBot.define do
     end
     name { email.split("@").first }
     password "bugmark"
+    note     ""
 
     factory :user, class: UserCmd::Create do
       balance 1000.0

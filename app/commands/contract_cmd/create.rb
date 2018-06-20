@@ -10,7 +10,7 @@ module ContractCmd
     private
 
     def contract_opts(args)
-      cmd_opts.merge(args)
+      cmd_opts(args).merge(args)
     end
 
     def unique_contract

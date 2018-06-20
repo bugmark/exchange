@@ -29,7 +29,7 @@ module ContractCmd
         stm_labels:     atts["labels"]     || proto.stm_labels     ,
         maturation:     atts["maturation"] || proto.maturation
       }.without_blanks
-      cmd_opts.merge(vals)
+      cmd_opts(atts).merge(vals).stringify_keys
     end
 
     def unique_clone

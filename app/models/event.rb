@@ -21,12 +21,15 @@ class Event < ApplicationRecord
         acc
       end
 
+      notes = fields.stringify_keys.slice("note", "tags ")
+
       new_fields = fields
         .without_blanks
         .merge(opts.fetch(:extras, {}))
         .without(*(opts.fetch(:exclude, [])))
         .delete_if {|k, v| %i(jsonb hstore tsrange).include?(v)}
         .delete_if {|k, v| %w(created_at updated_at).include?(k)}
+        .merge(notes)
 
       new_fields.each do |key, val|
         jsonb_accessor field, {key => val}
@@ -49,6 +52,9 @@ class Event < ApplicationRecord
 
   def ev_cast
     self.user_uuids = tgt_user_uuids
+    tst_log payload
+    self.note = payload.delete("note")
+    self.tags = payload.delete("tags")
     if valid?
       if new_object&.save
         self.projected_at = BugmTime.now

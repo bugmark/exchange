@@ -123,7 +123,8 @@ class ApplicationCommand
     @cmd_type ||= self.class.name
   end
 
-  def cmd_opts
-    {"cmd_type" => cmd_type, "cmd_uuid" => cmd_uuid}
+  def cmd_opts(opts = {})
+    base_opts = opts.stringify_keys.slice("note", "tags")
+    {"cmd_type" => cmd_type, "cmd_uuid" => cmd_uuid}.merge(base_opts)
   end
 end

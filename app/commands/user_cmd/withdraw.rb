@@ -13,7 +13,7 @@ module UserCmd
     private
 
     def withdraw_opts(opts)
-      cmd_opts.merge(opts.slice(*%w(uuid amount)))
+      cmd_opts(opts).merge(opts.slice(*%w(uuid amount)))
     end
 
     def has_amount?(args)

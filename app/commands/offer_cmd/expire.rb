@@ -25,7 +25,7 @@ module OfferCmd
     end
 
     def clean_args(opts)
-      cmd_opts.merge(opts)
+      cmd_opts(opts).merge(opts)
     end
   end
 end

@@ -96,6 +96,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_column table, :stm_body         , :string
       add_column table, :stm_status       , :string
       add_column table, :stm_labels       , :string
+      add_column table, :stm_trader_uuid  , :string
+      add_column table, :stm_group_uuid   , :string
       add_column table, :stm_comments     , :jsonb  , null: false, default: {}
       add_column table, :stm_jfields      , :jsonb  , null: false, default: {}
       add_column table, :stm_xfields      , :hstore , null: false, default: {}
@@ -106,6 +108,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :stm_body
       add_index table, :stm_status
       add_index table, :stm_labels
+      add_index table, :stm_trader_uuid
+      add_index table, :stm_group_uuid
       add_index table, :stm_comments , :using => :gin
       add_index table, :stm_jfields  , :using => :gin
       add_index table, :stm_xfields  , :using => :gin
@@ -180,6 +184,29 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :users, :exid
     add_index :users, :auth_token
     add_index :users, :jfields, using: :gin
+
+    create_table :user_groups do |t|
+      t.string   :uuid
+      t.string   :owner_uuid
+      t.string   :name
+      t.string   :tags
+      t.jsonb    :jfields , null: false, default: {}
+      t.timestamps
+    end
+    add_index :user_groups, :uuid
+    add_index :user_groups, :owner_uuid
+    add_index :user_groups, :name
+    add_index :user_groups, :tags
+    add_index :user_groups, :jfields, using: :gin
+
+    create_table :user_memberships do |t|
+      t.string :uuid
+      t.string :user_uuid
+      t.string :group_uuid
+    end
+    add_index :user_memberships, :uuid
+    add_index :user_memberships, :user_uuid
+    add_index :user_memberships, :group_uuid
 
     # the event store...
     create_table :events do |t|

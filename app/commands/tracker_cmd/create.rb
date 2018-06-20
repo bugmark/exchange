@@ -26,7 +26,7 @@ module TrackerCmd
 
     def tracker_opts(args)
       args["type"] = tracker_type(args["type"])
-      cmd_opts.merge(args)
+      cmd_opts(args).merge(args)
     end
   end
 end

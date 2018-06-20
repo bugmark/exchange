@@ -40,7 +40,7 @@ module TrackerCmd
     end
 
     def event_opts(args)
-      cmd_opts.merge(args)
+      cmd_opts(args).merge(args)
     end
 
     def labels_for(el)
