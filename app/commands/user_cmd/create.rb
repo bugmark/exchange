@@ -6,7 +6,6 @@ module UserCmd
       args["encrypted_password"] = pwd_digest(args["password"])
       args["amount"]             = args["balance"] if args["balance"]
       args["uuid"]               = args["uuid"] || SecureRandom.uuid
-      tst_log usr_opts(args), color: "red"
       add_event(:usr1, Event::UserCreated.new(usr_opts(args)))
       add_event(:usr2, Event::UserDeposited.new(deposit_opts(args))) if has_amount?(args)
     end
