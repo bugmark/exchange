@@ -76,6 +76,8 @@ end
 #  stm_body              :string
 #  stm_status            :string
 #  stm_labels            :string
+#  stm_trader_uuid       :string
+#  stm_group_uuid        :string
 #  stm_comments          :jsonb            not null
 #  stm_jfields           :jsonb            not null
 #  stm_xfields           :hstore           not null

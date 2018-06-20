@@ -13,6 +13,8 @@ class User < ApplicationRecord
     has_many :offers_sell, class_name: "Offer::Sell"
     has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
     has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
+    has_many :groups     , class_name: "UserGroup"     , foreign_key: "owner_uuid"
+    has_many :memberships, class_name: "UserMembership"
     has_many :positions
   end
 
