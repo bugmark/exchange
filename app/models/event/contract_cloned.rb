@@ -11,6 +11,11 @@ class Event::ContractCloned < Event
   def cast_object
     Contract.new(payload.without_blanks)
   end
+
+  def tgt_user_uuids
+    binding.pry
+    []
+  end
 end
 
 # == Schema Information

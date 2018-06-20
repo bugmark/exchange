@@ -13,6 +13,11 @@ class Event::ContractCanceled < Event
     contract
   end
 
+  def tgt_user_uuids
+    binding.pry
+    []
+  end
+
   private
 
   def contract

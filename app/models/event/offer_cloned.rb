@@ -19,6 +19,10 @@ class Event::OfferCloned < Event
     Offer.new(params)
   end
 
+  def tgt_user_uuids
+    [user_uuid]
+  end
+
   private
 
   def valid_params(attributes)

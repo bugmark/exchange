@@ -32,6 +32,9 @@ class Event::EscrowUpdated < Event
     @esc ||= Escrow.find_by_uuid(uuid)
   end
 
+  def tgt_user_uuids
+    escrow.users.pluck(:uuid)
+  end
 end
 
 # == Schema Information

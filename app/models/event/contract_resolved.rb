@@ -14,6 +14,12 @@ class Event::ContractResolved < Event
     contract
   end
 
+  def tgt_user_uuids
+    contract.escrows.reduce([]) do |acc, esc|
+      acc << esc.users.pluck(:uuid)
+    end.flatten.uniq
+  end
+
   private
 
   def contract

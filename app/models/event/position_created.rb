@@ -12,6 +12,10 @@ class Event::PositionCreated < Event
   def cast_object
     Position.new(payload.without_blanks)
   end
+
+  def tgt_user_uuids
+    [user_uuid]
+  end
 end
 
 # == Schema Information

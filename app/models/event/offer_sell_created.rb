@@ -18,6 +18,10 @@ class Event::OfferSellCreated < Event
 
   before_validation :set_defaults
 
+  def tgt_user_uuids
+    [user_uuid]
+  end
+
   private
 
   def cast_object

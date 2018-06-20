@@ -9,6 +9,10 @@ class Event::EscrowDistributed < Event
   def cast_object
     Escrow.new(payload.without_blanks)
   end
+
+  def tgt_user_uuids
+    []
+  end
 end
 
 # == Schema Information

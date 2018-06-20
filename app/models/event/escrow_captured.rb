@@ -14,6 +14,9 @@ class Event::EscrowCaptured < Event
     @esc ||= Escrow.new(payload.without_blanks)
   end
 
+  def tgt_user_uuids
+    []
+  end
 end
 
 # == Schema Information

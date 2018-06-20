@@ -12,6 +12,10 @@ class Event::PositionGranted < Event
   def cast_object
     Position.new(payload.without_blanks)
   end
+
+  def tgt_user_uuids
+    []
+  end
 end
 
 # == Schema Information
