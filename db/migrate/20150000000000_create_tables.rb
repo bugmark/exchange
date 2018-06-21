@@ -185,6 +185,26 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :users, :auth_token
     add_index :users, :jfields, using: :gin
 
+    create_table :user_ledgers do |t|
+      t.string   :uuid
+      t.string   :user_uuid
+      t.string   :paypro_uuid
+      t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
+      t.string   :name
+      t.string   :currency
+      t.float    :balance , default: 0.0
+      t.jsonb    :jfields , null: false, default: {}
+      t.timestamps
+    end
+    add_index :user_ledgers, :uuid
+    add_index :user_ledgers, :user_uuid
+    add_index :user_ledgers, :paypro_uuid
+    add_index :user_ledgers, :sequence
+    add_index :user_ledgers, :name
+    add_index :user_ledgers, :currency
+    add_index :user_ledgers, :balance
+    add_index :user_ledgers, :jfields, using: :gin
+
     create_table :user_groups do |t|
       t.string   :uuid
       t.string   :owner_uuid
@@ -207,6 +227,13 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :user_memberships, :uuid
     add_index :user_memberships, :user_uuid
     add_index :user_memberships, :group_uuid
+
+    create_table :paypros do |t|
+      t.string :uuid
+      t.string :name
+      t.timestamps
+    end
+    add_index :paypros, :uuid
 
     # the event store...
     create_table :events do |t|
