@@ -27,7 +27,7 @@ Your host machine can exist in a few different forms:
 2) a Virtual Machine running locally (using Vagrant)
 3) a Virtual Machine running in the data center
 
-Of the three options, the best and simplest is 3), runngeorging in the data center.
+Of the three options, the best and simplest is 3), running in the data center.
 We like Linode - you can allocate a cheap node for development that will cost
 $5/month.
 
