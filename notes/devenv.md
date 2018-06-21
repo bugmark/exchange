@@ -102,11 +102,11 @@ Follow these steps to bootstrap the app in your development environment.
 
 1. Get the VM IP address `ifconfig | grep addr`  
 
-2. On your local machine (the host)
+2. On your local machine (host)
   - On Linux: Add the VM IP Address to `/etc/hosts`
   - On Windows: VirtualBox must be setup to use a bridged network adapter to allow a connection from the host to the Bugmark server on the VM. Restart VM `sudo shutdown -r` and restart the tmux development session, if necessary. No other changes are needed.
 
-3. On your local machine, browse to `http://<VM IP address>:3000`
+3. On your local machine (host), browse to `http://<VM IP address>:3000`
 
 ## Online Collaboration
 
