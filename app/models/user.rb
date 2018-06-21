@@ -16,6 +16,7 @@ class User < ApplicationRecord
     has_many :groups     , class_name: "UserGroup"     , foreign_key: "owner_uuid"
     has_many :memberships, class_name: "UserMembership"
     has_many :positions
+    has_many :ledgers    , class_name: "UserLedger"
   end
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
