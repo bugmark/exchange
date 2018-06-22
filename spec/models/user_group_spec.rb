@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Paypro, type: :model do
+RSpec.describe UserGroup, type: :model do
   def valid_params(opts = {})
     {}
   end
@@ -9,7 +9,7 @@ RSpec.describe Paypro, type: :model do
   subject    { klas.new(valid_params)            }
 
   describe "Associations" do
-    it { should respond_to(:ledgers)             }
+    it { should respond_to(:owner)               }
     it { should respond_to(:users)               }
   end
 end
