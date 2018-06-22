@@ -19,6 +19,7 @@ end
 #  name        :string
 #  currency    :string
 #  balance     :float            default(0.0)
+#  status      :string           default("open")
 #  jfields     :jsonb            not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

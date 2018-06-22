@@ -14,6 +14,9 @@ end
 #  id         :bigint(8)        not null, primary key
 #  uuid       :string
 #  name       :string
+#  status     :string           default("open")
+#  currencies :string           default([]), is an Array
+#  pubkey     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
