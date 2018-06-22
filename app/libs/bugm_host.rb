@@ -22,7 +22,9 @@ class BugmHost
       tables = %w(Tracker User Offer Escrow Position Amendment Contract Event)
       tables.each {|el| Object.const_get(el).destroy_all}
       BugmTime.clear_offset
+      PayproCmd::Create.new({})
       UserCmd::Create.new({email: 'admin@bugmark.net', password: 'bugmark'}).project
+      Paypro.create(uuid: SecureRandom.uuid, name: "BmxTest", currency: "XXX")
     end
 
     def reset_grafana

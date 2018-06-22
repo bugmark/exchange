@@ -42,6 +42,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :type                      # BuyFixed, BuyUnfixed, SellFixed, SellUnfixed
       t.string   :tracker_type              # BugZilla, GitHub, CVE
       t.string   :user_uuid                 # the party who made the offer
+      t.string   :ledger_uuid               # the ledger used to make the offer
       t.string   :prototype_uuid            # optional offer prototype
       t.string   :amendment_uuid            # the generating amendment
       t.string   :salable_position_uuid     # for SaleOffers - a Position
@@ -98,6 +99,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_column table, :stm_labels       , :string
       add_column table, :stm_trader_uuid  , :string
       add_column table, :stm_group_uuid   , :string
+      add_column table, :stm_currency     , :string
+      add_column table, :stm_paypro_uuid  , :string
       add_column table, :stm_comments     , :jsonb  , null: false, default: {}
       add_column table, :stm_jfields      , :jsonb  , null: false, default: {}
       add_column table, :stm_xfields      , :hstore , null: false, default: {}
@@ -193,6 +196,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :name
       t.string   :currency
       t.float    :balance , default: 0.0
+      t.string   :status  , default: 'open'
       t.jsonb    :jfields , null: false, default: {}
       t.timestamps
     end
@@ -203,6 +207,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :user_ledgers, :name
     add_index :user_ledgers, :currency
     add_index :user_ledgers, :balance
+    add_index :user_ledgers, :status
     add_index :user_ledgers, :jfields, using: :gin
 
     create_table :user_groups do |t|
@@ -231,9 +236,14 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :paypros do |t|
       t.string :uuid
       t.string :name
+      t.string :status    , default: 'open'
+      t.string :currencies, array: true, default: []
+      t.string :pubkey
       t.timestamps
     end
     add_index :paypros, :uuid
+    add_index :paypros, :name
+    add_index :paypros, :status
 
     # the event store...
     create_table :events do |t|
