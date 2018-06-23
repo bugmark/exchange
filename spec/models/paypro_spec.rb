@@ -22,7 +22,7 @@ end
 #  uuid       :string
 #  name       :string
 #  status     :string           default("open")
-#  currencies :string           default([]), is an Array
+#  currency   :string
 #  pubkey     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

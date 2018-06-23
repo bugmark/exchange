@@ -16,14 +16,14 @@ end
 
 # == Schema Information
 #
-# Table name: paypros
+# Table name: user_groups
 #
 #  id         :bigint(8)        not null, primary key
 #  uuid       :string
+#  owner_uuid :string
 #  name       :string
-#  status     :string           default("open")
-#  currencies :string           default([]), is an Array
-#  pubkey     :string
+#  tags       :string
+#  jfields    :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

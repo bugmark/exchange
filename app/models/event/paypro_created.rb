@@ -4,10 +4,7 @@ class Event::PayproCreated < Event
 
   jsonb_fields_for :payload, Paypro
 
-  # validates :uuid       , presence: true
-  # validates :user_uuid  , presence: true
-
-  # jsonb_accessor :jfields, :transfer_uuid => :string
+  validates :uuid , presence: true
 
   def cast_object
     Paypro.new(payload.without_blanks)

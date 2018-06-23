@@ -1,20 +1,19 @@
 require 'ext/hash'
 
-class Event::PositionRevoked < Event
+class Event::PayproUpdated < Event
 
-  jsonb_fields_for :payload, Position
+  jsonb_accessor :payload, "uuid"   => :string
+  jsonb_accessor :payload, "name"   => :string
+  jsonb_accessor :payload, "status" => :string
 
-  validates :uuid       , presence: true
-  validates :user_uuid  , presence: true
-
-  jsonb_accessor :jfields, :transfer_uuid => :string
+  validates :uuid, presence: true
+  validates :name, presence: true
 
   def cast_object
-    Position.new(payload.without_blanks)
-  end
-
-  def tgt_user_uuids
-    []
+    obj = Paypro.find_by_uuid(uuid)
+    obj.name   = name   if name
+    obj.status = status if status
+    obj
   end
 end
 

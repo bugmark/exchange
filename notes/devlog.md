@@ -13,12 +13,48 @@
 
 ## 22 Jun Fri
 
-- [ ] PayproCmd::Create | Event::PayproCreated
-- [ ] PayproCmd::Update | Event::PayproUpdated
-- [ ] PayproCmd::Close  | Event::PayproClosed
+- [x] UserGroup spec
+- [x] UserLedger spec
+- [x] Paypro spec
+- [x] PayproCmd::Create  
+- [x] Event::PayproCreated 
+- [x] Create :paypro factory
+- [x] Create spec for :paypro factory
+- [x] PayproCmd::Update 
+- [x] Event::PayproUpdated
+- [x] PayproCmd::Close  
+- [x] Event::PayproClosed
+- [x] BugmHost::Reset should create a YAML paypro
 
-- [ ] BugmHost::Reset should create a YAML paypro
+- [ ] UserCmd::GroupCreate 
+- [ ] Event::GroupCreated
+
+- [ ] UserCmd::GroupDelete
+- [ ] Event::GroupDeleted
+
+- [ ] UserCmd::LedgerCreate 
+- [ ] Event::LedgerCreated
+
+- [ ] UserCmd::LedgerUpdate   
+- [ ] Event::LedgerUpdated
+
+- [ ] UserCmd::LedgerClose    
+- [ ] Event::LedgerClosed
+
+- [ ] UserCmd::LedgerDeposit  
+- [ ] Event::LedgerDeposited
+
+- [ ] UserCmd::LedgerWithdraw 
+- [ ] Event::LedgerWithdrawn
+
+- [ ] UserCmd::LedgerCredit   
+- [ ] Event::LedgerCredited
+
+- [ ] UserCmd::LedgerDebit    
+- [ ] Event::LedgerDebited
+
 - [ ] UserCmd::Create should generate a default ledger
+
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro
 - [ ] cross   - use ledger/debit command
@@ -28,10 +64,3 @@
 - [ ] user.token_reserve   -> user.ledger_reserve
 - [ ] user.token_available -> user.ledger_available
 
-- [ ] UserCmd::LedgerCreate   
-- [ ] UserCmd::LedgerUpdate
-- [ ] UserCmd::LedgerClose
-- [ ] UserCmd::LedgerDeposit
-- [ ] UserCmd::LedgerWithdraw
-- [ ] UserCmd::LedgerCredit
-- [ ] UserCmd::LedgerDebit

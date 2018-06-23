@@ -24,7 +24,7 @@ class BugmHost
       BugmTime.clear_offset
       PayproCmd::Create.new({})
       UserCmd::Create.new({email: 'admin@bugmark.net', password: 'bugmark'}).project
-      Paypro.create(uuid: SecureRandom.uuid, name: "BmxTest", currency: "XXX")
+      Paypro.create(uuid: SecureRandom.uuid, name: "BmxTest", currency: "XTS")
     end
 
     def reset_grafana

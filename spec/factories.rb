@@ -108,6 +108,15 @@ FactoryBot.define do
     type       "Contract::Test"
     status     "open"
   end
+
+  factory :paypro, class: PayproCmd::Create  do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    uuid     SecureRandom.uuid
+    sequence :name do |n| "Paypro#{n}" end
+    currency "XTS"
+  end
 end
 
 module FBX

@@ -4,22 +4,17 @@ require 'ext/hash'
 # TODO: write tests
 class Event::GroupCreated < Event
 
-  jsonb_fields_for :payload, User
+  jsonb_fields_for :payload, UserGroup
 
-  validates :uuid , presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
-
-  def initialize(opts)
-    super(opts)
-  end
+  validates :uuid      , presence: true
+  validates :owner_uuid, presence: true
 
   def cast_object
-    User.new(payload.without_blanks)
+    UserGroup.new(payload.without_blanks)
   end
 
   def tgt_user_uuids
-    [uuid]
+    [owner_uuid]
   end
 end
 

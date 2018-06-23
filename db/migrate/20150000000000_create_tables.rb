@@ -237,12 +237,13 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string :uuid
       t.string :name
       t.string :status    , default: 'open'
-      t.string :currencies, array: true, default: []
+      t.string :currency
       t.string :pubkey
       t.timestamps
     end
     add_index :paypros, :uuid
     add_index :paypros, :name
+    add_index :paypros, :currency
     add_index :paypros, :status
 
     # the event store...
