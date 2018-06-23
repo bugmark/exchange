@@ -27,10 +27,19 @@
 - [x] BugmHost::Reset should create a YAML paypro
 - [x] Event::GroupCreated
 
-- [ ] UserCmd::GroupCreate 
+## 23 Jun Sat
 
-- [ ] UserCmd::GroupDelete
-- [ ] Event::GroupDeleted
+- [x] UserCmd::GroupCreate 
+
+- [ ] Event::GroupClose
+- [ ] UserCmd::GroupClose
+
+
+- [ ] Event::GroupUserAdd 
+- [ ] UserCmd::GroupClose
+
+- [ ] Event::GroupClose
+- [ ] UserCmd::GroupClose
 
 - [ ] UserCmd::LedgerCreate 
 - [ ] Event::LedgerCreated

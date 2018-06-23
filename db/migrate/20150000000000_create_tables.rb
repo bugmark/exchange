@@ -216,12 +216,14 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :name
       t.string   :tags
       t.jsonb    :jfields , null: false, default: {}
+      t.string   :status  , default: 'open'
       t.timestamps
     end
     add_index :user_groups, :uuid
     add_index :user_groups, :owner_uuid
     add_index :user_groups, :name
     add_index :user_groups, :tags
+    add_index :user_groups, :status
     add_index :user_groups, :jfields, using: :gin
 
     create_table :user_memberships do |t|
