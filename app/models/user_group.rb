@@ -18,6 +18,7 @@ end
 #  name       :string
 #  tags       :string
 #  jfields    :jsonb            not null
+#  status     :string           default("open")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
