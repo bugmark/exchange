@@ -1,7 +1,5 @@
 require 'ext/hash'
 
-# TODO: write code
-# TODO: write tests
 class Event::GroupCreated < Event
 
   jsonb_fields_for :payload, UserGroup

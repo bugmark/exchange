@@ -25,9 +25,9 @@
 - [x] PayproCmd::Close  
 - [x] Event::PayproClosed
 - [x] BugmHost::Reset should create a YAML paypro
+- [x] Event::GroupCreated
 
 - [ ] UserCmd::GroupCreate 
-- [ ] Event::GroupCreated
 
 - [ ] UserCmd::GroupDelete
 - [ ] Event::GroupDeleted

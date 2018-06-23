@@ -4,13 +4,15 @@ RSpec.describe Event::GroupCreated, :type => :model do
 
   def valid_params(alt = {})
     {
-      cmd_type:           "Test::UserGroup"  ,
-      cmd_uuid:           SecureRandom.uuid  ,
-      name:               "PayPro Test"  ,
-      uuid:               SecureRandom.uuid  ,
+      cmd_type:   "Test::UserGroup"  ,
+      cmd_uuid:   SecureRandom.uuid  ,
+      name:       "PayPro Test"  ,
+      uuid:       SecureRandom.uuid  ,
+      owner_uuid: user.uuid
     }.merge(alt)
   end
 
+  let(:user)   { FB.create(:user).user   }
   let(:klas)   { described_class         }
   subject      { klas.new(valid_params)  }
 
@@ -22,25 +24,25 @@ RSpec.describe Event::GroupCreated, :type => :model do
       expect(subject).to be_valid
     end
 
-    it 'emits a tracker object' do
+    it 'emits a group object' do
       obj = subject.ev_cast
-      expect(obj).to be_a(Paypro)
+      expect(obj).to be_a(UserGroup)
     end
   end
 
   describe "Casting" do
     it "increments the paypro count" do
-      expect(Paypro.count).to eq(0)
+      expect(UserGroup.count).to eq(0)
       result = subject.ev_cast
-      expect(result).to be_a(Paypro)
-      expect(Paypro.count).to eq(1)
+      expect(result).to be_a(UserGroup)
+      expect(UserGroup.count).to eq(1)
     end
 
     it "increments the event count" do
       expect(Event.count).to eq(0)
       result = subject.ev_cast
-      expect(result).to be_a(Paypro)
-      expect(Event.count).to eq(1)
+      expect(result).to be_a(UserGroup)
+      expect(Event.count).to eq(3)
     end
   end
 end
