@@ -25,6 +25,16 @@ FactoryBot.define do
     end
   end
 
+  factory :user_group, class: UserCmd::GroupOpen do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    sequence :name do |n|
+      "Group#{n}"
+    end
+    owner_uuid { FB.create(:user).user&.uuid }
+  end
+
   factory :gh_tracker, class: TrackerCmd::GhCreate do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }

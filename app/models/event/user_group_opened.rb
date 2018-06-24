@@ -1,25 +1,32 @@
 require 'ext/hash'
 
-# TODO: write code
-# TODO: write tests
-class Event::GroupDeleted < Event
+class Event::UserGroupOpened < Event
 
-  jsonb_fields_for :payload, User
+  jsonb_fields_for :payload, UserGroup
 
-  validates :uuid , presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
-
-  def initialize(opts)
-    super(opts)
-  end
+  validates :uuid      , presence: true
+  validates :owner_uuid, presence: true
 
   def cast_object
-    User.new(payload.without_blanks)
+    group
   end
 
   def tgt_user_uuids
-    [uuid]
+    [owner_uuid]
+  end
+
+  private
+
+  def group
+    group = UserGroup.find_by(uuid: uuid) || UserGroup.new
+    group.update_attributes(group_args(payload))
+    group
+  end
+
+  def group_args(xargs)
+    args = xargs.stringify_keys.without_blanks
+    args["status"] = "open"
+    args
   end
 end
 

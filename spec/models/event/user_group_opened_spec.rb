@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Event::GroupCreated, :type => :model do
+RSpec.describe Event::UserGroupOpened, :type => :model do
 
   def valid_params(alt = {})
     {
       cmd_type:   "Test::UserGroup"  ,
       cmd_uuid:   SecureRandom.uuid  ,
-      name:       "PayPro Test"  ,
+      name:       "UserGroup Test"   ,
       uuid:       SecureRandom.uuid  ,
       owner_uuid: user.uuid
     }.merge(alt)

@@ -26,8 +26,6 @@ module GroupCmd
       args["price"]          = prototype.counter_price
       args["status"]         = "open"
       args["expiration"]     = prototype.expiration
-      # args["maturation_beg"] = prototype.maturation_range.first
-      # args["maturation_end"] = prototype.maturation_range.last
       excludes = %w(created_at updated_at id salable_position_uuid maturation_range)
       args = args.stringify_keys.without_blanks.without(*excludes)
       args

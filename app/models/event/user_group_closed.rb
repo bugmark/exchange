@@ -1,6 +1,6 @@
 require 'ext/hash'
 
-class Event::GroupCreated < Event
+class Event::UserGroupClosed < Event
 
   jsonb_fields_for :payload, UserGroup
 
@@ -8,11 +8,25 @@ class Event::GroupCreated < Event
   validates :owner_uuid, presence: true
 
   def cast_object
-    UserGroup.new(payload.without_blanks)
+    group
   end
 
   def tgt_user_uuids
     [owner_uuid]
+  end
+
+  private
+
+  def group
+    group = UserGroup.find_by(uuid: uuid) || UserGroup.new
+    group.update_attributes(group_args(payload))
+    group
+  end
+
+  def group_args(xargs)
+    args = xargs.stringify_keys.without_blanks
+    args["status"] = "closed"
+    args
   end
 end
 

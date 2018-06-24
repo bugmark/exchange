@@ -31,36 +31,42 @@
 
 - [x] UserCmd::GroupCreate 
 
-- [ ] Event::GroupClose
-- [ ] UserCmd::GroupClose
+## 24 Jun Sun
 
+- [x] Event::UserGroupOpened
+- [x] UserCmd::GroupOpen
+- [x] Factory :user_group
+- [x] Event::UserGroupClosed
+- [x] UserCmd::GroupClose
 
-- [ ] Event::GroupUserAdd 
-- [ ] UserCmd::GroupClose
+- [ ] Event::UserMembershipOpened
+- [ ] UserCmd::MembershipOpen
+- [ ] Factory :user_membership
 
-- [ ] Event::GroupClose
-- [ ] UserCmd::GroupClose
+- [ ] Event::UserMembershipClosed
+- [ ] UserCmd::MembershipClose
 
-- [ ] UserCmd::LedgerCreate 
-- [ ] Event::LedgerCreated
+- [ ] Event::UserLedgerOpened
+- [ ] UserCmd::LedgerOpen
+- [ ] Factory :user_ledger
 
+- [ ] Event::UserLedgerClosed
+- [ ] UserCmd::LedgerClose
+
+- [ ] Event::UserLedgerUpdated
 - [ ] UserCmd::LedgerUpdate   
-- [ ] Event::LedgerUpdated
 
-- [ ] UserCmd::LedgerClose    
-- [ ] Event::LedgerClosed
-
+- [ ] Event::UserLedgerDeposited
 - [ ] UserCmd::LedgerDeposit  
-- [ ] Event::LedgerDeposited
 
+- [ ] Event::UserLedgerWithdrawn
 - [ ] UserCmd::LedgerWithdraw 
-- [ ] Event::LedgerWithdrawn
 
+- [ ] Event::UserLedgerCredited
 - [ ] UserCmd::LedgerCredit   
-- [ ] Event::LedgerCredited
 
+- [ ] Event::UserLedgerDebited
 - [ ] UserCmd::LedgerDebit    
-- [ ] Event::LedgerDebited
 
 - [ ] UserCmd::Create should generate a default ledger
 

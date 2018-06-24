@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe GroupCmd::Create do
+RSpec.describe UserCmd::GroupOpen do
 
   require 'rails_helper'
 

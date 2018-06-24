@@ -216,7 +216,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :name
       t.string   :tags
       t.jsonb    :jfields , null: false, default: {}
-      t.string   :status  , default: 'open'
+      t.string   :status  , default: 'open'           # open | closed
       t.timestamps
     end
     add_index :user_groups, :uuid
@@ -230,10 +230,12 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string :uuid
       t.string :user_uuid
       t.string :group_uuid
+      t.string :status       , default: 'active'   # active | suspended
     end
     add_index :user_memberships, :uuid
     add_index :user_memberships, :user_uuid
     add_index :user_memberships, :group_uuid
+    add_index :user_memberships, :status
 
     create_table :paypros do |t|
       t.string :uuid
