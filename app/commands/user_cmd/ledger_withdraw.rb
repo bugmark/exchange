@@ -1,9 +1,10 @@
 module UserCmd
-  class Withdraw < ApplicationCommand
+  class LedgerWithdraw < ApplicationCommand
 
     def initialize(xargs)
       args = xargs.stringify_keys
-      add_event(:usr, Event::UserWithdrawn.new(withdraw_opts(args))) if has_amount?(args)
+      return unless has_amount?(args)
+      add_event(:usr, Event::UserLedgerWithdrawn.new(withdraw_opts(args)))
     end
 
     private

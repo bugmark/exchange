@@ -35,6 +35,23 @@ FactoryBot.define do
     owner_uuid { FB.create(:user).user&.uuid }
   end
 
+  factory :user_membership, class: UserCmd::MembershipOpen do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    user_uuid  { FB.create(:user).user&.uuid }
+    group_uuid { FB.create(:user_group).group&.uuid }
+  end
+
+  factory :user_ledger, class: UserCmd::LedgerOpen do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    user_uuid   { FB.create(:user).user&.uuid }
+    paypro_uuid { FB.create(:paypro).paypro&.uuid }
+    currency    "XTS"
+  end
+
   factory :gh_tracker, class: TrackerCmd::GhCreate do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }

@@ -42,28 +42,19 @@
 ## 25 Jun MON
 
 - [x] Event::UserMembershipOpened
-
-- [ ] UserCmd::MembershipOpen
-- [ ] Factory :user_membership
-
-- [ ] Event::UserMembershipClosed
-- [ ] UserCmd::MembershipClose
-
-- [ ] Event::UserLedgerOpened
-- [ ] UserCmd::LedgerOpen
-- [ ] Factory :user_ledger
-
-- [ ] Event::UserLedgerClosed
-- [ ] UserCmd::LedgerClose
-
-- [ ] Event::UserLedgerUpdated
-- [ ] UserCmd::LedgerUpdate   
-
-- [ ] Event::UserLedgerDeposited
-- [ ] UserCmd::LedgerDeposit  
-
-- [ ] Event::UserLedgerWithdrawn
-- [ ] UserCmd::LedgerWithdraw 
+- [x] UserCmd::MembershipOpen
+- [x] Factory :user_membership
+- [x] Event::UserMembershipClosed
+- [x] UserCmd::MembershipClose
+- [x] Event::UserLedgerOpened
+- [x] UserCmd::LedgerOpen
+- [x] Factory :user_ledger
+- [x] Event::UserLedgerClosed
+- [x] UserCmd::LedgerClose
+- [x] Event::UserLedgerDeposited
+- [x] UserCmd::LedgerDeposit  
+- [x] Event::UserLedgerWithdrawn
+- [x] UserCmd::LedgerWithdraw 
 
 - [ ] Event::UserLedgerCredited
 - [ ] UserCmd::LedgerCredit   

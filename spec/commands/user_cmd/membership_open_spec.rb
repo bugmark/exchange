@@ -10,16 +10,16 @@ RSpec.describe UserCmd::MembershipOpen do
       user_uuid:  user.uuid    ,
       group_uuid: group.uuid
     }
-  end  #.
+  end
 
-  let(:group) { FB.create(:group).group            }
+  let(:group) { FB.create(:user_group).group       }
   let(:user)  { FB.create(:user).user              }
   let(:klas)  { described_class                    }
   subject { klas.new(valid_params).project.group   }
 
   describe "Attributes" do
-    it { should respond_to :name       }
-    it { should respond_to :uuid       }
-    it { should respond_to :owner_uuid }
+    it { should respond_to :uuid        }
+    it { should respond_to :user_uuid   }
+    it { should respond_to :group_uuid  }
   end
 end

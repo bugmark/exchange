@@ -1,14 +1,15 @@
 module UserCmd
-  class Withdraw < ApplicationCommand
+  class LedgerDeposit < ApplicationCommand
 
     def initialize(xargs)
       args = xargs.stringify_keys
-      add_event(:usr, Event::UserWithdrawn.new(withdraw_opts(args))) if has_amount?(args)
+      return unless has_amount?(args)
+      add_event(:ledger, Event::UserLedgerDeposited.new(deposit_opts(args)))
     end
 
     private
 
-    def withdraw_opts(opts)
+    def deposit_opts(opts)
       cmd_opts(opts).merge(opts.slice(*%w(uuid amount)))
     end
 
