@@ -194,6 +194,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :paypro_uuid
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.string   :name
+      t.string   :description
       t.string   :currency
       t.float    :balance , default: 0.0
       t.string   :status  , default: 'open'
@@ -214,6 +215,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :uuid
       t.string   :owner_uuid
       t.string   :name
+      t.string   :description
       t.string   :tags
       t.jsonb    :jfields , null: false, default: {}
       t.string   :status  , default: 'open'           # open | closed

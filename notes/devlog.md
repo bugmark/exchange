@@ -1,17 +1,17 @@
 # Bugmark Exchange Devlog
 
-## 20 Jun Wed
+## 20 Jun WED
 
 - [x] create ledger object
 - [x] create paypro object
 
-## 21 Jun Thu
+## 21 Jun THU
 
 - [x] schema -> stm_currency
 - [x] schema -> stm_paypro_uuid
 - [x] schema -> Offer#ledger_uuid
 
-## 22 Jun Fri
+## 22 Jun FRI
 
 - [x] UserGroup spec
 - [x] UserLedger spec
@@ -27,11 +27,11 @@
 - [x] BugmHost::Reset should create a YAML paypro
 - [x] Event::GroupCreated
 
-## 23 Jun Sat
+## 23 Jun SAT
 
 - [x] UserCmd::GroupCreate 
 
-## 24 Jun Sun
+## 24 Jun SUN
 
 - [x] Event::UserGroupOpened
 - [x] UserCmd::GroupOpen
@@ -39,7 +39,10 @@
 - [x] Event::UserGroupClosed
 - [x] UserCmd::GroupClose
 
-- [ ] Event::UserMembershipOpened
+## 25 Jun MON
+
+- [x] Event::UserMembershipOpened
+
 - [ ] UserCmd::MembershipOpen
 - [ ] Factory :user_membership
 
@@ -68,6 +71,7 @@
 - [ ] Event::UserLedgerDebited
 - [ ] UserCmd::LedgerDebit    
 
+- [ ] UserCmd::LedgerTransfer(src, tgt) 
 - [ ] UserCmd::Create should generate a default ledger
 
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
