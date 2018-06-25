@@ -28,6 +28,7 @@
 | FIAT     | AUD | Australian Dollar |
 | FIAT     | CNY | Chinese Yuan      |
 |----------|-----|-------------------|
+| DIGITAL  | HBT | Hubii Token       |
 | DIGITAL  | BTC | Bitcoin           |
 | DIGITAL  | ETH | Ethereum          |
 | DIGITAL  | XMR | Monero            |

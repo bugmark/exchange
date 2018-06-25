@@ -55,15 +55,12 @@
 - [x] UserCmd::LedgerDeposit  
 - [x] Event::UserLedgerWithdrawn
 - [x] UserCmd::LedgerWithdraw 
-
-- [ ] Event::UserLedgerCredited
-- [ ] UserCmd::LedgerCredit   
-
-- [ ] Event::UserLedgerDebited
-- [ ] UserCmd::LedgerDebit    
-
-- [ ] UserCmd::LedgerTransfer(src, tgt) 
-- [ ] UserCmd::Create should generate a default ledger
+- [x] Event::UserLedgerDebited
+- [x] UserCmd::LedgerDebit    
+- [x] Event::UserLedgerCredited
+- [x] UserCmd::LedgerCredit   
+- [x] UserCmd::LedgerTransfer(src, tgt) 
+- [x] UserCmd::Create should generate a default ledger
 
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro
