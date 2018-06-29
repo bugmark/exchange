@@ -62,6 +62,10 @@
 - [x] UserCmd::LedgerTransfer(src, tgt) 
 - [x] UserCmd::Create should generate a default ledger
 
+## 26 Jun TUE
+
+- [x] Finish Paypro design
+
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro
 - [ ] cross   - use ledger/debit command
