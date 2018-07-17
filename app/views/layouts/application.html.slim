@@ -23,7 +23,7 @@ html[lang="en-US"]
         - else
           = content_for(:navbar)
         - if ! content_for?(:devise)
-          = render "layouts/devise"
+          render "layouts/devise"
         - else
           = content_for(:devise)
     .container-fluid[style="margin-top: 65px;"]

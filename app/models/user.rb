@@ -46,8 +46,6 @@ class User < ApplicationRecord
     event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc') #.
   end
 
-
-
   def xtag
     "usr"
   end
