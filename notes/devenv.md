@@ -20,7 +20,7 @@ To be successful, you'll need good skills with the following tools:
 ## Host Machine
 
 We assume that you're using Ubuntu 16.04 as your host machine.  If you're Mac
-savvy, you'll be able to get things running on a Mac. 
+savvy, you'll be able to get things running on a Mac.
 
 Your host machine can exist in a few different forms:
 1) a destop Ubuntu system
@@ -48,7 +48,7 @@ Let's get started:
 
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
-2. Download the dev-machine Vagrantfile 
+2. Download the dev-machine Vagrantfile
    `wget raw.githubusercontent.com/bugmark/exchange/master/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
@@ -57,7 +57,7 @@ Let's get started:
 
 ## Cloning the Bugmark Exchange
 
-1. Clone the tracker 
+1. Clone the tracker
    `mkdir src; cd src; git clone https://github.com/bugmark/exchange.git`
 
 2. CD to the tracker directory `cd exchange`
@@ -68,39 +68,45 @@ On the host machine:
 
 1. Checkout the dev branch `git checkout -b dev origin/dev`
 
-2. Install ansible `script/dev/provision/install_ansible`
+2. Install ansible `./script/dev/provision/install_ansible`
 
-3. Install ansible roles `script/dev/provision/install_roles`
+3. Check ansible is version 2.3.2.0 or newer `ansible --version`
 
-4. Provision the dev machine `script/dev/provision/localhost`
+4. Install ansible roles `./script/dev/provision/install_roles`
 
-5. Check database status: `systemctl status postgresql`
+5. Provision the dev machine `./script/dev/provision/localhost`
 
-6. Start a new shell: `bash` (required to load your new user configuration)
+6. Check database status: `systemctl status postgresql`
+
+7. Start a new shell: `bash` (required to load your new user configuration)
 
 ## Application Bootstrap
 
 Follow these steps to bootstrap the app in your development environment.
 
-1. Install ruby gems `gem install bundler; bundle install`
+1. Install ruby gem bundler `gem install bundler:1.16.1`
 
-2. Install NPM components: `yarn install`
+2. Install ruby gems `bundle install`
 
-3. Create databases `bundle exec rails db:create`
+3. Install NPM components: `yarn install`
 
-4. Run migrations `bundle exec rails db:migrate`
+4. Create databases `bundle exec rails db:create`
 
-5. Start the tmux development session `script/dev/session`
+5. Run migrations `bundle exec rails db:migrate`
 
-   A cheat-sheet for tmux navigation is in `~/.tmux.conf`.
+6. Start the tmux development session `./script/dev/session`
+
+  - A cheat-sheet for tmux navigation is in `~/.tmux.conf`.
 
 ## Host Web Access
 
-1. Get the host IP address `ifconfig`  
+1. Get the VM IP address `ifconfig | grep addr`  
 
-2. On your local machine, add the VM IP Address to `/etc/hosts`
+2. On your local machine (host)
+  - On Linux: Add the VM IP Address to `/etc/hosts`
+  - On Windows: VirtualBox must be setup to use a bridged network adapter to allow a connection from the host to the Bugmark server on the VM. Restart VM `sudo shutdown -r` and restart the tmux development session, if necessary. No other changes are needed.
 
-3. On your local machine, browse to `http://<hostname>:3000`
+3. On your local machine (host), browse to `http://<VM IP address>:3000`
 
 ## Online Collaboration
 
@@ -111,7 +117,7 @@ Connect to the SSH-Chat server from the command line.
 
 ### File Transfer
 
-Sender: 
+Sender:
 - type `wormhole send <filename>`
 - note the wormhole code
 
