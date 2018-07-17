@@ -11,11 +11,11 @@ html[lang="en-US"]
     = stylesheet_link_tag 'application.css'
     link[rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap4.min.css" crossorigin="anonymous"]
   body
-    nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+    nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark[style="padding-top: 6px; padding-bottom: 4px;"]
       button.navbar-toggler.navbar-toggler-right[type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"]
         span.navbar-toggler-icon
-      a.navbar-brand[href="#{brand_path}"]
-        img[src="/img/icon2.ico" style='position: relative; top: -1px; margin-right: 3px; background:grey']
+      a.navbar-brand[href="#{brand_path}" style="padding-top: 0; padding-bottom: 0;"]
+        img[src="/img/icon2.ico" style='height: 40px; position: relative; top: -2px; margin-right: 5px;']
         = brand_title
       .collapse.navbar-collapse
         - unless content_for(:navbar)

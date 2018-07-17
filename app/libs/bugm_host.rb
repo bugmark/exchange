@@ -14,6 +14,7 @@ class BugmHost
       reset_influx
       reset_grafana
       reset_postgres
+      User.new('asdf')
     end
 
     private
