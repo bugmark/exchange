@@ -192,6 +192,7 @@ GEM
     grape_logging (1.8.0)
       grape
       rack
+    graphql (1.8.5)
     graphviz (1.0.0)
       process-pipeline
     guard (2.14.2)
@@ -467,6 +468,7 @@ DEPENDENCIES
   grape-swagger-entity
   grape-swagger-rails
   grape_logging
+  graphql
   graphviz
   guard
   guard-rspec_min!
