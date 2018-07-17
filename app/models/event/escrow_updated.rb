@@ -32,6 +32,9 @@ class Event::EscrowUpdated < Event
     @esc ||= Escrow.find_by_uuid(uuid)
   end
 
+  def tgt_user_uuids
+    escrow.users.pluck(:uuid)
+  end
 end
 
 # == Schema Information
@@ -48,6 +51,8 @@ end
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
+#  tags         :string
+#  note         :string
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

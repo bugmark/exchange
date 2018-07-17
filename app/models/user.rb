@@ -13,12 +13,21 @@ class User < ApplicationRecord
     has_many :offers_sell, class_name: "Offer::Sell"
     has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
     has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
+    has_many :groups     , class_name: "UserGroup"     , foreign_key: "owner_uuid"
+    has_many :memberships, class_name: "UserMembership"
     has_many :positions
+    has_many :ledgers    , class_name: "UserLedger"
   end
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
 
   validates_uniqueness_of :email
+
+  validates_uniqueness_of :name, allow_blank: true
+  validates_format_of :name,
+    allow_blank: true,
+    with: /\A[a-zA-Z0-9.-]+\z/,
+    message: "Username can have only alphanumeric(A-Z, a-z, 0-9), period(.) and dash(-) characters."
 
   validates :email    , :presence => true
   validates :password , :presence => true, :on => :create, unless: :has_encrypted_pwd?
@@ -49,6 +58,10 @@ class User < ApplicationRecord
 
   def contracts
     positions.map(&:contract).flatten.uniq.sort_by {|c| c.uuid}
+  end
+
+  def open_contracts
+    contracts.select {|el| el.status == 'open'}
   end
 
   # ----- ACCOUNT BALANCES AND RESERVES-----
@@ -126,9 +139,9 @@ end
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  name                   :string           not null
-#  email                  :string           not null
-#  mobile                 :string           not null
+#  name                   :string
+#  email                  :string           default(""), not null
+#  mobile                 :string
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime

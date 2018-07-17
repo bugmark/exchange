@@ -1,4 +1,4 @@
-require 'rails_helper' #
+require 'rails_helper'
 
 RSpec.describe Escrow, type: :model do
   def valid_params(opt = {})
@@ -46,7 +46,6 @@ end
 #
 #  id             :bigint(8)        not null, primary key
 #  uuid           :string
-#  exid           :string
 #  type           :string
 #  sequence       :integer
 #  contract_uuid  :string

@@ -40,17 +40,22 @@ class Commit
     ctx.c_matching = bundle.offer.obj.match_contracts.overlap(ctx.o_max_beg, ctx.o_min_end)
     ctx.c_selected = ctx.c_matching.sort_by {|c| c.escrows.count}.first
     ctx.c_uuid     = ctx.c_selected&.uuid || SecureRandom.uuid
-    ctx.c_contract = @contract = ctx.c_selected || begin
+    ctx.c_contract = ctx.c_selected || begin
       date = [ctx.o_max_beg, ctx.o_min_end].avg_time #
       attr = bundle.offer.obj.match_attrs.merge(maturation: date, uuid: ctx.c_uuid)
       ctx_event(:contract, Event::ContractCreated, attr)
     end
+    @contract = ctx.c_contract
     ctx
   end
 
-  def gen_escrow_and_amendment(ctx)
+  def gen_amendment(ctx)
     ctx.a_uuid = SecureRandom.uuid
     ctx_event(:amendment, Event::AmendmentCreated, contract_uuid: ctx.c_uuid, uuid: ctx.a_uuid, type: ctx.a_type)
+    ctx
+  end
+
+  def gen_escrow(ctx)
     ctx.e_uuid = SecureRandom.uuid
     ctx_event(:escrow, Event::EscrowCreated, contract_uuid: ctx.c_uuid, amendment_uuid: ctx.a_uuid, uuid: ctx.e_uuid, type: ctx.e_type)
     ctx
@@ -59,26 +64,6 @@ class Commit
   def update_escrow_value(ctx)
     ctx_event(:escrow_upd, Event::EscrowUpdated, {uuid: ctx.e_uuid})
     ctx
-  end
-
-  def expand_position(offer, ctx, price)
-    transfer_uuid = SecureRandom.uuid
-    posargs = {
-      uuid:           SecureRandom.uuid      ,
-      volume:         offer.vol.to_i         ,
-      price:          price.to_f             ,
-      side:           offer.obj.side         ,
-      amendment_uuid: ctx.a_uuid             ,
-      escrow_uuid:    ctx.e_uuid             ,
-      offer_uuid:     offer.obj.uuid         ,
-      user_uuid:      offer.obj.user.uuid    ,
-      transfer_uuid:  transfer_uuid
-    }
-    oid = offer.obj.id
-    ctx_event("position#{oid}", Event::PositionCreated, posargs)
-    lcl_val = posargs[:volume] * posargs[:price]
-    ctx_event("user#{oid}" , Event::UserDebited, {uuid: offer.obj.user_uuid, amount: lcl_val})
-    ctx_event("offer#{oid}", Event::OfferCrossed, {uuid: offer.obj.uuid})
   end
 
   def suspend_overlimit_offers(bundle, ctx)

@@ -3,13 +3,15 @@ module OfferCmd
 
     attr_reader :args, :salable_position
 
-    def initialize(position, args)
+    def initialize(position, args = {})
       @salable_position = position
       @args = ArgHandler.new(args, self)
+                .apply(&:set_uuid)
                 .apply(&:set_price_and_volume)
                 .apply(&:set_offer_type)
                 .apply(&:set_user)
                 .apply(&:set_salable_uuid)
+                .apply(&:set_expiration)
                 .apply(&:set_maturation)
                 .apply(&:set_status)
                 .apply(&:event_opts)
@@ -26,6 +28,11 @@ module OfferCmd
         @salable_position = caller.salable_position
       end
 
+      def set_uuid
+        @args["uuid"] ||= SecureRandom.uuid
+        self
+      end
+
       def set_price_and_volume
         @args["volume"] = @args["volume"] || salable_position.volume
         @args["price"]  = @args["price"]  || salable_position.price
@@ -34,6 +41,11 @@ module OfferCmd
 
       def set_offer_type
         @args["type"] = klas
+        self
+      end
+
+      def set_expiration
+        @args["expiration"] = salable_position.offer.expiration
         self
       end
 

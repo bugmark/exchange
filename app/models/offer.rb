@@ -8,7 +8,7 @@ class Offer < ApplicationRecord
   with_options primary_key: "uuid" do
     belongs_to :user            , optional: true , foreign_key: "user_uuid"
     belongs_to :issue           , optional: true , foreign_key: "stm_issue_uuid"
-    belongs_to :tracker            , optional: true , foreign_key: "stm_tracker_uuid"
+    belongs_to :tracker         , optional: true , foreign_key: "stm_tracker_uuid"
     has_one    :position                         , foreign_key: "offer_uuid"
     has_one    :prototype_parent                 , foreign_key: "prototype_uuid"        , class_name: "Offer"
     belongs_to :prototype_child , optional: true , foreign_key: "prorotype_uuid"        , class_name: "Offer"
@@ -48,12 +48,12 @@ class Offer < ApplicationRecord
       define_method("not_#{status}".to_sym) { without_status(status) }
     end
 
-    def assigned
-      where("uuid IN (SELECT offer_uuid FROM positions)")
+    def with_child
+      where("uuid IN (SELECT prototype_uuid FROM offers)")
     end
 
-    def unassigned
-      where("uuid NOT IN (SELECT offer_uuid FROM positions)")
+    def without_child
+      where("uuid NOT IN (SELECT prototype_uuid FROM offers where offers.prototype_uuid IS NOT NULL)")
     end
 
     def by_maturation_range(range)
@@ -71,9 +71,83 @@ class Offer < ApplicationRecord
     def is_unfixed() where('type like ?', "%Unfixed")     end
     def is_fixed()   where('type like ?', "%Fixed")       end
 
+    def expired_by_time() where('expiration < ?', BugmTime.now) end
+
+    def open() where(status: 'open') end
+    def not_open() where.not(status: 'open') end
+    def canceled() where(status: 'canceled') end
+    def not_canceled() where.not(status: 'canceled') end
+    def expired() where(status: 'expired') end
+    def not_expired() where.not(status: 'expired') end
+    def crossed() where(status: 'crossed') end
+    def not_crossed() where.not(status: 'crossed') end
+
     def display_order
       order('maturation_range asc').order('type asc').order('volume asc')
     end
+
+    # ------------------------------------------------------------------------
+    # Cross-Model Scopes
+    #
+    # START BY READING THIS REFERENCE!
+    # http://aokolish.me/blog/2015/05/26/how-to-simplify-active-record-scopes-that-reference-other-tables/
+    #
+    # Examples:
+    # - Offer.assigned.merge(Position.open)
+    # - Offer.unassigned.merge(Position.crossed)
+    #
+    # Note that you can use `join_position`, `join_contract` and `distinct_offer`
+    # in standalone operations:
+    # - Offer.join_position.merge(Position.leaf).distinct_offer
+    #
+    # You can also compose with Offer-specific scopes:
+    # - Offer.offered.merge(Position.open).crossed
+    # - Offer.offered.merge(Position.open).open
+    #
+
+    def join_position
+      joins('LEFT JOIN positions ON positions.offer_uuid = offers.uuid')
+    end
+
+    def assigned
+      join_position
+        .where("offers.uuid IN (SELECT offer_uuid FROM positions)")
+    end
+
+    def unassigned
+      join_position
+        .where("offers.uuid NOT IN (SELECT offer_uuid FROM positions)")
+    end
+
+    def with_root_position
+      join_position
+        .merge(Position.root)
+        .assigned
+    end
+
+    def with_branch_position
+      join_position
+        .merge(Position.branch)
+        .assigned
+    end
+
+    def with_leaf_position
+      join_position
+        .merge(Position.leaf)
+        .assigned
+    end
+
+    def without_branch_position
+      join_position
+        .merge(Position.leaf)
+        .or(unassigned)
+    end
+
+    def distinct_offer
+      select("DISTINCT offers.*")
+    end
+
+    # ------------------------------------------------------------------------
 
     def select_subset
       select(%i(id uuid type user_uuid salable_position_uuid prototype_uuid volume price value poolable aon status stm_issue_uuid stm_status))
@@ -152,7 +226,7 @@ class Offer < ApplicationRecord
   # ----- INSTANCE METHODS -----
 
   def xid
-    "#{self.intent}-#{xtag}.#{self&.id || 0}"
+    "o#{self.intent[0]}#{xtag[0]}.#{self&.id || 0}"
   end
 
   def attach_type
@@ -177,8 +251,8 @@ class Offer < ApplicationRecord
     case self.type
       when "Offer::Buy::Fixed"    then "Offer::Buy::Unfixed"
       when "Offer::Buy::Unfixed"  then "Offer::Buy::Fixed"
-      when "Offer::Sell::Fixed"   then "Offer::Buy::Unfixed"
-      when "Offer::Sell::Unfixed" then "Offer::Buy::Fixed"
+      when "Offer::Sell::Fixed"   then "Offer::Buy::Fixed"
+      when "Offer::Sell::Unfixed" then "Offer::Buy::Unfixed"
     end
   end
 
@@ -250,16 +324,24 @@ class Offer < ApplicationRecord
     self.status == 'open'
   end
 
-  def deposit
-    (self.volume * self.price).to_i
-  end
-
-  def profit
-    (self.volume * (1 - self.price)).to_i
-  end
-
   def is_not_open?
     ! is_open?
+  end
+
+  def is_crossed?
+    self.status == 'crossed'
+  end
+
+  def is_not_crossed?
+    ! is_crossed?
+  end
+
+  def is_expired?
+    self.status == 'expired'
+  end
+
+  def is_not_expired?
+    ! is_expired?
   end
 
   def is_buy?()          self.intent == "buy"                    end
@@ -271,12 +353,37 @@ class Offer < ApplicationRecord
   def is_buy_unfixed?()  self.type   == "Offer::Buy::Unfixed"    end
   def is_buy_fixed?()    self.type   == "Offer::Buy::Fixed"      end
 
+  # ----- volume / price / value / costs -----
+
+  def fixed_cost
+    return value          if is_buy_fixed?
+    return volume - value if is_buy_unfixed?
+    nil
+  end
+  alias_method :fixer_cost, :fixed_cost
+
+  def unfixed_cost
+    return volume - value if is_buy_fixed?
+    return value          if is_buy_unfixed?
+    nil
+  end
+  alias_method :funder_cost, :unfixed_cost
+
+  def deposit
+    (self.volume * self.price).to_i
+  end
+
+  def profit
+    (self.volume * (1 - self.price)).to_i
+  end
+
   private
 
   def default_attributes
-    self.status   ||= 'open'
-    self.poolable ||= false
-    self.aon      ||= false
+    self.status     ||= 'open'
+    self.poolable   ||= false
+    self.aon        ||= false
+    self.expiration ||= self.maturation_range&.first
   end
 
   def update_value
@@ -294,10 +401,10 @@ end
 #
 #  id                    :bigint(8)        not null, primary key
 #  uuid                  :string
-#  exid                  :string
 #  type                  :string
 #  tracker_type          :string
 #  user_uuid             :string
+#  ledger_uuid           :string
 #  prototype_uuid        :string
 #  amendment_uuid        :string
 #  salable_position_uuid :string
@@ -319,6 +426,10 @@ end
 #  stm_body              :string
 #  stm_status            :string
 #  stm_labels            :string
+#  stm_trader_uuid       :string
+#  stm_group_uuid        :string
+#  stm_currency          :string
+#  stm_paypro_uuid       :string
 #  stm_comments          :jsonb            not null
 #  stm_jfields           :jsonb            not null
 #  stm_xfields           :hstore           not null

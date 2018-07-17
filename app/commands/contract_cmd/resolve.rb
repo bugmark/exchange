@@ -19,7 +19,7 @@ module ContractCmd
 
     def resolve_escrows
       base_contract.escrows.each_with_index do |escrow, idxe|
-        poslst = base_contract.awardee == "fixed" ? escrow.fixed_positions : escrow.unfixed_positions
+        poslst = base_contract.awardee == "fixed" ? escrow.positions.fixed.payable : escrow.positions.unfixed.payable
         escvol = poslst.map {|p| p.volume}.sum
         poslst.each_with_index do |position, idxp|
           prorata = escvol / position.volume.to_f
@@ -37,7 +37,7 @@ module ContractCmd
     end
 
     def base_opts(input)
-      cmd_opts.merge(input)
+      cmd_opts(input).merge(input)
     end
 
     def resolvable_contract

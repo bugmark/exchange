@@ -12,7 +12,7 @@ module OfferCmd
     validate :valid_deposit_amount
     validate :valid_profit_amount
 
-    # NOTE: the offer_args must contain either a price, deposit or profit
+    # NOTE: the offer_args must contain either a price, deposit or profit.
     def initialize(typ, offer_args)
       @typ  = typ
       @args = ArgHandler.new(offer_args, self)

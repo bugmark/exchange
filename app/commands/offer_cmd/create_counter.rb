@@ -25,9 +25,10 @@ module OfferCmd
       args["type"]           = prototype.counter_class
       args["price"]          = prototype.counter_price
       args["status"]         = "open"
+      args["expiration"]     = prototype.expiration
       # args["maturation_beg"] = prototype.maturation_range.first
       # args["maturation_end"] = prototype.maturation_range.last
-      excludes = %w(created_at updated_at id exid salable_position_uuid maturation_range)
+      excludes = %w(created_at updated_at id salable_position_uuid maturation_range)
       args = args.stringify_keys.without_blanks.without(*excludes)
       args
     end
@@ -38,7 +39,7 @@ module OfferCmd
 
     def event_opts(opts)
       exclude = %w(id deposit profit xfields jfields stm_comments stm_xfields stm_jfields created_at updated_at)
-      cmd_opts.merge(opts).without(*exclude).without_blanks
+      cmd_opts(opts).merge(opts).without(*exclude).without_blanks
     end
   end
 end

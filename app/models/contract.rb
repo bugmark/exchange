@@ -4,7 +4,7 @@ class Contract < ApplicationRecord
 
   include MatchUtils
 
-  belongs_to :tracker              , foreign_key: "stm_tracker_uuid" , primary_key: "uuid", optional: true
+  belongs_to :tracker           , foreign_key: "stm_tracker_uuid" , primary_key: "uuid", optional: true
   belongs_to :issue             , foreign_key: "stm_issue_uuid", primary_key: "uuid", optional: true
   has_one    :prototype         , foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
   has_many   :prototype_children, foreign_key: 'prototype_uuid', primary_key: "uuid", class_name: 'Contract'
@@ -130,7 +130,7 @@ class Contract < ApplicationRecord
   end
 
   def xtag
-    "con"
+    "contract"
   end
 
   def total_value
@@ -199,7 +199,6 @@ end
 #
 #  id               :bigint(8)        not null, primary key
 #  uuid             :string
-#  exid             :string
 #  prototype_uuid   :integer
 #  type             :string
 #  status           :string
@@ -215,6 +214,10 @@ end
 #  stm_body         :string
 #  stm_status       :string
 #  stm_labels       :string
+#  stm_trader_uuid  :string
+#  stm_group_uuid   :string
+#  stm_currency     :string
+#  stm_paypro_uuid  :string
 #  stm_comments     :jsonb            not null
 #  stm_jfields      :jsonb            not null
 #  stm_xfields      :hstore           not null

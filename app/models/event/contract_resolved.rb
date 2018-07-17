@@ -14,6 +14,12 @@ class Event::ContractResolved < Event
     contract
   end
 
+  def tgt_user_uuids
+    contract.escrows.reduce([]) do |acc, esc|
+      acc << esc.users.pluck(:uuid)
+    end.flatten.uniq
+  end
+
   private
 
   def contract
@@ -35,6 +41,8 @@ end
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
+#  tags         :string
+#  note         :string
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

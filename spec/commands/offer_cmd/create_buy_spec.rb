@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe OfferCmd::CreateBuy do #
+RSpec.describe OfferCmd::CreateBuy do
 
   def gen_obf(opts = {})
     lcl_opts = {volume: 10, price: 0.40, user_uuid: user.uuid}
@@ -56,6 +56,13 @@ RSpec.describe OfferCmd::CreateBuy do #
     it 'returns an sub-instance of klas' do
       obj = subject.project
       expect(obj.offer).to be_a(Offer)
+    end
+
+    it 'sets the proper user_uuid' do
+      user = subject.project.user
+      expect(Event.first.user_uuids).to be_an(Array)
+      expect(Event.count).to eq(3)
+      expect(Event.last.user_uuids.length).to eq(1)
     end
   end
 

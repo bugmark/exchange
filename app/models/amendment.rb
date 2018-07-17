@@ -21,6 +21,17 @@ class Amendment < ApplicationRecord
     alias_method :ss, :select_subset
   end
 
+  # -----
+
+  def xtype
+    case self.type
+    when "Amendment::Expand"   then "expand"
+    when "Amendment::Reduce"   then "reduce"
+    when "Amendment::Transfer" then "transfer"
+    when "Amendment::Resolve"  then "resolve"
+    end
+  end
+
   # ----- INSTANCE METHODS -----
   def dumptree
     dt_hdr
@@ -41,7 +52,6 @@ end
 #
 #  id            :bigint(8)        not null, primary key
 #  uuid          :string
-#  exid          :string
 #  type          :string
 #  sequence      :integer
 #  contract_uuid :string

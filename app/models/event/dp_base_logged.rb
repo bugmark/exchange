@@ -23,20 +23,20 @@ class Event::DpBaseLogged < Event
 
   def lcl_payload
     @lcl_payload ||= {
-      host_name:   BugmHost.name                  ,
-      day_offset:  BugmTime.day_offset            ,
-      hour_offset: BugmTime.hour_offset           ,
-      num_users:   User.count                     ,
-      num_trackers:   Tracker.count                     ,
-      num_issues:  Issue.count                    ,
-      num_offers:  Offer.open.count               ,
-      bf_offers:   Offer::Buy::Fixed.open.count   ,
-      bu_offers:   Offer::Buy::Unfixed.open.count ,
-      contracts:   Contract.open.count            ,
-      positions:   Position.count                 ,
-      escrows:     Escrow.count                   ,
-      amendments:  Amendment.count                ,
-      events:      Event.count
+      host_name:    BugmHost.name                  ,
+      day_offset:   BugmTime.day_offset            ,
+      hour_offset:  BugmTime.hour_offset           ,
+      num_users:    User.count                     ,
+      num_trackers: Tracker.count                  ,
+      num_issues:   Issue.count                    ,
+      num_offers:   Offer.open.count               ,
+      bf_offers:    Offer::Buy::Fixed.open.count   ,
+      bu_offers:    Offer::Buy::Unfixed.open.count ,
+      contracts:    Contract.open.count            ,
+      positions:    Position.count                 ,
+      escrows:      Escrow.count                   ,
+      amendments:   Amendment.count                ,
+      events:       Event.count
     }
   end
 end
@@ -55,6 +55,8 @@ end
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
+#  tags         :string
+#  note         :string
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

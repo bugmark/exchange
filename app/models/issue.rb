@@ -14,6 +14,8 @@ class Issue < ApplicationRecord
     has_many   :offers    , :dependent  => :destroy
     has_many   :offers_bf , :class_name => "Offer::Buy::Fixed"
     has_many   :offers_bu , :class_name => "Offer::Buy::Unfixed"
+    has_many   :offers_sf , :class_name => "Offer::Sell::Fixed"
+    has_many   :offers_su , :class_name => "Offer::Sell::Unfixed"
     has_many   :contracts , :dependent  => :destroy
   end
 
@@ -106,6 +108,10 @@ class Issue < ApplicationRecord
       where(stm_status: 'closed')
     end
 
+    def by_hexid(hexid)
+      where("stm_body like ?", "%#{hexid.to_s.gsub("/", "")}%")
+    end
+
     def select_subset
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
@@ -131,6 +137,10 @@ class Issue < ApplicationRecord
 
   def xtype
     self.type&.gsub("Issue::","")
+  end
+
+  def hexid
+    self.stm_body.scan(/(>|^| )\/(\h\h\h\h\h\h)/)&.first&.last
   end
 
   def has_offers?()    offers.count > 0    end
@@ -170,6 +180,10 @@ end
 #  stm_body         :string
 #  stm_status       :string
 #  stm_labels       :string
+#  stm_trader_uuid  :string
+#  stm_group_uuid   :string
+#  stm_currency     :string
+#  stm_paypro_uuid  :string
 #  stm_comments     :jsonb            not null
 #  stm_jfields      :jsonb            not null
 #  stm_xfields      :hstore           not null

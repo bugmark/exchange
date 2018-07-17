@@ -6,11 +6,15 @@ class ApplicationRecord < ActiveRecord::Base
   before_save :update_uuid
 
   def xid
-    "#{xtag}.#{self&.id || 0}"
+    "#{xtag}.#{(self&.id || 0).to_s.rjust(3, '0')}"
   end
 
   def to_i
     self.id
+  end
+
+  def to_s
+    self.uuid
   end
 
   def dump

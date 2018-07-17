@@ -37,6 +37,10 @@ class Event::OfferBuyCreated < Event
     }.without_blanks
   end
 
+  def tgt_user_uuids
+    [user_uuid]
+  end
+
   private
 
   def offer
@@ -50,10 +54,6 @@ class Event::OfferBuyCreated < Event
 
   def set_defaults
     payload["status"] ||= 'open'
-  end
-
-  def user_uuids
-    [user_uuid]
   end
 end
 
@@ -71,6 +71,8 @@ end
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
+#  tags         :string
+#  note         :string
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

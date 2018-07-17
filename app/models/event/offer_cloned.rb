@@ -19,6 +19,10 @@ class Event::OfferCloned < Event
     Offer.new(params)
   end
 
+  def tgt_user_uuids
+    [user_uuid]
+  end
+
   private
 
   def valid_params(attributes)
@@ -42,6 +46,8 @@ end
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
+#  tags         :string
+#  note         :string
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

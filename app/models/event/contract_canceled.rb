@@ -13,6 +13,10 @@ class Event::ContractCanceled < Event
     contract
   end
 
+  def tgt_user_uuids
+    []
+  end
+
   private
 
   def contract
@@ -34,6 +38,8 @@ end
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
+#  tags         :string
+#  note         :string
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

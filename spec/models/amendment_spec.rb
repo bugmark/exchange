@@ -5,7 +5,7 @@ RSpec.describe Amendment, type: :model do
     {}.merge(opt)
   end
 
-  def gen_amendment(opts = {}) klas.create(valid_params(opts)) end
+  def gen_lcl_amendment(opts = {}) klas.create(valid_params(opts)) end
 
   let(:contract) { FBX.expand_obf.contract    }
   let(:klas)     { described_class            }
@@ -42,7 +42,6 @@ end
 #
 #  id            :bigint(8)        not null, primary key
 #  uuid          :string
-#  exid          :string
 #  type          :string
 #  sequence      :integer
 #  contract_uuid :string

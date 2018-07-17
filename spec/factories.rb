@@ -8,7 +8,7 @@ FactoryBot.define do
 
   # ----- BASE -----
 
-  factory :user, class: UserCmd::Create do
+  factory :user0, class: UserCmd::Create do
     to_create { |instance| instance.project }
     initialize_with { new(attributes) }
 
@@ -16,8 +16,40 @@ FactoryBot.define do
       random = ('a'..'z').to_a.shuffle[0,8].join
       "#{random}#{n}@bugmark.net"
     end
+    name { email.split("@").first }
     password "bugmark"
-    balance 1000.0
+    note     ""
+
+    factory :user, class: UserCmd::Create do
+      balance 1000.0
+    end
+  end
+
+  factory :user_group, class: UserCmd::GroupOpen do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    sequence :name do |n|
+      "Group#{n}"
+    end
+    owner_uuid { FB.create(:user).user&.uuid }
+  end
+
+  factory :user_membership, class: UserCmd::MembershipOpen do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    user_uuid  { FB.create(:user).user&.uuid }
+    group_uuid { FB.create(:user_group).group&.uuid }
+  end
+
+  factory :user_ledger, class: UserCmd::LedgerOpen do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    user_uuid   { FB.create(:user).user&.uuid }
+    paypro_uuid { FB.create(:paypro).paypro&.uuid }
+    currency    "XTS"
   end
 
   factory :gh_tracker, class: TrackerCmd::GhCreate do
@@ -71,6 +103,7 @@ FactoryBot.define do
 
     price  0.60
     volume 10
+    expiration Time.now + 12.hours
     maturation Time.now + 1.day
     user_uuid      { FB.create(:user).user.uuid     }
     stm_issue_uuid { FB.create(:issue).issue.uuid   }
@@ -101,6 +134,15 @@ FactoryBot.define do
     maturation BugmTime.now + 1.hour
     type       "Contract::Test"
     status     "open"
+  end
+
+  factory :paypro, class: PayproCmd::Create  do
+    to_create { |instance| instance.project }
+    initialize_with { new(attributes) }
+
+    uuid     SecureRandom.uuid
+    sequence :name do |n| "Paypro#{n}" end
+    currency "XTS"
   end
 end
 

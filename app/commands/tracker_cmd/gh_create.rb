@@ -9,7 +9,7 @@ module TrackerCmd
     private
 
     def tracker_opts(args)
-      cmd_opts.merge(args).merge({"type" => "Tracker::GitHub"})
+      cmd_opts(args).merge(args).merge({"type" => "Tracker::GitHub"})
     end
   end
 end

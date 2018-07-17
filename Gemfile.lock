@@ -26,9 +26,9 @@ GIT
 
 GIT
   remote: git://github.com/bugmark/iora.git
-  revision: 2082d90aea5b0ca88cebacd7862f9c0c34bcae94
+  revision: 14a98ee233dbdff952d0951b2a4752d9e11ece6d
   specs:
-    iora (0.1.1)
+    iora (0.1.2)
       deep_merge (~> 1.2)
       octokit (~> 4.6)
 
@@ -261,7 +261,7 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    octokit (4.8.0)
+    octokit (4.9.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     orm_adapter (0.5.0)
     pg (1.0.0)

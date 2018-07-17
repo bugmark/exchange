@@ -37,5 +37,6 @@ RSpec.describe ContractCmd::Create do
       expect(Contract.count).to eq(1)
       expect(Event.count).to eq(1)
     end
+
   end
 end

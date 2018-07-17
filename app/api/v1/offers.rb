@@ -115,7 +115,6 @@ module V1
           result = cmd.project
           {status: "OK", event_uuid: result.events[:offer].event_uuid, offer_uuid: result.offer.uuid}
         else
-          # binding.pry
           error!({status: "ERROR", message: "INVALID OFFER"}, 404)
         end
       end

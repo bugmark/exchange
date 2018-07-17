@@ -34,16 +34,21 @@ class Event < ApplicationRecord
     end
 
     def for_user(user)
-      # user_id = user.to_i
-      # where("? = any(user_uuids)", user_id)
-      where(false)
+      return Event.none unless user.respond_to?(:uuid)
+      where("? = any(user_uuids)", user&.uuid)
     end
   end
 
-  def influx_tags()   {} end
-  def influx_fields() {} end
+  def transaction_events
+    Event.where(cmd_uuid: cmd_uuid)
+  end
+
+  def influx_tags()    {} end
+  def influx_fields()  {} end
+  def tgt_user_uuids() [] end
 
   def ev_cast
+    self.user_uuids = tgt_user_uuids
     if valid?
       if new_object&.save
         self.projected_at = BugmTime.now
@@ -68,7 +73,11 @@ class Event < ApplicationRecord
       values:    base_fields.merge(influx_fields)  ,
       timestamp: BugmTime.now.to_i
     }
-    InfluxStats.write_point mname, args
+    begin
+      InfluxStats.write_point mname, args
+    rescue
+      "INFLUX WRITE FAILED"
+    end
   end
 
   def cast_object
@@ -121,6 +130,8 @@ end
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
 #  user_uuids   :string           default([]), is an Array
+#  tags         :string
+#  note         :string
 #  projected_at :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

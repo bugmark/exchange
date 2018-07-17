@@ -21,11 +21,11 @@ module UserCmd
     end
 
     def usr_opts(opts)
-      cmd_opts.merge(opts.slice(*%w(uuid email encrypted_password)))
+      cmd_opts(opts).merge(opts.slice(*%w(uuid email name encrypted_password)))
     end
 
     def deposit_opts(opts)
-      cmd_opts.merge(opts.slice(*%w(uuid amount)))
+      cmd_opts(opts).merge(opts.slice(*%w(uuid amount)))
     end
 
     def has_amount?(args)

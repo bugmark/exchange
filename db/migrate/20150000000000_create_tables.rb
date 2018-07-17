@@ -6,7 +6,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     create_table :trackers do |t|
       t.string   :type       # Tracker::BugZilla, Tracker::GitHub, Tracker::Cvrf
       t.string   :uuid
-      t.string   :name       # mvscorg/xdmarket
+      t.string   :name       # bugmark/exchange
       t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields,  null: false, default: {}
       t.datetime :synced_at
@@ -39,10 +39,10 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :offers do |t|
       t.string   :uuid
-      t.string   :exid
-      t.string   :type                      # BuyBid, SellBid, BuyAsl, SellAsk
+      t.string   :type                      # BuyFixed, BuyUnfixed, SellFixed, SellUnfixed
       t.string   :tracker_type              # BugZilla, GitHub, CVE
       t.string   :user_uuid                 # the party who made the offer
+      t.string   :ledger_uuid               # the ledger used to make the offer
       t.string   :prototype_uuid            # optional offer prototype
       t.string   :amendment_uuid            # the generating amendment
       t.string   :salable_position_uuid     # for SaleOffers - a Position
@@ -60,7 +60,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :offers, :uuid
-    add_index :offers, :exid
     add_index :offers, :type
     add_index :offers, :user_uuid
     add_index :offers, :prototype_uuid
@@ -76,7 +75,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :contracts do |t|
       t.string   :uuid
-      t.string   :exid
       t.integer  :prototype_uuid      # optional contract prototype
       t.string   :type                # GitHub, BugZilla, ...
       t.string   :status              # open, matured, resolved
@@ -87,7 +85,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :contracts, :uuid
-    add_index :contracts, :exid
     add_index :contracts, :prototype_uuid
     add_index :contracts, :xfields, using: :gin
     add_index :contracts, :jfields, using: :gin
@@ -100,6 +97,10 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_column table, :stm_body         , :string
       add_column table, :stm_status       , :string
       add_column table, :stm_labels       , :string
+      add_column table, :stm_trader_uuid  , :string
+      add_column table, :stm_group_uuid   , :string
+      add_column table, :stm_currency     , :string
+      add_column table, :stm_paypro_uuid  , :string
       add_column table, :stm_comments     , :jsonb  , null: false, default: {}
       add_column table, :stm_jfields      , :jsonb  , null: false, default: {}
       add_column table, :stm_xfields      , :hstore , null: false, default: {}
@@ -110,6 +111,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       add_index table, :stm_body
       add_index table, :stm_status
       add_index table, :stm_labels
+      add_index table, :stm_trader_uuid
+      add_index table, :stm_group_uuid
       add_index table, :stm_comments , :using => :gin
       add_index table, :stm_jfields  , :using => :gin
       add_index table, :stm_xfields  , :using => :gin
@@ -117,7 +120,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :positions do |t|
       t.string   :uuid
-      t.string   :exid
       t.string   :offer_uuid
       t.string   :user_uuid
       t.string   :amendment_uuid
@@ -130,7 +132,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :positions, :uuid
-    add_index :positions, :exid
     add_index :positions, :offer_uuid
     add_index :positions, :user_uuid
     add_index :positions, :amendment_uuid
@@ -143,7 +144,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :escrows do |t|
       t.string   :uuid
-      t.string   :exid
       t.string   :type
       t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
       t.string   :contract_uuid
@@ -153,7 +153,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :escrows, :uuid
-    add_index :escrows, :exid
     add_index :escrows, :type
     add_index :escrows, :contract_uuid
     add_index :escrows, :amendment_uuid
@@ -161,7 +160,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
 
     create_table :amendments do |t|
       t.string   :uuid
-      t.string   :exid
       t.string   :type               # expand, transfer, reduce, resolve
       t.integer  :sequence           # SORTABLE POSITION USING ACTS_AS_LIST
       t.string   :contract_uuid
@@ -170,7 +168,6 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :amendments, :uuid
-    add_index :amendments, :exid
     add_index :amendments, :sequence
     add_index :amendments, :contract_uuid
     add_index :amendments, :xfields, using: :gin
@@ -191,6 +188,70 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :users, :auth_token
     add_index :users, :jfields, using: :gin
 
+    create_table :user_ledgers do |t|
+      t.string   :uuid
+      t.string   :user_uuid
+      t.string   :paypro_uuid
+      t.integer  :sequence      # SORTABLE POSITION USING ACTS_AS_LIST
+      t.string   :name
+      t.string   :description
+      t.string   :currency
+      t.float    :balance , default: 0.0
+      t.string   :status  , default: 'open'
+      t.jsonb    :jfields , null: false, default: {}
+      t.timestamps
+    end
+    add_index :user_ledgers, :uuid
+    add_index :user_ledgers, :user_uuid
+    add_index :user_ledgers, :paypro_uuid
+    add_index :user_ledgers, :sequence
+    add_index :user_ledgers, :name
+    add_index :user_ledgers, :currency
+    add_index :user_ledgers, :balance
+    add_index :user_ledgers, :status
+    add_index :user_ledgers, :jfields, using: :gin
+
+    create_table :user_groups do |t|
+      t.string   :uuid
+      t.string   :owner_uuid
+      t.string   :name
+      t.string   :description
+      t.string   :tags
+      t.jsonb    :jfields , null: false, default: {}
+      t.string   :status  , default: 'open'           # open | closed
+      t.timestamps
+    end
+    add_index :user_groups, :uuid
+    add_index :user_groups, :owner_uuid
+    add_index :user_groups, :name
+    add_index :user_groups, :tags
+    add_index :user_groups, :status
+    add_index :user_groups, :jfields, using: :gin
+
+    create_table :user_memberships do |t|
+      t.string :uuid
+      t.string :user_uuid
+      t.string :group_uuid
+      t.string :status       , default: 'active'   # active | suspended
+    end
+    add_index :user_memberships, :uuid
+    add_index :user_memberships, :user_uuid
+    add_index :user_memberships, :group_uuid
+    add_index :user_memberships, :status
+
+    create_table :paypros do |t|
+      t.string :uuid
+      t.string :name
+      t.string :status    , default: 'open'
+      t.string :currency
+      t.string :pubkey
+      t.timestamps
+    end
+    add_index :paypros, :uuid
+    add_index :paypros, :name
+    add_index :paypros, :currency
+    add_index :paypros, :status
+
     # the event store...
     create_table :events do |t|
       t.string     :event_type   # inheritance column
@@ -202,6 +263,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.jsonb      :payload    , null: false, default: {}
       t.jsonb      :jfields    , null: false, default: {}
       t.string     :user_uuids , array: true, default: []
+      t.string     :tags
+      t.string     :note
       t.datetime   :projected_at
       t.timestamps
     end
@@ -214,6 +277,8 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :events, :payload    , using: :gin
     add_index :events, :jfields    , using: :gin
     add_index :events, :user_uuids , using: :gin
+    add_index :events, :tags
+    add_index :events, :note
     add_index :events, :projected_at
 
     # holds an event counter for a projection
