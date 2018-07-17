@@ -12,13 +12,15 @@ end
 #
 # Table name: user_groups
 #
-#  id         :bigint(8)        not null, primary key
-#  uuid       :string
-#  owner_uuid :string
-#  name       :string
-#  tags       :string
-#  jfields    :jsonb            not null
-#  status     :string           default("open")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint(8)        not null, primary key
+#  uuid        :string
+#  owner_uuid  :string
+#  name        :string
+#  description :string
+#  tags        :string
+#  xfields     :hstore           not null
+#  jfields     :jsonb            not null
+#  status      :string           default("open")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #

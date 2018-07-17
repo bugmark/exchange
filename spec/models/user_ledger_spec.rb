@@ -23,9 +23,11 @@ end
 #  paypro_uuid :string
 #  sequence    :integer
 #  name        :string
+#  description :string
 #  currency    :string
 #  balance     :float            default(0.0)
 #  status      :string           default("open")
+#  xfields     :hstore           not null
 #  jfields     :jsonb            not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

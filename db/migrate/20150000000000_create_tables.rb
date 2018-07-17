@@ -179,6 +179,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.boolean  :admin
       t.string   :auth_token
       t.float    :balance, default: 0.0
+      t.hstore   :xfields,  null: false, default: {}
       t.jsonb    :jfields , null: false, default: {}
       t.datetime :last_seen_at
       t.timestamps
@@ -186,6 +187,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :users, :uuid
     add_index :users, :exid
     add_index :users, :auth_token
+    add_index :users, :xfields, using: :gin
     add_index :users, :jfields, using: :gin
 
     create_table :user_ledgers do |t|
@@ -198,6 +200,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :currency
       t.float    :balance , default: 0.0
       t.string   :status  , default: 'open'
+      t.hstore   :xfields , null: false, default: {}
       t.jsonb    :jfields , null: false, default: {}
       t.timestamps
     end
@@ -209,6 +212,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :user_ledgers, :currency
     add_index :user_ledgers, :balance
     add_index :user_ledgers, :status
+    add_index :user_ledgers, :xfields, using: :gin
     add_index :user_ledgers, :jfields, using: :gin
 
     create_table :user_groups do |t|
@@ -217,6 +221,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string   :name
       t.string   :description
       t.string   :tags
+      t.hstore   :xfields , null: false, default: {}
       t.jsonb    :jfields , null: false, default: {}
       t.string   :status  , default: 'open'           # open | closed
       t.timestamps
@@ -226,6 +231,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
     add_index :user_groups, :name
     add_index :user_groups, :tags
     add_index :user_groups, :status
+    add_index :user_groups, :xfields, using: :gin
     add_index :user_groups, :jfields, using: :gin
 
     create_table :user_memberships do |t|

@@ -65,7 +65,7 @@ end
 #  chain_hash   :string
 #  payload      :jsonb            not null
 #  jfields      :jsonb            not null
-#  ledger_uuids   :string           default([]), is an Array
+#  user_uuids   :string           default([]), is an Array
 #  tags         :string
 #  note         :string
 #  projected_at :datetime

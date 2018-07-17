@@ -135,6 +135,7 @@ end
 #  admin                  :boolean
 #  auth_token             :string
 #  balance                :float            default(0.0)
+#  xfields                :hstore           not null
 #  jfields                :jsonb            not null
 #  last_seen_at           :datetime
 #  created_at             :datetime         not null
