@@ -66,6 +66,41 @@
 
 - [x] Finish Paypro design
 
+## 17 Jul TUE
+
+- [x] Install GraphQL
+- [x] Working Graphiql
+
+- [ ] GraphQL queries
+- [ ] GraphQL mutations
+
+## TBD
+
+- [ ] Remove writes to InfluxDB
+- [ ] Add writes to NATS
+
+- [ ] Remove Restful Layer
+- [ ] Extract demo applications
+
+- [ ] Rewrite CLI to use GraphQL
+- [ ] Rewrite CLI to use TTY Gems
+
+- [ ] Rewrite Intern exercise to use GraphQL
+- [ ] Get all TestBench exercises working via GraphQL
+
+- [ ] Dockerize the Exchange
+- [ ] Dockerize PostgresQL
+- [ ] Dockerize Nats
+
+- [ ] test j/x fields: trackers
+- [ ] test j/x fields: issues
+- [ ] test j/x fields: offers
+- [ ] test j/x fields: contracts
+- [ ] test j/x fields: amendments
+- [ ] test j/x stm fields: issues
+- [ ] test j/x stm fields: offers
+- [ ] test j/x stm fields: contracts
+
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro
 - [ ] cross   - use ledger/debit command

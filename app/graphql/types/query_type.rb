@@ -1,11 +1,15 @@
 class Types::QueryType < Types::BaseObject
-  # Add root-level fields here.
-  # They will be entry points for queries on your schema.
+  # Root-level fields: entry points for queries on the schema.
 
-  # TODO: remove me
-  field :test_field, String, null: false,
-    description: "An example field added by the generator"
+  field :test_field, String, null: false do
+    description "An example field added by the generator"
+  end
+
   def test_field
     "Hello World!"
+  end
+
+  field :user, Types::Exchange::UserType do
+    description "User"
   end
 end
