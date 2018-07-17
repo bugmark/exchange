@@ -192,6 +192,9 @@ GEM
     grape_logging (1.8.0)
       grape
       rack
+    graphiql-rails (1.4.11)
+      railties
+      sprockets-rails
     graphql (1.8.5)
     graphviz (1.0.0)
       process-pipeline
@@ -468,6 +471,7 @@ DEPENDENCIES
   grape-swagger-entity
   grape-swagger-rails
   grape_logging
+  graphiql-rails
   graphql
   graphviz
   guard
