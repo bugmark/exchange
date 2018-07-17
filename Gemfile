@@ -13,6 +13,7 @@ end
 
 # ----- graphql -----
 gem 'graphql'
+gem 'graphiql-rails', group: :development
 
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.2'     # rails
