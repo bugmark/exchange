@@ -71,21 +71,18 @@
 - [x] Install GraphQL
 - [x] Working Graphiql
 
-- [ ] Require IORA/GitHub to use GraphQL interface
+## 18 Jul WED
 
-- [ ] GraphQL queries
-- [ ] GraphQL mutations
+- [x] GraphQL queries
+- [x] GraphQL mutations
 
 ## TBD
 
-- [ ] Remove writes to InfluxDB
-- [ ] Add writes to NATS
+- [ ] Rewrite CLI to use GraphQL
 
 - [ ] Remove Restful Layer
 - [ ] Extract demo applications
-
-- [ ] Rewrite CLI to use GraphQL
-- [ ] Rewrite CLI to use TTY Gems
+- [ ] Get rid of Bugmark language bindings
 
 - [ ] Rewrite Intern exercise to use GraphQL
 - [ ] Get all TestBench exercises working via GraphQL
@@ -93,6 +90,13 @@
 - [ ] Dockerize the Exchange
 - [ ] Dockerize PostgresQL
 - [ ] Dockerize Nats
+
+- [ ] Require IORA/GitHub to use GraphQL interface
+
+- [ ] Remove writes to InfluxDB
+- [ ] Add writes to NATS
+
+- [ ] Rewrite CLI to use TTY Gems
 
 - [ ] test j/x fields: trackers
 - [ ] test j/x fields: issues
