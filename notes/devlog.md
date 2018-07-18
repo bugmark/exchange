@@ -71,6 +71,8 @@
 - [x] Install GraphQL
 - [x] Working Graphiql
 
+- [ ] Require IORA/GitHub to use GraphQL interface
+
 - [ ] GraphQL queries
 - [ ] GraphQL mutations
 
