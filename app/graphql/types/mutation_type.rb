@@ -1,8 +1,23 @@
 class Types::MutationType < Types::BaseObject
-  # TODO: remove me
-  field :test_field, String, null: false,
-    description: "An example field added by the generator"
+
+  field :test_field, String, null: false do
+    description "an example field added by the generator"
+  end
+
   def test_field
-    "Hello World"
+    "hello world"
+  end
+
+  field :update_user_name, String, null: false do
+    description "an example field added by the generator"
+    argument :id, Int, required: true
+    argument :name, String, required: true
+  end
+
+  def update_user_name(id:, name:)
+    user = User.find(id)
+    user.name = name
+    user.save
+    "OK"
   end
 end
