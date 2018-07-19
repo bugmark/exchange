@@ -1,12 +1,24 @@
 class Types::QueryType < Types::BaseObject
-  field :test_field, String, null: false do
-    description "An example field added by the generator"
+
+  # --------------------------------------------------
+  field :hello, String, null: false do
+    description "GraphQL test - Hello World!"
   end
 
-  def test_field
+  def hello
     "Hello World!"
   end
 
+  # --------------------------------------------------
+  field :host, Types::Exchange::HostType, null: true do
+    description "Host info"
+  end
+
+  def host
+    Types::Exchange::HostKlas.new
+  end
+
+  # --------------------------------------------------
   field :users, [Types::Exchange::UserType], null: true do
     description "This and that and this"
   end
@@ -15,6 +27,7 @@ class Types::QueryType < Types::BaseObject
     User.all
   end
 
+  # --------------------------------------------------
   field :user, Types::Exchange::UserType, null: true do
     description "This and that and this"
     argument :id, Int, required: true
@@ -24,11 +37,5 @@ class Types::QueryType < Types::BaseObject
     User.find(id)
   end
 
-  field :bugm_time, String, null: true do
-    description "Current Exchange Time"
-  end
 
-  def bugm_time
-    BugmTime.now.to_s
-  end
 end

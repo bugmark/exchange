@@ -75,10 +75,31 @@
 
 - [x] GraphQL queries
 - [x] GraphQL mutations
+- [x] Start rewrite CLI to use GraphQL
+
+- [ ] CLI: host
+- [ ] CLI: user
+- [ ] GraphQL Query: host
+- [ ] GraphQL Query: user
+
+- [ ] GraphQL Query: tracker
+- [ ] GraphQL Query: issue
+- [ ] GraphQL Query: offer
+- [ ] GraphQL Query: contract
+- [ ] GraphQL Query: position
+- [ ] GraphQL Query: escrow
+- [ ] GraphQL Query: event
+
+- [ ] GraphQL Mutation: host
+- [ ] GraphQL Mutation: user
+- [ ] GraphQL Mutation: issue
+- [ ] GraphQL Mutation: offer
+- [ ] GraphQL Mutation: contract
+- [ ] GraphQL Mutation: position
+- [ ] GraphQL Mutation: escrow
+- [ ] GraphQL Mutation: event
 
 ## TBD
-
-- [ ] Rewrite CLI to use GraphQL
 
 - [ ] Remove Restful Layer
 - [ ] Extract demo applications
