@@ -76,11 +76,19 @@
 - [x] GraphQL queries
 - [x] GraphQL mutations
 - [x] Start rewrite CLI to use GraphQL
+- [x] CLI: host
+- [x] GraphQL Query: host
+- [x] CLI: user
+- [x] GraphQL Query: user
 
-- [ ] CLI: host
-- [ ] CLI: user
-- [ ] GraphQL Query: host
-- [ ] GraphQL Query: user
+## 19 Jul THU
+
+- [x] Add http-basic auth to /graphql controller
+- [x] Configure graphiql to generate http basic header
+- [x] Set a 'current_user' context in the GraphQL server
+- [x] Configure CLI to generate http basic header
+
+## TBD
 
 - [ ] GraphQL Query: tracker
 - [ ] GraphQL Query: issue
@@ -98,8 +106,6 @@
 - [ ] GraphQL Mutation: position
 - [ ] GraphQL Mutation: escrow
 - [ ] GraphQL Mutation: event
-
-## TBD
 
 - [ ] Remove Restful Layer
 - [ ] Extract demo applications

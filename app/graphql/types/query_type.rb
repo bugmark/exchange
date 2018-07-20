@@ -20,7 +20,7 @@ class Types::QueryType < Types::BaseObject
 
   # --------------------------------------------------
   field :users, [Types::Exchange::UserType], null: true do
-    description "This and that and this"
+    description "User list"
   end
 
   def users
@@ -29,7 +29,7 @@ class Types::QueryType < Types::BaseObject
 
   # --------------------------------------------------
   field :user, Types::Exchange::UserType, null: true do
-    description "This and that and this"
+    description "User info"
     argument :id, Int, required: true
   end
 
