@@ -18,9 +18,15 @@ begin
   end
 
   list = InfluxDB::Rails.client.list_databases.map {|el| el["name"]}
-  %w(bugm_log bugm_stats).each do |db|
+  %w(bugm_log bugm_stats bugm_views).each do |db|
     InfluxDB::Rails.client.create_database(db) unless list.include?(db)
   end
+
+  InfluxViews = InfluxDB::Client.new "bugm_views", {
+    hosts:    %w(localhost)   ,
+    username: "admin"         ,
+    password: "admin"
+  }
 
   InfluxStats = InfluxDB::Client.new "bugm_stats", {
     hosts:    %w(localhost)   ,
