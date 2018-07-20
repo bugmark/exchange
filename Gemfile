@@ -11,6 +11,13 @@ group :test_bench do
   gem 'kramdown'
 end
 
+# ----- graphql -----
+gem 'graphql'
+gem 'graphql-batch'
+gem 'graphql-errors'
+gem 'cacheql'
+gem 'graphiql-rails', group: :development
+
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.2'     # rails
 gem 'pg'           , '~> 1.0'     # postgres support
