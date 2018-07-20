@@ -1,25 +1,31 @@
-require 'ext/hash'
+class Event::UserLedgerDebited < Event
 
-# TODO: write code
-# TODO: write tests
-class Event::GroupUserAdded < Event
+  jsonb_accessor :payload, "uuid"   => :string
+  jsonb_accessor :payload, "amount" => :float
 
-  jsonb_fields_for :payload, User
-
-  validates :uuid , presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
-
-  def initialize(opts)
-    super(opts)
-  end
+  validates :uuid   , presence: true
+  validates :amount , presence: true
 
   def cast_object
-    User.new(payload.without_blanks)
+    ledger.balance -= amount if ledger
+    ledger
   end
 
-  def tgt_user_uuids
-    [uuid]
+  def influx_fields
+    {
+      withdraw_amount: self.amount          ,
+      new_balance:     ledger.balance
+    }
+  end
+
+  def tgt_ledger_uuids
+    [ledger&.user_uuid]
+  end
+
+  private
+
+  def ledger
+    @ledger ||= UserLedger.find_by_uuid(uuid)
   end
 end
 

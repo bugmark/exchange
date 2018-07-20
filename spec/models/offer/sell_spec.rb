@@ -57,6 +57,7 @@ end
 #  type                  :string
 #  tracker_type          :string
 #  user_uuid             :string
+#  ledger_uuid           :string
 #  prototype_uuid        :string
 #  amendment_uuid        :string
 #  salable_position_uuid :string
@@ -80,6 +81,8 @@ end
 #  stm_labels            :string
 #  stm_trader_uuid       :string
 #  stm_group_uuid        :string
+#  stm_currency          :string
+#  stm_paypro_uuid       :string
 #  stm_comments          :jsonb            not null
 #  stm_jfields           :jsonb            not null
 #  stm_xfields           :hstore           not null

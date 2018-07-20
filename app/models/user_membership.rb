@@ -14,4 +14,5 @@ end
 #  uuid       :string
 #  user_uuid  :string
 #  group_uuid :string
+#  status     :string           default("active")
 #

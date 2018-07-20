@@ -12,7 +12,7 @@ module ContractCmd
     validate :cross_integrity
 
     def initialize(offer, commit_type, counter = nil)
-      @type     = commit_type
+      @type     = commit_type   # expand, transfer, reduce
       @offer    = Offer.find(offer.to_i)
       @counters = counter ? Offer.where(id: counter.id) : @offer.qualified_counteroffers(commit_type)
       if valid?

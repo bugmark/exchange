@@ -1,10 +1,6 @@
 module UserCmd
   class Withdraw < ApplicationCommand
 
-    # TODO
-    # validate presence of user
-    # validate amount
-
     def initialize(xargs)
       args = xargs.stringify_keys
       add_event(:usr, Event::UserWithdrawn.new(withdraw_opts(args))) if has_amount?(args)

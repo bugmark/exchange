@@ -1,25 +1,34 @@
 require 'ext/hash'
 
-# TODO: write code
-# TODO: write tests
-class Event::GroupUserRemoved < Event
+class Event::UserLedgerOpened < Event
 
-  jsonb_fields_for :payload, User
+  jsonb_fields_for :payload, UserLedger
 
-  validates :uuid , presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
-
-  def initialize(opts)
-    super(opts)
-  end
+  validates :uuid        , presence: true
+  validates :user_uuid   , presence: true
+  validates :paypro_uuid , presence: true
+  validates :currency    , presence: true
 
   def cast_object
-    User.new(payload.without_blanks)
+    ledger
   end
 
   def tgt_user_uuids
-    [uuid]
+    [user_uuid]
+  end
+
+  private
+
+  def ledger
+    ledger = UserLedger.find_by(uuid: uuid) || UserLedger.new
+    ledger.update_attributes(ledger_args(payload))
+    ledger
+  end
+
+  def ledger_args(xargs)
+    args = xargs.stringify_keys.without_blanks
+    args["status"] = "open"
+    args
   end
 end
 

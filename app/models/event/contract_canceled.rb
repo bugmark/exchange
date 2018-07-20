@@ -14,7 +14,6 @@ class Event::ContractCanceled < Event
   end
 
   def tgt_user_uuids
-    binding.pry
     []
   end
 
