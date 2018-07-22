@@ -12,6 +12,10 @@ class Event < ApplicationRecord
 
   jsonb_accessor :jfields, :etherscan_url => :string
 
+  def xtag
+    "event"
+  end
+
   class << self
     # generate jsonb fields for a class
     def jsonb_fields_for(field, klas, opts = {})
