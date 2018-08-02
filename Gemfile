@@ -91,6 +91,8 @@ group :development do
   gem 'pry-stack_explorer'       # stack display and navigation
   gem 'web-console', '>= 3.3.0'  # IRB on exception pages or with <%= console %>
 
+  gem 'rubocop', require: false
+
   gem 'spring'
   gem 'guard'                    # auto test-runner
   gem 'spring-commands-rspec'    # 'spring rspec' command
