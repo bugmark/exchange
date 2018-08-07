@@ -15,7 +15,7 @@ class Event::OfferCanceled < Event
   end
 
   def tgt_user_uuids
-    [user_uuid]
+    [Offer.find_by_uuid(uuid).user_uuid]
   end
 end
 
