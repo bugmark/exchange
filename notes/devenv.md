@@ -19,7 +19,7 @@ To be successful, you'll need good skills with the following tools:
 
 ## Host Machine
 
-We assume that you're using Ubuntu 16.04 as your host machine.  If you're Mac
+We assume that you're using Ubuntu 18.04 as your host machine.  If you're Mac
 savvy, you'll be able to get things running on a Mac.
 
 Your host machine can exist in a few different forms:
