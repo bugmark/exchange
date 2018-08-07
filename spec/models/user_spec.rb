@@ -50,8 +50,9 @@ RSpec.describe User, type: :model do
       expect(usr.offers_bf.count).to  eq(0)
     end
 
-    it 'handles offers_bf and offers_bu' do
-      gen_unfixed; gen_fixed
+    it "handles offers_bf and offers_bu" do
+      gen_unfixed
+      gen_fixed
       expect(usr.offers.count).to eq(2)
       expect(usr.offers_buy.count).to eq(2)
       expect(usr.offers_bf.count).to eq(1)
@@ -70,14 +71,15 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#token_reserve_poolable", USE_VCR do #
+  describe "#token_reserve_poolable", USE_VCR do
     it "has a value with one bid" do
       gen_unfixed(poolable: true)
       expect(usr.token_reserve_poolable).to eq(6.0)
     end
 
     it "has a value with two bids" do
-      gen_unfixed(poolable: true); gen_unfixed(poolable: true)
+      gen_unfixed(poolable: true)
+      gen_unfixed(poolable: true)
       expect(Offer.count).to eq(2)
       expect(usr.token_reserve_poolable).to eq(6.0)
     end
@@ -88,13 +90,15 @@ RSpec.describe User, type: :model do
     end
 
     it "has a value with two asks" do
-      gen_fixed(poolable: true); gen_fixed(poolable: true)
+      gen_fixed(poolable: true)
+      gen_fixed(poolable: true)
       expect(Offer.count).to eq(2)
       expect(usr.token_reserve_poolable).to eq(4.0)
     end
 
     it "has a value with a bid and an ask" do
-      gen_unfixed(poolable: true); gen_fixed(poolable: true)
+      gen_unfixed(poolable: true)
+      gen_fixed(poolable: true)
       expect(Offer::Buy::Unfixed.count).to eq(1)
       expect(Offer::Buy::Fixed.count).to eq(1)
       expect(usr.token_reserve_poolable).to eq(6.0)
@@ -108,7 +112,8 @@ RSpec.describe User, type: :model do
     end
 
     it "has a value with two bids" do
-      gen_unfixed(poolable: false); gen_unfixed(poolable: false)
+      gen_unfixed(poolable: false)
+      gen_unfixed(poolable: false)
       expect(Offer.count).to eq(2)
       expect(usr.token_reserve_not_poolable).to eq(12.0)
     end
@@ -119,13 +124,15 @@ RSpec.describe User, type: :model do
     end
 
     it "has a value with two asks" do
-      gen_fixed(poolable: false); gen_fixed(poolable: false)
+      gen_fixed(poolable: false)
+      gen_fixed(poolable: false)
       expect(Offer.count).to eq(2)
       expect(usr.token_reserve_not_poolable).to eq(8.0)
     end
 
     it "has a value with a bid and an ask" do
-      gen_unfixed(poolable: false); gen_fixed(poolable: false)
+      gen_unfixed(poolable: false)
+      gen_fixed(poolable: false)
       expect(Offer::Buy::Unfixed.count).to eq(1)
       expect(Offer::Buy::Fixed.count).to eq(1)
       expect(usr.token_reserve_not_poolable).to eq(10.0)
@@ -139,7 +146,8 @@ RSpec.describe User, type: :model do
     end
 
     it "has a value with two bids" do
-      gen_unfixed(poolable: false); gen_unfixed(poolable: false)
+      gen_unfixed(poolable: false)
+      gen_unfixed(poolable: false)
       expect(Offer.count).to eq(2)
       expect(usr.token_available).to eq(88.0)
     end
@@ -157,7 +165,8 @@ RSpec.describe User, type: :model do
     end
 
     it "has a value with a bid and an ask" do
-      gen_unfixed; gen_fixed(poolable: false)
+      gen_unfixed
+      gen_fixed(poolable: false)
       expect(Offer::Buy::Unfixed.count).to eq(1)
       expect(Offer::Buy::Fixed.count).to eq(1)
       expect(usr.token_available).to eq(90.0)
