@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
   def valid_params
@@ -31,18 +31,18 @@ RSpec.describe User, type: :model do
   describe "Object Creation" do
     it { should be_valid }
 
-    it 'saves the object to the database' do
+    it "saves the object to the database" do
       subject.save
       expect(subject).to be_valid
     end
   end
 
   describe "Offer Associations", USE_VCR do
-    it 'starts with no bids' do
+    it "starts with no bids" do
       expect(usr.offers).to eq([])
     end
 
-    it 'returns a offer if one exists' do
+    it "returns a offer if one exists" do
       gen_unfixed
       expect(usr.offers.count).to     eq(1)
       expect(usr.offers_buy.count).to eq(1)
