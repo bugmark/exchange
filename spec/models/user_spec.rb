@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   def valid_params
-    {email: "asdf@qwer.net", password: "gggggg"}
+    {email: 'asdf@qwer.net', password: 'gggggg'}
   end
 
   def gen_unfixed(args = {})
@@ -18,7 +18,7 @@ RSpec.describe User, type: :model do
   let(:klas) { described_class }
   subject { klas.new(valid_params) }
 
-  describe "Associations" do
+  describe 'Associations' do
     it { should respond_to(:offers_buy)  }
     it { should respond_to(:offers_bu)   }
     it { should respond_to(:offers_bf)   }
@@ -28,7 +28,7 @@ RSpec.describe User, type: :model do
     it { should respond_to(:contracts)   }
   end
 
-  describe "Object Creation" do
+  describe 'Object Creation' do
     it { should be_valid }
 
     it "saves the object to the database" do
@@ -37,8 +37,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "Offer Associations", USE_VCR do
-    it "starts with no bids" do
+  describe 'Offer Associations', USE_VCR do
+    it 'starts with no bids' do
       expect(usr.offers).to eq([])
     end
 
