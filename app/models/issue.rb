@@ -110,16 +110,16 @@ class Issue < ApplicationRecord
     end
 
     def by_hexid(hexid)
-      where('stm_body like ?', "%#{hexid.to_s.gsub("/", "")}%")
+      where('stm_body like ?', "%#{hexid.to_s.gsub('/', '')}%")
     end
 
     def select_subset
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
-      alt << "substring(stm_title for 20) as title"
-      select(%i(id uuid type stm_tracker_uuid stm_issue_uuid stm_status stm_labels) + alt)
+      alt << 'substring(stm_title for 20) as title'
+      select(%i[id uuid type stm_tracker_uuid stm_issue_uuid stm_status stm_labels] + alt)
     end
-    alias_method :ss, :select_subset
+    alias ss select_subset
   end
 
   # ----- PGSEARCH SCOPES -----
@@ -133,11 +133,11 @@ class Issue < ApplicationRecord
   end
 
   def xtag
-    "issue"
+    'issue'
   end
 
   def xtype
-    self.type&.gsub("Issue::","")
+    self.type&.gsub('Issue::', '')
   end
 
   def hexid
@@ -151,7 +151,7 @@ class Issue < ApplicationRecord
   private
 
   def set_defaults
-    self.stm_status ||= "open"
+    self.stm_status ||= 'open'
   end
 
   def update_stm_ids
