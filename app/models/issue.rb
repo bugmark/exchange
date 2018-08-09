@@ -1,3 +1,4 @@
+# Generic Issue
 class Issue < ApplicationRecord
 
   include MatchUtils
@@ -6,25 +7,25 @@ class Issue < ApplicationRecord
   before_validation :set_defaults
   after_save        :update_stm_ids
 
-  with_options primary_key: "uuid" do
+  with_options primary_key: 'uuid' do
     belongs_to :tracker , :foreign_key => :stm_tracker_uuid
   end
 
-  with_options foreign_key: "stm_issue_uuid", primary_key: "uuid" do
+  with_options foreign_key: 'stm_issue_uuid', primary_key: 'uuid' do
     has_many   :offers    , :dependent  => :destroy
-    has_many   :offers_bf , :class_name => "Offer::Buy::Fixed"
-    has_many   :offers_bu , :class_name => "Offer::Buy::Unfixed"
-    has_many   :offers_sf , :class_name => "Offer::Sell::Fixed"
-    has_many   :offers_su , :class_name => "Offer::Sell::Unfixed"
+    has_many   :offers_bf , :class_name => 'Offer::Buy::Fixed'
+    has_many   :offers_bu , :class_name => 'Offer::Buy::Unfixed'
+    has_many   :offers_sf , :class_name => 'Offer::Sell::Fixed'
+    has_many   :offers_su , :class_name => 'Offer::Sell::Unfixed'
     has_many   :contracts , :dependent  => :destroy
   end
 
-  hstore_accessor :stm_xfields, :html_url  => :string
+  hstore_accessor :stm_xfields, :html_url => :string
   # jsonb_accessor  :stm_jfields, :comments  => :string
 
-  VALID_STM_STATUS = %w(open closed)
+  VALID_STM_STATUS = %w[open closed].freeze
 
-  validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
+  validates :stm_status, inclusion: {in: VALID_STM_STATUS }
 
   # ----- SCOPES -----
   class << self
@@ -95,7 +96,7 @@ class Issue < ApplicationRecord
     end
 
     def distinct_issue
-      select("DISTINCT issues.*")
+      select('DISTINCT issues.*')
     end
 
     # ------------------------------------------------------------------------
@@ -109,7 +110,7 @@ class Issue < ApplicationRecord
     end
 
     def by_hexid(hexid)
-      where("stm_body like ?", "%#{hexid.to_s.gsub("/", "")}%")
+      where('stm_body like ?', "%#{hexid.to_s.gsub("/", "")}%")
     end
 
     def select_subset
