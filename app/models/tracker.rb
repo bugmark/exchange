@@ -1,8 +1,9 @@
+# Generic Isssue Tracker.  Has many issues.
 class Tracker < ApplicationRecord
 
   include PgSearch
 
-  with_options foreign_key: "stm_tracker_uuid", primary_key: "uuid", :dependent => :destroy do
+  with_options :foreign_key => 'stm_tracker_uuid', :primary_key => 'uuid', :dependent => :destroy do
     has_many :issues
     has_many :offers
     has_many :contracts
@@ -13,36 +14,40 @@ class Tracker < ApplicationRecord
   before_validation :set_defaults
 
   def xtag
-    "tracker"
+    'tracker'
   end
 
   def xtype
-    self.type.gsub("Tracker::","")
+    self.type.gsub('Tracker::', '')
   end
 
   def org
-    "TBD"
+    'TBD'
   end
 
   def has_contracts?
-    return false
-    contracts.count != 0 || bug_contracts.count != 0
+    false
+    # contracts.count != 0 || bug_contracts.count != 0
   end
 
-  def readme_txt() "" end
-  def languages() "" end
+  def readme_txt() '' end
+
+  def languages() '' end
 
   # ----- SCOPES -----
 
   class << self
     def github
-      where(type: "Tracker::GitHub")
+      where(type: 'Tracker::GitHub')
     end
 
     def select_subset
-      select(:id, :name, "xfields->'languages' as lang", "jfields->'readme_url' as readme_url", "substring(jfields->>'readme_txt' for 50) as readme_txt")
+      var1 = "xfields->'languages' as lang"
+      var2 = "jfields->'readme_url' as readme_url"
+      var3 = "substring(jfields->>'readme_txt' for 50) as readme_txt"
+      select(:id, :name, var1, var2, var3)
     end
-    alias_method :ss, :select_subset
+    alias ss select_subset
   end
 
   private
