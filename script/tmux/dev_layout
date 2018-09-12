@@ -21,38 +21,10 @@ create_new_session()
 
   # ----- -----
 
-  tmux new-window -n "JEST"
-
-  sendkeys 2.1 'script/dev/jest'
-
-  # ----- -----
-
   tmux new-window -n "PUMA"
 
-  sendkeys 3.1 'script/dev/puma'
+  sendkeys 2.1 'script/dev/puma'
 
-  # ----- -----
-
-  tmux new-window -n "WEBPACK"
-
-  sendkeys 4.1 'script/dev/webpack'
-
-  # ----- -----
-
-  # tmux new-window -n "SIDEKIQ"
-  #
-  # sendkeys 5.1 'script/run/sidekiq'
-
-  # ----- -----
-
-  # tmux new-window -n "TUNNEL"
-  #
-  # splitwin 70 4
-  #
-  # sendkeys 6.1 'clear ; rpf deploy@x440h64:3000 3000'
-
-  # ----- -----
-
-  tmux select-window -t $APP:3
+  tmux select-window -t $APP:2
 
 }
