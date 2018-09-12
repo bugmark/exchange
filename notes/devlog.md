@@ -88,51 +88,53 @@
 - [x] Set a 'current_user' context in the GraphQL server
 - [x] Configure CLI to generate http basic header
 
+## 12 Sep WED
+
+- [ ] add gRPC gems
+- [ ] create a simple bmx.proto
+- [ ] build simple proof-of-concept
+- [ ] add gRPC authentication
+
 ## TBD
-
-- [ ] GraphQL Query: tracker
-- [ ] GraphQL Query: issue
-- [ ] GraphQL Query: offer
-- [ ] GraphQL Query: contract
-- [ ] GraphQL Query: position
-- [ ] GraphQL Query: escrow
-- [ ] GraphQL Query: event
-
-- [ ] GraphQL Mutation: host
-- [ ] GraphQL Mutation: user
-- [ ] GraphQL Mutation: issue
-- [ ] GraphQL Mutation: offer
-- [ ] GraphQL Mutation: contract
-- [ ] GraphQL Mutation: position
-- [ ] GraphQL Mutation: escrow
-- [ ] GraphQL Mutation: event
-
-- [ ] Remove Restful Layer
-- [ ] Extract demo applications
-- [ ] Get rid of Bugmark language bindings
-
-- [ ] Rewrite Intern exercise to use GraphQL
-- [ ] Get all TestBench exercises working via GraphQL
-
-- [ ] Dockerize the Exchange
-- [ ] Dockerize PostgresQL
-- [ ] Dockerize Nats
-
-- [ ] Require IORA/GitHub to use GraphQL interface
 
 - [ ] Remove writes to InfluxDB
 - [ ] Add writes to NATS
 
+- [ ] gRPC Query: tracker
+- [ ] gRPC Query: issue
+- [ ] gRPC Query: offer
+- [ ] gRPC Query: contract
+- [ ] gRPC Query: position
+- [ ] gRPC Query: escrow
+- [ ] gRPC Query: event
+
+- [ ] gRPC Command: host
+- [ ] gRPC Command: user
+- [ ] gRPC Command: issue
+- [ ] gRPC Command: offer
+- [ ] gRPC Command: contract
+- [ ] gRPC Command: position
+- [ ] gRPC Command: escrow
+- [ ] gRPC Command: event
+
+- [ ] Add a grpc-ruby repo & rubygem
+
+- [ ] Rewrite the CLI to use gRPC
 - [ ] Rewrite CLI to use TTY Gems
 
-- [ ] test j/x fields: trackers
-- [ ] test j/x fields: issues
-- [ ] test j/x fields: offers
-- [ ] test j/x fields: contracts
-- [ ] test j/x fields: amendments
-- [ ] test j/x stm fields: issues
-- [ ] test j/x stm fields: offers
-- [ ] test j/x stm fields: contracts
+- [ ] Get rid of Bugmark language bindings
+- [ ] Remove Restful Layer
+
+- [ ] Rewrite Intern exercise to use gRPC
+- [ ] Get all TestBench exercises working via gRPC
+- [ ] Extract demo application and rewrite to use gRPC
+
+- [ ] Containerize the Exchange
+- [ ] Containerize PostgresQL
+- [ ] Containerize Nats
+
+- [ ] Rewrite IORA to use gRPC interface
+- [ ] Rewrite PayPro to use gRPC interface
 
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro
@@ -143,3 +145,4 @@
 - [ ] user.token_reserve   -> user.ledger_reserve
 - [ ] user.token_available -> user.ledger_available
 
+- [ ] add striim/digitalcurrency paypro
