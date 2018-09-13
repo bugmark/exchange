@@ -90,15 +90,17 @@
 
 ## 12 Sep WED
 
-- [ ] add gRPC gems
-- [ ] create a simple bmx.proto
-- [ ] build simple proof-of-concept
-- [ ] add gRPC authentication
-
-## TBD
+- [x] add gRPC gems
+- [x] create helloworld.proto
+- [x] build simple proof-of-concept
 
 - [ ] Remove writes to InfluxDB
 - [ ] Add writes to NATS
+
+## TBD
+
+- [ ] add gRPC authentication
+- [ ] add gRPC encryption
 
 - [ ] gRPC Query: tracker
 - [ ] gRPC Query: issue

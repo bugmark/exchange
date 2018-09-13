@@ -22,6 +22,9 @@ gem 'graphiql-rails', group: :development
 gem 'gruf'
 gem 'grpc'
 
+# ----- messaging -----
+gem 'nats'
+
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.2'     # rails
 gem 'pg'           , '~> 1.0'     # postgres support
