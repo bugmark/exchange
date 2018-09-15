@@ -8,21 +8,21 @@ class Event::IssueSynced < Event
 
   validates :exid      , presence: true
 
-  def influx_tags
-    {
-      type: issue.type
-    }
-  end
-
-  def influx_fields
-    {
-      id:             issue.id            ,
-      stm_issue_uuid: issue.uuid          ,
-      stm_tracker_uuid:  issue.stm_tracker_uuid ,
-      stm_status:     issue.stm_status    ,
-      stm_labels:     issue.stm_labels    ,
-    }.without_blanks
-  end
+  # def influx_tags
+  #   {
+  #     type: issue.type
+  #   }
+  # end
+  #
+  # def influx_fields
+  #   {
+  #     id:             issue.id            ,
+  #     stm_issue_uuid: issue.uuid          ,
+  #     stm_tracker_uuid:  issue.stm_tracker_uuid ,
+  #     stm_status:     issue.stm_status    ,
+  #     stm_labels:     issue.stm_labels    ,
+  #   }.without_blanks
+  # end
 
   def cast_object
     issue.assign_attributes(payload.without_blanks)

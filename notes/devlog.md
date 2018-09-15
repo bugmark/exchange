@@ -93,14 +93,14 @@
 - [x] add gRPC gems
 - [x] create helloworld.proto
 - [x] build simple proof-of-concept
-
-- [ ] Remove writes to InfluxDB
-- [ ] Add writes to NATS
+- [x] Remove writes to InfluxDB
 
 ## TBD
 
-- [ ] add gRPC authentication
-- [ ] add gRPC encryption
+- [ ] Add writes to NATS
+
+- [ ] add gRPC basic-auth using interceptors
+- [ ] add gRPC encryption (TLS)
 
 - [ ] gRPC Query: tracker
 - [ ] gRPC Query: issue

@@ -6,23 +6,23 @@ class Event::EscrowUpdated < Event
 
   validates :uuid , presence: true
 
-  def influx_tags
-    {
-      type: escrow.type
-    }.without_blanks
-  end
-
-  def influx_fields
-    {
-      id:            escrow.id             ,
-      uuid:          escrow.uuid           ,
-      contract_uuid: escrow.contract_uuid  ,
-      sequence:      escrow.sequence       ,
-      fixed_value:   escrow.fixed_values   ,
-      unfixed_value: escrow.unfixed_values ,
-      total_value:   escrow.fixed_values + escrow.unfixed_values
-    }.without_blanks
-  end
+  # def influx_tags
+  #   {
+  #     type: escrow.type
+  #   }.without_blanks
+  # end
+  #
+  # def influx_fields
+  #   {
+  #     id:            escrow.id             ,
+  #     uuid:          escrow.uuid           ,
+  #     contract_uuid: escrow.contract_uuid  ,
+  #     sequence:      escrow.sequence       ,
+  #     fixed_value:   escrow.fixed_values   ,
+  #     unfixed_value: escrow.unfixed_values ,
+  #     total_value:   escrow.fixed_values + escrow.unfixed_values
+  #   }.without_blanks
+  # end
 
   def cast_object
     escrow

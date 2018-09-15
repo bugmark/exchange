@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+msg() {
+  echo --------------------------------------------------
+  echo --- $1
+}
+
+msg 'clear old certs'
+rm -rf out
+
+msg 'create new certificate authority'
+certstrap init --cn bugmark_dev --passphrase ''
+
+msg 'create a client cert'
+certstrap request-cert --cn tsl_client --passphrase ''
+
+msg 'create a host cert'
+certstrap sign tsl_client --CA bugmark_dev 
