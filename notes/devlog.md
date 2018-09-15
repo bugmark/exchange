@@ -97,8 +97,8 @@
 
 ## TBD
 
-- [ ] Add writes to NATS
-
+- [ ] configure Liftbridge with TLS
+- [ ] configure NATS with TLS
 - [ ] add gRPC basic-auth using interceptors
 - [ ] add gRPC encryption (TLS)
 
@@ -120,6 +120,9 @@
 - [ ] gRPC Command: event
 
 - [ ] Add a grpc-ruby repo & rubygem
+
+- [ ] Write event-stream to NATS
+- [ ] Write event-stream to Logfile
 
 - [ ] Rewrite the CLI to use gRPC
 - [ ] Rewrite CLI to use TTY Gems
