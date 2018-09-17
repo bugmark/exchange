@@ -232,6 +232,7 @@ GEM
     hirb (0.7.3)
     hstore_accessor (1.1.1)
       activerecord (>= 4.0.0)
+    htmlentities (4.3.4)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -366,6 +367,8 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    reverse_markdown (1.1.0)
+      nokogiri
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -424,6 +427,17 @@ GEM
       railties (>= 3.1)
       slim (~> 3.0)
     slop (4.6.2)
+    solargraph (0.27.1)
+      coderay (~> 1.1)
+      eventmachine (~> 1.2, >= 1.2.5)
+      htmlentities (~> 4.3, >= 4.3.4)
+      kramdown (~> 1.16)
+      parser (~> 2.4)
+      reverse_markdown (~> 1.0, >= 1.0.5)
+      rubocop (~> 0.52)
+      thor (~> 0.19, >= 0.19.4)
+      tilt (~> 2.0)
+      yard (~> 0.9)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
@@ -481,6 +495,7 @@ GEM
     will_paginate (3.1.6)
     xpath (3.0.0)
       nokogiri (~> 1.8)
+    yard (0.9.16)
 
 PLATFORMS
   ruby
@@ -551,6 +566,7 @@ DEPENDENCIES
   sinatra-contrib!
   sinatra-flash
   slim-rails
+  solargraph
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
