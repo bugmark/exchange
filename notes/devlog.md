@@ -95,12 +95,12 @@
 - [x] build simple proof-of-concept
 - [x] Remove writes to InfluxDB
 
-## TBD
+## 17 Sep MON
 
-- [ ] configure Liftbridge with TLS
-- [ ] configure NATS with TLS
+- [x] Add a grpc-ruby repo & rubygem
+- [x] validate gRPC interceptors
+
 - [ ] add gRPC basic-auth using interceptors
-- [ ] add gRPC encryption (TLS)
 
 - [ ] gRPC Query: tracker
 - [ ] gRPC Query: issue
@@ -119,7 +119,11 @@
 - [ ] gRPC Command: escrow
 - [ ] gRPC Command: event
 
-- [ ] Add a grpc-ruby repo & rubygem
+## TBD
+
+- [ ] configure Liftbridge with TLS
+- [ ] configure NATS with TLS
+- [ ] add gRPC encryption with TLS
 
 - [ ] Write event-stream to NATS
 - [ ] Write event-stream to Logfile

@@ -1,0 +1,92 @@
+#!/usr/bin/env ruby
+#
+# GRPC Server
+
+lib_dir  = File.join(__dir__, 'lib')
+$LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
+
+require 'grpc'
+require 'bmx_services_pb'
+
+require_relative './intercept'
+
+# HelloServer is simple server that implements the Hello server.
+class HelloServer < Helloworld::Hello::Service
+  # say_hello implements the SayHello rpc method.
+  def say_hello(hello_req, _unused_call)
+    Helloworld::HelloReply.new(message: "Hello #{hello_req.name}")
+  end
+end
+
+# main starts an RpcServer that receives requests to HelloServer at the sample
+# server port.
+def main
+  s = GRPC::RpcServer.new(interceptors: [InterceptServer.new])
+  s.add_http2_port('0.0.0.0:50051', :this_port_is_insecure)
+  s.handle(HelloServer)
+  s.run_till_terminated
+end
+
+main
+class InterceptClient < GRPC::ClientInterceptor
+  def request_response(request:, call:, method:, metadata:)
+    info "INTERCEPT REQUEST_RESPONSE", request, call, method, metadata
+    yield
+  end
+
+  def client_streamer(request:, call:, method:, metadata:)
+    info "INTERCEPT CLIENT STREAMER", request, call, method, metadata
+    yield
+  end
+
+  def server_streamer(request:, call:, method:, metadata:)
+    info "INTERCEPT SERVER STREAMER", request, call, method, metadata
+    yield
+  end
+
+  def bidi_streamer(request:, call:, method:, metadata:)
+    info "INTERCEPT BIDI STREAMER", request, call, method, metadata
+    yield
+  end
+
+  private
+
+  def info(msg, request = nil, call = nil, method = nil, metadata = nil)
+    puts msg
+    puts request.inspect
+    puts call.inspect
+    puts method.inspect
+    puts metadata.inspect
+  end
+end
+
+class InterceptServer < GRPC::ServerInterceptor
+  def request_response(request:, call:, method:)
+    info "INTERCEPT BIDI STREAMER", request: request, call: call, method: method
+    yield
+  end
+
+  def client_streamer(call:, method:)
+    info "INTERCEPT BIDI STREAMER", call: call, method: method
+    yield
+  end
+
+  def server_streamer(request:, call:, method:)
+    info "INTERCEPT BIDI STREAMER", request: request, call: call, method: method
+    yield
+  end
+
+  def bidi_streamer(request:, call:, method:)
+    info "INTERCEPT BIDI STREAMER", request: request, call: call, method: method
+    yield
+  end
+
+  private
+
+  def info(msg, request:, call:, method:)
+    puts msg
+    puts request.inspect
+    puts call.inspect
+    puts method.inspect
+  end
+end

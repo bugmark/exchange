@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-grpc_tools_ruby_protoc -I ./protos --ruby_out=./lib --grpc_out=./lib ./protos/hello.proto
+grpc_tools_ruby_protoc -I . --ruby_out=./lib --grpc_out=./lib ./bmx.proto
