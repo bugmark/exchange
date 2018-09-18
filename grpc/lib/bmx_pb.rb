@@ -4,15 +4,15 @@
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
-  add_message "helloworld.HelloRequest" do
+  add_message "bmx.HelloRequest" do
     optional :name, :string, 1
   end
-  add_message "helloworld.HelloReply" do
+  add_message "bmx.HelloReply" do
     optional :message, :string, 1
   end
 end
 
-module Helloworld
-  HelloRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("helloworld.HelloRequest").msgclass
-  HelloReply = Google::Protobuf::DescriptorPool.generated_pool.lookup("helloworld.HelloReply").msgclass
+module Bmx
+  HelloRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("bmx.HelloRequest").msgclass
+  HelloReply = Google::Protobuf::DescriptorPool.generated_pool.lookup("bmx.HelloReply").msgclass
 end

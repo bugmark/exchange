@@ -100,6 +100,8 @@
 - [x] Add a grpc-ruby repo & rubygem
 - [x] validate gRPC interceptors
 
+## 18 Sep TUE
+
 - [ ] add gRPC basic-auth using interceptors
 
 - [ ] gRPC Query: tracker
