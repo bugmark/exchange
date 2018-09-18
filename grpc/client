@@ -1,10 +1,8 @@
 #!/usr/bin/env ruby
 
-lib_dir = File.join(__dir__, 'lib')
-$LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
+# GRPC Client
 
-this_dir = File.expand_path(File.dirname(__FILE__))
-lib_dir = File.join(this_dir, 'lib')
+lib_dir = File.join(__dir__, 'lib')
 $LOAD_PATH.unshift(lib_dir) unless $LOAD_PATH.include?(lib_dir)
 
 require 'grpc'
@@ -13,9 +11,11 @@ require 'bmx_services_pb'
 require 'client/intercept'
 
 def main
-  stub = Helloworld::Hello::Stub.new('localhost:50051', :this_channel_is_insecure)
+  opts = {interceptors: [Client::Intercept.new]}
+  stub = Bmx::Greeter::Stub.new('localhost:50051', :this_channel_is_insecure, opts)
+  # stub = Bmx::Greeter::Stub.new('localhost:50051', :this_channel_is_insecure)
   user = ARGV.size > 0 ?  ARGV[0] : 'world'
-  message = stub.say_hello(Helloworld::HelloRequest.new(name: user)).message
+  message = stub.say_hello(Bmx::HelloRequest.new(name: user)).message
   p "Greeting: #{message}"
 end
 

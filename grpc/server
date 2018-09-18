@@ -11,10 +11,10 @@ require 'bmx_services_pb'
 require 'server/intercept'
 
 # Base Server
-class BmxGreeter < Bmx::Greeter::Service
+class BmxServer < Bmx::Greeter::Service
   # say_hello implements the SayHello rpc method.
   def say_hello(hello_req, _unused_call)
-    BmxGreeter::HelloReply.new(message: "Hello #{hello_req.name}")
+    Bmx::HelloReply.new(message: "Hello #{hello_req.name}")
   end
 end
 
@@ -24,7 +24,7 @@ def main
   # s = GRPC::RpcServer.new(interceptors: [Server::Intercept.new])
   s = GRPC::RpcServer.new
   s.add_http2_port('0.0.0.0:50051', :this_port_is_insecure)
-  s.handle(BmxGreeter)
+  s.handle(BmxServer)
   s.run_till_terminated
 end
 
