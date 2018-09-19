@@ -1,4 +1,4 @@
-class Types::Exchange::UserType < Types::BaseObject
+class Types::Exchange::UserType < Types::Base::Object
   field :id     , Int       , null: true
   field :uuid   , String    , null: true
   field :name   , String    , null: true

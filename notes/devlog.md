@@ -106,7 +106,8 @@
 
 ## 19 Sep WED
 
-- [ ] add GraphQL basic-auth using interceptors
+- [x] add GraphQL encryption with TLS
+- [x] add GraphQL basic-auth 
 
 - [ ] GraphQL Query: tracker
 - [ ] GraphQL Query: issue
@@ -129,8 +130,6 @@
 
 - [ ] configure Liftbridge with TLS
 - [ ] configure NATS with TLS
-- [ ] add GraphQL encryption with TLS
-
 - [ ] Write event-stream to NATS
 - [ ] Write event-stream to Logfile
 

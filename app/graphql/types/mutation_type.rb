@@ -1,4 +1,4 @@
-class Types::MutationType < Types::BaseObject
+class Types::MutationType < Types::Base::Object
 
   field :test_field, String, null: false do
     description "an example field added by the generator"

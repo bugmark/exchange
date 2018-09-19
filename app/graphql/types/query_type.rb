@@ -1,4 +1,4 @@
-class Types::QueryType < Types::BaseObject
+class Types::QueryType < Types::Base::Object
 
   # --------------------------------------------------
   field :hello, String, null: false do
@@ -36,6 +36,5 @@ class Types::QueryType < Types::BaseObject
   def user(id:)
     User.find(id)
   end
-
 
 end

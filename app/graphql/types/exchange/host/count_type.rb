@@ -1,6 +1,6 @@
 require_relative "./count_klas"
 
-class Types::Exchange::Host::CountType < Types::BaseObject
+class Types::Exchange::Host::CountType < Types::Base::Object
   field :users          , Int, null: true, description: "User Count"
   field :trackers       , Int, null: true, description: "Tracker Count"
   field :offers         , Int, null: true, description: "Offer Count"
