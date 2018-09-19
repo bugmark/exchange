@@ -102,50 +102,54 @@
 
 ## 18 Sep TUE
 
-- [ ] add gRPC basic-auth using interceptors
+- [x[ gRPC fail - drop it
 
-- [ ] gRPC Query: tracker
-- [ ] gRPC Query: issue
-- [ ] gRPC Query: offer
-- [ ] gRPC Query: contract
-- [ ] gRPC Query: position
-- [ ] gRPC Query: escrow
-- [ ] gRPC Query: event
+## 19 Sep WED
 
-- [ ] gRPC Command: host
-- [ ] gRPC Command: user
-- [ ] gRPC Command: issue
-- [ ] gRPC Command: offer
-- [ ] gRPC Command: contract
-- [ ] gRPC Command: position
-- [ ] gRPC Command: escrow
-- [ ] gRPC Command: event
+- [ ] add GraphQL basic-auth using interceptors
+
+- [ ] GraphQL Query: tracker
+- [ ] GraphQL Query: issue
+- [ ] GraphQL Query: offer
+- [ ] GraphQL Query: contract
+- [ ] GraphQL Query: position
+- [ ] GraphQL Query: escrow
+- [ ] GraphQL Query: event
+
+- [ ] GraphQL Command: host
+- [ ] GraphQL Command: user
+- [ ] GraphQL Command: issue
+- [ ] GraphQL Command: offer
+- [ ] GraphQL Command: contract
+- [ ] GraphQL Command: position
+- [ ] GraphQL Command: escrow
+- [ ] GraphQL Command: event
 
 ## TBD
 
 - [ ] configure Liftbridge with TLS
 - [ ] configure NATS with TLS
-- [ ] add gRPC encryption with TLS
+- [ ] add GraphQL encryption with TLS
 
 - [ ] Write event-stream to NATS
 - [ ] Write event-stream to Logfile
 
-- [ ] Rewrite the CLI to use gRPC
+- [ ] Rewrite the CLI to use GraphQL
 - [ ] Rewrite CLI to use TTY Gems
 
 - [ ] Get rid of Bugmark language bindings
 - [ ] Remove Restful Layer
 
-- [ ] Rewrite Intern exercise to use gRPC
-- [ ] Get all TestBench exercises working via gRPC
-- [ ] Extract demo application and rewrite to use gRPC
+- [ ] Rewrite Intern exercise to use GraphQL
+- [ ] Get all TestBench exercises working via GraphQL
+- [ ] Extract demo application and rewrite to use GraphQL
 
 - [ ] Containerize the Exchange
 - [ ] Containerize PostgresQL
 - [ ] Containerize Nats
 
-- [ ] Rewrite IORA to use gRPC interface
-- [ ] Rewrite PayPro to use gRPC interface
+- [ ] Rewrite IORA to use GraphQL interface
+- [ ] Rewrite PayPro to use GraphQL interface
 
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro

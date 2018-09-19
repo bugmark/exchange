@@ -18,10 +18,6 @@ gem 'graphql-errors'
 gem 'cacheql'
 gem 'graphiql-rails', group: :development
 
-# ----- gRPC -----
-gem 'gruf'
-gem 'grpc'
-
 # ----- messaging -----
 gem 'nats'
 
