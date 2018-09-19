@@ -1,5 +1,5 @@
-# require 'ext/hash'
-#
+require 'ext/hash'
+
 # class InfluxLogger < Grape::Middleware::Base
 #
 #   def before
@@ -40,12 +40,12 @@
 #     }.delete_if {|_k, v| v.nil?}
 #   end
 # end
-#
-# class ApplicationApi < Grape::API
-#
-#   use InfluxLogger
-#
-#   mount V1::Base    => "/v1"
-#   mount Vtest::Base => "/vtest"
-# end
-#
+
+class ApplicationApi < Grape::API
+
+  # use InfluxLogger
+
+  mount V1::Base    => "/v1"
+  mount Vtest::Base => "/vtest"
+end
+
