@@ -176,9 +176,6 @@ GEM
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    google-protobuf (3.6.1)
-    googleapis-common-protos-types (1.0.2)
-      google-protobuf (~> 3.0)
     grape (1.0.3)
       activesupport
       builder
@@ -202,7 +199,7 @@ GEM
     graphiql-rails (1.4.11)
       railties
       sprockets-rails
-    graphql (1.8.5)
+    graphql (1.8.9)
     graphql-batch (0.3.9)
       graphql (>= 0.8, < 2)
       promise.rb (~> 0.7.2)
@@ -210,15 +207,6 @@ GEM
       graphql (>= 1.6.0, < 2)
     graphviz (1.0.0)
       process-pipeline
-    grpc (1.14.2)
-      google-protobuf (~> 3.1)
-      googleapis-common-protos-types (~> 1.0.0)
-    grpc-tools (1.14.2)
-    gruf (2.4.2)
-      activesupport
-      grpc (~> 1.10)
-      grpc-tools (~> 1.10)
-      slop (~> 4.6)
     guard (2.14.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -426,7 +414,6 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (~> 3.0)
-    slop (4.6.2)
     solargraph (0.27.1)
       coderay (~> 1.1)
       eventmachine (~> 1.2, >= 1.2.5)
@@ -529,8 +516,6 @@ DEPENDENCIES
   graphql-batch
   graphql-errors
   graphviz
-  grpc
-  gruf
   guard
   guard-rspec_min!
   hirb

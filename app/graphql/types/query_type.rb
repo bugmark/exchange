@@ -15,27 +15,26 @@ class Types::QueryType < Types::Base::Object
   end
 
   def host
-    # Types::Exchange::HostType.new
-    HostKlas.new
+    Types::Exchange::HostKlas.new
   end
 
   # ------------------------------------------------------
-  # field :users, [Types::Exchange::UserType], null: true do
-  #   description 'User list'
-  # end
-  #
-  # def users
-  #   User.all
-  # end
+  field :users, [Types::Exchange::UserType], null: true do
+    description 'User list'
+  end
+
+  def users
+    User.all
+  end
 
   # ------------------------------------------------------
-  # field :user, Types::Exchange::UserType, null: true do
-  #   description 'User info'
-  #   argument :id, Int, required: true
-  # end
-  #
-  # def user(id:)
-  #   User.find(id)
-  # end
+  field :user, Types::Exchange::UserType, null: true do
+    description 'User info'
+    argument :id, Int, required: true
+  end
+
+  def user(id:)
+    User.find(id)
+  end
 
 end

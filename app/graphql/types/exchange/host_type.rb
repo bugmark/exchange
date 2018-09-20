@@ -1,28 +1,22 @@
+require_relative "./host/count_type"
 require_relative "./host/info_type"
-# require_relative "./host/count_type"
 
-class HostKlas
+class Types::Exchange::HostKlas
   def info
-    InfoKlas.new
+    Types::Exchange::Host::InfoKlas
+  end
+
+  def count
+    Types::Exchange::Host::CountKlas
   end
 end
 
 class Types::Exchange::HostType < Types::Base::Object
-  # --------------------------------------------------------------
   field :info  , Types::Exchange::Host::InfoType, null: true do
     description "Server info"
   end
 
-  # def info
-  #   InfoKlas.new
-  # end
-
-  # --------------------------------------------------------------
-  # field :count , Types::Exchange::Host::CountType, null: true do
-  #   description "Server counts"
-  # end
-
-  # def count
-  #   Types::Exchange::Host::CountType.new
-  # end
+  field :count , Types::Exchange::Host::CountType, null: true do
+    description "Server counts"
+  end
 end
