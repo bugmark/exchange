@@ -1,3 +1,21 @@
+class InfoKlas
+  def host_name
+    `hostname`.chomp
+  end
+
+  def host_time
+    BugmTime.now
+  end
+
+  def day_offset
+    BugmTime.day_offset
+  end
+
+  def hour_offset
+    BugmTime.hour_offset
+  end
+end
+
 class Types::Exchange::Host::InfoType < Types::Base::Object
 
   field :host_name  , String, null: true, description: "Server hostname"
