@@ -20,7 +20,7 @@ RSpec.describe "GraphQL User" do
   end
 
   describe "GraphQL run" do
-    let(:query_string) { "{ users { id } }" }
+    let(:query_string) { "{ events { id } }" }
 
     it "works" do
       expect(results).to_not be_nil

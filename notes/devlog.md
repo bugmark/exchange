@@ -109,13 +109,21 @@
 - [x] add GraphQL encryption with TLS
 - [x] add GraphQL basic-auth 
 
-- [ ] GraphQL Query: tracker
-- [ ] GraphQL Query: issue
-- [ ] GraphQL Query: offer
-- [ ] GraphQL Query: contract
-- [ ] GraphQL Query: position
-- [ ] GraphQL Query: escrow
-- [ ] GraphQL Query: event
+## 20 Sep THU
+
+- [x] GraphQL Query: tracker
+
+## 21 Sep FRI
+
+- [x] GraphQL Query: issue
+- [x] GraphQL Query: offer
+- [x] GraphQL Query: contract
+- [x] GraphQL Query: position
+- [x] GraphQL Query: escrow
+- [x] GraphQL Query: event
+- [x] GraphQL Query: amendment
+
+## 22 Sep SAT
 
 - [ ] GraphQL Command: host
 - [ ] GraphQL Command: user
@@ -128,13 +136,10 @@
 
 ## TBD
 
-- [ ] configure Liftbridge with TLS
-- [ ] configure NATS with TLS
 - [ ] Write event-stream to NATS
 - [ ] Write event-stream to Logfile
 
 - [ ] Rewrite the CLI to use GraphQL
-- [ ] Rewrite CLI to use TTY Gems
 
 - [ ] Get rid of Bugmark language bindings
 - [ ] Remove Restful Layer
@@ -149,6 +154,11 @@
 
 - [ ] Rewrite IORA to use GraphQL interface
 - [ ] Rewrite PayPro to use GraphQL interface
+
+- [ ] configure Liftbridge with TLS
+- [ ] configure NATS with TLS
+
+- [ ] Rewrite CLI to use TTY Gems
 
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro
