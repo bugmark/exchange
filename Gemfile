@@ -16,7 +16,7 @@ gem 'graphql'
 gem 'graphql-batch'
 gem 'graphql-errors'
 gem 'cacheql'
-gem 'graphiql-rails', group: :development
+gem 'graphiql-rails'
 
 # ----- messaging -----
 gem 'nats'

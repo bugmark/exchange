@@ -1,6 +1,6 @@
-require "rails_helper"  #........
+require "rails_helper"
 
-RSpec.describe "GraphQL Host" do
+RSpec.describe "GraphQL Host" do  #
   let(:context) { {} }
   let(:variables) { {} }
   let(:results) {
