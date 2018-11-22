@@ -123,7 +123,7 @@
 - [x] GraphQL Query: event
 - [x] GraphQL Query: amendment
 
-## 22 Sep SAT
+## 21 Nov WED
 
 - [ ] GraphQL Command: host
 - [ ] GraphQL Command: user
