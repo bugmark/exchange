@@ -34,6 +34,8 @@ module TrackerCmd
           html_url:      el["html_url"]    ,
           synced_at:     BugmTime.now
         }.stringify_keys
+        require 'pry'
+        binding.pry
         add_event("bug#{idx}".to_sym, Event::IssueSynced.new(event_opts(attrs)))
       end
       add_event :tracker, Event::TrackerSynced.new(event_opts(uuid: tracker.uuid))

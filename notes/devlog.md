@@ -125,6 +125,8 @@
 
 ## 21 Nov WED
 
+- [ ] Document Queries
+
 - [ ] GraphQL Command: host
 - [ ] GraphQL Command: user
 - [ ] GraphQL Command: issue
