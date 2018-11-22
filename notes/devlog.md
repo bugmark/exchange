@@ -136,17 +136,17 @@
 
 ## TBD
 
-- [ ] Write event-stream to NATS
-- [ ] Write event-stream to Logfile
-
 - [ ] Rewrite the CLI to use GraphQL
-
-- [ ] Get rid of Bugmark language bindings
-- [ ] Remove Restful Layer
 
 - [ ] Rewrite Intern exercise to use GraphQL
 - [ ] Get all TestBench exercises working via GraphQL
 - [ ] Extract demo application and rewrite to use GraphQL
+
+- [ ] Get rid of Bugmark language bindings
+- [ ] Remove Restful Layer
+
+- [ ] Write event-stream to NATS
+- [ ] Write event-stream to Logfile
 
 - [ ] Containerize the Exchange
 - [ ] Containerize PostgresQL
