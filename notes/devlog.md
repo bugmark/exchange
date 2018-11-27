@@ -130,8 +130,8 @@
 ## 27 Nov TUE
 
 - [x] GraphQL Command: userCreate
-- [ ] GraphQL Command: userDeposit
-- [ ] GraphQL Command: userWithdraw
+- [x] GraphQL Command: userDeposit
+- [x] GraphQL Command: userWithdraw
 
 - [ ] GraphQL User Specs
 

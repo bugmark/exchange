@@ -1,6 +1,6 @@
 require "rails_helper" #
 
-RSpec.describe "GraphQL User" do
+RSpec.describe "GraphQL Position" do
   let(:context) { {} }
   let(:variables) { {} }
   let(:results) {
