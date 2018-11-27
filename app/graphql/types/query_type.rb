@@ -40,10 +40,11 @@ class Types::QueryType < Types::Base::Object
   # ------------------------------------------------------
   field :events, [Types::Exchange::EventType], null: true do
     description 'Event list'
+    argument :limit, Integer, default_value: 20, required: false
   end
 
-  def events
-    Event.all
+  def events(limit:)
+    Event.all.order(:id => :desc).limit(limit)
   end
 
   # ------------------------------------------------------

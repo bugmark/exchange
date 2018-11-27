@@ -125,16 +125,48 @@
 
 ## 21 Nov WED
 
-- [ ] Document Queries
+- [x] Document Queries
 
-- [ ] GraphQL Command: host
-- [ ] GraphQL Command: user
-- [ ] GraphQL Command: issue
-- [ ] GraphQL Command: offer
-- [ ] GraphQL Command: contract
-- [ ] GraphQL Command: position
-- [ ] GraphQL Command: escrow
-- [ ] GraphQL Command: event
+## 27 Nov TUE
+
+- [x] GraphQL Command: userCreate
+- [ ] GraphQL Command: userDeposit
+- [ ] GraphQL Command: userWithdraw
+
+- [ ] GraphQL User Specs
+
+- [ ] GraphQL Command: offerCreateBuy
+- [ ] GraphQL Command: offerCancel
+- [ ] GraphQL Command: offerCreateClone
+- [ ] GraphQL Command: offerCreateCounter
+- [ ] GraphQL Command: offerCreateSell
+- [ ] GraphQL Command: offerExpire
+- [ ] GraphQL Command: offerSuspend
+
+- [ ] GraphQL Command: trackerCreate
+- [ ] GraphQL Command: trackerGhCreate
+- [ ] GraphQL Command: trackerGhSync
+
+- [ ] GraphQL Command: contractCancel
+- [ ] GraphQL Command: contractClone
+- [ ] GraphQL Command: contractCreate
+- [ ] GraphQL Command: contractCross
+- [ ] GraphQL Command: contractResolve
+
+- [ ] GraphQL Command: issueSync
+
+- [ ] GraphQL Command: payproClose
+- [ ] GraphQL Command: payproCreate
+- [ ] GraphQL Command: payproUpdate
+
+- [ ] GraphQL Command: userGroupClose
+- [ ] GraphQL Command: userGroupOpen
+- [ ] GraphQL Command: userLedgerClose
+- [ ] GraphQL Command: userLedgerOpen
+- [ ] GraphQL Command: userLedgerTransfer
+- [ ] GraphQL Command: userLedgerWithdraw
+- [ ] GraphQL Command: userMembershipClose
+- [ ] GraphQL Command: userMembershipOpen
 
 ## TBD
 
