@@ -21,6 +21,7 @@
     "jest": "^20.0.4",
     "js-yaml": "^3.8.4",
     "node-sass": "^4.5.3",
+    "npm": "^6.4.1",
     "path-complete-extname": "^0.1.0",
     "postcss-loader": "^2.0.5",
     "postcss-smart-import": "^0.7.2",
