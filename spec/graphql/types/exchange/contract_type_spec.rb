@@ -10,6 +10,7 @@ RSpec.describe "GraphQL Contract" do
       variables: variables
     )
     pp res if res["errors"]
+    # MODIFICATION
     res
   }
 
