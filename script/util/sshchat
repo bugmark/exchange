@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-# sshchat
-
-ssh research.bugmark.net -p 2022
-
