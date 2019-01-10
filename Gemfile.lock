@@ -1,36 +1,36 @@
 GIT
-  remote: https://github.com/andyl/guard-rspec_min.git
+  remote: git://github.com/andyl/guard-rspec_min.git
   revision: e9c65db51ca2b8cc5d05cc35b8e4910051fe3e23
   specs:
     guard-rspec_min (0.0.1)
       guard
 
 GIT
-  remote: https://github.com/andyl/sinatra.git
-  revision: 64ecbf2d78f652c962df292eb2f626eafc897f44
-  specs:
-    rack-protection (2.0.1)
-      rack
-    sinatra (2.0.1)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.1)
-      tilt (~> 2.0)
-    sinatra-contrib (2.0.1)
-      backports (~> 3.11.3)
-      multi_json
-      mustermann (~> 1.0)
-      rack-protection (= 2.0.1)
-      sinatra (= 2.0.1)
-      tilt (>= 1.3, < 3)
-
-GIT
-  remote: https://github.com/bugmark/iora.git
+  remote: git://github.com/bugmark/iora.git
   revision: 14a98ee233dbdff952d0951b2a4752d9e11ece6d
   specs:
     iora (0.1.2)
       deep_merge (~> 1.2)
       octokit (~> 4.6)
+
+GIT
+  remote: git://github.com/sinatra/sinatra.git
+  revision: f77a0d0baf62c634d089cbc2f0df60049002e247
+  specs:
+    rack-protection (2.0.5)
+      rack
+    sinatra (2.0.5)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.5)
+      tilt (~> 2.0)
+    sinatra-contrib (2.0.5)
+      backports (>= 2.8.2)
+      multi_json
+      mustermann (~> 1.0)
+      rack-protection (= 2.0.5)
+      sinatra (= 2.0.5)
+      tilt (>= 1.3, < 3)
 
 GEM
   remote: https://rubygems.org/
@@ -564,4 +564,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.16.4
+   1.17.2
