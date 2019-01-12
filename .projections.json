@@ -1,0 +1,4 @@
+{
+  "app/*.rb": {"alternate": "spec/{}_spec.rb"},
+  "spec/*spec.rb": {"alternate": "app/{}.rb"}
+}

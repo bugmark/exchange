@@ -1,8 +1,8 @@
-class Types::Exchange::UserType < Types::BaseObject
-  field :id     , Int       , null: true
-  field :uuid   , String    , null: true
-  field :name   , String    , null: true
-  field :email  , String    , null: true
+class Types::Exchange::UserType < Types::Base::Object
+  field :id     , Int       , null: false
+  field :uuid   , String    , null: false
+  field :name   , String    , null: false
+  field :email  , String    , null: false
   field :mobile , String    , null: true
-  field :balance, Float     , null: true
+  field :balance, Float     , null: false
 end

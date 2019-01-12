@@ -11,7 +11,7 @@ class BugmHost
     end
 
     def reset
-      reset_influx
+      # reset_influx
       reset_grafana
       reset_postgres
     end
@@ -31,11 +31,11 @@ class BugmHost
 
     end
 
-    def reset_influx
-      return
-      return unless InfluxUtil.has_influx?
-      InfluxStats.delete_database("bugm_stats")
-      InfluxStats.create_database("bugm_stats")
-    end
+    # def reset_influx
+    #   return
+    #   return unless InfluxUtil.has_influx?
+    #   InfluxStats.delete_database("bugm_stats")
+    #   InfluxStats.create_database("bugm_stats")
+    # end
   end
 end

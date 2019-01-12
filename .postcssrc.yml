@@ -1,3 +1,4 @@
+---
 plugins:
   postcss-smart-import: {}
   precss: {}

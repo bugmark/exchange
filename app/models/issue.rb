@@ -1,3 +1,4 @@
+# Generic Issue
 class Issue < ApplicationRecord
 
   include MatchUtils
@@ -6,25 +7,25 @@ class Issue < ApplicationRecord
   before_validation :set_defaults
   after_save        :update_stm_ids
 
-  with_options primary_key: "uuid" do
+  with_options primary_key: 'uuid' do
     belongs_to :tracker , :foreign_key => :stm_tracker_uuid
   end
 
-  with_options foreign_key: "stm_issue_uuid", primary_key: "uuid" do
+  with_options foreign_key: 'stm_issue_uuid', primary_key: 'uuid' do
     has_many   :offers    , :dependent  => :destroy
-    has_many   :offers_bf , :class_name => "Offer::Buy::Fixed"
-    has_many   :offers_bu , :class_name => "Offer::Buy::Unfixed"
-    has_many   :offers_sf , :class_name => "Offer::Sell::Fixed"
-    has_many   :offers_su , :class_name => "Offer::Sell::Unfixed"
+    has_many   :offers_bf , :class_name => 'Offer::Buy::Fixed'
+    has_many   :offers_bu , :class_name => 'Offer::Buy::Unfixed'
+    has_many   :offers_sf , :class_name => 'Offer::Sell::Fixed'
+    has_many   :offers_su , :class_name => 'Offer::Sell::Unfixed'
     has_many   :contracts , :dependent  => :destroy
   end
 
-  hstore_accessor :stm_xfields, :html_url  => :string
+  hstore_accessor :stm_xfields, :html_url => :string
   # jsonb_accessor  :stm_jfields, :comments  => :string
 
-  VALID_STM_STATUS = %w(open closed)
+  VALID_STM_STATUS = %w[open closed].freeze
 
-  validates :stm_status, inclusion:    {in: VALID_STM_STATUS }
+  validates :stm_status, inclusion: {in: VALID_STM_STATUS }
 
   # ----- SCOPES -----
   class << self
@@ -95,7 +96,7 @@ class Issue < ApplicationRecord
     end
 
     def distinct_issue
-      select("DISTINCT issues.*")
+      select('DISTINCT issues.*')
     end
 
     # ------------------------------------------------------------------------
@@ -109,16 +110,16 @@ class Issue < ApplicationRecord
     end
 
     def by_hexid(hexid)
-      where("stm_body like ?", "%#{hexid.to_s.gsub("/", "")}%")
+      where('stm_body like ?', "%#{hexid.to_s.gsub('/', '')}%")
     end
 
     def select_subset
       alt = []
       alt << "substring(stm_jfields->>'comments' for 20) as comments"
-      alt << "substring(stm_title for 20) as title"
-      select(%i(id uuid type stm_tracker_uuid stm_issue_uuid stm_status stm_labels) + alt)
+      alt << 'substring(stm_title for 20) as title'
+      select(%i[id uuid type stm_tracker_uuid stm_issue_uuid stm_status stm_labels] + alt)
     end
-    alias_method :ss, :select_subset
+    alias ss select_subset
   end
 
   # ----- PGSEARCH SCOPES -----
@@ -132,11 +133,11 @@ class Issue < ApplicationRecord
   end
 
   def xtag
-    "issue"
+    'issue'
   end
 
   def xtype
-    self.type&.gsub("Issue::","")
+    self.type&.gsub('Issue::', '')
   end
 
   def hexid
@@ -150,7 +151,7 @@ class Issue < ApplicationRecord
   private
 
   def set_defaults
-    self.stm_status ||= "open"
+    self.stm_status ||= 'open'
   end
 
   def update_stm_ids

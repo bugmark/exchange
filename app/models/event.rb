@@ -47,8 +47,8 @@ class Event < ApplicationRecord
     Event.where(cmd_uuid: cmd_uuid)
   end
 
-  def influx_tags()    {} end
-  def influx_fields()  {} end
+  # def influx_tags()    {} end
+  # def influx_fields()  {} end
   def tgt_user_uuids() [] end
 
   def ev_cast
@@ -57,7 +57,7 @@ class Event < ApplicationRecord
       if new_object&.save
         self.projected_at = BugmTime.now
         self.send(:save!) unless BMX_SAVE_EVENTS  == "FALSE"
-        point_cast        unless BMX_SAVE_METRICS == "FALSE"
+        # point_cast        unless BMX_SAVE_METRICS == "FALSE"
       else
         # raise "EVENT OBJECT DID NOT SAVE"
       end
@@ -67,22 +67,22 @@ class Event < ApplicationRecord
     end
   end
 
-  def point_cast
-    return unless InfluxUtil.has_influx?
-    return unless USE_INFLUX == true
-    return if Rails.env.test?
-    mname = self.class.name.gsub("Event::", "")
-    args  = {
-      tags:      base_tags.merge(influx_tags)      ,
-      values:    base_fields.merge(influx_fields)  ,
-      timestamp: BugmTime.now.to_i
-    }
-    begin
-      InfluxStats.write_point mname, args
-    rescue
-      "INFLUX WRITE FAILED"
-    end
-  end
+  # def point_cast
+  #   return unless InfluxUtil.has_influx?
+  #   return unless USE_INFLUX == true
+  #   return if Rails.env.test?
+  #   mname = self.class.name.gsub("Event::", "")
+  #   args  = {
+  #     tags:      base_tags.merge(influx_tags)      ,
+  #     values:    base_fields.merge(influx_fields)  ,
+  #     timestamp: BugmTime.now.to_i
+  #   }
+  #   begin
+  #     InfluxStats.write_point mname, args
+  #   rescue
+  #     "INFLUX WRITE FAILED"
+  #   end
+  # end
 
   def cast_object
     raise "ERROR: Call in SubClass"

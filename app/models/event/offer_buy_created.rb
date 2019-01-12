@@ -17,25 +17,25 @@ class Event::OfferBuyCreated < Event
 
   before_validation :set_defaults
 
-  def influx_tags
-    {
-      side:     offer.side       ,
-      intent:   offer.intent     ,
-      poolable: offer.poolable   ,
-      aon:      offer.aon
-    }
-  end
-
-  def influx_fields
-    {
-      id:                offer.id                                           ,
-      volume:            offer.volume                                       ,
-      price:             offer.price                                        ,
-      stm_issue_uuid:    offer.stm_issue_uuid                               ,
-      # stm_tracker_uuid:  offer.stm_tracker_uuid || offer.issue.tracker.uuid ,
-      stm_status:        offer.stm_status
-    }.without_blanks
-  end
+  # def influx_tags
+  #   {
+  #     side:     offer.side       ,
+  #     intent:   offer.intent     ,
+  #     poolable: offer.poolable   ,
+  #     aon:      offer.aon
+  #   }
+  # end
+  #
+  # def influx_fields
+  #   {
+  #     id:                offer.id                                           ,
+  #     volume:            offer.volume                                       ,
+  #     price:             offer.price                                        ,
+  #     stm_issue_uuid:    offer.stm_issue_uuid                               ,
+  #     # stm_tracker_uuid:  offer.stm_tracker_uuid || offer.issue.tracker.uuid ,
+  #     stm_status:        offer.stm_status
+  #   }.without_blanks
+  # end
 
   def tgt_user_uuids
     [user_uuid]

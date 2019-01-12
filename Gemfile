@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 group :test_bench do
   gem 'sinatra'
   gem 'sinatra-flash'
-  github 'andyl/sinatra' do
+  github 'sinatra/sinatra' do
     gem 'sinatra-contrib'
   end
   gem 'kramdown'
@@ -16,7 +16,10 @@ gem 'graphql'
 gem 'graphql-batch'
 gem 'graphql-errors'
 gem 'cacheql'
-gem 'graphiql-rails', group: :development
+gem 'graphiql-rails'
+
+# ----- messaging -----
+gem 'nats'
 
 # ----- exchange utilities -----
 gem 'rails'        , '~> 5.2'     # rails
@@ -63,7 +66,6 @@ gem 'grape-swagger-entity'
 gem 'grape-swagger-rails'
 
 gem 'rack-cors', require: 'rack/cors'
-gem 'influxdb-rails'
 
 gem 'factory_bot_rails'          # for data loading in production
 
@@ -82,7 +84,8 @@ group :development, :test do
 end
 
 group :development do
-  gem 'capistrano-rails'   , group: :development
+  gem 'solargraph'
+  gem 'capistrano-rails'   
 
   # ----- pry / development support -----
   gem 'byebug'                   # debugger
@@ -90,6 +93,8 @@ group :development do
   gem 'pry-rescue'               # opens pry on failing test
   gem 'pry-stack_explorer'       # stack display and navigation
   gem 'web-console', '>= 3.3.0'  # IRB on exception pages or with <%= console %>
+
+  gem 'rubocop', require: false
 
   gem 'spring'
   gem 'guard'                    # auto test-runner

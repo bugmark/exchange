@@ -88,51 +88,111 @@
 - [x] Set a 'current_user' context in the GraphQL server
 - [x] Configure CLI to generate http basic header
 
+## 12 Sep WED
+
+- [x] add gRPC gems
+- [x] create helloworld.proto
+- [x] build simple proof-of-concept
+- [x] Remove writes to InfluxDB
+
+## 17 Sep MON
+
+- [x] Add a grpc-ruby repo & rubygem
+- [x] validate gRPC interceptors
+
+## 18 Sep TUE
+
+- [x[ gRPC fail - drop it
+
+## 19 Sep WED
+
+- [x] add GraphQL encryption with TLS
+- [x] add GraphQL basic-auth 
+
+## 20 Sep THU
+
+- [x] GraphQL Query: tracker
+
+## 21 Sep FRI
+
+- [x] GraphQL Query: issue
+- [x] GraphQL Query: offer
+- [x] GraphQL Query: contract
+- [x] GraphQL Query: position
+- [x] GraphQL Query: escrow
+- [x] GraphQL Query: event
+- [x] GraphQL Query: amendment
+
+## 21 Nov WED
+
+- [x] Document Queries
+
+## 27 Nov TUE
+
+- [x] GraphQL Command: userCreate
+- [x] GraphQL Command: userDeposit
+- [x] GraphQL Command: userWithdraw
+
+- [ ] GraphQL User Specs
+
+- [ ] GraphQL Command: offerCreateBuy
+- [ ] GraphQL Command: offerCancel
+- [ ] GraphQL Command: offerCreateClone
+- [ ] GraphQL Command: offerCreateCounter
+- [ ] GraphQL Command: offerCreateSell
+- [ ] GraphQL Command: offerExpire
+- [ ] GraphQL Command: offerSuspend
+
+- [ ] GraphQL Command: trackerCreate
+- [ ] GraphQL Command: trackerGhCreate
+- [ ] GraphQL Command: trackerGhSync
+
+- [ ] GraphQL Command: contractCancel
+- [ ] GraphQL Command: contractClone
+- [ ] GraphQL Command: contractCreate
+- [ ] GraphQL Command: contractCross
+- [ ] GraphQL Command: contractResolve
+
+- [ ] GraphQL Command: issueSync
+
+- [ ] GraphQL Command: payproClose
+- [ ] GraphQL Command: payproCreate
+- [ ] GraphQL Command: payproUpdate
+
+- [ ] GraphQL Command: userGroupClose
+- [ ] GraphQL Command: userGroupOpen
+- [ ] GraphQL Command: userLedgerClose
+- [ ] GraphQL Command: userLedgerOpen
+- [ ] GraphQL Command: userLedgerTransfer
+- [ ] GraphQL Command: userLedgerWithdraw
+- [ ] GraphQL Command: userMembershipClose
+- [ ] GraphQL Command: userMembershipOpen
+
 ## TBD
 
-- [ ] GraphQL Query: tracker
-- [ ] GraphQL Query: issue
-- [ ] GraphQL Query: offer
-- [ ] GraphQL Query: contract
-- [ ] GraphQL Query: position
-- [ ] GraphQL Query: escrow
-- [ ] GraphQL Query: event
-
-- [ ] GraphQL Mutation: host
-- [ ] GraphQL Mutation: user
-- [ ] GraphQL Mutation: issue
-- [ ] GraphQL Mutation: offer
-- [ ] GraphQL Mutation: contract
-- [ ] GraphQL Mutation: position
-- [ ] GraphQL Mutation: escrow
-- [ ] GraphQL Mutation: event
-
-- [ ] Remove Restful Layer
-- [ ] Extract demo applications
-- [ ] Get rid of Bugmark language bindings
+- [ ] Rewrite the CLI to use GraphQL
 
 - [ ] Rewrite Intern exercise to use GraphQL
 - [ ] Get all TestBench exercises working via GraphQL
+- [ ] Extract demo application and rewrite to use GraphQL
 
-- [ ] Dockerize the Exchange
-- [ ] Dockerize PostgresQL
-- [ ] Dockerize Nats
+- [ ] Get rid of Bugmark language bindings
+- [ ] Remove Restful Layer
 
-- [ ] Require IORA/GitHub to use GraphQL interface
+- [ ] Write event-stream to NATS
+- [ ] Write event-stream to Logfile
 
-- [ ] Remove writes to InfluxDB
-- [ ] Add writes to NATS
+- [ ] Containerize the Exchange
+- [ ] Containerize PostgresQL
+- [ ] Containerize Nats
+
+- [ ] Rewrite IORA to use GraphQL interface
+- [ ] Rewrite PayPro to use GraphQL interface
+
+- [ ] configure Liftbridge with TLS
+- [ ] configure NATS with TLS
 
 - [ ] Rewrite CLI to use TTY Gems
-
-- [ ] test j/x fields: trackers
-- [ ] test j/x fields: issues
-- [ ] test j/x fields: offers
-- [ ] test j/x fields: contracts
-- [ ] test j/x fields: amendments
-- [ ] test j/x stm fields: issues
-- [ ] test j/x stm fields: offers
-- [ ] test j/x stm fields: contracts
 
 - [ ] Offer::Create should always set  `stm_currency` and `stm_paypro`
 - [ ] Match - find offers in matching currency and paypro
@@ -143,3 +203,4 @@
 - [ ] user.token_reserve   -> user.ledger_reserve
 - [ ] user.token_available -> user.ledger_available
 
+- [ ] add striim/digitalcurrency paypro
