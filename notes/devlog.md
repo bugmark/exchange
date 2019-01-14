@@ -133,6 +133,8 @@
 - [x] GraphQL Command: userDeposit
 - [x] GraphQL Command: userWithdraw
 
+## 12 Jan SAT
+
 - [ ] GraphQL User Specs
 
 - [ ] GraphQL Command: offerCreateBuy

@@ -4,8 +4,10 @@
 
     > rails db:create
     > rails db:migrate
-    > rails console
-    # BugmHost.reset
+
+## Load Some Data
+
+    $ script/bot/fast_load
     
 ## Graphiql Authentication
 
@@ -14,7 +16,8 @@ user/pass = `admin@bugmark.net`/`bugmark`
 
 ## Graphiql Queries
 
-TBD
+    { users { id }}
+    { offers { id }}
 
 ## Graphiql Commands
 
