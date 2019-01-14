@@ -137,6 +137,10 @@
 
 - [x] GraphQL User Specs
 
+- [ ] spec: userCreate
+- [ ] spec: userDeposit
+- [ ] spec: userWithdraw
+
 - [ ] GraphQL Command: offerCreateBuy
 - [ ] GraphQL Command: offerCancel
 - [ ] GraphQL Command: offerCreateClone
