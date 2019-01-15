@@ -15,8 +15,11 @@ end
 gem 'graphql'
 gem 'graphql-batch'
 gem 'graphql-errors'
-gem 'cacheql'
 gem 'graphiql-rails'
+
+group :production do
+  gem 'cacheql'
+end
 
 # ----- messaging -----
 gem 'nats'
