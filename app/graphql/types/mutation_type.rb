@@ -1,4 +1,9 @@
 class Types::MutationType < Types::Base::Object
+
+  field :user_dep, String, mutation: Mutations::UserDep
+
+  # --------------------------------------------------------------------
+
   field :user_create, String, null: false do
     description "create a user"
     argument :email, String, required: true
