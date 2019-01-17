@@ -11,16 +11,6 @@ class Types::QueryType < Types::Base::Object
   end
 
   # ------------------------------------------------------
-  field :event, Types::Exchange::EventType, null: true do
-    description 'Event info'
-    argument :id, Int, required: true
-  end
-
-  def event(id:)
-    Event.find(id)
-  end
-
-  # ------------------------------------------------------
   field :escrows, [Types::Exchange::EscrowType], null: true do
     description 'Escrow list'
   end

@@ -7,7 +7,8 @@ module Types
       Queries::Test       ,
       Queries::User       ,
       Queries::Host       ,
-      Queries::Amendment
+      Queries::Amendment  ,
+      Queries::Event
     ])
   end
 end
