@@ -7,11 +7,28 @@
     > rails db:create       # create database
     > rails db:migrate      # create database tables
     > script/bot/fast_buy   # generate seed data
+    
+## Running the Development Console
+
+If you are starting from a raw console, you can bring up a development console
+with a single command:
+
     > script/dev/session    # start development console
+
+If you are starting from within a TMUX/TMATE session, start the development
+console with two commands.
+
+In terminal one:
+
+    > script/dev/rspec    # start the test runner
+
+In terminal two:
+
+    > script/dev/puma     # start the dev server
     
 ## Graphiql Web 
 
-Visit `https://<YOURHOST>/graphiql`
+Visit `https://<YOURHOST>:<yourport>/graphiql`
 user/pass = `admin@bugmark.net`/`bugmark`
 
 Check out the **Documentation Explorer**!
