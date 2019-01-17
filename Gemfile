@@ -13,8 +13,8 @@ end
 
 # ----- graphql -----
 gem 'graphql'
-# gem 'graphql-errors'
 gem 'graphiql-rails'
+# gem 'graphql-errors'
 
 # group :production do
 #   gem 'graphql-batch'
