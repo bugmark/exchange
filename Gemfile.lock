@@ -1,12 +1,12 @@
 GIT
-  remote: git://github.com/andyl/guard-rspec_min.git
+  remote: https://github.com/andyl/guard-rspec_min.git
   revision: e9c65db51ca2b8cc5d05cc35b8e4910051fe3e23
   specs:
     guard-rspec_min (0.0.1)
       guard
 
 GIT
-  remote: git://github.com/bugmark/iora.git
+  remote: https://github.com/bugmark/iora.git
   revision: 14a98ee233dbdff952d0951b2a4752d9e11ece6d
   specs:
     iora (0.1.2)
@@ -14,8 +14,8 @@ GIT
       octokit (~> 4.6)
 
 GIT
-  remote: git://github.com/sinatra/sinatra.git
-  revision: f77a0d0baf62c634d089cbc2f0df60049002e247
+  remote: https://github.com/sinatra/sinatra.git
+  revision: 26fa5c86220890a02cc0f070ddb2696d74a5b843
   specs:
     rack-protection (2.0.5)
       rack
@@ -94,6 +94,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    backport (0.3.0)
     backports (3.11.4)
     bcrypt (3.1.11)
     bindex (0.5.0)
@@ -106,8 +107,6 @@ GEM
     bootstrap_form (2.7.0)
     builder (3.2.3)
     byebug (10.0.2)
-    cacheql (0.1.1)
-      graphql-batch (~> 0.3.9)
     capistrano (3.10.2)
       airbrussh (>= 1.0.0)
       i18n
@@ -200,11 +199,6 @@ GEM
       railties
       sprockets-rails
     graphql (1.8.13)
-    graphql-batch (0.3.9)
-      graphql (>= 0.8, < 2)
-      promise.rb (~> 0.7.2)
-    graphql-errors (0.2.0)
-      graphql (>= 1.6.0, < 2)
     graphviz (1.0.0)
       process-pipeline
     guard (2.14.2)
@@ -225,7 +219,7 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     interception (0.5)
-    jaro_winkler (1.5.1)
+    jaro_winkler (1.5.2)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -278,7 +272,7 @@ GEM
       sawyer (~> 0.8.0, >= 0.5.3)
     orm_adapter (0.5.0)
     parallel (1.12.1)
-    parser (2.5.3.0)
+    parser (2.6.0.0)
       ast (~> 2.4.0)
     pg (1.0.0)
     pg_search (2.1.2)
@@ -290,7 +284,6 @@ GEM
     process-group (1.1.0)
     process-pipeline (1.0.1)
       process-group
-    promise.rb (0.7.4)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -374,7 +367,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.60.0)
+    rubocop (0.63.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
       parser (>= 2.5, != 2.5.1.1)
@@ -414,9 +407,10 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (~> 3.0)
-    solargraph (0.29.0)
-      eventmachine (~> 1.2, >= 1.2.5)
+    solargraph (0.31.0)
+      backport (~> 0.3)
       htmlentities (~> 4.3, >= 4.3.4)
+      jaro_winkler (~> 1.5)
       kramdown (~> 1.16)
       parser (~> 2.3)
       reverse_markdown (~> 1.0, >= 1.0.5)
@@ -451,7 +445,7 @@ GEM
       tzinfo (>= 1.0.0)
     uglifier (4.1.10)
       execjs (>= 0.3.0, < 3)
-    unicode-display_width (1.4.0)
+    unicode-display_width (1.4.1)
     vcr (4.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -494,7 +488,6 @@ DEPENDENCIES
   bootstrap
   bootstrap_form
   byebug
-  cacheql
   capistrano-rails
   capybara
   coffee-rails (~> 4.2)
@@ -512,8 +505,6 @@ DEPENDENCIES
   grape_logging
   graphiql-rails
   graphql
-  graphql-batch
-  graphql-errors
   graphviz
   guard
   guard-rspec_min!
