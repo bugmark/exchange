@@ -13,10 +13,13 @@ end
 
 # ----- graphql -----
 gem 'graphql'
-gem 'graphql-batch'
-gem 'graphql-errors'
-gem 'cacheql'
 gem 'graphiql-rails'
+# gem 'graphql-errors'
+
+# group :production do
+#   gem 'graphql-batch'
+#   gem 'cacheql'
+# end
 
 # ----- messaging -----
 gem 'nats'

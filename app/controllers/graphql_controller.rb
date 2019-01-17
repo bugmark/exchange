@@ -21,9 +21,10 @@ class GraphqlController < ApplicationController
 
   def authenticate
     authenticate_or_request_with_http_basic do |mail, pass|
-      puts "AUTHENTICATING: MAIL #{mail} PASS #{pass}"
-      @current_user = User.find_by_email(mail)
-      @current_user && @current_user.valid_password?(pass)
+      xmail, xpass = [mail.strip.chomp, pass.strip.chomp]
+      puts "AUTHENTICATING: MAIL '#{xmail}' PASS '#{xpass}'"
+      @current_user = User.find_by_email(xmail)
+      @current_user && @current_user.valid_password?(xpass)
     end
   end
 

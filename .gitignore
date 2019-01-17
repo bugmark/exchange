@@ -1,4 +1,6 @@
 *.log
+.graphqlconfig
+schema.graphql
 .env
 /.env
 /.env-chruby

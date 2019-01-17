@@ -1,7 +1,6 @@
 # Bugmark DevEnv
 
-This covers the install and config of software components for Bugmark
-development.
+How to install and config software components for Bugmark development.
 
 NOTE: you don't need the full development environment to contribute
 documentation fixes!  Just clone the tracker, edit text files and submit PR's.
@@ -25,8 +24,9 @@ Sandbox][gs] for info and practice.
 
 ## Development Machine
 
-Use Ubuntu 18.04 for development. We use [Virtual Machines][vvm].  Follow these
-steps to set up a working system:
+We use [Virtual Machines][vvm] (Ubuntu 18.04) for development.  
+
+Follow these steps to bring up a working system:
 
 1. Install Git, VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
