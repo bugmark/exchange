@@ -5,7 +5,9 @@ module Types
     root_type.interfaces = []
     root_type.fields = Util::FieldCombiner.combine([
       Queries::Test       ,
-      Queries::User
+      Queries::User       ,
+      Queries::Host       ,
+      Queries::Amendment
     ])
   end
 end

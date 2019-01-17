@@ -4,9 +4,7 @@ module Types
     root_type.description = 'The mutation root'
     root_type.interfaces = []
     root_type.fields = Util::FieldCombiner.combine([
-      Mutations::UserCreate     ,
-      Mutations::UserDeposit    ,
-      Mutations::UserWithdraw
+      Mutations::User       
     ])
   end
 end

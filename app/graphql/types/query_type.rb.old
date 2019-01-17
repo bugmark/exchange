@@ -1,43 +1,6 @@
 class Types::QueryType < Types::Base::Object
 
   # ------------------------------------------------------
-  field :hello, String, null: false do
-    description 'GraphQL test - Hello World!'
-  end
-
-  def hello
-    'Hello World!'
-  end
-
-  # ------------------------------------------------------
-  field :host, Types::Exchange::HostType, null: true do
-    description 'Host info'
-  end
-
-  def host
-    Types::Exchange::HostKlas.new
-  end
-
-  # ------------------------------------------------------
-  field :amendments, [Types::Exchange::AmendmentType], null: true do
-    description 'Amendment list'
-  end
-
-  def amendments
-    Amendment.all
-  end
-
-  # ------------------------------------------------------
-  field :amendment, Types::Exchange::AmendmentType, null: true do
-    description 'Amendment info'
-    argument :id, Int, required: true
-  end
-
-  def amendment(id:)
-    Amendment.find(id)
-  end
-
-  # ------------------------------------------------------
   field :events, [Types::Exchange::EventType], null: true do
     description 'Event list'
     argument :limit, Integer, default_value: 20, required: false
