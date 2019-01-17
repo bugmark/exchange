@@ -8,6 +8,12 @@ module Types
       Queries::User       ,
       Queries::Host       ,
       Queries::Amendment  ,
+      Queries::Escrow     ,
+      Queries::Tracker    ,
+      Queries::Position   ,
+      Queries::Issue      ,   
+      Queries::Offer      ,   
+      Queries::Contract   ,   
       Queries::Event
     ])
   end
