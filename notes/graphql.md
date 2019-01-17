@@ -2,13 +2,12 @@
 
 ## Starting Up
 
-    > bundle install
-    > rails db:create
-    > rails db:migrate
-
-## Load Some Data
-
-    $ script/bot/fast_load
+    > cd exchange           # cd to the exchange directory
+    > bundle install        # install gem dependencies
+    > rails db:create       # create database
+    > rails db:migrate      # create database tables
+    > script/bot/fast_buy   # generate seed data
+    > script/dev/session    # start development console
     
 ## Graphiql Web 
 
