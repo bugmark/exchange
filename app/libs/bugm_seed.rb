@@ -9,7 +9,7 @@ class BugmSeed
   def initialize(opts = {})
     @cycles     = opts.fetch(:cycles,     15)
     @num_users  = opts.fetch(:num_users,  3)
-    @num_issues = opts.fetch(:num_issues, 5)
+    @num_issues = opts.fetch(:num_issues, 4)
   end
 
   def generate
