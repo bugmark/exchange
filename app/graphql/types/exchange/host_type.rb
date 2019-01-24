@@ -5,7 +5,7 @@ module Types
   module Exchange
     module HostBase
       def info() Types::Exchange::Host::InfoKlas end
-      def types() Types::Exchange::Host::CountKlas end
+      def count() Types::Exchange::Host::CountKlas end
     end
 
     class HostKlas

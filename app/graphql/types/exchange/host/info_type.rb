@@ -1,7 +1,6 @@
 module Types
   module Exchange
     module Host
-
       module InfoBase
         def host_name()   `hostname`.chomp     end
         def host_time()   BugmTime.now         end
