@@ -1,0 +1,19 @@
+version: '3'
+
+# to setup the network, run `docker network create proxynet`
+networks:
+  default:
+      external:
+        name: proxynet
+
+services:
+  bgm_pg:
+    image: postgres:11
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  
+  bgm_app:
+    image: bugmark/exchange
+    ports:
+      - "3090:80"

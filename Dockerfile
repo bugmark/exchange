@@ -27,4 +27,5 @@ RUN     bundle install
 
 COPY . $APP_HOME
 
+CMD ["watch", "-n", "20", "uptime"]
 
