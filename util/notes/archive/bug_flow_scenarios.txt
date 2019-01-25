@@ -1,0 +1,120 @@
+
+-- high level description of *intent* around the flow
+
+   1. the prediction market ( or if no ui, just the mapping )
+   2. the bug bounty ui ( assume this is separate from the bug tracker )
+   3. admin ui ( filling in the conceptually less important gaps )
+
+-- stakeholders
+   1. joe - user wants a bug fixed
+   2. steve - developer wants $100
+   
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SIMPLEST SCENARIO
+-----------------
+
+Joe navigate to the project and sees a link to a market for that tracker.
+Joe visits the market for that tracker and finds a bug he cares about ( might already have a bug id )
+Joe sees that there are no bids on the bug in a) his web3 browser? b) the rails representation of the bug ?
+
+> Just for signing up in the Marketplace, Joe gets 1000 free BugCoin [ future: use bank ach to top-up bugcoin ]
+EVENT: 1000 bugcoin signup grant to joe (registration)
+
+Joe decides that he is willing to pay a) $100 b) 100 BugCoin to have the bug fixed in the next two months.
+Joe clicks 'bid', is prompted for an amount and a deadline, fills those in, and then says ok.
+
+    ------------------------------------------------------
+    RISK #2; he needs to put the money in escrow [ TBD ]
+       -> paypal payment link,
+       -> etherium address to which he can send the money from coinbase
+       -> dapp interface to create the contract and fund it.
+       	  <CreateContract BugId DueDate> <BidYes ContactId Amount>
+
+	  riffs:
+	  - we keep a balance for the user that gets topped up to x as she consumes site services
+	  - if user has no etherium wallet, we can create an internal address for them that we facilitate funding with usd.
+	    ( if they lack an etherium wallet, how do they withdraw their funds?  maybe they can't! or we use paypal! )
+
+EVENT: joe offers $100 for fix
+
+Joe has 900 BugCoin and sees the 'Bid' he created in the Market.
+
+Steve visits the market and looks for bugs with bids.
+Steve finds Joe's Bid, reads the bug, decides he can fix it. Sees "sign up" button.  Clicks it.
+
+EVENT: 1000 bugcoin signup grant to Steve (registration)
+
+Steve sees Bid with "Accept" button on it.  He clicks it.
+
+EVENT: steve accepts the offer
+
+Steve has 900 BugCoin and sees Joe's Bid and his own Ask and a spinner saying "matching...."
+  While the 'matching...' is displayed, steve can cancel his Ask.
+(future: reselling stakes flows are enabled for the newly created cross.)
+
+EVENT: system matches joe's bid with steve's ask, creating a new contract.
+
+Steve sees the spinner go away.  He can no longer cancel his Ask. The contract is committed. ( reselling is not MVP, but can be a dummy link )
+Joe also sees that his Bid can no longer be cancelled.
+
+Steve fixes the bug and gets an admin to mark it closed.
+
+EVENT: Bug is successfully closed on x date
+
+Joe and Steve both see that the bug is closed, and that the confirmation date is the due date that Joe specified.
+  ( future: if Steve wants his money sooner, he can resell his stake now - steve must offer discount for time and risk of reopen bug )
+            ( one simple case - Joe tries out the fix and offers to buy out steve 'cause it works )
+	    ( business opportunity - validate immature contracts with closed bugs and buy them out at a discount, taking the time / reopening risk )
+
+EVENT: Joe's contract deadline passes and the cross is resolved "Yes".  System awards contents of contract to holders of "yes" stakes.
+       (future: transaction fee)
+
+Joe has 900 BugCoin.
+Steve has 1100 BugCoin.
+
+[ TBD EVENT: steve withdraws his bugCoin - needs payment method ]
+
+SIMPLE SCENARIO 2 : The maturity date elapses and the bug is not closed.  ( it was not fixed, or the fix was re-opened )
+-----------------
+
+EVENT: Joe's contract deadline passes and the the cross is resolved "No". System awards contents of contract to holders of "no" stakes.
+       (future: transaction fee)
+
+Joe has 1100 BugCoin.
+Steve has 900 BugCoin.
+
+
+ELABORATIONS
+1. transaction fees - lots of options who gets charged, when they get charged
+2. external payment options - we sell bugcoin ( troubling if free bugcoin has a secondary market.  paid bugcoin is separate. )
+
+ELABORATION: EXTERNAL PAYMENT METHODS(s)  ( buy and sell bug coin )
+-------------------------------------------------------------------
+
+Q: Does Kickstarter take your money before or after the campaign fully funded. Maybe we can de-emphasize "escrow" and "funding the system".
+   We might authorize funds to award you virtual bugcoin.
+
+    BugCoinKarma  vs BugCoinGold
+   
+  ( possible: we might have tons of money in escrow, use the float in the contract to produced revenue in some reasonable low-risk way )
+
+
+Terminology Ideas
+`````````````````
+Contracts have a maturity date.
+Contracts also have resolution conditions which may met before the date, but may no longer be met at the date.
+
+* payment details
+* re-selling marketplace ui
+* cross-making engine & new conditions for crosses ( e.g. partial bids aggregate to meet 
+
+
+
+SCENARIO : Steve thinks he can fix a bug and wants to get paid 100 BugCoin.  Joe only offers 10, but Sally offers the other 90.
+
+    
+
+
+SCENARIO : Stakes in the Contract are Re-Sold

@@ -17,15 +17,16 @@ FROM ruby:2.6
 MAINTAINER Andy Leak <andy@r210.com>
 
 RUN apt-get update -yqq && \
-    apt-get install -yqq --no-install-recommends nodejs
+    apt-get install -yqq --no-install-recommends nodejs postgresql-client
 
 ENV     APP_HOME /usr/src/app
 RUN     mkdir -p $APP_HOME
 COPY    Gemfile* $APP_HOME/
 WORKDIR $APP_HOME
 RUN     bundle install
+EXPOSE  3000
 
 COPY . $APP_HOME
 
-CMD ["watch", "-n", "20", "uptime"]
+CMD ["script/docker/cmd.bash"]
 

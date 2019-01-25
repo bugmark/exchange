@@ -7,7 +7,7 @@ networks:
         name: proxynet
 
 services:
-  bgm_pg:
+  bgm_db:
     image: postgres:11
     environment:
       POSTGRES_USER: postgres
@@ -16,4 +16,6 @@ services:
   bgm_app:
     image: bugmark/exchange
     ports:
-      - "3090:80"
+      - "3090:3000"
+    depends_on:
+      - bgm_db

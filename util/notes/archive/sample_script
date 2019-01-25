@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+puts "LOADING RAILS"
+require_relative "../config/environment"
+
+puts "RESETTING SYSTEM, CREATE DEFAULT PAYPRO (XTS)"
+BugmHost.reset
+exit
+
+ppro1 = Paypro.first
+
+# create user with XTS ledger and opening XTS balance
+usr    = UserCmd::Create.new({email: 'test', balance: '45XTS'}).project.user
+usr_l1 = usr.ledgers.first
+
+# create another XTS paypro
+ppro2 = PayproCmd::Create.new().project.paypro
+
+# create a new XTS ledger for the user
+usr_l2 = UserCmd::LedgerCreate().project.ledger
+
+# deposit into the second XTS ledger
+UserCmd::LedgerDeposit.new().project
+
+# -------------------------------------------------
+
+# make an offer using funds from the second XTS ledger
+
+# get user balance on the second XTS ledger
+
+# get user token_available on the second XTS ledger
+
+# -------------------------------------------------
+
+# create a USD Paypro
+
+# create a new USD ledger for the user
+
+
+
+
+     
