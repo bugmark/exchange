@@ -137,6 +137,8 @@
 
 - [x] GraphQL User Specs
 
+## 26 Jan SAT
+
 - [ ] spec: userCreate
 - [ ] spec: userDeposit
 - [ ] spec: userWithdraw
