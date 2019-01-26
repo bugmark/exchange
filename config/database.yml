@@ -1,7 +1,6 @@
 default: &default
   adapter: postgresql
   encoding: UTF8
-  template: template_base
   host:     <%= ENV['POSTGRES_HOST'] || 'localhost' %>
   username: postgres
   password: postgres
