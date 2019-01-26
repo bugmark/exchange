@@ -1,18 +1,8 @@
 require "rails_helper"
+require "rails_support"
 
-RSpec.describe "GraphQL Contract" do
-  let(:context) { {} }
-  let(:variables) { {} }
-  let(:results) {
-    res = BugmarkSchema.execute(
-      query_string,
-      context: context,
-      variables: variables
-    )
-    pp res if res["errors"]
-    # MODIFICATION
-    res
-  }
+RSpec.describe "GQL Contract Query" do
+  include_context "GraphQL"
 
   describe "base run" do
     it "runs ok" do
@@ -20,7 +10,7 @@ RSpec.describe "GraphQL Contract" do
     end
   end
 
-  describe "GraphQL run" do
+  describe "GQL run" do
     let(:query_string) { "{ contracts { id } }" }
 
     it "works" do

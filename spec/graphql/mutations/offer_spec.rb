@@ -1,6 +1,6 @@
-require "rails_helper" #
+require "rails_helper"
 
-RSpec.describe "GraphQL Offer" do
+RSpec.describe "GQL Offer Mutation" do
   let(:context) { {} }
   let(:variables) { {} }
   let(:results) {

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "GraphQL Host" do
+RSpec.describe "GQL Host Mutation" do
   let(:context) { {} }
   let(:variables) { {} }
   let(:results) {

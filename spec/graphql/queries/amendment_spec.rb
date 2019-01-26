@@ -1,17 +1,7 @@
 require "rails_helper"
 
-RSpec.describe "GraphQL Amendment" do
-  let(:context) { {} }
-  let(:variables) { {} }
-  let(:results) {
-    res = BugmarkSchema.execute(
-      query_string,
-      context: context,
-      variables: variables
-    )
-    pp res if res["errors"]
-    res
-  }
+RSpec.describe "GQL Amendment Query" do
+  include_context "GraphQL"
 
   describe "base run" do
     it "runs ok" do
@@ -19,7 +9,7 @@ RSpec.describe "GraphQL Amendment" do
     end
   end
 
-  describe "GraphQL run" do
+  describe "GQL run" do
     let(:query_string) { "{ amendments { id } }" }
 
     it "works" do
