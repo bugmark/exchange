@@ -3,7 +3,7 @@ module Mutations
 
     field :user_create, GraphQL::STRING_TYPE do
       description "Create a User"
-      argument :id,       GraphQL::STRING_TYPE
+      argument :email,    GraphQL::STRING_TYPE
       argument :password, GraphQL::STRING_TYPE
       argument :name,     GraphQL::STRING_TYPE
       argument :amount,   GraphQL::FLOAT_TYPE
@@ -15,7 +15,7 @@ module Mutations
           name:     args[:name]    ,
           amount:   args[:amount]
         }
-        UserCmd::Create.new(opts).project
+        result = UserCmd::Create.new(opts).project
         "OK"
       end
     end

@@ -27,7 +27,7 @@ end
 #   ...
 
 RSpec.shared_context 'GraphQL' do
-  let(:context) { {} }
+  let(:context)   { {} }
   let(:variables) { {} }
   let(:results) {
     res = BugmarkSchema.execute(

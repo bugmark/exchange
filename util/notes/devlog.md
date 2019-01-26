@@ -139,10 +139,13 @@
 
 ## 26 Jan SAT
 
-- [ ] class / spec nav in vim
-- [ ] spec: userCreate
-- [ ] spec: userDeposit
-- [ ] spec: userWithdraw
+- [x] Rewrite the CLI to use GraphQL
+- [x] Class / spec nav in vim
+- [x] Add shared-context for GraphQL specs
+
+- [ ] mutation spec: userCreate
+- [ ] mutation spec: userDeposit
+- [ ] mutation spec: userWithdraw
 
 - [ ] GraphQL Command: offerCreateBuy
 - [ ] GraphQL Command: offerCancel
@@ -178,8 +181,6 @@
 - [ ] GraphQL Command: userMembershipOpen
 
 ## TBD
-
-- [ ] Rewrite the CLI to use GraphQL
 
 - [ ] Rewrite Intern exercise to use GraphQL
 - [ ] Get all TestBench exercises working via GraphQL
