@@ -1,17 +1,8 @@
 require "rails_helper"
+require "rails_support"
 
 RSpec.describe "GQL User Mutation" do
-  let(:context) { {} }
-  let(:variables) { {} }
-  let(:results) {
-    res = BugmarkSchema.execute(
-      query_string,
-      context: context,
-      variables: variables
-    )
-    pp res if res["errors"]
-    res
-  }
+  include_context "GraphQL"
 
   describe "base run" do
     it "runs ok" do
