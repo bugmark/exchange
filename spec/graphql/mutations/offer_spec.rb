@@ -1,6 +1,6 @@
-require "rails_helper"
+require "rails_helper" #
 
-RSpec.describe "GraphQL User" do
+RSpec.describe "GraphQL Offer" do
   let(:context) { {} }
   let(:variables) { {} }
   let(:results) {
@@ -20,7 +20,7 @@ RSpec.describe "GraphQL User" do
   end
 
   describe "GraphQL run" do
-    let(:query_string) { "{ users { id } }" }
+    let(:query_string) { "{ offers { id } }" }
 
     it "works" do
       expect(results).to_not be_nil
