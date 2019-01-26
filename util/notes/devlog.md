@@ -139,6 +139,7 @@
 
 ## 26 Jan SAT
 
+- [ ] class / spec nav in vim
 - [ ] spec: userCreate
 - [ ] spec: userDeposit
 - [ ] spec: userWithdraw

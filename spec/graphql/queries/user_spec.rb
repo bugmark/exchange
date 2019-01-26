@@ -14,9 +14,9 @@ RSpec.describe "GraphQL User" do
   }
 
   describe "base run" do
-    it "runs ok" do
-      expect(1).to eq(1)
-    end
+    # it "runs ok" do
+    #   expect(1).to eq(1)
+    # end
   end
 
   describe "GraphQL run" do
