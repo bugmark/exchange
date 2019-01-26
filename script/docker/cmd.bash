@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export POSTGRES_HOST=postgres
+
 echo "----- BUNDLE INSTALL -----"
 bundle install
 

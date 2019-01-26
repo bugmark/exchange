@@ -19,3 +19,5 @@ services:
       - "3090:3000"
     depends_on:
       - bgm_db
+    links:
+      - bgm_db:postgres
