@@ -2,11 +2,7 @@
 #
 # To launch:
 # term1> docker run --name pgdb -e POSTGRES_PASSWORD=pwd postgres:11
-# term2> docker run --rm --link pgdb:postgres -it bugmark/exchange bash
-#            > rails db:create
-#            > rails db:migrate
-#            > rails server
-# term2> docker run --name bgmk --link pgdb:postgres bugmark/exchange bin/rails server
+# term2> docker run --name bgmk --link pgdb:postgres bugmark/exchange 
 #
 # Building the image
 # > docker build . -t bugmark/exchange
