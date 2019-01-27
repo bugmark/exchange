@@ -142,10 +142,10 @@
 - [x] Rewrite the CLI to use GraphQL
 - [x] Class / spec nav in vim
 - [x] Add shared-context for GraphQL specs
-
-- [ ] mutation spec: userCreate
-- [ ] mutation spec: userDeposit
-- [ ] mutation spec: userWithdraw
+- [x] fix snippets
+- [x] mutation spec: userCreate
+- [x] mutation spec: userDeposit
+- [x] mutation spec: userWithdraw
 
 - [ ] GraphQL Command: offerCreateBuy
 - [ ] GraphQL Command: offerCancel

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContractCmd::Cross::Expand do
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   let(:offer_bf) { FB.create(:offer_bf, user_uuid: usr1.uuid).offer }
   let(:offer_bu) { FB.create(:offer_bu, user_uuid: usr2.uuid).offer }

@@ -6,7 +6,7 @@ describe "Issues", USE_VCR do
   let(:tracker) { FB.create(:gh_tracker).tracker                                      }
   let(:issue)   { Issue.create(stm_tracker_uuid: tracker.uuid, type: "Issue::GitHub") }
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   it "renders index" do
     hydrate(issue)

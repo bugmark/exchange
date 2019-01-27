@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContractCmd::Cross::Transfer do
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   let(:offer_su) { FBX.offer_su(osu: {price: 0.4}).offer                        }
   let(:offer_bu) { FB.create(:offer_bu, user_uuid: usr1.uuid, price: 0.4).offer }

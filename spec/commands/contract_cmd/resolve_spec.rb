@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContractCmd::Resolve do
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   def offer_args(user, alt = {})
     {
@@ -45,11 +45,11 @@ RSpec.describe ContractCmd::Resolve do
 
     it "has the right user balances" do
       hydrate(issue, obf, obu, contract)
-      expect(User.first.balance).to eq(996.0)
-      expect(User.last.balance).to eq(994.0)
+      expect(User.first.balance).to eq( 996.0)
+      expect(User.last.balance).to  eq( 994.0)
       subject.project
-      expect(User.first.balance).to eq(996.0)
-      expect(User.last.balance).to eq(1004.0)
+      expect(User.first.balance).to eq( 996.0)
+      expect(User.last.balance).to  eq(1004.0)
     end
   end
 
@@ -57,9 +57,9 @@ RSpec.describe ContractCmd::Resolve do
     it "handles median price" do
       o1 = gen_offer(usr1, :offer_bf, {price: 0.1 })
       o2 = gen_offer(usr2, :offer_bu, {price: 0.9 })
-      ct = ContractCmd::Cross.new(o1, :expand).project.contract
-      expect(User.first.balance).to eq(999.0)
-      expect(User.last.balance).to  eq(991.0)
+      ct = ContractCmd::Cross.new(o1, :expand).project.contract #
+      expect(User.first.balance).to eq( 999.0)
+      expect(User.last.balance).to  eq( 991.0)
       cmd = klas.new(ct)
       expect(cmd).to be_valid
       cmd.project
@@ -71,8 +71,8 @@ RSpec.describe ContractCmd::Resolve do
       o1 = gen_offer(usr1, :offer_bf, {price: 0.9 })
       o2 = gen_offer(usr2, :offer_bu, {price: 0.1 })
       ct = ContractCmd::Cross.new(o1, :expand).project.contract
-      expect(User.first.balance).to eq(991.0)
-      expect(User.last.balance).to  eq(999.0)
+      expect(User.first.balance).to eq( 991.0)
+      expect(User.last.balance).to  eq( 999.0)
       cmd = klas.new(ct)
       expect(cmd).to be_valid
       cmd.project

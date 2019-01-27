@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContractCmd::Cross::Reduce do
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   let(:offer_su) { FBX.offer_su.offer                     }
   let(:offer_sf) { FBX.offer_sf.offer                     }
@@ -12,7 +12,7 @@ RSpec.describe ContractCmd::Cross::Reduce do
   let(:sub_xu)   { klas.new(offer_su, :reduce)            }
   subject        { sub_xf                                 }
 
-  describe "Attributes", USE_VCR do 
+  describe "Attributes", USE_VCR do
     it { should respond_to :offer          }
   end
 

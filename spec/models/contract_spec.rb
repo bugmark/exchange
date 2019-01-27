@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Contract, type: :model do
 
-  include_context 'Integration Environment' #
+  include_context 'FactoryBot'
 
   def valid_params(opts = {})
     {

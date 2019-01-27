@@ -79,7 +79,7 @@ RSpec.describe OfferCmd::CreateSell do
         subject.project
         expect(User.count).to eq(2)
         usr = User.first
-        expect(usr.balance).to eq(994.0)
+        expect(usr.balance).to eq( 994.0)
         expect(usr.token_reserve).to eq(0.0)
       end
 

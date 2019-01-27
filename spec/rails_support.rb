@@ -1,9 +1,9 @@
 # use for either request specs or feature specs:
 # describe 'My Feature' do
-#   include_context 'Integration Environment'
+#   include_context 'FactoryBot'
 #   ...
 
-RSpec.shared_context 'Integration Environment' do
+RSpec.shared_context 'FactoryBot' do
   let(:usr1)      { FB.create(:user).user                                     }
   let(:usr2)      { FB.create(:user).user                                     }
   let(:usr3)      { FB.create(:user).user                                     }

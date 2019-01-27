@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContractCmd::Resolve, type: :model do
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   let(:contract) { FBX.expand_obf.contract                                }
   let(:klas)     { described_class                                        }

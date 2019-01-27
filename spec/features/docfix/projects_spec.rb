@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Trackers", USE_VCR do
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   before(:each) { hydrate(tracker1) }
 

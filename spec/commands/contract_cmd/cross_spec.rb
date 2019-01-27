@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContractCmd::Cross do
 
-  include_context 'Integration Environment'
+  include_context 'FactoryBot'
 
   def offer_args(user, alt = {})
     {
