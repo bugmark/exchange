@@ -1,22 +1,22 @@
 module Mutations
   User = GraphQL::ObjectType.define do
 
-    field :user_create, GraphQL::STRING_TYPE do
+    field :user_create, Types::Exchange::UserType do
       description "Create a User"
-      argument :email,    GraphQL::STRING_TYPE
-      argument :password, GraphQL::STRING_TYPE
-      argument :name,     GraphQL::STRING_TYPE
-      argument :amount,   GraphQL::FLOAT_TYPE
+      argument :email    , GraphQL::STRING_TYPE
+      argument :password , GraphQL::STRING_TYPE
+      argument :name     , GraphQL::STRING_TYPE
+      argument :amount   , GraphQL::FLOAT_TYPE
 
       resolve ->(_obj, args, _ctx) do
         opts = {
-          email:    args[:email]   ,
-          password: args[:password],
-          name:     args[:name]    ,
-          amount:   args[:amount]
+          email:    args[:email]                                    ,
+          password: args[:password] || 'bugmark'                    ,
+          name:     args[:name]     || args[:email].split('@').first ,
+          amount:   args[:amount]   || 1000.00
         }
         result = UserCmd::Create.new(opts).project
-        "OK"
+        result.user
       end
     end
 

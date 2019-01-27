@@ -6,6 +6,7 @@ module Types
     root_type.fields = Util::FieldCombiner.combine([
       Mutations::User             ,
       Mutations::Host             ,
+      Mutations::Offer            ,
     ])
   end
 end

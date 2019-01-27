@@ -18,7 +18,7 @@ RSpec.describe "GQL User Mutation" do
 
   describe "User create with graphql" do
     let(:query_string) {
-      'mutation { user_create(email: "bing@bang.com", password: "welcome")}'
+      'mutation { user_create(email: "bing@bang.com", password: "welcome") {id uuid email}}'
     }
 
     it "generates a user" do
@@ -27,9 +27,8 @@ RSpec.describe "GQL User Mutation" do
       expect(results).to_not be_nil
       expect(results.to_h).to be_a(Hash)
       expect(User.count).to eq(1)
-      expect(Event.count).to eq(1)
+      expect(Event.count).to eq(2)
     end
-
   end
 
   describe "deposit" do

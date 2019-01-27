@@ -147,6 +147,8 @@
 - [x] mutation spec: userDeposit
 - [x] mutation spec: userWithdraw
 
+## 27 Jan SUN
+
 - [ ] GraphQL Command: offerCreateBuy
 - [ ] GraphQL Command: offerCancel
 - [ ] GraphQL Command: offerCreateClone

@@ -1,4 +1,5 @@
-# - [ ] GraphQL Command: offerCreateBuy
+# - [x] GraphQL Command: offerCreateBu
+# - [x] GraphQL Command: offerCreateBf
 # - [ ] GraphQL Command: offerCancel
 # - [ ] GraphQL Command: offerCreateClone
 # - [ ] GraphQL Command: offerCreateCounter
@@ -9,22 +10,59 @@
 module Mutations
   Offer = GraphQL::ObjectType.define do
 
-    field :offer_create_buy, GraphQL::STRING_TYPE do
-      description "Create a User"
-      argument :id,       GraphQL::STRING_TYPE
-      argument :password, GraphQL::STRING_TYPE
-      argument :name,     GraphQL::STRING_TYPE
-      argument :amount,   GraphQL::FLOAT_TYPE
+    field :offer_create_bu, Types::Exchange::OfferType do
+      description "Create a Offer to Buy Unfixed"
+      argument :user_uuid      , !GraphQL::STRING_TYPE
+      argument :price          , !GraphQL::FLOAT_TYPE
+      argument :volume         , !GraphQL::INT_TYPE
+      argument :stm_issue_uuid , GraphQL::STRING_TYPE
+      argument :expiration     , GraphQL::Types::ISO8601DateTime
+      argument :maturation     , GraphQL::Types::ISO8601DateTime
+      argument :poolable       , types.Boolean
+      argument :aon            , types.Boolean
 
       resolve ->(_obj, args, _ctx) do
         opts = {
-          email:    args[:email]   ,
-          password: args[:password],
-          name:     args[:name]    ,
-          amount:   args[:amount]
+          user_uuid:      args[:user_uuid]                                   ,
+          price:          args[:price]                                       ,
+          volume:         args[:volume]                                      ,
+          stm_issue_uuid: args[:stm_issue_uuid]                              ,
+          stm_status:     "closed"                                           ,
+          expiration:     args[:expiration] || (Time.now + 1.day).iso8601    ,
+          maturation:     args[:maturation] || (Time.now + 12.hours).iso8601 ,
+          poolable:       args[:poolable]   || false                         ,
+          aon:            args[:aon]        || false                         ,
         }
-        UserCmd::Create.new(opts).project
-        "OK"
+        result = OfferCmd::CreateBuy.new(:offer_bu, opts).project
+        result.offer
+      end
+    end
+
+    field :offer_create_bf, Types::Exchange::OfferType do
+      description "Create a Offer to Buy Fixed"
+      argument :user_uuid      , !GraphQL::STRING_TYPE
+      argument :price          , !GraphQL::FLOAT_TYPE
+      argument :volume         , !GraphQL::INT_TYPE
+      argument :stm_issue_uuid , GraphQL::STRING_TYPE
+      argument :expiration     , GraphQL::Types::ISO8601DateTime
+      argument :maturation     , GraphQL::Types::ISO8601DateTime
+      argument :poolable       , types.Boolean
+      argument :aon            , types.Boolean
+
+      resolve ->(_obj, args, _ctx) do
+        opts = {
+          user_uuid:      args[:user_uuid]                                   ,
+          price:          args[:price]                                       ,
+          volume:         args[:volume]                                      ,
+          stm_issue_uuid: args[:stm_issue_uuid]                              ,
+          stm_status:     "open"                                             ,
+          expiration:     args[:expiration] || (Time.now + 1.day).iso8601    ,
+          maturation:     args[:maturation] || (Time.now + 12.hours).iso8601 ,
+          poolable:       args[:poolable]   || false                         ,
+          aon:            args[:aon]        || false                         ,
+        }
+        result = OfferCmd::CreateBuy.new(:offer_bu, opts).project
+        result.offer
       end
     end
 
