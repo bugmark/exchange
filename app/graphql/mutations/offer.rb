@@ -1,6 +1,3 @@
-# - [x] GraphQL Command: offerCreateBu
-# - [x] GraphQL Command: offerCreateBf
-# - [ ] GraphQL Command: offerCancel
 # - [ ] GraphQL Command: offerCreateClone
 # - [ ] GraphQL Command: offerCreateCounter
 # - [ ] GraphQL Command: offerCreateSell
@@ -10,6 +7,7 @@
 module Mutations
   Offer = GraphQL::ObjectType.define do
 
+    # -------------------------------------------------------------------------
     field :offer_create_bu, Types::Exchange::OfferType do
       description "Create a Offer to Buy Unfixed"
       argument :user_uuid      , !GraphQL::STRING_TYPE
@@ -38,6 +36,7 @@ module Mutations
       end
     end
 
+    # -------------------------------------------------------------------------
     field :offer_create_bf, Types::Exchange::OfferType do
       description "Create a Offer to Buy Fixed"
       argument :user_uuid      , !GraphQL::STRING_TYPE
@@ -62,6 +61,19 @@ module Mutations
           aon:            args[:aon]        || false                         ,
         }
         result = OfferCmd::CreateBuy.new(:offer_bu, opts).project
+        result.offer
+      end
+    end
+
+    # -------------------------------------------------------------------------
+    field :offer_cancel, Types::Exchange::OfferType do
+      description "Cancel an Offer"
+      argument :offer_uuid, !GraphQL::STRING_TYPE
+
+      resolve ->(_obj, args, _ctx) do
+        offer_uuid = args[:offer_uuid]
+        offer = Offer.find_by_uuid(args[:offer_uuid])
+        result = OfferCmd::Cancel.new(offer).project
         result.offer
       end
     end

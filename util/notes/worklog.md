@@ -140,16 +140,23 @@
 ## 26 Jan SAT
 
 - [x] Rewrite the CLI to use GraphQL
-- [x] Class / spec nav in vim
-- [x] Add shared-context for GraphQL specs
-- [x] fix snippets
+- [x] rspec: Add shared-context for GraphQL specs
+- [x] vim: Class / spec nav
+- [x] vim: fix snippets
 - [x] mutation spec: userCreate
 - [x] mutation spec: userDeposit
 - [x] mutation spec: userWithdraw
 
 ## 27 Jan SUN
 
-- [ ] GraphQL Command: offerCreateBuy
+- [x] rspec: fix database reset [before(:each)]
+- [x] vim:   fix character v-alignment (,)
+- [x] make mutation return a GraphQL type
+- [x] handle dates
+- [x] add optional/required arguments
+- [x] GraphQL command: offerCreateBu
+- [x] GraphQL command: offerCreateBf
+
 - [ ] GraphQL Command: offerCancel
 - [ ] GraphQL Command: offerCreateClone
 - [ ] GraphQL Command: offerCreateCounter
