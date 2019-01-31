@@ -1,8 +1,10 @@
 # Dockerfile for bugmark/exchange
 #
 # To launch:
-# term1> docker run --name pgdb -e POSTGRES_PASSWORD=pwd postgres:11
-# term2> docker run --name bgmk --link pgdb:postgres bugmark/exchange 
+# term1> docker run --name pgdb -e POSTGRES_PASSWORD=postgres postgres:11
+# term2> docker run --name bgmk --link pgdb:postgres -p 3333:3000 bugmark/exchange 
+# term3> curl localhost:3333
+# browser> http://localhost:3333
 #
 # Building the image
 # > docker build . -t bugmark/exchange
