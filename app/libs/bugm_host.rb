@@ -16,6 +16,10 @@ class BugmHost
       reset_postgres
     end
 
+    def seed
+      BugmSeed.new(cycles: 20).generate
+    end
+
     private
 
     def reset_postgres
