@@ -3,9 +3,13 @@ module Queries
 
     field :user, Types::Exchange::UserType do
       description 'User info'
-      argument :id, !types.Int, "User ID"
+      argument :id    , types.Int    , "User ID"
+      argument :email , types.String , "User Email"
       resolve ->(_obj, args, _ctx) do
-        ::User.find(args[:id])
+        case
+        when args[:id]    then ::User.find(args[:id])
+        when args[:email] then ::User.find_by_email(args[:email]&.strip&.chomp)
+        end
       end
     end
 
