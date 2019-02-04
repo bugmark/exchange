@@ -1,5 +1,6 @@
 *.log
 .graphqlconfig
+.session.vim
 schema.graphql
 .env
 /.env
