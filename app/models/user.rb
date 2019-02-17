@@ -1,4 +1,4 @@
-# User class
+# User model
 class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
@@ -45,19 +45,19 @@ class User < ApplicationRecord
   end
 
   def new_event_lines
-    event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc') #.
+    event_lines.where('created_at > ?', self.last_session_ended_at).order('id desc')
   end
 
   def xtag
-    "usr"
+    'usr'
   end
 
   def sname
-    self.email.split("@").first.capitalize
+    self.email.split('@').first.capitalize
   end
 
   def contracts
-    positions.map(&:contract).flatten.uniq.sort_by {|c| c.uuid}
+    positions.map(&:contract).flatten.uniq.sort_by(&:uuid)
   end
 
   def open_contracts
@@ -87,7 +87,7 @@ class User < ApplicationRecord
 
   class << self
     def demo_accounts
-      qry = %w(joe jane test admin).map {|x| "email ilike '#{x}%'"}.join(" OR ")
+      qry = %w[joe jane test admin].map {|x| "email ilike '#{x}%'"}.join(' OR ')
       where(qry).order('email asc')
     end
 
@@ -96,9 +96,9 @@ class User < ApplicationRecord
     end
 
     def select_subset
-      select(%i(id uuid email balance))
+      select(%i[id uuid email balance])
     end
-    alias_method :ss, :select_subset
+    alias ss select_subset
   end
 
   # ----- INSTANCE METHODS -----
