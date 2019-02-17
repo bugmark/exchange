@@ -1,3 +1,4 @@
+# User class
 class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
@@ -5,18 +6,18 @@ class User < ApplicationRecord
 
   before_save :default_values
 
-  with_options foreign_key: "user_uuid", primary_key: "uuid" do
-    has_many :offers     , class_name: "Offer"
-    has_many :offers_buy , class_name: "Offer::Buy"
-    has_many :offers_bu  , class_name: "Offer::Buy::Unfixed"
-    has_many :offers_bf  , class_name: "Offer::Buy::Fixed"
-    has_many :offers_sell, class_name: "Offer::Sell"
-    has_many :offers_su  , class_name: "Offer::Sell::Unfixed"
-    has_many :offers_sf  , class_name: "Offer::Sell::Fixed"
-    has_many :groups     , class_name: "UserGroup"     , foreign_key: "owner_uuid"
-    has_many :memberships, class_name: "UserMembership"
+  with_options foreign_key: 'user_uuid', primary_key: 'uuid' do
+    has_many :offers     , class_name: 'Offer'
+    has_many :offers_buy , class_name: 'Offer::Buy'
+    has_many :offers_bu  , class_name: 'Offer::Buy::Unfixed'
+    has_many :offers_bf  , class_name: 'Offer::Buy::Fixed'
+    has_many :offers_sell, class_name: 'Offer::Sell'
+    has_many :offers_su  , class_name: 'Offer::Sell::Unfixed'
+    has_many :offers_sf  , class_name: 'Offer::Sell::Fixed'
+    has_many :groups     , class_name: 'UserGroup', foreign_key: 'owner_uuid'
+    has_many :memberships, class_name: 'UserMembership'
+    has_many :ledgers    , class_name: 'UserLedger'
     has_many :positions
-    has_many :ledgers    , class_name: "UserLedger"
   end
 
   jsonb_accessor :jfields, :last_session_ended_at => :datetime
@@ -27,10 +28,10 @@ class User < ApplicationRecord
   validates_format_of :name,
     allow_blank: true,
     with: /\A[a-zA-Z0-9.-]+\z/,
-    message: "Username can have only alphanumeric(A-Z, a-z, 0-9), period(.) and dash(-) characters."
+    message: 'Username can have only alphanumeric(A-Z, a-z, 0-9), period(.) and dash(-) characters.'
 
   validates :email    , :presence => true
-  validates :password , :presence => true, :on => :create, unless: :has_encrypted_pwd?
+  validates :password , :presence => true, :on => :create, :unless => :has_encrypted_pwd?
   validates :balance  , :numericality => { greater_than_or_equal_to: 0.0 }
 
   def event_lines
@@ -39,6 +40,7 @@ class User < ApplicationRecord
 
   def last_event_at
     return nil if event_lines.count == 0
+
     event_lines.order('id desc').limit(1).first.created_at
   end
 
