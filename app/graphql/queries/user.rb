@@ -1,3 +1,5 @@
+require_relative '../ext/user_auth'
+
 module Queries
   User = GraphQL::ObjectType.define do
 
@@ -13,18 +15,12 @@ module Queries
       end
     end
 
-    field :basic_token, types.String do
-      description 'Basic auth token'
+    field :user_auth, Types::Exchange::UserAuthType do
+      description 'User auth'
       argument :email   , !types.String, 'Email address'
       argument :password, !types.String, 'Password'
       resolve ->(_obj, args, _ctx) do
-        mail = args[:email]
-        pass = args[:password]
-        user = ::User.find_by_email(mail)
-        auth = user&.valid_password?(pass)
-        base = ActionController::HttpAuthentication::Basic
-        cred = base.encode_credentials(mail, pass)
-        auth ? cred : ''
+        ::UserAuth.new(args[:email], args[:password])
       end
     end
 

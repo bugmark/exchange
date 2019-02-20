@@ -123,6 +123,7 @@ class User < ApplicationRecord
   def has_encrypted_pwd?
     self.encrypted_password.present?
   end
+
 end
 
 # == Schema Information
