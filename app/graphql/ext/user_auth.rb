@@ -6,14 +6,17 @@ class UserAuth
   def initialize(mail, pass)
     @pass = pass
     @mail = mail
-    lcl_user = User.find_by_email(mail)
-    @user = lcl_user&.valid_password?(pass) ? lcl_user : nil
+    @user = User.find_by_email(mail)
+  end
+
+  def valid_password?
+    user.valid_password?(pass)
   end
 
   def basic_token
     base = ActionController::HttpAuthentication::Basic
     cred = base.encode_credentials(mail, pass)
-    user ? cred : nil
+    valid_password? ? cred : nil
   end
 
   def id()      user&.id;      end
