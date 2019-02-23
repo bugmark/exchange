@@ -1,3 +1,4 @@
+# Exchange type
 class Types::Exchange::IssueType < Types::Base::Object
   field :id                , Int       , null: true
   field :uuid              , String    , null: true
