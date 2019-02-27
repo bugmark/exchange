@@ -17,6 +17,7 @@ schema.graphql
 /gems.tags
 /log/
 /tmp/
+/doc
 /doc/
 /data/
 /wiki/
