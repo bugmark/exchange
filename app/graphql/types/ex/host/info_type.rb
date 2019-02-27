@@ -1,5 +1,5 @@
 module Types
-  module Exchange
+  module Ex
     module Host
       module InfoBase
         def host_name()   `hostname`.chomp     end

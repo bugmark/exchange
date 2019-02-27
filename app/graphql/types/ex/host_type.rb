@@ -2,7 +2,7 @@ require_relative './host/count_type'
 require_relative './host/info_type'
 
 module Types
-  module Exchange
+  module Ex
     # base module
     module HostBase
       def info() Types::Ex::Host::InfoKlas end

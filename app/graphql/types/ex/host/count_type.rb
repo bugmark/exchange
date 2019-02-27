@@ -1,5 +1,5 @@
 module Types
-  module Exchange
+  module Ex
     module Host
       # host count
       module CountBase
