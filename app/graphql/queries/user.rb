@@ -3,7 +3,7 @@ require_relative '../ext/user_auth'
 module Queries
   User = GraphQL::ObjectType.define do
 
-    field :user, Types::Exchange::UserType do
+    field :user, Types::Ex::UserType do
       description 'User info'
       argument :id    , types.Int    , 'User ID'
       argument :email , types.String , 'User Email'
@@ -15,7 +15,7 @@ module Queries
       end
     end
 
-    field :user_auth, Types::Exchange::UserAuthType do
+    field :user_auth, Types::Ex::UserAuthType do
       description 'User auth'
       argument :email   , !types.String, 'Email address'
       argument :password, !types.String, 'Password'
@@ -24,7 +24,7 @@ module Queries
       end
     end
 
-    field :users, types[Types::Exchange::UserType] do
+    field :users, types[Types::Ex::UserType] do
       description 'User list'
       argument :limit, types.Int, 'Max number of records to return'
       resolve ->(_obj, args, _ctx) do

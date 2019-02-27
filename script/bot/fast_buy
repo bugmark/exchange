@@ -1,24 +1,24 @@
 #!/usr/bin/env ruby
 
-PROCNAME = "fast_bot_buy"
+PROCNAME = 'fast_bot_buy'
 Process.setproctitle(PROCNAME)
 
 # for C-c
-trap "SIGINT" do
-  puts "\nExiting"
+trap 'SIGINT' do
+  puts '\nExiting'
   exit 130
 end
 
 # for "pkill -f fast_bot_buy"
-trap "SIGTERM" do
+trap 'SIGTERM' do
   puts "TERMINATED #{Time.now}"
   STDOUT.flush
   exit 130
 end
 
 # run in turbo mode
-BMX_SAVE_EVENTS  = "FALSE"
-BMX_SAVE_METRICS = "FALSE"
+BMX_SAVE_EVENTS  = 'TRUE'
+BMX_SAVE_METRICS = 'FALSE'
 
 puts "----- BUGMARK OFFER BOT -------------------------------------------"
 puts "START #{Time.now} | C-c to exit"

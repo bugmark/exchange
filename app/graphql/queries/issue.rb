@@ -1,7 +1,7 @@
 module Queries
   Issue = GraphQL::ObjectType.define do
 
-    field :issue, Types::Exchange::IssueType do
+    field :issue, Types::Ex::IssueType do
       description 'Issue info'
       argument :id, !types.Int, 'Issue ID'
       resolve ->(_obj, args, _ctx) do
@@ -9,7 +9,7 @@ module Queries
       end
     end
 
-    field :issues, types[Types::Exchange::IssueType] do
+    field :issues, types[Types::Ex::IssueType] do
       description 'Issue list'
       argument :limit,      types.Int,    'Max number of records to return (default 10)'
       argument :stm_status, types.String, 'Issue status (open, closed)'

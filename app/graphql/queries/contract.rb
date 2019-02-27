@@ -1,7 +1,7 @@
 module Queries
   Contract = GraphQL::ObjectType.define do
 
-    field :contract, Types::Exchange::ContractType do
+    field :contract, Types::Ex::ContractType do
       description 'Contract info'
       argument :id, !types.Int, "Contract ID"
       resolve ->(_obj, args, _ctx) do
@@ -9,7 +9,7 @@ module Queries
       end
     end
 
-    field :contracts, types[Types::Exchange::ContractType] do
+    field :contracts, types[Types::Ex::ContractType] do
       description 'Contract list'
       argument :limit, types.Int, "Max number of records to return"
       resolve ->(_obj, args, _ctx) do

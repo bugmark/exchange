@@ -1,7 +1,7 @@
 module Queries
   Event = GraphQL::ObjectType.define do
 
-    field :event, Types::Exchange::EventType do
+    field :event, Types::Ex::EventType do
       description 'Event Info'
       argument :id, !types.Int
       resolve ->(_obj, args, _ctx) do
@@ -9,7 +9,7 @@ module Queries
       end
     end
 
-    field :events, types[Types::Exchange::EventType] do
+    field :events, types[Types::Ex::EventType] do
       description 'Event list'
       argument :limit, types.Int, "Max number of records to return"
       resolve ->(_obj, args, _ctx) do

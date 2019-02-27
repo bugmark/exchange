@@ -1,7 +1,7 @@
 module Queries
   Escrow = GraphQL::ObjectType.define do
 
-    field :escrow, Types::Exchange::EscrowType do
+    field :escrow, Types::Ex::EscrowType do
       description 'Escrow info'
       argument :id, !types.Int, "Escrow ID"
       resolve ->(_obj, args, _ctx) do
@@ -9,7 +9,7 @@ module Queries
       end
     end
 
-    field :escrows, types[Types::Exchange::EscrowType] do
+    field :escrows, types[Types::Ex::EscrowType] do
       description 'Escrow list'
       argument :limit, types.Int, "Max number of records to return"
       resolve ->(_obj, args, _ctx) do

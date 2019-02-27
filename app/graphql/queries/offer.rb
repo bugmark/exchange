@@ -1,7 +1,7 @@
 module Queries
   Offer = GraphQL::ObjectType.define do
 
-    field :offer, Types::Exchange::OfferType do
+    field :offer, Types::Ex::OfferType do
       description 'Offer info'
       argument :id, !types.Int, 'Offer ID'
       resolve ->(_obj, args, _ctx) do
@@ -9,7 +9,7 @@ module Queries
       end
     end
 
-    field :offers, types[Types::Exchange::OfferType] do
+    field :offers, types[Types::Ex::OfferType] do
       description 'Offer list'
       argument :limit, types.Int, 'Max number of records to return'
       resolve ->(_obj, args, _ctx) do

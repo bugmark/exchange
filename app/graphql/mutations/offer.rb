@@ -8,7 +8,7 @@ module Mutations
   Offer = GraphQL::ObjectType.define do
 
     # -------------------------------------------------------------------------
-    field :offer_create_bu, Types::Exchange::OfferType do
+    field :offer_create_bu, Types::Ex::OfferType do
       description "Create a Offer to Buy Unfixed"
       argument :user_uuid      , !GraphQL::STRING_TYPE
       argument :price          , !GraphQL::FLOAT_TYPE
@@ -37,7 +37,7 @@ module Mutations
     end
 
     # -------------------------------------------------------------------------
-    field :offer_create_bf, Types::Exchange::OfferType do
+    field :offer_create_bf, Types::Ex::OfferType do
       description "Create a Offer to Buy Fixed"
       argument :user_uuid      , !GraphQL::STRING_TYPE
       argument :price          , !GraphQL::FLOAT_TYPE
@@ -66,7 +66,7 @@ module Mutations
     end
 
     # -------------------------------------------------------------------------
-    field :offer_cancel, Types::Exchange::OfferType do
+    field :offer_cancel, Types::Ex::OfferType do
       description "Cancel an Offer"
       argument :offer_uuid, !GraphQL::STRING_TYPE
 

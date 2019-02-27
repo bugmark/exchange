@@ -1,7 +1,7 @@
 module Queries
   Tracker = GraphQL::ObjectType.define do
 
-    field :tracker, Types::Exchange::TrackerType do
+    field :tracker, Types::Ex::TrackerType do
       description 'Tracker info'
       argument :id, !types.Int, "Tracker ID"
       resolve ->(_obj, args, _ctx) do
@@ -9,7 +9,7 @@ module Queries
       end
     end
 
-    field :trackers, types[Types::Exchange::TrackerType] do
+    field :trackers, types[Types::Ex::TrackerType] do
       description 'Tracker list'
       argument :limit, types.Int, "Max number of records to return"
       resolve ->(_obj, args, _ctx) do

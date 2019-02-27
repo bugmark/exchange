@@ -1,5 +1,5 @@
 # type for user auth
-class Types::Exchange::UserAuthType < Types::Base::Object
+class Types::Ex::UserAuthType < Types::Base::Object
   field :id,          Int,    null: true
   field :uuid,        String, null: true
   field :name,        String, null: true

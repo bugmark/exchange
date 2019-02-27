@@ -43,6 +43,10 @@ class Event < ApplicationRecord
     end
   end
 
+  def users
+    user_uuids.map {|uuid| User.find_by_uuid(uuid)}
+  end
+
   def transaction_events
     Event.where(cmd_uuid: cmd_uuid)
   end

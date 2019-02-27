@@ -1,7 +1,7 @@
 module Mutations
   User = GraphQL::ObjectType.define do
 
-    field :user_create, Types::Exchange::UserType do
+    field :user_create, Types::Ex::UserType do
       description "Create a User"
       argument :email    , GraphQL::STRING_TYPE
       argument :password , GraphQL::STRING_TYPE
