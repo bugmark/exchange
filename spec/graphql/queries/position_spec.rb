@@ -1,19 +1,19 @@
-require "rails_helper"
-require "rails_support"
+require 'rails_helper'
+require 'rails_support'
 
-RSpec.describe "GQL Position Query" do
-  include_context "GraphQL"
+RSpec.describe 'GQL Position Query' do
+  include_context 'GraphQL'
 
-  describe "base run" do
-    it "runs ok" do
+  describe 'base run' do
+    it 'runs ok' do
       expect(1).to eq(1)
     end
   end
 
-  describe "GQL run" do
-    let(:query_string) { "{ positions { id } }" }
+  describe 'GQL run' do
+    let(:query_string) { '{ positions { id } }' }
 
-    it "works" do
+    it 'works' do
       expect(results).to_not be_nil
       expect(results.to_h).to be_a(Hash)
     end

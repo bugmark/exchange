@@ -8,8 +8,8 @@ module Mutations
   Offer = GraphQL::ObjectType.define do
 
     # -------------------------------------------------------------------------
-    field :offer_create_bu, Types::Ex::OfferType do
-      description "Create a Offer to Buy Unfixed"
+    field :offer_create_bu, Types::Exc::OfferType do
+      description 'Create a Offer to Buy Unfixed'
       argument :user_uuid      , !GraphQL::STRING_TYPE
       argument :price          , !GraphQL::FLOAT_TYPE
       argument :volume         , !GraphQL::INT_TYPE
@@ -25,7 +25,7 @@ module Mutations
           price:          args[:price]                                       ,
           volume:         args[:volume]                                      ,
           stm_issue_uuid: args[:stm_issue_uuid]                              ,
-          stm_status:     "closed"                                           ,
+          stm_status:     'closed'                                           ,
           expiration:     args[:expiration] || (Time.now + 1.day).iso8601    ,
           maturation:     args[:maturation] || (Time.now + 12.hours).iso8601 ,
           poolable:       args[:poolable]   || false                         ,
@@ -37,8 +37,8 @@ module Mutations
     end
 
     # -------------------------------------------------------------------------
-    field :offer_create_bf, Types::Ex::OfferType do
-      description "Create a Offer to Buy Fixed"
+    field :offer_create_bf, Types::Exc::OfferType do
+      description 'Create a Offer to Buy Fixed'
       argument :user_uuid      , !GraphQL::STRING_TYPE
       argument :price          , !GraphQL::FLOAT_TYPE
       argument :volume         , !GraphQL::INT_TYPE
@@ -54,7 +54,7 @@ module Mutations
           price:          args[:price]                                       ,
           volume:         args[:volume]                                      ,
           stm_issue_uuid: args[:stm_issue_uuid]                              ,
-          stm_status:     "open"                                             ,
+          stm_status:     'open'                                             ,
           expiration:     args[:expiration] || (Time.now + 1.day).iso8601    ,
           maturation:     args[:maturation] || (Time.now + 12.hours).iso8601 ,
           poolable:       args[:poolable]   || false                         ,
@@ -66,8 +66,8 @@ module Mutations
     end
 
     # -------------------------------------------------------------------------
-    field :offer_cancel, Types::Ex::OfferType do
-      description "Cancel an Offer"
+    field :offer_cancel, Types::Exc::OfferType do
+      description 'Cancel an Offer'
       argument :offer_uuid, !GraphQL::STRING_TYPE
 
       resolve ->(_obj, args, _ctx) do

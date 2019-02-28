@@ -1,7 +1,7 @@
 module Queries
   Amendment = GraphQL::ObjectType.define do
 
-    field :amendment, Types::Ex::AmendmentType do
+    field :amendment, Types::Exc::AmendmentType do
       description 'Amendment Info'
       argument :id, GraphQL::INT_TYPE
       resolve ->(_obj, args, _ctx) do
@@ -9,7 +9,7 @@ module Queries
       end
     end
 
-    field :amendments, types[Types::Ex::AmendmentType] do
+    field :amendments, types[Types::Exc::AmendmentType] do
       description 'Amendment list'
       resolve ->(_obj, _args, _ctx) do
         ::Amendment.all

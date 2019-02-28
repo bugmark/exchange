@@ -1,5 +1,5 @@
 # Event type
-class Types::Ex::EventType < Types::Base::Object
+class Types::Exc::EventType < Types::Base::Object
   field :id            , Int, null: true
   field :date          , GraphQL::Types::ISO8601DateTime , null: true
   field :class         , String    , null: true
@@ -11,8 +11,8 @@ class Types::Ex::EventType < Types::Base::Object
   field :cmd_uuid      , String    , null: true
   field :note          , String    , null: true
   # field :user_uuids    , [String]  , null: true
-  # field :users         , [Types::Ex::UserType], null: true
-  # field :kong          , Types::Ex::UserType do
+  # field :users         , [Types::Exc::User], null: true
+  # field :kong          , Types::Exc::User do
   #   description 'Kong kong'
   #   resolve ->(_obj, _args, _ctx) do
   #     ::User.first
