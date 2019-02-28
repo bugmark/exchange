@@ -10,12 +10,5 @@ class Types::Exc::EventType < Types::Base::Object
   field :cmd_type      , String    , null: true
   field :cmd_uuid      , String    , null: true
   field :note          , String    , null: true
-  # field :user_uuids    , [String]  , null: true
-  # field :users         , [Types::Exc::User], null: true
-  # field :kong          , Types::Exc::User do
-  #   description 'Kong kong'
-  #   resolve ->(_obj, _args, _ctx) do
-  #     ::User.first
-  #   end
-  # end
+  field :users         , [Types::Exc::UserType], null: true
 end

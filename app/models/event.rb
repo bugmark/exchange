@@ -1,6 +1,7 @@
 require 'json'
 require 'ext/hash'
 
+# Event model
 class Event < ApplicationRecord
 
   self.inheritance_column = :event_type
@@ -13,7 +14,7 @@ class Event < ApplicationRecord
   jsonb_accessor :jfields, :etherscan_url => :string
 
   def xtag
-    "event"
+    'event'
   end
 
   class << self
