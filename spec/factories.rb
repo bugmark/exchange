@@ -1,6 +1,6 @@
 require 'ostruct'
 require 'factory_bot'
-require_relative "../app/commands/application_command"
+require_relative '../app/commands/application_command'
 
 FB ||= FactoryBot
 

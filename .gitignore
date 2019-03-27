@@ -2,6 +2,8 @@
 .graphqlconfig
 schema.graphql
 .env
+.yardoc
+.yardoc/
 /.env
 /.env-chruby
 /.bundle

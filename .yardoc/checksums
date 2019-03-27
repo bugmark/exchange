@@ -187,7 +187,7 @@ app/models/event/offer_suspended.rb dc910979ba02701547a0712de5aba3f894091572
 app/models/event/tracker_created.rb e8095516e732a82f2eaaabe57d29348267b33294
 app/api/entities/amendment_detail.rb 81287e64824934a1df6abdfcacda4dbbd93a7a69
 app/commands/contract_cmd/resolve.rb ddd95c4ac5cb97a9adecb6095870e1b3ad9c5ea8
-app/commands/offer_cmd/create_buy.rb ae3002c9341804b6bb5c24f2169e1d6f8de7a1b1
+app/commands/offer_cmd/create_buy.rb 4550d90feaa4b3e2d1590670045de5a48e1ed57a
 app/commands/user_cmd/group_close.rb f1ef3ec3f57666aec196dcc5d92ebfce9357558d
 app/commands/user_cmd/ledger_open.rb c16d4a7ffaf0f02aa39c6aabc5464140a8696ff5
 app/controllers/docfix_controller.rb 9f26823dbd0a84d3cbbcd94f406b335b363db8b3

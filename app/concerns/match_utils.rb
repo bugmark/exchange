@@ -62,7 +62,20 @@ module MatchUtils
       match(obj.match_attrs)
     end
 
+    # this is our core match algorithm
+    # it looks at a statement to do a database query
+    # this generatres a sql query
     def match(attrs)
+      # {:stm_issue_uuid: "sadf", ...}
+      # methods that operate on collections (array, hash, stream)
+      # - map - transforms each element of the collection [1,2,3] -> [4,5,6]
+      # - reduce - returns a single element for the collection [1,2,3] -> 6
+      # - select - gives you a subset of elements [2,3,4,5,6] -> [2,4,6]
+      # we're generating a sql query
+      # base scope is 'select * from "offers"'
+      # -select * from offers where stm_issue_id == "value"
+      # -select * from offers where stm_issue_id == "value" and stm_title contains "word"
+      # -select * from offers where stm_issue_id == "value" and stm_title contains "word" and "..."
       attrs.without_blanks.reduce(base_scope) do |acc, (key, val)|
         scope_for(acc, key, val)
       end

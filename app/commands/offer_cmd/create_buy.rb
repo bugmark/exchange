@@ -2,6 +2,23 @@ require 'ext/hash'
 require 'user_balance'
 
 module OfferCmd
+  # Genrates a buy offer for a user.
+  #
+  # Use this to create a buy offer.   When this runs successfully, it will
+  # generate a new offer, and also generate an `Event` which captures the
+  # command details.
+  #
+  # == Parameters
+  # typ::
+  #   A symbol - can be either `:offer_bf` or `:offer_bu`
+  # offer_args::
+  #   Arguments for the offer.
+  #
+  # ==== Examples
+  #
+  #     OfferCmd::CreateBuy(:offer_bf, {user_uuid: "..."})
+  #     OfferCmd::CreateBuy(:offer_bu, {user_uuid: "..."})
+  #
   class CreateBuy < ApplicationCommand
 
     include UserBalance
@@ -31,7 +48,7 @@ module OfferCmd
     def maturation
       offer_new&.maturation
     end
-    
+
     private
 
     def clean_args
