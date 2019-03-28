@@ -10,5 +10,5 @@ class Types::Exc::EventType < Types::Base::Object
   field :cmd_type      , String    , null: true
   field :cmd_uuid      , String    , null: true
   field :note          , String    , null: true
-  field :users         , [Types::Exc::UserType], null: true
+  field :users         , [Types::Exc::UserType], null: false
 end

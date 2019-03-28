@@ -1,7 +1,7 @@
 class Paypro < ApplicationRecord
 
-  with_options primary_key: "uuid" do
-    has_many :ledgers  , foreign_key: "paypro_uuid"
+  with_options primary_key: 'uuid' do
+    has_many :ledgers  , foreign_key: 'paypro_uuid'
   end
   has_many :users, :through => :ledgers
 

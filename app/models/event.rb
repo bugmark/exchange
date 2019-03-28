@@ -45,6 +45,11 @@ class Event < ApplicationRecord
   end
 
   def users
+    puts '#' * 60
+    puts user_uuids.inspect
+    puts '#' * 60
+    return [] if user_uuids.empty? || user_uuids.first.nil?
+
     user_uuids.map {|uuid| User.find_by_uuid(uuid)}
   end
 

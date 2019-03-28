@@ -1,4 +1,4 @@
-require_relative '../ext/user_auth'
+require File.expand_path('../ext/user_auth', File.dirname(__FILE__))
 
 module Queries
   User = GraphQL::ObjectType.define do
