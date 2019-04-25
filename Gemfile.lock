@@ -1,12 +1,12 @@
 GIT
-  remote: https://github.com/andyl/guard-rspec_min.git
+  remote: git://github.com/andyl/guard-rspec_min.git
   revision: e9c65db51ca2b8cc5d05cc35b8e4910051fe3e23
   specs:
     guard-rspec_min (0.0.1)
       guard
 
 GIT
-  remote: https://github.com/bugmark/iora.git
+  remote: git://github.com/bugmark/iora.git
   revision: 14a98ee233dbdff952d0951b2a4752d9e11ece6d
   specs:
     iora (0.1.2)
@@ -14,8 +14,8 @@ GIT
       octokit (~> 4.6)
 
 GIT
-  remote: https://github.com/sinatra/sinatra.git
-  revision: 6f15fba2790ebdf4d1215cebf425dea2ea3130ea
+  remote: git://github.com/sinatra/sinatra.git
+  revision: 5e2e41f28395d68a922b60bc851951d46accf2b7
   specs:
     rack-protection (2.0.5)
       rack
@@ -95,7 +95,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     backport (0.3.0)
-    backports (3.12.0)
+    backports (3.13.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
     binding_of_caller (0.8.0)
