@@ -5,11 +5,21 @@
 require 'ext/array'
 
 module ContractCmd
+  # ## Overview
+  #
   # Things to document (with examples):
   # terminology: 'explicit' vs 'best_fit'
   # cross terminology: 'overlap', 'complement'
   # prices and price limits
   # qualified_counteroffers
+  #
+  # ## Debugging Tips
+  #
+  # Offer.overlaps(@offer)
+  # Offer.align_complement(@offer)
+  # Offer.align_gte(@offer)
+  # Offer.align_lte(@offer)
+  # @offer.qualified_counteroffers
   class Cross < ApplicationCommand
 
     attr_reader :offer, :counters, :type, :bundle, :commit
